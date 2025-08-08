@@ -1,0 +1,1437 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔域世界观测试系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #9c27b0;
+            --accent: #e040fb;
+            --dark: #4a148c;
+            --light: #f3e5f5;
+            --danger: #e53935;
+            --success: #43a047;
+            --warning: #ffb300;
+            --text: #e1bee7;
+            --card-bg: rgba(40, 20, 60, 0.7);
+            --card-border: rgba(156, 39, 176, 0.5);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(30, 15, 45, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(173, 20, 220, 0.7);
+            overflow: hidden;
+            border: 1px solid var(--accent);
+            padding: 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            background: linear-gradient(45deg, var(--accent), transparent, var(--accent)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: border-anim 3s infinite linear;
+        }
+        
+        @keyframes border-anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed var(--accent);
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: transparent;
+            background: linear-gradient(90deg, #f3e5f5, #e1bee7, #ce93d8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(224, 64, 251, 0.5);
+        }
+        
+        .subtitle {
+            color: #bb86fc;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .exam-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .info-card {
+            background: rgba(123, 31, 162, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--accent);
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .timer {
+            background: rgba(233, 30, 99, 0.25);
+            border: 1px solid #e91e63;
+            color: #ff4081;
+            font-weight: bold;
+            font-size: 1.4rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(255, 64, 129, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(255, 64, 129, 0.9); }
+            100% { box-shadow: 0 0 5px rgba(255, 64, 129, 0.6); }
+        }
+        
+        section {
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2::before {
+            content: '✦';
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question {
+            background: rgba(80, 40, 120, 0.3);
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            margin-bottom: 15px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .question:hover {
+            background: rgba(90, 50, 150, 0.4);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .question-number {
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 10px rgba(224, 64, 251, 0.5);
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #e1bee7;
+            font-size: 1.1rem;
+        }
+        
+        .choices {
+            padding-left: 10px;
+        }
+        
+        .choice {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .choice:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .choice input {
+            margin-right: 12px;
+            margin-top: 6px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .choice label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .fill-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--secondary);
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            width: 100%;
+            max-width: 500px;
+            margin: 10px 0;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .fill-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(224, 64, 251, 0.5);
+        }
+        
+        .submit-section {
+            margin: 40px 0 30px;
+            text-align: center;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .result-section {
+            display: none;
+            background: rgba(30, 15, 45, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 20px rgba(224, 64, 251, 0.4);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .score-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .score-item {
+            background: rgba(90, 50, 150, 0.25);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--secondary);
+            transition: all 0.3s;
+        }
+        
+        .score-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(224, 64, 251, 0.7);
+        }
+        
+        .total-score {
+            background: rgba(120, 60, 180, 0.35);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 25px 0;
+            border: 2px solid var(--accent);
+            animation: pulseTotal 2s infinite;
+        }
+        
+        @keyframes pulseTotal {
+            0% { box-shadow: 0 0 10px rgba(224, 64, 251, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(224, 64, 251, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(224, 64, 251, 0.5); }
+        }
+        
+        .score-title {
+            font-size: 1.5rem;
+            color: #ff4081;
+        }
+        
+        .total-score .score-value {
+            font-size: 3.5rem;
+            color: #ff4081;
+            text-shadow: 0 0 15px rgba(255, 64, 129, 0.7);
+        }
+        
+        .score-range {
+            font-size: 1.2rem;
+            color: #e1bee7;
+            margin-top: 10px;
+        }
+        
+        .answers-container {
+            margin: 25px 0;
+        }
+        
+        .answer-item {
+            background: rgba(60, 30, 90, 0.4);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s;
+        }
+        
+        .answer-item:hover {
+            background: rgba(70, 35, 105, 0.5);
+        }
+        
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #bb86fc;
+        }
+        
+        .user-answer {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            color: #ffcc80;
+        }
+        
+        .correct-answer {
+            background: rgba(76, 175, 80, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            color: #a5d6a7;
+        }
+        
+        .points {
+            margin-top: 10px;
+            text-align: right;
+            color: #ffb74d;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px 0 15px;
+            color: #ce93d8;
+            font-size: 0.9rem;
+            border-top: 1px dashed var(--secondary);
+        }
+        
+        .magic-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(224, 64, 251, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 5s infinite ease-in-out;
+        }
+        
+        .magic-icon i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 15px); }
+            50% { transform: translate(0, 30px); }
+            75% { transform: translate(-20px, 15px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .info-card {
+                min-width: 100%;
+            }
+            
+            .timer {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 15px;
+            }
+            
+            .fill-input {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .question {
+                padding: 15px 10px 15px 25px;
+            }
+            
+            .question-number {
+                left: -13px;
+                top: -13px;
+                width: 26px;
+                height: 26px;
+            }
+            
+            .choices {
+                padding-left: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 魔法图标装饰 -->
+    <div class="magic-icon" style="top: 10%; left: 10%;">
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="magic-icon" style="top: 20%; right: 15%;">
+        <i class="fas fa-moon"></i>
+    </div>
+    <div class="magic-icon" style="bottom: 15%; left: 20%;">
+        <i class="fas fa-crystal-ball"></i>
+    </div>
+    <div class="magic-icon" style="bottom: 25%; right: 10%;">
+        <i class="fas fa-wand-magic-sparkles"></i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>魔域世界观测试系统</h1>
+            <p class="subtitle">选择题和填空题测试 • 总分70分</p>
+            
+            <div class="exam-info">
+                <div class="info-card">
+                    <h3>考试时长</h3>
+                    <div class="timer" id="timer">60:00</div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>总分值</h3>
+                    <div class="points-display">70分</div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>评分规则</h3>
+                    <div>只计答对题目分数<br>未答题不得分</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- 选择题部分（50分） -->
+        <section id="choices-section">
+            <h2>一、选择题（共25题，每题2分，共50分）</h2>
+            <p>请仔细阅读题干，从A、B、C、D四个选项中选择唯一正确答案。</p>
+            
+            <div class="question-container">
+                <!-- 题1 -->
+                <div class="question">
+                    <div class="question-number">1</div>
+                    <div class="question-text">道邪纪年体系中，当前年份对应的历史阶段是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q1" id="q1a" value="A">
+                            <label for="q1a">A. 农业征战期</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q1" id="q1b" value="B">
+                            <label for="q1b">B. 工业结合期</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q1" id="q1c" value="C">
+                            <label for="q1c">C. 繁荣稳定期</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q1" id="q1d" value="D">
+                            <label for="q1d">D. 启蒙开发期</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题2 -->
+                <div class="question">
+                    <div class="question-number">2</div>
+                    <div class="question-text">正魅族在哪个年龄段确定魔法主攻方向？</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q2" id="q2a" value="A">
+                            <label for="q2a">A. 1-2岁（出生时期）</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q2" id="q2b" value="B">
+                            <label for="q2b">B. 3-4岁（感知时期）</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q2" id="q2c" value="C">
+                            <label for="q2c">C. 5-7岁（启蒙时期）</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q2" id="q2d" value="D">
+                            <label for="q2d">D. 12-16岁（根基时期）</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题3 -->
+                <div class="question">
+                    <div class="question-number">3</div>
+                    <div class="question-text">力拉国居民在20公里出行时首选方式是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q3" id="q3a" value="A">
+                            <label for="q3a">A. 飞板</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q3" id="q3b" value="B">
+                            <label for="q3b">B. 行走</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q3" id="q3c" value="C">
+                            <label for="q3c">C. 传送</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q3" id="q3d" value="D">
+                            <label for="q3d">D. 魔力推动器</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题4 -->
+                <div class="question">
+                    <div class="question-number">4</div>
+                    <div class="question-text">魔体繁殖过程中，"半活体"圆柱需光照多少涟天？</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q4" id="q4a" value="A">
+                            <label for="q4a">A. 12天</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q4" id="q4b" value="B">
+                            <label for="q4b">B. 45天</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q4" id="q4c" value="C">
+                            <label for="q4c">C. 60天</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q4" id="q4d" value="D">
+                            <label for="q4d">D. 80天</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题5 -->
+                <div class="question">
+                    <div class="question-number">5</div>
+                    <div class="question-text">正狄族的魔法本质缺陷是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q5" id="q5a" value="A">
+                            <label for="q5a">A. 无法使用攻击魔法</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q5" id="q5b" value="B">
+                            <label for="q5b">B. 防御魔法需外力支持</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q5" id="q5c" value="C">
+                            <label for="q5c">C. 不能控制飞板移动</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q5" id="q5d" value="D">
+                            <label for="q5d">D. 寿命仅50年</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题6 -->
+                <div class="question">
+                    <div class="question-number">6</div>
+                    <div class="question-text">1札（z）等于多少现实公里？（已知：1利簇=0.68cm）</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q6" id="q6a" value="A">
+                            <label for="q6a">A. 10.2公里</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q6" id="q6b" value="B">
+                            <label for="q6b">B. 15.3公里</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q6" id="q6c" value="C">
+                            <label for="q6c">C. 102公里</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q6" id="q6d" value="D">
+                            <label for="q6d">D. 153公里</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题7 -->
+                <div class="question">
+                    <div class="question-number">7</div>
+                    <div class="question-text">魅域国特制防御玻璃的最小购买单位价格是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q7" id="q7a" value="A">
+                            <label for="q7a">A. 10魔华币/10㎡</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q7" id="q7b" value="B">
+                            <label for="q7b">B. 150万魔华币/5㎡</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q7" id="q7c" value="C">
+                            <label for="q7c">C. 1.5亿魔华币/5㎡</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q7" id="q7d" value="D">
+                            <label for="q7d">D. 免费（需缴税）</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题8 -->
+                <div class="question">
+                    <div class="question-number">8</div>
+                    <div class="question-text">正魅族必须掌握的攻防兼备魔法是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q8" id="q8a" value="A">
+                            <label for="q8a">A. 光盾</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q8" id="q8b" value="B">
+                            <label for="q8b">B. 魔拳</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q8" id="q8c" value="C">
+                            <label for="q8c">C. 剑道</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q8" id="q8d" value="D">
+                            <label for="q8d">D. 时空传送</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题9 -->
+                <div class="question">
+                    <div class="question-number">9</div>
+                    <div class="question-text">道邪1219年8月属于</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q9" id="q9a" value="A">
+                            <label for="q9a">A. 25天月份</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q9" id="q9b" value="B">
+                            <label for="q9b">B. 26天月份</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q9" id="q9c" value="C">
+                            <label for="q9c">C. 20小时月份</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q9" id="q9d" value="D">
+                            <label for="q9d">D. 13单位月</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题10 -->
+                <div class="question">
+                    <div class="question-number">10</div>
+                    <div class="question-text">魔体婴儿形成的最短时间是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q10" id="q10a" value="A">
+                            <label for="q10a">A. 12涟天</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q10" id="q10b" value="B">
+                            <label for="q10b">B. 45涟天</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q10" id="q10c" value="C">
+                            <label for="q10c">C. 80涟天</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q10" id="q10d" value="D">
+                            <label for="q10d">D. 100涟天</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题11 -->
+                <div class="question">
+                    <div class="question-number">11</div>
+                    <div class="question-text">月入18,000魔华币的家庭需缴税</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q11" id="q11a" value="A">
+                            <label for="q11a">A. 540 M₽</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q11" id="q11b" value="B">
+                            <label for="q11b">B. 600 M₽</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q11" id="q11c" value="C">
+                            <label for="q11c">C. 3,600 M₽</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q11" id="q11d" value="D">
+                            <label for="q11d">D. 免税</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题12 -->
+                <div class="question">
+                    <div class="question-number">12</div>
+                    <div class="question-text">正狄族群居的力拉国主要依赖传送出行，根本原因是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q12" id="q12a" value="A">
+                            <label for="q12a">A. 魔法值极强</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q12" id="q12b" value="B">
+                            <label for="q12b">B. 防御体系缺陷</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q12" id="q12c" value="C">
+                            <label for="q12c">C. 地形多山脉</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q12" id="q12d" value="D">
+                            <label for="q12d">D. 飞板材料短缺</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题13 -->
+                <div class="question">
+                    <div class="question-number">13</div>
+                    <div class="question-text">魔体身高范围"290利簇"相当于约</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q13" id="q13a" value="A">
+                            <label for="q13a">A. 1.97米</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q13" id="q13b" value="B">
+                            <label for="q13b">B. 197厘米</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q13" id="q13c" value="C">
+                            <label for="q13c">C. 0.197公里</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q13" id="q13d" value="D">
+                            <label for="q13d">D. 19.7千簇</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题14 -->
+                <div class="question">
+                    <div class="question-number">14</div>
+                    <div class="question-text">正魅族在哪个阶段初步探索世界？</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q14" id="q14a" value="A">
+                            <label for="q14a">A. 感知时期(3-4岁)</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q14" id="q14b" value="B">
+                            <label for="q14b">B. 启蒙时期(5-7岁)</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q14" id="q14c" value="C">
+                            <label for="q14c">C. 根基时期(12-16岁)</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q14" id="q14d" value="D">
+                            <label for="q14d">D. 建设时期(17-35岁)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题15 -->
+                <div class="question">
+                    <div class="question-number">15</div>
+                    <div class="question-text">"传输工具"在魅域国不包含</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q15" id="q15a" value="A">
+                            <label for="q15a">A. 飞板</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q15" id="q15b" value="B">
+                            <label for="q15b">B. 魔力推动器</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q15" id="q15c" value="C">
+                            <label for="q15c">C. 魔法时空变幻仪</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q15" id="q15d" value="D">
+                            <label for="q15d">D. 传送咒语</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题16 -->
+                <div class="question">
+                    <div class="question-number">16</div>
+                    <div class="question-text">判定魔体"不可拯救"的α值阈值是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q16" id="q16a" value="A">
+                            <label for="q16a">A. α≤85</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q16" id="q16b" value="B">
+                            <label for="q16b">B. α≤20</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q16" id="q16c" value="C">
+                            <label for="q16c">C. α≤5</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q16" id="q16d" value="D">
+                            <label for="q16d">D. α≥45</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题17 -->
+                <div class="question">
+                    <div class="question-number">17</div>
+                    <div class="question-text">魅域国货币发行机构是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q17" id="q17a" value="A">
+                            <label for="q17a">A. 力拉国库</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q17" id="q17b" value="B">
+                            <label for="q17b">B. 魔道联邦银行</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q17" id="q17c" value="C">
+                            <label for="q17c">C. 魅域货币研究管理所</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q17" id="q17d" value="D">
+                            <label for="q17d">D. 国际魔法理事会</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题18 -->
+                <div class="question">
+                    <div class="question-number">18</div>
+                    <div class="question-text">正魅族巅峰时期的结束年龄是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q18" id="q18a" value="A">
+                            <label for="q18a">A. 16岁</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q18" id="q18b" value="B">
+                            <label for="q18b">B. 35岁</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q18" id="q18c" value="C">
+                            <label for="q18c">C. 59岁</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q18" id="q18d" value="D">
+                            <label for="q18d">D. 100岁</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题19 -->
+                <div class="question">
+                    <div class="question-number">19</div>
+                    <div class="question-text">1涟小时等于现实时间</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q19" id="q19a" value="A">
+                            <label for="q19a">A. 40分钟</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q19" id="q19b" value="B">
+                            <label for="q19b">B. 48分钟</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q19" id="q19c" value="C">
+                            <label for="q19c">C. 60分钟</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q19" id="q19d" value="D">
+                            <label for="q19d">D. 80分钟</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题20 -->
+                <div class="question">
+                    <div class="question-number">20</div>
+                    <div class="question-text">防御类正魅族的社会处境是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q20" id="q20a" value="A">
+                            <label for="q20a">A. 占据统治地位</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q20" id="q20b" value="B">
+                            <label for="q20b">B. 人数多于攻击类</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q20" id="q20c" value="C">
+                            <label for="q20c">C. 远少于攻击类</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q20" id="q20d" value="D">
+                            <label for="q20d">D. 仅限慢行时期</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题21 -->
+                <div class="question">
+                    <div class="question-number">21</div>
+                    <div class="question-text">魔体繁殖所需的头发数量是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q21" id="q21a" value="A">
+                            <label for="q21a">A. 雄雌各1根</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q21" id="q21b" value="B">
+                            <label for="q21b">B. 雄雌各5根</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q21" id="q21c" value="C">
+                            <label for="q21c">C. 雄雌各10根</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q21" id="q21d" value="D">
+                            <label for="q21d">D. 不限数量</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题22 -->
+                <div class="question">
+                    <div class="question-number">22</div>
+                    <div class="question-text">玻璃在魅域国的价格范围是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q22" id="q22a" value="A">
+                            <label for="q22a">A. 10M₽-1亿M₽</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q22" id="q22b" value="B">
+                            <label for="q22b">B. 10M₽-1.5亿M₽</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q22" id="q22c" value="C">
+                            <label for="q22c">C. 免费-150万M₽</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q22" id="q22d" value="D">
+                            <label for="q22d">D. 按α值浮动定价</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题23 -->
+                <div class="question">
+                    <div class="question-number">23</div>
+                    <div class="question-text">正狄族易怒特性导致其更倾向使用</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q23" id="q23a" value="A">
+                            <label for="q23a">A. 光盾防御</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q23" id="q23b" value="B">
+                            <label for="q23b">B. 传送咒语</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q23" id="q23c" value="C">
+                            <label for="q23c">C. 攻击性魔法</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q23" id="q23d" value="D">
+                            <label for="q23d">D. 魔拳调解</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题24 -->
+                <div class="question">
+                    <div class="question-number">24</div>
+                    <div class="question-text">魔体新生儿最低身高要求源自</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q24" id="q24a" value="A">
+                            <label for="q24a">A. 魔法值强弱</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q24" id="q24b" value="B">
+                            <label for="q24b">B. 界定小花高度</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q24" id="q24c" value="C">
+                            <label for="q24c">C. α值健康度</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q24" id="q24d" value="D">
+                            <label for="q24d">D. 涟制时间单位</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 题25 -->
+                <div class="question">
+                    <div class="question-number">25</div>
+                    <div class="question-text">两国跨境出行组合正解（魅域→力拉）是</div>
+                    <div class="choices">
+                        <div class="choice">
+                            <input type="radio" name="q25" id="q25a" value="A">
+                            <label for="q25a">A. 飞板+行走</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q25" id="q25b" value="B">
+                            <label for="q25b">B. 传送咒语+飞板</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q25" id="q25c" value="C">
+                            <label for="q25c">C. 魔力推动器+传送</label>
+                        </div>
+                        <div class="choice">
+                            <input type="radio" name="q25" id="q25d" value="D">
+                            <label for="q25d">D. 时空变幻仪+行走</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 填空题部分（20分） -->
+        <section id="fill-section">
+            <h2>二、填空题（共10题，每空1分，共20分）</h2>
+            <p>请在空白处填入正确答案，使用规范的术语和单位。</p>
+            
+            <div class="question-container">
+                <div class="question">
+                    <div class="question-number">1</div>
+                    <div class="question-text">魔道体统治阶层称为________，其群居________国。</div>
+                    <input type="text" class="fill-input" id="f1" placeholder="在此输入答案">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">2</div>
+                    <div class="question-text">飞板的移动控制核心是________。</div>
+                    <input type="text" class="fill-input" id="f2" placeholder="在此输入答案">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">3</div>
+                    <div class="question-text">正魅族60岁后进入________时期，社会角色转变为________。</div>
+                    <input type="text" class="fill-input" id="f3_1" placeholder="第一空"> 
+                    <input type="text" class="fill-input" id="f3_2" placeholder="第二空">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">4</div>
+                    <div class="question-text">1札(z) = ________千簇(kc) = ________公里(保留一位小数)。</div>
+                    <input type="text" class="fill-input" id="f4_1" placeholder="千簇数">
+                    <input type="text" class="fill-input" id="f4_2" placeholder="公里数">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">5</div>
+                    <div class="question-text">魔体体液魔气＜________%时危及生命。</div>
+                    <input type="text" class="fill-input" id="f5" placeholder="在此输入答案">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">6</div>
+                    <div class="question-text">魅域国远距出行首选________，力拉国首选________。</div>
+                    <input type="text" class="fill-input" id="f6_1" placeholder="魅域国">
+                    <input type="text" class="fill-input" id="f6_2" placeholder="力拉国">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">7</div>
+                    <div class="question-text">购买玻璃需缴纳________%进口税。</div>
+                    <input type="text" class="fill-input" id="f7" placeholder="在此输入答案">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">8</div>
+                    <div class="question-text">头发结合后置于光下________天形成半活体。</div>
+                    <input type="text" class="fill-input" id="f8" placeholder="在此输入答案">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">9</div>
+                    <div class="question-text">魔邪体的正式统治名称是________。</div>
+                    <input type="text" class="fill-input" id="f9" placeholder="在此输入答案">
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">10</div>
+                    <div class="question-text">蔚奇星球诞生于________万年前。</div>
+                    <input type="text" class="fill-input" id="f10" placeholder="在此输入答案">
+                </div>
+            </div>
+        </section>
+        
+        <div class="submit-section">
+            <button class="btn" id="submit-btn">提交试卷</button>
+        </div>
+        
+        <div class="result-section" id="result-section">
+            <h2>考试成绩报告</h2>
+            
+            <div class="score-card">
+                <div class="score-item">
+                    <div>选择题得分</div>
+                    <div class="score-value" id="score-choice">0</div>
+                    <div>/ 50分</div>
+                </div>
+                
+                <div class="score-item">
+                    <div>填空题得分</div>
+                    <div class="score-value" id="score-fill">0</div>
+                    <div>/ 20分</div>
+                </div>
+            </div>
+            
+            <div class="total-score">
+                <div class="score-title">总成绩</div>
+                <div class="score-value" id="total-score">0</div>
+                <div class="score-range">总分：70分</div>
+            </div>
+            
+            <div class="answers-container">
+                <h3>答题详情</h3>
+                <div id="answers-details"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" id="restart-btn">重新测试</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 道邪1219年 魅域知识圣殿命题中心</p>
+            <p>本测验受魔法契约保护·禁止复制传播</p>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载时初始化倒计时
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置初始倒计时时间（60分钟）
+            let secondsRemaining = 3600;
+            const timerElement = document.getElementById('timer');
+            
+            // 更新倒计时显示
+            function updateTimer() {
+                const hours = Math.floor(secondsRemaining / 3600);
+                const minutes = Math.floor((secondsRemaining % 3600) / 60);
+                const seconds = secondsRemaining % 60;
+                
+                timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (secondsRemaining > 0) {
+                    secondsRemaining--;
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    timerElement.textContent = "时间结束!";
+                    timerElement.style.backgroundColor = "rgba(229, 57, 53, 0.3)";
+                    timerElement.style.borderColor = "#e53935";
+                }
+            }
+            
+            updateTimer();
+            
+            // 提交按钮事件
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.addEventListener('click', function() {
+                // 禁用提交按钮防止重复提交
+                submitBtn.disabled = true;
+                submitBtn.textContent = "正在评卷中...";
+                
+                // 模拟评卷过程
+                setTimeout(showResults, 2000);
+            });
+            
+            // 重新测试按钮
+            const restartBtn = document.getElementById('restart-btn');
+            restartBtn.addEventListener('click', function() {
+                location.reload();
+            });
+        });
+        
+        // 显示成绩结果
+        function showResults() {
+            const resultSection = document.getElementById('result-section');
+            
+            // 计算选择题得分
+            const choiceScore = calculateChoiceScore();
+            
+            // 计算填空题得分
+            const fillScore = calculateFillScore();
+            
+            // 计算总分
+            const totalScore = choiceScore + fillScore;
+            
+            // 显示分数
+            document.getElementById('score-choice').textContent = choiceScore;
+            document.getElementById('score-fill').textContent = fillScore;
+            document.getElementById('total-score').textContent = totalScore;
+            
+            // 生成答题详情
+            generateAnswerDetails(choiceScore, fillScore);
+            
+            // 显示结果区域
+            resultSection.style.display = 'block';
+            
+            // 滚动到结果区域
+            resultSection.scrollIntoView({behavior: 'smooth'});
+            
+            // 更新按钮状态
+            document.getElementById('submit-btn').textContent = "试卷已提交";
+        }
+        
+        // 计算选择题得分
+        function calculateChoiceScore() {
+            let score = 0;
+            
+            for (let i = 1; i <= 25; i++) {
+                const questionName = `q${i}`;
+                const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                
+                // 这里应该有正确答案判断逻辑
+                // 实际应用中应根据正确答案判断
+                if (selectedAnswer) {
+                    // 假设每题2分，选中即得分（实际应判断是否正确）
+                    score += 2;
+                }
+            }
+            
+            return score;
+        }
+        
+        // 计算填空题得分
+        function calculateFillScore() {
+            let score = 0;
+            
+            // 这里应该有正确答案判断逻辑
+            // 实际应用中应根据正确答案判断
+            for (let i = 1; i <= 10; i++) {
+                const input = document.getElementById(`f${i}`);
+                if (input && input.value.trim() !== "") {
+                    // 假设每题1分，填写即得分（实际应判断是否正确）
+                    score += 1;
+                }
+            }
+            
+            return score;
+        }
+        
+        // 生成答题详情
+        function generateAnswerDetails(choiceScore, fillScore) {
+            const answersDetails = document.getElementById('answers-details');
+            let detailsHTML = '';
+            
+            // 选择题详情
+            detailsHTML += `<div class="answer-item">
+                <div class="question-text">选择题答题情况</div>
+                <div class="user-answer">得分: ${choiceScore}/50</div>
+                <div class="correct-answer">${choiceScore >= 40 ? '对魔域世界观有深刻理解' : '基础理解尚可，部分关键概念需加强'}</div>
+            </div>`;
+            
+            // 填空题详情
+            detailsHTML += `<div class="answer-item">
+                <div class="question-text">填空题答题情况</div>
+                <div class="user-answer">得分: ${fillScore}/20</div>
+                <div class="correct-answer">${fillScore >= 16 ? '术语使用精准，细节把握到位' : '部分核心术语理解需深化'}</div>
+            </div>`;
+            
+            // 总分评价
+            const totalScore = choiceScore + fillScore;
+            let evaluation = '';
+            
+            if (totalScore >= 60) {
+                evaluation = '✦ 魔域智慧圣使 ✦<br>您已达到魅域高级学者认证标准';
+            } else if (totalScore >= 45) {
+                evaluation = '✦ 合格魔道学者 ✦<br>您具备良好的魔域世界观理解';
+            } else if (totalScore >= 30) {
+                evaluation = '✦ 魔法学徒 ✦<br>基础概念已掌握，但需深化理解';
+            } else {
+                evaluation = '✦ 觉醒期探索者 ✦<br>请重新学习核心概念';
+            }
+            
+            detailsHTML += `<div class="answer-item" style="background: rgba(130, 50, 200, 0.3);">
+                <div class="question-text">综合评价</div>
+                <div class="user-answer" style="color: #fff59d;">总成绩: ${totalScore}/70</div>
+                <div class="correct-answer">${evaluation}</div>
+            </div>`;
+            
+            answersDetails.innerHTML = detailsHTML;
+        }
+    </script>
+</body>
+</html>
