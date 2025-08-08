@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岁窦工作室 测验界面</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 - 简约黑白风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        /* 导航样式 */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            opacity: 0.8;
+            border-bottom: 2px solid white;
+        }
+
+        /* 介绍区域 */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        .intro-section h2 {
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .contact-info {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* 答卷区域通用样式 */
+        .quiz-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            font-size: 22px;
+        }
+
+        /* 答卷卡片样式 */
+        .quiz-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .quiz-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-card h3 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .quiz-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quiz-desc {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .start-btn {
+            display: inline-block;
+            background-color: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .start-btn:hover {
+            background-color: #333;
+        }
+
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .quiz-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header>
+        <div class="header-content">
+            <h1>岁窦工作室</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">主页</a></li>
+                    <li><a href="#quiz">答题内容</a></li>
+                    <li><a href="#about">关于工作室</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主页内容 -->
+    <section id="home" class="intro-section">
+        <h2>欢迎来到岁窦工作室</h2>
+        <p>这里是我们精心准备的各类测试卷，您可以选择感兴趣的内容进行答题测试。</p>
+        <p class="contact-info">联系方式：q13052830801@163.com</p>
+    </section>
+
+    <!-- 最近更新的答卷 -->
+<section class="quiz-section">
+    <h3 class="section-title"><i class="fas fa-clock"></i> 最近更新的答卷</h3>
+    <div class="quiz-cards">
+        <!-- 最近更新的答卷1 -->
+        <div class="quiz-card">
+            <h3>《魔域》世界观检测2</h3>
+            <div class="quiz-meta">
+                <span><i class="far fa-calendar"></i> 2025-8-9</span>
+                <span><i class="fas fa-question-circle"></i> 30题</span>
+            </div>
+            <p class="quiz-desc">第二个《魔域》世界观检测，欢迎答题</p>
+            <button class="start-btn" onclick="location.href='quiz1.html'">进入测试</button>
+        </div>
+
+        <!-- 最近更新的答卷2 -->
+        <div class="quiz-card">
+            <h3>《魔域》世界观检测1</h3>
+            <div class="quiz-meta">
+                <span><i class="far fa-calendar"></i> 2025-8-8</span>
+                <span><i class="fas fa-question-circle"></i> 30题</span>
+            </div>
+            <p class="quiz-desc">第一个《魔域》世界观测试卷，欢迎答题</p>
+            <button class="start-btn" onclick="location.href='html.html'">进入测试</button>
+        </div>
+    </div>
+</section> 
+    <!-- 所有答卷 -->
+    <section class="quiz-section">
+        <h3 class="section-title"><i class="fas fa-list"></i> 所有答卷</h3>
+        <div class="quiz-cards">
+            <!-- 所有答卷1 -->
+            <div class="quiz-card">
+                <h3>测试2</h3>
+                <div class="quiz-meta">
+                    <span><i class="far fa-calendar"></i>2025-8-9</span>
+                    <span><i class="fas fa-question-circle"></i> 30题</span>
+                </div>
+                <button class="start-btn" onclick="location.href='quiz1.html'">开始答题</button>
+            </div>
+
+            <!-- 所有答卷2 -->
+            <div class="quiz-card">
+                <h3>测试1</h3>
+                <div class="quiz-meta">
+                    <span><i class="far fa-calendar"></i> 2025-8-8</span>
+                    <span><i class="fas fa-question-circle"></i> 30题</span>
+                </div>
+                <button class="start-btn" onclick="location.href='html.html'">开始答题</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于工作室 -->
+    <section id="about" class="intro-section">
+        <h2>关于工作室</h2>
+        <p>岁窦工作室专注于你</p>
+        <p>我热爱生活。</p>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2025 岁窦工作室 版权所有</p>
+        <p>联系方式：q13052830801@163.com</p>
+    </footer>
+
+    <script>
+        // 导航栏激活状态处理
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                // 移除所有链接的active类
+                document.querySelectorAll('nav a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                // 给当前点击的链接添加active类
+                this.classList.add('active');
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
