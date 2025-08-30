@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>实时日期和时间显示</title>
+</head>
+<body>
+
+<h1>实时日期和时间显示</h1>
+<div id="datetime"></div>
+
+<script>
+    function displayDateTime() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+
+        // 格式化日期和时间
+        month = month < 10 ? '0' + month : month;
+        day = day < 10 ? '0' + day : day;
+        hour = hour < 10 ? '0' + hour : hour;
+        minute = minute < 10 ? '0' + minute : minute;
+        second = second < 10 ? '0' + second : second;
+
+        // 显示在网页上
+        document.getElementById('datetime').innerHTML = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    }
+
+    // 每秒更新一次
+    setInterval(displayDateTime, 1000);
+</script>
+
+</body>
+</html>
