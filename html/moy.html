@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《魔域》时间转换器</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 50%, #d1ebff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #334e68;
+        }
+
+        .converter-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(187, 225, 250, 0.5);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c698d;
+            margin-bottom: 25px;
+            font-size: 24px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #62b5e5 0%, #3895d3 100%);
+            border-radius: 3px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #3895d3;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bde0fe;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f0f9ff;
+            color: #2c698d;
+        }
+
+        input::placeholder {
+            color: #96c6e8;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #62b5e5;
+            box-shadow: 0 0 0 3px rgba(98, 181, 229, 0.15);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .convert-btn {
+            background: linear-gradient(90deg, #62b5e5 0%, #3895d3 100%);
+            color: #ffffff;
+        }
+
+        .clear-btn {
+            background: #e6f7ff;
+            color: #3895d3;
+            border: 1px solid #bde0fe;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(56, 149, 211, 0.2);
+        }
+
+        .result {
+            background: #e6f7ff;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c698d;
+            font-size: 16px;
+            border: 1px solid #bde0fe;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .calculation-process {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 15px;
+            color: #334e68;
+            font-size: 14px;
+            border: 1px solid #bde0fe;
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .calculation-process h4 {
+            color: #2c698d;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .calculation-step {
+            margin-bottom: 8px;
+            padding-left: 10px; /* 仅保留左侧间距，移除符号 */
+        }
+
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter-container">
+        <h2>《魔域》时间转换器</h2>
+        <div class="form-group">
+            <label for="inputValue">输入值：</label>
+            <input type="number" id="inputValue" placeholder="请输入数值" step="any">
+        </div>
+        <div class="form-group">
+            <label for="fromUnit">从单位：</label>
+            <select id="fromUnit">
+                <option value="感知帧">感知帧</option>
+                <option value="秒">秒</option>
+                <option value="分钟">分钟</option>
+                <option value="小时">小时</option>
+                <option value="天">天</option>
+                <option value="单位月">单位月</option>
+                <option value="年">年</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="toUnit">到单位：</label>
+            <select id="toUnit">
+                <option value="感知帧">感知帧</option>
+                <option value="秒">秒</option>
+                <option value="分钟">分钟</option>
+                <option value="小时">小时</option>
+                <option value="天">天</option>
+                <option value="单位月">单位月</option>
+                <option value="年">年</option>
+            </select>
+        </div>
+        <div class="button-group">
+            <button class="convert-btn" onclick="convertTime()">
+                <i class="fa fa-exchange" aria-hidden="true"></i>
+                转换时间
+            </button>
+            <button class="clear-btn" onclick="clearAll()">
+                <i class="fa fa-eraser" aria-hidden="true"></i>
+                清空
+            </button>
+        </div>
+        <div class="result" id="result">转换结果将显示在这里</div>
+        <div class="calculation-process" id="calculationProcess" style="display: none;">
+            <h4><i class="fa fa-calculator" aria-hidden="true"></i>计算过程</h4>
+            <div id="processSteps"></div>
+        </div>
+    </div>
+
+    <script>
+        function convertTime() {
+            const inputValue = parseFloat(document.getElementById('inputValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            const resultElement = document.getElementById('result');
+            const processContainer = document.getElementById('calculationProcess');
+            const processStepsElement = document.getElementById('processSteps');
+            
+            // 重置结果和过程显示
+            resultElement.textContent = '';
+            processStepsElement.innerHTML = '';
+            processContainer.style.display = 'none';
+            
+            // 验证输入值
+            if (isNaN(inputValue) || inputValue < 0) {
+                resultElement.textContent = "请输入有效的非负数值！";
+                resultElement.classList.add('error');
+                return;
+            }
+            resultElement.classList.remove('error');
+            
+            // 如果单位相同，直接显示结果
+            if (fromUnit === toUnit) {
+                resultElement.textContent = `${inputValue} ${fromUnit} = ${inputValue} ${toUnit}`;
+                processContainer.style.display = 'block';
+                processStepsElement.innerHTML = `
+                    <div class="calculation-step">由于转换前后单位相同（都是${fromUnit}），所以结果保持不变</div>
+                `;
+                return;
+            }
+            
+            // 转换过程和步骤记录
+            let steps = [];
+            let inPerceptFrames = 0;
+            
+            // 先将输入单位转换为感知帧，并记录步骤
+            steps.push(`1. 将 ${inputValue} ${fromUnit} 转换为感知帧：`);
+            
+            switch (fromUnit) {
+                case "感知帧":
+                    inPerceptFrames = inputValue;
+                    steps.push(`   ${inputValue} 感知帧 = ${inputValue} 感知帧`);
+                    break;
+                case "秒":
+                    inPerceptFrames = inputValue * 1; 
+                    steps.push(`   根据设定：1秒 = 1感知帧`);
+                    steps.push(`   ${inputValue} 秒 = ${inputValue} × 1 = ${inPerceptFrames} 感知帧`);
+                    break;
+                case "分钟":
+                    inPerceptFrames = inputValue * 80; 
+                    steps.push(`   根据设定：1分钟 = 80秒，1秒 = 1感知帧`);
+                    steps.push(`   因此：1分钟 = 80感知帧`);
+                    steps.push(`   ${inputValue} 分钟 = ${inputValue} × 80 = ${inPerceptFrames} 感知帧`);
+                    break;
+                case "小时":
+                    inPerceptFrames = inputValue * 40 * 80; 
+                    steps.push(`   根据设定：1小时 = 40分钟，1分钟 = 80秒，1秒 = 1感知帧`);
+                    steps.push(`   因此：1小时 = 40 × 80 = 3200感知帧`);
+                    steps.push(`   ${inputValue} 小时 = ${inputValue} × 40 × 80 = ${inputValue} × 3200 = ${inPerceptFrames} 感知帧`);
+                    break;
+                case "天":
+                    inPerceptFrames = inputValue * 20 * 40 * 80; 
+                    steps.push(`   根据设定：1天 = 20小时，1小时 = 40分钟，1分钟 = 80秒，1秒 = 1感知帧`);
+                    steps.push(`   因此：1天 = 20 × 40 × 80 = 64000感知帧`);
+                    steps.push(`   ${inputValue} 天 = ${inputValue} × 20 × 40 × 80 = ${inputValue} × 64000 = ${inPerceptFrames} 感知帧`);
+                    break;
+                case "单位月":
+                    const avgDaysInMonth = 25.5;
+                    inPerceptFrames = inputValue * avgDaysInMonth * 20 * 40 * 80; 
+                    steps.push(`   根据设定：1单位月平均为25.5天（25天和26天的平均值），1天 = 20小时，1小时 = 40分钟，1分钟 = 80秒，1秒 = 1感知帧`);
+                    steps.push(`   因此：1单位月 = 25.5 × 20 × 40 × 80 = 1632000感知帧`);
+                    steps.push(`   ${inputValue} 单位月 = ${inputValue} × 25.5 × 20 × 40 × 80 = ${inputValue} × 1632000 = ${inPerceptFrames} 感知帧`);
+                    break;
+                case "年":
+                    inPerceptFrames = inputValue * 13 * 25.5 * 20 * 40 * 80; 
+                    steps.push(`   根据设定：1年 = 13单位月，1单位月平均为25.5天，1天 = 20小时，1小时 = 40分钟，1分钟 = 80秒，1秒 = 1感知帧`);
+                    steps.push(`   因此：1年 = 13 × 25.5 × 20 × 40 × 80 = 21216000感知帧`);
+                    steps.push(`   ${inputValue} 年 = ${inputValue} × 13 × 25.5 × 20 × 40 × 80 = ${inputValue} × 21216000 = ${inPerceptFrames} 感知帧`);
+                    break;
+            }
+            
+            // 再将感知帧转换为目标单位，并记录步骤
+            let result = 0;
+            steps.push(`2. 将 ${inPerceptFrames} 感知帧 转换为 ${toUnit}：`);
+            
+            switch (toUnit) {
+                case "感知帧":
+                    result = inPerceptFrames;
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${result} 感知帧`);
+                    break;
+                case "秒":
+                    result = inPerceptFrames / 1;
+                    steps.push(`   根据设定：1秒 = 1感知帧`);
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${inPerceptFrames} ÷ 1 = ${result} 秒`);
+                    break;
+                case "分钟":
+                    result = inPerceptFrames / 80;
+                    steps.push(`   根据设定：1分钟 = 80感知帧`);
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${inPerceptFrames} ÷ 80 = ${result} 分钟`);
+                    break;
+                case "小时":
+                    result = inPerceptFrames / (40 * 80);
+                    steps.push(`   根据设定：1小时 = 3200感知帧（40分钟 × 80秒）`);
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${inPerceptFrames} ÷ 3200 = ${result} 小时`);
+                    break;
+                case "天":
+                    result = inPerceptFrames / (20 * 40 * 80);
+                    steps.push(`   根据设定：1天 = 64000感知帧（20小时 × 40分钟 × 80秒）`);
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${inPerceptFrames} ÷ 64000 = ${result} 天`);
+                    break;
+                case "单位月":
+                    result = inPerceptFrames / (25.5 * 20 * 40 * 80);
+                    steps.push(`   根据设定：1单位月 = 1632000感知帧（25.5天 × 20小时 × 40分钟 × 80秒）`);
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${inPerceptFrames} ÷ 1632000 = ${result} 单位月`);
+                    break;
+                case "年":
+                    result = inPerceptFrames / (13 * 25.5 * 20 * 40 * 80);
+                    steps.push(`   根据设定：1年 = 21216000感知帧（13单位月 × 25.5天 × 20小时 × 40分钟 × 80秒）`);
+                    steps.push(`   ${inPerceptFrames} 感知帧 = ${inPerceptFrames} ÷ 21216000 = ${result} 年`);
+                    break;
+            }
+            
+            // 显示结果和计算过程
+            resultElement.textContent = `${inputValue} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+            
+            // 构建计算步骤HTML
+            let stepsHTML = '';
+            steps.forEach(step => {
+                stepsHTML += `<div class="calculation-step">${step}</div>`;
+            });
+            processStepsElement.innerHTML = stepsHTML;
+            processContainer.style.display = 'block';
+        }
+
+        // 清空所有输入和结果
+        function clearAll() {
+            document.getElementById('inputValue').value = '';
+            document.getElementById('result').textContent = '转换结果将显示在这里';
+            document.getElementById('result').classList.remove('error');
+            document.getElementById('calculationProcess').style.display = 'none';
+            document.getElementById('processSteps').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
+    
