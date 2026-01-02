@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 【可修改】网页标题 - 替换为你的新闻网站名称 -->
+    <title>岁窦新闻网 - 聚焦全球热点，传递权威信息</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* 顶部导航栏 - 固定顶部，适配移动端 */
+        .top-nav {
+            background-color: #2d3748;
+            color: #ffffff;
+            padding: 0.8rem 5%;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-nav-left {
+            /* 【可修改】顶部左侧信息 - 日期/天气等 */
+            display: flex;
+            gap: 2rem;
+        }
+
+        .top-nav-right {
+            /* 【可修改】顶部右侧功能 - 登录/注册等 */
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .top-nav-link {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .top-nav-link:hover {
+            color: #4a90e2;
+        }
+
+        /* 网站头部 - LOGO+主导航 */
+        .site-header {
+            background-color: #ffffff;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .site-logo {
+            /* 【可修改】网站LOGO/名称 - 调整字体/大小/颜色 */
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .site-logo span {
+            color: #4a90e2;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-item {
+            /* 【可修改】主导航栏目 - 增减/修改分类 */
+            color: #2d3748;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        /* 首页核心容器 - 左右分栏布局 */
+        .home-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 7fr 3fr;
+            gap: 2rem;
+        }
+
+        /* 左侧主内容区 */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        /* 头条轮播区 - 简化版轮播，可扩展为动态轮播 */
+        .headline-banner {
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .banner-content {
+            display: flex;
+            height: 400px;
+        }
+
+        .banner-img {
+            /* 【可修改】头条轮播图片 - 替换图片地址，保持尺寸适配 */
+            width: 60%;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url("https://picsum.photos/800/400") no-repeat center center;
+            background-size: cover;
+        }
+
+        .banner-text {
+            width: 40%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .banner-tag {
+            /* 【可修改】头条分类标签 */
+            display: inline-block;
+            background-color: #4a90e2;
+            color: #ffffff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .banner-title {
+            /* 【可修改】头条标题 */
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .banner-desc {
+            /* 【可修改】头条简介 */
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .banner-meta {
+            /* 【可修改】头条元信息 */
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        /* 要闻推荐区 */
+        .hot-news-section {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            /* 【可修改】板块标题 */
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #e8f4ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-more {
+            color: #4a90e2;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .hot-news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hot-news-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .hot-news-img {
+            /* 【可修改】要闻图片 - 替换图片地址 */
+            width: 180px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: url("https://picsum.photos/180/120") no-repeat center center;
+            background-size: cover;
+        }
+
+        .hot-news-text {
+            flex: 1;
+        }
+
+        .hot-news-title {
+            /* 【可修改】要闻标题 */
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .hot-news-title:hover {
+            color: #4a90e2;
+            cursor: pointer;
+        }
+
+        .hot-news-meta {
+            /* 【可修改】要闻元信息 */
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        /* 分类新闻区 - 多栏目横向布局 */
+        .category-news-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .category-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .category-news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .category-news-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .category-news-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* 右侧侧边栏 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* 热搜榜 */
+        .hot-search-widget {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .search-rank-list {
+            margin-top: 1rem;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-num {
+            width: 24px;
+            height: 24px;
+            background-color: #e8f4ff;
+            color: #4a90e2;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .rank-num.top3 {
+            background-color: #4a90e2;
+            color: #ffffff;
+        }
+
+        .rank-title {
+            /* 【可修改】热搜标题 */
+            font-size: 0.95rem;
+            color: #2d3748;
+            transition: color 0.3s ease;
+        }
+
+        .rank-title:hover {
+            color: #4a90e2;
+            cursor: pointer;
+        }
+
+        /* 推荐专栏/广告 */
+        .sidebar-widget {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .widget-img {
+            /* 【可修改】侧边栏图片 - 广告/专栏图片 */
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            background: url("https://picsum.photos/300/200") no-repeat center center;
+            background-size: cover;
+        }
+
+        .widget-text {
+            /* 【可修改】侧边栏文案 */
+            font-size: 0.95rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* 网站底部 */
+        .site-footer {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 3rem 5%;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-title {
+            /* 【可修改】底部栏目标题 */
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link {
+            /* 【可修改】底部链接 */
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #4a90e2;
+        }
+
+        .copyright {
+            max-width: 1400px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #a0aec0;
+        }
+
+        /* 响应式适配 - 移动端适配 */
+        @media (max-width: 992px) {
+            .home-container {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-content {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .banner-img, .banner-text {
+                width: 100%;
+            }
+
+            .banner-img {
+                height: 250px;
+            }
+
+            .category-news-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-nav {
+                display: none; /* 移动端隐藏主导航，可添加汉堡菜单 */
+            }
+
+            .hot-news-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hot-news-img {
+                width: 100%;
+                height: 180px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部小导航 -->
+    <div class="top-nav">
+        <div class="top-nav-left">
+            <span>2026年1月2日 星期五 晴</span>
+            <span>北京 气温 -5℃~5℃</span>
+        </div>
+        <div class="top-nav-right">
+            <a href="#" class="top-nav-link">登录</a>
+            <a href="#" class="top-nav-link">注册</a>
+            <a href="#" class="top-nav-link">订阅</a>
+        </div>
+    </div>
+
+    <!-- 网站头部（LOGO+主导航） -->
+    <header class="site-header">
+        <a href="#" class="site-logo">环球<span>资讯</span>网</a>
+        <nav class="main-nav">
+            <a href="#" class="nav-item active">首页</a>
+            <a href="#" class="nav-item">时政新闻</a>
+            <a href="#" class="nav-item">财经动态</a>
+            <a href="#" class="nav-item">科技前沿</a>
+            <a href="#" class="nav-item">文娱体育</a>
+            <a href="#" class="nav-item">国际视野</a>
+            <a href="#" class="nav-item">民生百态</a>
+        </nav>
+    </header>
+
+    <!-- 首页核心容器 -->
+    <div class="home-container">
+        <!-- 左侧主内容区 -->
+        <div class="main-content">
+            <!-- 头条轮播区 -->
+            <div class="headline-banner">
+                <div class="banner-content">
+                    <div class="banner-img"></div>
+                    <div class="banner-text">
+                        <span class="banner-tag">头条 · 文娱</span>
+                        <h2 class="banner-title">《逆行穿梭》创作近一年即将完结 萌骑士萨蓝星抉择引全网期待</h2>
+                        <p class="banner-desc">这部承载着宇宙种族纷争与英雄成长的科幻力作，自2025年3月开文以来收获大批粉丝，1月底至2月初将迎来收官，最终剧情引发全网热议。</p>
+                        <div class="banner-meta">发布时间：2026-01-02 09:30 | 作者：文学专栏组 | 阅读量：10w+</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 要闻推荐区 -->
+            <div class="hot-news-section">
+                <h2 class="section-title">
+                    今日要闻
+                    <a href="#" class="section-more">查看更多 >></a>
+                </h2>
+                <div class="hot-news-list">
+                    <!-- 要闻1 -->
+                    <div class="hot-news-item">
+                        <div class="hot-news-img"></div>
+                        <div class="hot-news-text">
+                            <h3 class="hot-news-title">2026年全球科技峰会将于1月中旬在上海举办，聚焦AI与量子计算</h3>
+                            <div class="hot-news-meta">2026-01-02 08:15 | 科技频道 | 阅读量：5.8w</div>
+                        </div>
+                    </div>
+                    <!-- 要闻2 -->
+                    <div class="hot-news-item">
+                        <div class="hot-news-img"></div>
+                        <div class="hot-news-text">
+                            <h3 class="hot-news-title">全国冬季运动会落幕，东道主斩获22金领跑金牌榜</h3>
+                            <div class="hot-news-meta">2026-01-01 22:00 | 体育频道 | 阅读量：7.2w</div>
+                        </div>
+                    </div>
+                    <!-- 要闻3 -->
+                    <div class="hot-news-item">
+                        <div class="hot-news-img"></div>
+                        <div class="hot-news-text">
+                            <h3 class="hot-news-title">春节假期国内旅游预订量同比增长30%，三亚哈尔滨成热门目的地</h3>
+                            <div class="hot-news-meta">2026-01-02 10:00 | 财经频道 | 阅读量：6.5w</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分类新闻区 -->
+            <div class="category-news-section">
+                <!-- 财经分类 -->
+                <div class="category-card">
+                    <h2 class="section-title">
+                        财经动态
+                        <a href="#" class="section-more">更多 >></a>
+                    </h2>
+                    <div class="category-news-list">
+                        <div class="category-news-item">
+                            <h3 class="hot-news-title">央行发布最新金融数据，市场流动性保持合理充裕</h3>
+                            <div class="hot-news-meta">2026-01-02 09:00 | 阅读量：3.2w</div>
+                        </div>
+                        <div class="category-news-item">
+                            <h3 class="hot-news-title">A股开盘小幅高开，新能源板块领涨</h3>
+                            <div class="hot-news-meta">2026-01-02 09:30 | 阅读量：2.8w</div>
+                        </div>
+                        <div class="category-news-item">
+                            <h3 class="hot-news-title">全球油价小幅波动，供需关系仍是核心影响因素</h3>
+                            <div class="hot-news-meta">2026-01-01 18:00 | 阅读量：2.1w</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 科技分类 -->
+                <div class="category-card">
+                    <h2 class="section-title">
+                        科技前沿
+                        <a href="#" class="section-more">更多 >></a>
+                    </h2>
+                    <div class="category-news-list">
+                        <div class="category-news-item">
+                            <h3 class="hot-news-title">新一代人工智能模型发布，推理速度提升50%</h3>
+                            <div class="hot-news-meta">2026-01-02 08:30 | 阅读量：4.5w</div>
+                        </div>
+                        <div class="category-news-item">
+                            <h3 class="hot-news-title">我国首颗高分辨率遥感卫星完成在轨测试，即将投入使用</h3>
+                            <div class="hot-news-meta">2026-01-01 15:00 | 阅读量：3.9w</div>
+                        </div>
+                        <div class="category-news-item">
+                            <h3 class="hot-news-title">新能源汽车续航再创新高，最高续航突破1200公里</h3>
+                            <div class="hot-news-meta">2026-01-01 10:00 | 阅读量：3.5w</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧侧边栏 -->
+        <div class="sidebar">
+            <!-- 热搜榜 -->
+            <div class="hot-search-widget">
+                <h2 class="section-title">今日热搜</h2>
+                <div class="search-rank-list">
+                    <div class="rank-item">
+                        <div class="rank-num top3">1</div>
+                        <div class="rank-title">《逆行穿梭》完结预告</div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num top3">2</div>
+                        <div class="rank-title">全球科技峰会上海举办</div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num top3">3</div>
+                        <div class="rank-title">春节旅游预订火爆</div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num">4</div>
+                        <div class="rank-title">冬运会金牌榜出炉</div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-num">5</div>
+                        <div class="rank-title">新一代AI模型发布</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推荐专栏 -->
+            <div class="sidebar-widget">
+                <h2 class="section-title">编辑推荐</h2>
+                <div class="widget-img"></div>
+                <p class="widget-text">《2026年全球经济发展展望》：深度分析全球经济格局变化，解读未来一年经济发展趋势，为投资者提供参考方向。</p>
+            </div>
+
+            <!-- 广告模块 -->
+            <div class="sidebar-widget">
+                <h2 class="section-title">合作推广</h2>
+                <div class="widget-img"></div>
+                <p class="widget-text">人民银行全新理财产品上线，预期收益率4.2%，低风险高流动性，限时认购中，详情请咨询线下网点。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 网站底部 -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3 class="footer-title">环球资讯网</h3>
+                <p>聚焦全球热点，传递权威、及时、准确的新闻信息</p>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">新闻分类</h3>
+                <a href="#" class="footer-link">时政新闻</a>
+                <a href="#" class="footer-link">财经动态</a>
+                <a href="#" class="footer-link">科技前沿</a>
+                <a href="#" class="footer-link">文娱体育</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">关于我们</h3>
+                <a href="#" class="footer-link">公司简介</a>
+                <a href="#" class="footer-link">联系方式</a>
+                <a href="#" class="footer-link">招聘信息</a>
+                <a href="#" class="footer-link">广告合作</a>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">法律声明</h3>
+                <a href="#" class="footer-link">隐私政策</a>
+                <a href="#" class="footer-link">用户协议</a>
+                <a href="#" class="footer-link">版权声明</a>
+                <a href="#" class="footer-link">投诉通道</a>
+            </div>
+        </div>
+        <div class="copyright">
+            版权所有 © 2026 环球资讯网 保留所有权利 | 京ICP备0256522号-1
+        </div>
+    </footer>
+</body>
+</html>
