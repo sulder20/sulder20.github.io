@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://example.com/img/qadxx.webp">
 <meta property="og:image" content="http://example.com/img/qadx.png">
 <meta property="article:published_time" content="2026-01-26T05:55:20.000Z">
-<meta property="article:modified_time" content="2026-01-26T06:27:54.243Z">
+<meta property="article:modified_time" content="2026-01-26T06:29:35.041Z">
 <meta property="article:author" content="sulder">
 <meta property="article:tag" content="观点总结">
 <meta name="twitter:card" content="summary_large_image">
@@ -311,7 +311,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-01-26T14:27:54+08:00
+                    本文最后更新于 2026-01-26T14:29:35+08:00
                   
                   
 
@@ -403,18 +403,17 @@
 </ul>
 <hr>
 <h2 id="🔗-人物关系图谱"><a href="#🔗-人物关系图谱" class="headerlink" title="🔗 人物关系图谱"></a>🔗 人物关系图谱</h2><p><img src="/../img/qadx.png" srcset="/img/loading.gif" lazyload alt="《亲爱的X》人物关系图"></p>
-<pre><code class=" mermaid">graph LR
-    A[林善艺] --&gt;|母女| B[白雅珍]
-    C[白善圭] --&gt;|父女| B
-    D[黄智善] --&gt;|母子| E[尹俊瑞]
-    E --&gt;|表哥/棋子| B
-    F[沈圣希] --&gt;|敌对| B
-    G[金在伍] --&gt;|绝对忠诚| B
-    H[许仁江] --&gt;|恋人| B
-    I[文道赫] --&gt;|丈夫/控制者| B
-    J[徐代表] --&gt;|前经纪公司| B
-    K[任莉娜] --&gt;|职场竞争| B
-</code></pre>
+<pre class="mermaid">graph LR
+    A[林善艺] -->|母女| B[白雅珍]
+    C[白善圭] -->|父女| B
+    D[黄智善] -->|母子| E[尹俊瑞]
+    E -->|表哥/棋子| B
+    F[沈圣希] -->|敌对/昔日友人| B
+    G[金在伍] -->|绝对忠诚| B
+    H[许仁江] -->|恋人| B
+    I[文道赫] -->|丈夫/控制者| B
+    J[徐代表] -->|前经纪公司| B
+    K[任莉娜] -->|职场竞争| B</pre>
 
 <h2 id="完整故事脉络"><a href="#完整故事脉络" class="headerlink" title="完整故事脉络"></a>完整故事脉络</h2><h3 id="第一阶段：黑暗童年与危机初现"><a href="#第一阶段：黑暗童年与危机初现" class="headerlink" title="第一阶段：黑暗童年与危机初现"></a>第一阶段：黑暗童年与危机初现</h3><p>白雅珍生于家暴家庭，母亲酗酒施暴，父亲将母亲推下楼梯后伪装悲伤脱罪。后随父搬至财阀情妇黄智善家中，与表哥尹俊瑞相识。因识破黄智善 “儿子非财阀亲生” 的秘密，遭其溺杀未遂，被尹俊瑞救下并结为同盟。</p>
 <h3 id="第二阶段：校园恩怨与家庭决裂"><a href="#第二阶段：校园恩怨与家庭决裂" class="headerlink" title="第二阶段：校园恩怨与家庭决裂"></a>第二阶段：校园恩怨与家庭决裂</h3><p>高中时，律师家庭出身的沈圣希因情书被操纵、身份被揭露，与白雅珍结怨。在尹俊瑞、金在伍帮助下，白雅珍曝光沈父出轨丑闻，致其家破人亡、被退学。父亲白善圭出狱后变本加厉施暴，触发弑父案。</p>
@@ -510,6 +509,21 @@
 
   
 
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
 
 
 
