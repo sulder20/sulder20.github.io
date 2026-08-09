@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>岁窦 | 同人创作者</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:
+    "Noto Serif SC",
+    "Microsoft YaHei",
+    serif;
+    background:#111;
+    color:#fff;
+}
+
+
+/* 页面容器 */
+
+.container{
+
+    width:100%;
+    height:100vh;
+
+    transition:
+    transform 1s cubic-bezier(.77,0,.18,1);
+
+}
+
+
+/* 每一页 */
+
+.page{
+
+    height:100vh;
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+
+    padding:40px;
+
+    perspective:1200px;
+
+}
+
+
+.page .content{
+
+    opacity:0;
+
+    transform:
+    translateY(50px)
+    scale(.95);
+
+
+    transition:
+
+    opacity .8s ease,
+
+    transform .8s ease;
+
+}
+
+
+/* 当前页内容出现 */
+
+.page.active .content{
+
+    opacity:1;
+
+    transform:
+
+    translateY(0)
+    scale(1);
+
+}
+
+}
+
+
+
+/* 背景 */
+
+.page:nth-child(odd){
+
+    background:#111;
+
+}
+
+
+.page:nth-child(even){
+
+    background:#f7f7f7;
+    color:#111;
+
+}
+
+
+
+
+.content{
+
+    max-width:800px;
+
+}
+
+
+
+h1{
+
+    font-size:80px;
+
+    letter-spacing:18px;
+
+    margin-bottom:30px;
+
+}
+
+
+h2{
+
+    font-size:45px;
+
+    margin-bottom:35px;
+
+}
+
+
+p{
+
+    font-size:20px;
+
+    line-height:2;
+
+    opacity:.8;
+
+}
+
+
+
+.small{
+
+    font-size:14px;
+
+    opacity:.6;
+
+}
+
+
+
+/* 按钮 */
+
+.btn{
+
+    display:inline-block;
+
+    margin-top:40px;
+
+    padding:14px 45px;
+
+    border:1px solid currentColor;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:.3s;
+
+}
+
+
+
+.btn:hover{
+
+    background:white;
+
+    color:#111;
+
+}
+
+
+
+
+
+/* 右侧导航 */
+
+
+.nav{
+
+    position:fixed;
+
+    right:30px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    z-index:10;
+
+}
+
+
+.dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    border:1px solid #fff;
+
+    margin:18px 0;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.dot.active{
+
+    background:white;
+
+    transform:scale(1.5);
+
+}
+
+
+
+
+/* 作品卡 */
+
+
+.book{
+
+    margin:auto;
+
+    max-width:650px;
+
+}
+
+
+
+.book-title{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.status{
+
+    margin-top:20px;
+
+    font-size:16px;
+
+    opacity:.7;
+
+}
+
+
+
+/* 页码 */
+
+.page-number{
+
+    position:absolute;
+
+    bottom:40px;
+
+    right:50px;
+
+    font-size:14px;
+
+    opacity:.5;
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+h1{
+
+    font-size:50px;
+
+    letter-spacing:10px;
+
+}
+
+
+h2{
+
+    font-size:35px;
+
+}
+
+
+.book-title{
+
+    font-size:42px;
+
+}
+
+
+p{
+
+    font-size:17px;
+
+}
+
+
+.nav{
+
+    right:15px;
+
+}
+
+
+}
+
+
+.work-layout{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:70px;
+
+}
+
+
+.cover-box img{
+
+    width:280px;
+
+    height:400px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.4);
+
+}
+
+
+.book{
+
+    text-align:left;
+
+}
+
+
+
+@media(max-width:700px){
+
+.work-layout{
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+
+.cover-box img{
+
+    width:200px;
+
+    height:290px;
+
+}
+
+
+.book{
+
+    text-align:center;
+
+}
+
+
+}
+
+/* 联系方式页面 */
+
+.contact{
+
+    text-align:center;
+
+}
+
+
+.contact-title{
+
+    font-size:22px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.line{
+
+    width:80px;
+
+    height:1px;
+
+    background:currentColor;
+
+    margin:30px auto;
+
+    opacity:.5;
+
+}
+
+
+
+.contact-info{
+
+    line-height:2.2;
+
+    font-size:17px;
+
+}
+
+
+
+.contact-info a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+    border-bottom:1px solid currentColor;
+
+}
+
+
+
+.contact-info span{
+
+    opacity:.7;
+
+}
+
+
+
+.studio{
+
+    margin-top:45px;
+
+    font-size:14px;
+
+    letter-spacing:3px;
+
+    opacity:.6;
+
+}
+
+/* 第一页标题浮现效果 */
+
+.title-star{
+
+    opacity:0;
+
+    transform:
+    translateY(50px)
+    scale(1.3);
+
+    filter:blur(10px);
+
+    animation:
+    titleShow 2s ease forwards;
+
+}
+
+
+@keyframes titleShow{
+
+
+0%{
+
+    opacity:0;
+
+    transform:
+    translateY(80px)
+    scale(1.5);
+
+    filter:blur(15px);
+
+}
+
+
+
+100%{
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+    filter:blur(0);
+
+}
+
+}
+
+
+
+/* 副标题出现 */
+
+.subtitle-star{
+
+    opacity:0;
+
+    animation:
+    textShow 1.5s ease forwards;
+
+    animation-delay:1.5s;
+
+}
+
+
+
+/* 按钮出现 */
+
+.btn-star{
+
+    opacity:0;
+
+    animation:
+    textShow 1.5s ease forwards;
+
+    animation-delay:2.5s;
+
+}
+
+
+
+@keyframes textShow{
+
+
+from{
+
+    opacity:0;
+
+    transform:
+    translateY(20px);
+
+}
+
+
+to{
+
+    opacity:1;
+
+    transform:
+    translateY(0);
+
+}
+
+}
+/* =====================
+   首页背景
+===================== */
+
+
+.first-page{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.first-page::before{
+
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+
+    background-image:
+
+    linear-gradient(
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.75)
+    ),
+
+    url("images/yinhe.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+
+    z-index:0;
+
+
+    animation:
+
+    starZoom 20s infinite alternate;
+
+}
+
+
+
+.first-page .content{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+
+
+
+@keyframes starZoom{
+
+
+from{
+
+    transform:scale(1);
+
+}
+
+
+to{
+
+    transform:scale(1.08);
+
+}
+
+
+}
+
+
+
+
+
+/* =====================
+   最后一页背景
+===================== */
+
+
+.last-page{
+
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.last-page::before{
+
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+
+    background-image:
+
+
+    linear-gradient(
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.8)
+    ),
+
+
+    url("images/yueguang.png");
+
+
+
+    background-size:cover;
+
+
+    background-position:center;
+
+
+    z-index:0;
+
+
+}
+
+
+
+.last-page .content{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+/* 最后一页文字颜色 */
+
+/* 最后一页强制白色文字 */
+
+.last-page,
+.last-page h1,
+.last-page p,
+.last-page span,
+.last-page .contact-info,
+.last-page .studio,
+.last-page .page-number {
+
+    color:#ffffff !important;
+
+}
+
+
+.last-page a{
+
+    color:#ffffff !important;
+
+    border-color:#ffffff !important;
+
+}
+
+/* 联系方式图标 */
+
+.contact-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:18px;
+
+    margin:18px 0;
+
+    font-size:17px;
+
+}
+
+
+
+.contact-item img{
+
+    width:28px;
+
+    height:28px;
+
+    object-fit:contain;
+
+}
+
+
+
+.contact-item a{
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+
+
+.contact-item span{
+
+    color:white;
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<!-- 页面导航 -->
+
+<div class="nav">
+
+<div class="dot active"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+
+</div>
+
+
+
+
+<!-- 页面主体 -->
+
+<div class="container" id="container">
+
+
+
+<!-- 第一页 -->
+
+<section class="page first-page">
+
+
+<div class="content">
+
+
+<h1 class="title-star">
+岁窦
+</h1>
+
+
+<p class="subtitle-star">
+
+同人创作者（不止于同人）
+<br>
+Sulder Studio
+
+</p>
+
+<a class="btn btn-star" onclick="nextPage()">
+开始阅读
+</a>
+
+
+</div>
+
+
+<div class="page-number">
+01 / 06
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- 第二页 -->
+
+
+<section class="page">
+
+
+<div class="content">
+
+
+<h2>
+关于岁窦
+</h2>
+
+
+<p>
+
+文字是想象世界的入口。
+
+<br><br>
+
+以同人创作为核心，
+记录角色、故事与情感。
+
+<br>
+
+让每一次创作，
+成为一次新的相遇。
+
+</p>
+
+
+</div>
+
+
+<div class="page-number">
+02 / 06
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- 第三页 -->
+
+<section class="page">
+
+<div class="work-layout">
+
+
+<div class="cover-box">
+
+<img 
+src="images/nixingchuansuo.png"
+alt="逆行穿梭封面">
+
+</div>
+
+
+
+<div class="content book">
+
+
+<div class="book-title">
+《逆行穿梭》
+</div>
+
+
+<p>
+同人作品
+<br><br>
+
+一次关于时间、
+选择与命运交错的旅程。
+</p>
+
+
+<a class="btn"
+href="https://fanqienovel.com/page/7603245134909541400"
+target="_blank">
+
+进入阅读
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+<div class="page-number">
+03 / 06
+</div>
+
+</section>
+
+
+<!-- 第四页 -->
+
+
+<section class="page">
+
+
+<div class="work-layout">
+
+
+<div class="cover-box">
+
+
+<img 
+src="images/fengjuanhailang.png"
+alt="风卷骇浪封面">
+
+
+</div>
+
+
+
+<div class="content book">
+
+
+<div class="book-title">
+
+《风卷骇浪》
+
+</div>
+
+
+<p>
+
+同人作品
+
+<br><br>
+
+新的故事正在展开。
+
+</p>
+
+
+<div class="status">
+
+状态：连载更新中
+
+</div>
+
+
+
+<a class="btn"
+
+href="https://fanqienovel.com/page/7633323841279773721"
+
+target="_blank">
+
+追更作品
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="page-number">
+04 / 06
+</div>
+
+
+</section>
+
+
+<!-- 第五页 -->
+
+
+<section class="page">
+
+
+<div class="content">
+
+
+<h2>
+岁窦工作室
+</h2>
+
+
+<p>
+
+Sulder Studio
+
+<br><br>
+
+创作 · 技术 · 想象
+
+</p>
+
+
+
+<a class="btn"
+
+href="https://sulder20.github.io/"
+
+target="_blank">
+
+访问官网
+
+</a>
+
+
+</div>
+
+
+
+<div class="page-number">
+05 / 06
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 第六页 -->
+
+<section class="page last-page">
+
+
+<div class="content contact">
+
+<h1>
+岁窦
+</h1>
+
+<p class="contact-title">
+感谢你的阅读，下面是个人的联系方式
+</p>
+
+
+<div class="contact-info">
+
+
+<div class="contact-item">
+
+<img src="images/1.png">
+
+<a href="mailto:sulder0918@gmail.com">
+
+sulder0918@gmail.com
+
+</a>
+
+</div>
+
+
+
+<div class="contact-item">
+
+<img src="images/2.png">
+
+<a href="mailto:q13052830801@163.com">
+
+q13052830801@163.com
+
+</a>
+
+</div>
+
+
+
+<div class="contact-item">
+
+<img src="images/3.png">
+
+<span>
+
+岁窦工作室
+
+</span>
+
+</div>
+
+
+
+<div class="contact-item">
+
+<img src="images/4.png">
+
+<span>
+
+即将开通，敬请期待
+
+</span>
+
+</div>
+
+
+
+</div>
+
+
+
+<div class="studio">
+
+Sulder Studio
+
+<br>
+
+创作 · 文字 · 想象
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="page-number">
+06 / 06
+</div>
+
+
+</section>
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+const pages =
+document.querySelectorAll(".page");
+
+
+window.onload=function(){
+
+pages[0].classList.add("active");
+
+}
+
+
+const dots =
+document.querySelectorAll(".dot");
+
+
+const container =
+document.getElementById("container");
+let current = 0;
+
+
+
+function showPage(index){
+
+
+if(index < 0)
+index = 0;
+
+
+if(index >= pages.length)
+index = pages.length-1;
+
+
+current=index;
+
+
+
+container.style.transform =
+`translateY(-${index*100}vh)`;
+
+
+
+pages.forEach((page,i)=>{
+
+page.classList.remove("active");
+
+
+if(i===index){
+
+setTimeout(()=>{
+
+page.classList.add("active");
+
+},200);
+
+
+}
+
+
+});
+
+
+
+dots.forEach((dot,i)=>{
+
+dot.classList.toggle(
+"active",
+i===index
+);
+
+});
+
+
+}
+
+
+
+function nextPage(){
+
+showPage(current+1);
+
+}
+
+
+
+function prevPage(){
+
+showPage(current-1);
+
+}
+
+
+
+
+
+// 鼠标滚轮
+
+window.addEventListener(
+"wheel",
+e=>{
+
+
+if(e.deltaY>0)
+nextPage();
+
+else
+prevPage();
+
+
+},
+{
+passive:true
+});
+
+
+
+
+
+// 键盘
+
+window.addEventListener(
+"keydown",
+e=>{
+
+
+if(
+e.key==="ArrowDown" ||
+e.key==="PageDown"
+)
+
+nextPage();
+
+
+
+if(
+e.key==="ArrowUp" ||
+e.key==="PageUp"
+)
+
+prevPage();
+
+
+
+});
+
+
+
+
+
+
+// 点击导航点
+
+
+dots.forEach(
+(dot,index)=>{
+
+
+dot.onclick=()=>{
+
+showPage(index);
+
+};
+
+
+});
+
+
+
+
+
+
+
+// 手机滑动
+
+
+let startY=0;
+
+
+window.addEventListener(
+"touchstart",
+e=>{
+
+startY=e.touches[0].clientY;
+
+});
+
+
+
+window.addEventListener(
+"touchend",
+e=>{
+
+
+let endY =
+e.changedTouches[0].clientY;
+
+
+if(startY-endY>50)
+
+nextPage();
+
+
+if(endY-startY>50)
+
+prevPage();
+
+
+
+});
+
+
+
+</script>
+
+
+</body>
+
+</html>
