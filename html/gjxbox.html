@@ -188,8 +188,9 @@ input[type=file]{font-size:13px;color:var(--muted);}
 .person-body p{margin:0 0 8px;font-size:13.5px;line-height:1.65;color:#404754;word-break:break-word;}
 .person-body b{color:var(--muted);font-weight:600;}
 .empty{color:var(--muted);text-align:center;padding:36px 0;font-size:14px;}
-.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 14px;}
+.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 14px;gap:10px;flex-wrap:wrap;}
 .list-head h2{margin:0;font-size:16px;}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap;}
 
 /* 地点卡片 */
 .places-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
@@ -216,6 +217,18 @@ input[type=file]{font-size:13px;color:var(--muted);}
 }
 .baike-btn:hover{color:var(--primary);border-color:#c7d2fe;background:#f8faff;}
 .baike-btn svg{width:13px;height:13px;}
+
+/* 影视收藏卡片 */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+.media-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.16s;position:relative;}
+.media-card:hover{border-color:#c7d2fe;}
+.media-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;padding-right:30px;}
+.media-name{font-size:15.5px;font-weight:700;margin:0 0 8px;line-height:1.45;}
+.media-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.media-tags .tag{margin-right:0;}
+.media-body p{margin:0 0 8px;font-size:13.5px;line-height:1.65;color:#404754;word-break:break-word;}
+.media-body p:last-child{margin-bottom:0;}
+.media-body b{color:var(--muted);font-weight:600;}
 
 /* 歌曲表 */
 .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:#fff;}
@@ -453,6 +466,12 @@ details.sub .inner{padding-bottom:14px;}
         <h3>我的日历</h3>
         <p>在日历里安排每日计划，支持新增 / 修改 / 删除，并可导出当月图片</p>
       </div>
+
+      <div class="tool-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 导出 文档 图片">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></div>
+        <h3>影视收藏</h3>
+        <p>收藏电视剧 / 电影 / 综艺 / 纪录片 / 动画片，可导出追剧信息文档与图片</p>
+      </div>
     </div>
     <p id="noResult">没有找到相关工具，换个关键词试试吧～</p>
   </section>
@@ -512,7 +531,7 @@ details.sub .inner{padding-bottom:14px;}
       </h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V1.2（2026.9）</span>
+        <span class="version-val">V1.3（2026.9）</span>
       </div>
     </div>
   </section>
@@ -813,7 +832,58 @@ details.sub .inner{padding-bottom:14px;}
     <div class="places-grid" id="placesList"></div>
   </section>
 
-  <!-- ============ 我的日历（新增） ============ -->
+  <!-- ============ 影视收藏（新增） ============ -->
+  <section id="page-media" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></span>
+      影视收藏
+    </h2>
+    <p class="page-desc">收藏你喜欢的电视剧、电影、综艺、纪录片、动画片等影视作品。填写名称、类型、年份、主要角色与简介，可一键导出「我的追剧信息」文档与图片。</p>
+
+    <div class="panel">
+      <div class="form-grid">
+        <label class="field"><span>影视名称 *</span><input type="text" id="mTitle" placeholder="如：肖申克的救赎"></label>
+        <label class="field"><span>类型</span>
+          <select id="mType">
+            <option value="电视剧">电视剧</option>
+            <option value="电影">电影</option>
+            <option value="综艺">综艺</option>
+            <option value="纪录片">纪录片</option>
+            <option value="动画片">动画片</option>
+          </select>
+        </label>
+        <label class="field"><span>自定义类型（选填）</span><input type="text" id="mTypeCustom" placeholder="如：舞台剧 / 短剧（填写后优先）"></label>
+        <label class="field"><span>年份</span><input type="text" id="mYear" placeholder="如：1994"></label>
+        <label class="field"><span>观看状态</span>
+          <select id="mStatus">
+            <option value="已看完">已看完</option>
+            <option value="在看">在看</option>
+            <option value="想看">想看</option>
+          </select>
+        </label>
+        <label class="field"><span>我的评分（选填）</span><input type="text" id="mScore" placeholder="如：9.7"></label>
+      </div>
+
+      <div class="field"><span>主要角色 / 人物</span><input type="text" id="mCast" placeholder="如：安迪（蒂姆·罗宾斯 饰）、瑞德（摩根·弗里曼 饰）"></div>
+      <div class="field"><span>简介</span><textarea id="mDesc" rows="3" placeholder="简单写一下剧情简介，或者你对它的感受…"></textarea></div>
+
+      <button class="btn" id="mAdd">＋ 添加影视</button>
+      <button class="btn ghost" id="mReset">重置表单</button>
+    </div>
+
+    <div class="list-head">
+      <h2>影视列表（<span id="mCount">0</span>）</h2>
+      <div class="head-actions">
+        <button class="btn ghost small" id="mExportDoc">导出文档</button>
+        <button class="btn small" id="mExportImg">导出图片</button>
+        <button class="btn ghost small" id="mClearAll">清空全部</button>
+      </div>
+    </div>
+    <div class="media-grid" id="mediaList"></div>
+  </section>
+
+  <!-- ============ 我的日历 ============ -->
   <section id="page-calendar" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title">
@@ -888,6 +958,10 @@ function esc(s){
   return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[c]));
+}
+function pad2(n){ return String(n).padStart(2,'0'); }
+function timeStamp(d){
+  return d.getFullYear() + pad2(d.getMonth()+1) + pad2(d.getDate()) + '_' + pad2(d.getHours()) + pad2(d.getMinutes());
 }
 
 /* ===================== 页面切换 ===================== */
@@ -1724,7 +1798,316 @@ function renderPlaces(){
 }
 loadPlaces(); renderPlaces();
 
-/* ===================== 7. 我的日历（新增） ===================== */
+/* ===================== 7. 影视收藏（新增） ===================== */
+let medias = [];
+const MEDIA_KEY = 'suidou-medias-v1';
+
+function saveMedias(){
+  try {
+    localStorage.setItem(MEDIA_KEY, JSON.stringify(medias));
+    updateStorageUsage();
+    return true;
+  } catch(e){
+    console.warn('影视保存失败：', e);
+    alert('保存失败！浏览器存储空间可能已满，建议先前往「设置」导出备份。');
+    return false;
+  }
+}
+function loadMedias(){
+  try {
+    const raw = localStorage.getItem(MEDIA_KEY);
+    if (raw) medias = JSON.parse(raw) || [];
+  } catch(e){ medias = []; }
+}
+
+function resetMediaForm(){
+  ['mTitle','mTypeCustom','mYear','mScore','mCast','mDesc']
+    .forEach(id => document.getElementById(id).value = '');
+  document.getElementById('mType').value = '电视剧';
+  document.getElementById('mStatus').value = '已看完';
+}
+document.getElementById('mReset').addEventListener('click', resetMediaForm);
+
+document.getElementById('mAdd').addEventListener('click', () => {
+  const title = document.getElementById('mTitle').value.trim();
+  if (!title) { alert('请先填写影视名称～'); document.getElementById('mTitle').focus(); return; }
+  const customType = document.getElementById('mTypeCustom').value.trim();
+
+  medias.push({
+    id: Date.now() + '-' + Math.floor(Math.random()*1000),
+    title: title,
+    type: customType || document.getElementById('mType').value,
+    year: document.getElementById('mYear').value.trim(),
+    status: document.getElementById('mStatus').value,
+    score: document.getElementById('mScore').value.trim(),
+    cast: document.getElementById('mCast').value.trim(),
+    desc: document.getElementById('mDesc').value.trim()
+  });
+
+  if (saveMedias()){
+    renderMedias();
+    resetMediaForm();
+    showToast('已添加「' + title + '」，数据已保存到浏览器');
+  } else {
+    medias.pop();
+  }
+});
+
+document.getElementById('mClearAll').addEventListener('click', () => {
+  if (medias.length === 0) return;
+  if (confirm('确定要清空全部影视记录吗？此操作不可恢复。')) {
+    medias = [];
+    try { localStorage.removeItem(MEDIA_KEY); } catch(e){}
+    updateStorageUsage();
+    renderMedias();
+    showToast('影视数据已清空');
+  }
+});
+
+function mediaMetaText(m){
+  return [m.type, m.year, m.status, m.score ? ('★ ' + m.score) : ''].filter(Boolean).join(' · ');
+}
+
+function renderMedias(){
+  const list = document.getElementById('mediaList');
+  document.getElementById('mCount').textContent = medias.length;
+  if (medias.length === 0){
+    list.innerHTML = '<p class="empty">还没有影视记录，先在上方添加一部吧～</p>';
+    return;
+  }
+  list.innerHTML = medias.map(m => {
+    return '' +
+      '<div class="media-card">' +
+        '<button class="del-btn" data-id="' + m.id + '" title="删除">✕</button>' +
+        '<div class="media-head">' +
+          '<div style="flex:1;min-width:0;">' +
+            '<h3 class="media-name">' + esc(m.title) + '</h3>' +
+            '<div class="media-tags">' +
+              '<span class="tag">' + esc(m.type || '影视') + '</span>' +
+              (m.year ? '<span class="tag gray">' + esc(m.year) + '</span>' : '') +
+              (m.status ? '<span class="tag gray">' + esc(m.status) + '</span>' : '') +
+              (m.score ? '<span class="tag">★ ' + esc(m.score) + '</span>' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="media-body">' +
+          (m.cast ? '<p><b>主要角色 / 人物：</b>' + esc(m.cast) + '</p>' : '') +
+          (m.desc ? '<p><b>简介：</b>' + esc(m.desc) + '</p>' : '') +
+        '</div>' +
+      '</div>';
+  }).join('');
+
+  list.querySelectorAll('.del-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const t = medias.find(x => String(x.id) === String(id));
+      if (t && confirm('确定删除「' + t.title + '」吗？')) {
+        medias = medias.filter(x => String(x.id) !== String(id));
+        if (saveMedias()) { renderMedias(); showToast('已删除「' + t.title + '」'); }
+        else { medias.push(t); }
+      }
+    });
+  });
+}
+
+/* —— 导出「我的追剧信息」文档（HTML） —— */
+function exportMediaDoc(){
+  if (medias.length === 0){ showToast('还没有影视记录，先添加一部吧～'); return; }
+  const d = new Date();
+  const dateStr = d.getFullYear() + ' 年 ' + (d.getMonth()+1) + ' 月 ' + d.getDate() + ' 日';
+
+  const items = medias.map((m, i) => {
+    const meta = mediaMetaText(m);
+    return '<section class="item">' +
+      '<h2>' + (i + 1) + '. ' + esc(m.title) + '</h2>' +
+      (meta ? '<p class="meta">' + esc(meta) + '</p>' : '') +
+      (m.cast ? '<p><b>主要角色 / 人物：</b>' + esc(m.cast) + '</p>' : '') +
+      (m.desc ? '<p><b>简介：</b>' + esc(m.desc) + '</p>' : '') +
+      '</section>';
+  }).join('\n');
+
+  const html = '<!DOCTYPE html>\n' +
+'<html lang="zh-CN">\n<head>\n<meta charset="UTF-8">\n<title>我的追剧信息</title>\n<style>\n' +
+'body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;max-width:820px;margin:0 auto;padding:48px 28px 60px;color:#111827;line-height:1.8;background:#fff;}\n' +
+'h1{font-size:26px;margin:0 0 8px;}\n' +
+'.head-meta{color:#6b7280;font-size:13.5px;margin:0 0 28px;padding-bottom:18px;border-bottom:2px solid #2563eb;}\n' +
+'.item{border:1px solid #e5e7eb;border-radius:12px;padding:18px 20px;margin-bottom:16px;background:#fafbfc;}\n' +
+'.item h2{font-size:17px;margin:0 0 8px;}\n' +
+'.meta{color:#2563eb;font-size:13px;margin:0 0 10px;font-weight:600;}\n' +
+'.item p{margin:0 0 8px;font-size:14px;}\n' +
+'.item b{color:#6b7280;font-weight:600;}\n' +
+'.foot{margin-top:34px;text-align:center;color:#9ca3af;font-size:12.5px;}\n' +
+'</style>\n</head>\n<body>\n' +
+'<h1>我的追剧信息</h1>\n' +
+'<p class="head-meta">共收录 ' + medias.length + ' 部作品　·　导出时间：' + dateStr + '</p>\n' +
+items + '\n' +
+'<p class="foot">岁窦工具箱 · 影视收藏</p>\n' +
+'</body>\n</html>';
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '我的追剧信息_' + timeStamp(d) + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1200);
+  showToast('已导出「我的追剧信息」文档（共 ' + medias.length + ' 部）');
+}
+
+/* —— 导出「我的追剧信息」图片（PNG） —— */
+function wrapText(ctx, text, maxW){
+  const out = [];
+  String(text).split('\n').forEach(seg => {
+    if (seg === ''){ out.push(''); return; }
+    let cur = '';
+    for (const ch of seg){
+      if (cur && ctx.measureText(cur + ch).width > maxW){ out.push(cur); cur = ch; }
+      else cur += ch;
+    }
+    out.push(cur);
+  });
+  return out;
+}
+
+function exportMediaImage(){
+  if (medias.length === 0){ showToast('还没有影视记录，先添加一部吧～'); return; }
+
+  const W = 920, PAD = 44, CARD_PAD = 20, GAP = 14;
+  const innerW = W - PAD * 2;
+  const textW  = innerW - CARD_PAD * 2;
+  const dpr = 2;
+  const FONT = '"PingFang SC","Microsoft YaHei",sans-serif';
+
+  const mc = document.createElement('canvas').getContext('2d');
+
+  /* —— 预排版 —— */
+  const blocks = medias.map(m => {
+    const rows = [];
+    rows.push({ kind:'title', text: m.title, h: 30 });
+
+    const meta = mediaMetaText(m);
+    if (meta) rows.push({ kind:'meta', text: meta, h: 26 });
+
+    if (m.cast){
+      mc.font = '14px ' + FONT;
+      wrapText(mc, '主要角色 / 人物：' + m.cast, textW)
+        .forEach(l => rows.push({ kind:'body', text: l, h: 23 }));
+    }
+    if (m.desc){
+      mc.font = '14px ' + FONT;
+      wrapText(mc, '简介：' + m.desc, textW)
+        .forEach(l => rows.push({ kind:'body', text: l, h: 23 }));
+    }
+    return rows;
+  });
+
+  const HEADER = 118, FOOTER = 58;
+  let contentH = 0;
+  blocks.forEach(rows => {
+    contentH += CARD_PAD * 2 + rows.reduce((a, r) => a + r.h, 0) + GAP;
+  });
+  const H = PAD + HEADER + contentH + FOOTER + PAD;
+
+  /* —— 绘制 —— */
+  const canvas = document.createElement('canvas');
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, W, H);
+  ctx.textBaseline = 'top';
+  ctx.textAlign = 'left';
+
+  /* 标题区 */
+  ctx.fillStyle = '#111827';
+  ctx.font = 'bold 30px ' + FONT;
+  ctx.fillText('我的追剧信息', PAD, PAD + 4);
+
+  ctx.fillStyle = '#9ca3af';
+  ctx.font = '14.5px ' + FONT;
+  ctx.fillText('共 ' + medias.length + ' 部作品　·　岁窦工具箱 · 影视收藏', PAD, PAD + 52);
+
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(PAD, PAD + 92);
+  ctx.lineTo(W - PAD, PAD + 92);
+  ctx.stroke();
+
+  /* 条目 */
+  let y = PAD + HEADER;
+  blocks.forEach(rows => {
+    const cardH = CARD_PAD * 2 + rows.reduce((a, r) => a + r.h, 0);
+    ctx.fillStyle = '#fafbfc';
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 1;
+    roundRect(ctx, PAD + 0.5, y + 0.5, innerW - 1, cardH - 1, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    let ry = y + CARD_PAD;
+    rows.forEach(r => {
+      if (r.kind === 'title'){
+        ctx.font = 'bold 17px ' + FONT;
+        ctx.fillStyle = '#111827';
+        ctx.fillText(fitText(ctx, r.text, textW), PAD + CARD_PAD, ry + 6);
+      } else if (r.kind === 'meta'){
+        ctx.font = '13px ' + FONT;
+        ctx.fillStyle = '#2563eb';
+        ctx.fillText(r.text, PAD + CARD_PAD, ry + 4);
+      } else {
+        ctx.font = '14px ' + FONT;
+        ctx.fillStyle = '#4b5563';
+        ctx.fillText(r.text, PAD + CARD_PAD, ry + 2);
+      }
+      ry += r.h;
+    });
+
+    y += cardH + GAP;
+  });
+
+  /* 页脚 */
+  const d = new Date();
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#9ca3af';
+  ctx.font = '12.5px ' + FONT;
+  ctx.fillText(
+    '导出时间：' + d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate()) +
+    ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) +
+    '　|　岁窦工具箱 · 影视收藏',
+    W / 2, y + 22
+  );
+
+  /* 下载 */
+  const fileName = '我的追剧信息_' + timeStamp(d) + '.png';
+  if (canvas.toBlob){
+    canvas.toBlob(blob => {
+      if (!blob){ showToast('导出失败，请重试'); return; }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      showToast('已导出追剧信息图片');
+    }, 'image/png');
+  } else {
+    const url = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    showToast('已导出追剧信息图片');
+  }
+}
+
+document.getElementById('mExportDoc').addEventListener('click', exportMediaDoc);
+document.getElementById('mExportImg').addEventListener('click', exportMediaImage);
+
+loadMedias(); renderMedias();
+
+/* ===================== 8. 我的日历 ===================== */
 const CAL_START = { y: 2026, m: 10 };   // 起始月
 const CAL_END   = { y: 2036, m: 12 };   // 结束月
 const CAL_KEY   = 'suidou-schedules-v1';
@@ -1737,7 +2120,6 @@ let calSelected = null;      // 'YYYY-MM-DD'
 let calEditingId = null;
 
 /* —— 日期工具 —— */
-function pad2(n){ return String(n).padStart(2,'0'); }
 function calKey(y, m, d){ return y + '-' + pad2(m) + '-' + pad2(d); }
 function daysInMonth(y, m){ return new Date(y, m, 0).getDate(); }
 function firstWeekdayMon(y, m){ return (new Date(y, m-1, 1).getDay() + 6) % 7; } // 0=周一
@@ -2293,18 +2675,18 @@ function exportCalImage(){
 function exportAll(){
   const data = {
     app: '岁窦工具箱',
-    version: 'V1.2',
+    version: 'V1.3',
     exportTime: new Date().toISOString(),
     people: people,
     songs: songs,
     places: places,
+    medias: medias,
     schedules: schedules
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
   const url = URL.createObjectURL(blob);
   const d = new Date();
-  const stamp = d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0')
-              + '_' + String(d.getHours()).padStart(2,'0') + String(d.getMinutes()).padStart(2,'0');
+  const stamp = timeStamp(d);
   const a = document.createElement('a');
   a.href = url;
   a.download = '岁窦工具箱备份_' + stamp + '.json';
@@ -2313,7 +2695,8 @@ function exportAll(){
   document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   showToast('已导出：人物 ' + people.length + ' · 歌曲 ' + songs.length +
-            ' · 地点 ' + places.length + ' · 日程 ' + schedules.length);
+            ' · 地点 ' + places.length + ' · 影视 ' + medias.length +
+            ' · 日程 ' + schedules.length);
 }
 
 document.getElementById('exportAll').addEventListener('click', exportAll);
@@ -2330,18 +2713,21 @@ document.getElementById('importFile').addEventListener('change', e => {
       const pc = Array.isArray(data.people)    ? data.people.length    : 0;
       const sc = Array.isArray(data.songs)     ? data.songs.length     : 0;
       const lc = Array.isArray(data.places)    ? data.places.length    : 0;
+      const mc = Array.isArray(data.medias)    ? data.medias.length    : 0;
       const cc = Array.isArray(data.schedules) ? data.schedules.length : 0;
-      if (!pc && !sc && !lc && !cc) { alert('文件里没有可导入的数据'); e.target.value=''; return; }
+      if (!pc && !sc && !lc && !mc && !cc) { alert('文件里没有可导入的数据'); e.target.value=''; return; }
       if (!confirm('导入将替换当前全部数据，确定继续吗？\n\n文件内容：人物 ' + pc + ' 条，歌曲 ' + sc +
-                   ' 条，地点 ' + lc + ' 条，日程 ' + cc + ' 条')) {
+                   ' 条，地点 ' + lc + ' 条，影视 ' + mc + ' 条，日程 ' + cc + ' 条')) {
         e.target.value = ''; return;
       }
       if (Array.isArray(data.people))    { people    = data.people;    savePeople();    renderPeople();    }
       if (Array.isArray(data.songs))     { songs     = data.songs;     saveSongs();     renderSongs();     }
       if (Array.isArray(data.places))    { places    = data.places;    savePlaces();    renderPlaces();    }
+      if (Array.isArray(data.medias))    { medias    = data.medias;    saveMedias();    renderMedias();    }
       if (Array.isArray(data.schedules)) { schedules = data.schedules; saveSchedules(); renderCalendar();  }
       updateStorageUsage();
-      showToast('导入成功：人物 ' + pc + ' · 歌曲 ' + sc + ' · 地点 ' + lc + ' · 日程 ' + cc);
+      showToast('导入成功：人物 ' + pc + ' · 歌曲 ' + sc + ' · 地点 ' + lc +
+                ' · 影视 ' + mc + ' · 日程 ' + cc);
     } catch(err){
       alert('导入失败：文件格式不正确');
     }
@@ -2351,18 +2737,19 @@ document.getElementById('importFile').addEventListener('change', e => {
 });
 
 document.getElementById('clearAllData').addEventListener('click', () => {
-  if (!people.length && !songs.length && !places.length && !schedules.length) {
+  if (!people.length && !songs.length && !places.length && !medias.length && !schedules.length) {
     showToast('当前没有数据'); return;
   }
-  if (!confirm('确定要清空全部数据吗？（人物 + 歌曲 + 地点 + 日程）\n建议先「导出全部数据」备份！')) return;
-  people = []; songs = []; places = []; schedules = [];
+  if (!confirm('确定要清空全部数据吗？（人物 + 歌曲 + 地点 + 影视 + 日程）\n建议先「导出全部数据」备份！')) return;
+  people = []; songs = []; places = []; medias = []; schedules = [];
   try {
     localStorage.removeItem(PEOPLE_KEY);
     localStorage.removeItem(SONGS_KEY);
     localStorage.removeItem(PLACES_KEY);
+    localStorage.removeItem(MEDIA_KEY);
     localStorage.removeItem(CAL_KEY);
   } catch(e){}
-  renderPeople(); renderSongs(); renderPlaces(); renderCalendar(); updateStorageUsage();
+  renderPeople(); renderSongs(); renderPlaces(); renderMedias(); renderCalendar(); updateStorageUsage();
   showToast('全部数据已清空');
 });
 
