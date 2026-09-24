@@ -242,6 +242,57 @@ details.sub summary::before{content:"▸ ";color:var(--primary);}
 details.sub[open] summary::before{content:"▾ ";}
 details.sub .inner{padding-bottom:14px;}
 
+/* ============ 我的日历 ============ */
+.cal-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.cal-toolbar .spacer{flex:1 1 auto;}
+.cal-selects{display:flex;gap:8px;}
+.cal-selects select{
+  padding:8px 12px;border-radius:9px;border:1px solid var(--border);
+  background:#fafbfc;font-size:14px;color:var(--text);outline:none;transition:.16s;cursor:pointer;
+}
+.cal-selects select:focus{border-color:var(--primary);background:#fff;}
+.cal-selects select:disabled{color:#c3c8d3;cursor:not-allowed;}
+.cal-hint{font-size:12.5px;color:var(--muted);margin:0 0 14px;}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:7px;}
+.cal-weekdays span{text-align:center;font-size:12.5px;font-weight:600;color:var(--muted);padding:2px 0;}
+.cal-weekdays span.weekend{color:#dc2626;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;}
+.cal-day{
+  min-height:106px;border:1px solid var(--border);border-radius:10px;background:#fff;
+  padding:7px 8px;display:flex;flex-direction:column;gap:5px;overflow:hidden;transition:.15s;
+}
+.cal-day[data-key]{cursor:pointer;}
+.cal-day[data-key]:hover{border-color:#c7d2fe;background:#f8faff;}
+.cal-day.out{background:#fafbfc;border-style:dashed;border-color:#eceef3;}
+.cal-day.today{border-color:var(--primary);}
+.cal-day.selected{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-soft);}
+.cal-day-head{display:flex;align-items:center;justify-content:space-between;gap:4px;}
+.cal-day-num{font-size:13px;font-weight:700;color:#374151;line-height:1;}
+.cal-day.out .cal-day-num{color:#c9cdd6;font-weight:600;}
+.cal-day.today .cal-day-num{color:var(--primary);}
+.cal-count{font-size:10px;font-weight:700;color:#fff;background:var(--primary);border-radius:999px;padding:1px 6px;line-height:1.5;}
+.cal-mini{display:flex;flex-direction:column;gap:3px;overflow:hidden;}
+.cal-mini-item{
+  font-size:11px;line-height:1.3;color:#3b4a6b;background:#eef2ff;border-radius:5px;
+  padding:2px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.cal-mini-item b{color:var(--primary);}
+.cal-more{font-size:10.5px;color:#9ca3af;padding-left:2px;}
+
+.cal-item{
+  display:flex;gap:12px;align-items:flex-start;justify-content:space-between;
+  border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:9px;background:#fafbfc;
+}
+.cal-item-main{flex:1;min-width:0;}
+.cal-item-top{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;margin-bottom:5px;}
+.cal-item-time{
+  font-size:12.5px;font-weight:700;color:var(--primary);background:var(--primary-soft);
+  border-radius:6px;padding:2px 8px;white-space:nowrap;
+}
+.cal-item-content{font-size:14.5px;font-weight:600;color:var(--text);word-break:break-word;}
+.cal-item-meta{font-size:12.5px;color:var(--muted);line-height:1.6;word-break:break-word;}
+.cal-item-actions{display:flex;gap:6px;flex:0 0 auto;}
+
 /* 弹窗 */
 .modal-backdrop{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
 .modal-backdrop.show{display:flex;}
@@ -282,49 +333,20 @@ details.sub .inner{padding-bottom:14px;}
   .editor-title{font-size:23px;letter-spacing:4px;margin-bottom:32px;}
   .editor-body p{font-size:15.5px;line-height:2;}
   .editor-sign p{font-size:14.5px;}
-}
 
-/* ============ 我的日历 新增样式 ============ */
-.calendar-wrap{max-width:940px;margin:0 auto;}
-.calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
-.calendar-title{font-size:17px;font-weight:700;}
-.calendar-nav{display:flex;gap:6px;}
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px;
+  /* 日历移动端 */
+  .cal-toolbar{gap:8px;}
+  .cal-toolbar .spacer{display:none;}
+  .cal-selects{flex:1 1 100%;}
+  .cal-selects select{flex:1;}
+  .cal-weekdays{gap:4px;}
+  .cal-grid{gap:4px;}
+  .cal-day{min-height:64px;padding:5px;gap:3px;}
+  .cal-mini{display:none;}
+  .cal-day-num{font-size:12px;}
+  .cal-item{flex-direction:column;align-items:stretch;gap:8px;}
+  .cal-item-actions{justify-content:flex-end;}
 }
-.calendar-week{text-align:center;font-size:12.5px;color:var(--muted);font-weight:600;padding:8px 2px;}
-.calendar-day{
-  min-height:86px;border:1px solid var(--border);border-radius:8px;padding:6px;
-  background:#fff;cursor:pointer;transition:.14s;
-}
-.calendar-day:hover{border-color:#c7d2fe;background:#f8faff;}
-.calendar-day.other-month{background:#f7f8fa;color:#b0b6c4;}
-.calendar-day.has-event{background:#eef2ff;}
-.calendar-day-num{font-size:13.5px;font-weight:700;margin-bottom:4px;}
-.calendar-event-item{
-  font-size:11px;line-height:1.3;padding:2px 4px;margin:2px 0;
-  background:#dbeafe;color:#1e40af;border-radius:4px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.calendar-more{font-size:10px;color:var(--muted);text-align:right;}
-/* 日程弹窗表单 */
-.event-form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
-.event-textarea{min-height:90px;resize:vertical;}
-/* 导出图片容器（用于canvas截图） */
-#calendarExportBox{position:absolute;left:-9999px;top:0;background:#fff;padding:20px;}
-.calendar-export-month-title{font-size:18px;font-weight:bold;text-align:center;margin-bottom:12px;}
-.calendar-export-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
-.calendar-export-week{text-align:center;font-size:12px;font-weight:600;padding:4px;}
-.calendar-export-day{border:1px solid #ddd;padding:6px;min-height:60px;font-size:11px;}
-.calendar-export-day-num{font-weight:bold;margin-bottom:3px;}
-.calendar-export-evt{font-size:10px;line-height:1.2;background:#dbeafe;color:#1e40af;border-radius:3px;padding:1px 3px;margin:2px 0;overflow:hidden;}
-@media (max-width:640px){
-  .calendar-day{min-height:64px;padding:4px;}
-  .calendar-event-item{font-size:9.5px;}
-}
-
 </style>
 </head>
 <body>
@@ -425,13 +447,12 @@ details.sub .inner{padding-bottom:14px;}
         <h3>地点收藏</h3>
         <p>收藏去过的或想去的地点，支持图片、价格与百度百科直达</p>
       </div>
-            
-      <div class="tool-card" data-target="calendar" data-keywords="日历 日程 安排 计划 导出图片 时间 地点 人物">
-        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
-        <h3>我的日历</h3>
-        <p>2026‑10至2036‑12日历，新增/修改/删除日程，导出月份为图片；可填写时间、地点、内容、人物</p>
-      </div>
 
+      <div class="tool-card" data-target="calendar" data-keywords="日历 日程 安排 计划 时间表 备忘录 提醒 导出图片 2026 2036 月份">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
+        <h3>我的日历</h3>
+        <p>在日历里安排每日计划，支持新增 / 修改 / 删除，并可导出当月图片</p>
+      </div>
     </div>
     <p id="noResult">没有找到相关工具，换个关键词试试吧～</p>
   </section>
@@ -491,7 +512,7 @@ details.sub .inner{padding-bottom:14px;}
       </h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V1.1（2026.9）</span>
+        <span class="version-val">V1.2（2026.9）</span>
       </div>
     </div>
   </section>
@@ -792,6 +813,50 @@ details.sub .inner{padding-bottom:14px;}
     <div class="places-grid" id="placesList"></div>
   </section>
 
+  <!-- ============ 我的日历（新增） ============ -->
+  <section id="page-calendar" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></span>
+      我的日历
+    </h2>
+    <p class="page-desc">在日历中安排每天的计划，支持新增、修改与删除，并可把当月安排导出为图片。可查看范围：2026 年 10 月 — 2036 年 12 月。</p>
+
+    <div class="panel">
+      <div class="cal-toolbar">
+        <button class="btn ghost small" id="calPrev">← 上一月</button>
+        <div class="cal-selects">
+          <select id="calYear"></select>
+          <select id="calMonth"></select>
+        </div>
+        <button class="btn ghost small" id="calNext">下一月 →</button>
+        <span class="spacer"></span>
+        <button class="btn ghost small" id="calStart">回到 2026-10</button>
+        <button class="btn small" id="calExport">导出本月图片</button>
+      </div>
+      <p class="cal-hint">点击日期即可查看、添加、修改或删除当天的安排。</p>
+      <div class="cal-weekdays">
+        <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span class="weekend">六</span><span class="weekend">日</span>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <div class="panel" id="calDayPanel">
+      <h3 class="panel-head" id="calDayTitle">当天安排</h3>
+      <div id="calDayList"></div>
+      <div id="calDayForm" style="display:none;">
+        <div class="form-grid">
+          <label class="field"><span>时间</span><input type="text" id="calTime" placeholder="如：14:30 / 全天"></label>
+          <label class="field"><span>地点</span><input type="text" id="calPlace" placeholder="如：公司会议室 A"></label>
+          <label class="field"><span>人物（如果有）</span><input type="text" id="calPeople" placeholder="如：张三、李四"></label>
+        </div>
+        <div class="field"><span>安排内容 *</span><textarea id="calContent" rows="2" placeholder="如：项目评审会，提前准备第三季度数据"></textarea></div>
+        <button class="btn" id="calSave">＋ 添加安排</button>
+        <button class="btn ghost" id="calCancelEdit" style="display:none;">取消编辑</button>
+      </div>
+    </div>
+  </section>
+
   <footer class="site-footer">2026© 岁窦制作</footer>
 </main>
 
@@ -840,6 +905,7 @@ function go(name){
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (name === 'chart') setTimeout(renderChart, 60);
+  if (name === 'calendar') setTimeout(renderCalendar, 60);
 }
 
 document.querySelectorAll('nav button[data-page], .logo[data-page]').forEach(el => {
@@ -1658,15 +1724,581 @@ function renderPlaces(){
 }
 loadPlaces(); renderPlaces();
 
+/* ===================== 7. 我的日历（新增） ===================== */
+const CAL_START = { y: 2026, m: 10 };   // 起始月
+const CAL_END   = { y: 2036, m: 12 };   // 结束月
+const CAL_KEY   = 'suidou-schedules-v1';
+const CAL_WEEK  = ['一','二','三','四','五','六','日'];
+
+let schedules = [];
+let calYear  = CAL_START.y;
+let calMonth = CAL_START.m;
+let calSelected = null;      // 'YYYY-MM-DD'
+let calEditingId = null;
+
+/* —— 日期工具 —— */
+function pad2(n){ return String(n).padStart(2,'0'); }
+function calKey(y, m, d){ return y + '-' + pad2(m) + '-' + pad2(d); }
+function daysInMonth(y, m){ return new Date(y, m, 0).getDate(); }
+function firstWeekdayMon(y, m){ return (new Date(y, m-1, 1).getDay() + 6) % 7; } // 0=周一
+function calInRange(y, m){
+  if (y < CAL_START.y || y > CAL_END.y) return false;
+  if (y === CAL_START.y && m < CAL_START.m) return false;
+  if (y === CAL_END.y && m > CAL_END.m) return false;
+  return true;
+}
+function timeToMin(t){
+  t = String(t || '').trim();
+  if (!t) return 12 * 60;
+  if (/全天/.test(t)) return -1;
+  const m = t.match(/(\d{1,2})\s*[:：]\s*(\d{1,2})/);
+  if (m) return (+m[1]) * 60 + (+m[2]);
+  const h = t.match(/(\d{1,2})\s*[点时]/);
+  if (h) return (+h[1]) * 60;
+  return 23 * 60 + 59;
+}
+function sortSchedules(a, b){
+  const d = timeToMin(a.time) - timeToMin(b.time);
+  return d !== 0 ? d : String(a.content || '').localeCompare(String(b.content || ''));
+}
+
+/* —— 存取 —— */
+function saveSchedules(){
+  try {
+    localStorage.setItem(CAL_KEY, JSON.stringify(schedules));
+    updateStorageUsage();
+    return true;
+  } catch(e){
+    console.warn('日历保存失败：', e);
+    alert('保存失败！浏览器存储空间可能已满，建议先前往「设置」导出备份。');
+    return false;
+  }
+}
+function loadSchedules(){
+  try {
+    const raw = localStorage.getItem(CAL_KEY);
+    if (raw) schedules = JSON.parse(raw) || [];
+  } catch(e){ schedules = []; }
+}
+
+/* —— 默认显示月份 —— */
+(function initCalMonth(){
+  const now = new Date();
+  if (calInRange(now.getFullYear(), now.getMonth() + 1)){
+    calYear  = now.getFullYear();
+    calMonth = now.getMonth() + 1;
+  }
+})();
+
+/* —— 年月下拉 —— */
+function buildCalSelects(){
+  const ys = document.getElementById('calYear');
+  const ms = document.getElementById('calMonth');
+  ys.innerHTML = '';
+  for (let y = CAL_START.y; y <= CAL_END.y; y++){
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y + ' 年';
+    ys.appendChild(o);
+  }
+  ms.innerHTML = '';
+  for (let m = 1; m <= 12; m++){
+    const o = document.createElement('option');
+    o.value = m; o.textContent = m + ' 月';
+    ms.appendChild(o);
+  }
+  syncCalSelects();
+}
+function syncCalSelects(){
+  const ys = document.getElementById('calYear');
+  const ms = document.getElementById('calMonth');
+  ys.value = String(calYear);
+  ms.value = String(calMonth);
+  Array.prototype.forEach.call(ms.options, o => {
+    const m = +o.value;
+    let ok = true;
+    if (calYear === CAL_START.y && m < CAL_START.m) ok = false;
+    if (calYear === CAL_END.y   && m > CAL_END.m)   ok = false;
+    o.disabled = !ok;
+  });
+}
+
+/* —— 渲染日历网格 —— */
+function renderCalGrid(){
+  const grid = document.getElementById('calGrid');
+  if (!grid) return;
+  const y = calYear, m = calMonth;
+  const first = firstWeekdayMon(y, m);
+  const dim   = daysInMonth(y, m);
+  const rows  = Math.ceil((first + dim) / 7);
+  const total = rows * 7;
+
+  // 建立日期 → 安排 索引
+  const map = {};
+  schedules.forEach(s => {
+    if (!s.date) return;
+    (map[s.date] = map[s.date] || []).push(s);
+  });
+  Object.keys(map).forEach(k => map[k].sort(sortSchedules));
+
+  const now = new Date();
+  const todayKey = calKey(now.getFullYear(), now.getMonth() + 1, now.getDate());
+
+  let html = '';
+  for (let i = 0; i < total; i++){
+    const dayNum = i - first + 1;
+    const inMonth = dayNum >= 1 && dayNum <= dim;
+
+    let cy = y, cm = m, cd = dayNum;
+    if (!inMonth){
+      if (dayNum < 1){
+        cm = m - 1; cy = y;
+        if (cm < 1){ cm = 12; cy--; }
+        cd = daysInMonth(cy, cm) + dayNum;
+      } else {
+        cm = m + 1; cy = y;
+        if (cm > 12){ cm = 1; cy++; }
+        cd = dayNum - dim;
+      }
+    }
+    const key = calKey(cy, cm, cd);
+    const items = inMonth ? (map[key] || []) : [];
+
+    const cls = ['cal-day'];
+    if (!inMonth) cls.push('out');
+    if (key === todayKey) cls.push('today');
+    if (key === calSelected) cls.push('selected');
+
+    let mini = '';
+    if (items.length){
+      const show = items.slice(0, 2).map(s =>
+        '<div class="cal-mini-item">' +
+          (s.time ? '<b>' + esc(s.time) + '</b> ' : '') +
+          esc(s.content || '') +
+        '</div>'
+      ).join('');
+      mini = '<div class="cal-mini">' + show +
+             (items.length > 2 ? '<div class="cal-more">+' + (items.length - 2) + ' 条</div>' : '') +
+             '</div>';
+    }
+
+    html += '<div class="' + cls.join(' ') + '"' +
+            (inMonth ? ' data-key="' + key + '"' : '') + '>' +
+              '<div class="cal-day-head">' +
+                '<span class="cal-day-num">' + cd + '</span>' +
+                (items.length ? '<span class="cal-count">' + items.length + '</span>' : '') +
+              '</div>' +
+              mini +
+            '</div>';
+  }
+  grid.innerHTML = html;
+
+  grid.querySelectorAll('.cal-day[data-key]').forEach(el => {
+    el.addEventListener('click', () => selectCalDay(el.dataset.key));
+  });
+}
+
+/* —— 选中某一天 —— */
+function selectCalDay(key){
+  calSelected = key;
+  hideCalForm();
+  renderCalGrid();
+  renderDayPanel();
+  const panel = document.getElementById('calDayPanel');
+  if (panel && panel.scrollIntoView){
+    try { panel.scrollIntoView({ behavior:'smooth', block:'nearest' }); } catch(e){}
+  }
+}
+
+/* —— 渲染当天详情 —— */
+function renderDayPanel(){
+  const titleEl = document.getElementById('calDayTitle');
+  const listEl  = document.getElementById('calDayList');
+  const formEl  = document.getElementById('calDayForm');
+
+  if (!calSelected){
+    titleEl.textContent = '当天安排';
+    listEl.innerHTML = '<p class="empty">点击上方任意日期，查看或添加当天安排～</p>';
+    formEl.style.display = 'none';
+    return;
+  }
+
+  const parts = calSelected.split('-').map(Number);
+  const y = parts[0], m = parts[1], d = parts[2];
+  const wd = CAL_WEEK[(new Date(y, m - 1, d).getDay() + 6) % 7];
+  titleEl.textContent = y + ' 年 ' + m + ' 月 ' + d + ' 日 · 星期' + wd;
+
+  const items = schedules.filter(s => s.date === calSelected).sort(sortSchedules);
+
+  if (!items.length){
+    listEl.innerHTML = '<p class="empty">这一天还没有安排，在下方添加一条吧～</p>';
+  } else {
+    listEl.innerHTML = items.map(s => {
+      const meta = [];
+      if (s.place)  meta.push('地点：' + esc(s.place));
+      if (s.people) meta.push('人物：' + esc(s.people));
+      return '<div class="cal-item">' +
+        '<div class="cal-item-main">' +
+          '<div class="cal-item-top">' +
+            (s.time ? '<span class="cal-item-time">' + esc(s.time) + '</span>' : '') +
+            '<span class="cal-item-content">' + esc(s.content) + '</span>' +
+          '</div>' +
+          (meta.length ? '<div class="cal-item-meta">' + meta.join('　·　') + '</div>' : '') +
+        '</div>' +
+        '<div class="cal-item-actions">' +
+          '<button class="mini-btn" data-cedit="' + s.id + '">编辑</button>' +
+          '<button class="mini-btn danger" data-cdel="' + s.id + '">删除</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    listEl.querySelectorAll('[data-cedit]').forEach(btn => {
+      btn.addEventListener('click', () => openCalForm(btn.dataset.cedit));
+    });
+    listEl.querySelectorAll('[data-cdel]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.cdel;
+        const t = schedules.find(x => String(x.id) === String(id));
+        if (!t) return;
+        const label = (t.time ? t.time + ' ' : '') + t.content;
+        if (!confirm('确定删除这条安排吗？\n\n' + label)) return;
+        const backup = schedules.slice();
+        schedules = schedules.filter(x => String(x.id) !== String(id));
+        if (saveSchedules()){
+          if (calEditingId && String(calEditingId) === String(id)){
+            hideCalForm();
+          }
+          renderCalGrid(); renderDayPanel();
+          showToast('已删除该安排');
+        } else {
+          schedules = backup;
+        }
+      });
+    });
+  }
+
+  formEl.style.display = '';
+}
+
+/* —— 表单：新增 / 编辑 —— */
+function openCalForm(id){
+  const s = schedules.find(x => String(x.id) === String(id));
+  if (!s) return;
+  calEditingId = id;
+  document.getElementById('calTime').value    = s.time || '';
+  document.getElementById('calPlace').value   = s.place || '';
+  document.getElementById('calPeople').value  = s.people || '';
+  document.getElementById('calContent').value = s.content || '';
+  document.getElementById('calSave').textContent = '保存修改';
+  document.getElementById('calCancelEdit').style.display = '';
+  document.getElementById('calDayForm').style.display = '';
+  document.getElementById('calContent').focus();
+}
+function hideCalForm(){
+  calEditingId = null;
+  document.getElementById('calTime').value    = '';
+  document.getElementById('calPlace').value   = '';
+  document.getElementById('calPeople').value  = '';
+  document.getElementById('calContent').value = '';
+  document.getElementById('calSave').textContent = '＋ 添加安排';
+  document.getElementById('calCancelEdit').style.display = 'none';
+}
+
+/* —— 控制按钮 —— */
+function shiftMonth(delta){
+  let y = calYear, m = calMonth + delta;
+  if (m < 1){ m = 12; y--; }
+  if (m > 12){ m = 1; y++; }
+  if (!calInRange(y, m)) { showToast('已到达可查看范围的边界'); return; }
+  calYear = y; calMonth = m;
+  syncCalSelects();
+  renderCalGrid();
+}
+function renderCalendar(){
+  syncCalSelects();
+  renderCalGrid();
+  renderDayPanel();
+}
+
+/* —— 导出当月图片 —— */
+function fitText(ctx, text, maxW){
+  text = String(text || '');
+  if (ctx.measureText(text).width <= maxW) return text;
+  let t = text;
+  while (t.length > 1 && ctx.measureText(t + '…').width > maxW) t = t.slice(0, -1);
+  return t + '…';
+}
+function exportCalImage(){
+  const y = calYear, m = calMonth;
+  const dpr   = 2;
+  const PAD   = 30;
+  const HEAD  = 92;
+  const WEEKH = 36;
+  const CELLW = 168;
+  const CELLH = 134;
+  const GAP   = 8;
+  const FOOT  = 48;
+  const cols  = 7;
+
+  const first = firstWeekdayMon(y, m);
+  const dim   = daysInMonth(y, m);
+  const rows  = Math.ceil((first + dim) / 7);
+
+  const W = PAD * 2 + cols * CELLW + (cols - 1) * GAP;
+  const H = PAD + HEAD + WEEKH + rows * CELLH + (rows - 1) * GAP + FOOT + PAD;
+
+  const canvas = document.createElement('canvas');
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, W, H);
+  ctx.textBaseline = 'top';
+
+  const FONT = '"PingFang SC","Microsoft YaHei",sans-serif';
+
+  /* 标题 */
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#111827';
+  ctx.font = 'bold 32px ' + FONT;
+  ctx.fillText(y + ' 年 ' + m + ' 月', PAD, PAD + 2);
+
+  ctx.fillStyle = '#9ca3af';
+  ctx.font = '15px ' + FONT;
+  ctx.fillText('我的日历 · 岁窦工具箱', PAD, PAD + 48);
+
+  /* 星期表头 */
+  const weekTop = PAD + HEAD;
+  ctx.font = 'bold 14px ' + FONT;
+  ctx.textAlign = 'center';
+  for (let c = 0; c < 7; c++){
+    ctx.fillStyle = c >= 5 ? '#dc2626' : '#6b7280';
+    ctx.fillText(CAL_WEEK[c], PAD + c * (CELLW + GAP) + CELLW / 2, weekTop + 11);
+  }
+
+  /* 网格 */
+  const gridTop = weekTop + WEEKH;
+
+  const map = {};
+  schedules.forEach(s => {
+    if (!s.date) return;
+    (map[s.date] = map[s.date] || []).push(s);
+  });
+  Object.keys(map).forEach(k => map[k].sort(sortSchedules));
+
+  for (let i = 0; i < rows * 7; i++){
+    const col = i % 7;
+    const row = Math.floor(i / 7);
+    const x = PAD + col * (CELLW + GAP);
+    const yy = gridTop + row * (CELLH + GAP);
+    const dayNum = i - first + 1;
+    const inMonth = dayNum >= 1 && dayNum <= dim;
+
+    // 背景
+    ctx.fillStyle = inMonth ? '#ffffff' : '#fafbfc';
+    ctx.strokeStyle = inMonth ? '#e5e7eb' : '#f1f2f6';
+    ctx.lineWidth = 1;
+    roundRect(ctx, x + 0.5, yy + 0.5, CELLW - 1, CELLH - 1, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    if (!inMonth) continue;
+
+    const key = calKey(y, m, dayNum);
+    const items = map[key] || [];
+
+    // 日期数字
+    ctx.fillStyle = '#374151';
+    ctx.font = 'bold 15px ' + FONT;
+    ctx.textAlign = 'left';
+    ctx.fillText(String(dayNum), x + 11, yy + 10);
+
+    // 条数徽标
+    if (items.length){
+      const badge = String(items.length);
+      ctx.font = 'bold 11px ' + FONT;
+      const bw = ctx.measureText(badge).width + 14;
+      ctx.fillStyle = '#2563eb';
+      roundRect(ctx, x + CELLW - 10 - bw, yy + 8, bw, 19, 9.5);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.fillText(badge, x + CELLW - 10 - bw / 2, yy + 12);
+      ctx.textAlign = 'left';
+    }
+
+    // 安排条目
+    const lineTop = yy + 36;
+    const lineH   = 21;
+    const maxLines = Math.max(1, Math.floor((CELLH - 44) / lineH));
+
+    let shown = items;
+    let more = 0;
+    if (items.length > maxLines){
+      shown = items.slice(0, maxLines - 1);
+      more = items.length - shown.length;
+    }
+
+    shown.forEach((s, idx) => {
+      const ly = lineTop + idx * lineH;
+      ctx.fillStyle = '#eef2ff';
+      roundRect(ctx, x + 8, ly, CELLW - 16, lineH - 4, 5);
+      ctx.fill();
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x + 12, ly, CELLW - 24, lineH - 4);
+      ctx.clip();
+      ctx.fillStyle = '#1e40af';
+      ctx.font = '11.5px ' + FONT;
+      const text = (s.time ? s.time + ' ' : '') + (s.content || '');
+      ctx.fillText(fitText(ctx, text, CELLW - 24), x + 12, ly + 4);
+      ctx.restore();
+    });
+
+    if (more > 0){
+      ctx.fillStyle = '#9ca3af';
+      ctx.font = '11px ' + FONT;
+      ctx.fillText('+' + more + ' 条', x + 12, lineTop + shown.length * lineH + 3);
+    }
+  }
+
+  /* 页脚 */
+  const d = new Date();
+  const footY = gridTop + rows * CELLH + (rows - 1) * GAP + 20;
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#9ca3af';
+  ctx.font = '12.5px ' + FONT;
+  ctx.fillText(
+    '导出时间：' + d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) +
+    ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) +
+    '　|　岁窦工具箱 · 我的日历',
+    W / 2, footY
+  );
+
+  /* 下载 */
+  const fileName = '我的日历_' + y + '-' + pad2(m) + '.png';
+  if (canvas.toBlob){
+    canvas.toBlob(blob => {
+      if (!blob){ showToast('导出失败，请重试'); return; }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      showToast('已导出 ' + y + ' 年 ' + m + ' 月的日历图片');
+    }, 'image/png');
+  } else {
+    const url = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showToast('已导出 ' + y + ' 年 ' + m + ' 月的日历图片');
+  }
+}
+
+/* —— 绑定日历事件 —— */
+(function initCalendar(){
+  loadSchedules();
+  buildCalSelects();
+
+  const ys = document.getElementById('calYear');
+  const ms = document.getElementById('calMonth');
+
+  ys.addEventListener('change', () => {
+    const y = +ys.value;
+    let m = +ms.value;
+    if (y === CAL_START.y && m < CAL_START.m) m = CAL_START.m;
+    if (y === CAL_END.y   && m > CAL_END.m)   m = CAL_END.m;
+    calYear = y; calMonth = m;
+    syncCalSelects();
+    renderCalGrid();
+  });
+
+  ms.addEventListener('change', () => {
+    const m = +ms.value;
+    if (!calInRange(calYear, m)){ syncCalSelects(); return; }
+    calMonth = m;
+    syncCalSelects();
+    renderCalGrid();
+  });
+
+  document.getElementById('calPrev').addEventListener('click', () => shiftMonth(-1));
+  document.getElementById('calNext').addEventListener('click', () => shiftMonth(1));
+  document.getElementById('calStart').addEventListener('click', () => {
+    calYear = CAL_START.y;
+    calMonth = CAL_START.m;
+    syncCalSelects();
+    renderCalGrid();
+  });
+  document.getElementById('calExport').addEventListener('click', exportCalImage);
+
+  document.getElementById('calSave').addEventListener('click', () => {
+    if (!calSelected){ showToast('请先点击选择一个日期'); return; }
+    const content = document.getElementById('calContent').value.trim();
+    if (!content){ alert('请填写安排内容～'); document.getElementById('calContent').focus(); return; }
+
+    const payload = {
+      date: calSelected,
+      time:   document.getElementById('calTime').value.trim(),
+      place:  document.getElementById('calPlace').value.trim(),
+      people: document.getElementById('calPeople').value.trim(),
+      content: content
+    };
+
+    const wasEditing = !!calEditingId;
+    const backup = schedules.slice();
+
+    if (calEditingId){
+      const i = schedules.findIndex(x => String(x.id) === String(calEditingId));
+      if (i < 0){ hideCalForm(); renderDayPanel(); return; }
+      schedules[i] = Object.assign({}, schedules[i], payload);
+    } else {
+      payload.id = Date.now() + '-' + Math.floor(Math.random() * 1000);
+      schedules.push(payload);
+    }
+
+    if (saveSchedules()){
+      hideCalForm();
+      renderCalGrid();
+      renderDayPanel();
+      showToast(wasEditing ? '安排已更新' : '安排已添加');
+    } else {
+      schedules = backup;
+    }
+  });
+
+  document.getElementById('calCancelEdit').addEventListener('click', () => {
+    hideCalForm();
+    renderDayPanel();
+  });
+
+  /* 键盘：在日历页按 Esc 取消编辑 */
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (!document.getElementById('page-calendar').classList.contains('active')) return;
+    if (calEditingId){ hideCalForm(); renderDayPanel(); }
+  });
+
+  renderCalendar();
+})();
+
 /* ===================== 数据管理：导出 / 导入 / 清空 ===================== */
 function exportAll(){
   const data = {
     app: '岁窦工具箱',
-    version: 'V1.1',
+    version: 'V1.2',
     exportTime: new Date().toISOString(),
     people: people,
     songs: songs,
-    places: places
+    places: places,
+    schedules: schedules
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
   const url = URL.createObjectURL(blob);
@@ -1680,7 +2312,8 @@ function exportAll(){
   a.click();
   document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  showToast('已导出：人物 ' + people.length + ' · 歌曲 ' + songs.length + ' · 地点 ' + places.length);
+  showToast('已导出：人物 ' + people.length + ' · 歌曲 ' + songs.length +
+            ' · 地点 ' + places.length + ' · 日程 ' + schedules.length);
 }
 
 document.getElementById('exportAll').addEventListener('click', exportAll);
@@ -1694,18 +2327,21 @@ document.getElementById('importFile').addEventListener('change', e => {
   reader.onload = ev => {
     try {
       const data = JSON.parse(ev.target.result);
-      const pc = Array.isArray(data.people) ? data.people.length : 0;
-      const sc = Array.isArray(data.songs)  ? data.songs.length  : 0;
-      const lc = Array.isArray(data.places) ? data.places.length : 0;
-      if (!pc && !sc && !lc) { alert('文件里没有可导入的数据'); e.target.value=''; return; }
-      if (!confirm('导入将替换当前全部数据，确定继续吗？\n\n文件内容：人物 ' + pc + ' 条，歌曲 ' + sc + ' 条，地点 ' + lc + ' 条')) {
+      const pc = Array.isArray(data.people)    ? data.people.length    : 0;
+      const sc = Array.isArray(data.songs)     ? data.songs.length     : 0;
+      const lc = Array.isArray(data.places)    ? data.places.length    : 0;
+      const cc = Array.isArray(data.schedules) ? data.schedules.length : 0;
+      if (!pc && !sc && !lc && !cc) { alert('文件里没有可导入的数据'); e.target.value=''; return; }
+      if (!confirm('导入将替换当前全部数据，确定继续吗？\n\n文件内容：人物 ' + pc + ' 条，歌曲 ' + sc +
+                   ' 条，地点 ' + lc + ' 条，日程 ' + cc + ' 条')) {
         e.target.value = ''; return;
       }
-      if (Array.isArray(data.people)) { people = data.people; savePeople(); renderPeople(); }
-      if (Array.isArray(data.songs))  { songs  = data.songs;  saveSongs();  renderSongs();  }
-      if (Array.isArray(data.places)) { places = data.places; savePlaces(); renderPlaces(); }
+      if (Array.isArray(data.people))    { people    = data.people;    savePeople();    renderPeople();    }
+      if (Array.isArray(data.songs))     { songs     = data.songs;     saveSongs();     renderSongs();     }
+      if (Array.isArray(data.places))    { places    = data.places;    savePlaces();    renderPlaces();    }
+      if (Array.isArray(data.schedules)) { schedules = data.schedules; saveSchedules(); renderCalendar();  }
       updateStorageUsage();
-      showToast('导入成功：人物 ' + pc + ' · 歌曲 ' + sc + ' · 地点 ' + lc);
+      showToast('导入成功：人物 ' + pc + ' · 歌曲 ' + sc + ' · 地点 ' + lc + ' · 日程 ' + cc);
     } catch(err){
       alert('导入失败：文件格式不正确');
     }
@@ -1715,15 +2351,18 @@ document.getElementById('importFile').addEventListener('change', e => {
 });
 
 document.getElementById('clearAllData').addEventListener('click', () => {
-  if (!people.length && !songs.length && !places.length) { showToast('当前没有数据'); return; }
-  if (!confirm('确定要清空全部数据吗？（人物 + 歌曲 + 地点）\n建议先「导出全部数据」备份！')) return;
-  people = []; songs = []; places = [];
+  if (!people.length && !songs.length && !places.length && !schedules.length) {
+    showToast('当前没有数据'); return;
+  }
+  if (!confirm('确定要清空全部数据吗？（人物 + 歌曲 + 地点 + 日程）\n建议先「导出全部数据」备份！')) return;
+  people = []; songs = []; places = []; schedules = [];
   try {
     localStorage.removeItem(PEOPLE_KEY);
     localStorage.removeItem(SONGS_KEY);
     localStorage.removeItem(PLACES_KEY);
+    localStorage.removeItem(CAL_KEY);
   } catch(e){}
-  renderPeople(); renderSongs(); renderPlaces(); updateStorageUsage();
+  renderPeople(); renderSongs(); renderPlaces(); renderCalendar(); updateStorageUsage();
   showToast('全部数据已清空');
 });
 
