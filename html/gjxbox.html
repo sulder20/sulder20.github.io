@@ -105,6 +105,10 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .tool-card p{margin:0;font-size:13px;color:var(--muted);line-height:1.55;}
 #noResult{text-align:center;color:var(--muted);padding:40px 0;display:none;}
 
+/* 全部应用折叠 */
+#allApps.collapsed .tool-card:nth-child(n+5){display:none;}
+.expand-wrap{display:flex;justify-content:center;margin:20px 0 0;}
+
 /* 热门卡片 */
 .hot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
 .hot-card{
@@ -245,6 +249,26 @@ input[type=file]{font-size:13px;color:var(--muted);}
 .media-body p:last-child{margin-bottom:0;}
 .media-body b{color:var(--muted);font-weight:600;}
 
+/* 时钟工具 */
+.clock-tabs{display:flex;gap:4px;background:#f3f4f6;padding:4px;border-radius:9px;margin-bottom:18px;max-width:300px;}
+.clock-tab{border:none;background:none;padding:8px 20px;border-radius:7px;cursor:pointer;font-size:14px;color:var(--muted);transition:.15s;flex:1;}
+.clock-tab.active{background:#fff;color:var(--primary);font-weight:600;}
+.clock-display{
+  background:#111827;color:#fff;border-radius:12px;padding:28px 18px;text-align:center;
+  font-size:44px;font-weight:600;letter-spacing:3px;font-variant-numeric:tabular-nums;
+  font-family:Consolas,Menlo,monospace;margin-bottom:16px;
+}
+.clock-adjust{display:flex;gap:14px;justify-content:center;margin-bottom:10px;flex-wrap:wrap;}
+.clock-adjust label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);font-weight:600;}
+.clock-adjust input{
+  width:72px;padding:9px 10px;border-radius:9px;border:1px solid var(--border);
+  background:#fafbfc;outline:none;font-size:15px;text-align:center;transition:.16s;
+}
+.clock-adjust input:focus{border-color:var(--primary);background:#fff;}
+.clock-hint{text-align:center;font-size:12px;color:var(--muted);margin:0 0 16px;}
+.clock-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.clock-actions .btn{min-width:92px;}
+
 /* 歌曲表 */
 .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:#fff;}
 .songs-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:860px;}
@@ -374,6 +398,10 @@ details.sub .inner{padding-bottom:14px;}
   .cal-day-num{font-size:12px;}
   .cal-item{flex-direction:column;align-items:stretch;gap:8px;}
   .cal-item-actions{justify-content:flex-end;}
+
+  /* 时钟移动端 */
+  .clock-display{font-size:32px;padding:22px 12px;letter-spacing:2px;}
+  .clock-adjust input{width:60px;font-size:14px;}
 }
 </style>
 </head>
@@ -427,7 +455,7 @@ details.sub .inner{padding-bottom:14px;}
         </div>
       </div>
 
-      <div class="hot-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 导出 文档 图片">
+      <div class="hot-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 国别 导出 文档 图片">
         <span class="hot-badge">热门</span>
         <div class="tool-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg>
@@ -451,6 +479,7 @@ details.sub .inner{padding-bottom:14px;}
           <li data-target="wordcount">小说字数统计</li>
           <li data-target="calc">计算器</li>
           <li data-target="chart">常见统计图生成</li>
+          <li data-target="clock">时钟工具</li>
         </ul>
       </div>
 
@@ -469,9 +498,9 @@ details.sub .inner{padding-bottom:14px;}
       </div>
     </div>
 
-    <!-- 模块三：全部应用 -->
+    <!-- 模块三：全部应用（默认展示4个 + 展开全部） -->
     <h2 class="section-title" id="allTitle" style="margin-top:34px;">全部应用</h2>
-    <div class="tools-grid" id="allApps">
+    <div class="tools-grid collapsed" id="allApps">
       <div class="tool-card" data-target="wordcount" data-keywords="小说 字数 统计 写作 中文字数 段落 阅读">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
         <h3>小说字数统计</h3>
@@ -514,11 +543,20 @@ details.sub .inner{padding-bottom:14px;}
         <p>在日历里安排每日计划，支持新增 / 修改 / 删除，并可导出当月图片</p>
       </div>
 
-      <div class="tool-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 导出 文档 图片">
+      <div class="tool-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 国别 导出 文档 图片">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></div>
         <h3>影视收藏</h3>
         <p>收藏电视剧 / 电影 / 综艺 / 纪录片 / 动画片，可导出追剧信息文档与图片</p>
       </div>
+
+      <div class="tool-card" data-target="clock" data-keywords="时钟 倒计时 计时器 秒表 定时 闹钟 振动 20小时">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>时钟工具</h3>
+        <p>倒计时（1 秒 - 20 小时，结束振动）与计时器</p>
+      </div>
+    </div>
+    <div class="expand-wrap" id="expandWrap">
+      <button class="btn ghost small" id="expandAllBtn">展开全部</button>
     </div>
     <p id="noResult">没有找到相关工具，换个关键词试试吧～</p>
   </section>
@@ -578,7 +616,7 @@ details.sub .inner{padding-bottom:14px;}
       </h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V1.3（2026.9）</span>
+        <span class="version-val">V1.4（2026.9）</span>
       </div>
     </div>
   </section>
@@ -715,6 +753,47 @@ details.sub .inner{padding-bottom:14px;}
     </div>
     <div class="panel" id="chartWrap">
       <canvas id="chartCanvas"></canvas>
+    </div>
+  </section>
+
+  <!-- ============ 时钟工具 ============ -->
+  <section id="page-clock" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      时钟工具
+    </h2>
+    <p class="page-desc">倒计时支持 1 秒 - 20 小时，结束时自动震动反馈；计时器可精确到 0.01 秒。</p>
+
+    <div class="clock-tabs" id="clockTabs">
+      <button class="clock-tab active" data-tab="countdown">倒计时</button>
+      <button class="clock-tab" data-tab="timer">计时器</button>
+    </div>
+
+    <!-- 倒计时 -->
+    <div class="panel" id="clockPanelCountdown">
+      <div class="clock-display" id="cdDisplay">00:00:30</div>
+      <div class="clock-adjust">
+        <label><input type="number" id="cdHour" min="0" max="20" value="0"><span>时</span></label>
+        <label><input type="number" id="cdMin" min="0" max="59" value="0"><span>分</span></label>
+        <label><input type="number" id="cdSec" min="0" max="59" value="30"><span>秒</span></label>
+      </div>
+      <p class="clock-hint">范围：1 秒 - 20 小时（最大 20:00:00）</p>
+      <div class="clock-actions">
+        <button class="btn" id="cdStart">开始</button>
+        <button class="btn ghost" id="cdPause">暂停</button>
+        <button class="btn ghost" id="cdReset">重置</button>
+      </div>
+    </div>
+
+    <!-- 计时器 -->
+    <div class="panel" id="clockPanelTimer" style="display:none">
+      <div class="clock-display" id="tmDisplay">00:00:00.00</div>
+      <div class="clock-actions">
+        <button class="btn" id="tmStart">开始</button>
+        <button class="btn ghost" id="tmPause">暂停</button>
+        <button class="btn ghost" id="tmReset">重置</button>
+      </div>
     </div>
   </section>
 
@@ -886,7 +965,7 @@ details.sub .inner{padding-bottom:14px;}
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></span>
       影视收藏
     </h2>
-    <p class="page-desc">收藏你喜欢的电视剧、电影、综艺、纪录片、动画片等影视作品。填写名称、类型、年份、主要角色与简介，可一键导出「我的追剧信息」文档与图片。</p>
+    <p class="page-desc">收藏你喜欢的电视剧、电影、综艺、纪录片、动画片等影视作品。填写名称、类型、国别、年份、主要角色与简介，可一键导出「我的追剧信息」文档与图片。</p>
 
     <div class="panel">
       <div class="form-grid">
@@ -901,6 +980,7 @@ details.sub .inner{padding-bottom:14px;}
           </select>
         </label>
         <label class="field"><span>自定义类型（选填）</span><input type="text" id="mTypeCustom" placeholder="如：舞台剧 / 短剧（填写后优先）"></label>
+        <label class="field"><span>国别</span><input type="text" id="mCountry" placeholder="如：美国 / 中国 / 日本"></label>
         <label class="field"><span>年份</span><input type="text" id="mYear" placeholder="如：1994"></label>
         <label class="field"><span>观看状态</span>
           <select id="mStatus">
@@ -1041,8 +1121,37 @@ document.querySelectorAll('[data-back]').forEach(btn => {
   btn.addEventListener('click', () => go('home'));
 });
 
-/* ===================== 搜索 ===================== */
+/* ===================== 全部应用：折叠 / 展开 ===================== */
 const searchInput = document.getElementById('searchInput');
+let appsExpanded = false;
+
+function applyCollapseState(){
+  const grid = document.getElementById('allApps');
+  const wrap = document.getElementById('expandWrap');
+  const btn  = document.getElementById('expandAllBtn');
+  if (!grid || !btn || !wrap) return;
+  const isSearching = searchInput.value.trim() !== '';
+  if (isSearching){
+    grid.classList.remove('collapsed');
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = '';
+  if (appsExpanded){
+    grid.classList.remove('collapsed');
+    btn.textContent = '收起';
+  } else {
+    grid.classList.add('collapsed');
+    btn.textContent = '展开全部';
+  }
+}
+
+document.getElementById('expandAllBtn').addEventListener('click', () => {
+  appsExpanded = !appsExpanded;
+  applyCollapseState();
+});
+
+/* ===================== 搜索 ===================== */
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.trim().toLowerCase();
   const isSearching = !!q;
@@ -1055,16 +1164,18 @@ searchInput.addEventListener('input', () => {
     if (show) any = true;
   });
 
+  /* 搜索时隐藏「热门工具」「分类」，只展示过滤后的「全部应用」 */
   const toggle = (id, show) => {
     const el = document.getElementById(id);
     if (el) el.style.display = show ? '' : 'none';
   };
-  /* 搜索时隐藏「热门工具」与「分类」，只展示过滤后的「全部应用」 */
   toggle('hotTitle', !isSearching);
   toggle('hotSection', !isSearching);
   toggle('categoryTitle', !isSearching);
   toggle('categorySection', !isSearching);
   toggle('allTitle', true);
+
+  applyCollapseState();
 
   document.getElementById('noResult').style.display = (any || !q) ? 'none' : 'block';
   if (!document.getElementById('page-home').classList.contains('active')) go('home');
@@ -1878,7 +1989,7 @@ function loadMedias(){
 }
 
 function resetMediaForm(){
-  ['mTitle','mTypeCustom','mYear','mScore','mCast','mDesc']
+  ['mTitle','mTypeCustom','mCountry','mYear','mScore','mCast','mDesc']
     .forEach(id => document.getElementById(id).value = '');
   document.getElementById('mType').value = '电视剧';
   document.getElementById('mStatus').value = '已看完';
@@ -1894,6 +2005,7 @@ document.getElementById('mAdd').addEventListener('click', () => {
     id: Date.now() + '-' + Math.floor(Math.random()*1000),
     title: title,
     type: customType || document.getElementById('mType').value,
+    country: document.getElementById('mCountry').value.trim(),
     year: document.getElementById('mYear').value.trim(),
     status: document.getElementById('mStatus').value,
     score: document.getElementById('mScore').value.trim(),
@@ -1922,7 +2034,7 @@ document.getElementById('mClearAll').addEventListener('click', () => {
 });
 
 function mediaMetaText(m){
-  return [m.type, m.year, m.status, m.score ? ('★ ' + m.score) : ''].filter(Boolean).join(' · ');
+  return [m.type, m.country, m.year, m.status, m.score ? ('★ ' + m.score) : ''].filter(Boolean).join(' · ');
 }
 
 function renderMedias(){
@@ -1941,6 +2053,7 @@ function renderMedias(){
             '<h3 class="media-name">' + esc(m.title) + '</h3>' +
             '<div class="media-tags">' +
               '<span class="tag">' + esc(m.type || '影视') + '</span>' +
+              (m.country ? '<span class="tag gray">' + esc(m.country) + '</span>' : '') +
               (m.year ? '<span class="tag gray">' + esc(m.year) + '</span>' : '') +
               (m.status ? '<span class="tag gray">' + esc(m.status) + '</span>' : '') +
               (m.score ? '<span class="tag">★ ' + esc(m.score) + '</span>' : '') +
@@ -2026,6 +2139,13 @@ function wrapText(ctx, text, maxW){
     out.push(cur);
   });
   return out;
+}
+function fitText(ctx, text, maxW){
+  text = String(text || '');
+  if (ctx.measureText(text).width <= maxW) return text;
+  let t = text;
+  while (t.length > 1 && ctx.measureText(t + '…').width > maxW) t = t.slice(0, -1);
+  return t + '…';
 }
 
 function exportMediaImage(){
@@ -2114,7 +2234,7 @@ function exportMediaImage(){
       } else if (r.kind === 'meta'){
         ctx.font = '13px ' + FONT;
         ctx.fillStyle = '#2563eb';
-        ctx.fillText(r.text, PAD + CARD_PAD, ry + 4);
+        ctx.fillText(fitText(ctx, r.text, textW), PAD + CARD_PAD, ry + 4);
       } else {
         ctx.font = '14px ' + FONT;
         ctx.fillStyle = '#4b5563';
@@ -2164,7 +2284,174 @@ document.getElementById('mExportImg').addEventListener('click', exportMediaImage
 
 loadMedias(); renderMedias();
 
-/* ===================== 8. 我的日历 ===================== */
+/* ===================== 8. 时钟工具 ===================== */
+(function initClock(){
+  const $ = id => document.getElementById(id);
+  const HOURS_MAX = 20;
+  const TOTAL_MAX = 20 * 3600; // 72000 秒
+  const TOTAL_MIN = 1;
+
+  /* —— Tab 切换 —— */
+  document.querySelectorAll('.clock-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.clock-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const isCd = tab.dataset.tab === 'countdown';
+      $('clockPanelCountdown').style.display = isCd ? '' : 'none';
+      $('clockPanelTimer').style.display = isCd ? 'none' : '';
+    });
+  });
+
+  /* ========== 倒计时 ========== */
+  let cdRemaining = 30;
+  let cdTimer = null;
+  let cdRunning = false;
+  let cdEndTime = 0;
+
+  function formatCd(sec){
+    sec = Math.max(0, Math.ceil(sec));
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
+    const s = sec % 60;
+    return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+  }
+
+  function readCdInput(){
+    let h = parseInt($('cdHour').value) || 0;
+    let m = parseInt($('cdMin').value) || 0;
+    let s = parseInt($('cdSec').value) || 0;
+    h = Math.max(0, Math.min(HOURS_MAX, h));
+    m = Math.max(0, Math.min(59, m));
+    s = Math.max(0, Math.min(59, s));
+    let total = h * 3600 + m * 60 + s;
+    if (total > TOTAL_MAX) total = TOTAL_MAX;
+    if (total < TOTAL_MIN) total = TOTAL_MIN;
+    return total;
+  }
+
+  function updateCdDisplay(){
+    $('cdDisplay').textContent = formatCd(cdRemaining);
+  }
+
+  function stopCd(){
+    if (cdTimer){ clearInterval(cdTimer); cdTimer = null; }
+    cdRunning = false;
+  }
+
+  function tickCd(){
+    cdRemaining = Math.max(0, (cdEndTime - Date.now()) / 1000);
+    updateCdDisplay();
+    if (cdRemaining <= 0){
+      stopCd();
+      /* 震动反馈（部分浏览器 / 设备不支持时静默跳过） */
+      if (navigator.vibrate){
+        try { navigator.vibrate([500, 200, 500, 200, 800]); } catch(e){}
+      }
+      showToast('倒计时结束！');
+    }
+  }
+
+  function startCd(){
+    if (cdRunning) return;
+    if (cdRemaining <= 0){
+      cdRemaining = readCdInput();
+    }
+    cdRunning = true;
+    cdEndTime = Date.now() + cdRemaining * 1000;
+    cdTimer = setInterval(tickCd, 100);
+    updateCdDisplay();
+  }
+
+  function pauseCd(){
+    if (!cdRunning) return;
+    cdRemaining = Math.max(0, (cdEndTime - Date.now()) / 1000);
+    stopCd();
+    updateCdDisplay();
+  }
+
+  function resetCd(){
+    stopCd();
+    cdRemaining = readCdInput();
+    updateCdDisplay();
+  }
+
+  /* 输入框变化 / 失焦时校验 */
+  function syncCdInputs(){
+    const h = Math.max(0, Math.min(HOURS_MAX, parseInt($('cdHour').value) || 0));
+    const m = Math.max(0, Math.min(59, parseInt($('cdMin').value) || 0));
+    const s = Math.max(0, Math.min(59, parseInt($('cdSec').value) || 0));
+    $('cdHour').value = h;
+    $('cdMin').value = m;
+    $('cdSec').value = s;
+    if (!cdRunning){
+      cdRemaining = readCdInput();
+      updateCdDisplay();
+    }
+  }
+  ['cdHour','cdMin','cdSec'].forEach(id => {
+    $(id).addEventListener('input', syncCdInputs);
+    $(id).addEventListener('blur', syncCdInputs);
+  });
+
+  $('cdStart').addEventListener('click', startCd);
+  $('cdPause').addEventListener('click', pauseCd);
+  $('cdReset').addEventListener('click', resetCd);
+
+  updateCdDisplay();
+
+  /* ========== 计时器 ========== */
+  let tmElapsed = 0;
+  let tmTimer = null;
+  let tmRunning = false;
+  let tmStartTime = 0;
+
+  function formatTm(ms){
+    const totalCs = Math.floor(ms / 10);
+    const cs = totalCs % 100;
+    const totalSec = Math.floor(totalCs / 100);
+    const s = totalSec % 60;
+    const totalMin = Math.floor(totalSec / 60);
+    const m = totalMin % 60;
+    const h = Math.floor(totalMin / 60);
+    return pad2(h) + ':' + pad2(m) + ':' + pad2(s) + '.' + String(cs).padStart(2, '0');
+  }
+
+  function updateTmDisplay(){
+    $('tmDisplay').textContent = formatTm(tmElapsed);
+  }
+
+  function startTm(){
+    if (tmRunning) return;
+    tmRunning = true;
+    tmStartTime = Date.now() - tmElapsed;
+    tmTimer = setInterval(() => {
+      tmElapsed = Date.now() - tmStartTime;
+      updateTmDisplay();
+    }, 33);
+  }
+
+  function pauseTm(){
+    if (!tmRunning) return;
+    tmRunning = false;
+    if (tmTimer){ clearInterval(tmTimer); tmTimer = null; }
+    tmElapsed = Date.now() - tmStartTime;
+    updateTmDisplay();
+  }
+
+  function resetTm(){
+    pauseTm();
+    tmElapsed = 0;
+    updateTmDisplay();
+  }
+
+  $('tmStart').addEventListener('click', startTm);
+  $('tmPause').addEventListener('click', pauseTm);
+  $('tmReset').addEventListener('click', resetTm);
+
+  updateTmDisplay();
+})();
+
+/* ===================== 9. 我的日历 ===================== */
 const CAL_START = { y: 2026, m: 10 };   // 起始月
 const CAL_END   = { y: 2036, m: 12 };   // 结束月
 const CAL_KEY   = 'suidou-schedules-v1';
@@ -2271,7 +2558,6 @@ function renderCalGrid(){
   const rows  = Math.ceil((first + dim) / 7);
   const total = rows * 7;
 
-  // 建立日期 → 安排 索引
   const map = {};
   schedules.forEach(s => {
     if (!s.date) return;
@@ -2459,13 +2745,6 @@ function renderCalendar(){
 }
 
 /* —— 导出当月图片 —— */
-function fitText(ctx, text, maxW){
-  text = String(text || '');
-  if (ctx.measureText(text).width <= maxW) return text;
-  let t = text;
-  while (t.length > 1 && ctx.measureText(t + '…').width > maxW) t = t.slice(0, -1);
-  return t + '…';
-}
 function exportCalImage(){
   const y = calYear, m = calMonth;
   const dpr   = 2;
@@ -2533,7 +2812,6 @@ function exportCalImage(){
     const dayNum = i - first + 1;
     const inMonth = dayNum >= 1 && dayNum <= dim;
 
-    // 背景
     ctx.fillStyle = inMonth ? '#ffffff' : '#fafbfc';
     ctx.strokeStyle = inMonth ? '#e5e7eb' : '#f1f2f6';
     ctx.lineWidth = 1;
@@ -2546,13 +2824,11 @@ function exportCalImage(){
     const key = calKey(y, m, dayNum);
     const items = map[key] || [];
 
-    // 日期数字
     ctx.fillStyle = '#374151';
     ctx.font = 'bold 15px ' + FONT;
     ctx.textAlign = 'left';
     ctx.fillText(String(dayNum), x + 11, yy + 10);
 
-    // 条数徽标
     if (items.length){
       const badge = String(items.length);
       ctx.font = 'bold 11px ' + FONT;
@@ -2566,7 +2842,6 @@ function exportCalImage(){
       ctx.textAlign = 'left';
     }
 
-    // 安排条目
     const lineTop = yy + 36;
     const lineH   = 21;
     const maxLines = Math.max(1, Math.floor((CELLH - 44) / lineH));
@@ -2615,7 +2890,6 @@ function exportCalImage(){
     W / 2, footY
   );
 
-  /* 下载 */
   const fileName = '我的日历_' + y + '-' + pad2(m) + '.png';
   if (canvas.toBlob){
     canvas.toBlob(blob => {
@@ -2718,7 +2992,6 @@ function exportCalImage(){
     renderDayPanel();
   });
 
-  /* 键盘：在日历页按 Esc 取消编辑 */
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     if (!document.getElementById('page-calendar').classList.contains('active')) return;
@@ -2732,7 +3005,7 @@ function exportCalImage(){
 function exportAll(){
   const data = {
     app: '岁窦工具箱',
-    version: 'V1.3',
+    version: 'V1.4',
     exportTime: new Date().toISOString(),
     people: people,
     songs: songs,
