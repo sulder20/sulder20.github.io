@@ -345,6 +345,41 @@ details.sub .inner{padding-bottom:14px;}
 .cal-item-meta{font-size:12.5px;color:var(--muted);line-height:1.6;word-break:break-word;}
 .cal-item-actions{display:flex;gap:6px;flex:0 0 auto;}
 
+/* ============ 代码编辑器 ============ */
+.code-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.code-modes{display:flex;gap:4px;background:#f3f4f6;padding:4px;border-radius:9px;}
+.code-mode{border:none;background:none;padding:7px 20px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--muted);transition:.15s;}
+.code-mode.active{background:#fff;color:var(--primary);font-weight:600;}
+.code-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.code-split{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+#codeInput{
+  width:100%;height:470px;padding:14px;border-radius:10px;border:1px solid var(--border);
+  background:#0f172a;color:#e2e8f0;outline:none;resize:vertical;
+  font-family:Consolas,Menlo,"Courier New",monospace;font-size:13.5px;line-height:1.72;
+  tab-size:2;transition:.16s;white-space:pre;overflow:auto;
+}
+#codeInput:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12);}
+#codeInput::placeholder{color:#64748b;}
+.code-preview-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff;height:470px;}
+#codePreview{width:100%;height:100%;border:none;display:block;background:#fff;}
+.code-hint{margin:12px 0 0;font-size:12.5px;color:var(--muted);}
+
+/* ============ 畅想画布 ============ */
+.draw-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.brush-colors{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.color-dot{
+  width:26px;height:26px;border-radius:50%;border:2px solid #fff;padding:0;
+  box-shadow:0 0 0 1px var(--border);cursor:pointer;transition:.15s;
+}
+.color-dot:hover{transform:scale(1.14);}
+.color-dot.active{box-shadow:0 0 0 2px var(--primary);transform:scale(1.14);}
+.brush-size{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-weight:600;}
+.brush-size input[type=range]{width:110px;accent-color:var(--primary);cursor:pointer;}
+.brush-size span{color:var(--text);min-width:22px;text-align:center;font-variant-numeric:tabular-nums;}
+#eraserBtn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.draw-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;line-height:0;}
+#drawCanvas{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair;}
+
 /* 弹窗 */
 .modal-backdrop{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
 .modal-backdrop.show{display:flex;}
@@ -374,6 +409,12 @@ details.sub .inner{padding-bottom:14px;}
 
 .site-footer{text-align:center;padding:34px 10px 26px;color:#9ca3af;font-size:13px;}
 
+@media (max-width:860px){
+  .code-split{grid-template-columns:1fr;}
+  #codeInput{height:320px;}
+  .code-preview-wrap{height:360px;}
+}
+
 @media (max-width:640px){
   .hero{padding:26px 20px;}
   .hero h1{font-size:21px;}
@@ -402,6 +443,10 @@ details.sub .inner{padding-bottom:14px;}
   /* 时钟移动端 */
   .clock-display{font-size:32px;padding:22px 12px;letter-spacing:2px;}
   .clock-adjust input{width:60px;font-size:14px;}
+
+  /* 画布移动端 */
+  .draw-toolbar{gap:10px;}
+  .brush-size input[type=range]{width:84px;}
 }
 </style>
 </head>
@@ -496,6 +541,17 @@ details.sub .inner{padding-bottom:14px;}
           <li data-target="calendar">我的日历</li>
         </ul>
       </div>
+
+      <div class="category-card">
+        <div class="category-head">
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+          <h3>创作</h3>
+        </div>
+        <ul class="cat-list">
+          <li data-target="code">代码编辑器</li>
+          <li data-target="canvas">畅想画布</li>
+        </ul>
+      </div>
     </div>
 
     <!-- 模块三：全部应用（默认展示4个 + 展开全部） -->
@@ -553,6 +609,18 @@ details.sub .inner{padding-bottom:14px;}
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
         <h3>时钟工具</h3>
         <p>倒计时（1 秒 - 20 小时，结束振动）与计时器</p>
+      </div>
+
+      <div class="tool-card" data-target="code" data-keywords="代码 编辑器 JavaScript JS 运行 预览 沙箱 Markdown 渲染 md 写作 排版 高亮">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></div>
+        <h3>代码编辑器</h3>
+        <p>JavaScript 实时运行预览，Markdown 实时渲染，边写边看</p>
+      </div>
+
+      <div class="tool-card" data-target="canvas" data-keywords="画布 白板 绘画 涂鸦 画笔 颜色 橡皮擦 撤销 导出 PNG 手绘 创作">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+        <h3>畅想画布</h3>
+        <p>自由白板随手涂鸦，多种颜色与粗细，可擦除、撤销并导出 PNG</p>
       </div>
     </div>
     <div class="expand-wrap" id="expandWrap">
@@ -1054,6 +1122,78 @@ details.sub .inner{padding-bottom:14px;}
     </div>
   </section>
 
+  <!-- ============ 代码编辑器 ============ -->
+  <section id="page-code" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></span>
+      代码编辑器
+    </h2>
+    <p class="page-desc">左侧写代码，右侧即时看效果。JavaScript 模式会在沙箱中真实运行（console.log 输出显示在预览底部）；Markdown 模式会实时渲染成排版后的文章。</p>
+
+    <div class="panel">
+      <div class="code-toolbar">
+        <div class="code-modes">
+          <button class="code-mode active" data-mode="js">JavaScript</button>
+          <button class="code-mode" data-mode="md">Markdown</button>
+        </div>
+        <div class="code-actions">
+          <button class="btn small" id="codeRun">▶ 运行 / 渲染</button>
+          <button class="btn ghost small" id="codeSample">载入示例</button>
+          <button class="btn ghost small" id="codeClear">清空</button>
+        </div>
+      </div>
+
+      <div class="code-split">
+        <textarea id="codeInput" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="在这里写代码…"></textarea>
+        <div class="code-preview-wrap">
+          <iframe id="codePreview" title="预览" sandbox="allow-scripts allow-modals allow-forms allow-popups"></iframe>
+        </div>
+      </div>
+
+      <p class="code-hint" id="codeHint">提示：停止输入约 0.7 秒后会自动运行，也可以点击「运行 / 渲染」，或按 Ctrl / ⌘ + Enter。</p>
+    </div>
+  </section>
+
+  <!-- ============ 畅想画布 ============ -->
+  <section id="page-canvas" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+      畅想画布
+    </h2>
+    <p class="page-desc">一块自由的白板：选择颜色与粗细随手涂鸦，支持橡皮擦、撤销与清空，完成后可一键导出为 PNG 图片。</p>
+
+    <div class="panel">
+      <div class="draw-toolbar">
+        <div class="brush-colors" id="brushColors">
+          <button class="color-dot active" data-color="#111827" style="background:#111827" title="墨黑"></button>
+          <button class="color-dot" data-color="#ef4444" style="background:#ef4444" title="朱红"></button>
+          <button class="color-dot" data-color="#f59e0b" style="background:#f59e0b" title="琥珀"></button>
+          <button class="color-dot" data-color="#10b981" style="background:#10b981" title="翠绿"></button>
+          <button class="color-dot" data-color="#0ea5e9" style="background:#0ea5e9" title="天蓝"></button>
+          <button class="color-dot" data-color="#2563eb" style="background:#2563eb" title="宝蓝"></button>
+          <button class="color-dot" data-color="#8b5cf6" style="background:#8b5cf6" title="紫罗兰"></button>
+          <button class="color-dot" data-color="#ec4899" style="background:#ec4899" title="桃粉"></button>
+          <button class="color-dot" data-color="#a3a3a3" style="background:#a3a3a3" title="灰"></button>
+        </div>
+        <label class="brush-size">粗细
+          <input type="range" id="brushSize" min="2" max="40" value="6">
+          <span id="brushSizeVal">6</span>
+        </label>
+        <button class="btn ghost small" id="eraserBtn">橡皮擦</button>
+        <button class="btn ghost small" id="undoDraw">撤销</button>
+        <button class="btn ghost small" id="clearDraw">清空</button>
+        <button class="btn small" id="exportDraw">导出 PNG</button>
+      </div>
+
+      <div class="draw-wrap">
+        <canvas id="drawCanvas" width="1400" height="900"></canvas>
+      </div>
+      <p class="code-hint">支持鼠标与触屏书写。画布会随窗口自适应显示，导出图片为 1400 × 900 高清 PNG。</p>
+    </div>
+  </section>
+
   <footer class="site-footer">2026© 岁窦制作</footer>
 </main>
 
@@ -1107,6 +1247,7 @@ function go(name){
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (name === 'chart') setTimeout(renderChart, 60);
   if (name === 'calendar') setTimeout(renderCalendar, 60);
+  if (name === 'code') setTimeout(runCodeEditor, 60);
 }
 
 document.querySelectorAll('nav button[data-page], .logo[data-page]').forEach(el => {
@@ -3000,6 +3141,439 @@ function exportCalImage(){
 
   renderCalendar();
 })();
+
+/* ===================== 10. 代码编辑器 ===================== */
+const codeInputEl   = document.getElementById('codeInput');
+const codePreviewEl = document.getElementById('codePreview');
+const codeHintEl    = document.getElementById('codeHint');
+
+const CODE_SAMPLE_JS = [
+  '// 欢迎使用岁窦代码编辑器',
+  '// 这里写下的 JavaScript 会真实运行，结果显示在右侧预览中',
+  '',
+  'const fruits = ["苹果", "香蕉", "橙子", "葡萄"];',
+  '',
+  'const box = document.createElement("div");',
+  'box.innerHTML = "<h2>🍎 我的水果清单</h2>";',
+  '',
+  'const ul = document.createElement("ul");',
+  'fruits.forEach((f, i) => {',
+  '  const li = document.createElement("li");',
+  '  li.textContent = (i + 1) + ". " + f;',
+  '  ul.appendChild(li);',
+  '});',
+  'box.appendChild(ul);',
+  '',
+  'box.innerHTML += "<p>一共收藏了 <b>" + fruits.length + "</b> 种水果。</p>";',
+  'document.body.appendChild(box);',
+  '',
+  'console.log("运行完成，共 " + fruits.length + " 条数据");',
+  'console.log(fruits);'
+].join('\n');
+
+const CODE_SAMPLE_MD = [
+  '# 岁窦工具箱 · Markdown 示例',
+  '',
+  '这是一段普通文本，支持 **加粗**、*斜体*、~~删除线~~ 以及 `行内代码`。',
+  '',
+  '## 二级标题',
+  '',
+  '### 支持的能力',
+  '',
+  '- 标题（一至六级）',
+  '- 无序列表 / 有序列表',
+  '- 引用、分割线、链接',
+  '- 围栏代码块',
+  '',
+  '1. 第一步：在左边写下内容',
+  '2. 第二步：右边立刻看到排版效果',
+  '3. 第三步：继续写下去',
+  '',
+  '> 把想法写下来，它就成功了一半。',
+  '',
+  '```js',
+  'function hello(name) {',
+  '  return "你好，" + name + "！";',
+  '}',
+  'console.log(hello("岁窦"));',
+  '```',
+  '',
+  '[访问百度](https://www.baidu.com)',
+  '',
+  '---',
+  '',
+  '以上就是全部示例，试试改成你自己的内容吧。'
+].join('\n');
+
+let codeMode = 'js';
+const codeDrafts = { js: CODE_SAMPLE_JS, md: CODE_SAMPLE_MD };
+let codeAutoTimer = null;
+
+/* —— 极简 Markdown 渲染 —— */
+function inlineMd(s){
+  return s
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/~~([^~]+)~~/g, '<del>$1</del>')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+
+function mdToHtml(src){
+  let text = esc(src);
+
+  /* 先抽出围栏代码块 */
+  const blocks = [];
+  text = text.replace(/```([\s\S]*?)```/g, (m, body) => {
+    blocks.push(body.replace(/^\n+/, '').replace(/\n+$/, ''));
+    return '\u0000' + (blocks.length - 1) + '\u0000';
+  });
+
+  const lines = text.split('\n');
+  const out = [];
+  let para = [];
+  let list = null;
+
+  function flushPara(){
+    if (para.length){
+      out.push('<p>' + inlineMd(para.join('<br>')) + '</p>');
+      para = [];
+    }
+  }
+  function closeList(){
+    if (list){ out.push('</' + list + '>'); list = null; }
+  }
+
+  lines.forEach(line => {
+    const raw = line.trim();
+
+    const ph = raw.match(/^\u0000(\d+)\u0000$/);
+    if (ph){
+      flushPara(); closeList();
+      out.push('<pre class="md-pre"><code>' + blocks[+ph[1]] + '</code></pre>');
+      return;
+    }
+    if (!raw){ flushPara(); closeList(); return; }
+
+    const h = raw.match(/^(#{1,6})\s+(.*)$/);
+    if (h){
+      flushPara(); closeList();
+      const lv = h[1].length;
+      out.push('<h' + lv + '>' + inlineMd(h[2]) + '</h' + lv + '>');
+      return;
+    }
+
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(raw)){
+      flushPara(); closeList(); out.push('<hr>'); return;
+    }
+
+    if (/^>\s?/.test(raw)){
+      flushPara(); closeList();
+      out.push('<blockquote>' + inlineMd(raw.replace(/^>\s?/, '')) + '</blockquote>');
+      return;
+    }
+
+    const ul = raw.match(/^[-*+]\s+(.*)$/);
+    if (ul){
+      flushPara();
+      if (list !== 'ul'){ closeList(); out.push('<ul>'); list = 'ul'; }
+      out.push('<li>' + inlineMd(ul[1]) + '</li>');
+      return;
+    }
+
+    const ol = raw.match(/^\d+[.)]\s+(.*)$/);
+    if (ol){
+      flushPara();
+      if (list !== 'ol'){ closeList(); out.push('<ol>'); list = 'ol'; }
+      out.push('<li>' + inlineMd(ol[1]) + '</li>');
+      return;
+    }
+
+    closeList();
+    para.push(raw);
+  });
+
+  flushPara(); closeList();
+  return out.join('\n');
+}
+
+function buildMdDoc(md){
+  const body = mdToHtml(md);
+  return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>' +
+    'body{margin:0;padding:18px 22px 28px;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-size:14.5px;color:#111827;line-height:1.8;}' +
+    'h1{font-size:24px;border-bottom:2px solid #eef2ff;padding-bottom:8px;margin:0 0 14px;}' +
+    'h2{font-size:20px;margin:22px 0 10px;}' +
+    'h3{font-size:17px;margin:18px 0 8px;}' +
+    'h4,h5,h6{font-size:15px;margin:16px 0 8px;}' +
+    'p{margin:0 0 12px;}' +
+    'ul,ol{margin:0 0 12px;padding-left:24px;}' +
+    'li{margin:4px 0;}' +
+    'blockquote{margin:0 0 12px;padding:8px 14px;border-left:4px solid #c7d2fe;background:#f8faff;color:#4b5563;border-radius:0 8px 8px 0;}' +
+    'code{background:#f3f4f6;color:#be185d;padding:1px 6px;border-radius:5px;font-family:Consolas,Menlo,monospace;font-size:13px;}' +
+    'pre.md-pre{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.65;}' +
+    'pre.md-pre code{background:none;color:inherit;padding:0;}' +
+    'a{color:#2563eb;}' +
+    'hr{border:none;border-top:1px solid #e5e7eb;margin:18px 0;}' +
+    'del{color:#9ca3af;}' +
+    '</style></head><body>' + body + '</body></html>';
+}
+
+function buildJsDoc(code){
+  return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>' +
+    'body{margin:0;padding:14px 16px 24px;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-size:14px;color:#111827;line-height:1.7;}' +
+    'h1{font-size:22px;margin:0 0 10px;}h2{font-size:17px;margin:14px 0 10px;}h3{font-size:15px;margin:12px 0 8px;}' +
+    'ul,ol{padding-left:22px;margin:0 0 10px;}' +
+    'button{cursor:pointer;padding:6px 14px;border-radius:8px;border:1px solid #2563eb;background:#2563eb;color:#fff;font-size:13px;}' +
+    'input,textarea{padding:7px 10px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;outline:none;}' +
+    'pre.out{background:#0f172a;color:#a5f3fc;padding:10px 12px;border-radius:8px;font-size:12.5px;' +
+    'overflow:auto;white-space:pre-wrap;margin:14px 0 0;font-family:Consolas,Menlo,monospace;line-height:1.6;}' +
+    '.err{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;padding:10px 12px;border-radius:8px;' +
+    'font-size:13px;white-space:pre-wrap;margin-top:14px;}' +
+    '</style></head><body><div id="__out"></div><script>\n' +
+    'var __logs = [];\n' +
+    'var __origLog = console.log;\n' +
+    'console.log = function(){\n' +
+    '  var a = Array.prototype.slice.call(arguments).map(function(x){\n' +
+    '    try { return (typeof x === "object" && x !== null) ? JSON.stringify(x) : String(x); }\n' +
+    '    catch(e){ return String(x); }\n' +
+    '  }).join(" ");\n' +
+    '  __logs.push(a);\n' +
+    '  __origLog.apply(console, arguments);\n' +
+    '};\n' +
+    'function __flush(){\n' +
+    '  if (!__logs.length) return;\n' +
+    '  var d = document.createElement("pre");\n' +
+    '  d.className = "out";\n' +
+    '  d.textContent = __logs.join("\\n");\n' +
+    '  document.body.appendChild(d);\n' +
+    '}\n' +
+    'try {\n' +
+    code + '\n' +
+    '} catch(err) {\n' +
+    '  var e = document.createElement("div");\n' +
+    '  e.className = "err";\n' +
+    '  e.textContent = "运行时错误：" + (err && err.message ? err.message : err);\n' +
+    '  document.body.appendChild(e);\n' +
+    '}\n' +
+    '__flush();\n' +
+    '<\/script></body></html>';
+}
+
+function runCodeEditor(){
+  const code = codeInputEl.value;
+  if (codeMode === 'js'){
+    codePreviewEl.srcdoc = buildJsDoc(code);
+    codeHintEl.textContent = 'JavaScript 已在沙箱中运行；console.log 的输出会显示在预览内容的下方。';
+  } else {
+    codePreviewEl.srcdoc = buildMdDoc(code);
+    codeHintEl.textContent = 'Markdown 已渲染为排版页面。';
+  }
+}
+
+document.querySelectorAll('.code-mode').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.mode === codeMode) return;
+    /* 保存当前草稿 */
+    codeDrafts[codeMode] = codeInputEl.value;
+    document.querySelectorAll('.code-mode').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    codeMode = btn.dataset.mode;
+    codeInputEl.value = codeDrafts[codeMode] !== undefined ? codeDrafts[codeMode] : '';
+    runCodeEditor();
+  });
+});
+
+document.getElementById('codeRun').addEventListener('click', runCodeEditor);
+
+document.getElementById('codeSample').addEventListener('click', () => {
+  codeInputEl.value = codeMode === 'js' ? CODE_SAMPLE_JS : CODE_SAMPLE_MD;
+  codeDrafts[codeMode] = codeInputEl.value;
+  runCodeEditor();
+  showToast('已载入示例' + (codeMode === 'js' ? '代码' : '文档'));
+});
+
+document.getElementById('codeClear').addEventListener('click', () => {
+  codeInputEl.value = '';
+  codeDrafts[codeMode] = '';
+  runCodeEditor();
+});
+
+/* 自动运行（防抖） */
+codeInputEl.addEventListener('input', () => {
+  codeDrafts[codeMode] = codeInputEl.value;
+  clearTimeout(codeAutoTimer);
+  codeAutoTimer = setTimeout(runCodeEditor, 700);
+});
+
+/* Tab 缩进 + Ctrl/⌘ + Enter 运行 */
+codeInputEl.addEventListener('keydown', e => {
+  if (e.key === 'Tab'){
+    e.preventDefault();
+    const s = codeInputEl.selectionStart, en = codeInputEl.selectionEnd;
+    codeInputEl.value = codeInputEl.value.slice(0, s) + '  ' + codeInputEl.value.slice(en);
+    codeInputEl.selectionStart = codeInputEl.selectionEnd = s + 2;
+    codeDrafts[codeMode] = codeInputEl.value;
+    return;
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+    e.preventDefault();
+    runCodeEditor();
+    showToast('已运行 / 渲染');
+  }
+});
+
+/* 初始化 */
+codeInputEl.value = CODE_SAMPLE_JS;
+runCodeEditor();
+
+/* ===================== 11. 畅想画布 ===================== */
+const drawCanvasEl = document.getElementById('drawCanvas');
+const drawCtx = drawCanvasEl.getContext('2d');
+const brushSizeEl = document.getElementById('brushSize');
+const brushSizeValEl = document.getElementById('brushSizeVal');
+const eraserBtnEl = document.getElementById('eraserBtn');
+
+let drawColorValue = '#111827';
+let drawSizeValue  = 6;
+let drawErasing    = false;
+let drawIsDrawing  = false;
+let drawLastPt     = null;
+let drawHistory    = [];
+
+function initBoard(){
+  drawCtx.fillStyle = '#ffffff';
+  drawCtx.fillRect(0, 0, drawCanvasEl.width, drawCanvasEl.height);
+  drawCtx.lineCap = 'round';
+  drawCtx.lineJoin = 'round';
+}
+
+function drawPos(e){
+  const rect = drawCanvasEl.getBoundingClientRect();
+  const scaleX = drawCanvasEl.width  / (rect.width  || 1);
+  const scaleY = drawCanvasEl.height / (rect.height || 1);
+  return {
+    x: (e.clientX - rect.left) * scaleX,
+    y: (e.clientY - rect.top)  * scaleY
+  };
+}
+
+function pushDrawHistory(){
+  try {
+    if (drawHistory.length >= 25) drawHistory.shift();
+    drawHistory.push(drawCanvasEl.toDataURL('image/png'));
+  } catch(e){}
+}
+
+function strokeSegment(from, to){
+  drawCtx.strokeStyle = drawErasing ? '#ffffff' : drawColorValue;
+  drawCtx.lineWidth   = drawErasing ? drawSizeValue * 2 : drawSizeValue;
+  drawCtx.beginPath();
+  drawCtx.moveTo(from.x, from.y);
+  drawCtx.lineTo(to.x, to.y);
+  drawCtx.stroke();
+}
+
+function strokeDot(p){
+  drawCtx.beginPath();
+  drawCtx.arc(p.x, p.y, (drawErasing ? drawSizeValue * 2 : drawSizeValue) / 2, 0, Math.PI * 2);
+  drawCtx.fillStyle = drawErasing ? '#ffffff' : drawColorValue;
+  drawCtx.fill();
+}
+
+drawCanvasEl.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  try { drawCanvasEl.setPointerCapture(e.pointerId); } catch(err){}
+  pushDrawHistory();
+  drawIsDrawing = true;
+  drawLastPt = drawPos(e);
+  strokeDot(drawLastPt);
+});
+
+drawCanvasEl.addEventListener('pointermove', e => {
+  if (!drawIsDrawing) return;
+  e.preventDefault();
+  const p = drawPos(e);
+  if (drawLastPt) strokeSegment(drawLastPt, p);
+  drawLastPt = p;
+});
+
+['pointerup','pointercancel'].forEach(evt => {
+  drawCanvasEl.addEventListener(evt, () => {
+    drawIsDrawing = false;
+    drawLastPt = null;
+  });
+});
+
+/* 颜色选择 */
+document.querySelectorAll('.color-dot').forEach(dot => {
+  dot.addEventListener('click', () => {
+    document.querySelectorAll('.color-dot').forEach(x => x.classList.remove('active'));
+    dot.classList.add('active');
+    drawColorValue = dot.dataset.color;
+    drawErasing = false;
+    eraserBtnEl.classList.remove('active');
+  });
+});
+
+/* 粗细 */
+brushSizeEl.addEventListener('input', () => {
+  drawSizeValue = +brushSizeEl.value;
+  brushSizeValEl.textContent = drawSizeValue;
+});
+
+/* 橡皮擦 */
+eraserBtnEl.addEventListener('click', () => {
+  drawErasing = !drawErasing;
+  eraserBtnEl.classList.toggle('active', drawErasing);
+  showToast(drawErasing ? '橡皮擦已开启' : '已切回画笔');
+});
+
+/* 撤销 */
+document.getElementById('undoDraw').addEventListener('click', () => {
+  if (!drawHistory.length){ showToast('没有可以撤销的操作了'); return; }
+  const data = drawHistory.pop();
+  const img = new Image();
+  img.onload = () => {
+    drawCtx.fillStyle = '#ffffff';
+    drawCtx.fillRect(0, 0, drawCanvasEl.width, drawCanvasEl.height);
+    drawCtx.drawImage(img, 0, 0);
+  };
+  img.src = data;
+});
+
+/* 清空 */
+document.getElementById('clearDraw').addEventListener('click', () => {
+  if (!confirm('确定要清空整块画布吗？（清空后仍可点击撤销恢复）')) return;
+  pushDrawHistory();
+  drawCtx.fillStyle = '#ffffff';
+  drawCtx.fillRect(0, 0, drawCanvasEl.width, drawCanvasEl.height);
+  showToast('画布已清空');
+});
+
+/* 导出 PNG */
+document.getElementById('exportDraw').addEventListener('click', () => {
+  const d = new Date();
+  const fileName = '畅想画布_' + timeStamp(d) + '.png';
+  if (drawCanvasEl.toBlob){
+    drawCanvasEl.toBlob(blob => {
+      if (!blob){ showToast('导出失败，请重试'); return; }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      showToast('画布已导出为 PNG');
+    }, 'image/png');
+  } else {
+    const a = document.createElement('a');
+    a.href = drawCanvasEl.toDataURL('image/png');
+    a.download = fileName;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    showToast('画布已导出为 PNG');
+  }
+});
+
+initBoard();
 
 /* ===================== 数据管理：导出 / 导入 / 清空 ===================== */
 function exportAll(){
