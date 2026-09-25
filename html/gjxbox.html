@@ -311,7 +311,6 @@ details.sub .inner{padding-bottom:14px;}
 .ai-subtab{border:none;background:none;padding:8px 16px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--muted);transition:.15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
 .ai-subtab svg{width:15px;height:15px;flex-shrink:0;}
 .ai-subtab:hover{background:#fff;color:var(--text);}
-.ai-subtab:hover{background:#fff;color:var(--text);}
 .ai-subtab.active{background:#fff;color:var(--primary);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.06);}
 .ai-subpage{display:none;}
 .ai-subpage.active{display:block;}
@@ -355,27 +354,56 @@ details.sub .inner{padding-bottom:14px;}
 .note-card .note-time{font-size:11px;color:#a16207;}
 .note-card .note-del{position:absolute;right:8px;top:8px;border:none;background:none;color:#a16207;cursor:pointer;font-size:13px;padding:2px 5px;border-radius:5px;}
 .note-card .note-del:hover{background:#fecaca;color:#dc2626;}
-.novel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
-.novel-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:.16s;position:relative;}
-.novel-card:hover{border-color:#c7d2fe;transform:translateY(-2px);}
-.novel-card h3{margin:0 0 6px;font-size:16px;padding-right:24px;}
-.novel-card .novel-meta{font-size:12.5px;color:var(--muted);line-height:1.7;}
-.novel-card .novel-syn{font-size:13px;color:#4b5563;line-height:1.65;margin:8px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-.novel-editor{display:grid;grid-template-columns:260px 1fr;gap:16px;min-height:520px;}
+/* ============ 小说助手 ============ */
+.novel-total-bar{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;border-radius:14px;padding:20px 26px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.novel-total-bar .nlb-left{display:flex;flex-direction:column;gap:4px;}
+.novel-total-bar .nlb-label{font-size:13.5px;opacity:.85;letter-spacing:.5px;}
+.novel-total-bar .nlb-big{font-size:34px;font-weight:800;letter-spacing:1.5px;font-variant-numeric:tabular-nums;}
+.novel-total-bar .nlb-sub{font-size:12.5px;opacity:.8;}
+.novel-total-bar .nlb-right{display:flex;gap:26px;flex-wrap:wrap;}
+.novel-total-bar .nlb-stat{text-align:right;}
+.novel-total-bar .nlb-stat b{display:block;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;}
+.novel-total-bar .nlb-stat span{font-size:11.5px;opacity:.85;}
+.novel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.novel-card{background:#fff;border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:.16s;position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.novel-card:hover{border-color:#c7d2fe;transform:translateY(-2px);box-shadow:0 6px 18px rgba(37,99,235,.08);}
+.novel-cover{height:150px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);display:flex;align-items:center;justify-content:center;color:#a5b4fc;overflow:hidden;position:relative;flex:0 0 auto;}
+.novel-cover img{width:100%;height:100%;object-fit:cover;}
+.novel-cover svg{width:44px;height:44px;}
+.novel-cover-edit{position:absolute;right:8px;bottom:8px;background:rgba(255,255,255,.94);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:11px;cursor:pointer;color:var(--muted);transition:.15s;}
+.novel-cover-edit:hover{color:var(--primary);border-color:#c7d2fe;}
+.novel-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;}
+.novel-body h3{margin:0;font-size:16px;padding-right:22px;}
+.novel-meta{font-size:12.5px;color:var(--muted);line-height:1.7;}
+.novel-meta b{color:var(--primary);font-weight:700;}
+.novel-syn{font-size:13px;color:#4b5563;line-height:1.65;margin:4px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.novel-editor{display:grid;grid-template-columns:280px 1fr;gap:16px;min-height:520px;}
 @media(max-width:860px){.novel-editor{grid-template-columns:1fr;}}
-.chapter-list{background:#fafbfc;border:1px solid var(--border);border-radius:12px;padding:10px;max-height:640px;overflow-y:auto;}
-.chapter-item{padding:9px 11px;border-radius:8px;cursor:pointer;font-size:13.5px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:.15s;}
-.chapter-item:hover{background:#fff;border:1px solid var(--border);}
-.chapter-item.active{background:var(--primary);color:#fff;}
+.chapter-list{background:#fafbfc;border:1px solid var(--border);border-radius:12px;padding:10px;max-height:700px;overflow-y:auto;}
+.chapter-list-head{display:flex;justify-content:space-between;align-items:center;padding:4px 6px 10px;font-size:12.5px;color:var(--muted);font-weight:600;}
+.chapter-item{padding:9px 11px;border-radius:8px;cursor:pointer;font-size:13.5px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:.15s;border:1px solid transparent;}
+.chapter-item:hover{background:#fff;border-color:var(--border);}
+.chapter-item.active{background:var(--primary);color:#fff;border-color:var(--primary);}
 .chapter-item.active .chapter-wc{color:rgba(255,255,255,.85);}
-.chapter-item .chapter-wc{font-size:11.5px;color:var(--muted);}
+.chapter-item.active .chapter-type-badge{background:rgba(255,255,255,.22);color:#fff;}
+.chapter-item .chapter-wc{font-size:11.5px;color:var(--muted);white-space:nowrap;}
 .chapter-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.chapter-type-badge{font-size:10px;padding:1px 7px;border-radius:4px;background:#eef2ff;color:#2563eb;margin-left:6px;font-weight:600;}
 .chapter-editor{display:flex;flex-direction:column;gap:10px;}
-#chapterTitleInput{padding:10px 14px;border-radius:9px;border:1px solid var(--border);font-size:16px;font-weight:600;outline:none;transition:.15s;}
+.chapter-title-row{display:flex;gap:8px;flex-wrap:wrap;}
+#chapterTitleInput{flex:1;min-width:200px;padding:10px 14px;border-radius:9px;border:1px solid var(--border);font-size:16px;font-weight:600;outline:none;transition:.15s;}
 #chapterTitleInput:focus{border-color:var(--primary);}
-#chapterContent{width:100%;min-height:460px;padding:16px;border-radius:10px;border:1px solid var(--border);background:#fafbfc;outline:none;resize:vertical;font-size:15px;line-height:1.9;font-family:inherit;transition:.16s;}
+#chapterTypeSelect{padding:10px 12px;border-radius:9px;border:1px solid var(--border);background:#fafbfc;font-size:14px;outline:none;transition:.15s;cursor:pointer;}
+#chapterTypeSelect:focus{border-color:var(--primary);background:#fff;}
+#chapterContent{width:100%;min-height:440px;padding:16px;border-radius:10px;border:1px solid var(--border);background:#fafbfc;outline:none;resize:vertical;font-size:15px;line-height:1.9;font-family:inherit;transition:.16s;}
 #chapterContent:focus{border-color:var(--primary);background:#fff;}
 .chapter-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:12.5px;color:var(--muted);}
+.chart-card{background:#fafbfc;border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
+.chart-card h4{margin:0 0 12px;font-size:14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+.type-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.type-stat-chip{background:#fff;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12.5px;display:inline-flex;align-items:center;gap:6px;}
+.type-stat-chip .dot{width:8px;height:8px;border-radius:50%;}
+.type-stat-chip b{color:var(--primary);font-weight:700;}
 @media (max-width:860px){
   .code-split{grid-template-columns:1fr;}
   #codeInput{height:320px;}
@@ -408,6 +436,8 @@ details.sub .inner{padding-bottom:14px;}
   .clock-adjust input{width:60px;font-size:14px;}
   .draw-toolbar{gap:10px;}
   .brush-size input[type=range]{width:84px;}
+  .novel-total-bar{padding:16px 18px;}
+  .novel-total-bar .nlb-big{font-size:26px;}
 }
 </style>
 </head>
@@ -445,12 +475,12 @@ details.sub .inner{padding-bottom:14px;}
 
     <h2 class="section-title" id="hotTitle">热门工具</h2>
     <div class="hot-grid" id="hotSection">
-      <div class="hot-card" data-target="novel" data-keywords="小说 管理 章节 大纲 写作 字数 导出">
+      <div class="hot-card" data-target="novel" data-keywords="小说 助手 管理 章节 封面 字数 统计 导出">
         <span class="hot-badge">NEW</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-        <div><h3>小说管理</h3><p>多小说 + 章节 + 字数统计 + 导出</p></div>
+        <div><h3>小说助手</h3><p>封面 + 章节分类 + 字数统计图 + 导出</p></div>
       </div>
-      <div class="hot-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 智能 写作 助手 时间线 对话 起名 灵感">
+      <div class="hot-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 时间线 对话 起名 灵感">
         <span class="hot-badge">NEW</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div>
         <div><h3>AI 助手</h3><p>聊天 + 时间线 + 对话生成 + 起名 + 灵感速记</p></div>
@@ -460,7 +490,7 @@ details.sub .inner{padding-bottom:14px;}
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
         <div><h3>小说字数统计</h3><p>中文字数、段落、阅读时长实时统计，支持 AI 润色</p></div>
       </div>
-      <div class="hot-card" data-target="calendar" data-keywords="日历 日程 安排 计划 时间表 备忘录 提醒 导出图片 2026 2036 月份">
+      <div class="hot-card" data-target="calendar" data-keywords="日历 日程 安排 计划 时间表 备忘录 提醒 导出图片">
         <span class="hot-badge">热门</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
         <div><h3>我的日历</h3><p>安排每日计划，支持增删改与导出图片</p></div>
@@ -468,7 +498,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="hot-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 国别 导出 文档 图片 AI">
         <span class="hot-badge">热门</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></div>
-        <div><h3>影视收藏</h3><p>收藏影视作品，一键导出追剧文档与图片，支持 AI 生成简介</p></div>
+        <div><h3>影视收藏</h3><p>收藏影视作品，一键导出追剧文档与图片</p></div>
       </div>
     </div>
 
@@ -496,7 +526,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="category-card">
         <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span><h3>创作</h3></div>
         <ul class="cat-list">
-          <li data-target="novel">小说管理</li>
+          <li data-target="novel">小说助手</li>
           <li data-target="ai">AI 助手</li>
           <li data-target="code">代码编辑器</li>
           <li data-target="canvas">畅想画布</li>
@@ -506,7 +536,7 @@ details.sub .inner{padding-bottom:14px;}
 
     <h2 class="section-title" id="allTitle" style="margin-top:34px;">全部应用</h2>
     <div class="tools-grid collapsed" id="allApps">
-      <div class="tool-card" data-target="novel" data-keywords="小说 管理 章节 大纲 写作 字数 导出"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>小说管理</h3><p>新建小说、管理章节、实时字数、一键导出</p></div>
+      <div class="tool-card" data-target="novel" data-keywords="小说 助手 管理 章节 封面 字数 统计 导出"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>小说助手</h3><p>封面、章节分类、字数统计图、导出 TXT/HTML</p></div>
       <div class="tool-card" data-target="wordcount" data-keywords="小说 字数 统计 写作 中文字数 段落 阅读 AI 润色"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div><h3>小说字数统计</h3><p>实时统计中文字数、标点、段落、行数与预计阅读时长</p></div>
       <div class="tool-card" data-target="calc" data-keywords="计算器 算术 加减乘除 平方 开方 三角函数 专家模式"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></div><h3>计算器</h3><p>普通模式与专家模式自由切换，支持平方、开方、三角函数等</p></div>
       <div class="tool-card" data-target="chart" data-keywords="统计图 图表 柱状图 折线图 饼图 可视化 数据"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><h3>常见统计图生成</h3><p>输入数据一键生成柱状图、折线图与饼图</p></div>
@@ -516,7 +546,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="tool-card" data-target="calendar" data-keywords="日历 日程 安排 计划 时间表 备忘录 提醒 导出图片"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>我的日历</h3><p>在日历里安排每日计划，支持新增 / 修改 / 删除，并可导出当月图片</p></div>
       <div class="tool-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 国别 导出 文档 图片 AI"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></div><h3>影视收藏</h3><p>收藏影视作品，可导出追剧信息文档与图片，支持 AI 生成简介</p></div>
       <div class="tool-card" data-target="clock" data-keywords="时钟 倒计时 计时器 秒表 定时 闹钟 振动 20小时"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>时钟工具</h3><p>倒计时（1 秒 - 20 小时，结束振动）与计时器</p></div>
-      <div class="tool-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 智能 写作 助手 时间线 对话 起名 灵感"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div><h3>AI 助手</h3><p>聊天 / 时间线 / 对话生成 / 起名 / 灵感速记</p></div>
+      <div class="tool-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 时间线 对话 起名 灵感"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div><h3>AI 助手</h3><p>聊天 / 时间线 / 对话生成 / 起名 / 灵感速记</p></div>
       <div class="tool-card" data-target="code" data-keywords="代码 编辑器 JavaScript JS 运行 预览 沙箱 Markdown 渲染 md 写作 排版 高亮 AI 解释"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></div><h3>代码编辑器</h3><p>JavaScript 实时运行预览，Markdown 实时渲染，支持 AI 解释代码</p></div>
       <div class="tool-card" data-target="canvas" data-keywords="画布 白板 绘画 涂鸦 画笔 颜色 橡皮擦 撤销 导出 PNG 手绘 创作"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><h3>畅想画布</h3><p>自由白板随手涂鸦，多种颜色与粗细，可擦除、撤销并导出 PNG</p></div>
     </div>
@@ -530,11 +560,11 @@ details.sub .inner{padding-bottom:14px;}
       <h1 class="editor-title">编者的话</h1>
       <div class="editor-body">
         <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱，在这里，你可以进行小说字数的统计、计算器、常见统计图生成等非常常见且实用的功能，我们还在不断优化中。</p>
-        <p>V1.6 版本加入了小说管理、AI 助手子工具（时间线、对话生成、随机生成、起名、灵感速记），由 Supabase 提供云端存储，DeepSeek 提供 AI 能力。</p>
+        <p>V2.1 正式版加入了小说助手（封面、章节分类、字数统计图），以及 AI 助手子工具（时间线、对话生成、随机生成、起名、灵感速记），由 Supabase 提供云端存储，DeepSeek 提供 AI 能力。</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
       </div>
       <div class="editor-sign">
-        <p>2026年9月</p>
+        <p>2026年10月</p>
         <p>岁窦工作室 岁窦工具箱</p>
       </div>
     </div>
@@ -544,7 +574,6 @@ details.sub .inner{padding-bottom:14px;}
   <section id="page-settings" class="page">
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>设置</h2>
     <p class="page-desc">数据管理与版本信息。</p>
-
     <div class="panel">
       <h3 class="panel-head">账号与同步</h3>
       <p class="tip" id="accountTip">当前为<strong>本地模式</strong>：数据保存在浏览器 localStorage，登录后可上传到云端并在多设备间同步。</p>
@@ -553,7 +582,6 @@ details.sub .inner{padding-bottom:14px;}
         <button class="btn ghost" id="pullCloudBtn" style="display:none;">从云端拉取数据</button>
       </div>
     </div>
-
     <div class="panel">
       <h3 class="panel-head">数据管理</h3>
       <p class="tip">你的数据保存在<strong>浏览器本地</strong>（localStorage），刷新或关闭页面不会丢失。<br>但清除浏览器缓存、更换设备 / 浏览器、使用无痕模式会导致数据丢失，建议定期点击下方按钮<strong>导出备份</strong>。</p>
@@ -566,12 +594,11 @@ details.sub .inner{padding-bottom:14px;}
       <p class="storage-info">当前存储占用：<strong id="storageUsage">—</strong> <span style="color:#b0b6c4;">（浏览器上限一般约 5 MB）</span></p>
       <div class="storage-bar"><i id="storageBar"></i></div>
     </div>
-
     <div class="panel">
       <h3 class="panel-head">关于</h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V1.6（2026.9）</span>
+        <span class="version-val">V2.1 正式版（2026.10）</span>
       </div>
     </div>
   </section>
@@ -1020,7 +1047,7 @@ details.sub .inner{padding-bottom:14px;}
 
     <div class="ai-subpage" data-ai-page="timeline">
       <div class="panel">
-        <h3 class="panel-head">⏱ 时间线工具</h3>
+        <h3 class="panel-head">时间线工具</h3>
         <p class="tip">记录事件发生的时间顺序。可以按时间排序展示。</p>
         <div class="form-grid">
           <label class="field"><span>时间</span><input type="text" id="tlTime" placeholder="如：公元 1024 年 / 第三章 / 幼年"></label>
@@ -1039,7 +1066,7 @@ details.sub .inner{padding-bottom:14px;}
 
     <div class="ai-subpage" data-ai-page="dialogue">
       <div class="panel">
-        <h3 class="panel-head">🗣 对话生成器</h3>
+        <h3 class="panel-head">对话生成器</h3>
         <p class="tip">输入两个角色和场景，让 AI 模拟他们的对话。会从「人物印象表」中拉取角色设定。</p>
         <div class="dlg-setup">
           <label class="field"><span>角色 A</span><input type="text" id="dlgA" placeholder="如：林清越"></label>
@@ -1057,7 +1084,7 @@ details.sub .inner{padding-bottom:14px;}
 
     <div class="ai-subpage" data-ai-page="random">
       <div class="panel">
-        <h3 class="panel-head">🎲 随机生成器</h3>
+        <h3 class="panel-head">随机生成器</h3>
         <p class="tip">卡文时点一下，随机给点灵感。不消耗 AI 额度。</p>
         <div class="rng-grid">
           <div class="rng-chip" data-rng="name"><b>人名</b><span>随机中文名</span></div>
@@ -1077,27 +1104,17 @@ details.sub .inner{padding-bottom:14px;}
 
     <div class="ai-subpage" data-ai-page="namer">
       <div class="panel">
-        <h3 class="panel-head">✨ AI 起名器</h3>
+        <h3 class="panel-head">AI 起名器</h3>
         <p class="tip">输入关键词和风格，让 AI 一次给你 10 个候选名。</p>
         <div class="form-grid">
           <label class="field"><span>类型</span>
             <select id="nmType">
-              <option value="人名">人名</option>
-              <option value="地名">地名</option>
-              <option value="招式名">招式名</option>
-              <option value="门派名">门派名</option>
-              <option value="书名">书名</option>
-              <option value="章节名">章节名</option>
-              <option value="物品名">物品名</option>
+              <option value="人名">人名</option><option value="地名">地名</option><option value="招式名">招式名</option><option value="门派名">门派名</option><option value="书名">书名</option><option value="章节名">章节名</option><option value="物品名">物品名</option>
             </select>
           </label>
           <label class="field"><span>风格</span>
             <select id="nmStyle">
-              <option value="古风">古风</option>
-              <option value="现代">现代</option>
-              <option value="西幻">西幻</option>
-              <option value="日系">日系</option>
-              <option value="科幻">科幻</option>
+              <option value="古风">古风</option><option value="现代">现代</option><option value="西幻">西幻</option><option value="日系">日系</option><option value="科幻">科幻</option>
             </select>
           </label>
           <label class="field"><span>关键词（选填）</span><input type="text" id="nmKeyword" placeholder="如：月、剑、星"></label>
@@ -1110,7 +1127,7 @@ details.sub .inner{padding-bottom:14px;}
 
     <div class="ai-subpage" data-ai-page="notes">
       <div class="panel">
-        <h3 class="panel-head">💡 灵感速记</h3>
+        <h3 class="panel-head">灵感速记</h3>
         <p class="tip">随手记下灵感碎片，支持标签和全文搜索。登录后自动同步云端。</p>
         <div class="field"><span>内容 *</span><textarea id="noteContent" rows="3" placeholder="一句台词、一个场景、一段设定…"></textarea></div>
         <div class="field"><span>标签（逗号分隔）</span><input type="text" id="noteTags" placeholder="如：人物,地名,台词"></div>
@@ -1124,19 +1141,38 @@ details.sub .inner{padding-bottom:14px;}
     </div>
   </section>
 
-  <!-- 小说管理 -->
+  <!-- 小说助手 -->
   <section id="page-novel" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
-    <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>小说管理</h2>
-    <p class="page-desc">多本小说独立管理，每本可分章节，实时统计字数，一键导出全文。</p>
+    <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>小说助手</h2>
+    <p class="page-desc">多本小说独立管理，每本可分章节、分类统计字数，支持封面、字数统计图，一键导出全文。</p>
 
     <div id="novelListView">
+      <div class="novel-total-bar">
+        <div class="nlb-left">
+          <span class="nlb-label">全部作品总字数</span>
+          <span class="nlb-big" id="nvGrandTotal">0</span>
+          <span class="nlb-sub" id="nvGrandSub">共 0 本小说 · 0 章</span>
+        </div>
+        <div class="nlb-right">
+          <div class="nlb-stat"><b id="nvStatToday">0</b><span>今日新增（字）</span></div>
+          <div class="nlb-stat"><b id="nvStatAvg">0</b><span>平均每本（字）</span></div>
+        </div>
+      </div>
+
       <div class="panel">
         <h3 class="panel-head">新建小说</h3>
         <div class="form-grid">
           <label class="field"><span>小说名称 *</span><input type="text" id="nvTitle" placeholder="如：长夜将明"></label>
         </div>
         <div class="field"><span>简介（选填）</span><textarea id="nvSyn" rows="2" placeholder="一句话简介…"></textarea></div>
+        <div class="field">
+          <span>封面（选填，会自动压缩）</span>
+          <div class="upload-row">
+            <input type="file" id="nvCover" accept="image/*">
+            <div class="preview" id="nvCoverPreview" style="width:88px;height:120px;">未选择</div>
+          </div>
+        </div>
         <button class="btn" id="nvCreate">＋ 新建小说</button>
       </div>
 
@@ -1149,10 +1185,20 @@ details.sub .inner{padding-bottom:14px;}
     <div id="novelEditView" style="display:none;">
       <button class="btn ghost small" id="nvBack" style="margin-bottom:14px;">← 返回小说列表</button>
       <div class="panel" style="margin-bottom:14px;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h2 style="margin:0 0 6px;font-size:19px;" id="nvEditTitle">小说标题</h2>
-            <p style="margin:0;color:var(--muted);font-size:13px;" id="nvEditMeta">0 章 · 0 字</p>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div class="novel-cover" style="width:96px;height:130px;border-radius:10px;flex:0 0 auto;">
+              <div id="nvEditCover" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:34px;height:34px;color:#a5b4fc;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <button class="novel-cover-edit" id="nvEditCoverBtn">换封面</button>
+              <input type="file" id="nvEditCoverInput" accept="image/*" style="display:none;">
+            </div>
+            <div>
+              <h2 style="margin:0 0 6px;font-size:19px;" id="nvEditTitle">小说标题</h2>
+              <p style="margin:0 0 6px;color:var(--muted);font-size:13px;" id="nvEditMeta">0 章 · 0 字</p>
+              <p style="margin:0;color:var(--muted);font-size:12.5px;line-height:1.7;max-width:420px;" id="nvEditSyn"></p>
+            </div>
           </div>
           <div class="head-actions">
             <button class="btn ghost small" id="nvRename">重命名</button>
@@ -1163,6 +1209,15 @@ details.sub .inner{padding-bottom:14px;}
         </div>
       </div>
 
+      <div class="chart-card">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;color:var(--primary);"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+          各类型字数分布
+        </h4>
+        <canvas id="nvTypeChart" height="200"></canvas>
+        <div class="type-stats" id="nvTypeStats"></div>
+      </div>
+
       <div class="novel-editor">
         <div>
           <div style="display:flex;gap:6px;margin-bottom:8px;">
@@ -1171,7 +1226,17 @@ details.sub .inner{padding-bottom:14px;}
           <div class="chapter-list" id="chapterList"></div>
         </div>
         <div class="chapter-editor">
-          <input type="text" id="chapterTitleInput" placeholder="章节标题">
+          <div class="chapter-title-row">
+            <input type="text" id="chapterTitleInput" placeholder="章节标题">
+            <select id="chapterTypeSelect">
+              <option value="前言">前言</option>
+              <option value="正文" selected>正文</option>
+              <option value="番外">番外</option>
+              <option value="附录">附录</option>
+              <option value="后记">后记</option>
+              <option value="作者的话">作者的话</option>
+            </select>
+          </div>
           <textarea id="chapterContent" placeholder="在这里写正文…"></textarea>
           <div class="chapter-toolbar">
             <span>本章字数：<b id="chWc">0</b> · 全书字数：<b id="nvWc">0</b></span>
@@ -1185,7 +1250,7 @@ details.sub .inner{padding-bottom:14px;}
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V1.6</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V2.1 正式版</footer>
 </main>
 
 <div class="modal-backdrop" id="lyricModal">
@@ -1587,7 +1652,6 @@ const TL_KEY     = 'suidou-timeline-v1';
 const NOVELS_KEY = 'suidou-novels-v1';
 const CHAPTERS_KEY = 'suidou-chapters-v1';
 
-
 /* ===================== 1. 小说字数统计 ===================== */
 const wcText = document.getElementById('wcText');
 const SAMPLE_TEXT = `夜色像一块被浸透的墨玉，沉沉地压在长街尽头。
@@ -1866,6 +1930,7 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     if (document.getElementById('page-chart').classList.contains('active')) renderChart();
+    if (document.getElementById('page-novel').classList.contains('active')) renderNovelTypeChart();
   }, 160);
 });
 
@@ -2431,7 +2496,8 @@ function exportMediaImage(){
   }
 }
 document.getElementById('mExportDoc').addEventListener('click', exportMediaDoc);
-document.getElementById('mExportImg').addEventListener('click', exportMediaImage);
+document.getElementById('mExportImg').addEventListener('click', exportMediaImgPlaceholder);
+function exportMediaImgPlaceholder(){ exportMediaImage(); }
 loadMedias(); renderMedias();
 
 /* ===================== 8. 时钟工具 ===================== */
@@ -3385,10 +3451,7 @@ document.getElementById('dlgClear').addEventListener('click', () => {
 
 /* ===================== 17. 随机生成器 ===================== */
 const RNG_POOLS = {
-  name: {
-    pool: ['林清越','苏晚','沈砚','顾承轩','陆时衍','江辞','萧景行','楚言','谢知微','云舒','慕容昭','宋归','叶寒舟','裴书','柳眠'],
-    make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; }
-  },
+  name: { pool: ['林清越','苏晚','沈砚','顾承轩','陆时衍','江辞','萧景行','楚言','谢知微','云舒','慕容昭','宋归','叶寒舟','裴书','柳眠'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
   place: { pool: ['云隐山','忘川渡','长夜城','碧落海','沧澜关','听雪楼','明月谷','九霄殿','无归岛','落霞坡','寒鸦岭','朱雀街','白鹭洲','烟雨巷','断桥'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
   appearance: { pool: ['眉眼清冷，唇角微勾','身姿挺拔，气质沉静','一双桃花眼，笑意不达眼底','短发利落，耳后有一颗小痣','面色苍白，唇色极淡','身形瘦削，指节分明','长发及腰，用一根木簪挽起','右眼下有一颗泪痣'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
   personality: { pool: ['外冷内热','嘴硬心软','谨慎多疑','疏离寡言','温和守礼','偏执固执','毒舌腹黑','天真迟钝','温柔坚韧','孤傲清高','八面玲珑','不按常理出牌'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
@@ -3521,8 +3584,13 @@ document.getElementById('noteClearAll').addEventListener('click', async () => {
   } catch(err){ alert('清空失败：' + err.message); }
 });
 
-/* ===================== 20. 小说管理 ===================== */
+/* ===================== 20. 小说助手 ===================== */
 let novels = [], currentNovel = null, currentChapter = null;
+let pendingNovelCover = '';
+let pendingEditCover = '';
+const CHAPTER_TYPES = ['前言','正文','番外','附录','后记','作者的话'];
+const TYPE_COLORS = { '前言':'#6366f1','正文':'#2563eb','番外':'#10b981','附录':'#f59e0b','后记':'#8b5cf6','作者的话':'#ec4899' };
+
 function loadNovels(){
   try { const raw = localStorage.getItem(NOVELS_KEY); if (raw) novels = JSON.parse(raw) || []; } catch(e){ novels = []; }
 }
@@ -3540,31 +3608,84 @@ async function fetchChapters(novelId){
   return loadChaptersLocal().filter(c => String(c.novel_id) === String(novelId)).sort((a,b) => (a.order_index||0) - (b.order_index||0));
 }
 function countChars(text){ if (!text) return 0; return text.replace(/\s/g,'').length; }
+function isToday(d){
+  if (!d) return false;
+  const t = new Date(d);
+  const n = new Date();
+  return t.getFullYear() === n.getFullYear() && t.getMonth() === n.getMonth() && t.getDate() === n.getDate();
+}
+
+/* 新建小说封面预览 */
+document.getElementById('nvCover').addEventListener('change', e => {
+  const file = e.target.files[0];
+  const preview = document.getElementById('nvCoverPreview');
+  if (!file){ pendingNovelCover = ''; preview.textContent = '未选择'; return; }
+  if (!file.type.startsWith('image/')){ alert('请选择图片文件'); return; }
+  preview.textContent = '处理中…';
+  compressImage(file, 600, 0.78, dataUrl => {
+    pendingNovelCover = dataUrl;
+    preview.innerHTML = '<img src="' + dataUrl + '" alt="">';
+  });
+});
+
+/* 渲染小说列表（含封面、字数、总栏） */
 async function renderNovelList(){
   const list = document.getElementById('novelList');
   document.getElementById('nvCount').textContent = novels.length;
-  if (novels.length === 0){ list.innerHTML = '<p class="empty" style="grid-column:1/-1;">还没有小说，先在上方新建一本吧～</p>'; return; }
+
+  // 汇总统计
+  let grandTotal = 0;
+  let totalChapters = 0;
+  let todayNew = 0;
   const counts = {};
-  if (appMode === 'cloud' && currentUser){
-    for (const n of novels){
-      const chs = await fetchChapters(n.id);
-      counts[n.id] = { chapters: chs.length, words: chs.reduce((a,c) => a + countChars(c.content), 0) };
+
+  const gatherChapters = async (novelId) => {
+    if (appMode === 'cloud' && currentUser){
+      const { data, error } = await sb.from('novel_chapters').select('*').eq('novel_id', novelId);
+      if (error) return [];
+      return data || [];
     }
-  } else {
-    const all = loadChaptersLocal();
-    novels.forEach(n => {
-      const chs = all.filter(c => String(c.novel_id) === String(n.id));
-      counts[n.id] = { chapters: chs.length, words: chs.reduce((a,c) => a + countChars(c.content), 0) };
+    return loadChaptersLocal().filter(c => String(c.novel_id) === String(novelId));
+  };
+
+  for (const n of novels){
+    const chs = await gatherChapters(n.id);
+    const words = chs.reduce((a,c) => a + countChars(c.content), 0);
+    counts[n.id] = { chapters: chs.length, words };
+    grandTotal += words;
+    totalChapters += chs.length;
+    chs.forEach(c => {
+      const when = c.updated_at || c.created_at;
+      if (isToday(when)) todayNew += countChars(c.content);
     });
   }
+
+  document.getElementById('nvGrandTotal').textContent = grandTotal.toLocaleString();
+  document.getElementById('nvGrandSub').textContent = '共 ' + novels.length + ' 本小说 · ' + totalChapters + ' 章';
+  document.getElementById('nvStatToday').textContent = todayNew.toLocaleString();
+  document.getElementById('nvStatAvg').textContent = novels.length ? Math.round(grandTotal / novels.length).toLocaleString() : '0';
+
+  if (novels.length === 0){
+    list.innerHTML = '<p class="empty" style="grid-column:1/-1;">还没有小说，先在上方新建一本吧～</p>';
+    return;
+  }
+
   list.innerHTML = novels.map(n => {
     const c = counts[n.id] || { chapters: 0, words: 0 };
+    const coverHtml = n.cover
+      ? '<img src="' + n.cover + '" alt="">'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
     return '<div class="novel-card" data-nvid="' + n.id + '">' +
       '<button class="del-btn" data-nvdel="' + n.id + '" title="删除">✕</button>' +
-      '<h3>' + esc(n.title) + '</h3>' +
-      '<div class="novel-meta">' + c.chapters + ' 章 · ' + c.words + ' 字</div>' +
-      (n.synopsis ? '<p class="novel-syn">' + esc(n.synopsis) + '</p>' : '') + '</div>';
+      '<div class="novel-cover">' + coverHtml + '</div>' +
+      '<div class="novel-body">' +
+        '<h3>' + esc(n.title) + '</h3>' +
+        '<div class="novel-meta"><b>' + c.words.toLocaleString() + '</b> 字 · ' + c.chapters + ' 章</div>' +
+        (n.synopsis ? '<p class="novel-syn">' + esc(n.synopsis) + '</p>' : '') +
+      '</div>' +
+    '</div>';
   }).join('');
+
   list.querySelectorAll('.novel-card').forEach(card => {
     card.addEventListener('click', e => { if (e.target.classList.contains('del-btn')) return; openNovel(card.dataset.nvid); });
   });
@@ -3584,11 +3705,13 @@ async function renderNovelList(){
     });
   });
 }
+
+/* 新建小说 */
 document.getElementById('nvCreate').addEventListener('click', async () => {
   const title = document.getElementById('nvTitle').value.trim();
   if (!title){ alert('请填写小说名称～'); return; }
   const synopsis = document.getElementById('nvSyn').value.trim();
-  const data = { title, synopsis };
+  const data = { title, synopsis, cover: pendingNovelCover || '' };
   try {
     if (appMode === 'cloud' && currentUser){
       const { data: row, error } = await sb.from('novels').insert({ ...data, user_id: currentUser.id }).select().single();
@@ -3601,39 +3724,196 @@ document.getElementById('nvCreate').addEventListener('click', async () => {
     }
     document.getElementById('nvTitle').value = '';
     document.getElementById('nvSyn').value = '';
+    document.getElementById('nvCover').value = '';
+    document.getElementById('nvCoverPreview').textContent = '未选择';
+    pendingNovelCover = '';
     renderNovelList(); showToast('已新建小说');
   } catch(err){ alert('新建失败：' + err.message); }
 });
+
+/* 打开小说 */
 async function openNovel(id){
   currentNovel = novels.find(n => String(n.id) === String(id));
   if (!currentNovel) return;
   document.getElementById('novelListView').style.display = 'none';
   document.getElementById('novelEditView').style.display = '';
   document.getElementById('nvEditTitle').textContent = currentNovel.title;
+  document.getElementById('nvEditSyn').textContent = currentNovel.synopsis || '';
+
+  // 封面
+  const coverBox = document.getElementById('nvEditCover');
+  if (currentNovel.cover){
+    coverBox.innerHTML = '<img src="' + currentNovel.cover + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">';
+  } else {
+    coverBox.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:34px;height:34px;color:#a5b4fc;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+  }
+
   currentChapter = null;
   document.getElementById('chapterTitleInput').value = '';
   document.getElementById('chapterContent').value = '';
   document.getElementById('chWc').textContent = '0';
   await refreshChapterList();
 }
+
+/* 编辑页换封面 */
+document.getElementById('nvEditCoverBtn').addEventListener('click', () => {
+  document.getElementById('nvEditCoverInput').click();
+});
+document.getElementById('nvEditCoverInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file){ return; }
+  if (!file.type.startsWith('image/')){ alert('请选择图片文件'); return; }
+  compressImage(file, 600, 0.78, async dataUrl => {
+    pendingEditCover = dataUrl;
+    try {
+      if (appMode === 'cloud' && currentUser){
+        await cloudUpdate('novels', currentNovel.id, { cover: dataUrl });
+      } else {
+        const i = novels.findIndex(n => String(n.id) === String(currentNovel.id));
+        if (i >= 0){ novels[i].cover = dataUrl; saveNovelsLocal(); }
+      }
+      currentNovel.cover = dataUrl;
+      const coverBox = document.getElementById('nvEditCover');
+      coverBox.innerHTML = '<img src="' + dataUrl + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">';
+      showToast('封面已更新');
+    } catch(err){ alert('更新失败：' + err.message); }
+  });
+});
+
+/* 章节列表 */
 async function refreshChapterList(){
   if (!currentNovel) return;
   const chapters = await fetchChapters(currentNovel.id);
   const list = document.getElementById('chapterList');
-  if (chapters.length === 0){ list.innerHTML = '<p class="empty">还没有章节，点击上方「新章节」创建～</p>'; }
-  else {
-    list.innerHTML = chapters.map(c => {
-      const wc = countChars(c.content);
-      return '<div class="chapter-item' + (currentChapter && String(currentChapter.id) === String(c.id) ? ' active' : '') + '" data-chid="' + c.id + '">' +
-        '<span class="chapter-title">' + esc(c.title) + '</span>' +
-        '<span class="chapter-wc">' + wc + ' 字</span></div>';
-    }).join('');
+  if (chapters.length === 0){
+    list.innerHTML = '<p class="empty">还没有章节，点击上方「新章节」创建～</p>';
+  } else {
+    // 按类型统计
+    const typeCount = {};
+    CHAPTER_TYPES.forEach(t => typeCount[t] = 0);
+    chapters.forEach(c => {
+      const t = c.chapter_type || '正文';
+      typeCount[t] = (typeCount[t] || 0) + countChars(c.content);
+    });
+
+    list.innerHTML = '<div class="chapter-list-head"><span>章节列表</span><span>' + chapters.length + ' 章</span></div>' +
+      chapters.map(c => {
+        const wc = countChars(c.content);
+        const ct = c.chapter_type || '正文';
+        const cls = 'chapter-item' + (currentChapter && String(currentChapter.id) === String(c.id) ? ' active' : '');
+        return '<div class="' + cls + '" data-chid="' + c.id + '">' +
+          '<span class="chapter-title">' + esc(c.title) +
+            '<span class="chapter-type-badge">' + esc(ct) + '</span>' +
+          '</span>' +
+          '<span class="chapter-wc">' + wc + ' 字</span></div>';
+      }).join('');
+
     list.querySelectorAll('.chapter-item').forEach(el => el.addEventListener('click', () => openChapter(el.dataset.chid)));
+
+    // 更新统计图
+    renderNovelTypeChart(chapters);
   }
+
   const total = chapters.reduce((a,c) => a + countChars(c.content), 0);
-  document.getElementById('nvEditMeta').textContent = chapters.length + ' 章 · ' + total + ' 字';
-  document.getElementById('nvWc').textContent = total;
+  document.getElementById('nvEditMeta').textContent = chapters.length + ' 章 · ' + total.toLocaleString() + ' 字';
+  document.getElementById('nvWc').textContent = total.toLocaleString();
 }
+
+/* 章节类型统计图 */
+function renderNovelTypeChart(chapters){
+  if (!chapters){
+    // 需要重新拉取
+    return;
+  }
+  const stats = {};
+  CHAPTER_TYPES.forEach(t => stats[t] = 0);
+  chapters.forEach(c => {
+    const t = c.chapter_type || '正文';
+    stats[t] = (stats[t] || 0) + countChars(c.content);
+  });
+
+  // 更新 chip 显示
+  const statsEl = document.getElementById('nvTypeStats');
+  statsEl.innerHTML = CHAPTER_TYPES.map(t =>
+    '<div class="type-stat-chip"><span class="dot" style="background:' + TYPE_COLORS[t] + '"></span>' +
+    esc(t) + ' <b>' + stats[t].toLocaleString() + '</b> 字</div>'
+  ).join('');
+
+  // 绘制柱状图
+  const canvas = document.getElementById('nvTypeChart');
+  if (!canvas) return;
+  const wrap = canvas.parentElement;
+  const cssW = Math.max(280, wrap.clientWidth - 32);
+  const cssH = 200;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.style.width = cssW + 'px';
+  canvas.style.height = cssH + 'px';
+  canvas.width = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, cssW, cssH);
+
+  const data = CHAPTER_TYPES.map(t => ({ label: t, value: stats[t], color: TYPE_COLORS[t] }));
+  const maxV = Math.max(...data.map(d => d.value), 1);
+  const pad = { l: 50, r: 16, t: 20, b: 40 };
+  const pw = cssW - pad.l - pad.r;
+  const ph = cssH - pad.t - pad.b;
+
+  // 网格
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  for (let i = 0; i <= 4; i++){
+    const v = maxV * i / 4;
+    const y = pad.t + ph - (v / maxV) * ph;
+    ctx.strokeStyle = '#eef0f5';
+    ctx.beginPath();
+    ctx.moveTo(pad.l, y);
+    ctx.lineTo(pad.l + pw, y);
+    ctx.stroke();
+    ctx.fillStyle = '#9aa1b1';
+    ctx.fillText(formatNum(Math.round(v)), pad.l - 6, y);
+  }
+
+  // 柱
+  const slot = pw / data.length;
+  const bw = Math.min(slot * 0.55, 56);
+  data.forEach((d, i) => {
+    const cx = pad.l + slot * i + slot / 2;
+    const bh = (d.value / maxV) * ph;
+    const yTop = pad.t + ph - bh;
+    ctx.fillStyle = d.color;
+    roundRect(ctx, cx - bw / 2, yTop, bw, Math.max(bh, 2), 5);
+    ctx.fill();
+
+    // 数值
+    if (d.value > 0){
+      ctx.fillStyle = '#4b5563';
+      ctx.font = '11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(d.value.toLocaleString(), cx, yTop - 4);
+    }
+
+    // 标签
+    ctx.fillStyle = '#6b7280';
+    ctx.font = '11.5px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(d.label, cx, pad.t + ph + 10);
+  });
+
+  // 轴
+  ctx.strokeStyle = '#d9dce6';
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t);
+  ctx.lineTo(pad.l, pad.t + ph);
+  ctx.lineTo(pad.l + pw, pad.t + ph);
+  ctx.stroke();
+}
+
+/* 打开章节 */
 async function openChapter(id){
   if (!currentNovel) return;
   const chapters = await fetchChapters(currentNovel.id);
@@ -3642,14 +3922,17 @@ async function openChapter(id){
   currentChapter = ch;
   document.getElementById('chapterTitleInput').value = ch.title || '';
   document.getElementById('chapterContent').value = ch.content || '';
+  document.getElementById('chapterTypeSelect').value = ch.chapter_type || '正文';
   document.getElementById('chWc').textContent = countChars(ch.content);
   await refreshChapterList();
 }
+
+/* 新章节 */
 document.getElementById('chAdd').addEventListener('click', async () => {
   if (!currentNovel) return;
   const chapters = await fetchChapters(currentNovel.id);
   const title = '第 ' + (chapters.length + 1) + ' 章';
-  const data = { novel_id: currentNovel.id, title, content: '', order_index: chapters.length };
+  const data = { novel_id: currentNovel.id, title, content: '', order_index: chapters.length, chapter_type: '正文' };
   try {
     if (appMode === 'cloud' && currentUser){
       const { data: row, error } = await sb.from('novel_chapters').insert({ ...data, user_id: currentUser.id }).select().single();
@@ -3664,24 +3947,30 @@ document.getElementById('chAdd').addEventListener('click', async () => {
     }
     document.getElementById('chapterTitleInput').value = title;
     document.getElementById('chapterContent').value = '';
+    document.getElementById('chapterTypeSelect').value = '正文';
     document.getElementById('chWc').textContent = '0';
     await refreshChapterList(); showToast('已新建章节');
   } catch(err){ alert('新建失败：' + err.message); }
 });
+
+/* 保存章节 */
 document.getElementById('chSave').addEventListener('click', async () => {
   if (!currentNovel || !currentChapter){ showToast('请先选择或新建章节'); return; }
   const title = document.getElementById('chapterTitleInput').value.trim() || '未命名';
   const content = document.getElementById('chapterContent').value;
+  const chapter_type = document.getElementById('chapterTypeSelect').value;
   try {
     if (appMode === 'cloud' && currentUser){
-      const { error } = await sb.from('novel_chapters').update({ title, content, updated_at: new Date().toISOString() }).eq('id', currentChapter.id);
+      const { error } = await sb.from('novel_chapters').update({
+        title, content, chapter_type, updated_at: new Date().toISOString()
+      }).eq('id', currentChapter.id);
       if (error) throw error;
-      currentChapter.title = title; currentChapter.content = content;
+      currentChapter.title = title; currentChapter.content = content; currentChapter.chapter_type = chapter_type;
     } else {
       const all = loadChaptersLocal();
       const i = all.findIndex(c => String(c.id) === String(currentChapter.id));
       if (i < 0) throw new Error('章节不存在');
-      all[i] = { ...all[i], title, content };
+      all[i] = { ...all[i], title, content, chapter_type, updated_at: new Date().toISOString() };
       if (!saveChaptersLocal(all)) throw new Error('本地保存失败');
       currentChapter = all[i];
     }
@@ -3689,9 +3978,12 @@ document.getElementById('chSave').addEventListener('click', async () => {
     await refreshChapterList(); showToast('已保存');
   } catch(err){ alert('保存失败：' + err.message); }
 });
+
 document.getElementById('chapterContent').addEventListener('input', e => {
   document.getElementById('chWc').textContent = countChars(e.target.value);
 });
+
+/* 删除章节 */
 document.getElementById('chDelete').addEventListener('click', async () => {
   if (!currentChapter) return;
   if (!confirm('确定删除本章吗？此操作不可恢复。')) return;
@@ -3709,12 +4001,16 @@ document.getElementById('chDelete').addEventListener('click', async () => {
     await refreshChapterList(); showToast('已删除章节');
   } catch(err){ alert('删除失败：' + err.message); }
 });
+
+/* 返回列表 */
 document.getElementById('nvBack').addEventListener('click', async () => {
   document.getElementById('novelListView').style.display = '';
   document.getElementById('novelEditView').style.display = 'none';
   currentNovel = null; currentChapter = null;
   await renderNovelList();
 });
+
+/* 重命名 */
 document.getElementById('nvRename').addEventListener('click', async () => {
   if (!currentNovel) return;
   const newTitle = prompt('新的小说名称：', currentNovel.title);
@@ -3732,6 +4028,8 @@ document.getElementById('nvRename').addEventListener('click', async () => {
     showToast('已重命名');
   } catch(err){ alert('重命名失败：' + err.message); }
 });
+
+/* 删除小说 */
 document.getElementById('nvDelete').addEventListener('click', async () => {
   if (!currentNovel) return;
   if (!confirm('确定删除「' + currentNovel.title + '」及其所有章节吗？')) return;
@@ -3746,12 +4044,16 @@ document.getElementById('nvDelete').addEventListener('click', async () => {
     await renderNovelList(); showToast('已删除小说');
   } catch(err){ alert('删除失败：' + err.message); }
 });
+
+/* 导出 TXT */
 document.getElementById('nvExportTxt').addEventListener('click', async () => {
   if (!currentNovel) return;
   const chapters = await fetchChapters(currentNovel.id);
   const lines = [currentNovel.title, ''];
   if (currentNovel.synopsis) lines.push('简介：' + currentNovel.synopsis, '');
-  chapters.forEach(c => { lines.push(c.title, '', c.content || '', ''); });
+  chapters.forEach(c => {
+    lines.push('【' + (c.chapter_type || '正文') + '】' + c.title, '', c.content || '', '');
+  });
   const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -3760,12 +4062,18 @@ document.getElementById('nvExportTxt').addEventListener('click', async () => {
   setTimeout(() => URL.revokeObjectURL(url), 1200);
   showToast('已导出 TXT');
 });
+
+/* 导出 HTML */
 document.getElementById('nvExportHtml').addEventListener('click', async () => {
   if (!currentNovel) return;
   const chapters = await fetchChapters(currentNovel.id);
   const totalWc = chapters.reduce((a,c) => a + countChars(c.content), 0);
-  const body = chapters.map(c => '<section class="ch"><h2>' + esc(c.title) + '</h2>' +
-    esc(c.content || '').split('\n').map(p => p.trim() ? '<p>' + p + '</p>' : '').join('') + '</section>').join('\n');
+  const body = chapters.map(c => {
+    const ct = c.chapter_type || '正文';
+    return '<section class="ch"><h2>' + esc(c.title) +
+      '<span style="font-size:12px;color:#9ca3af;margin-left:10px;font-weight:400;">[' + esc(ct) + ']</span></h2>' +
+      esc(c.content || '').split('\n').map(p => p.trim() ? '<p>' + p + '</p>' : '').join('') + '</section>';
+  }).join('\n');
   const html = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>' + esc(currentNovel.title) + '</title><style>' +
     'body{font-family:"Songti SC","STSong","PingFang SC",serif;max-width:760px;margin:0 auto;padding:48px 32px 80px;line-height:2;color:#111827;background:#fafaf7;}' +
     'h1{font-size:28px;text-align:center;margin:0 0 12px;letter-spacing:4px;}' +
@@ -3773,7 +4081,7 @@ document.getElementById('nvExportHtml').addEventListener('click', async () => {
     '.syn{color:#6b7280;font-size:14px;text-align:center;margin-bottom:38px;padding-bottom:22px;border-bottom:1px solid #e5e7eb;}' +
     '.ch{margin-bottom:44px;}.ch h2{font-size:19px;margin:32px 0 16px;}.ch p{margin:0 0 14px;text-indent:2em;font-size:16px;}' +
     '</style></head><body><h1>' + esc(currentNovel.title) + '</h1>' +
-    '<p class="meta">共 ' + chapters.length + ' 章 · ' + totalWc + ' 字</p>' +
+    '<p class="meta">共 ' + chapters.length + ' 章 · ' + totalWc.toLocaleString() + ' 字</p>' +
     (currentNovel.synopsis ? '<p class="syn">' + esc(currentNovel.synopsis) + '</p>' : '') +
     body + '</body></html>';
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
@@ -3784,13 +4092,14 @@ document.getElementById('nvExportHtml').addEventListener('click', async () => {
   setTimeout(() => URL.revokeObjectURL(url), 1200);
   showToast('已导出 HTML');
 });
+
 loadNovels();
 renderNovelList();
 
 /* ===================== 21. 数据管理 ===================== */
 function exportAll(){
   const data = {
-    app: '岁窦工具箱', version: 'V1.6', exportTime: new Date().toISOString(),
+    app: '岁窦工具箱', version: 'V2.1', exportTime: new Date().toISOString(),
     people, songs, places, medias, schedules, notes, timelineEvents, novels
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
@@ -3845,7 +4154,6 @@ document.getElementById('clearAllData').addEventListener('click', async () => {
 
 /* ===================== 初始化 ===================== */
 updateStorageUsage();
-
 </script>
 </body>
 </html>
