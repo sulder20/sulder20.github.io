@@ -661,7 +661,7 @@ details.sub .inner{padding-bottom:14px;}
 
       <div class="field">
         <span>用户名（显示在主页右上角，可随时修改）</span>
-        <input type="text" id="usernameInput" placeholder="未登录" disabled>
+        <input type="text" id="usernameInput" placeholder="请输入用户名" disabled>
       </div>
       <button class="btn" id="usernameSave" disabled>保存用户名</button>
       <p class="tip" id="usernameTip" style="margin-top:12px;">未登录时无法修改用户名，请先登录。</p>
@@ -1647,6 +1647,7 @@ function updateAuthUI(){
   const userAvatar = document.getElementById('userAvatar');
 
   if (currentUser){
+    // ========== 已登录 ==========
     loginBtn.style.display = 'none';
     logoutBtn.style.display = '';
     userEmail.style.display = '';
@@ -1667,20 +1668,24 @@ function updateAuthUI(){
 
     setMode('cloud');
 
+    // 用户名输入框：解除禁用，并填入当前用户名
     if (unameInput){
       unameInput.value = uname || '';
-      unameInput.disabled = false;
-      unameSave.disabled = false;
+      unameInput.disabled = false;   // 关键：解除禁用
+      unameSave.disabled = false;    // 关键：启用保存按钮
       unameTip.textContent = '用户名只用于主页显示，不影响登录邮箱。建议 2-20 字。';
     }
     if (avatarInput) avatarInput.disabled = false;
+
   } else {
+    // ========== 未登录 ==========
     loginBtn.style.display = '';
     logoutBtn.style.display = 'none';
     userEmail.style.display = 'none';
     userAvatar.classList.remove('show');
     userAvatar.src = '';
     setMode('local');
+
     if (unameInput){
       unameInput.value = '';
       unameInput.disabled = true;
