@@ -11,12 +11,8 @@
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
-body{
-  font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;
-}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
 button,input,select,textarea{font-family:inherit;}
-
 header{position:sticky;top:0;z-index:80;background:#fff;border-bottom:1px solid var(--border);}
 .header-inner{max-width:1200px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .logo{font-size:20px;font-weight:800;color:var(--primary);cursor:pointer;white-space:nowrap;}
@@ -25,16 +21,10 @@ nav button{background:none;border:none;padding:8px 14px;border-radius:8px;font-s
 nav button:hover{background:#f3f4f6;color:var(--text);}
 nav button.active{background:var(--primary);color:#fff;}
 .search-wrap{margin-left:auto;}
-.search-wrap input{
-  width:200px;max-width:50vw;padding:9px 16px 9px 38px;border-radius:999px;
-  border:1px solid var(--border);background:#f9fafb;outline:none;font-size:14px;transition:.18s;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.6-3.6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:13px center;background-size:15px;
-}
+.search-wrap input{width:200px;max-width:50vw;padding:9px 16px 9px 38px;border-radius:999px;border:1px solid var(--border);background:#f9fafb;outline:none;font-size:14px;transition:.18s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.6-3.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:13px center;background-size:15px;}
 .search-wrap input:focus{border-color:var(--primary);background-color:#fff;width:230px;}
 #userBox{margin-left:auto;display:flex;align-items:center;gap:10px;}
 #userBox .user-email{font-size:13px;color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
 main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .page{display:none;}
 .page.active{display:block;}
@@ -45,20 +35,16 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:18px;}
 .panel-head{margin:0 0 14px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:9px;}
 .section-title{font-size:16px;margin:0 0 14px;font-weight:700;}
-
 .back-btn{display:inline-flex;align-items:center;gap:5px;background:none;border:none;color:var(--muted);font-size:13.5px;cursor:pointer;padding:4px 0;margin-bottom:10px;transition:.15s;}
 .back-btn:hover{color:var(--primary);}
-
 .hero{background:var(--primary);border-radius:16px;padding:34px 30px;color:#fff;margin-bottom:30px;}
 .hero h1{margin:0 0 10px;font-size:26px;}
 .hero p{margin:0;opacity:.9;font-size:14.5px;}
-
 .editor-note{max-width:820px;margin:56px auto 80px;padding:0 22px;}
 .editor-title{font-size:27px;font-weight:800;letter-spacing:6px;margin:0 0 46px;color:var(--text);text-align:center;}
 .editor-body p{font-size:17px;font-weight:700;line-height:2.2;color:#2b3140;margin:0 0 26px;text-align:left;text-indent:2em;letter-spacing:.4px;}
 .editor-sign{margin-top:52px;text-align:right;padding-right:6px;}
 .editor-sign p{font-size:15.5px;font-weight:700;line-height:2;color:var(--text);margin:0;letter-spacing:.5px;}
-
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
 .tool-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:.16s;}
 .tool-card:hover{border-color:#c7d2fe;transform:translateY(-2px);}
@@ -67,10 +53,8 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .tool-card h3{margin:0 0 6px;font-size:15.5px;}
 .tool-card p{margin:0;font-size:13px;color:var(--muted);line-height:1.55;}
 #noResult{text-align:center;color:var(--muted);padding:40px 0;display:none;}
-
 #allApps.collapsed .tool-card:nth-child(n+5){display:none;}
 .expand-wrap{display:flex;justify-content:center;margin:20px 0 0;}
-
 .hot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
 .hot-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:.16s;display:flex;gap:13px;align-items:flex-start;position:relative;}
 .hot-card:hover{border-color:#c7d2fe;transform:translateY(-2px);}
@@ -78,7 +62,6 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .hot-card h3{margin:0 0 5px;font-size:15px;}
 .hot-card p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.5;}
 .hot-badge{position:absolute;top:12px;right:12px;font-size:10.5px;font-weight:700;color:#dc2626;background:#fef2f2;border-radius:999px;padding:2px 8px;}
-
 .category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
 .category-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:.16s;}
 .category-card:hover{border-color:#c7d2fe;}
@@ -89,7 +72,6 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .cat-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
 .cat-list li{font-size:13px;padding:7px 14px;border-radius:8px;background:#f6f7f9;color:#4b5563;cursor:pointer;transition:.15s;border:1px solid transparent;}
 .cat-list li:hover{background:var(--primary-soft);color:var(--primary);border-color:#c7d2fe;}
-
 .btn{background:var(--primary);color:#fff;border:1px solid var(--primary);padding:9px 18px;border-radius:9px;cursor:pointer;font-size:14px;transition:.16s;}
 .btn:hover{background:#1d4ed8;border-color:#1d4ed8;}
 .btn.ghost{background:#fff;color:var(--muted);border:1px solid var(--border);}
@@ -98,14 +80,12 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .btn.danger{background:#fff;color:#dc2626;border:1px solid #fecaca;}
 .btn.danger:hover{background:#fef2f2;border-color:#fca5a5;}
 .row-between{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;}
-
 #wcText{width:100%;min-height:220px;padding:14px;border-radius:10px;border:1px solid var(--border);background:#fafbfc;outline:none;resize:vertical;font-size:14.5px;line-height:1.85;transition:.16s;}
 #wcText:focus{border-color:var(--primary);background:#fff;}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px;display:flex;flex-direction:column;gap:6px;}
 .stat-value{font-size:23px;font-weight:800;color:var(--primary);word-break:break-all;}
 .stat-label{font-size:12.5px;color:var(--muted);}
-
 .calc-box{max-width:400px;margin:0 auto;}
 .calc-display{background:#111827;color:#fff;border-radius:12px;padding:18px;text-align:right;font-size:28px;font-weight:600;min-height:84px;display:flex;align-items:flex-end;justify-content:flex-end;word-break:break-all;overflow:hidden;}
 .calc-mode-bar{display:flex;justify-content:space-between;align-items:center;margin:12px 0 10px;font-size:13px;color:var(--muted);}
@@ -118,7 +98,6 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .calc-btn.eq{grid-column:1 / -1;background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700;}
 .calc-btn.eq:hover{background:#1d4ed8;}
 .calc-btn.sm{font-size:14px;padding:13px 0;}
-
 .chart-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
 .chart-types{display:flex;gap:4px;background:#f3f4f6;padding:4px;border-radius:9px;}
 .chart-type{border:none;background:none;padding:7px 16px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--muted);transition:.15s;}
@@ -126,7 +105,6 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 #chartData{width:100%;padding:13px;border-radius:10px;border:1px solid var(--border);background:#fafbfc;outline:none;resize:vertical;font-size:13.5px;line-height:1.75;font-family:Consolas,Menlo,monospace;transition:.16s;}
 #chartData:focus{border-color:var(--primary);background:#fff;}
 #chartCanvas{display:block;width:100%;}
-
 .form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-bottom:14px;}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
 .field > span{font-size:12.5px;color:var(--muted);font-weight:600;}
@@ -138,7 +116,6 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 input[type=file]{font-size:13px;color:var(--muted);}
 .preview{width:72px;height:72px;border-radius:10px;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0b6c4;overflow:hidden;background:#fafbfc;text-align:center;}
 .preview img{width:100%;height:100%;object-fit:cover;}
-
 .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
 .person-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.16s;}
 .person-card:hover{border-color:#c7d2fe;}
@@ -158,7 +135,6 @@ input[type=file]{font-size:13px;color:var(--muted);}
 .list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 14px;gap:10px;flex-wrap:wrap;}
 .list-head h2{margin:0;font-size:16px;}
 .head-actions{display:flex;gap:8px;flex-wrap:wrap;}
-
 .places-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
 .place-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:.16s;display:flex;flex-direction:column;}
 .place-card:hover{border-color:#c7d2fe;}
@@ -179,7 +155,6 @@ input[type=file]{font-size:13px;color:var(--muted);}
 .baike-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:7px;font-size:12px;border:1px solid var(--border);background:#fff;color:var(--muted);text-decoration:none;transition:.15s;}
 .baike-btn:hover{color:var(--primary);border-color:#c7d2fe;background:#f8faff;}
 .baike-btn svg{width:13px;height:13px;}
-
 .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
 .media-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.16s;position:relative;}
 .media-card:hover{border-color:#c7d2fe;}
@@ -190,7 +165,6 @@ input[type=file]{font-size:13px;color:var(--muted);}
 .media-body p{margin:0 0 8px;font-size:13.5px;line-height:1.65;color:#404754;word-break:break-word;}
 .media-body p:last-child{margin-bottom:0;}
 .media-body b{color:var(--muted);font-weight:600;}
-
 .clock-tabs{display:flex;gap:4px;background:#f3f4f6;padding:4px;border-radius:9px;margin-bottom:18px;max-width:300px;}
 .clock-tab{border:none;background:none;padding:8px 20px;border-radius:7px;cursor:pointer;font-size:14px;color:var(--muted);transition:.15s;flex:1;}
 .clock-tab.active{background:#fff;color:var(--primary);font-weight:600;}
@@ -202,7 +176,6 @@ input[type=file]{font-size:13px;color:var(--muted);}
 .clock-hint{text-align:center;font-size:12px;color:var(--muted);margin:0 0 16px;}
 .clock-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
 .clock-actions .btn{min-width:92px;}
-
 .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:#fff;}
 .songs-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:860px;}
 .songs-table th{text-align:left;padding:11px 12px;background:#f9fafb;color:var(--muted);font-weight:600;font-size:12.5px;border-bottom:1px solid var(--border);white-space:nowrap;}
@@ -226,7 +199,6 @@ details.sub summary::-webkit-details-marker{display:none;}
 details.sub summary::before{content:"▸ ";color:var(--primary);}
 details.sub[open] summary::before{content:"▾ ";}
 details.sub .inner{padding-bottom:14px;}
-
 .cal-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
 .cal-toolbar .spacer{flex:1 1 auto;}
 .cal-selects{display:flex;gap:8px;}
@@ -260,7 +232,6 @@ details.sub .inner{padding-bottom:14px;}
 .cal-item-content{font-size:14.5px;font-weight:600;color:var(--text);word-break:break-word;}
 .cal-item-meta{font-size:12.5px;color:var(--muted);line-height:1.6;word-break:break-word;}
 .cal-item-actions{display:flex;gap:6px;flex:0 0 auto;}
-
 .code-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
 .code-modes{display:flex;gap:4px;background:#f3f4f6;padding:4px;border-radius:9px;}
 .code-mode{border:none;background:none;padding:7px 20px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--muted);transition:.15s;}
@@ -273,7 +244,6 @@ details.sub .inner{padding-bottom:14px;}
 .code-preview-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff;height:470px;}
 #codePreview{width:100%;height:100%;border:none;display:block;background:#fff;}
 .code-hint{margin:12px 0 0;font-size:12.5px;color:var(--muted);}
-
 .draw-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
 .brush-colors{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
 .color-dot{width:26px;height:26px;border-radius:50%;border:2px solid #fff;padding:0;box-shadow:0 0 0 1px var(--border);cursor:pointer;transition:.15s;}
@@ -285,7 +255,6 @@ details.sub .inner{padding-bottom:14px;}
 #eraserBtn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
 .draw-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;line-height:0;}
 #drawCanvas{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair;}
-
 .modal-backdrop{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;}
 .modal-backdrop.show{display:flex;}
 .modal{background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:82vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -294,7 +263,6 @@ details.sub .inner{padding-bottom:14px;}
 .modal-head button{border:none;background:none;font-size:16px;color:var(--muted);cursor:pointer;padding:2px 6px;border-radius:6px;}
 .modal-head button:hover{background:#f3f4f6;color:var(--text);}
 .modal-body{padding:18px;overflow-y:auto;white-space:pre-wrap;line-height:1.9;font-size:14px;color:#374151;}
-
 .tip{margin:0 0 16px;font-size:13px;color:var(--muted);line-height:1.75;}
 .data-actions{display:flex;gap:10px;flex-wrap:wrap;}
 .storage-info{margin:16px 0 0;font-size:12.5px;color:var(--muted);}
@@ -303,17 +271,12 @@ details.sub .inner{padding-bottom:14px;}
 .version-line{display:flex;align-items:center;gap:12px;font-size:14px;flex-wrap:wrap;padding:14px 16px;border-radius:10px;background:#f8faff;border:1px solid #e2e8fb;}
 .version-label{color:var(--muted);font-size:13px;}
 .version-val{color:var(--primary);font-weight:800;font-size:17px;letter-spacing:.6px;}
-
 .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(16px);background:#111827;color:#fff;padding:11px 22px;border-radius:10px;font-size:13.5px;opacity:0;transition:.28s;z-index:300;pointer-events:none;max-width:88vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.18);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
 .site-footer{text-align:center;padding:34px 10px 26px;color:#9ca3af;font-size:13px;}
-
-/* ============ 新增：登录 / 模式 / AI ============ */
 .mode-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 11px;border-radius:999px;font-weight:600;}
 .mode-badge.local{background:#f3f4f6;color:#6b7280;}
 .mode-badge.cloud{background:#eef2ff;color:#2563eb;}
-
 .auth-wrap{max-width:420px;margin:60px auto;padding:0 20px;}
 .auth-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px 24px;}
 .auth-card h2{margin:0 0 8px;font-size:22px;}
@@ -324,7 +287,6 @@ details.sub .inner{padding-bottom:14px;}
 .auth-msg{margin-top:14px;font-size:13px;padding:10px 12px;border-radius:8px;display:none;line-height:1.6;}
 .auth-msg.ok{background:#ecfdf5;color:#059669;display:block;}
 .auth-msg.err{background:#fef2f2;color:#dc2626;display:block;}
-
 .chat-box{display:flex;flex-direction:column;height:560px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;}
 .chat-log{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;background:#fafbfc;}
 .chat-msg{max-width:82%;padding:11px 14px;border-radius:12px;font-size:14px;line-height:1.7;word-break:break-word;white-space:pre-wrap;}
@@ -336,10 +298,8 @@ details.sub .inner{padding-bottom:14px;}
 .chat-input-row textarea:focus{border-color:var(--primary);}
 .chat-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
 .chat-quota{font-size:12.5px;color:var(--muted);margin-left:auto;}
-
 .ai-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;font-size:12.5px;cursor:pointer;border:1px solid #c7d2fe;background:#f8faff;color:var(--primary);transition:.15s;margin-right:8px;}
 .ai-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
-
 .ai-pop{position:fixed;inset:0;background:rgba(17,24,39,.45);z-index:250;display:none;align-items:center;justify-content:center;padding:20px;}
 .ai-pop.show{display:flex;}
 .ai-pop-card{background:#fff;border-radius:14px;width:100%;max-width:640px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -347,7 +307,73 @@ details.sub .inner{padding-bottom:14px;}
 .ai-pop-head h3{margin:0;font-size:15.5px;}
 .ai-pop-body{padding:18px;overflow-y:auto;font-size:14px;line-height:1.85;white-space:pre-wrap;color:#374151;}
 .ai-pop-foot{padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;}
-
+.ai-subtabs{display:flex;gap:4px;background:#f3f4f6;padding:4px;border-radius:10px;margin-bottom:16px;flex-wrap:wrap;}
+.ai-subtab{border:none;background:none;padding:8px 16px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--muted);transition:.15s;white-space:nowrap;}
+.ai-subtab:hover{background:#fff;color:var(--text);}
+.ai-subtab.active{background:#fff;color:var(--primary);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.ai-subpage{display:none;}
+.ai-subpage.active{display:block;}
+.tl-list{position:relative;padding-left:28px;}
+.tl-list::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--primary),#c7d2fe);border-radius:1px;}
+.tl-item{position:relative;margin-bottom:16px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;transition:.15s;}
+.tl-item:hover{border-color:#c7d2fe;}
+.tl-item::before{content:"";position:absolute;left:-24px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--primary-soft);}
+.tl-time{font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-soft);display:inline-block;padding:2px 9px;border-radius:999px;margin-bottom:6px;}
+.tl-title{font-size:14.5px;font-weight:700;margin:0 0 4px;}
+.tl-desc{font-size:13px;color:#4b5563;line-height:1.65;margin:0;}
+.tl-cat{font-size:11px;color:var(--muted);background:#f3f4f6;padding:1px 8px;border-radius:999px;margin-left:6px;}
+.tl-actions{position:absolute;right:10px;top:10px;display:flex;gap:5px;}
+.dlg-setup{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:640px){.dlg-setup{grid-template-columns:1fr;}}
+.dlg-log{background:#fafbfc;border:1px solid var(--border);border-radius:12px;padding:18px;max-height:520px;overflow-y:auto;font-size:14px;line-height:1.85;}
+.dlg-line{margin-bottom:14px;padding-left:10px;border-left:3px solid #e5e7eb;}
+.dlg-line.a{border-left-color:#2563eb;}
+.dlg-line.b{border-left-color:#10b981;}
+.dlg-speaker{font-weight:700;font-size:13px;margin-bottom:3px;}
+.dlg-line.a .dlg-speaker{color:#2563eb;}
+.dlg-line.b .dlg-speaker{color:#10b981;}
+.dlg-text{color:#2b3140;}
+.rng-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:14px;}
+.rng-chip{background:#fafbfc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:.15s;text-align:center;}
+.rng-chip:hover{border-color:#c7d2fe;background:#f8faff;}
+.rng-chip b{display:block;font-size:13.5px;color:var(--text);margin-bottom:3px;}
+.rng-chip span{font-size:11.5px;color:var(--muted);}
+.rng-result{background:#f8faff;border:1px solid #c7d2fe;border-radius:10px;padding:16px 18px;font-size:15px;line-height:1.85;color:#1e3a8a;min-height:60px;white-space:pre-wrap;word-break:break-word;}
+.name-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.name-item{background:#fafbfc;border:1px solid var(--border);border-radius:999px;padding:7px 16px;font-size:14px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px;}
+.name-item:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+.name-item.faved{background:#fef3c7;border-color:#fbbf24;color:#92400e;}
+.name-item .star{font-size:12px;}
+.note-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.note-card{background:#fefce8;border:1px solid #fde68a;border-radius:10px;padding:14px;position:relative;transition:.15s;min-height:100px;display:flex;flex-direction:column;gap:8px;}
+.note-card:hover{box-shadow:0 4px 12px rgba(251,191,36,.15);}
+.note-card .note-content{font-size:13.5px;line-height:1.7;color:#422006;white-space:pre-wrap;flex:1;}
+.note-card .note-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.note-card .note-tag{font-size:11px;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:999px;}
+.note-card .note-time{font-size:11px;color:#a16207;}
+.note-card .note-del{position:absolute;right:8px;top:8px;border:none;background:none;color:#a16207;cursor:pointer;font-size:13px;padding:2px 5px;border-radius:5px;}
+.note-card .note-del:hover{background:#fecaca;color:#dc2626;}
+.novel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.novel-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:.16s;position:relative;}
+.novel-card:hover{border-color:#c7d2fe;transform:translateY(-2px);}
+.novel-card h3{margin:0 0 6px;font-size:16px;padding-right:24px;}
+.novel-card .novel-meta{font-size:12.5px;color:var(--muted);line-height:1.7;}
+.novel-card .novel-syn{font-size:13px;color:#4b5563;line-height:1.65;margin:8px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.novel-editor{display:grid;grid-template-columns:260px 1fr;gap:16px;min-height:520px;}
+@media(max-width:860px){.novel-editor{grid-template-columns:1fr;}}
+.chapter-list{background:#fafbfc;border:1px solid var(--border);border-radius:12px;padding:10px;max-height:640px;overflow-y:auto;}
+.chapter-item{padding:9px 11px;border-radius:8px;cursor:pointer;font-size:13.5px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:.15s;}
+.chapter-item:hover{background:#fff;border:1px solid var(--border);}
+.chapter-item.active{background:var(--primary);color:#fff;}
+.chapter-item.active .chapter-wc{color:rgba(255,255,255,.85);}
+.chapter-item .chapter-wc{font-size:11.5px;color:var(--muted);}
+.chapter-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.chapter-editor{display:flex;flex-direction:column;gap:10px;}
+#chapterTitleInput{padding:10px 14px;border-radius:9px;border:1px solid var(--border);font-size:16px;font-weight:600;outline:none;transition:.15s;}
+#chapterTitleInput:focus{border-color:var(--primary);}
+#chapterContent{width:100%;min-height:460px;padding:16px;border-radius:10px;border:1px solid var(--border);background:#fafbfc;outline:none;resize:vertical;font-size:15px;line-height:1.9;font-family:inherit;transition:.16s;}
+#chapterContent:focus{border-color:var(--primary);background:#fff;}
+.chapter-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:12.5px;color:var(--muted);}
 @media (max-width:860px){
   .code-split{grid-template-columns:1fr;}
   #codeInput{height:320px;}
@@ -417,6 +443,16 @@ details.sub .inner{padding-bottom:14px;}
 
     <h2 class="section-title" id="hotTitle">热门工具</h2>
     <div class="hot-grid" id="hotSection">
+      <div class="hot-card" data-target="novel" data-keywords="小说 管理 章节 大纲 写作 字数 导出">
+        <span class="hot-badge">NEW</span>
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <div><h3>小说管理</h3><p>多小说 + 章节 + 字数统计 + 导出</p></div>
+      </div>
+      <div class="hot-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 智能 写作 助手 时间线 对话 起名 灵感">
+        <span class="hot-badge">NEW</span>
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div>
+        <div><h3>AI 助手</h3><p>聊天 + 时间线 + 对话生成 + 起名 + 灵感速记</p></div>
+      </div>
       <div class="hot-card" data-target="wordcount" data-keywords="小说 字数 统计 写作 中文字数 段落 阅读 AI 润色">
         <span class="hot-badge">热门</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
@@ -426,11 +462,6 @@ details.sub .inner{padding-bottom:14px;}
         <span class="hot-badge">热门</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
         <div><h3>我的日历</h3><p>安排每日计划，支持增删改与导出图片</p></div>
-      </div>
-      <div class="hot-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 智能 写作 助手">
-        <span class="hot-badge">NEW</span>
-        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div>
-        <div><h3>AI 助手</h3><p>DeepSeek 驱动，聊天 / 写作 / 代码助手，每天免费额度</p></div>
       </div>
       <div class="hot-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 国别 导出 文档 图片 AI">
         <span class="hot-badge">热门</span>
@@ -463,6 +494,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="category-card">
         <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span><h3>创作</h3></div>
         <ul class="cat-list">
+          <li data-target="novel">小说管理</li>
           <li data-target="ai">AI 助手</li>
           <li data-target="code">代码编辑器</li>
           <li data-target="canvas">畅想画布</li>
@@ -472,16 +504,17 @@ details.sub .inner{padding-bottom:14px;}
 
     <h2 class="section-title" id="allTitle" style="margin-top:34px;">全部应用</h2>
     <div class="tools-grid collapsed" id="allApps">
+      <div class="tool-card" data-target="novel" data-keywords="小说 管理 章节 大纲 写作 字数 导出"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>小说管理</h3><p>新建小说、管理章节、实时字数、一键导出</p></div>
       <div class="tool-card" data-target="wordcount" data-keywords="小说 字数 统计 写作 中文字数 段落 阅读 AI 润色"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div><h3>小说字数统计</h3><p>实时统计中文字数、标点、段落、行数与预计阅读时长</p></div>
       <div class="tool-card" data-target="calc" data-keywords="计算器 算术 加减乘除 平方 开方 三角函数 专家模式"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></div><h3>计算器</h3><p>普通模式与专家模式自由切换，支持平方、开方、三角函数等</p></div>
       <div class="tool-card" data-target="chart" data-keywords="统计图 图表 柱状图 折线图 饼图 可视化 数据"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><h3>常见统计图生成</h3><p>输入数据一键生成柱状图、折线图与饼图</p></div>
       <div class="tool-card" data-target="people" data-keywords="人物 印象 表格 设定 角色 明星 现实 历史 小说 身高 体重 图片 头像 AI"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div><h3>人物印象表格</h3><p>记录人物信息与印象，支持上传图片和 AI 生成小传</p></div>
       <div class="tool-card" data-target="songs" data-keywords="歌曲 音乐 收藏 歌词 音源 QQ音乐 酷我 酷狗 网易云"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3>歌曲收藏</h3><p>收录歌曲信息与歌词，一键跳转四大平台查找音源</p></div>
       <div class="tool-card" data-target="places" data-keywords="地点 收藏 位置 门牌号 广场 景点 门票 人均 百度百科 图片 国内 国外"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>地点收藏</h3><p>收藏去过的或想去的地点，支持图片、价格与百度百科直达</p></div>
-      <div class="tool-card" data-target="calendar" data-keywords="日历 日程 安排 计划 时间表 备忘录 提醒 导出图片 2026 2036 月份"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>我的日历</h3><p>在日历里安排每日计划，支持新增 / 修改 / 删除，并可导出当月图片</p></div>
+      <div class="tool-card" data-target="calendar" data-keywords="日历 日程 安排 计划 时间表 备忘录 提醒 导出图片"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>我的日历</h3><p>在日历里安排每日计划，支持新增 / 修改 / 删除，并可导出当月图片</p></div>
       <div class="tool-card" data-target="media" data-keywords="影视 电影 电视剧 综艺 纪录片 动画片 追剧 收藏 简介 角色 人物 年份 国别 导出 文档 图片 AI"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></div><h3>影视收藏</h3><p>收藏影视作品，可导出追剧信息文档与图片，支持 AI 生成简介</p></div>
       <div class="tool-card" data-target="clock" data-keywords="时钟 倒计时 计时器 秒表 定时 闹钟 振动 20小时"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>时钟工具</h3><p>倒计时（1 秒 - 20 小时，结束振动）与计时器</p></div>
-      <div class="tool-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 智能 写作 助手"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div><h3>AI 助手</h3><p>DeepSeek 驱动的通用聊天助手，每天免费额度</p></div>
+      <div class="tool-card" data-target="ai" data-keywords="AI 助手 聊天 DeepSeek 智能 写作 助手 时间线 对话 起名 灵感"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></div><h3>AI 助手</h3><p>聊天 / 时间线 / 对话生成 / 起名 / 灵感速记</p></div>
       <div class="tool-card" data-target="code" data-keywords="代码 编辑器 JavaScript JS 运行 预览 沙箱 Markdown 渲染 md 写作 排版 高亮 AI 解释"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></div><h3>代码编辑器</h3><p>JavaScript 实时运行预览，Markdown 实时渲染，支持 AI 解释代码</p></div>
       <div class="tool-card" data-target="canvas" data-keywords="画布 白板 绘画 涂鸦 画笔 颜色 橡皮擦 撤销 导出 PNG 手绘 创作"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><h3>畅想画布</h3><p>自由白板随手涂鸦，多种颜色与粗细，可擦除、撤销并导出 PNG</p></div>
     </div>
@@ -495,7 +528,7 @@ details.sub .inner{padding-bottom:14px;}
       <h1 class="editor-title">编者的话</h1>
       <div class="editor-body">
         <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱，在这里，你可以进行小说字数的统计、计算器、常见统计图生成等非常常见且实用的功能，我们还在不断优化中。</p>
-        <p>V1.5 版本加入了账号登录与 AI 助手，由 Supabase 提供云端存储，DeepSeek 提供 AI 能力。登录后数据将同步到云端，换设备也能继续使用；未登录仍可使用本地模式。</p>
+        <p>V1.6 版本加入了小说管理、AI 助手子工具（时间线、对话生成、随机生成、起名、灵感速记），由 Supabase 提供云端存储，DeepSeek 提供 AI 能力。</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
       </div>
       <div class="editor-sign">
@@ -511,7 +544,7 @@ details.sub .inner{padding-bottom:14px;}
     <p class="page-desc">数据管理与版本信息。</p>
 
     <div class="panel">
-      <h3 class="panel-head"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>账号与同步</h3>
+      <h3 class="panel-head">账号与同步</h3>
       <p class="tip" id="accountTip">当前为<strong>本地模式</strong>：数据保存在浏览器 localStorage，登录后可上传到云端并在多设备间同步。</p>
       <div class="data-actions">
         <button class="btn" id="uploadLocalBtn" style="display:none;">上传本地数据到云端</button>
@@ -520,7 +553,7 @@ details.sub .inner{padding-bottom:14px;}
     </div>
 
     <div class="panel">
-      <h3 class="panel-head"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>数据管理</h3>
+      <h3 class="panel-head">数据管理</h3>
       <p class="tip">你的数据保存在<strong>浏览器本地</strong>（localStorage），刷新或关闭页面不会丢失。<br>但清除浏览器缓存、更换设备 / 浏览器、使用无痕模式会导致数据丢失，建议定期点击下方按钮<strong>导出备份</strong>。</p>
       <div class="data-actions">
         <button class="btn" id="exportAll">导出全部数据（JSON）</button>
@@ -533,10 +566,10 @@ details.sub .inner{padding-bottom:14px;}
     </div>
 
     <div class="panel">
-      <h3 class="panel-head"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span>关于</h3>
+      <h3 class="panel-head">关于</h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V1.5（2026.9）</span>
+        <span class="version-val">V1.6（2026.9）</span>
       </div>
     </div>
   </section>
@@ -675,16 +708,11 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span>人物印象表格</h2>
     <p class="page-desc">记录现实人物、历史人物或小说人物的基本信息，以及你对他 / 她的专属印象。支持上传图片和 AI 生成小传。</p>
-
     <div class="panel">
       <div class="form-grid">
         <label class="field"><span>姓名 *</span><input type="text" id="pName" placeholder="如：林清越"></label>
         <label class="field"><span>人物类型</span>
-          <select id="pType">
-            <option value="现实人物">现实人物</option>
-            <option value="历史人物">历史人物</option>
-            <option value="小说人物">小说人物</option>
-          </select>
+          <select id="pType"><option value="现实人物">现实人物</option><option value="历史人物">历史人物</option><option value="小说人物">小说人物</option></select>
         </label>
         <label class="field"><span>身份 / 关系</span><input type="text" id="pRole" placeholder="如：演员 · 挚友 · 主角"></label>
         <label class="field"><span>身高（cm）</span><input type="text" id="pHeight" placeholder="如：168"></label>
@@ -697,16 +725,12 @@ details.sub .inner{padding-bottom:14px;}
       <div class="field"><span>本人印象</span><textarea id="pImp" rows="3" placeholder="写下你对这个人物的整体感受、评价或期待…"></textarea></div>
       <div class="field">
         <span>人物图片（会自动压缩到 400px 以内）</span>
-        <div class="upload-row">
-          <input type="file" id="pImg" accept="image/*">
-          <div class="preview" id="pPreview">未选择</div>
-        </div>
+        <div class="upload-row"><input type="file" id="pImg" accept="image/*"><div class="preview" id="pPreview">未选择</div></div>
       </div>
       <button class="ai-btn" id="pAiBtn">✨ AI 生成小传</button>
       <button class="btn" id="pAdd">＋ 添加人物</button>
       <button class="btn ghost" id="pReset">重置表单</button>
     </div>
-
     <div class="list-head">
       <h2>人物列表（<span id="pCount">0</span>）</h2>
       <button class="btn ghost small" id="pClearAll">清空全部</button>
@@ -719,7 +743,6 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>歌曲收藏</h2>
     <p class="page-desc">记录你喜欢的歌曲信息与歌词，并一键跳转到 QQ音乐、酷我音乐、酷狗音乐、网易云音乐查找音源。（本工具不提供试听功能）</p>
-
     <div class="panel">
       <div class="form-grid">
         <label class="field"><span>歌曲名称 *</span><input type="text" id="sTitle" placeholder="如：夜空中最亮的星"></label>
@@ -730,7 +753,6 @@ details.sub .inner{padding-bottom:14px;}
         <label class="field"><span>发行年份</span><input type="text" id="sYear" placeholder="如：2011"></label>
       </div>
       <div class="field"><span>歌词</span><textarea id="sLyrics" rows="5" placeholder="粘贴歌词内容…"></textarea></div>
-
       <details class="sub">
         <summary>后台填写：各平台音源链接（选填，不填则自动使用搜索跳转）</summary>
         <div class="inner">
@@ -742,21 +764,16 @@ details.sub .inner{padding-bottom:14px;}
           </div>
         </div>
       </details>
-
       <button class="btn" id="sAdd">＋ 添加歌曲</button>
       <button class="btn ghost" id="sReset">重置表单</button>
     </div>
-
     <div class="list-head">
       <h2>音乐列表（<span id="sCount">0</span>）</h2>
       <button class="btn ghost small" id="sClearAll">清空全部</button>
     </div>
-
     <div class="table-wrap">
       <table class="songs-table">
-        <thead>
-          <tr><th style="width:42px;">#</th><th>歌曲</th><th>歌手</th><th>专辑</th><th>年份</th><th>歌词</th><th>音源</th><th style="width:70px;">操作</th></tr>
-        </thead>
+        <thead><tr><th style="width:42px;">#</th><th>歌曲</th><th>歌手</th><th>专辑</th><th>年份</th><th>歌词</th><th>音源</th><th style="width:70px;">操作</th></tr></thead>
         <tbody id="songsBody"></tbody>
       </table>
     </div>
@@ -768,7 +785,6 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>地点收藏</h2>
     <p class="page-desc">收藏某个地方。国内填写到具体门牌号或精确位置；国外做模糊处理，写到城市或地标即可。支持添加图片、人均价格 / 门票价格，并可直达百度百科查看。</p>
-
     <div class="panel">
       <div class="form-grid">
         <label class="field"><span>地点名称 *</span><input type="text" id="plName" placeholder="如：西湖断桥 / 首尔大学"></label>
@@ -788,10 +804,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="field"><span>描述 / 印象</span><textarea id="plDesc" rows="3" placeholder="为什么收藏这里？有什么特别的回忆或期待？"></textarea></div>
       <div class="field">
         <span>地点图片（会自动压缩到 800px 以内）</span>
-        <div class="upload-row">
-          <input type="file" id="plImg" accept="image/*">
-          <div class="preview" id="plPreview">未选择</div>
-        </div>
+        <div class="upload-row"><input type="file" id="plImg" accept="image/*"><div class="preview" id="plPreview">未选择</div></div>
       </div>
       <div class="field">
         <span>百度百科链接（选填，不填则自动使用名称搜索）</span>
@@ -800,7 +813,6 @@ details.sub .inner{padding-bottom:14px;}
       <button class="btn" id="plAdd">＋ 添加地点</button>
       <button class="btn ghost" id="plReset">重置表单</button>
     </div>
-
     <div class="list-head">
       <h2>地点列表（<span id="plCount">0</span>）</h2>
       <button class="btn ghost small" id="plClearAll">清空全部</button>
@@ -813,14 +825,11 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></span>影视收藏</h2>
     <p class="page-desc">收藏你喜欢的电视剧、电影、综艺、纪录片、动画片等影视作品。填写名称、类型、国别、年份、主要角色与简介，可一键导出「我的追剧信息」文档与图片，支持 AI 生成简介。</p>
-
     <div class="panel">
       <div class="form-grid">
         <label class="field"><span>影视名称 *</span><input type="text" id="mTitle" placeholder="如：肖申克的救赎"></label>
         <label class="field"><span>类型</span>
-          <select id="mType">
-            <option value="电视剧">电视剧</option><option value="电影">电影</option><option value="综艺">综艺</option><option value="纪录片">纪录片</option><option value="动画片">动画片</option>
-          </select>
+          <select id="mType"><option value="电视剧">电视剧</option><option value="电影">电影</option><option value="综艺">综艺</option><option value="纪录片">纪录片</option><option value="动画片">动画片</option></select>
         </label>
         <label class="field"><span>自定义类型（选填）</span><input type="text" id="mTypeCustom" placeholder="如：舞台剧 / 短剧（填写后优先）"></label>
         <label class="field"><span>国别</span><input type="text" id="mCountry" placeholder="如：美国 / 中国 / 日本"></label>
@@ -836,7 +845,6 @@ details.sub .inner{padding-bottom:14px;}
       <button class="btn" id="mAdd">＋ 添加影视</button>
       <button class="btn ghost" id="mReset">重置表单</button>
     </div>
-
     <div class="list-head">
       <h2>影视列表（<span id="mCount">0</span>）</h2>
       <div class="head-actions">
@@ -853,7 +861,6 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></span>我的日历</h2>
     <p class="page-desc">在日历中安排每天的计划，支持新增、修改与删除，并可把当月安排导出为图片。可查看范围：2026 年 10 月 — 2036 年 12 月。</p>
-
     <div class="panel">
       <div class="cal-toolbar">
         <button class="btn ghost small" id="calPrev">← 上一月</button>
@@ -867,7 +874,6 @@ details.sub .inner{padding-bottom:14px;}
       <div class="cal-weekdays"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span class="weekend">六</span><span class="weekend">日</span></div>
       <div class="cal-grid" id="calGrid"></div>
     </div>
-
     <div class="panel" id="calDayPanel">
       <h3 class="panel-head" id="calDayTitle">当天安排</h3>
       <div id="calDayList"></div>
@@ -889,7 +895,6 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></span>代码编辑器</h2>
     <p class="page-desc">左侧写代码，右侧即时看效果。JavaScript 模式会在沙箱中真实运行；Markdown 模式会实时渲染。登录后可让 AI 解释代码。</p>
-
     <div class="panel">
       <div class="code-toolbar">
         <div class="code-modes">
@@ -916,7 +921,6 @@ details.sub .inner{padding-bottom:14px;}
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>畅想画布</h2>
     <p class="page-desc">一块自由的白板：选择颜色与粗细随手涂鸦，支持橡皮擦、撤销与清空，完成后可一键导出为 PNG 图片。</p>
-
     <div class="panel">
       <div class="draw-toolbar">
         <div class="brush-colors" id="brushColors">
@@ -964,30 +968,206 @@ details.sub .inner{padding-bottom:14px;}
   <section id="page-ai" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v1a3 3 0 0 0 6 0v-1h6a3 3 0 0 0 3-3v-3a3 3 0 0 0-3-3h-6V5a3 3 0 0 0-3-3z"/></svg></span>AI 助手</h2>
-    <p class="page-desc">由 DeepSeek 驱动。登录后每天有固定免费额度，额度用完次日恢复。</p>
+    <p class="page-desc">由 DeepSeek 驱动。登录后每天有固定免费额度。下方包含多种 AI 子工具。</p>
 
-    <div class="panel">
-      <div class="chat-toolbar">
-        <button class="btn ghost small" id="chatClear">清空对话</button>
-        <button class="btn ghost small" id="chatSample">载入示例</button>
-        <span class="chat-quota" id="chatQuota">未登录</span>
-      </div>
-      <div class="chat-box">
-        <div class="chat-log" id="chatLog">
-          <div class="chat-msg sys">你好，我是岁窦工具箱的 AI 助手，有什么可以帮你？</div>
+    <div class="ai-subtabs">
+      <button class="ai-subtab active" data-ai="chat">💬 聊天</button>
+      <button class="ai-subtab" data-ai="timeline">⏱ 时间线</button>
+      <button class="ai-subtab" data-ai="dialogue">🗣 对话生成器</button>
+      <button class="ai-subtab" data-ai="random">🎲 随机生成</button>
+      <button class="ai-subtab" data-ai="namer">✨ 起名器</button>
+      <button class="ai-subtab" data-ai="notes">💡 灵感速记</button>
+    </div>
+
+    <div class="ai-subpage active" data-ai-page="chat">
+      <div class="panel">
+        <div class="chat-toolbar">
+          <button class="btn ghost small" id="chatClear">清空对话</button>
+          <button class="btn ghost small" id="chatSample">载入示例</button>
+          <span class="chat-quota" id="chatQuota">未登录</span>
         </div>
-        <div class="chat-input-row">
-          <textarea id="chatInput" placeholder="输入你的问题…（Ctrl / ⌘ + Enter 发送）"></textarea>
-          <button class="btn" id="chatSend">发送</button>
+        <div class="chat-box">
+          <div class="chat-log" id="chatLog">
+            <div class="chat-msg sys">你好，我是岁窦工具箱的 AI 助手，有什么可以帮你？</div>
+          </div>
+          <div class="chat-input-row">
+            <textarea id="chatInput" placeholder="输入你的问题…（Ctrl / ⌘ + Enter 发送）"></textarea>
+            <button class="btn" id="chatSend">发送</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-subpage" data-ai-page="timeline">
+      <div class="panel">
+        <h3 class="panel-head">⏱ 时间线工具</h3>
+        <p class="tip">记录事件发生的时间顺序。可以按时间排序展示。</p>
+        <div class="form-grid">
+          <label class="field"><span>时间</span><input type="text" id="tlTime" placeholder="如：公元 1024 年 / 第三章 / 幼年"></label>
+          <label class="field"><span>标题 *</span><input type="text" id="tlTitle" placeholder="如：主角拜师"></label>
+          <label class="field"><span>分类</span><input type="text" id="tlCat" placeholder="如：主线 / 支线 / 回忆"></label>
+        </div>
+        <div class="field"><span>描述</span><textarea id="tlDesc" rows="2" placeholder="事件详情…"></textarea></div>
+        <button class="btn" id="tlAdd">＋ 添加事件</button>
+        <button class="btn ghost" id="tlReset">重置</button>
+        <div class="list-head"><h2>事件列表（<span id="tlCount">0</span>）</h2>
+          <button class="btn ghost small" id="tlSort">按时间排序</button>
+        </div>
+        <div class="tl-list" id="tlList"></div>
+      </div>
+    </div>
+
+    <div class="ai-subpage" data-ai-page="dialogue">
+      <div class="panel">
+        <h3 class="panel-head">🗣 对话生成器</h3>
+        <p class="tip">输入两个角色和场景，让 AI 模拟他们的对话。会从「人物印象表」中拉取角色设定。</p>
+        <div class="dlg-setup">
+          <label class="field"><span>角色 A</span><input type="text" id="dlgA" placeholder="如：林清越"></label>
+          <label class="field"><span>角色 B</span><input type="text" id="dlgB" placeholder="如：苏晚"></label>
+        </div>
+        <div class="field"><span>场景 / 情境</span><textarea id="dlgScene" rows="2" placeholder="如：两人在雨夜重逢，气氛微妙"></textarea></div>
+        <div class="field"><span>轮数（1 轮 = A 说一句 + B 说一句）</span>
+          <select id="dlgRounds"><option value="3">3 轮</option><option value="5" selected>5 轮</option><option value="8">8 轮</option><option value="10">10 轮</option></select>
+        </div>
+        <button class="btn" id="dlgGen">✨ 生成对话</button>
+        <button class="btn ghost" id="dlgClear">清空</button>
+        <div class="dlg-log" id="dlgLog" style="margin-top:14px;"><p class="empty">还没有生成对话，点击上方按钮开始～</p></div>
+      </div>
+    </div>
+
+    <div class="ai-subpage" data-ai-page="random">
+      <div class="panel">
+        <h3 class="panel-head">🎲 随机生成器</h3>
+        <p class="tip">卡文时点一下，随机给点灵感。不消耗 AI 额度。</p>
+        <div class="rng-grid">
+          <div class="rng-chip" data-rng="name"><b>人名</b><span>随机中文名</span></div>
+          <div class="rng-chip" data-rng="place"><b>地名</b><span>随机地名</span></div>
+          <div class="rng-chip" data-rng="appearance"><b>外貌</b><span>随机外貌特征</span></div>
+          <div class="rng-chip" data-rng="personality"><b>性格</b><span>随机性格词</span></div>
+          <div class="rng-chip" data-rng="conflict"><b>剧情冲突</b><span>随机矛盾点</span></div>
+          <div class="rng-chip" data-rng="opening"><b>开头句</b><span>随机开场白</span></div>
+          <div class="rng-chip" data-rng="item"><b>道具</b><span>随机关键物品</span></div>
+          <div class="rng-chip" data-rng="weather"><b>天气</b><span>随机天气+氛围</span></div>
+          <div class="rng-chip" data-rng="twist"><b>反转</b><span>剧情反转点</span></div>
+        </div>
+        <div class="rng-result" id="rngResult">点击上方任意卡片，随机生成。</div>
+        <button class="btn ghost small" id="rngAgain" style="margin-top:10px;">再随机一次</button>
+      </div>
+    </div>
+
+    <div class="ai-subpage" data-ai-page="namer">
+      <div class="panel">
+        <h3 class="panel-head">✨ AI 起名器</h3>
+        <p class="tip">输入关键词和风格，让 AI 一次给你 10 个候选名。</p>
+        <div class="form-grid">
+          <label class="field"><span>类型</span>
+            <select id="nmType">
+              <option value="人名">人名</option>
+              <option value="地名">地名</option>
+              <option value="招式名">招式名</option>
+              <option value="门派名">门派名</option>
+              <option value="书名">书名</option>
+              <option value="章节名">章节名</option>
+              <option value="物品名">物品名</option>
+            </select>
+          </label>
+          <label class="field"><span>风格</span>
+            <select id="nmStyle">
+              <option value="古风">古风</option>
+              <option value="现代">现代</option>
+              <option value="西幻">西幻</option>
+              <option value="日系">日系</option>
+              <option value="科幻">科幻</option>
+            </select>
+          </label>
+          <label class="field"><span>关键词（选填）</span><input type="text" id="nmKeyword" placeholder="如：月、剑、星"></label>
+        </div>
+        <button class="btn" id="nmGen">✨ 生成 10 个候选</button>
+        <button class="btn ghost" id="nmClear">清空</button>
+        <div class="name-list" id="nmList"></div>
+      </div>
+    </div>
+
+    <div class="ai-subpage" data-ai-page="notes">
+      <div class="panel">
+        <h3 class="panel-head">💡 灵感速记</h3>
+        <p class="tip">随手记下灵感碎片，支持标签和全文搜索。登录后自动同步云端。</p>
+        <div class="field"><span>内容 *</span><textarea id="noteContent" rows="3" placeholder="一句台词、一个场景、一段设定…"></textarea></div>
+        <div class="field"><span>标签（逗号分隔）</span><input type="text" id="noteTags" placeholder="如：人物,地名,台词"></div>
+        <button class="btn" id="noteAdd">＋ 添加</button>
+        <input type="text" id="noteSearch" placeholder="🔍 搜索灵感…" style="padding:9px 14px;border-radius:9px;border:1px solid var(--border);font-size:13.5px;outline:none;margin-left:8px;width:200px;">
+        <div class="list-head"><h2>灵感列表（<span id="noteCount">0</span>）</h2>
+          <button class="btn ghost small" id="noteClearAll">清空全部</button>
+        </div>
+        <div class="note-grid" id="noteList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 小说管理 -->
+  <section id="page-novel" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>小说管理</h2>
+    <p class="page-desc">多本小说独立管理，每本可分章节，实时统计字数，一键导出全文。</p>
+
+    <div id="novelListView">
+      <div class="panel">
+        <h3 class="panel-head">新建小说</h3>
+        <div class="form-grid">
+          <label class="field"><span>小说名称 *</span><input type="text" id="nvTitle" placeholder="如：长夜将明"></label>
+        </div>
+        <div class="field"><span>简介（选填）</span><textarea id="nvSyn" rows="2" placeholder="一句话简介…"></textarea></div>
+        <button class="btn" id="nvCreate">＋ 新建小说</button>
+      </div>
+
+      <div class="list-head">
+        <h2>我的小说（<span id="nvCount">0</span>）</h2>
+      </div>
+      <div class="novel-grid" id="novelList"></div>
+    </div>
+
+    <div id="novelEditView" style="display:none;">
+      <button class="btn ghost small" id="nvBack" style="margin-bottom:14px;">← 返回小说列表</button>
+      <div class="panel" style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+          <div>
+            <h2 style="margin:0 0 6px;font-size:19px;" id="nvEditTitle">小说标题</h2>
+            <p style="margin:0;color:var(--muted);font-size:13px;" id="nvEditMeta">0 章 · 0 字</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn ghost small" id="nvRename">重命名</button>
+            <button class="btn ghost small" id="nvExportTxt">导出 TXT</button>
+            <button class="btn small" id="nvExportHtml">导出 HTML</button>
+            <button class="btn danger small" id="nvDelete">删除小说</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="novel-editor">
+        <div>
+          <div style="display:flex;gap:6px;margin-bottom:8px;">
+            <button class="btn small" id="chAdd" style="flex:1;">＋ 新章节</button>
+          </div>
+          <div class="chapter-list" id="chapterList"></div>
+        </div>
+        <div class="chapter-editor">
+          <input type="text" id="chapterTitleInput" placeholder="章节标题">
+          <textarea id="chapterContent" placeholder="在这里写正文…"></textarea>
+          <div class="chapter-toolbar">
+            <span>本章字数：<b id="chWc">0</b> · 全书字数：<b id="nvWc">0</b></span>
+            <span>
+              <button class="btn small" id="chSave">保存</button>
+              <button class="btn ghost small" id="chDelete">删除本章</button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V1.5</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V1.6</footer>
 </main>
 
-<!-- 歌词弹窗 -->
 <div class="modal-backdrop" id="lyricModal">
   <div class="modal">
     <div class="modal-head"><h3 id="modalTitle">歌词</h3><button id="modalClose">✕</button></div>
@@ -995,7 +1175,6 @@ details.sub .inner{padding-bottom:14px;}
   </div>
 </div>
 
-<!-- AI 弹窗 -->
 <div class="ai-pop" id="aiPop">
   <div class="ai-pop-card">
     <div class="ai-pop-head">
@@ -1010,18 +1189,15 @@ details.sub .inner{padding-bottom:14px;}
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-/* ===================== Supabase 配置（改成你自己的） ===================== */
+/* ===================== 配置 ===================== */
 const SUPABASE_URL      = 'https://gsyyaxmqtrxdxuiamkcr.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzeXlheG1xdHJ4ZHh1aWFta2NyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDEwOTcsImV4cCI6MjEwNTg3NzA5N30.06OY_P37nhhXaKNc2-kB29qx16GGKjvUgICQQY3YGt8';
 const AI_PROXY_URL      = SUPABASE_URL + '/functions/v1/ai-proxy';
-
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 /* ===================== 通用工具 ===================== */
@@ -1043,9 +1219,8 @@ function timeStamp(d){
   return d.getFullYear() + pad2(d.getMonth()+1) + pad2(d.getDate()) + '_' + pad2(d.getHours()) + pad2(d.getMinutes());
 }
 
-/* ===================== 认证状态 ===================== */
 let currentUser = null;
-let appMode = 'local';   // 'local' | 'cloud'
+let appMode = 'local';
 
 /* ===================== 页面切换 ===================== */
 const pages = document.querySelectorAll('.page');
@@ -1066,6 +1241,7 @@ function go(name){
   if (name === 'calendar') setTimeout(renderCalendar, 60);
   if (name === 'code')     setTimeout(runCodeEditor, 60);
   if (name === 'ai')       setTimeout(() => { updateQuota(); chatInput.focus(); }, 60);
+  if (name === 'novel')    setTimeout(renderNovelList, 60);
 }
 
 document.querySelectorAll('nav button[data-page], .logo[data-page]').forEach(el => {
@@ -1078,7 +1254,7 @@ document.querySelectorAll('[data-back]').forEach(btn => {
   btn.addEventListener('click', () => go('home'));
 });
 
-/* ===================== 全部应用：折叠 / 展开 ===================== */
+/* ===================== 全部应用折叠 ===================== */
 const searchInput = document.getElementById('searchInput');
 let appsExpanded = false;
 
@@ -1118,7 +1294,7 @@ searchInput.addEventListener('input', () => {
   if (!document.getElementById('page-home').classList.contains('active')) go('home');
 });
 
-/* ===================== 认证 UI ===================== */
+/* ===================== 认证 ===================== */
 const loginBtn  = document.getElementById('loginBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 const userEmail = document.getElementById('userEmail');
@@ -1162,7 +1338,6 @@ logoutBtn.addEventListener('click', async () => {
   go('home');
 });
 
-/* —— 登录 / 注册 —— */
 let authMode = 'login';
 const tabLogin    = document.getElementById('tabLogin');
 const tabRegister = document.getElementById('tabRegister');
@@ -1176,7 +1351,7 @@ function setAuthMode(m){
   tabLogin.classList.toggle('active', m === 'login');
   tabRegister.classList.toggle('active', m === 'register');
   authTitle.textContent  = m === 'login' ? '登录岁窦工具箱' : '注册新账号';
-  authSub.textContent    = m === 'login' ? '登录后数据将同步到云端，换设备也能继续使用。' : '注册后即可在云端保存人物、歌曲、地点、影视与日程。';
+  authSub.textContent    = m === 'login' ? '登录后数据将同步到云端，换设备也能继续使用。' : '注册后即可在云端保存所有数据。';
   authSubmit.textContent = m === 'login' ? '登录' : '注册';
   authMsg.className = 'auth-msg';
 }
@@ -1193,7 +1368,6 @@ authSubmit.addEventListener('click', async () => {
   const pwd   = document.getElementById('authPassword').value;
   if (!email || !pwd) { showAuthMsg('请填写邮箱和密码', false); return; }
   if (pwd.length < 6) { showAuthMsg('密码至少 6 位', false); return; }
-
   authSubmit.disabled = true;
   const oldText = authSubmit.textContent;
   authSubmit.textContent = '处理中…';
@@ -1207,7 +1381,10 @@ authSubmit.addEventListener('click', async () => {
       await maybeUploadLocalData();
       setTimeout(() => { go('home'); showToast('欢迎回来，' + email); }, 700);
     } else {
-      const { data, error } = await sb.auth.signUp({ email, password: pwd });
+      const { data, error } = await sb.auth.signUp({
+        email, password: pwd,
+        options: { emailRedirectTo: location.origin + location.pathname }
+      });
       if (error) throw error;
       if (data.session){
         currentUser = data.user;
@@ -1228,7 +1405,6 @@ authSubmit.addEventListener('click', async () => {
 });
 document.getElementById('authBack').addEventListener('click', () => go('home'));
 
-/* —— 首次登录：检测本地数据并询问上传 —— */
 async function maybeUploadLocalData(){
   const localCount =
     (JSON.parse(localStorage.getItem(PEOPLE_KEY) || '[]').length) +
@@ -1236,14 +1412,11 @@ async function maybeUploadLocalData(){
     (JSON.parse(localStorage.getItem(PLACES_KEY) || '[]').length) +
     (JSON.parse(localStorage.getItem(MEDIA_KEY)  || '[]').length) +
     (JSON.parse(localStorage.getItem(CAL_KEY)    || '[]').length);
-
   if (localCount === 0){ await loadAllFromCloud(); return; }
-
   if (!confirm(`检测到本地有 ${localCount} 条数据，是否上传到云端？\n\n点「确定」上传，点「取消」保留本地但云端从空开始。`)){
     await loadAllFromCloud();
     return;
   }
-
   await uploadLocalToCloud();
   showToast('本地数据已上传到云端');
 }
@@ -1258,12 +1431,11 @@ async function uploadLocalToCloud(){
     [MEDIA_KEY,  'medias',    'm'],
     [CAL_KEY,    'schedules', 'c'],
   ];
-  for (const [key, table, pfx] of map){
+  for (const [key, table] of map){
     const arr = JSON.parse(localStorage.getItem(key) || '[]');
     if (!arr.length) continue;
     const rows = arr.map(x => {
       const { id, ...rest } = x;
-      // 字段名映射：desc → desc_text，cast → cast_text
       if (table === 'places') { rest.desc_text = rest.desc; delete rest.desc; }
       if (table === 'medias') { rest.desc_text = rest.desc; rest.cast_text = rest.cast; delete rest.desc; delete rest.cast; }
       return { ...rest, user_id: uid };
@@ -1282,12 +1454,14 @@ async function loadAllFromCloud(){
     ['places',    PLACES_KEY],
     ['medias',    MEDIA_KEY],
     ['schedules', CAL_KEY],
+    ['notes',     NOTES_KEY],
+    ['timeline_events', TL_KEY],
+    ['novels',    NOVELS_KEY],
   ];
   for (const [table, key] of map){
     const { data, error } = await sb.from(table).select('*').order('created_at', { ascending: true });
     if (error) { console.warn('拉取 ' + table + ' 失败：', error); continue; }
     if (!data) continue;
-    // 字段名反向映射
     const arr = data.map(r => {
       const o = { ...r };
       if (table === 'places') { o.desc = o.desc_text; delete o.desc_text; }
@@ -1301,6 +1475,9 @@ async function loadAllFromCloud(){
   loadPlaces();    renderPlaces();
   loadMedias();    renderMedias();
   loadSchedules(); renderCalendar();
+  loadNotes();     renderNotes();
+  loadTimeline();
+  loadNovels();    renderNovelList();
   updateStorageUsage();
 }
 
@@ -1317,7 +1494,6 @@ document.getElementById('pullCloudBtn').addEventListener('click', async () => {
   showToast('已从云端拉取');
 });
 
-/* 监听登录状态 */
 sb.auth.onAuthStateChange((event, session) => {
   currentUser = session?.user || null;
   updateAuthUI();
@@ -1326,6 +1502,71 @@ sb.auth.getSession().then(({ data }) => {
   currentUser = data.session?.user || null;
   updateAuthUI();
 });
+
+/* ===================== 存储用量 & 图片压缩 ===================== */
+function updateStorageUsage(){
+  let total = 0;
+  try {
+    Object.keys(localStorage).forEach(k => {
+      if (k.startsWith('suidou-')) {
+        total += (localStorage.getItem(k) || '').length * 2 + k.length * 2;
+      }
+    });
+  } catch(e){}
+  const kb = total/1024;
+  const el = document.getElementById('storageUsage');
+  const bar = document.getElementById('storageBar');
+  if (el) el.textContent = kb < 1024 ? kb.toFixed(1) + ' KB' : (kb/1024).toFixed(2) + ' MB';
+  if (bar) bar.style.width = Math.min(100, (kb/5120)*100) + '%';
+}
+function compressImage(file, maxSize, quality, cb){
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      if (w > h && w > maxSize) { h = Math.round(h*maxSize/w); w = maxSize; }
+      else if (h > maxSize)     { w = Math.round(w*maxSize/h); h = maxSize; }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
+      ctx.drawImage(img, 0, 0, w, h);
+      cb(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => cb(e.target.result);
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+async function cloudInsert(table, row){
+  if (!currentUser) throw new Error('未登录');
+  const { data, error } = await sb.from(table).insert({ ...row, user_id: currentUser.id }).select().single();
+  if (error) throw error;
+  return data;
+}
+async function cloudDelete(table, id){
+  if (!currentUser) throw new Error('未登录');
+  const { error } = await sb.from(table).delete().eq('id', id);
+  if (error) throw error;
+}
+async function cloudUpdate(table, id, patch){
+  if (!currentUser) throw new Error('未登录');
+  const { error } = await sb.from(table).update(patch).eq('id', id);
+  if (error) throw error;
+}
+
+/* 存储 key */
+const PEOPLE_KEY = 'suidou-people-v2';
+const SONGS_KEY  = 'suidou-songs-v1';
+const PLACES_KEY = 'suidou-places-v1';
+const MEDIA_KEY  = 'suidou-medias-v1';
+const CAL_KEY    = 'suidou-schedules-v1';
+const NOTES_KEY  = 'suidou-notes-v1';
+const TL_KEY     = 'suidou-timeline-v1';
+const NOVELS_KEY = 'suidou-novels-v1';
+const CHAPTERS_KEY = 'suidou-chapters-v1';
+
 
 /* ===================== 1. 小说字数统计 ===================== */
 const wcText = document.getElementById('wcText');
@@ -1368,9 +1609,8 @@ const gridExpert  = document.getElementById('calcGridExpert');
 const modeLabel   = document.getElementById('calcModeLabel');
 const modeToggle  = document.getElementById('calcModeToggle');
 const degBtn      = document.getElementById('degBtn');
-
 function updateCalcDisplay(){ calcDisplay.textContent = calcExpr === '' ? '0' : calcExpr; }
-function updateDegBtn(){ if (!degBtn) return; degBtn.textContent = calcDeg ? 'DEG' : 'RAD'; }
+function updateDegBtn(){ if (degBtn) degBtn.textContent = calcDeg ? 'DEG' : 'RAD'; }
 modeToggle.addEventListener('click', () => {
   calcExpert = !calcExpert;
   gridNormal.style.display = calcExpert ? 'none' : 'grid';
@@ -1456,7 +1696,6 @@ document.querySelectorAll('.chart-type').forEach(b => {
 });
 document.getElementById('chartClear').addEventListener('click', () => { chartDataEl.value=''; renderChart(); });
 chartDataEl.addEventListener('input', renderChart);
-
 function parseChartData(text){
   const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
   const out = [];
@@ -1610,78 +1849,10 @@ window.addEventListener('resize', () => {
   }, 160);
 });
 
-/* ===================== 存储用量 ===================== */
-function updateStorageUsage(){
-  let total = 0;
-  try {
-    Object.keys(localStorage).forEach(k => {
-      if (k.startsWith('suidou-')) {
-        total += (localStorage.getItem(k) || '').length * 2 + k.length * 2;
-      }
-    });
-  } catch(e){}
-  const kb = total/1024;
-  const el = document.getElementById('storageUsage');
-  const bar = document.getElementById('storageBar');
-  if (el) el.textContent = kb < 1024 ? kb.toFixed(1) + ' KB' : (kb/1024).toFixed(2) + ' MB';
-  if (bar) bar.style.width = Math.min(100, (kb/5120)*100) + '%';
-}
-
-/* ===================== 图片压缩 ===================== */
-function compressImage(file, maxSize, quality, cb){
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = new Image();
-    img.onload = () => {
-      let w = img.width, h = img.height;
-      if (w > h && w > maxSize) { h = Math.round(h*maxSize/w); w = maxSize; }
-      else if (h > maxSize)     { w = Math.round(w*maxSize/h); h = maxSize; }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
-      ctx.drawImage(img, 0, 0, w, h);
-      cb(canvas.toDataURL('image/jpeg', quality));
-    };
-    img.onerror = () => cb(e.target.result);
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-/* ===================== 云端写入辅助 ===================== */
-async function cloudInsert(table, row){
-  if (!currentUser) throw new Error('未登录');
-  const { data, error } = await sb.from(table).insert({ ...row, user_id: currentUser.id }).select().single();
-  if (error) throw error;
-  return data;
-}
-async function cloudDelete(table, id){
-  if (!currentUser) throw new Error('未登录');
-  const { error } = await sb.from(table).delete().eq('id', id);
-  if (error) throw error;
-}
-async function cloudUpdate(table, id, patch){
-  if (!currentUser) throw new Error('未登录');
-  const { error } = await sb.from(table).update(patch).eq('id', id);
-  if (error) throw error;
-}
-
 /* ===================== 4. 人物印象表 ===================== */
-let people = [];
-let pendingImage = '';
-let imageProcessing = false;
-const PEOPLE_KEY = 'suidou-people-v2';
-
-function savePeople(){
-  try { localStorage.setItem(PEOPLE_KEY, JSON.stringify(people)); updateStorageUsage(); return true; }
-  catch(e){ console.warn('保存失败：', e); return false; }
-}
-function loadPeople(){
-  try { const raw = localStorage.getItem(PEOPLE_KEY); if (raw) people = JSON.parse(raw) || []; }
-  catch(e){ people = []; }
-}
-
+let people = [], pendingImage = '', imageProcessing = false;
+function savePeople(){ try { localStorage.setItem(PEOPLE_KEY, JSON.stringify(people)); updateStorageUsage(); return true; } catch(e){ return false; } }
+function loadPeople(){ try { const raw = localStorage.getItem(PEOPLE_KEY); if (raw) people = JSON.parse(raw) || []; } catch(e){ people = []; } }
 document.getElementById('pImg').addEventListener('change', e => {
   const file = e.target.files[0];
   const preview = document.getElementById('pPreview');
@@ -1695,22 +1866,18 @@ document.getElementById('pImg').addEventListener('change', e => {
     imageProcessing = false;
   });
 });
-
 function resetPersonForm(){
-  ['pName','pRole','pHeight','pWeight','pAge','pBirth','pLook','pChar','pImp']
-    .forEach(id => document.getElementById(id).value = '');
+  ['pName','pRole','pHeight','pWeight','pAge','pBirth','pLook','pChar','pImp'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('pType').value = '现实人物';
   document.getElementById('pImg').value = '';
   document.getElementById('pPreview').textContent = '未选择';
   pendingImage = '';
 }
 document.getElementById('pReset').addEventListener('click', resetPersonForm);
-
 document.getElementById('pAdd').addEventListener('click', async () => {
   if (imageProcessing) { alert('图片正在处理中，请稍候…'); return; }
   const name = document.getElementById('pName').value.trim();
   if (!name) { alert('请先填写姓名～'); document.getElementById('pName').focus(); return; }
-
   const personData = {
     name, type: document.getElementById('pType').value,
     role: document.getElementById('pRole').value.trim(),
@@ -1723,7 +1890,6 @@ document.getElementById('pAdd').addEventListener('click', async () => {
     impression: document.getElementById('pImp').value.trim(),
     img: pendingImage
   };
-
   try {
     if (appMode === 'cloud' && currentUser){
       const row = await cloudInsert('people', personData);
@@ -1736,27 +1902,20 @@ document.getElementById('pAdd').addEventListener('click', async () => {
     showToast('已添加「' + name + '」');
   } catch(err){ alert('保存失败：' + err.message); }
 });
-
 document.getElementById('pClearAll').addEventListener('click', async () => {
   if (people.length === 0) return;
   if (!confirm('确定要清空全部人物记录吗？此操作不可恢复。')) return;
   try {
-    if (appMode === 'cloud' && currentUser){
-      await sb.from('people').delete().eq('user_id', currentUser.id);
-    }
+    if (appMode === 'cloud' && currentUser) await sb.from('people').delete().eq('user_id', currentUser.id);
     people = [];
     try { localStorage.removeItem(PEOPLE_KEY); } catch(e){}
     updateStorageUsage(); renderPeople(); showToast('人物数据已清空');
   } catch(err){ alert('清空失败：' + err.message); }
 });
-
 function renderPeople(){
   const list = document.getElementById('peopleList');
   document.getElementById('pCount').textContent = people.length;
-  if (people.length === 0){
-    list.innerHTML = '<p class="empty">还没有人物记录，先在上方添加一位吧～</p>';
-    return;
-  }
+  if (people.length === 0){ list.innerHTML = '<p class="empty">还没有人物记录，先在上方添加一位吧～</p>'; return; }
   list.innerHTML = people.map(p => {
     const chips = [];
     if (p.height) chips.push('<span class="chip">身高 ' + esc(p.height) + ' cm</span>');
@@ -1764,23 +1923,21 @@ function renderPeople(){
     if (p.age)    chips.push('<span class="chip">年龄 ' + esc(p.age) + '</span>');
     if (p.birth)  chips.push('<span class="chip">生日 ' + esc(p.birth) + '</span>');
     return '<div class="person-card">' +
-        '<div class="person-head">' +
-          '<div class="avatar">' + (p.img ? '<img src="' + p.img + '" alt="">' : esc((p.name||'?').slice(0,1))) + '</div>' +
-          '<div><h3>' + esc(p.name) + '</h3>' +
-            '<span class="tag">' + esc(p.type || '现实人物') + '</span>' +
-            (p.role ? '<span class="tag gray">' + esc(p.role) + '</span>' : '') +
-          '</div>' +
-          '<button class="del-btn" data-id="' + p.id + '" title="删除">✕</button>' +
+      '<div class="person-head">' +
+        '<div class="avatar">' + (p.img ? '<img src="' + p.img + '" alt="">' : esc((p.name||'?').slice(0,1))) + '</div>' +
+        '<div><h3>' + esc(p.name) + '</h3>' +
+          '<span class="tag">' + esc(p.type || '现实人物') + '</span>' +
+          (p.role ? '<span class="tag gray">' + esc(p.role) + '</span>' : '') +
         '</div>' +
-        (chips.length ? '<div class="chips">' + chips.join('') + '</div>' : '') +
-        '<div class="person-body">' +
-          (p.look ? '<p><b>外貌：</b>' + esc(p.look) + '</p>' : '') +
-          (p.character ? '<p><b>性格：</b>' + esc(p.character) + '</p>' : '') +
-          (p.impression ? '<p><b>印象：</b>' + esc(p.impression) + '</p>' : '') +
-        '</div>' +
-      '</div>';
+        '<button class="del-btn" data-id="' + p.id + '" title="删除">✕</button>' +
+      '</div>' +
+      (chips.length ? '<div class="chips">' + chips.join('') + '</div>' : '') +
+      '<div class="person-body">' +
+        (p.look ? '<p><b>外貌：</b>' + esc(p.look) + '</p>' : '') +
+        (p.character ? '<p><b>性格：</b>' + esc(p.character) + '</p>' : '') +
+        (p.impression ? '<p><b>印象：</b>' + esc(p.impression) + '</p>' : '') +
+      '</div></div>';
   }).join('');
-
   list.querySelectorAll('.del-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const id = btn.dataset.id;
@@ -1799,7 +1956,6 @@ loadPeople(); renderPeople();
 
 /* ===================== 5. 歌曲收藏 ===================== */
 let songs = [];
-const SONGS_KEY = 'suidou-songs-v1';
 const PLATFORMS = {
   qq:      { name:'QQ音乐',   base:'https://y.qq.com/n/ryqq/search?w=', suffix:'&t=song&remoteplace=txt.yqq.top' },
   kuwo:    { name:'酷我音乐', base:'https://www.kuwo.cn/search/list?key=', suffix:'' },
@@ -1825,21 +1981,18 @@ function renderSongs(){
       return '<a class="src-btn" data-p="' + k + '" href="' + esc(url) + '" target="_blank" rel="noopener">' + PLATFORMS[k].name + (custom ? ' ·直链' : '') + '</a>';
     }).join('');
     const hasLyric = !!(s.lyrics && s.lyrics.trim());
-    return '<tr>' +
-        '<td>' + (i+1) + '</td>' +
-        '<td><div class="song-title">' + esc(s.title) + '</div>' +
-          ((s.lyricist||s.composer) ? '<div class="song-sub">' +
-            (s.lyricist ? '词：'+esc(s.lyricist) : '') +
-            (s.lyricist && s.composer ? ' · ' : '') +
-            (s.composer ? '曲：'+esc(s.composer) : '') + '</div>' : '') +
-        '</td>' +
-        '<td>' + esc(s.artist) + '</td>' +
-        '<td>' + (s.album ? esc(s.album) : '—') + '</td>' +
-        '<td>' + (s.year ? esc(s.year) : '—') + '</td>' +
-        '<td>' + (hasLyric ? '<button class="mini-btn" data-lyric="' + s.id + '">查看歌词</button>' : '<span style="color:#b0b6c4;">暂无</span>') + '</td>' +
-        '<td>' + links + '</td>' +
-        '<td><button class="mini-btn danger" data-del="' + s.id + '">删除</button></td>' +
-      '</tr>';
+    return '<tr><td>' + (i+1) + '</td>' +
+      '<td><div class="song-title">' + esc(s.title) + '</div>' +
+      ((s.lyricist||s.composer) ? '<div class="song-sub">' +
+        (s.lyricist ? '词：'+esc(s.lyricist) : '') +
+        (s.lyricist && s.composer ? ' · ' : '') +
+        (s.composer ? '曲：'+esc(s.composer) : '') + '</div>' : '') + '</td>' +
+      '<td>' + esc(s.artist) + '</td>' +
+      '<td>' + (s.album ? esc(s.album) : '—') + '</td>' +
+      '<td>' + (s.year ? esc(s.year) : '—') + '</td>' +
+      '<td>' + (hasLyric ? '<button class="mini-btn" data-lyric="' + s.id + '">查看歌词</button>' : '<span style="color:#b0b6c4;">暂无</span>') + '</td>' +
+      '<td>' + links + '</td>' +
+      '<td><button class="mini-btn danger" data-del="' + s.id + '">删除</button></td></tr>';
   }).join('');
   body.querySelectorAll('[data-del]').forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -1869,20 +2022,15 @@ function openLyric(s){
   if (s.year) meta.push('发行：' + s.year);
   if (s.lyricist) meta.push('作词：' + s.lyricist);
   if (s.composer) meta.push('作曲：' + s.composer);
-  document.getElementById('modalBody').textContent =
-    (meta.length ? meta.join('　|　') + '\n\n' : '') + (s.lyrics || '暂无歌词');
+  document.getElementById('modalBody').textContent = (meta.length ? meta.join('　|　') + '\n\n' : '') + (s.lyrics || '暂无歌词');
   lyricModal.classList.add('show');
 }
 document.getElementById('modalClose').addEventListener('click', () => lyricModal.classList.remove('show'));
 lyricModal.addEventListener('click', e => { if (e.target === lyricModal) lyricModal.classList.remove('show'); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') lyricModal.classList.remove('show'); });
-
 function resetSongForm(){
-  ['sTitle','sArtist','sAlbum','sLyricist','sComposer','sYear','sLyrics','sQQ','sKuwo','sKugou','sNetease']
-    .forEach(id => document.getElementById(id).value = '');
+  ['sTitle','sArtist','sAlbum','sLyricist','sComposer','sYear','sLyrics','sQQ','sKuwo','sKugou','sNetease'].forEach(id => document.getElementById(id).value = '');
 }
 document.getElementById('sReset').addEventListener('click', resetSongForm);
-
 document.getElementById('sAdd').addEventListener('click', async () => {
   const title = document.getElementById('sTitle').value.trim();
   const artist = document.getElementById('sArtist').value.trim();
@@ -1914,7 +2062,6 @@ document.getElementById('sAdd').addEventListener('click', async () => {
     showToast('已添加「' + title + '」');
   } catch(err){ alert('保存失败：' + err.message); }
 });
-
 document.getElementById('sClearAll').addEventListener('click', async () => {
   if (songs.length === 0) return;
   if (!confirm('确定要清空全部歌曲记录吗？此操作不可恢复。')) return;
@@ -1928,17 +2075,12 @@ document.getElementById('sClearAll').addEventListener('click', async () => {
 loadSongs(); renderSongs();
 
 /* ===================== 6. 地点收藏 ===================== */
-let places = [];
-let pendingPlaceImage = '';
-let placeImageProcessing = false;
-const PLACES_KEY = 'suidou-places-v1';
-
+let places = [], pendingPlaceImage = '', placeImageProcessing = false;
 const plRegionEl    = document.getElementById('plRegion');
 const plAddressEl   = document.getElementById('plAddress');
 const plAddressHint = document.getElementById('plAddressHint');
 const plPriceTypeEl = document.getElementById('plPriceType');
 const plPriceEl     = document.getElementById('plPrice');
-
 function updateAddressHint(){
   if (plRegionEl.value === '国内'){
     plAddressEl.placeholder = '省 / 市 / 区 + 街道门牌号，如：浙江省杭州市西湖区文三路 100 号';
@@ -1950,7 +2092,6 @@ function updateAddressHint(){
 }
 plRegionEl.addEventListener('change', updateAddressHint);
 updateAddressHint();
-
 function updatePriceState(){
   const free = plPriceTypeEl.value === '免费';
   plPriceEl.disabled = free;
@@ -1959,10 +2100,8 @@ function updatePriceState(){
 }
 plPriceTypeEl.addEventListener('change', updatePriceState);
 updatePriceState();
-
 function savePlaces(){ try { localStorage.setItem(PLACES_KEY, JSON.stringify(places)); updateStorageUsage(); return true; } catch(e){ return false; } }
 function loadPlaces(){ try { const raw = localStorage.getItem(PLACES_KEY); if (raw) places = JSON.parse(raw) || []; } catch(e){ places = []; } }
-
 document.getElementById('plImg').addEventListener('change', e => {
   const file = e.target.files[0];
   const preview = document.getElementById('plPreview');
@@ -1976,7 +2115,6 @@ document.getElementById('plImg').addEventListener('change', e => {
     placeImageProcessing = false;
   });
 });
-
 function resetPlaceForm(){
   ['plName','plAddress','plPrice','plDesc','plBaike'].forEach(id => document.getElementById(id).value = '');
   plRegionEl.value = '国内'; plPriceTypeEl.value = '门票';
@@ -1986,14 +2124,12 @@ function resetPlaceForm(){
   updateAddressHint(); updatePriceState();
 }
 document.getElementById('plReset').addEventListener('click', resetPlaceForm);
-
 document.getElementById('plAdd').addEventListener('click', async () => {
   if (placeImageProcessing) { alert('图片正在处理中，请稍候…'); return; }
   const name = document.getElementById('plName').value.trim();
   if (!name) { alert('请先填写地点名称～'); document.getElementById('plName').focus(); return; }
   const address = plAddressEl.value.trim();
   if (!address) { alert('请填写详细位置～'); plAddressEl.focus(); return; }
-
   const placeData = {
     name, region: plRegionEl.value, address,
     price_type: plPriceTypeEl.value,
@@ -2002,7 +2138,6 @@ document.getElementById('plAdd').addEventListener('click', async () => {
     baike: document.getElementById('plBaike').value.trim(),
     img: pendingPlaceImage
   };
-
   try {
     if (appMode === 'cloud' && currentUser){
       const row = await cloudInsert('places', placeData);
@@ -2010,8 +2145,7 @@ document.getElementById('plAdd').addEventListener('click', async () => {
       places.push(row);
     } else {
       const local = { id: Date.now() + '-' + Math.floor(Math.random()*1000), ...placeData };
-      local.desc = local.desc_text;
-      delete local.desc_text;
+      local.desc = local.desc_text; delete local.desc_text;
       places.push(local);
       if (!savePlaces()){ places.pop(); return; }
     }
@@ -2019,7 +2153,6 @@ document.getElementById('plAdd').addEventListener('click', async () => {
     showToast('已添加「' + name + '」');
   } catch(err){ alert('保存失败：' + err.message); }
 });
-
 document.getElementById('plClearAll').addEventListener('click', async () => {
   if (places.length === 0) return;
   if (!confirm('确定要清空全部地点记录吗？此操作不可恢复。')) return;
@@ -2030,46 +2163,35 @@ document.getElementById('plClearAll').addEventListener('click', async () => {
     updateStorageUsage(); renderPlaces(); showToast('地点数据已清空');
   } catch(err){ alert('清空失败：' + err.message); }
 });
-
 const PIN_ICON  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 const COIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h5M9.5 14.5h5"/></svg>';
 const LINK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>';
-
 function renderPlaces(){
   const list = document.getElementById('placesList');
   document.getElementById('plCount').textContent = places.length;
   if (places.length === 0){ list.innerHTML = '<p class="empty">还没有地点记录，先在上方添加一个吧～</p>'; return; }
-
   list.innerHTML = places.map(p => {
     const isCN = p.region === '国内';
     let priceText = '';
-    if (p.priceType === '免费' || p.price_type === '免费') priceText = '免费';
-    else if (p.price) {
-      const pt = p.priceType || p.price_type;
-      priceText = (pt === '门票' ? '门票 ¥' : '人均 ¥') + esc(p.price);
-    } else {
-      const pt = p.priceType || p.price_type;
-      priceText = (pt === '门票' ? '门票价格' : '人均消费') + '未填写';
-    }
+    const pt = p.priceType || p.price_type;
+    if (pt === '免费') priceText = '免费';
+    else if (p.price) priceText = (pt === '门票' ? '门票 ¥' : '人均 ¥') + esc(p.price);
+    else priceText = (pt === '门票' ? '门票价格' : '人均消费') + '未填写';
     const baikeUrl = p.baike || ('https://baike.baidu.com/search?word=' + encodeURIComponent(p.name));
-
     return '<div class="place-card">' +
-        '<div class="place-cover">' + (p.img ? '<img src="' + p.img + '" alt="">' : PIN_ICON) + '</div>' +
-        '<div class="place-body">' +
-          '<h3 class="place-name">' + esc(p.name) +
-            '<span class="region-badge ' + (isCN ? 'region-cn' : 'region-intl') + '">' + (isCN ? '国内 · 精确' : '国外 · 模糊') + '</span>' +
-          '</h3>' +
-          '<div class="place-line">' + PIN_ICON + '<span>' + esc(p.address) + '</span></div>' +
-          '<div class="place-line">' + COIN_ICON + '<span class="place-price">' + priceText + '</span></div>' +
-          (p.desc ? '<p class="place-desc">' + esc(p.desc) + '</p>' : '') +
-          '<div class="place-actions">' +
-            '<a class="baike-btn" href="' + esc(baikeUrl) + '" target="_blank" rel="noopener">' + LINK_ICON + '百度百科</a>' +
-            '<button class="del-btn" data-id="' + p.id + '">删除</button>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
+      '<div class="place-cover">' + (p.img ? '<img src="' + p.img + '" alt="">' : PIN_ICON) + '</div>' +
+      '<div class="place-body">' +
+        '<h3 class="place-name">' + esc(p.name) +
+          '<span class="region-badge ' + (isCN ? 'region-cn' : 'region-intl') + '">' + (isCN ? '国内 · 精确' : '国外 · 模糊') + '</span>' +
+        '</h3>' +
+        '<div class="place-line">' + PIN_ICON + '<span>' + esc(p.address) + '</span></div>' +
+        '<div class="place-line">' + COIN_ICON + '<span class="place-price">' + priceText + '</span></div>' +
+        (p.desc ? '<p class="place-desc">' + esc(p.desc) + '</p>' : '') +
+        '<div class="place-actions">' +
+          '<a class="baike-btn" href="' + esc(baikeUrl) + '" target="_blank" rel="noopener">' + LINK_ICON + '百度百科</a>' +
+          '<button class="del-btn" data-id="' + p.id + '">删除</button>' +
+        '</div></div></div>';
   }).join('');
-
   list.querySelectorAll('.del-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const id = btn.dataset.id;
@@ -2088,23 +2210,18 @@ loadPlaces(); renderPlaces();
 
 /* ===================== 7. 影视收藏 ===================== */
 let medias = [];
-const MEDIA_KEY = 'suidou-medias-v1';
-
 function saveMedias(){ try { localStorage.setItem(MEDIA_KEY, JSON.stringify(medias)); updateStorageUsage(); return true; } catch(e){ return false; } }
 function loadMedias(){ try { const raw = localStorage.getItem(MEDIA_KEY); if (raw) medias = JSON.parse(raw) || []; } catch(e){ medias = []; } }
-
 function resetMediaForm(){
   ['mTitle','mTypeCustom','mCountry','mYear','mScore','mCast','mDesc'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('mType').value = '电视剧';
   document.getElementById('mStatus').value = '已看完';
 }
 document.getElementById('mReset').addEventListener('click', resetMediaForm);
-
 document.getElementById('mAdd').addEventListener('click', async () => {
   const title = document.getElementById('mTitle').value.trim();
   if (!title) { alert('请先填写影视名称～'); document.getElementById('mTitle').focus(); return; }
   const customType = document.getElementById('mTypeCustom').value.trim();
-
   const data = {
     title,
     type: customType || document.getElementById('mType').value,
@@ -2115,7 +2232,6 @@ document.getElementById('mAdd').addEventListener('click', async () => {
     cast_text: document.getElementById('mCast').value.trim(),
     desc_text: document.getElementById('mDesc').value.trim()
   };
-
   try {
     if (appMode === 'cloud' && currentUser){
       const row = await cloudInsert('medias', data);
@@ -2132,7 +2248,6 @@ document.getElementById('mAdd').addEventListener('click', async () => {
     showToast('已添加「' + title + '」');
   } catch(err){ alert('保存失败：' + err.message); }
 });
-
 document.getElementById('mClearAll').addEventListener('click', async () => {
   if (medias.length === 0) return;
   if (!confirm('确定要清空全部影视记录吗？此操作不可恢复。')) return;
@@ -2143,35 +2258,30 @@ document.getElementById('mClearAll').addEventListener('click', async () => {
     updateStorageUsage(); renderMedias(); showToast('影视数据已清空');
   } catch(err){ alert('清空失败：' + err.message); }
 });
-
 function mediaMetaText(m){
   return [m.type, m.country, m.year, m.status, m.score ? ('★ ' + m.score) : ''].filter(Boolean).join(' · ');
 }
-
 function renderMedias(){
   const list = document.getElementById('mediaList');
   document.getElementById('mCount').textContent = medias.length;
   if (medias.length === 0){ list.innerHTML = '<p class="empty">还没有影视记录，先在上方添加一部吧～</p>'; return; }
   list.innerHTML = medias.map(m => {
     return '<div class="media-card">' +
-        '<button class="del-btn" data-id="' + m.id + '" title="删除">✕</button>' +
-        '<div class="media-head"><div style="flex:1;min-width:0;">' +
-          '<h3 class="media-name">' + esc(m.title) + '</h3>' +
-          '<div class="media-tags">' +
-            '<span class="tag">' + esc(m.type || '影视') + '</span>' +
-            (m.country ? '<span class="tag gray">' + esc(m.country) + '</span>' : '') +
-            (m.year ? '<span class="tag gray">' + esc(m.year) + '</span>' : '') +
-            (m.status ? '<span class="tag gray">' + esc(m.status) + '</span>' : '') +
-            (m.score ? '<span class="tag">★ ' + esc(m.score) + '</span>' : '') +
-          '</div>' +
-        '</div></div>' +
-        '<div class="media-body">' +
-          (m.cast ? '<p><b>主要角色 / 人物：</b>' + esc(m.cast) + '</p>' : '') +
-          (m.desc ? '<p><b>简介：</b>' + esc(m.desc) + '</p>' : '') +
-        '</div>' +
-      '</div>';
+      '<button class="del-btn" data-id="' + m.id + '" title="删除">✕</button>' +
+      '<div class="media-head"><div style="flex:1;min-width:0;">' +
+        '<h3 class="media-name">' + esc(m.title) + '</h3>' +
+        '<div class="media-tags">' +
+          '<span class="tag">' + esc(m.type || '影视') + '</span>' +
+          (m.country ? '<span class="tag gray">' + esc(m.country) + '</span>' : '') +
+          (m.year ? '<span class="tag gray">' + esc(m.year) + '</span>' : '') +
+          (m.status ? '<span class="tag gray">' + esc(m.status) + '</span>' : '') +
+          (m.score ? '<span class="tag">★ ' + esc(m.score) + '</span>' : '') +
+        '</div></div></div>' +
+      '<div class="media-body">' +
+        (m.cast ? '<p><b>主要角色 / 人物：</b>' + esc(m.cast) + '</p>' : '') +
+        (m.desc ? '<p><b>简介：</b>' + esc(m.desc) + '</p>' : '') +
+      '</div></div>';
   }).join('');
-
   list.querySelectorAll('.del-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const id = btn.dataset.id;
@@ -2186,30 +2296,25 @@ function renderMedias(){
     });
   });
 }
-
 function exportMediaDoc(){
   if (medias.length === 0){ showToast('还没有影视记录，先添加一部吧～'); return; }
   const d = new Date();
   const dateStr = d.getFullYear() + ' 年 ' + (d.getMonth()+1) + ' 月 ' + d.getDate() + ' 日';
   const items = medias.map((m, i) => {
     const meta = mediaMetaText(m);
-    return '<section class="item">' +
-      '<h2>' + (i + 1) + '. ' + esc(m.title) + '</h2>' +
+    return '<section class="item"><h2>' + (i + 1) + '. ' + esc(m.title) + '</h2>' +
       (meta ? '<p class="meta">' + esc(meta) + '</p>' : '') +
       (m.cast ? '<p><b>主要角色 / 人物：</b>' + esc(m.cast) + '</p>' : '') +
-      (m.desc ? '<p><b>简介：</b>' + esc(m.desc) + '</p>' : '') +
-      '</section>';
+      (m.desc ? '<p><b>简介：</b>' + esc(m.desc) + '</p>' : '') + '</section>';
   }).join('\n');
-
-  const html = '<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="UTF-8">\n<title>我的追剧信息</title>\n<style>\n' +
-'body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;max-width:820px;margin:0 auto;padding:48px 28px 60px;color:#111827;line-height:1.8;background:#fff;}\n' +
-'h1{font-size:26px;margin:0 0 8px;}\n.head-meta{color:#6b7280;font-size:13.5px;margin:0 0 28px;padding-bottom:18px;border-bottom:2px solid #2563eb;}\n' +
-'.item{border:1px solid #e5e7eb;border-radius:12px;padding:18px 20px;margin-bottom:16px;background:#fafbfc;}\n' +
-'.item h2{font-size:17px;margin:0 0 8px;}\n.meta{color:#2563eb;font-size:13px;margin:0 0 10px;font-weight:600;}\n' +
-'.item p{margin:0 0 8px;font-size:14px;}\n.item b{color:#6b7280;font-weight:600;}\n.foot{margin-top:34px;text-align:center;color:#9ca3af;font-size:12.5px;}\n</style>\n</head>\n<body>\n' +
-'<h1>我的追剧信息</h1>\n<p class="head-meta">共收录 ' + medias.length + ' 部作品　·　导出时间：' + dateStr + '</p>\n' + items + '\n' +
-'<p class="foot">岁窦工具箱 · 影视收藏</p>\n</body>\n</html>';
-
+  const html = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>我的追剧信息</title><style>' +
+    'body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;max-width:820px;margin:0 auto;padding:48px 28px 60px;color:#111827;line-height:1.8;background:#fff;}' +
+    'h1{font-size:26px;margin:0 0 8px;}.head-meta{color:#6b7280;font-size:13.5px;margin:0 0 28px;padding-bottom:18px;border-bottom:2px solid #2563eb;}' +
+    '.item{border:1px solid #e5e7eb;border-radius:12px;padding:18px 20px;margin-bottom:16px;background:#fafbfc;}' +
+    '.item h2{font-size:17px;margin:0 0 8px;}.meta{color:#2563eb;font-size:13px;margin:0 0 10px;font-weight:600;}' +
+    '.item p{margin:0 0 8px;font-size:14px;}.item b{color:#6b7280;font-weight:600;}.foot{margin-top:34px;text-align:center;color:#9ca3af;font-size:12.5px;}' +
+    '</style></head><body><h1>我的追剧信息</h1><p class="head-meta">共收录 ' + medias.length + ' 部作品　·　导出时间：' + dateStr + '</p>' +
+    items + '<p class="foot">岁窦工具箱 · 影视收藏</p></body></html>';
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2218,7 +2323,6 @@ function exportMediaDoc(){
   setTimeout(() => URL.revokeObjectURL(url), 1200);
   showToast('已导出「我的追剧信息」文档');
 }
-
 function wrapText(ctx, text, maxW){
   const out = [];
   String(text).split('\n').forEach(seg => {
@@ -2251,14 +2355,8 @@ function exportMediaImage(){
     rows.push({ kind:'title', text: m.title, h: 30 });
     const meta = mediaMetaText(m);
     if (meta) rows.push({ kind:'meta', text: meta, h: 26 });
-    if (m.cast){
-      mc.font = '14px ' + FONT;
-      wrapText(mc, '主要角色 / 人物：' + m.cast, textW).forEach(l => rows.push({ kind:'body', text: l, h: 23 }));
-    }
-    if (m.desc){
-      mc.font = '14px ' + FONT;
-      wrapText(mc, '简介：' + m.desc, textW).forEach(l => rows.push({ kind:'body', text: l, h: 23 }));
-    }
+    if (m.cast){ mc.font = '14px ' + FONT; wrapText(mc, '主要角色 / 人物：' + m.cast, textW).forEach(l => rows.push({ kind:'body', text: l, h: 23 })); }
+    if (m.desc){ mc.font = '14px ' + FONT; wrapText(mc, '简介：' + m.desc, textW).forEach(l => rows.push({ kind:'body', text: l, h: 23 })); }
     return rows;
   });
   const HEADER = 118, FOOTER = 58;
@@ -2319,10 +2417,7 @@ loadMedias(); renderMedias();
 /* ===================== 8. 时钟工具 ===================== */
 (function initClock(){
   const $ = id => document.getElementById(id);
-  const HOURS_MAX = 20;
-  const TOTAL_MAX = 20 * 3600;
-  const TOTAL_MIN = 1;
-
+  const HOURS_MAX = 20, TOTAL_MAX = 20 * 3600, TOTAL_MIN = 1;
   document.querySelectorAll('.clock-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.clock-tab').forEach(t => t.classList.remove('active'));
@@ -2332,7 +2427,6 @@ loadMedias(); renderMedias();
       $('clockPanelTimer').style.display = isCd ? 'none' : '';
     });
   });
-
   let cdRemaining = 30, cdTimer = null, cdRunning = false, cdEndTime = 0;
   function formatCd(sec){
     sec = Math.max(0, Math.ceil(sec));
@@ -2366,11 +2460,7 @@ loadMedias(); renderMedias();
     cdTimer = setInterval(tickCd, 100);
     updateCdDisplay();
   }
-  function pauseCd(){
-    if (!cdRunning) return;
-    cdRemaining = Math.max(0, (cdEndTime - Date.now()) / 1000);
-    stopCd(); updateCdDisplay();
-  }
+  function pauseCd(){ if (!cdRunning) return; cdRemaining = Math.max(0, (cdEndTime - Date.now()) / 1000); stopCd(); updateCdDisplay(); }
   function resetCd(){ stopCd(); cdRemaining = readCdInput(); updateCdDisplay(); }
   function syncCdInputs(){
     const h = Math.max(0, Math.min(HOURS_MAX, parseInt($('cdHour').value) || 0));
@@ -2387,7 +2477,6 @@ loadMedias(); renderMedias();
   $('cdPause').addEventListener('click', pauseCd);
   $('cdReset').addEventListener('click', resetCd);
   updateCdDisplay();
-
   let tmElapsed = 0, tmTimer = null, tmRunning = false, tmStartTime = 0;
   function formatTm(ms){
     const totalCs = Math.floor(ms / 10);
@@ -2396,19 +2485,8 @@ loadMedias(); renderMedias();
     return pad2(h) + ':' + pad2(m) + ':' + pad2(s) + '.' + String(cs).padStart(2, '0');
   }
   function updateTmDisplay(){ $('tmDisplay').textContent = formatTm(tmElapsed); }
-  function startTm(){
-    if (tmRunning) return;
-    tmRunning = true;
-    tmStartTime = Date.now() - tmElapsed;
-    tmTimer = setInterval(() => { tmElapsed = Date.now() - tmStartTime; updateTmDisplay(); }, 33);
-  }
-  function pauseTm(){
-    if (!tmRunning) return;
-    tmRunning = false;
-    if (tmTimer){ clearInterval(tmTimer); tmTimer = null; }
-    tmElapsed = Date.now() - tmStartTime;
-    updateTmDisplay();
-  }
+  function startTm(){ if (tmRunning) return; tmRunning = true; tmStartTime = Date.now() - tmElapsed; tmTimer = setInterval(() => { tmElapsed = Date.now() - tmStartTime; updateTmDisplay(); }, 33); }
+  function pauseTm(){ if (!tmRunning) return; tmRunning = false; if (tmTimer){ clearInterval(tmTimer); tmTimer = null; } tmElapsed = Date.now() - tmStartTime; updateTmDisplay(); }
   function resetTm(){ pauseTm(); tmElapsed = 0; updateTmDisplay(); }
   $('tmStart').addEventListener('click', startTm);
   $('tmPause').addEventListener('click', pauseTm);
@@ -2419,15 +2497,8 @@ loadMedias(); renderMedias();
 /* ===================== 9. 我的日历 ===================== */
 const CAL_START = { y: 2026, m: 10 };
 const CAL_END   = { y: 2036, m: 12 };
-const CAL_KEY   = 'suidou-schedules-v1';
 const CAL_WEEK  = ['一','二','三','四','五','六','日'];
-
-let schedules = [];
-let calYear  = CAL_START.y;
-let calMonth = CAL_START.m;
-let calSelected = null;
-let calEditingId = null;
-
+let schedules = [], calYear = CAL_START.y, calMonth = CAL_START.m, calSelected = null, calEditingId = null;
 function calKey(y, m, d){ return y + '-' + pad2(m) + '-' + pad2(d); }
 function daysInMonth(y, m){ return new Date(y, m, 0).getDate(); }
 function firstWeekdayMon(y, m){ return (new Date(y, m-1, 1).getDay() + 6) % 7; }
@@ -2453,38 +2524,18 @@ function sortSchedules(a, b){
 }
 function saveSchedules(){ try { localStorage.setItem(CAL_KEY, JSON.stringify(schedules)); updateStorageUsage(); return true; } catch(e){ return false; } }
 function loadSchedules(){ try { const raw = localStorage.getItem(CAL_KEY); if (raw) schedules = JSON.parse(raw) || []; } catch(e){ schedules = []; } }
-
-(function initCalMonth(){
-  const now = new Date();
-  if (calInRange(now.getFullYear(), now.getMonth() + 1)){
-    calYear  = now.getFullYear(); calMonth = now.getMonth() + 1;
-  }
-})();
-
+(function initCalMonth(){ const now = new Date(); if (calInRange(now.getFullYear(), now.getMonth() + 1)){ calYear = now.getFullYear(); calMonth = now.getMonth() + 1; } })();
 function buildCalSelects(){
-  const ys = document.getElementById('calYear');
-  const ms = document.getElementById('calMonth');
-  ys.innerHTML = '';
-  for (let y = CAL_START.y; y <= CAL_END.y; y++){
-    const o = document.createElement('option');
-    o.value = y; o.textContent = y + ' 年';
-    ys.appendChild(o);
-  }
-  ms.innerHTML = '';
-  for (let m = 1; m <= 12; m++){
-    const o = document.createElement('option');
-    o.value = m; o.textContent = m + ' 月';
-    ms.appendChild(o);
-  }
+  const ys = document.getElementById('calYear'), ms = document.getElementById('calMonth');
+  ys.innerHTML = ''; for (let y = CAL_START.y; y <= CAL_END.y; y++){ const o = document.createElement('option'); o.value = y; o.textContent = y + ' 年'; ys.appendChild(o); }
+  ms.innerHTML = ''; for (let m = 1; m <= 12; m++){ const o = document.createElement('option'); o.value = m; o.textContent = m + ' 月'; ms.appendChild(o); }
   syncCalSelects();
 }
 function syncCalSelects(){
-  const ys = document.getElementById('calYear');
-  const ms = document.getElementById('calMonth');
+  const ys = document.getElementById('calYear'), ms = document.getElementById('calMonth');
   ys.value = String(calYear); ms.value = String(calMonth);
   Array.prototype.forEach.call(ms.options, o => {
-    const m = +o.value;
-    let ok = true;
+    const m = +o.value; let ok = true;
     if (calYear === CAL_START.y && m < CAL_START.m) ok = false;
     if (calYear === CAL_END.y && m > CAL_END.m) ok = false;
     o.disabled = !ok;
@@ -2494,10 +2545,8 @@ function renderCalGrid(){
   const grid = document.getElementById('calGrid');
   if (!grid) return;
   const y = calYear, m = calMonth;
-  const first = firstWeekdayMon(y, m);
-  const dim = daysInMonth(y, m);
-  const rows = Math.ceil((first + dim) / 7);
-  const total = rows * 7;
+  const first = firstWeekdayMon(y, m), dim = daysInMonth(y, m);
+  const rows = Math.ceil((first + dim) / 7), total = rows * 7;
   const map = {};
   schedules.forEach(s => { if (s.date) (map[s.date] = map[s.date] || []).push(s); });
   Object.keys(map).forEach(k => map[k].sort(sortSchedules));
@@ -2524,21 +2573,14 @@ function renderCalGrid(){
       mini = '<div class="cal-mini">' + show + (items.length > 2 ? '<div class="cal-more">+' + (items.length - 2) + ' 条</div>' : '') + '</div>';
     }
     html += '<div class="' + cls.join(' ') + '"' + (inMonth ? ' data-key="' + key + '"' : '') + '>' +
-              '<div class="cal-day-head">' +
-                '<span class="cal-day-num">' + cd + '</span>' +
-                (items.length ? '<span class="cal-count">' + items.length + '</span>' : '') +
-              '</div>' + mini + '</div>';
+      '<div class="cal-day-head"><span class="cal-day-num">' + cd + '</span>' +
+      (items.length ? '<span class="cal-count">' + items.length + '</span>' : '') + '</div>' + mini + '</div>';
   }
   grid.innerHTML = html;
-  grid.querySelectorAll('.cal-day[data-key]').forEach(el => {
-    el.addEventListener('click', () => selectCalDay(el.dataset.key));
-  });
+  grid.querySelectorAll('.cal-day[data-key]').forEach(el => el.addEventListener('click', () => selectCalDay(el.dataset.key)));
 }
 function selectCalDay(key){
-  calSelected = key;
-  hideCalForm();
-  renderCalGrid();
-  renderDayPanel();
+  calSelected = key; hideCalForm(); renderCalGrid(); renderDayPanel();
   const panel = document.getElementById('calDayPanel');
   if (panel && panel.scrollIntoView){ try { panel.scrollIntoView({ behavior:'smooth', block:'nearest' }); } catch(e){} }
 }
@@ -2549,8 +2591,7 @@ function renderDayPanel(){
   if (!calSelected){
     titleEl.textContent = '当天安排';
     listEl.innerHTML = '<p class="empty">点击上方任意日期，查看或添加当天安排～</p>';
-    formEl.style.display = 'none';
-    return;
+    formEl.style.display = 'none'; return;
   }
   const parts = calSelected.split('-').map(Number);
   const y = parts[0], m = parts[1], d = parts[2];
@@ -2564,23 +2605,14 @@ function renderDayPanel(){
       const meta = [];
       if (s.place)  meta.push('地点：' + esc(s.place));
       if (s.people) meta.push('人物：' + esc(s.people));
-      return '<div class="cal-item">' +
-          '<div class="cal-item-main">' +
-            '<div class="cal-item-top">' +
-              (s.time ? '<span class="cal-item-time">' + esc(s.time) + '</span>' : '') +
-              '<span class="cal-item-content">' + esc(s.content) + '</span>' +
-            '</div>' +
-            (meta.length ? '<div class="cal-item-meta">' + meta.join('　·　') + '</div>' : '') +
-          '</div>' +
-          '<div class="cal-item-actions">' +
-            '<button class="mini-btn" data-cedit="' + s.id + '">编辑</button>' +
-            '<button class="mini-btn danger" data-cdel="' + s.id + '">删除</button>' +
-          '</div>' +
-        '</div>';
+      return '<div class="cal-item"><div class="cal-item-main">' +
+        '<div class="cal-item-top">' + (s.time ? '<span class="cal-item-time">' + esc(s.time) + '</span>' : '') + '<span class="cal-item-content">' + esc(s.content) + '</span></div>' +
+        (meta.length ? '<div class="cal-item-meta">' + meta.join('　·　') + '</div>' : '') +
+        '</div><div class="cal-item-actions">' +
+        '<button class="mini-btn" data-cedit="' + s.id + '">编辑</button>' +
+        '<button class="mini-btn danger" data-cdel="' + s.id + '">删除</button></div></div>';
     }).join('');
-    listEl.querySelectorAll('[data-cedit]').forEach(btn => {
-      btn.addEventListener('click', () => openCalForm(btn.dataset.cedit));
-    });
+    listEl.querySelectorAll('[data-cedit]').forEach(btn => btn.addEventListener('click', () => openCalForm(btn.dataset.cedit)));
     listEl.querySelectorAll('[data-cdel]').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.dataset.cdel;
@@ -2615,10 +2647,7 @@ function openCalForm(id){
 }
 function hideCalForm(){
   calEditingId = null;
-  document.getElementById('calTime').value    = '';
-  document.getElementById('calPlace').value   = '';
-  document.getElementById('calPeople').value  = '';
-  document.getElementById('calContent').value = '';
+  ['calTime','calPlace','calPeople','calContent'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('calSave').textContent = '＋ 添加安排';
   document.getElementById('calCancelEdit').style.display = 'none';
 }
@@ -2627,21 +2656,13 @@ function shiftMonth(delta){
   if (m < 1){ m = 12; y--; }
   if (m > 12){ m = 1; y++; }
   if (!calInRange(y, m)) { showToast('已到达可查看范围的边界'); return; }
-  calYear = y; calMonth = m;
-  syncCalSelects();
-  renderCalGrid();
+  calYear = y; calMonth = m; syncCalSelects(); renderCalGrid();
 }
-function renderCalendar(){
-  syncCalSelects();
-  renderCalGrid();
-  renderDayPanel();
-}
+function renderCalendar(){ syncCalSelects(); renderCalGrid(); renderDayPanel(); }
 function exportCalImage(){
   const y = calYear, m = calMonth;
   const dpr = 2, PAD = 30, HEAD = 92, WEEKH = 36, CELLW = 168, CELLH = 134, GAP = 8, FOOT = 48, cols = 7;
-  const first = firstWeekdayMon(y, m);
-  const dim = daysInMonth(y, m);
-  const rows = Math.ceil((first + dim) / 7);
+  const first = firstWeekdayMon(y, m), dim = daysInMonth(y, m), rows = Math.ceil((first + dim) / 7);
   const W = PAD * 2 + cols * CELLW + (cols - 1) * GAP;
   const H = PAD + HEAD + WEEKH + rows * CELLH + (rows - 1) * GAP + FOOT + PAD;
   const canvas = document.createElement('canvas');
@@ -2669,13 +2690,11 @@ function exportCalImage(){
   for (let i = 0; i < rows * 7; i++){
     const col = i % 7, row = Math.floor(i / 7);
     const x = PAD + col * (CELLW + GAP), yy = gridTop + row * (CELLH + GAP);
-    const dayNum = i - first + 1;
-    const inMonth = dayNum >= 1 && dayNum <= dim;
+    const dayNum = i - first + 1, inMonth = dayNum >= 1 && dayNum <= dim;
     ctx.fillStyle = inMonth ? '#ffffff' : '#fafbfc';
     ctx.strokeStyle = inMonth ? '#e5e7eb' : '#f1f2f6';
     ctx.lineWidth = 1;
-    roundRect(ctx, x + 0.5, yy + 0.5, CELLW - 1, CELLH - 1, 10);
-    ctx.fill(); ctx.stroke();
+    roundRect(ctx, x + 0.5, yy + 0.5, CELLW - 1, CELLH - 1, 10); ctx.fill(); ctx.stroke();
     if (!inMonth) continue;
     const key = calKey(y, m, dayNum);
     const items = map[key] || [];
@@ -2706,10 +2725,7 @@ function exportCalImage(){
       ctx.fillText(fitText(ctx, text, CELLW - 24), x + 12, ly + 4);
       ctx.restore();
     });
-    if (more > 0){
-      ctx.fillStyle = '#9ca3af'; ctx.font = '11px ' + FONT;
-      ctx.fillText('+' + more + ' 条', x + 12, lineTop + shown.length * lineH + 3);
-    }
+    if (more > 0){ ctx.fillStyle = '#9ca3af'; ctx.font = '11px ' + FONT; ctx.fillText('+' + more + ' 条', x + 12, lineTop + shown.length * lineH + 3); }
   }
   const d = new Date();
   const footY = gridTop + rows * CELLH + (rows - 1) * GAP + 20;
@@ -2736,27 +2752,21 @@ function exportCalImage(){
 (function initCalendar(){
   loadSchedules();
   buildCalSelects();
-  const ys = document.getElementById('calYear');
-  const ms = document.getElementById('calMonth');
+  const ys = document.getElementById('calYear'), ms = document.getElementById('calMonth');
   ys.addEventListener('change', () => {
     const y = +ys.value; let m = +ms.value;
     if (y === CAL_START.y && m < CAL_START.m) m = CAL_START.m;
     if (y === CAL_END.y && m > CAL_END.m) m = CAL_END.m;
-    calYear = y; calMonth = m;
-    syncCalSelects(); renderCalGrid();
+    calYear = y; calMonth = m; syncCalSelects(); renderCalGrid();
   });
   ms.addEventListener('change', () => {
     const m = +ms.value;
     if (!calInRange(calYear, m)){ syncCalSelects(); return; }
-    calMonth = m;
-    syncCalSelects(); renderCalGrid();
+    calMonth = m; syncCalSelects(); renderCalGrid();
   });
   document.getElementById('calPrev').addEventListener('click', () => shiftMonth(-1));
   document.getElementById('calNext').addEventListener('click', () => shiftMonth(1));
-  document.getElementById('calStart').addEventListener('click', () => {
-    calYear = CAL_START.y; calMonth = CAL_START.m;
-    syncCalSelects(); renderCalGrid();
-  });
+  document.getElementById('calStart').addEventListener('click', () => { calYear = CAL_START.y; calMonth = CAL_START.m; syncCalSelects(); renderCalGrid(); });
   document.getElementById('calExport').addEventListener('click', exportCalImage);
   document.getElementById('calSave').addEventListener('click', async () => {
     if (!calSelected){ showToast('请先点击选择一个日期'); return; }
@@ -2791,18 +2801,11 @@ function exportCalImage(){
         }
         if (!saveSchedules()){ return; }
       }
-      hideCalForm();
-      renderCalGrid();
-      renderDayPanel();
+      hideCalForm(); renderCalGrid(); renderDayPanel();
       showToast(wasEditing ? '安排已更新' : '安排已添加');
     } catch(err){ alert('保存失败：' + err.message); }
   });
   document.getElementById('calCancelEdit').addEventListener('click', () => { hideCalForm(); renderDayPanel(); });
-  document.addEventListener('keydown', e => {
-    if (e.key !== 'Escape') return;
-    if (!document.getElementById('page-calendar').classList.contains('active')) return;
-    if (calEditingId){ hideCalForm(); renderDayPanel(); }
-  });
   renderCalendar();
 })();
 
@@ -2810,7 +2813,6 @@ function exportCalImage(){
 const codeInputEl   = document.getElementById('codeInput');
 const codePreviewEl = document.getElementById('codePreview');
 const codeHintEl    = document.getElementById('codeHint');
-
 const CODE_SAMPLE_JS = [
   '// 欢迎使用岁窦代码编辑器',
   'const fruits = ["苹果", "香蕉", "橙子", "葡萄"];',
@@ -2831,7 +2833,6 @@ const CODE_SAMPLE_JS = [
   '',
   'console.log("运行完成，共 " + fruits.length + " 条数据");'
 ].join('\n');
-
 const CODE_SAMPLE_MD = [
   '# 岁窦工具箱 · Markdown 示例',
   '',
@@ -2842,7 +2843,6 @@ const CODE_SAMPLE_MD = [
   '- 标题（一至六级）',
   '- 无序列表 / 有序列表',
   '- 引用、分割线、链接',
-  '- 围栏代码块',
   '',
   '> 把想法写下来，它就成功了一半。',
   '',
@@ -2855,11 +2855,9 @@ const CODE_SAMPLE_MD = [
   '[访问百度](https://www.baidu.com)',
   '---'
 ].join('\n');
-
 let codeMode = 'js';
 const codeDrafts = { js: CODE_SAMPLE_JS, md: CODE_SAMPLE_MD };
 let codeAutoTimer = null;
-
 function inlineMd(s){
   return s
     .replace(/`([^`]+)`/g, '<code>$1</code>')
@@ -2903,17 +2901,13 @@ function buildMdDoc(md){
   return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>' +
     'body{margin:0;padding:18px 22px 28px;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-size:14.5px;color:#111827;line-height:1.8;}' +
     'h1{font-size:24px;border-bottom:2px solid #eef2ff;padding-bottom:8px;margin:0 0 14px;}' +
-    'h2{font-size:20px;margin:22px 0 10px;}' +
-    'h3{font-size:17px;margin:18px 0 8px;}' +
-    'p{margin:0 0 12px;}' +
-    'ul,ol{margin:0 0 12px;padding-left:24px;}' +
+    'h2{font-size:20px;margin:22px 0 10px;}h3{font-size:17px;margin:18px 0 8px;}' +
+    'p{margin:0 0 12px;}ul,ol{margin:0 0 12px;padding-left:24px;}' +
     'blockquote{margin:0 0 12px;padding:8px 14px;border-left:4px solid #c7d2fe;background:#f8faff;color:#4b5563;border-radius:0 8px 8px 0;}' +
     'code{background:#f3f4f6;color:#be185d;padding:1px 6px;border-radius:5px;font-family:Consolas,Menlo,monospace;font-size:13px;}' +
     'pre.md-pre{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.65;}' +
-    'pre.md-pre code{background:none;color:inherit;padding:0;}' +
-    'a{color:#2563eb;}' +
-    'hr{border:none;border-top:1px solid #e5e7eb;margin:18px 0;}' +
-    'del{color:#9ca3af;}' +
+    'pre.md-pre code{background:none;color:inherit;padding:0;}a{color:#2563eb;}' +
+    'hr{border:none;border-top:1px solid #e5e7eb;margin:18px 0;}del{color:#9ca3af;}' +
     '</style></head><body>' + body + '</body></html>';
 }
 function buildJsDoc(code){
@@ -2922,15 +2916,13 @@ function buildJsDoc(code){
     'pre.out{background:#0f172a;color:#a5f3fc;padding:10px 12px;border-radius:8px;font-size:12.5px;overflow:auto;white-space:pre-wrap;margin:14px 0 0;font-family:Consolas,Menlo,monospace;line-height:1.6;}' +
     '.err{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;padding:10px 12px;border-radius:8px;font-size:13px;white-space:pre-wrap;margin-top:14px;}' +
     '</style></head><body><div id="__out"></div><script>\n' +
-    'var __logs = [];\n' +
-    'var __origLog = console.log;\n' +
+    'var __logs = [];var __origLog = console.log;\n' +
     'console.log = function(){\n' +
     '  var a = Array.prototype.slice.call(arguments).map(function(x){\n' +
     '    try { return (typeof x === "object" && x !== null) ? JSON.stringify(x) : String(x); }\n' +
     '    catch(e){ return String(x); }\n' +
     '  }).join(" ");\n' +
-    '  __logs.push(a);\n' +
-    '  __origLog.apply(console, arguments);\n' +
+    '  __logs.push(a); __origLog.apply(console, arguments);\n' +
     '};\n' +
     'function __flush(){\n' +
     '  if (!__logs.length) return;\n' +
@@ -2977,9 +2969,7 @@ document.getElementById('codeSample').addEventListener('click', () => {
   showToast('已载入示例' + (codeMode === 'js' ? '代码' : '文档'));
 });
 document.getElementById('codeClear').addEventListener('click', () => {
-  codeInputEl.value = '';
-  codeDrafts[codeMode] = '';
-  runCodeEditor();
+  codeInputEl.value = ''; codeDrafts[codeMode] = ''; runCodeEditor();
 });
 codeInputEl.addEventListener('input', () => {
   codeDrafts[codeMode] = codeInputEl.value;
@@ -3006,14 +2996,7 @@ const drawCtx = drawCanvasEl.getContext('2d');
 const brushSizeEl = document.getElementById('brushSize');
 const brushSizeValEl = document.getElementById('brushSizeVal');
 const eraserBtnEl = document.getElementById('eraserBtn');
-
-let drawColorValue = '#111827';
-let drawSizeValue  = 6;
-let drawErasing    = false;
-let drawIsDrawing  = false;
-let drawLastPt     = null;
-let drawHistory    = [];
-
+let drawColorValue = '#111827', drawSizeValue = 6, drawErasing = false, drawIsDrawing = false, drawLastPt = null, drawHistory = [];
 function initBoard(){
   drawCtx.fillStyle = '#ffffff';
   drawCtx.fillRect(0, 0, drawCanvasEl.width, drawCanvasEl.height);
@@ -3042,10 +3025,8 @@ function strokeDot(p){
 drawCanvasEl.addEventListener('pointerdown', e => {
   e.preventDefault();
   try { drawCanvasEl.setPointerCapture(e.pointerId); } catch(err){}
-  pushDrawHistory();
-  drawIsDrawing = true;
-  drawLastPt = drawPos(e);
-  strokeDot(drawLastPt);
+  pushDrawHistory(); drawIsDrawing = true;
+  drawLastPt = drawPos(e); strokeDot(drawLastPt);
 });
 drawCanvasEl.addEventListener('pointermove', e => {
   if (!drawIsDrawing) return;
@@ -3054,22 +3035,14 @@ drawCanvasEl.addEventListener('pointermove', e => {
   if (drawLastPt) strokeSegment(drawLastPt, p);
   drawLastPt = p;
 });
-['pointerup','pointercancel'].forEach(evt => {
-  drawCanvasEl.addEventListener(evt, () => { drawIsDrawing = false; drawLastPt = null; });
-});
+['pointerup','pointercancel'].forEach(evt => drawCanvasEl.addEventListener(evt, () => { drawIsDrawing = false; drawLastPt = null; }));
 document.querySelectorAll('.color-dot').forEach(dot => {
   dot.addEventListener('click', () => {
     document.querySelectorAll('.color-dot').forEach(x => x.classList.remove('active'));
-    dot.classList.add('active');
-    drawColorValue = dot.dataset.color;
-    drawErasing = false;
-    eraserBtnEl.classList.remove('active');
+    dot.classList.add('active'); drawColorValue = dot.dataset.color; drawErasing = false; eraserBtnEl.classList.remove('active');
   });
 });
-brushSizeEl.addEventListener('input', () => {
-  drawSizeValue = +brushSizeEl.value;
-  brushSizeValEl.textContent = drawSizeValue;
-});
+brushSizeEl.addEventListener('input', () => { drawSizeValue = +brushSizeEl.value; brushSizeValEl.textContent = drawSizeValue; });
 eraserBtnEl.addEventListener('click', () => {
   drawErasing = !drawErasing;
   eraserBtnEl.classList.toggle('active', drawErasing);
@@ -3079,11 +3052,7 @@ document.getElementById('undoDraw').addEventListener('click', () => {
   if (!drawHistory.length){ showToast('没有可以撤销的操作了'); return; }
   const data = drawHistory.pop();
   const img = new Image();
-  img.onload = () => {
-    drawCtx.fillStyle = '#ffffff';
-    drawCtx.fillRect(0, 0, drawCanvasEl.width, drawCanvasEl.height);
-    drawCtx.drawImage(img, 0, 0);
-  };
+  img.onload = () => { drawCtx.fillStyle = '#ffffff'; drawCtx.fillRect(0, 0, drawCanvasEl.width, drawCanvasEl.height); drawCtx.drawImage(img, 0, 0); };
   img.src = data;
 });
 document.getElementById('clearDraw').addEventListener('click', () => {
@@ -3115,15 +3084,12 @@ document.getElementById('exportDraw').addEventListener('click', () => {
 });
 initBoard();
 
-/* ===================== 12. AI 助手 ===================== */
+/* ===================== 12. AI 聊天 ===================== */
 const chatLog   = document.getElementById('chatLog');
 const chatInput = document.getElementById('chatInput');
 const chatSend  = document.getElementById('chatSend');
 const chatQuota = document.getElementById('chatQuota');
-
-let chatHistory = [
-  { role: 'system', content: '你是岁窦工具箱的 AI 助手，用简洁、友好的中文回答。' }
-];
+let chatHistory = [{ role: 'system', content: '你是岁窦工具箱的 AI 助手，用简洁、友好的中文回答。' }];
 function appendChat(role, text){
   const div = document.createElement('div');
   div.className = 'chat-msg ' + role;
@@ -3136,8 +3102,7 @@ async function updateQuota(){
   if (!currentUser){ chatQuota.textContent = '未登录'; return; }
   const today = new Date().toISOString().slice(0,10);
   const { data } = await sb.from('ai_usage').select('count').eq('user_id', currentUser.id).eq('date', today).maybeSingle();
-  const used = data?.count || 0;
-  chatQuota.textContent = '今日已用 ' + used + ' / 20 次';
+  chatQuota.textContent = '今日已用 ' + (data?.count || 0) + ' / 20 次';
 }
 async function sendChat(){
   if (!currentUser){ showToast('请先登录再使用 AI 助手'); go('login'); return; }
@@ -3159,8 +3124,7 @@ async function sendChat(){
     if (!res.ok){
       const err = await res.json().catch(() => ({}));
       aiDiv.textContent = '⚠️ ' + (err.error || '请求失败');
-      chatSend.disabled = false;
-      return;
+      chatSend.disabled = false; return;
     }
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
@@ -3187,9 +3151,7 @@ async function sendChat(){
     updateQuota();
   } catch (err){
     aiDiv.textContent = '⚠️ 网络错误：' + err.message;
-  } finally {
-    chatSend.disabled = false;
-  }
+  } finally { chatSend.disabled = false; }
 }
 chatSend.addEventListener('click', sendChat);
 chatInput.addEventListener('keydown', e => {
@@ -3204,12 +3166,11 @@ document.getElementById('chatSample').addEventListener('click', () => {
   chatInput.focus();
 });
 
-/* ===================== 13. 通用 AI 弹窗 ===================== */
+/* ===================== 13. AI 弹窗辅助 ===================== */
 const aiPop      = document.getElementById('aiPop');
 const aiPopTitle = document.getElementById('aiPopTitle');
 const aiPopBody  = document.getElementById('aiPopBody');
 let aiPopInsertHandler = null;
-
 async function openAiPop(title, prompt, onInsert){
   if (!currentUser){ showToast('请先登录再使用 AI'); go('login'); return; }
   aiPopTitle.textContent = title;
@@ -3233,9 +3194,7 @@ async function openAiPop(title, prompt, onInsert){
     const text = data.choices?.[0]?.message?.content || data.error || '无结果';
     aiPopBody.textContent = text;
     updateQuota();
-  } catch(err){
-    aiPopBody.textContent = '⚠️ ' + err.message;
-  }
+  } catch(err){ aiPopBody.textContent = '⚠️ ' + err.message; }
 }
 document.getElementById('aiPopClose').addEventListener('click', () => aiPop.classList.remove('show'));
 document.getElementById('aiPopCopy').addEventListener('click', () => {
@@ -3245,22 +3204,16 @@ document.getElementById('aiPopInsert').addEventListener('click', () => {
   if (aiPopInsertHandler) aiPopInsertHandler(aiPopBody.textContent);
   aiPop.classList.remove('show');
 });
-
-/* 人物：AI 生成小传 */
 document.getElementById('pAiBtn').addEventListener('click', () => {
   const name = document.getElementById('pName').value.trim();
   if (!name){ alert('请先填写姓名'); return; }
-  const info = [
-    '姓名：' + name,
-    '类型：' + document.getElementById('pType').value,
+  const info = ['姓名：' + name, '类型：' + document.getElementById('pType').value,
     '身份：' + document.getElementById('pRole').value,
     '外貌：' + document.getElementById('pLook').value,
-    '性格：' + document.getElementById('pChar').value
-  ].join('\n');
+    '性格：' + document.getElementById('pChar').value].join('\n');
   openAiPop('AI 生成人物小传', '请根据以下信息写一段 200 字左右的人物小传：\n' + info,
     (text) => { document.getElementById('pImp').value = text; });
 });
-/* 影视：AI 生成简介 */
 document.getElementById('mAiBtn').addEventListener('click', () => {
   const title = document.getElementById('mTitle').value.trim();
   if (!title){ alert('请先填写影视名称'); return; }
@@ -3270,35 +3223,564 @@ document.getElementById('mAiBtn').addEventListener('click', () => {
     '请为影视作品《' + title + '》写一段 150 字左右的简介。' + (year ? '年份：' + year + '。' : '') + (country ? '国别：' + country + '。' : ''),
     (text) => { document.getElementById('mDesc').value = text; });
 });
-/* 字数：AI 润色 */
 document.getElementById('wcAiBtn').addEventListener('click', () => {
   const t = wcText.value.trim();
   if (!t){ alert('请先输入内容'); return; }
   openAiPop('AI 润色', '请润色以下文字，保持原意，让语句更流畅：\n\n' + t,
     (text) => { wcText.value = text; updateWC(); });
 });
-/* 代码：AI 解释 */
 document.getElementById('codeAiBtn').addEventListener('click', () => {
   const c = codeInputEl.value.trim();
   if (!c){ alert('请先输入代码'); return; }
   openAiPop('AI 解释代码', '请用中文解释以下代码的功能，并指出可能的问题：\n\n' + c, null);
 });
 
-/* ===================== 14. 数据管理 ===================== */
+/* ===================== 14. AI 子工具切换 ===================== */
+document.querySelectorAll('.ai-subtab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.ai-subtab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.ai;
+    document.querySelectorAll('.ai-subpage').forEach(p => p.classList.toggle('active', p.dataset.aiPage === target));
+    if (target === 'notes') loadNotes();
+    if (target === 'timeline') loadTimeline();
+  });
+});
+
+/* ===================== 15. 时间线 ===================== */
+let timelineEvents = [];
+function saveTimeline(){ try { localStorage.setItem(TL_KEY, JSON.stringify(timelineEvents)); updateStorageUsage(); return true; } catch(e){ return false; } }
+function loadTimeline(){
+  try { const raw = localStorage.getItem(TL_KEY); if (raw) timelineEvents = JSON.parse(raw) || []; } catch(e){ timelineEvents = []; }
+  renderTimeline();
+}
+function renderTimeline(){
+  const list = document.getElementById('tlList');
+  document.getElementById('tlCount').textContent = timelineEvents.length;
+  if (timelineEvents.length === 0){ list.innerHTML = '<p class="empty">还没有事件，先在上方添加一条吧～</p>'; return; }
+  list.innerHTML = timelineEvents.map(t => {
+    return '<div class="tl-item"><div class="tl-actions"><button class="mini-btn danger" data-tldel="' + t.id + '">删除</button></div>' +
+      (t.event_time ? '<span class="tl-time">' + esc(t.event_time) + '</span>' : '') +
+      '<h4 class="tl-title">' + esc(t.title) + (t.category ? '<span class="tl-cat">' + esc(t.category) + '</span>' : '') + '</h4>' +
+      (t.description ? '<p class="tl-desc">' + esc(t.description) + '</p>' : '') + '</div>';
+  }).join('');
+  list.querySelectorAll('[data-tldel]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.tldel;
+      const t = timelineEvents.find(x => String(x.id) === String(id));
+      if (!t || !confirm('确定删除「' + t.title + '」吗？')) return;
+      try {
+        if (appMode === 'cloud' && currentUser) await cloudDelete('timeline_events', id);
+        timelineEvents = timelineEvents.filter(x => String(x.id) !== String(id));
+        if (appMode === 'local') saveTimeline();
+        renderTimeline();
+      } catch(err){ alert('删除失败：' + err.message); }
+    });
+  });
+}
+document.getElementById('tlAdd').addEventListener('click', async () => {
+  const title = document.getElementById('tlTitle').value.trim();
+  if (!title){ alert('请填写标题～'); return; }
+  const data = {
+    title, event_time: document.getElementById('tlTime').value.trim(),
+    category: document.getElementById('tlCat').value.trim(),
+    description: document.getElementById('tlDesc').value.trim(),
+    order_index: timelineEvents.length
+  };
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const row = await cloudInsert('timeline_events', data);
+      timelineEvents.push(row);
+    } else {
+      timelineEvents.push({ id: Date.now() + '-' + Math.floor(Math.random()*1000), ...data });
+      if (!saveTimeline()){ timelineEvents.pop(); return; }
+    }
+    ['tlTitle','tlTime','tlCat','tlDesc'].forEach(id => document.getElementById(id).value = '');
+    renderTimeline(); showToast('已添加事件');
+  } catch(err){ alert('保存失败：' + err.message); }
+});
+document.getElementById('tlReset').addEventListener('click', () => {
+  ['tlTitle','tlTime','tlCat','tlDesc'].forEach(id => document.getElementById(id).value = '');
+});
+document.getElementById('tlSort').addEventListener('click', () => {
+  timelineEvents.sort((a,b) => String(a.event_time||'').localeCompare(String(b.event_time||'')));
+  renderTimeline(); showToast('已按时间排序');
+});
+
+/* ===================== 16. 对话生成器 ===================== */
+function parseDialogue(text){
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  return lines.map(line => {
+    const m = line.match(/^([^：:]+)[：:]\s*(.+)$/);
+    if (m) return { speaker: m[1].trim(), text: m[2].trim() };
+    return { speaker: '', text: line };
+  });
+}
+document.getElementById('dlgGen').addEventListener('click', async () => {
+  if (!currentUser){ showToast('请先登录再使用 AI'); go('login'); return; }
+  const a = document.getElementById('dlgA').value.trim();
+  const b = document.getElementById('dlgB').value.trim();
+  const scene = document.getElementById('dlgScene').value.trim();
+  const rounds = document.getElementById('dlgRounds').value;
+  if (!a || !b){ alert('请填写两个角色名称'); return; }
+  const log = document.getElementById('dlgLog');
+  log.innerHTML = '<p class="empty">生成中…</p>';
+  let extra = '';
+  const pa = people.find(p => p.name === a);
+  const pb = people.find(p => p.name === b);
+  if (pa) extra += '\n【' + a + '设定】' + [pa.type, pa.role, pa.character, pa.look].filter(Boolean).join('，');
+  if (pb) extra += '\n【' + b + '设定】' + [pb.type, pb.role, pb.character, pb.look].filter(Boolean).join('，');
+  const prompt = `请模拟一段 ${a} 和 ${b} 之间的对话，共 ${rounds} 轮（每轮一人一句）。\n场景：${scene || '未指定'}` + extra +
+    `\n\n格式要求：每行以「${a}：」或「${b}：」开头，一句一行，不要加旁白，不要解释。`;
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    const res = await fetch(AI_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: '你是小说对白生成器，只输出对话内容。' },
+          { role: 'user', content: prompt }
+        ],
+        stream: false
+      })
+    });
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || data.error || '生成失败';
+    const lines = parseDialogue(text);
+    if (!lines.length){ log.innerHTML = '<p class="empty">' + esc(text) + '</p>'; return; }
+    log.innerHTML = lines.map(l => {
+      const isA = l.speaker === a;
+      const cls = isA ? 'a' : (l.speaker === b ? 'b' : '');
+      return '<div class="dlg-line ' + cls + '">' +
+        (l.speaker ? '<div class="dlg-speaker">' + esc(l.speaker) + '</div>' : '') +
+        '<div class="dlg-text">' + esc(l.text) + '</div></div>';
+    }).join('');
+    updateQuota();
+  } catch(err){ log.innerHTML = '<p class="empty">⚠️ ' + esc(err.message) + '</p>'; }
+});
+document.getElementById('dlgClear').addEventListener('click', () => {
+  document.getElementById('dlgLog').innerHTML = '<p class="empty">还没有生成对话，点击上方按钮开始～</p>';
+});
+
+/* ===================== 17. 随机生成器 ===================== */
+const RNG_POOLS = {
+  name: {
+    pool: ['林清越','苏晚','沈砚','顾承轩','陆时衍','江辞','萧景行','楚言','谢知微','云舒','慕容昭','宋归','叶寒舟','裴书','柳眠'],
+    make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; }
+  },
+  place: { pool: ['云隐山','忘川渡','长夜城','碧落海','沧澜关','听雪楼','明月谷','九霄殿','无归岛','落霞坡','寒鸦岭','朱雀街','白鹭洲','烟雨巷','断桥'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  appearance: { pool: ['眉眼清冷，唇角微勾','身姿挺拔，气质沉静','一双桃花眼，笑意不达眼底','短发利落，耳后有一颗小痣','面色苍白，唇色极淡','身形瘦削，指节分明','长发及腰，用一根木簪挽起','右眼下有一颗泪痣'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  personality: { pool: ['外冷内热','嘴硬心软','谨慎多疑','疏离寡言','温和守礼','偏执固执','毒舌腹黑','天真迟钝','温柔坚韧','孤傲清高','八面玲珑','不按常理出牌'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  conflict: { pool: ['昔日挚友反目成仇','为了保护对方而说出伤人的话','一个承诺却注定无法实现','立场不同却动了真心','身份暴露后的信任危机','以为对方已经死去，多年后重逢','因误会而错过','为了大局牺牲一人','复仇与宽恕的抉择'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  opening: { pool: ['雨下了一整夜，他坐在窗边，等一个不会来的人。','剑鸣声在空谷中回荡，她握紧了手中的剑。','「你终于来了。」他抬起头，眼底有光。','那封信在她手里被反复摩挲，字迹已经模糊。','城门在身后缓缓关闭，他头也不回地走了。','这是她第三次梦见那个地方。','桌上那杯茶还温着，人却已经不见了。'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  item: { pool: ['一枚刻着名字的玉佩','一把断剑','半张旧地图','褪色的红绳','一只空了的药瓶','母亲的遗物','刻满符文的古镜','未寄出的信','生锈的钥匙'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  weather: { pool: ['细雨绵绵，空气里都是泥土味','大雪封城，天地一片素白','烈日当空，蝉鸣聒噪','秋风卷叶，满地金黄','浓雾弥漫，五步之内不见人影','月明星稀，夜风微凉','暴雨倾盆，雷声滚滚'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } },
+  twist: { pool: ['一直帮助主角的人其实是幕后黑手','救下的陌生人正是要找的仇人','以为死去的角色其实还活着','所谓的敌人和自己有血缘关系','真相是主角自己的记忆被篡改','一直守护的东西其实早就碎了','主角身世另有隐情','预言中的救世主是个孩子'], make(){ return this.pool[Math.floor(Math.random()*this.pool.length)]; } }
+};
+let lastRngKey = 'name';
+function runRng(key){
+  lastRngKey = key;
+  const pool = RNG_POOLS[key];
+  if (!pool) return;
+  document.getElementById('rngResult').textContent = pool.make();
+}
+document.querySelectorAll('.rng-chip').forEach(chip => chip.addEventListener('click', () => runRng(chip.dataset.rng)));
+document.getElementById('rngAgain').addEventListener('click', () => runRng(lastRngKey));
+
+/* ===================== 18. AI 起名器 ===================== */
+document.getElementById('nmGen').addEventListener('click', async () => {
+  if (!currentUser){ showToast('请先登录再使用 AI'); go('login'); return; }
+  const type = document.getElementById('nmType').value;
+  const style = document.getElementById('nmStyle').value;
+  const kw = document.getElementById('nmKeyword').value.trim();
+  const list = document.getElementById('nmList');
+  list.innerHTML = '<p class="empty">生成中…</p>';
+  const prompt = `请生成 10 个${style}风格的${type}，${kw ? '可以关联关键词「' + kw + '」，' : ''}直接列出 10 个，每行一个，不要编号，不要解释。`;
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    const res = await fetch(AI_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: '你是起名助手，只输出名字，不要解释。' },
+          { role: 'user', content: prompt }
+        ],
+        stream: false
+      })
+    });
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || data.error || '生成失败';
+    const names = text.split('\n').map(l => l.replace(/^\d+[.、)]\s*/,'').trim()).filter(Boolean).slice(0, 15);
+    if (!names.length){ list.innerHTML = '<p class="empty">' + esc(text) + '</p>'; return; }
+    list.innerHTML = names.map(n => '<span class="name-item" data-name="' + esc(n) + '">' + esc(n) + '<span class="star">☆</span></span>').join('');
+    list.querySelectorAll('.name-item').forEach(el => {
+      el.addEventListener('click', e => {
+        if (e.target.classList.contains('star')){
+          el.classList.toggle('faved');
+          el.querySelector('.star').textContent = el.classList.contains('faved') ? '★' : '☆';
+          return;
+        }
+        navigator.clipboard.writeText(el.dataset.name).then(() => showToast('已复制：' + el.dataset.name));
+      });
+    });
+    updateQuota();
+  } catch(err){ list.innerHTML = '<p class="empty">⚠️ ' + esc(err.message) + '</p>'; }
+});
+document.getElementById('nmClear').addEventListener('click', () => { document.getElementById('nmList').innerHTML = ''; });
+
+/* ===================== 19. 灵感速记 ===================== */
+let notes = [], noteSearchQ = '';
+function saveNotes(){ try { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); updateStorageUsage(); return true; } catch(e){ return false; } }
+function loadNotes(){
+  try { const raw = localStorage.getItem(NOTES_KEY); if (raw) notes = JSON.parse(raw) || []; } catch(e){ notes = []; }
+  renderNotes();
+}
+function renderNotes(){
+  const list = document.getElementById('noteList');
+  const q = noteSearchQ.toLowerCase();
+  let filtered = notes;
+  if (q){ filtered = notes.filter(n => (n.content || '').toLowerCase().includes(q) || (n.tags || '').toLowerCase().includes(q)); }
+  document.getElementById('noteCount').textContent = filtered.length;
+  if (filtered.length === 0){
+    list.innerHTML = '<p class="empty" style="grid-column:1/-1;">' + (q ? '没有匹配的灵感～' : '还没有灵感，先在上方写一条吧～') + '</p>';
+    return;
+  }
+  list.innerHTML = filtered.map(n => {
+    const tagArr = (n.tags || '').split(/[,，\s]+/).filter(Boolean);
+    const dt = n.created_at ? new Date(n.created_at) : null;
+    const timeStr = dt ? (dt.getFullYear() + '-' + pad2(dt.getMonth()+1) + '-' + pad2(dt.getDate()) + ' ' + pad2(dt.getHours()) + ':' + pad2(dt.getMinutes())) : '';
+    return '<div class="note-card">' +
+      '<button class="note-del" data-ndel="' + n.id + '" title="删除">✕</button>' +
+      '<div class="note-content">' + esc(n.content) + '</div>' +
+      (tagArr.length ? '<div class="note-tags">' + tagArr.map(t => '<span class="note-tag">#' + esc(t) + '</span>').join('') + '</div>' : '') +
+      (timeStr ? '<div class="note-time">' + timeStr + '</div>' : '') + '</div>';
+  }).join('');
+  list.querySelectorAll('[data-ndel]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.ndel;
+      const t = notes.find(x => String(x.id) === String(id));
+      if (!t || !confirm('确定删除这条灵感吗？')) return;
+      try {
+        if (appMode === 'cloud' && currentUser) await cloudDelete('notes', id);
+        notes = notes.filter(x => String(x.id) !== String(id));
+        if (appMode === 'local') saveNotes();
+        renderNotes();
+      } catch(err){ alert('删除失败：' + err.message); }
+    });
+  });
+}
+document.getElementById('noteAdd').addEventListener('click', async () => {
+  const content = document.getElementById('noteContent').value.trim();
+  if (!content){ alert('请写点内容～'); return; }
+  const tags = document.getElementById('noteTags').value.trim();
+  const data = { content, tags };
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const row = await cloudInsert('notes', data);
+      notes.unshift(row);
+    } else {
+      notes.unshift({ id: Date.now() + '-' + Math.floor(Math.random()*1000), ...data, created_at: new Date().toISOString() });
+      if (!saveNotes()){ notes.shift(); return; }
+    }
+    document.getElementById('noteContent').value = '';
+    document.getElementById('noteTags').value = '';
+    renderNotes(); showToast('灵感已记录');
+  } catch(err){ alert('保存失败：' + err.message); }
+});
+document.getElementById('noteSearch').addEventListener('input', e => { noteSearchQ = e.target.value.trim(); renderNotes(); });
+document.getElementById('noteClearAll').addEventListener('click', async () => {
+  if (notes.length === 0) return;
+  if (!confirm('确定清空全部灵感吗？')) return;
+  try {
+    if (appMode === 'cloud' && currentUser) await sb.from('notes').delete().eq('user_id', currentUser.id);
+    notes = [];
+    try { localStorage.removeItem(NOTES_KEY); } catch(e){}
+    renderNotes(); showToast('灵感已清空');
+  } catch(err){ alert('清空失败：' + err.message); }
+});
+
+/* ===================== 20. 小说管理 ===================== */
+let novels = [], currentNovel = null, currentChapter = null;
+function loadNovels(){
+  try { const raw = localStorage.getItem(NOVELS_KEY); if (raw) novels = JSON.parse(raw) || []; } catch(e){ novels = []; }
+}
+function saveNovelsLocal(){ try { localStorage.setItem(NOVELS_KEY, JSON.stringify(novels)); return true; } catch(e){ return false; } }
+function loadChaptersLocal(){
+  try { const raw = localStorage.getItem(CHAPTERS_KEY); return raw ? JSON.parse(raw) || [] : []; } catch(e){ return []; }
+}
+function saveChaptersLocal(arr){ try { localStorage.setItem(CHAPTERS_KEY, JSON.stringify(arr)); return true; } catch(e){ return false; } }
+async function fetchChapters(novelId){
+  if (appMode === 'cloud' && currentUser){
+    const { data, error } = await sb.from('novel_chapters').select('*').eq('novel_id', novelId).order('order_index', { ascending: true });
+    if (error){ console.warn(error); return []; }
+    return data || [];
+  }
+  return loadChaptersLocal().filter(c => String(c.novel_id) === String(novelId)).sort((a,b) => (a.order_index||0) - (b.order_index||0));
+}
+function countChars(text){ if (!text) return 0; return text.replace(/\s/g,'').length; }
+async function renderNovelList(){
+  const list = document.getElementById('novelList');
+  document.getElementById('nvCount').textContent = novels.length;
+  if (novels.length === 0){ list.innerHTML = '<p class="empty" style="grid-column:1/-1;">还没有小说，先在上方新建一本吧～</p>'; return; }
+  const counts = {};
+  if (appMode === 'cloud' && currentUser){
+    for (const n of novels){
+      const chs = await fetchChapters(n.id);
+      counts[n.id] = { chapters: chs.length, words: chs.reduce((a,c) => a + countChars(c.content), 0) };
+    }
+  } else {
+    const all = loadChaptersLocal();
+    novels.forEach(n => {
+      const chs = all.filter(c => String(c.novel_id) === String(n.id));
+      counts[n.id] = { chapters: chs.length, words: chs.reduce((a,c) => a + countChars(c.content), 0) };
+    });
+  }
+  list.innerHTML = novels.map(n => {
+    const c = counts[n.id] || { chapters: 0, words: 0 };
+    return '<div class="novel-card" data-nvid="' + n.id + '">' +
+      '<button class="del-btn" data-nvdel="' + n.id + '" title="删除">✕</button>' +
+      '<h3>' + esc(n.title) + '</h3>' +
+      '<div class="novel-meta">' + c.chapters + ' 章 · ' + c.words + ' 字</div>' +
+      (n.synopsis ? '<p class="novel-syn">' + esc(n.synopsis) + '</p>' : '') + '</div>';
+  }).join('');
+  list.querySelectorAll('.novel-card').forEach(card => {
+    card.addEventListener('click', e => { if (e.target.classList.contains('del-btn')) return; openNovel(card.dataset.nvid); });
+  });
+  list.querySelectorAll('[data-nvdel]').forEach(btn => {
+    btn.addEventListener('click', async e => {
+      e.stopPropagation();
+      const id = btn.dataset.nvdel;
+      const n = novels.find(x => String(x.id) === String(id));
+      if (!n || !confirm('确定删除「' + n.title + '」及其所有章节吗？此操作不可恢复。')) return;
+      try {
+        if (appMode === 'cloud' && currentUser){ await sb.from('novels').delete().eq('id', id); }
+        else { saveChaptersLocal(loadChaptersLocal().filter(c => String(c.novel_id) !== String(id))); }
+        novels = novels.filter(x => String(x.id) !== String(id));
+        if (appMode === 'local') saveNovelsLocal();
+        renderNovelList(); showToast('已删除小说');
+      } catch(err){ alert('删除失败：' + err.message); }
+    });
+  });
+}
+document.getElementById('nvCreate').addEventListener('click', async () => {
+  const title = document.getElementById('nvTitle').value.trim();
+  if (!title){ alert('请填写小说名称～'); return; }
+  const synopsis = document.getElementById('nvSyn').value.trim();
+  const data = { title, synopsis };
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const { data: row, error } = await sb.from('novels').insert({ ...data, user_id: currentUser.id }).select().single();
+      if (error) throw error;
+      novels.push(row);
+    } else {
+      const row = { id: Date.now() + '-' + Math.floor(Math.random()*1000), ...data, created_at: new Date().toISOString() };
+      novels.push(row);
+      if (!saveNovelsLocal()){ novels.pop(); return; }
+    }
+    document.getElementById('nvTitle').value = '';
+    document.getElementById('nvSyn').value = '';
+    renderNovelList(); showToast('已新建小说');
+  } catch(err){ alert('新建失败：' + err.message); }
+});
+async function openNovel(id){
+  currentNovel = novels.find(n => String(n.id) === String(id));
+  if (!currentNovel) return;
+  document.getElementById('novelListView').style.display = 'none';
+  document.getElementById('novelEditView').style.display = '';
+  document.getElementById('nvEditTitle').textContent = currentNovel.title;
+  currentChapter = null;
+  document.getElementById('chapterTitleInput').value = '';
+  document.getElementById('chapterContent').value = '';
+  document.getElementById('chWc').textContent = '0';
+  await refreshChapterList();
+}
+async function refreshChapterList(){
+  if (!currentNovel) return;
+  const chapters = await fetchChapters(currentNovel.id);
+  const list = document.getElementById('chapterList');
+  if (chapters.length === 0){ list.innerHTML = '<p class="empty">还没有章节，点击上方「新章节」创建～</p>'; }
+  else {
+    list.innerHTML = chapters.map(c => {
+      const wc = countChars(c.content);
+      return '<div class="chapter-item' + (currentChapter && String(currentChapter.id) === String(c.id) ? ' active' : '') + '" data-chid="' + c.id + '">' +
+        '<span class="chapter-title">' + esc(c.title) + '</span>' +
+        '<span class="chapter-wc">' + wc + ' 字</span></div>';
+    }).join('');
+    list.querySelectorAll('.chapter-item').forEach(el => el.addEventListener('click', () => openChapter(el.dataset.chid)));
+  }
+  const total = chapters.reduce((a,c) => a + countChars(c.content), 0);
+  document.getElementById('nvEditMeta').textContent = chapters.length + ' 章 · ' + total + ' 字';
+  document.getElementById('nvWc').textContent = total;
+}
+async function openChapter(id){
+  if (!currentNovel) return;
+  const chapters = await fetchChapters(currentNovel.id);
+  const ch = chapters.find(c => String(c.id) === String(id));
+  if (!ch) return;
+  currentChapter = ch;
+  document.getElementById('chapterTitleInput').value = ch.title || '';
+  document.getElementById('chapterContent').value = ch.content || '';
+  document.getElementById('chWc').textContent = countChars(ch.content);
+  await refreshChapterList();
+}
+document.getElementById('chAdd').addEventListener('click', async () => {
+  if (!currentNovel) return;
+  const chapters = await fetchChapters(currentNovel.id);
+  const title = '第 ' + (chapters.length + 1) + ' 章';
+  const data = { novel_id: currentNovel.id, title, content: '', order_index: chapters.length };
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const { data: row, error } = await sb.from('novel_chapters').insert({ ...data, user_id: currentUser.id }).select().single();
+      if (error) throw error;
+      currentChapter = row;
+    } else {
+      const row = { id: Date.now() + '-' + Math.floor(Math.random()*1000), ...data, created_at: new Date().toISOString() };
+      const all = loadChaptersLocal();
+      all.push(row);
+      if (!saveChaptersLocal(all)) return;
+      currentChapter = row;
+    }
+    document.getElementById('chapterTitleInput').value = title;
+    document.getElementById('chapterContent').value = '';
+    document.getElementById('chWc').textContent = '0';
+    await refreshChapterList(); showToast('已新建章节');
+  } catch(err){ alert('新建失败：' + err.message); }
+});
+document.getElementById('chSave').addEventListener('click', async () => {
+  if (!currentNovel || !currentChapter){ showToast('请先选择或新建章节'); return; }
+  const title = document.getElementById('chapterTitleInput').value.trim() || '未命名';
+  const content = document.getElementById('chapterContent').value;
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const { error } = await sb.from('novel_chapters').update({ title, content, updated_at: new Date().toISOString() }).eq('id', currentChapter.id);
+      if (error) throw error;
+      currentChapter.title = title; currentChapter.content = content;
+    } else {
+      const all = loadChaptersLocal();
+      const i = all.findIndex(c => String(c.id) === String(currentChapter.id));
+      if (i < 0) throw new Error('章节不存在');
+      all[i] = { ...all[i], title, content };
+      if (!saveChaptersLocal(all)) throw new Error('本地保存失败');
+      currentChapter = all[i];
+    }
+    document.getElementById('chWc').textContent = countChars(content);
+    await refreshChapterList(); showToast('已保存');
+  } catch(err){ alert('保存失败：' + err.message); }
+});
+document.getElementById('chapterContent').addEventListener('input', e => {
+  document.getElementById('chWc').textContent = countChars(e.target.value);
+});
+document.getElementById('chDelete').addEventListener('click', async () => {
+  if (!currentChapter) return;
+  if (!confirm('确定删除本章吗？此操作不可恢复。')) return;
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const { error } = await sb.from('novel_chapters').delete().eq('id', currentChapter.id);
+      if (error) throw error;
+    } else {
+      saveChaptersLocal(loadChaptersLocal().filter(c => String(c.id) !== String(currentChapter.id)));
+    }
+    currentChapter = null;
+    document.getElementById('chapterTitleInput').value = '';
+    document.getElementById('chapterContent').value = '';
+    document.getElementById('chWc').textContent = '0';
+    await refreshChapterList(); showToast('已删除章节');
+  } catch(err){ alert('删除失败：' + err.message); }
+});
+document.getElementById('nvBack').addEventListener('click', async () => {
+  document.getElementById('novelListView').style.display = '';
+  document.getElementById('novelEditView').style.display = 'none';
+  currentNovel = null; currentChapter = null;
+  await renderNovelList();
+});
+document.getElementById('nvRename').addEventListener('click', async () => {
+  if (!currentNovel) return;
+  const newTitle = prompt('新的小说名称：', currentNovel.title);
+  if (!newTitle || newTitle.trim() === currentNovel.title) return;
+  try {
+    if (appMode === 'cloud' && currentUser){
+      const { error } = await sb.from('novels').update({ title: newTitle.trim(), updated_at: new Date().toISOString() }).eq('id', currentNovel.id);
+      if (error) throw error;
+    } else {
+      const i = novels.findIndex(n => String(n.id) === String(currentNovel.id));
+      if (i >= 0){ novels[i].title = newTitle.trim(); saveNovelsLocal(); }
+    }
+    currentNovel.title = newTitle.trim();
+    document.getElementById('nvEditTitle').textContent = currentNovel.title;
+    showToast('已重命名');
+  } catch(err){ alert('重命名失败：' + err.message); }
+});
+document.getElementById('nvDelete').addEventListener('click', async () => {
+  if (!currentNovel) return;
+  if (!confirm('确定删除「' + currentNovel.title + '」及其所有章节吗？')) return;
+  try {
+    if (appMode === 'cloud' && currentUser){ await sb.from('novels').delete().eq('id', currentNovel.id); }
+    else { saveChaptersLocal(loadChaptersLocal().filter(c => String(c.novel_id) !== String(currentNovel.id))); }
+    novels = novels.filter(n => String(n.id) !== String(currentNovel.id));
+    if (appMode === 'local') saveNovelsLocal();
+    currentNovel = null; currentChapter = null;
+    document.getElementById('novelListView').style.display = '';
+    document.getElementById('novelEditView').style.display = 'none';
+    await renderNovelList(); showToast('已删除小说');
+  } catch(err){ alert('删除失败：' + err.message); }
+});
+document.getElementById('nvExportTxt').addEventListener('click', async () => {
+  if (!currentNovel) return;
+  const chapters = await fetchChapters(currentNovel.id);
+  const lines = [currentNovel.title, ''];
+  if (currentNovel.synopsis) lines.push('简介：' + currentNovel.synopsis, '');
+  chapters.forEach(c => { lines.push(c.title, '', c.content || '', ''); });
+  const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = currentNovel.title + '_' + timeStamp(new Date()) + '.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1200);
+  showToast('已导出 TXT');
+});
+document.getElementById('nvExportHtml').addEventListener('click', async () => {
+  if (!currentNovel) return;
+  const chapters = await fetchChapters(currentNovel.id);
+  const totalWc = chapters.reduce((a,c) => a + countChars(c.content), 0);
+  const body = chapters.map(c => '<section class="ch"><h2>' + esc(c.title) + '</h2>' +
+    esc(c.content || '').split('\n').map(p => p.trim() ? '<p>' + p + '</p>' : '').join('') + '</section>').join('\n');
+  const html = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>' + esc(currentNovel.title) + '</title><style>' +
+    'body{font-family:"Songti SC","STSong","PingFang SC",serif;max-width:760px;margin:0 auto;padding:48px 32px 80px;line-height:2;color:#111827;background:#fafaf7;}' +
+    'h1{font-size:28px;text-align:center;margin:0 0 12px;letter-spacing:4px;}' +
+    '.meta{text-align:center;color:#9ca3af;font-size:13px;margin-bottom:12px;}' +
+    '.syn{color:#6b7280;font-size:14px;text-align:center;margin-bottom:38px;padding-bottom:22px;border-bottom:1px solid #e5e7eb;}' +
+    '.ch{margin-bottom:44px;}.ch h2{font-size:19px;margin:32px 0 16px;}.ch p{margin:0 0 14px;text-indent:2em;font-size:16px;}' +
+    '</style></head><body><h1>' + esc(currentNovel.title) + '</h1>' +
+    '<p class="meta">共 ' + chapters.length + ' 章 · ' + totalWc + ' 字</p>' +
+    (currentNovel.synopsis ? '<p class="syn">' + esc(currentNovel.synopsis) + '</p>' : '') +
+    body + '</body></html>';
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = currentNovel.title + '_' + timeStamp(new Date()) + '.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1200);
+  showToast('已导出 HTML');
+});
+loadNovels();
+renderNovelList();
+
+/* ===================== 21. 数据管理 ===================== */
 function exportAll(){
   const data = {
-    app: '岁窦工具箱', version: 'V1.5', exportTime: new Date().toISOString(),
-    people: people, songs: songs, places: places, medias: medias, schedules: schedules
+    app: '岁窦工具箱', version: 'V1.6', exportTime: new Date().toISOString(),
+    people, songs, places, medias, schedules, notes, timelineEvents, novels
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
   const url = URL.createObjectURL(blob);
   const d = new Date();
   const a = document.createElement('a');
-  a.href = url;
-  a.download = '岁窦工具箱备份_' + timeStamp(d) + '.json';
+  a.href = url; a.download = '岁窦工具箱备份_' + timeStamp(d) + '.json';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  showToast('已导出：人物 ' + people.length + ' · 歌曲 ' + songs.length + ' · 地点 ' + places.length + ' · 影视 ' + medias.length + ' · 日程 ' + schedules.length);
+  showToast('已导出全部数据');
 }
 document.getElementById('exportAll').addEventListener('click', exportAll);
 document.getElementById('importAll').addEventListener('click', () => document.getElementById('importFile').click());
@@ -3309,48 +3791,41 @@ document.getElementById('importFile').addEventListener('change', e => {
   reader.onload = ev => {
     try {
       const data = JSON.parse(ev.target.result);
-      const pc = Array.isArray(data.people) ? data.people.length : 0;
-      const sc = Array.isArray(data.songs) ? data.songs.length : 0;
-      const lc = Array.isArray(data.places) ? data.places.length : 0;
-      const mc = Array.isArray(data.medias) ? data.medias.length : 0;
-      const cc = Array.isArray(data.schedules) ? data.schedules.length : 0;
-      if (!pc && !sc && !lc && !mc && !cc) { alert('文件里没有可导入的数据'); e.target.value=''; return; }
-      if (!confirm('导入将替换当前全部数据，确定继续吗？\n\n文件内容：人物 ' + pc + ' 条，歌曲 ' + sc + ' 条，地点 ' + lc + ' 条，影视 ' + mc + ' 条，日程 ' + cc + ' 条')){ e.target.value = ''; return; }
+      if (!confirm('导入将替换当前全部数据，确定继续吗？')){ e.target.value = ''; return; }
       if (Array.isArray(data.people))    { people    = data.people;    savePeople();    renderPeople();    }
       if (Array.isArray(data.songs))     { songs     = data.songs;     saveSongs();     renderSongs();     }
       if (Array.isArray(data.places))    { places    = data.places;    savePlaces();    renderPlaces();    }
       if (Array.isArray(data.medias))    { medias    = data.medias;    saveMedias();    renderMedias();    }
       if (Array.isArray(data.schedules)) { schedules = data.schedules; saveSchedules(); renderCalendar();  }
-      updateStorageUsage();
-      showToast('导入成功');
+      if (Array.isArray(data.notes))     { notes     = data.notes;     saveNotes();     renderNotes();     }
+      if (Array.isArray(data.timelineEvents)){ timelineEvents = data.timelineEvents; saveTimeline(); renderTimeline(); }
+      if (Array.isArray(data.novels))    { novels    = data.novels;    saveNovelsLocal(); renderNovelList(); }
+      updateStorageUsage(); showToast('导入成功');
     } catch(err){ alert('导入失败：文件格式不正确'); }
     e.target.value = '';
   };
   reader.readAsText(file);
 });
 document.getElementById('clearAllData').addEventListener('click', async () => {
-  if (!people.length && !songs.length && !places.length && !medias.length && !schedules.length) { showToast('当前没有数据'); return; }
-  if (!confirm('确定要清空全部数据吗？（人物 + 歌曲 + 地点 + 影视 + 日程）\n建议先「导出全部数据」备份！')) return;
+  if (!confirm('确定要清空全部数据吗？建议先导出备份！')) return;
   try {
     if (appMode === 'cloud' && currentUser){
-      await sb.from('people').delete().eq('user_id', currentUser.id);
-      await sb.from('songs').delete().eq('user_id', currentUser.id);
-      await sb.from('places').delete().eq('user_id', currentUser.id);
-      await sb.from('medias').delete().eq('user_id', currentUser.id);
-      await sb.from('schedules').delete().eq('user_id', currentUser.id);
+      for (const t of ['people','songs','places','medias','schedules','notes','timeline_events','novels']){
+        await sb.from(t).delete().eq('user_id', currentUser.id);
+      }
     }
-    people = []; songs = []; places = []; medias = []; schedules = [];
+    people = []; songs = []; places = []; medias = []; schedules = []; notes = []; timelineEvents = []; novels = [];
     try {
-      localStorage.removeItem(PEOPLE_KEY); localStorage.removeItem(SONGS_KEY);
-      localStorage.removeItem(PLACES_KEY); localStorage.removeItem(MEDIA_KEY); localStorage.removeItem(CAL_KEY);
+      [PEOPLE_KEY, SONGS_KEY, PLACES_KEY, MEDIA_KEY, CAL_KEY, NOTES_KEY, TL_KEY, NOVELS_KEY, CHAPTERS_KEY].forEach(k => localStorage.removeItem(k));
     } catch(e){}
-    renderPeople(); renderSongs(); renderPlaces(); renderMedias(); renderCalendar(); updateStorageUsage();
-    showToast('全部数据已清空');
+    renderPeople(); renderSongs(); renderPlaces(); renderMedias(); renderCalendar(); renderNotes(); renderTimeline(); renderNovelList();
+    updateStorageUsage(); showToast('全部数据已清空');
   } catch(err){ alert('清空失败：' + err.message); }
 });
 
-/* 初始化存储用量 */
+/* ===================== 初始化 ===================== */
 updateStorageUsage();
+
 </script>
 </body>
 </html>
