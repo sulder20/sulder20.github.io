@@ -987,8 +987,33 @@ details.sub .inner{padding-bottom:14px;}
         <label class="field"><span>邮箱</span><input type="text" id="authEmail" placeholder="you@example.com" autocomplete="email"></label>
         <label class="field"><span>密码</span><input type="text" id="authPassword" placeholder="至少 6 位" style="-webkit-text-security:disc;text-security:disc;"></label>
         <button class="btn" id="authSubmit" style="width:100%;margin-top:6px;">登录</button>
+        <button class="btn ghost" id="forgotPwdBtn" style="width:100%;margin-top:8px;color:var(--primary);">忘记密码？</button>
         <button class="btn ghost" id="authBack" style="width:100%;margin-top:8px;">返回首页（本地模式）</button>
         <div class="auth-msg" id="authMsg"></div>
+      </div>
+    </div>
+  </section>
+    <!-- 重置密码 -->
+  <section id="page-reset" class="page">
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <h2 id="resetTitle">重置密码</h2>
+        <p class="sub" id="resetSub">输入你的注册邮箱，我们会发送一封重置密码的邮件。</p>
+
+        <label class="field" id="resetEmailField">
+          <span>邮箱</span>
+          <input type="text" id="resetEmail" placeholder="you@example.com" autocomplete="email">
+        </label>
+
+        <label class="field" id="resetPwdField" style="display:none;">
+          <span>新密码</span>
+          <input type="text" id="resetNewPwd" placeholder="至少 6 位" style="-webkit-text-security:disc;text-security:disc;">
+        </label>
+
+        <button class="btn" id="resetSubmit" style="width:100%;margin-top:6px;">发送重置邮件</button>
+        <button class="btn ghost" id="resetBack" style="width:100%;margin-top:8px;">返回登录</button>
+
+        <div class="auth-msg" id="resetMsg"></div>
       </div>
     </div>
   </section>
@@ -1489,6 +1514,103 @@ authSubmit.addEventListener('click', async () => {
   }
 });
 document.getElementById('authBack').addEventListener('click', () => go('home'));
+/* ===================== 忘记密码 / 重置密码 ===================== */
+const forgotPwdBtn = document.getElementById('forgotPwdBtn');
+const resetTitle   = document.getElementById('resetTitle');
+const resetSub     = document.getElementById('resetSub');
+const resetEmailField = document.getElementById('resetEmailField');
+const resetPwdField   = document.getElementById('resetPwdField');
+const resetEmail   = document.getElementById('resetEmail');
+const resetNewPwd  = document.getElementById('resetNewPwd');
+const resetSubmit  = document.getElementById('resetSubmit');
+const resetMsg     = document.getElementById('resetMsg');
+
+let resetMode = 'send'; // 'send' 发送重置邮件 | 'update' 设置新密码
+
+function showResetMsg(text, ok){
+  resetMsg.textContent = text;
+  resetMsg.className = 'auth-msg ' + (ok ? 'ok' : 'err');
+}
+
+/* 从登录页点击「忘记密码」 */
+forgotPwdBtn.addEventListener('click', () => {
+  resetMode = 'send';
+  resetTitle.textContent = '重置密码';
+  resetSub.textContent   = '输入你的注册邮箱，我们会发送一封重置密码的邮件。';
+  resetEmailField.style.display = '';
+  resetPwdField.style.display = 'none';
+  resetSubmit.textContent = '发送重置邮件';
+  resetMsg.className = 'auth-msg';
+  // 如果登录页已经填了邮箱，自动带入
+  const curEmail = document.getElementById('authEmail').value.trim();
+  if (curEmail) resetEmail.value = curEmail;
+  go('reset');
+});
+
+document.getElementById('resetBack').addEventListener('click', () => go('login'));
+
+resetSubmit.addEventListener('click', async () => {
+  if (resetMode === 'send'){
+    const email = resetEmail.value.trim();
+    if (!email){ showResetMsg('请填写邮箱', false); return; }
+    resetSubmit.disabled = true;
+    resetSubmit.textContent = '发送中…';
+    try {
+      const { error } = await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: location.origin + location.pathname
+      });
+      if (error) throw error;
+      showResetMsg('重置邮件已发送，请到邮箱点击链接（若未收到，请检查垃圾邮件）。', true);
+      resetSubmit.textContent = '重新发送';
+    } catch (err){
+      showResetMsg(err.message || '发送失败，请重试', false);
+      resetSubmit.textContent = '发送重置邮件';
+    } finally {
+      resetSubmit.disabled = false;
+    }
+  } else {
+    // 设置新密码
+    const pwd = resetNewPwd.value;
+    if (!pwd || pwd.length < 6){ showResetMsg('密码至少 6 位', false); return; }
+    resetSubmit.disabled = true;
+    resetSubmit.textContent = '保存中…';
+    try {
+      const { error } = await sb.auth.updateUser({ password: pwd });
+      if (error) throw error;
+      showResetMsg('密码已更新！请返回登录页使用新密码登录。', true);
+      resetSubmit.textContent = '已完成';
+      setTimeout(() => {
+        // 清除 URL 上的 token
+        history.replaceState(null, '', location.pathname);
+        go('login');
+      }, 1600);
+    } catch (err){
+      showResetMsg(err.message || '修改失败，请重新获取重置链接', false);
+      resetSubmit.disabled = false;
+      resetSubmit.textContent = '保存新密码';
+    }
+  }
+});
+
+/* 监听进入页面时 URL 上是否带了重置 token */
+(function checkResetToken(){
+  const hash = location.hash || '';
+  const search = location.search || '';
+  // Supabase 默认把 token 放在 hash 里，格式：#access_token=...&type=recovery
+  const hasRecovery = /type=recovery/.test(hash) || /type=recovery/.test(search) ||
+                      /access_token=/.test(hash) && /type=recovery/.test(hash);
+  if (hasRecovery){
+    // 切到重置密码页，直接显示「设置新密码」
+    resetMode = 'update';
+    resetTitle.textContent = '设置新密码';
+    resetSub.textContent   = '请输入你的新密码，提交后即可使用新密码登录。';
+    resetEmailField.style.display = 'none';
+    resetPwdField.style.display = '';
+    resetSubmit.textContent = '保存新密码';
+    resetMsg.className = 'auth-msg';
+    go('reset');
+  }
+})();
 
 async function maybeUploadLocalData(){
   const localCount =
