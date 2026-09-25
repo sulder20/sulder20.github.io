@@ -607,7 +607,7 @@ details.sub .inner{padding-bottom:14px;}
         <span class="version-val" style="color:#9ca3af;font-size:15px;">V2.1 正式版</span>
         <span style="color:#c7d2fe;font-weight:800;font-size:16px;">→</span>
         <span class="version-label">当前版本</span>
-        <span class="version-val">V2.2 黄金版</span>
+        <span class="version-val">V2.2.1 黄金版</span>
       </div>
       <div class="upgrade-grid">
         <div class="upgrade-item">
@@ -636,7 +636,7 @@ details.sub .inner{padding-bottom:14px;}
         </div>
         <div class="upgrade-item">
           <div class="up-head"><span class="up-badge">同步</span><b>全站版本号更新</b></div>
-          <p>设置页、页脚、帮助中心与「编者的话」中的版本号统一更新为 V2.2 黄金版，帮助文档的 HTML / Word / Markdown 导出内容也同步为最新版本。</p>
+          <p>设置页、页脚、帮助中心与「编者的话」中的版本号统一更新为 V2.2.1 黄金版，帮助文档的 HTML / Word / Markdown 导出内容也同步为最新版本。</p>
         </div>
       </div>
     </div>
@@ -1213,7 +1213,7 @@ details.sub .inner{padding-bottom:14px;}
         </div>
         <div class="help-info-row">
           <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-          <div class="help-info-body"><b>版本</b>：V2.2 黄金版（2026.10）</div>
+          <div class="help-info-body"><b>版本</b>：V2.2.1 黄金版（2026.10）</div>
         </div>
       </div>
 
@@ -1388,7 +1388,7 @@ details.sub .inner{padding-bottom:14px;}
 
       var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档</h1>' +
         '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
-        '<span class="ver">V2.2 黄金版（2026.10）</span></div>' +
+        '<span class="ver">V2.2.1 黄金版（2026.10）</span></div>' +
 
         '<h2>一、快速开始</h2><ol>' +
         '<li><b>找到你要的工具</b>：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。</li>' +
@@ -1485,7 +1485,7 @@ details.sub .inner{padding-bottom:14px;}
         '<ul>' +
         '<li><b>微博</b>：@岁窦工作室</li>' +
         '<li><b>邮箱</b>：q13052830801@163.com</li>' +
-        '<li><b>版本</b>：V2.2 黄金版（2026.10）</li>' +
+        '<li><b>版本</b>：V2.2.1 黄金版（2026.10）</li>' +
         '</ul>' +
 
         '<div class="footer">岁窦工具箱 · 帮助文档<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>';
@@ -1505,7 +1505,7 @@ details.sub .inner{padding-bottom:14px;}
       return [
         '# 岁窦工具箱 · 帮助文档', '',
         '> 新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明  ',
-        '> 版本：V2.2 黄金版（2026.10）', '', '---', '',
+        '> 版本：V2.2.1 黄金版（2026.10）', '', '---', '',
 
         '## 一、快速开始', '',
         '1. **找到你要的工具**：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。',
@@ -1576,7 +1576,7 @@ details.sub .inner{padding-bottom:14px;}
         '## 六、联系与反馈', '',
         '- 微博：@岁窦工作室',
         '- 邮箱：q13052830801@163.com',
-        '- 版本：V2.2 黄金版（2026.10）', '',
+        '- 版本：V2.2.1 黄金版（2026.10）', '',
         '---', '',
         '*岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
       ].join('\n');
@@ -1606,7 +1606,7 @@ async function downloadDocx() {
     spacing: { after: 120 }
   }));
   children.push(new D.Paragraph({
-    children: [new D.TextRun({ text: 'V2.2 黄金版（2026.10）', size: 22, font: FONT, color: '2563eb', bold: true })],
+    children: [new D.TextRun({ text: 'V2.2.1 黄金版（2026.10）', size: 22, font: FONT, color: '2563eb', bold: true })],
     alignment: D.AlignmentType.CENTER,
     spacing: { after: 400 },
     border: { bottom: { color: '2563eb', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
@@ -1823,7 +1823,7 @@ async function downloadDocx() {
   [
     ['微博', '@岁窦工作室'],
     ['邮箱', 'q13052830801@163.com'],
-    ['版本', 'V2.2 黄金版（2026.10）']
+    ['版本', 'V2.2.1 黄金版（2026.10）']
   ].forEach(function (t) {
     children.push(Runs([
       { text: '• ', color: '2563eb', bold: true, size: 24 },
@@ -1852,7 +1852,7 @@ async function downloadDocx() {
     var doc = new D.Document({
       creator: '岁窦工具箱',
       title: '岁窦工具箱 · 帮助文档',
-      description: '岁窦工具箱 V2.2 黄金版帮助文档',
+      description: '岁窦工具箱 V2.2.1 黄金版帮助文档',
       styles: {
         default: {
           document: { run: { font: FONT, size: 22 } }
@@ -1961,7 +1961,7 @@ async function downloadDocx() {
       <h3 class="panel-head">关于</h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V2.2 黄金版（2026.10）</span>
+        <span class="version-val">V2.2.1 黄金版（2026.10）</span>
       </div>
     </div>
   </section>
@@ -2848,7 +2848,7 @@ async function downloadDocx() {
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V2.2 黄金版</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V2.2.1 黄金版</footer>
 </main>
 
 <div class="modal-backdrop" id="lyricModal">
