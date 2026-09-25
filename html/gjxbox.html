@@ -985,7 +985,7 @@ details.sub .inner{padding-bottom:14px;}
           <button id="tabRegister">注册</button>
         </div>
         <label class="field"><span>邮箱</span><input type="text" id="authEmail" placeholder="you@example.com" autocomplete="email"></label>
-        <label class="field"><span>密码</span><input type="text" id="authPassword" placeholder="至少 6 位" style="-webkit-text-security:disc;text-security:disc;"></label>
+        <label class="field"><span>密码</span><input type="text" id="authPassword" placeholder="" style="-webkit-text-security:disc;text-security:disc;"></label>
         <button class="btn" id="authSubmit" style="width:100%;margin-top:6px;">登录</button>
         <button class="btn ghost" id="forgotPwdBtn" style="width:100%;margin-top:8px;color:var(--primary);">忘记密码？</button>
         <button class="btn ghost" id="authBack" style="width:100%;margin-top:8px;">返回首页（本地模式）</button>
@@ -1463,6 +1463,7 @@ function setAuthMode(m){
   authTitle.textContent  = m === 'login' ? '登录岁窦工具箱' : '注册新账号';
   authSub.textContent    = m === 'login' ? '登录后数据将同步到云端，换设备也能继续使用。' : '注册后即可在云端保存所有数据。';
   authSubmit.textContent = m === 'login' ? '登录' : '注册';
+  document.getElementById('authPassword').placeholder = m === 'login' ? '' : '至少 6 位';
   authMsg.className = 'auth-msg';
 }
 tabLogin.addEventListener('click', () => setAuthMode('login'));
