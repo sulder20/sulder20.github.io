@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岁窦工具箱 · V2.3.1 铂金版</title>
+<title>岁窦工具箱 · V2.3.2 铂金版</title>
 <style>
 /* ============================================================
-   V2.3.1 铂金版 · 全局配色（结构重整版，无新功能）
+   V2.3.2 铂金版 · 全局配色（结构重整版，无新功能）
    —— 铂金作为「界面主色」，正文文字单独使用深墨色，二者严格分离
    ============================================================ */
 :root{
@@ -1121,7 +1121,7 @@ details.sub .inner{padding-bottom:14px;}
   <!-- ==================== 首页 ==================== -->
   <section id="page-home" class="page active">
     <div class="hero">
-      <h1 style="color:#fff;">岁窦工具箱 · V2.3.1 铂金版</h1>
+      <h1 style="color:#fff;">岁窦工具箱 · V2.3.2 铂金版</h1>
       <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次重整了工具分类，让它们各归其位。</p>
     </div>
 
@@ -1168,7 +1168,7 @@ details.sub .inner{padding-bottom:14px;}
 
     </div>
 
-    <!-- ---------- 版本更迭（三个版本 + V2.3.1 说明） ---------- -->
+    <!-- ---------- 版本更迭（三个版本 + V2.3.2 说明） ---------- -->
     <h2 class="section-title" id="upgradeTitle" style="margin-top:34px;">版本更迭</h2>
     <div class="panel">
 
@@ -1183,11 +1183,46 @@ details.sub .inner{padding-bottom:14px;}
         <span class="version-label">V2.3</span>
         <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
         <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-        <span class="version-label">当前</span>
-        <span class="version-val">V2.3.1 铂金版</span>
+        <span class="version-label">V2.3.1</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
+      <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">当前</span>
+      <span class="version-val">V2.3.2 铂金版</span>
       </div>
 
-      <!-- ======= V2.3.1 结构调整（当前） ======= -->
+            <!-- ======= V2.3.2 铂金版 · 功能扩充与体验优化（当前） ======= -->
+      <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
+        V2.3.2 铂金版 · 功能扩充与体验优化
+      </h3>
+      <div class="upgrade-grid" style="margin-bottom:26px;">
+        <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">新增</span><b>图片压缩工具</b></div>
+          <p>「创作工坊」分类新增图片压缩工具，纯浏览器本地处理，支持调节压缩质量、目标文件大小，原图与压缩后并排预览对比，支持 JPG / WebP / PNG 格式输出。</p>
+        </div>
+        <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">新增</span><b>二维码工具</b></div>
+          <p>我们上线了二维码生成工具，支持文字、网站、电话号码等多功能，支持导出、修改。</p>
+        </div>
+        <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">新增</span><b>体感温度与运动风险</b></div>
+          <p>「健康与运动」分类新增体感温度工具，结合气温、湿度、风速自动切换酷热指数/风寒指数模型，评估户外运动风险等级，给出对应补水与防护建议。</p>
+        </div>
+        <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">优化</span><b>风险条动态指示</b></div>
+          <p>体感温度风险条新增指示箭头，根据计算结果自动滑动到对应风险等级，带平滑过渡动画，风险等级直观可视。</p>
+        </div>
+        <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">修复</span><b>本地模式兼容性</b></div>
+          <p>修复多个工具在本地文件协议（file://）下的渲染异常、跨域报错、Canvas 导出失败等问题，核心功能离线可用。</p>
+        </div>
+        <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">细节</span><b>交互体验打磨</b></div>
+          <p>统一各工具上传区域视觉样式，修复元素错位问题；优化表单焦点反馈、按钮过渡动画，全局交互手感更统一。</p>
+        </div>
+      </div>
+
+      <!-- ======= 版本四：V2.3.1 结构调整======= -->
       <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
         <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
         V2.3.1 铂金版 · 结构重整（无新功能）
@@ -1223,7 +1258,7 @@ details.sub .inner{padding-bottom:14px;}
         </div>
         <div class="upgrade-item">
           <div class="up-head"><span class="up-badge">同步</span><b>版本号与面包屑同步</b></div>
-          <p>全站版本号统一为 V2.3.1，各工具页顶部面包屑的「全部工具」快捷入口按新分类顺序排列，切工具更方便。</p>
+          <p>全站版本号统一为 V2.3.2，各工具页顶部面包屑的「全部工具」快捷入口按新分类顺序排列，切工具更方便。</p>
         </div>
       </div>
 
@@ -1326,13 +1361,13 @@ details.sub .inner{padding-bottom:14px;}
       <div class="editor-body">
         <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
         <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
-        <p>V2.3.1 没有加新功能，只是把工具的分类重新梳理了一遍：AI 助手里不再堆杂物，创作相关工具收进「创作工坊」，日历 / 时钟 / 记账独立成「时间与生活」，鞋码回归健康类。希望这次调整后，你能更快找到想用的工具。</p>
+        <p>V2.3.1 没有加新功能，只是把工具的分类重新梳理了一遍：AI 助手里不再堆杂物，创作相关工具收进「创作工坊」，日历 / 时钟 / 记账独立成「时间与生活」，鞋码回归健康类。希望这次调整后，你能更快找到想用的工具。V2.3.2补充了两款实用工具：创作工坊新增图片压缩，健康与运动新增体感温度与运动风险。同时重构了二维码生成模块，修复了不少细节问题，工具箱用起来会更顺手。</p>
         <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
       </div>
       <div class="editor-sign">
         <p>2026 年 10 月</p>
-        <p>岁窦工具箱 · V2.3.1 铂金版</p>
+        <p>岁窦工具箱 · V2.3.2 铂金版</p>
       </div>
     </div>
   </section>
@@ -1833,6 +1868,8 @@ details.sub .inner{padding-bottom:14px;}
             <div class="help-tip"><b>我的记账本</b>支持多种货币，按币种分别汇总本月与今日支出；「导出 CSV」可直接用 Excel 打开。</div>
             <div class="help-tip"><b>畅想画布</b>支持鼠标与触屏书写，导出的是 1400 × 900 高清 PNG；清空之后仍然可以点「撤销」找回。</div>
             <div class="help-tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>
+            <div class="help-tip"><b>图片压缩</b>本地浏览器压缩，支持质量滑块、目标大小、格式切换，原图与压缩后并排对比体积。</div>
+            <div class="help-tip"><b>体感温度</b>结合温湿度风速计算体感温度，自动切换酷热/风寒模型，给出户外运动风险与建议。</div>
           </div>
         </div>
 
@@ -1910,7 +1947,7 @@ details.sub .inner{padding-bottom:14px;}
           </div>
           <div class="help-info-row">
             <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <div class="help-info-body"><b>版本</b>：V2.3.1 铂金版（2026.10）</div>
+            <div class="help-info-body"><b>版本</b>：V2.3.2 铂金版（2026.10）</div>
           </div>
         </div>
 
@@ -2084,7 +2121,7 @@ details.sub .inner{padding-bottom:14px;}
 
         var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档</h1>' +
           '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
-          '<span class="ver">V2.3.1 铂金版（2026.10）</span></div>' +
+          '<span class="ver">V2.3.2 铂金版（2026.10）</span></div>' +
 
           '<h2>一、快速开始</h2><ol>' +
           '<li><b>找到你要的工具</b>：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。V2.3.1 起，工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列。</li>' +
@@ -2205,7 +2242,7 @@ details.sub .inner{padding-bottom:14px;}
           '<ul>' +
           '<li><b>微博</b>：@岁窦工作室</li>' +
           '<li><b>邮箱</b>：q13052830801@163.com</li>' +
-          '<li><b>版本</b>：V2.3.1 铂金版（2026.10）</li>' +
+          '<li><b>版本</b>：V2.3.2 铂金版（2026.10）</li>' +
           '</ul>' +
 
           '<div class="footer">岁窦工具箱 · 帮助文档<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>';
@@ -2225,7 +2262,7 @@ details.sub .inner{padding-bottom:14px;}
         return [
           '# 岁窦工具箱 · 帮助文档', '',
           '> 新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明  ',
-          '> 版本：V2.3.1 铂金版（2026.10）', '', '---', '',
+          '> 版本：V2.3.2 铂金版（2026.10）', '', '---', '',
 
           '## 一、快速开始', '',
           '1. **找到你要的工具**：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。V2.3.1 起，工具按六大分类排列：① 健康与运动、② 创作工坊、③ 收藏与记录、④ 计算与数据、⑤ 时间与生活、⑥ AI 与开发。',
@@ -2317,7 +2354,7 @@ details.sub .inner{padding-bottom:14px;}
           '## 六、联系与反馈', '',
           '- 微博：@岁窦工作室',
           '- 邮箱：q13052830801@163.com',
-          '- 版本：V2.3.1 铂金版（2026.10）', '',
+          '- 版本：V2.3.2 铂金版（2026.10）', '',
           '---', '',
           '*岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
         ].join('\n');
@@ -2347,7 +2384,7 @@ details.sub .inner{padding-bottom:14px;}
           spacing: { after: 120 }
         }));
         children.push(new D.Paragraph({
-          children: [new D.TextRun({ text: 'V2.3.1 铂金版（2026.10）', size: 22, font: FONT, color: '565d65', bold: true })],
+          children: [new D.TextRun({ text: 'V2.3.2 铂金版（2026.10）', size: 22, font: FONT, color: '565d65', bold: true })],
           alignment: D.AlignmentType.CENTER,
           spacing: { after: 400 },
           border: { bottom: { color: '737b84', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
@@ -2576,7 +2613,7 @@ details.sub .inner{padding-bottom:14px;}
         [
           ['微博', '@岁窦工作室'],
           ['邮箱', 'q13052830801@163.com'],
-          ['版本', 'V2.3.1 铂金版（2026.10）']
+          ['版本', 'V2.3.2 铂金版（2026.10）']
         ].forEach(function (t) {
           children.push(Runs([
             { text: '• ', color: '565d65', bold: true, size: 24 },
@@ -2603,7 +2640,7 @@ details.sub .inner{padding-bottom:14px;}
           var doc = new D.Document({
             creator: '岁窦工具箱',
             title: '岁窦工具箱 · 帮助文档',
-            description: '岁窦工具箱 V2.3.1 铂金版帮助文档',
+            description: '岁窦工具箱 V2.3.2 铂金版帮助文档',
             styles: {
               default: {
                 document: { run: { font: FONT, size: 22 } }
@@ -2655,7 +2692,7 @@ details.sub .inner{padding-bottom:14px;}
         });
       }
 
-      console.log('[帮助] 帮助页脚本已加载（V2.3.1）');
+      console.log('[帮助] 帮助页脚本已加载（V2.3.2）');
     })();
     </script>
   </section>
@@ -2708,7 +2745,7 @@ details.sub .inner{padding-bottom:14px;}
       <h3 class="panel-head">关于</h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V2.3.1 铂金版（2026.10）</span>
+        <span class="version-val">V2.3.2 铂金版（2026.10）</span>
       </div>
     </div>
   </section>
@@ -4975,7 +5012,7 @@ details.sub .inner{padding-bottom:14px;}
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V2.3.1 铂金版</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V2.3.2 铂金版</footer>
 </main>
 
 <!-- ==================== 弹窗：歌词 ==================== -->
@@ -5010,7 +5047,7 @@ details.sub .inner{padding-bottom:14px;}
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 <script>
 /* ============================================================
-   岁窦工具箱 · V2.3.1 铂金版
+   岁窦工具箱 · V2.3.2 铂金版
    主脚本（结构调整版，无新功能）
    ============================================================ */
 
@@ -10365,7 +10402,7 @@ document.querySelectorAll('[data-qr]').forEach(btn => {
    ============================================================ */
 function exportAll(){
   const data = {
-    app: '岁窦工具箱', version: 'V2.3.1', exportTime: new Date().toISOString(),
+    app: '岁窦工具箱', version: 'V2.3.2', exportTime: new Date().toISOString(),
     people, songs, places, medias, schedules, notes, timelineEvents, novels, ledger,
     sleepRecords, vitalRecords, exerciseRecords, exerProfile
   };
@@ -10467,7 +10504,7 @@ loadTimeline();
 loadNotes();
 
 /* ============================================================
-   V2.3.1 · 工具面包屑导航
+   V2.3.2 · 工具面包屑导航
    ============================================================ */
 const TOOL_REGISTRY = [
   /* ① 健康与运动 */
@@ -10565,7 +10602,7 @@ function injectToolCrumbs(){
 
 injectToolCrumbs();
 
-console.log('%c岁窦工具箱 · V2.3.1 铂金版 已加载', 'color:#565d65;font-weight:700;font-size:14px;');
+console.log('%c岁窦工具箱 · V2.3.2 铂金版 已加载', 'color:#565d65;font-weight:700;font-size:14px;');
 </script>
 </body>
 </html>
