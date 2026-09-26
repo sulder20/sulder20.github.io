@@ -1076,7 +1076,12 @@ details.sub .inner{padding-bottom:14px;}
   transition:left .3s ease;
   pointer-events:none;
 }
-.heat-risk-seg{flex:1;}
+.heat-risk-seg.cold{flex:10;}
+.heat-risk-seg.ok{flex:18;}
+.heat-risk-seg.low{flex:4;}
+.heat-risk-seg.mid{flex:6;}
+.heat-risk-seg.high{flex:3;}
+.heat-risk-seg.extreme{flex:6;}
 .heat-risk-seg.cold{background:#8ba6c0;}
 .heat-risk-seg.ok{background:#8fb59a;}
 .heat-risk-seg.low{background:#c8a468;}
@@ -1122,7 +1127,7 @@ details.sub .inner{padding-bottom:14px;}
   <section id="page-home" class="page active">
     <div class="hero">
       <h1 style="color:#fff;">岁窦工具箱 · V2.3.2 铂金版</h1>
-      <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次重整了工具分类，让它们各归其位。</p>
+      <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次新增时间戳转换、二维码生成、图片压缩、体感温度四款工具。</p>
     </div>
 
     <!-- ---------- 热门应用 ---------- -->
@@ -1130,7 +1135,7 @@ details.sub .inner{padding-bottom:14px;}
     <div class="hot-grid" id="hotSection">
 
       <div class="hot-card" data-target="health" data-keywords="健康 管理 BMI 鞋码 睡眠 心率 血糖 血压 身体 体检 分析">
-        <span class="hot-badge">热门</span>
+        <span class="hot-badge">置顶</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></div>
         <div><h3>健康管理</h3><p>BMI + 鞋码 + 睡眠曲线 + 生命体征，AI 辅助分析</p></div>
       </div>
@@ -1141,7 +1146,6 @@ details.sub .inner{padding-bottom:14px;}
       </div>
 
       <div class="hot-card" data-target="novel" data-keywords="小说 助手 管理 章节 封面 字数 统计 导出 角色 时间线">
-        <span class="hot-badge">热门</span>
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
         <div><h3>小说助手</h3><p>封面 + 章节 + 字数统计图 + 导出</p></div>
       </div>
@@ -1184,10 +1188,10 @@ details.sub .inner{padding-bottom:14px;}
         <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
         <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
         <span class="version-label">V2.3.1</span>
-      <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
-      <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-      <span class="version-label">当前</span>
-      <span class="version-val">V2.3.2 铂金版</span>
+        <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
+        <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
+        <span class="version-label">当前</span>
+        <span class="version-val">V2.3.2 铂金版</span>
       </div>
 
             <!-- ======= V2.3.2 铂金版 · 功能扩充与体验优化（当前） ======= -->
@@ -1199,6 +1203,10 @@ details.sub .inner{padding-bottom:14px;}
         <div class="upgrade-item">
           <div class="up-head"><span class="up-badge">新增</span><b>图片压缩工具</b></div>
           <p>「创作工坊」分类新增图片压缩工具，纯浏览器本地处理，支持调节压缩质量、目标文件大小，原图与压缩后并排预览对比，支持 JPG / WebP / PNG 格式输出。</p>
+        </div>
+          <div class="upgrade-item">
+          <div class="up-head"><span class="up-badge">新增</span><b>时间戳转换</b></div>
+          <p>「时间与生活」分类新增时间戳工具，支持时间戳与日期双向互转、秒/毫秒自动识别、多时区切换、多格式输出，并附时间差计算。</p>
         </div>
         <div class="upgrade-item">
           <div class="up-head"><span class="up-badge">新增</span><b>二维码工具</b></div>
@@ -1361,7 +1369,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="editor-body">
         <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
         <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
-        <p>V2.3.1 没有加新功能，只是把工具的分类重新梳理了一遍：AI 助手里不再堆杂物，创作相关工具收进「创作工坊」，日历 / 时钟 / 记账独立成「时间与生活」，鞋码回归健康类。希望这次调整后，你能更快找到想用的工具。V2.3.2补充了两款实用工具：创作工坊新增图片压缩，健康与运动新增体感温度与运动风险。同时重构了二维码生成模块，修复了不少细节问题，工具箱用起来会更顺手。</p>
+        <p>V2.3.1 没有加新功能，只是把工具的分类重新梳理了一遍：AI 助手里不再堆杂物，创作相关工具收进「创作工坊」，日历 / 时钟 / 记账独立成「时间与生活」，鞋码回归健康类。V2.3.2 补充了四款实用工具：时间与生活新增时间戳转换，计算与数据新增二维码生成，创作工坊新增图片压缩，健康与运动新增体感温度与运动风险。同时重构了二维码生成模块，修复了不少细节问题。</p>
         <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
       </div>
@@ -1745,6 +1753,13 @@ details.sub .inner{padding-bottom:14px;}
               <p>所有已有数据均不受影响，无需迁移。</p>
             </div>
           </details>
+          <details class="faq-item">
+            <summary>V2.3.2 相比 V2.3.1 改了什么？</summary>
+            <div class="faq-body">
+              <p>V2.3.2 新增了四款工具：<b>时间戳转换</b>（时间与生活）、<b>二维码生成</b>（计算与数据）、<b>图片压缩</b>（创作工坊）、<b>体感温度与运动风险</b>（健康与运动）。</p>
+              <p>同时优化了二维码模块，修复了本地文件协议下的导出兼容性。</p>
+            </div>
+          </details>
 
           <details class="faq-item">
             <summary>「健康管理」都能做什么？鞋码在哪？</summary>
@@ -1870,6 +1885,8 @@ details.sub .inner{padding-bottom:14px;}
             <div class="help-tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>
             <div class="help-tip"><b>图片压缩</b>本地浏览器压缩，支持质量滑块、目标大小、格式切换，原图与压缩后并排对比体积。</div>
             <div class="help-tip"><b>体感温度</b>结合温湿度风速计算体感温度，自动切换酷热/风寒模型，给出户外运动风险与建议。</div>
+            <div class="help-tip"><b>时间戳转换</b>支持秒/毫秒自动识别、多时区、ISO/RFC/中文多格式输出；时间差子页可计算两个时间戳或日期的差距。</div>
+            <div class="help-tip"><b>二维码生成</b>文本 / 网址 / 电话 / WiFi 四类内容，参数可调，支持导出 PNG 与 SVG；SVG 为矢量图放大不糊。</div>
           </div>
         </div>
 
@@ -1899,10 +1916,16 @@ details.sub .inner{padding-bottom:14px;}
               <span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span> 发送消息
             </div>
           </div>
-          <div class="help-key-row">
+                    <div class="help-key-row">
             <div class="help-key-label">随机灵感</div>
             <div class="help-key-desc">
               关键词输入框中按 <span class="kbd">Enter</span> 直接触发生成
+            </div>
+          </div>
+          <div class="help-key-row">
+            <div class="help-key-label">时间戳转换</div>
+            <div class="help-key-desc">
+              输入框中按 <span class="kbd">Enter</span> 直接触发转换
             </div>
           </div>
         </div>
@@ -2058,6 +2081,7 @@ details.sub .inner{padding-bottom:14px;}
       }
 
       function toast(msg) {
+        if (typeof window.showToast === 'function'){ window.showToast(msg); return; }
         var el = document.getElementById('toast');
         if (!el) { console.log('[帮助]', msg); return; }
         el.textContent = msg;
@@ -3446,7 +3470,7 @@ details.sub .inner{padding-bottom:14px;}
               <input type="file" id="qrLogoInput" accept="image/*" style="font-size:13px;">
               <button class="btn ghost small" id="qrLogoClear" type="button">清除</button>
             </div>
-            <span class="field-hint">建议用纠错等级 H，Logo 占比约 20%</span>
+            <span class="field-hint">纠错等级越高越抗损，H 等级约 30% 冗余</span>
           </div>
         </div>
       </div>
@@ -3536,40 +3560,49 @@ details.sub .inner{padding-bottom:14px;}
 
     // ========== 3. 核心渲染二维码 ==========
     function renderQR() {
-      const payload = getPayload();
-      const size = parseInt(sizeInput.value) || 320;
-      const level = levelSelect.value;
-      const margin = parseInt(marginInput.value) || 2;
+      if (!canvas || !canvas.parentNode) return;
 
-      // 空内容清空画布
+      const payload = getPayload();
+      let size = parseInt(sizeInput.value) || 320;
+      if (!isFinite(size) || size < 40) size = 40;   // 保底，防止画布 0 尺寸
+      const level = levelSelect.value;
+      let margin = parseInt(marginInput.value);
+      if (!isFinite(margin) || margin < 0) margin = 2;
+      if (margin > 10) margin = 10;
+
+      // 空内容：显示占位提示，而不是留白
       if (!payload) {
         canvas.width = size;
         canvas.height = size;
-        ctx.clearRect(0, 0, size, size);
+        ctx.fillStyle = '#fafbfc';
+        ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = '#b0b6c4';
+        ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('输入内容后自动生成二维码', size / 2, size / 2);
         document.getElementById('qrPreviewHint').textContent = '输入内容后自动生成';
         return;
       }
 
       try {
-        // 生成二维码矩阵
         const qr = qrcode(0, level);
         qr.addData(payload);
         qr.make();
 
         const moduleCount = qr.getModuleCount();
-        const tileSize = Math.floor(size / (moduleCount + margin * 2));
+        // 关键保底：tileSize 至少 1
+        let tileSize = Math.floor(size / (moduleCount + margin * 2));
+        if (!isFinite(tileSize) || tileSize < 1) tileSize = 1;
         const totalSize = tileSize * (moduleCount + margin * 2);
         const offset = tileSize * margin;
 
-        // 设置画布尺寸
         canvas.width = totalSize;
         canvas.height = totalSize;
 
-        // 白色背景
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, totalSize, totalSize);
 
-        // 绘制码点
         ctx.fillStyle = '#1c1f23';
         for (let row = 0; row < moduleCount; row++) {
           for (let col = 0; col < moduleCount; col++) {
@@ -3579,21 +3612,19 @@ details.sub .inner{padding-bottom:14px;}
           }
         }
 
-        // 绘制中心Logo
         if (logoImage && logoImage.complete) {
-          const logoSize = Math.floor(totalSize * 0.2); // Logo占20%
+          const logoSize = Math.floor(totalSize * 0.2);
           const logoX = (totalSize - logoSize) / 2;
           const logoY = (totalSize - logoSize) / 2;
-          // 白色底托
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(logoX - 4, logoY - 4, logoSize + 8, logoSize + 8);
-          // 绘制Logo
           ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
         }
 
         document.getElementById('qrPreviewHint').textContent = '生成成功';
       } catch (e) {
-        document.getElementById('qrPreviewHint').textContent = '生成失败：' + e.message;
+        console.error('[二维码] 渲染失败：', e);
+        document.getElementById('qrPreviewHint').textContent = '生成失败：' + (e && e.message ? e.message : e);
       }
     }
 
@@ -3640,7 +3671,8 @@ details.sub .inner{padding-bottom:14px;}
         link.href = canvas.toDataURL('image/png');
         link.click();
       } catch (e) {
-        alert('导出失败：本地文件模式下带Logo可能无法导出PNG，建议使用SVG格式或本地服务打开');
+        if (typeof showToast === 'function') showToast('导出失败，建议改用 SVG 格式');
+        else alert('导出失败，建议改用 SVG 格式');
       }
     });
 
@@ -3648,7 +3680,8 @@ details.sub .inner{padding-bottom:14px;}
     document.getElementById('qrDownloadSvg').addEventListener('click', function () {
       const payload = getPayload();
       if (!payload) {
-        alert('请先输入二维码内容');
+        if (typeof showToast === 'function') showToast('请先输入二维码内容');
+        else alert('请先输入二维码内容');
         return;
       }
       const level = levelSelect.value;
@@ -3674,9 +3707,11 @@ details.sub .inner{padding-bottom:14px;}
         return;
       }
       navigator.clipboard.writeText(payload).then(() => {
-        alert('已复制到剪贴板');
+        if (typeof showToast === 'function') showToast('已复制编码内容');
+        else alert('已复制到剪贴板');
       }).catch(() => {
-        alert('复制失败，请手动复制');
+        if (typeof showToast === 'function') showToast('复制失败，请手动复制');
+        else alert('复制失败，请手动复制');
       });
     });
 
@@ -3692,12 +3727,26 @@ details.sub .inner{padding-bottom:14px;}
       if (el) el.addEventListener('change', renderQR);
     });
 
-    // ========== 7. 初始化 ==========
-    // 默认生成一个示例
-    document.getElementById('qrTextInput').value = '岁窦工具箱 · 铂金版';
-    renderQR();
+    // ========== 7. 初始化（等库和 DOM 都就绪再渲染） ==========
+    function qrInit(){
+      if (typeof window.qrcode === 'undefined'){
+        document.getElementById('qrPreviewHint').textContent =
+          '二维码库加载失败，请检查网络后刷新页面';
+        return;
+      }
+      document.getElementById('qrTextInput').value = '岁窦工具箱 · 铂金版';
+      renderQR();
+      console.log('[二维码] 模块已加载');
+    }
 
-    console.log('[二维码] 模块已加载');
+    if (typeof window.qrcode === 'undefined'){
+      window.addEventListener('load', qrInit);
+    } else {
+      qrInit();
+    }
+
+    // 把渲染函数暴露到全局，供主脚本 go('qrcode') 调用
+    window.__qrRender = renderQR;
   })();
   </script>
 </section>
@@ -4283,9 +4332,12 @@ details.sub .inner{padding-bottom:14px;}
         if (feelsLike >= 41) range = ranges[5];
       }
 
-      const blockWidth = 100 / 6;
-      const blockStart = range.index * blockWidth;
-      
+      const segFlex = [10, 18, 4, 6, 3, 6];
+      const totalFlex = segFlex.reduce((a, b) => a + b, 0);
+      let blockStart = 0;
+      for (let i = 0; i < range.index; i++) blockStart += segFlex[i] / totalFlex * 100;
+      const blockWidth = segFlex[range.index] / totalFlex * 100;
+
       let innerPercent = 0.5;
       if (isFinite(range.min) && isFinite(range.max)) {
         innerPercent = (feelsLike - range.min) / (range.max - range.min);
@@ -5127,6 +5179,12 @@ function go(name){
   if (name === 'exercise')     setTimeout(() => { loadExerProfile(); renderExerciseList(); }, 60);
   if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
   if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
+  if (name === 'qrcode')       setTimeout(() => {
+    if (typeof window.__qrRender === 'function'){
+      try { window.__qrRender(); }
+      catch(e){ console.error('[二维码] 切页重绘失败：', e); }
+    }
+  }, 100);
 }
 
 document.querySelectorAll('nav button[data-page], .logo[data-page]').forEach(el => {
@@ -7465,7 +7523,7 @@ function exportCalImage(){
   ctx.fillStyle = '#1c1f23'; ctx.font = 'bold 32px ' + FONT;
   ctx.fillText(y + ' 年 ' + m + ' 月', PAD, PAD + 2);
   ctx.fillStyle = '#9ca3af'; ctx.font = '15px ' + FONT;
-  ctx.fillText('我的日历 · 岁窦工具箱 V2.3.1', PAD, PAD + 48);
+  ctx.fillText('我的日历 · 岁窦工具箱 V2.3.2', PAD, PAD + 48);
   const weekTop = PAD + HEAD;
   ctx.font = 'bold 14px ' + FONT; ctx.textAlign = 'center';
   for (let c = 0; c < 7; c++){
@@ -9183,17 +9241,22 @@ function renderSleepList(){
   });
 }
 
+let sleepChartRetry = 0;
 function renderSleepChart(){
   const canvas = document.getElementById('sleepChart');
   if (!canvas) return;
   const wrap = canvas.parentElement;
-  const cssW = Math.max(280, wrap.clientWidth - 28);
-  const cssH = 260;
 
   if (wrap.clientWidth === 0){
-    setTimeout(renderSleepChart, 80);
+    if (sleepChartRetry++ < 10){
+      setTimeout(renderSleepChart, 80);
+    }
     return;
   }
+  sleepChartRetry = 0;
+
+  const cssW = Math.max(280, wrap.clientWidth - 28);
+  const cssH = 260;
 
   const dpr = window.devicePixelRatio || 1;
   canvas.style.width = cssW + 'px';
@@ -9953,7 +10016,12 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     const elBig = document.getElementById('tsNowValue');
     if (elSec) elSec.textContent = sec;
     if (elMs)  elMs.textContent = now;
-    if (elBig) elBig.textContent = sec;
+    if (elBig) {
+      const d = new Date(now);
+      const p = n => String(n).padStart(2,'0');
+      elBig.textContent = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate())
+                        + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    }
   }
   updateNowTS();
   setInterval(updateNowTS, 1000);
@@ -10278,132 +10346,17 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
   console.log('[时间戳转换] 已加载');
 })();
 
-/* ============================================================
-   二维码生成
-   ============================================================ */
-// ========== 二维码核心生成函数 ==========
-function renderQRCode() {
-  // 1. 读取页面参数
-  const size = parseInt(document.getElementById('qrSize').value) || 320;
-  const level = document.getElementById('qrLevel').value; // L/M/Q/H
-  const margin = parseInt(document.getElementById('qrMargin').value) || 2;
-
-  // 2. 根据激活Tab获取最终内容
-  let content = '';
-  const activePage = document.querySelector('[data-qr-page].active');
-  const pageType = activePage.dataset.qrPage;
-
-  if (pageType === 'text') {
-    content = document.getElementById('qrTextInput').value.trim();
-  } else if (pageType === 'url') {
-    let url = document.getElementById('qrUrlInput').value.trim();
-    if (url && !/^https?:\/\//i.test(url)) url = 'https://' + url;
-    content = url;
-  } else if (pageType === 'tel') {
-    content = 'tel:' + document.getElementById('qrTelInput').value.trim();
-  } else if (pageType === 'wifi') {
-    const ssid = document.getElementById('qrWifiSsid').value.trim();
-    const pwd = document.getElementById('qrWifiPwd').value.trim();
-    const enc = document.getElementById('qrWifiEnc').value;
-    content = `WIFI:T:${enc === 'nopass' ? '' : enc};S:${ssid};P:${enc === 'nopass' ? '' : pwd};;`;
-  }
-
-  if (!content) return;
-
-  // 3. 生成二维码矩阵
-  const qr = qrcode(0, level); // 0=自动选择版本
-  qr.addData(content);
-  qr.make();
-
-  // 4. 绘制到Canvas
-  const canvas = document.getElementById('qrCanvas');
-  const ctx = canvas.getContext('2d');
-  const moduleCount = qr.getModuleCount();
-  const tileSize = Math.floor(size / (moduleCount + margin * 2));
-  const totalSize = tileSize * (moduleCount + margin * 2);
-
-  canvas.width = totalSize;
-  canvas.height = totalSize;
-
-  // 白色背景
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, totalSize, totalSize);
-
-  // 绘制码点
-  ctx.fillStyle = '#000000';
-  const offset = tileSize * margin;
-  for (let row = 0; row < moduleCount; row++) {
-    for (let col = 0; col < moduleCount; col++) {
-      if (qr.isDark(row, col)) {
-        ctx.fillRect(offset + col * tileSize, offset + row * tileSize, tileSize, tileSize);
-      }
-    }
-  }
-}
-
-// ========== 导出功能 ==========
-// 导出PNG（纯文本二维码file://下可正常导出；带本地Logo会报错）
-function downloadQRPNG() {
-  const canvas = document.getElementById('qrCanvas');
-  const link = document.createElement('a');
-  link.download = 'qrcode.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-}
-
-// 导出SVG（纯文本生成，file://下完全正常，无损矢量）
-function downloadQRSVG() {
-  const level = document.getElementById('qrLevel').value;
-  const margin = parseInt(document.getElementById('qrMargin').value) || 2;
-  
-  // 复用上面的内容获取逻辑
-  let content = '';
-  const activePage = document.querySelector('[data-qr-page].active');
-  const pageType = activePage.dataset.qrPage;
-  if (pageType === 'text') content = document.getElementById('qrTextInput').value.trim();
-  else if (pageType === 'url') {
-    let url = document.getElementById('qrUrlInput').value.trim();
-    content = url && !/^https?:\/\//i.test(url) ? 'https://' + url : url;
-  }
-  else if (pageType === 'tel') content = 'tel:' + document.getElementById('qrTelInput').value.trim();
-  else if (pageType === 'wifi') {
-    const ssid = document.getElementById('qrWifiSsid').value.trim();
-    const pwd = document.getElementById('qrWifiPwd').value.trim();
-    const enc = document.getElementById('qrWifiEnc').value;
-    content = `WIFI:T:${enc === 'nopass' ? '' : enc};S:${ssid};P:${enc === 'nopass' ? '' : pwd};;`;
-  }
-
-  const qr = qrcode(0, level);
-  qr.addData(content);
-  qr.make();
-  const svgStr = qr.createSvgTag({ margin: margin });
-
-  const blob = new Blob([svgStr], { type: 'image/svg+xml' });
-  const link = document.createElement('a');
-  link.download = 'qrcode.svg';
-  link.href = URL.createObjectURL(blob);
-  link.click();
-  URL.revokeObjectURL(link.href);
-}
-
-// ========== 绑定事件：输入即自动更新 ==========
-document.querySelectorAll(
-  '#qrTextInput, #qrUrlInput, #qrTelInput, #qrWifiSsid, #qrWifiPwd, #qrSize, #qrLevel, #qrMargin'
-).forEach(el => el.addEventListener('input', renderQRCode));
-
-// Tab切换时重新渲染
-document.querySelectorAll('[data-qr]').forEach(btn => {
-  btn.addEventListener('click', () => setTimeout(renderQRCode, 10));
-});
 
 
 /* ============================================================
    数据管理
    ============================================================ */
 function exportAll(){
+  let chapters = [];
+  try { chapters = loadChaptersLocal(); } catch(e){ chapters = []; }
   const data = {
     app: '岁窦工具箱', version: 'V2.3.2', exportTime: new Date().toISOString(),
-    people, songs, places, medias, schedules, notes, timelineEvents, novels, ledger,
+    people, songs, places, medias, schedules, notes, timelineEvents, novels, chapters, ledger,
     sleepRecords, vitalRecords, exerciseRecords, exerProfile
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
@@ -10432,6 +10385,7 @@ document.getElementById('importFile').addEventListener('change', e => {
       if (Array.isArray(data.schedules)) { schedules = data.schedules; saveSchedules(); renderCalendar();  }
       if (Array.isArray(data.notes))     { notes     = data.notes;     saveNotes();     renderNotes();     }
       if (Array.isArray(data.timelineEvents)){ timelineEvents = data.timelineEvents; saveTimeline(); renderTimeline(); }
+      if (Array.isArray(data.chapters))  { saveChaptersLocal(data.chapters); }
       if (Array.isArray(data.novels))    { novels    = data.novels;    saveNovelsLocal(); renderNovelList(); }
       if (Array.isArray(data.ledger))    { ledger    = data.ledger;    saveLedger();    renderLedger();    }
       if (Array.isArray(data.sleepRecords))   { sleepRecords    = data.sleepRecords;    saveSleep();    renderSleepList(); renderSleepChart(); }
@@ -10451,7 +10405,7 @@ document.getElementById('clearAllData').addEventListener('click', async () => {
   if (!confirm('确定要清空全部数据吗？建议先导出备份！')) return;
   try {
     if (appMode === 'cloud' && currentUser){
-      for (const t of ['people','songs','places','medias','schedules','notes','timeline_events','novels','ledger','sleep_records','vitals','exercises']){
+      for (const t of ['people','songs','places','medias','schedules','notes','timeline_events','novels','novel_chapters','ledger','sleep_records','vitals','exercises']){
         await sb.from(t).delete().eq('user_id', currentUser.id);
       }
     }
