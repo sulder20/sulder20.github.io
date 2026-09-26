@@ -114,7 +114,6 @@ main{max-width:1200px;margin:0 auto;padding:26px 20px 0;}
 .cat-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
 .cat-list li{font-size:13px;padding:7px 14px;border-radius:8px;background:#f5f6f8;color:#4b5563;cursor:pointer;transition:.15s;border:1px solid transparent;}
 .cat-list li:hover{background:var(--primary-soft);color:var(--primary-dark);border-color:var(--platinum);}
-
 /* ============ 按钮 ============ */
 .btn{background:var(--primary);color:#fff;border:1px solid var(--primary);padding:9px 18px;border-radius:9px;cursor:pointer;font-size:14px;transition:.16s;}
 .btn:hover{background:var(--primary-dark);border-color:var(--primary-dark);}
@@ -197,6 +196,7 @@ input[type=file]{font-size:13px;color:var(--muted);}
 ::-webkit-scrollbar-thumb{background:var(--platinum);border-radius:6px;border:2px solid #f3f4f6;}
 ::-webkit-scrollbar-thumb:hover{background:#b5bbc1;}
 ::selection{background:var(--primary-soft);color:var(--primary-dark);}
+
 /* ============ 计算器 ============ */
 .calc-box{max-width:400px;margin:0 auto;}
 .calc-display{background:linear-gradient(135deg,#3a4046,#22262b);color:#fff;border-radius:12px;padding:18px;text-align:right;font-size:28px;font-weight:600;min-height:84px;display:flex;align-items:flex-end;justify-content:flex-end;word-break:break-all;overflow:hidden;}
@@ -219,7 +219,6 @@ input[type=file]{font-size:13px;color:var(--muted);}
 #chartData{width:100%;padding:13px;border-radius:10px;border:1px solid var(--border);background:#fafbfc;outline:none;resize:vertical;font-size:13.5px;line-height:1.75;font-family:Consolas,Menlo,monospace;transition:.16s;}
 #chartData:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(115,123,132,.14);}
 #chartCanvas{display:block;width:100%;}
-
 /* ============ 人物印象 ============ */
 .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
 .person-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:.16s;}
@@ -416,7 +415,6 @@ details.sub .inner{padding-bottom:14px;}
 .ai-pop-head h3{margin:0;font-size:15.5px;color:var(--text);}
 .ai-pop-body{padding:18px;overflow-y:auto;font-size:14px;line-height:1.85;white-space:pre-wrap;color:#374151;}
 .ai-pop-foot{padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;}
-
 /* ============ 时间线 ============ */
 .tl-list{position:relative;padding-left:28px;}
 .tl-list::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--primary),var(--platinum));border-radius:1px;}
@@ -730,6 +728,121 @@ details.sub .inner{padding-bottom:14px;}
   min-height:90px;margin-top:12px;
 }
 
+/* ============================================================
+   V2.3 新增 · 工具面包屑导航
+   ============================================================ */
+.tool-crumb{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 16px;
+  margin-bottom:18px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.crumb-path{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+  font-size:13px;
+}
+.crumb-link{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:none;
+  border:none;
+  padding:4px 9px;
+  border-radius:7px;
+  color:var(--muted);
+  font-size:13px;
+  cursor:pointer;
+  transition:.15s;
+}
+.crumb-link:hover{
+  background:var(--primary-soft);
+  color:var(--primary-dark);
+}
+.crumb-link svg{width:13px;height:13px;}
+.crumb-sep{color:#c9cdd6;font-size:13px;user-select:none;}
+.crumb-current{
+  font-weight:700;
+  color:var(--primary-dark);
+  padding:4px 9px;
+  font-size:13.5px;
+}
+.crumb-tools{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+  padding-top:10px;
+  border-top:1px dashed var(--border);
+}
+.crumb-tools-label{
+  font-size:11.5px;
+  color:#9ca3af;
+  font-weight:600;
+  margin-right:4px;
+  letter-spacing:.4px;
+  flex:0 0 auto;
+}
+.crumb-tool{
+  background:#f5f6f8;
+  border:1px solid transparent;
+  border-radius:999px;
+  padding:3px 11px;
+  font-size:12px;
+  color:#5b6478;
+  cursor:pointer;
+  transition:.15s;
+  white-space:nowrap;
+}
+.crumb-tool:hover{
+  background:var(--primary-soft);
+  color:var(--primary-dark);
+  border-color:var(--platinum);
+}
+.crumb-tool.active{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+  font-weight:600;
+}
+
+/* ============================================================
+   V2.3 · 文章分析 textarea 补全（原本漏掉）
+   ============================================================ */
+#wcText,
+#wfText {
+  width: 100%;
+  min-height: 220px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fafbfc;
+  outline: none;
+  resize: vertical;
+  font-size: 14.5px;
+  line-height: 1.85;
+  font-family: inherit;
+  color: var(--text);
+  transition: .16s;
+  box-sizing: border-box;
+}
+#wcText::placeholder,
+#wfText::placeholder {
+  color: #b0b6c4;
+}
+#wcText:focus,
+#wfText:focus {
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(115,123,132,.14);
+}
+
 /* ---------- 响应式补充 ---------- */
 @media (max-width:900px){
   .help-layout{grid-template-columns:1fr;gap:14px;}
@@ -780,6 +893,11 @@ details.sub .inner{padding-bottom:14px;}
   .exer-profile-bar .epb-right{gap:12px;}
   .exer-profile-bar .epb-stat b{font-size:17px;}
   .vital-item-date{flex:0 0 100px;font-size:12px;}
+  .tool-crumb{padding:10px 12px;}
+  .crumb-path{font-size:12.5px;}
+  .crumb-tools{gap:4px;}
+  .crumb-tool{font-size:11px;padding:2px 9px;}
+  .crumb-tools-label{font-size:11px;}
 }
 </style>
 </head>
@@ -995,8 +1113,7 @@ details.sub .inner{padding-bottom:14px;}
       </div>
     </div>
   </section>
-
-  <!-- ==================== 应用中心 ==================== -->
+    <!-- ==================== 应用中心 ==================== -->
   <section id="page-apps" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>应用中心</h2>
@@ -1361,7 +1478,7 @@ details.sub .inner{padding-bottom:14px;}
             <div class="help-tip"><b>鞋码计算</b>输入脚长（mm 或 cm）与年龄，会区分成人码与童码，同时给出中国码、欧码、美码、英码、日码推荐，并附带公式与完整对照表。结果仅供参考。</div>
             <div class="help-tip"><b>文章分析</b>字数统计按字符计算，中文、英文字母、数字、标点分别归类；词频分析的中文按双字组切分，可在结果上方切换是否过滤常见停用词。</div>
             <div class="help-tip"><b>小说助手</b>先在列表页新建一本小说，进入后左侧添加章节、右侧编辑正文；章节可标记「前言 / 正文 / 番外 / 附录 / 后记 / 作者的话」，图表会按类型统计字数，支持导出 TXT 与 HTML。</div>
-            <div class="help-tip"><b>人物印象表 / 影视收藏</b>填好名称后可以点「✨ AI 生成小传 / 简介」让 AI 帮你起草，生成结果可一键插入到表单。</div>
+            <div class="help-tip"><b>人物印象表 / 影视收藏</b>填好名称后可以点「AI 生成小传 / 简介」让 AI 帮你起草，生成结果可一键插入到表单。</div>
             <div class="help-tip"><b>地点收藏</b>国内请填写到具体门牌号或精确位置，国外写到城市或地标即可；不填百度百科链接时会自动按名称搜索。</div>
             <div class="help-tip"><b>我的日历</b>点击日期格子即可添加安排，支持时间、地点、人物与内容；「导出本月图片」会生成一张当月日程长图。</div>
             <div class="help-tip"><b>我的记账本</b>支持多种货币，按币种分别汇总本月与今日支出；「导出 CSV」可直接用 Excel 打开。</div>
@@ -1470,731 +1587,733 @@ details.sub .inner{padding-bottom:14px;}
         <a href="#help-download" data-target="help-download"><span class="hs-dot"></span>下载帮助文档</a>
       </aside>
     </div><!-- /.help-layout -->
+
+    <!-- ========== 帮助页专属脚本 ========== -->
     <script>
-  (function () {
-    'use strict';
+    (function () {
+      'use strict';
 
-    var page = document.getElementById('page-help');
-    var sidebar = document.getElementById('helpSidebar');
-    if (!page) { console.warn('[帮助] 找不到 #page-help'); return; }
+      var page = document.getElementById('page-help');
+      var sidebar = document.getElementById('helpSidebar');
+      if (!page) { console.warn('[帮助] 找不到 #page-help'); return; }
 
-    /* ============================================================
-       一、侧边目录：点击跳转 + 滚动高亮
-       ============================================================ */
-    if (sidebar && sidebar.dataset.bound !== '1') {
-      sidebar.dataset.bound = '1';
+      /* ============================================================
+         一、侧边目录：点击跳转 + 滚动高亮
+         ============================================================ */
+      if (sidebar && sidebar.dataset.bound !== '1') {
+        sidebar.dataset.bound = '1';
 
-      var links = Array.prototype.slice.call(sidebar.querySelectorAll('a[data-target]'));
-      var sections = links.map(function (a) {
-        return document.getElementById(a.dataset.target);
-      }).filter(Boolean);
+        var links = Array.prototype.slice.call(sidebar.querySelectorAll('a[data-target]'));
+        var sections = links.map(function (a) {
+          return document.getElementById(a.dataset.target);
+        }).filter(Boolean);
 
-      var setActive = function (id) {
+        var setActive = function (id) {
+          links.forEach(function (a) {
+            a.classList.toggle('active', a.dataset.target === id);
+          });
+        };
+
         links.forEach(function (a) {
-          a.classList.toggle('active', a.dataset.target === id);
-        });
-      };
-
-      links.forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          var t = document.getElementById(a.dataset.target);
-          if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      });
-
-      if ('IntersectionObserver' in window) {
-        var obs = new IntersectionObserver(function (entries) {
-          var best = null, bestRatio = 0;
-          entries.forEach(function (en) {
-            if (en.isIntersecting && en.intersectionRatio > bestRatio) {
-              bestRatio = en.intersectionRatio;
-              best = en.target;
-            }
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            var t = document.getElementById(a.dataset.target);
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
           });
-          if (best) setActive(best.id);
-        }, { rootMargin: '-80px 0px -40% 0px', threshold: [0, .1, .25, .5, .75, 1] });
-        sections.forEach(function (s) { obs.observe(s); });
-      }
-
-      window.addEventListener('scroll', function () {
-        if (!page.classList.contains('active')) return;
-        var atBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 8);
-        if (atBottom && sections.length) setActive(sections[sections.length - 1].id);
-      }, { passive: true });
-    }
-
-    /* ============================================================
-       二、快速导航按钮：滚动到对应板块
-       ============================================================ */
-    if (page.dataset.tocBound !== '1') {
-      page.dataset.tocBound = '1';
-      page.querySelectorAll('[data-help]').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          var target = document.getElementById(btn.getAttribute('data-help'));
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-      });
-    }
 
-    /* ============================================================
-       三、工具函数
-       ============================================================ */
-    function stamp() {
-      var d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
-      return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes());
-    }
-
-    function toast(msg) {
-      var el = document.getElementById('toast');
-      if (!el) { console.log('[帮助]', msg); return; }
-      el.textContent = msg;
-      el.classList.add('show');
-      clearTimeout(el.__helpToastTimer);
-      el.__helpToastTimer = setTimeout(function () { el.classList.remove('show'); }, 2200);
-    }
-
-    function download(text, filename, mime) {
-      try {
-        var blob = new Blob([text], { type: mime });
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
-        toast('已开始下载：' + filename);
-        console.log('[帮助] 下载已触发：', filename);
-      } catch (e) {
-        console.error('[帮助] 下载失败：', e);
-        alert('下载失败：' + (e && e.message ? e.message : e));
-      }
-    }
-
-    /* ============================================================
-       四、生成 HTML 帮助文档
-       ============================================================ */
-    function buildHtml() {
-      var d = new Date();
-      var dateStr = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
-
-      var css = '*{box-sizing:border-box;}' +
-        'body{margin:0;background:#f3f4f6;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#1c1f23;line-height:1.9;}' +
-        '.doc{max-width:860px;margin:0 auto;background:#fff;padding:56px 60px 64px;min-height:100vh;}' +
-        '.cover{text-align:center;padding-bottom:34px;border-bottom:3px solid #737b84;margin-bottom:44px;}' +
-        '.cover h1{font-size:32px;font-weight:800;letter-spacing:3px;margin:0 0 14px;}' +
-        '.cover .sub{color:#6f7680;font-size:15px;margin:0;}' +
-        '.cover .ver{display:inline-block;margin-top:16px;padding:5px 16px;border-radius:999px;background:#eceff2;color:#565d65;font-size:13px;font-weight:700;}' +
-        'h2{font-size:21px;margin:44px 0 18px;padding-left:14px;border-left:5px solid #737b84;}' +
-        'p{margin:0 0 12px;font-size:15px;color:#374151;}' +
-        'ul,ol{margin:0 0 14px;padding-left:26px;font-size:15px;color:#374151;}' +
-        'li{margin-bottom:7px;}' +
-        'b,strong{color:#1c1f23;}' +
-        'code{background:#eceff2;color:#565d65;padding:1px 7px;border-radius:5px;font-family:Consolas,Menlo,monospace;font-size:13.5px;}' +
-        '.qa{border:1px solid #e3e6ea;border-radius:10px;padding:15px 18px;margin-bottom:11px;background:#fafbfc;}' +
-        '.qa .q{font-size:15.5px;font-weight:700;margin:0 0 8px;}' +
-        '.qa .a{font-size:14.5px;color:#4b5563;}' +
-        '.qa .a p{margin:0 0 8px;font-size:14.5px;color:#4b5563;}' +
-        '.tip{border-left:4px solid #cfd4d9;background:#f7f8f9;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:11px;font-size:14.5px;color:#4b5563;}' +
-        '.tip b{color:#565d65;display:block;margin-bottom:4px;}' +
-        '.kbd{display:inline-block;padding:2px 8px;margin:0 2px;border:1px solid #d1d5db;border-bottom-width:2px;border-radius:6px;background:#fff;font-family:Consolas,Menlo,monospace;font-size:12.5px;color:#374151;white-space:nowrap;}' +
-        'table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14.5px;}' +
-        'th,td{text-align:left;padding:10px 13px;border-bottom:1px solid #e3e6ea;vertical-align:top;}' +
-        'th{background:#f9fafb;color:#6f7680;font-weight:600;font-size:13px;}' +
-        '.footer{margin-top:52px;padding-top:22px;border-top:1px solid #e3e6ea;text-align:center;color:#9ca3af;font-size:13px;}' +
-        '@media print{body{background:#fff;}.doc{padding:0;max-width:none;}.qa,.tip{break-inside:avoid;}}' +
-        '@media(max-width:640px){.doc{padding:28px 20px 40px;}.cover h1{font-size:24px;}h2{font-size:18px;}}';
-
-      var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档</h1>' +
-        '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
-        '<span class="ver">V2.3 铂金版（2026.10）</span></div>' +
-
-        '<h2>一、快速开始</h2><ol>' +
-        '<li><b>找到你要的工具</b>：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。</li>' +
-        '<li><b>用搜索框快速定位</b>：顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。</li>' +
-        '<li><b>不登录也能直接使用</b>：默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录等都不需要登录；仅 AI 相关能力需要登录。</li>' +
-        '<li><b>登录后开启云端同步与 AI</b>：点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、运动热量估算、健康数据分析等能力也只对登录用户开放。</li>' +
-        '<li><b>养成备份的习惯</b>：在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。</li>' +
-        '<li><b>健康数据仅供参考</b>：V2.3 起新增「健康管理」与「运动记录」。BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，<b>不能替代专业医疗意见</b>，如有不适请及时就医。</li>' +
-        '</ol>' +
-
-        '<h2>二、常见问题</h2>' +
-        '<div class="qa"><p class="q">数据保存在哪里？会不会丢？</p><div class="a">' +
-        '<p>不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 <code>suidou-</code> 开头），刷新或关闭页面都不会丢失。</p>' +
-        '<p>但<b>清除浏览器缓存、更换设备 / 浏览器、使用无痕模式</b>都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">换了一台设备，怎么把数据搬过去？</p><div class="a">' +
-        '<p><b>方式一（推荐）</b>：注册并登录账号 → 在设置页点「上传本地数据到云端」→ 另一台设备登录同一账号后点「从云端拉取数据」。</p>' +
-        '<p><b>方式二</b>：在旧设备导出 JSON 备份文件，在新设备通过「设置 → 导入数据」恢复。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">本地模式和云端模式有什么区别？</p><div class="a">' +
-        '<p><b>本地模式</b>：数据只存在你自己的浏览器里，不上传服务器，无需登录，适合单设备使用。</p>' +
-        '<p><b>云端模式</b>：登录后数据同步到 Supabase，多设备共用同一份数据；AI 相关功能也只对登录用户开放。</p>' +
-        '<p>右上角的徽章会实时显示当前所处的模式。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">为什么 AI 功能提示「请先登录」？</p><div class="a">' +
-        '<p>AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。</p>' +
-        '<p>登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析同样计入该额度。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">AI 每天能用多少次？额度什么时候重置？</p><div class="a">' +
-        '<p>每个账号每天有固定的免费调用次数，AI 助手聊天页会实时显示今日已用次数。</p>' +
-        '<p>额度按<b>自然日</b>重置，当天的使用量不会累计到第二天。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">忘记密码了怎么办？</p><div class="a">' +
-        '<p>在登录页点击「忘记密码？」，输入注册邮箱后我们会发送一封重置密码的邮件。</p>' +
-        '<p>如果没收到，请检查垃圾邮件文件夹；重置链接有时效，过期后可以重新发送。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">怎么修改用户名和头像？</p><div class="a">' +
-        '<p>登录后进入「设置 → 个人资料」，可以上传头像（自动压缩到 180px 以内）和修改用户名。</p>' +
-        '<p>用户名只用于主页右上角显示，<b>不影响登录邮箱</b>；未登录时这两项不可用。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">上传的图片会不会占用很多空间？</p><div class="a">' +
-        '<p>所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。</p>' +
-        '<p>浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。建议不要一次性放入过多高清大图。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">V2.3 新增的「健康管理」都能做什么？</p><div class="a">' +
-        '<p><b>BMI 计算</b>：原「数学计算 → BMI 计算」整体迁移过来，输入身高、体重（支持 cm / m、kg / 斤 / 磅）即可得到 BMI 数值、分级与理想体重区间。</p>' +
-        '<p><b>睡眠记录</b>：录入入睡时间与起床时间，自动计算睡眠时长（含跨夜），按日期绘制近 30 天睡眠曲线，支持导出 PNG。</p>' +
-        '<p><b>生命体征</b>：可录入心率、血糖、血压（收缩压 / 舒张压），系统按参考范围自动标出「正常 / 偏高 / 偏低」，并可把一段时间的数据整体交给 AI 做趋势解读。</p>' +
-        '<p>所有结果仅为生活参考，<b>不构成医疗建议</b>。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">睡眠记录怎么算跨夜时长？</p><div class="a">' +
-        '<p>若起床时间早于入睡时间，系统会判定为跨夜，自动加 24 小时再相减。例如 23:30 入睡、07:00 起床，睡眠时长为 7 小时 30 分。</p>' +
-        '<p>若入睡与起床时间完全相同，会视为 0 分钟并拒绝保存，请检查是否填错。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">「运动记录」的热量估算准不准？</p><div class="a">' +
-        '<p>系统会先基于你填写的性别、年龄、身高、体重做基础代谢与运动代谢估算；勾选「让 AI 辅助估算」后，AI 会结合运动类型、时长、强度给出更细化的参考区间。</p>' +
-        '<p>运动手环、心率带等专业设备的数据更准确，本工具结果<b>仅供参考</b>。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">鞋码计算为什么需要「年龄」？</p><div class="a">' +
-        '<p>儿童与青少年的脚部仍在发育，同一脚长在成人码与童码中对应关系不同。输入年龄后，系统会区分成人码表与童鞋码表，给出更合理的推荐区间。</p>' +
-        '<p>不同品牌、不同鞋型的尺码略有差异，建议同时参考具体商品的官方尺码说明。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">歌曲收藏能直接试听吗？</p><div class="a">' +
-        '<p>不能。本工具只记录歌曲信息与歌词，并提供 QQ 音乐、酷我音乐、酷狗音乐、网易云音乐的搜索 / 直链跳转，播放需要到对应平台进行。</p>' +
-        '<p>如果在「后台填写」里填了某平台的链接，跳转时会直接使用该直链。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">日历为什么只能查看 2026 年 10 月到 2036 年 12 月？</p><div class="a">' +
-        '<p>这是当前版本设定的可查看范围，超出范围的月份在年份 / 月份下拉框中会被禁用。</p>' +
-        '<p>点击「回到 2026-10」可以快速回到起点；点击某一天的格子即可查看、添加、修改或删除当天的安排。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">代码编辑器安全吗？支持哪些语言？</p><div class="a">' +
-        '<p>JavaScript 模式运行在带有 <code>sandbox</code> 属性的 iframe 中，无法访问本页面的数据和存储，相对安全。</p>' +
-        '<p>当前支持 <b>JavaScript 实时运行</b> 与 <b>Markdown 实时渲染</b>两种模式；仍建议只运行你自己信任的代码。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">点了导出按钮却找不到文件？</p><div class="a">' +
-        '<p>所有导出（JSON 备份、CSV、docx、TXT、HTML、PNG）都通过浏览器的下载功能保存到默认下载目录。</p>' +
-        '<p>如果没有反应，请检查浏览器是否拦截了下载、是否开启了「下载前询问保存位置」，以及手机端是否需要在文件管理器中查找。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">误删或清空的数据还能恢复吗？</p><div class="a">' +
-        '<p>不能。工具箱不保存历史版本，已清空且没有备份的数据无法找回。</p>' +
-        '<p>所以在执行「清空全部数据」之前，请务必先导出备份。云端模式下清空会同时删除云端记录。</p>' +
-        '</div></div>' +
-        '<div class="qa"><p class="q">页面显示异常、按钮点不动怎么办？</p><div class="a">' +
-        '<p>可以依次尝试：① 刷新页面；② 检查网络（AI 功能和云端同步依赖网络）；③ 换用 Chrome / Edge / Safari 等现代浏览器。</p>' +
-        '<p>如果仍然异常，欢迎把浏览器版本和具体操作步骤反馈给我们。</p>' +
-        '</div></div>' +
-
-        '<h2>三、工具小贴士</h2>' +
-        '<div class="tip"><b>健康管理</b>共三个子模块：BMI 计算、睡眠记录、生命体征。BMI 支持 cm / m 与 kg / 斤 / 磅；睡眠记录自动处理跨夜；心率 / 血糖 / 血压会按参考范围自动标注正常、偏高或偏低。</div>' +
-        '<div class="tip"><b>运动记录</b>先填好性别、年龄、身高、体重，再添加运动。运动状态可选「计划」或「已记录」；填入运动类型、时长、强度后，勾选「AI 辅助估算」可得到热量消耗参考值。</div>' +
-        '<div class="tip"><b>数学计算</b>包含计算器（普通 / 专家模式）、单位换算（长度 / 重量 / 面积 / 体积 / 温度 / 时间 / 速度 / 数据存储）与鞋码计算三个独立模块。BMI 已迁至健康管理。</div>' +
-        '<div class="tip"><b>鞋码计算</b>输入脚长（mm 或 cm）与年龄，会区分成人码与童码，同时给出中国码、欧码、美码、英码、日码推荐，并附带公式与完整对照表。结果仅供参考。</div>' +
-        '<div class="tip"><b>文章分析</b>字数统计按字符计算，中文、英文字母、数字、标点分别归类；词频分析的中文按双字组切分，可在结果上方切换是否过滤常见停用词。</div>' +
-        '<div class="tip"><b>小说助手</b>先在列表页新建一本小说，进入后左侧添加章节、右侧编辑正文；章节可标记「前言 / 正文 / 番外 / 附录 / 后记 / 作者的话」，图表会按类型统计字数，支持导出 TXT 与 HTML。</div>' +
-        '<div class="tip"><b>人物印象表 / 影视收藏</b>填好名称后可以点「✨ AI 生成小传 / 简介」让 AI 帮你起草，生成结果可一键插入到表单。</div>' +
-        '<div class="tip"><b>地点收藏</b>国内请填写到具体门牌号或精确位置，国外写到城市或地标即可；不填百度百科链接时会自动按名称搜索。</div>' +
-        '<div class="tip"><b>我的日历</b>点击日期格子即可添加安排，支持时间、地点、人物与内容；「导出本月图片」会生成一张当月日程长图。</div>' +
-        '<div class="tip"><b>我的记账本</b>支持多种货币，按币种分别汇总本月与今日支出；「导出 CSV」可直接用 Excel 打开。</div>' +
-        '<div class="tip"><b>畅想画布</b>支持鼠标与触屏书写，导出的是 1400 × 900 高清 PNG；清空之后仍然可以点「撤销」找回。</div>' +
-        '<div class="tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>' +
-
-        '<h2>四、快捷键速查</h2>' +
-        '<table><thead><tr><th style="width:130px;">场景</th><th>按键</th></tr></thead><tbody>' +
-        '<tr><td>数学计算 · 计算器</td><td><span class="kbd">0-9</span><span class="kbd">+</span><span class="kbd">-</span><span class="kbd">*</span><span class="kbd">/</span><span class="kbd">(</span><span class="kbd">)</span><span class="kbd">.</span><span class="kbd">%</span><span class="kbd">^</span><br>求值：<span class="kbd">Enter</span> 或 <span class="kbd">=</span>　退格：<span class="kbd">Backspace</span>　清空：<span class="kbd">Esc</span></td></tr>' +
-        '<tr><td>代码编辑器</td><td><span class="kbd">Tab</span> 插入两个空格缩进<br>立即运行 / 渲染：<span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span>（停止输入约 0.7 秒也会自动运行）</td></tr>' +
-        '<tr><td>AI 聊天</td><td>发送消息：<span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span></td></tr>' +
-        '</tbody></table>' +
-
-        '<h2>五、数据与隐私</h2>' +
-        '<div class="tip"><b>本地模式</b>数据保存在浏览器 localStorage，不会上传到任何服务器；浏览器上限一般约 5 MB，可在设置页查看当前占用与进度条。</div>' +
-        '<div class="tip"><b>云端模式</b>登录后数据通过 Supabase 同步，密码由 Supabase Auth 加密处理，工具箱不会保存你的明文密码。</div>' +
-        '<div class="tip"><b>图片压缩</b>头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px，上传前自动压缩以节省空间。</div>' +
-        '<div class="tip"><b>导出格式</b>JSON（完整备份）、CSV（记账）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线）。</div>' +
-
-        '<h2>六、联系与反馈</h2>' +
-        '<ul>' +
-        '<li><b>微博</b>：@岁窦工作室</li>' +
-        '<li><b>邮箱</b>：q13052830801@163.com</li>' +
-        '<li><b>版本</b>：V2.3 铂金版（2026.10）</li>' +
-        '</ul>' +
-
-        '<div class="footer">岁窦工具箱 · 帮助文档<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>';
-
-      return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">' +
-        '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-        '<title>岁窦工具箱 · 帮助文档</title><style>' + css + '</style></head><body>' +
-        '<div class="doc">' + body + '</div></body></html>';
-    }
-
-    /* ============================================================
-       五、生成 Markdown 帮助文档
-       ============================================================ */
-    function buildMd() {
-      var d = new Date();
-      var dateStr = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
-      return [
-        '# 岁窦工具箱 · 帮助文档', '',
-        '> 新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明  ',
-        '> 版本：V2.3 铂金版（2026.10）', '', '---', '',
-
-        '## 一、快速开始', '',
-        '1. **找到你要的工具**：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。',
-        '2. **用搜索框快速定位**：顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。',
-        '3. **不登录也能直接使用**：默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录等都不需要登录；仅 AI 相关能力需要登录。',
-        '4. **登录后开启云端同步与 AI**：点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、运动热量估算、健康数据分析等能力也只对登录用户开放。',
-        '5. **养成备份的习惯**：在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。',
-        '6. **健康数据仅供参考**：V2.3 起新增「健康管理」与「运动记录」。BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，**不能替代专业医疗意见**，如有不适请及时就医。', '',
-
-        '## 二、常见问题', '',
-        '### Q1. 数据保存在哪里？会不会丢？',
-        '不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 `suidou-` 开头），刷新或关闭页面都不会丢失。',
-        '但**清除浏览器缓存、更换设备 / 浏览器、使用无痕模式**都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。', '',
-        '### Q2. 换了一台设备，怎么把数据搬过去？',
-        '- **方式一（推荐）**：注册并登录账号 → 在设置页点「上传本地数据到云端」→ 另一台设备登录同一账号后点「从云端拉取数据」。',
-        '- **方式二**：在旧设备导出 JSON 备份文件，在新设备通过「设置 → 导入数据」恢复。', '',
-        '### Q3. 本地模式和云端模式有什么区别？',
-        '- **本地模式**：数据只存在你自己的浏览器里，不上传服务器，无需登录，适合单设备使用。',
-        '- **云端模式**：登录后数据同步到 Supabase，多设备共用同一份数据；AI 相关功能也只对登录用户开放。',
-        '',
-        '右上角的徽章会实时显示当前所处的模式。', '',
-        '### Q4. 为什么 AI 功能提示「请先登录」？',
-        'AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析同样计入该额度。', '',
-        '### Q5. AI 每天能用多少次？额度什么时候重置？',
-        '每个账号每天有固定的免费调用次数，AI 助手聊天页会实时显示今日已用次数。额度按**自然日**重置，当天的使用量不会累计到第二天。', '',
-        '### Q6. 忘记密码了怎么办？',
-        '在登录页点击「忘记密码？」，输入注册邮箱后我们会发送一封重置密码的邮件。如果没收到，请检查垃圾邮件文件夹；重置链接有时效，过期后可以重新发送。', '',
-        '### Q7. 怎么修改用户名和头像？',
-        '登录后进入「设置 → 个人资料」，可以上传头像（自动压缩到 180px 以内）和修改用户名。用户名只用于主页右上角显示，**不影响登录邮箱**；未登录时这两项不可用。', '',
-        '### Q8. 上传的图片会不会占用很多空间？',
-        '所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。', '',
-        '### Q9. V2.3 新增的「健康管理」都能做什么？',
-        '- **BMI 计算**：原「数学计算 → BMI 计算」整体迁移过来。',
-        '- **睡眠记录**：录入入睡 / 起床时间自动算时长（含跨夜），绘制近 30 天曲线，可导出 PNG。',
-        '- **生命体征**：录入心率、血糖、血压，自动标注正常 / 偏高 / 偏低，可让 AI 做趋势解读。',
-        '',
-        '所有结果仅为生活参考，**不构成医疗建议**。', '',
-        '### Q10. 睡眠记录怎么算跨夜时长？',
-        '若起床时间早于入睡时间，系统判定为跨夜，自动加 24 小时再相减。例如 23:30 入睡、07:00 起床，睡眠时长为 7 小时 30 分。若入睡与起床完全相同，会视为 0 分钟并拒绝保存。', '',
-        '### Q11. 「运动记录」的热量估算准不准？',
-        '系统会先基于性别、年龄、身高、体重做基础估算；勾选「让 AI 辅助估算」后，AI 会结合运动类型、时长、强度给出更细化的参考区间。运动手环等专业设备的数据更准确，本工具结果**仅供参考**。', '',
-        '### Q12. 鞋码计算为什么需要「年龄」？',
-        '儿童与青少年的脚部仍在发育，同一脚长在成人码与童码中对应关系不同。输入年龄后，系统会区分成人码表与童鞋码表，给出更合理的推荐区间。不同品牌、鞋型略有差异，建议同时参考商品官方尺码说明。', '',
-        '### Q13. 歌曲收藏能直接试听吗？',
-        '不能。本工具只记录歌曲信息与歌词，并提供四大平台的搜索 / 直链跳转，播放需要到对应平台进行。', '',
-        '### Q14. 日历为什么只能查看 2026 年 10 月到 2036 年 12 月？',
-        '这是当前版本设定的可查看范围，超出范围的月份在年份 / 月份下拉框中会被禁用。点击「回到 2026-10」可以快速回到起点。', '',
-        '### Q15. 代码编辑器安全吗？支持哪些语言？',
-        'JavaScript 模式运行在带有 `sandbox` 属性的 iframe 中，无法访问本页面的数据和存储，相对安全。当前支持 **JavaScript 实时运行** 与 **Markdown 实时渲染**两种模式。', '',
-        '### Q16. 点了导出按钮却找不到文件？',
-        '所有导出都通过浏览器的下载功能保存到默认下载目录。如果没有反应，请检查浏览器是否拦截了下载、是否开启了「下载前询问保存位置」。', '',
-        '### Q17. 误删或清空的数据还能恢复吗？',
-        '不能。工具箱不保存历史版本，已清空且没有备份的数据无法找回。执行「清空全部数据」之前请务必先导出备份。', '',
-        '### Q18. 页面显示异常、按钮点不动怎么办？',
-        '可以依次尝试：① 刷新页面；② 检查网络；③ 换用 Chrome / Edge / Safari 等现代浏览器。', '',
-
-        '## 三、工具小贴士', '',
-        '- **健康管理**：BMI 计算 + 睡眠记录 + 生命体征三合一。心率 / 血糖 / 血压按参考范围自动标注，AI 可做趋势分析。',
-        '- **运动记录**：先填个人信息，再添加运动。状态可选「计划」或「已记录」，AI 可辅助估算热量，支持文字 + 图片，可导出 Word 与 PNG。',
-        '- **数学计算**：计算器（普通 / 专家）、单位换算（8 大类）、鞋码计算三合一。BMI 已迁至健康管理。',
-        '- **鞋码计算**：输入脚长与年龄，区分成人码 / 童码，给出中国码、欧码、美码、英码、日码推荐，并附公式与对照表。',
-        '- **文章分析**：字数统计按字符计算；词频分析中文按双字组切分，可切换停用词过滤。',
-        '- **小说助手**：章节分类（前言 / 正文 / 番外 / 附录 / 后记 / 作者的话）、字数统计图，可导出 TXT 与 HTML。',
-        '- **人物印象表 / 影视收藏**：支持 AI 生成小传 / 简介，结果可一键插入表单。',
-        '- **地点收藏**：国内填到门牌号，国外写到城市或地标即可。',
-        '- **我的日历**：点击日期格子添加安排，可导出当月图片。',
-        '- **我的记账本**：多币种，按币种汇总，可导出 CSV。',
-        '- **畅想画布**：支持鼠标与触屏书写，导出 1400 × 900 高清 PNG。',
-        '- **代码编辑器**：JavaScript 沙箱运行，`console.log` 输出显示在预览下方；Markdown 实时渲染。', '',
-
-        '## 四、快捷键速查', '',
-        '| 场景 | 按键 |',
-        '| --- | --- |',
-        '| 数学计算 · 计算器 | `0-9` `+` `-` `*` `/` `(` `)` `.` `%` `^`；`Enter` / `=` 求值；`Backspace` 退格；`Esc` 清空 |',
-        '| 代码编辑器 | `Tab` 缩进两个空格；`Ctrl` / `⌘` + `Enter` 立即运行或渲染 |',
-        '| AI 聊天 | `Ctrl` / `⌘` + `Enter` 发送消息 |', '',
-
-        '## 五、数据与隐私', '',
-        '- **本地模式**：数据保存在浏览器 localStorage，不上传服务器，上限约 5 MB。',
-        '- **云端模式**：登录后通过 Supabase 同步，密码由 Supabase Auth 加密处理。',
-        '- **图片压缩**：头像 180px、人物 400px、小说封面 600px、地点 / 影视 / 运动 800px。',
-        '- **导出格式**：JSON、CSV、docx、TXT / HTML、PNG。', '',
-
-        '## 六、联系与反馈', '',
-        '- 微博：@岁窦工作室',
-        '- 邮箱：q13052830801@163.com',
-        '- 版本：V2.3 铂金版（2026.10）', '',
-        '---', '',
-        '*岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
-      ].join('\n');
-    }
-
-    /* ============================================================
-       六、生成并下载 Word（docx）帮助文档
-       ============================================================ */
-    async function downloadDocx() {
-      if (typeof window.docx === 'undefined') {
-        alert('Word 导出库未加载，请刷新页面后重试');
-        return;
-      }
-
-      var D = window.docx;
-      var FONT = 'Microsoft YaHei';
-      var children = [];
-
-      /* ---------- 封面标题 ---------- */
-      children.push(new D.Paragraph({
-        children: [new D.TextRun({ text: '岁窦工具箱 · 帮助文档', bold: true, size: 44, font: FONT, color: '565d65' })],
-        alignment: D.AlignmentType.CENTER,
-        spacing: { before: 600, after: 200 }
-      }));
-      children.push(new D.Paragraph({
-        children: [new D.TextRun({ text: '新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明', size: 22, font: FONT, color: '6f7680' })],
-        alignment: D.AlignmentType.CENTER,
-        spacing: { after: 120 }
-      }));
-      children.push(new D.Paragraph({
-        children: [new D.TextRun({ text: 'V2.3 铂金版（2026.10）', size: 22, font: FONT, color: '565d65', bold: true })],
-        alignment: D.AlignmentType.CENTER,
-        spacing: { after: 400 },
-        border: { bottom: { color: '737b84', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
-      }));
-
-      /* ---------- 小工具函数 ---------- */
-      function H1(text) {
-        return new D.Paragraph({
-          children: [new D.TextRun({ text: text, bold: true, size: 30, font: FONT, color: '3d444b' })],
-          spacing: { before: 400, after: 200 },
-          border: { left: { color: '737b84', space: 8, style: D.BorderStyle.SINGLE, size: 24 } },
-          indent: { left: 160 }
-        });
-      }
-      function Runs(runs, opts) {
-        opts = opts || {};
-        return new D.Paragraph({
-          children: runs.map(function (r) {
-            return new D.TextRun({
-              text: r.text,
-              bold: !!r.bold,
-              size: r.size || 22,
-              font: FONT,
-              color: r.color || '374151'
+        if ('IntersectionObserver' in window) {
+          var obs = new IntersectionObserver(function (entries) {
+            var best = null, bestRatio = 0;
+            entries.forEach(function (en) {
+              if (en.isIntersecting && en.intersectionRatio > bestRatio) {
+                bestRatio = en.intersectionRatio;
+                best = en.target;
+              }
             });
-          }),
-          spacing: { after: opts.after !== undefined ? opts.after : 120, line: 340 },
-          indent: opts.indent
-        });
-      }
-
-      /* ---------- 一、快速开始 ---------- */
-      children.push(H1('一、快速开始'));
-      [
-        ['找到你要的工具', '首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。'],
-        ['用搜索框快速定位', '顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。'],
-        ['不登录也能直接使用', '默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录等都不需要登录；仅 AI 相关能力需要登录。'],
-        ['登录后开启云端同步与 AI', '点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、运动热量估算、健康数据分析等能力也只对登录用户开放。'],
-        ['养成备份的习惯', '在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。'],
-        ['健康数据仅供参考', 'V2.3 起新增「健康管理」与「运动记录」。BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，不能替代专业医疗意见，如有不适请及时就医。']
-      ].forEach(function (s, i) {
-        children.push(Runs([
-          { text: (i + 1) + '. ', bold: true, color: '565d65' },
-          { text: s[0] + '：', bold: true, color: '1c1f23' },
-          { text: s[1] }
-        ]));
-      });
-
-      /* ---------- 二、常见问题 ---------- */
-      children.push(H1('二、常见问题'));
-      var faqs = [
-        ['数据保存在哪里？会不会丢？', [
-          '不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 suidou- 开头），刷新或关闭页面都不会丢失。',
-          '但清除浏览器缓存、更换设备 / 浏览器、使用无痕模式都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。'
-        ]],
-        ['换了一台设备，怎么把数据搬过去？', [
-          '方式一（推荐）：注册并登录账号 → 在设置页点「上传本地数据到云端」→ 另一台设备登录同一账号后点「从云端拉取数据」。',
-          '方式二：在旧设备导出 JSON 备份文件，在新设备通过「设置 → 导入数据」恢复。'
-        ]],
-        ['本地模式和云端模式有什么区别？', [
-          '本地模式：数据只存在你自己的浏览器里，不上传服务器，无需登录，适合单设备使用。',
-          '云端模式：登录后数据同步到 Supabase，多设备共用同一份数据；AI 相关功能也只对登录用户开放。',
-          '右上角的徽章会实时显示当前所处的模式。'
-        ]],
-        ['为什么 AI 功能提示「请先登录」？', [
-          'AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。',
-          '登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析同样计入该额度。'
-        ]],
-        ['AI 每天能用多少次？额度什么时候重置？', [
-          '每个账号每天有固定的免费调用次数，AI 助手聊天页会实时显示今日已用次数。',
-          '额度按自然日重置，当天的使用量不会累计到第二天。'
-        ]],
-        ['忘记密码了怎么办？', [
-          '在登录页点击「忘记密码？」，输入注册邮箱后我们会发送一封重置密码的邮件。',
-          '如果没收到，请检查垃圾邮件文件夹；重置链接有时效，过期后可以重新发送。'
-        ]],
-        ['怎么修改用户名和头像？', [
-          '登录后进入「设置 → 个人资料」，可以上传头像（自动压缩到 180px 以内）和修改用户名。',
-          '用户名只用于主页右上角显示，不影响登录邮箱；未登录时这两项不可用。'
-        ]],
-        ['上传的图片会不会占用很多空间？', [
-          '所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。',
-          '浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。建议不要一次性放入过多高清大图。'
-        ]],
-        ['V2.3 新增的「健康管理」都能做什么？', [
-          'BMI 计算：原「数学计算 → BMI 计算」整体迁移过来，输入身高、体重（支持 cm / m、kg / 斤 / 磅）即可得到 BMI 数值、分级与理想体重区间。',
-          '睡眠记录：录入入睡时间与起床时间，自动计算睡眠时长（含跨夜），按日期绘制近 30 天睡眠曲线，支持导出 PNG。',
-          '生命体征：可录入心率、血糖、血压（收缩压 / 舒张压），系统按参考范围自动标出「正常 / 偏高 / 偏低」，并可把一段时间的数据整体交给 AI 做趋势解读。',
-          '所有结果仅为生活参考，不构成医疗建议。'
-        ]],
-        ['睡眠记录怎么算跨夜时长？', [
-          '若起床时间早于入睡时间，系统会判定为跨夜，自动加 24 小时再相减。例如 23:30 入睡、07:00 起床，睡眠时长为 7 小时 30 分。',
-          '若入睡与起床时间完全相同，会视为 0 分钟并拒绝保存，请检查是否填错。'
-        ]],
-        ['「运动记录」的热量估算准不准？', [
-          '系统会先基于你填写的性别、年龄、身高、体重做基础代谢与运动代谢估算；勾选「让 AI 辅助估算」后，AI 会结合运动类型、时长、强度给出更细化的参考区间。',
-          '运动手环、心率带等专业设备的数据更准确，本工具结果仅供参考。'
-        ]],
-        ['鞋码计算为什么需要「年龄」？', [
-          '儿童与青少年的脚部仍在发育，同一脚长在成人码与童码中对应关系不同。输入年龄后，系统会区分成人码表与童鞋码表，给出更合理的推荐区间。',
-          '不同品牌、不同鞋型的尺码略有差异，建议同时参考具体商品的官方尺码说明。'
-        ]],
-        ['歌曲收藏能直接试听吗？', [
-          '不能。本工具只记录歌曲信息与歌词，并提供 QQ音乐、酷我音乐、酷狗音乐、网易云音乐的搜索 / 直链跳转，播放需要到对应平台进行。',
-          '如果在「后台填写」里填了某平台的链接，跳转时会直接使用该直链。'
-        ]],
-        ['日历为什么只能查看 2026 年 10 月到 2036 年 12 月？', [
-          '这是当前版本设定的可查看范围，超出范围的月份在年份 / 月份下拉框中会被禁用。',
-          '点击「回到 2026-10」可以快速回到起点；点击某一天的格子即可查看、添加、修改或删除当天的安排。'
-        ]],
-        ['代码编辑器安全吗？支持哪些语言？', [
-          'JavaScript 模式运行在带有 sandbox 属性的 iframe 中，无法访问本页面的数据和存储，相对安全。',
-          '当前支持 JavaScript 实时运行 与 Markdown 实时渲染两种模式；仍建议只运行你自己信任的代码。'
-        ]],
-        ['点了导出按钮却找不到文件？', [
-          '所有导出（JSON 备份、CSV、docx、TXT、HTML、PNG）都通过浏览器的下载功能保存到默认下载目录。',
-          '如果没有反应，请检查浏览器是否拦截了下载、是否开启了「下载前询问保存位置」，以及手机端是否需要在文件管理器中查找。'
-        ]],
-        ['误删或清空的数据还能恢复吗？', [
-          '不能。工具箱不保存历史版本，已清空且没有备份的数据无法找回。',
-          '所以在执行「清空全部数据」之前，请务必先导出备份。云端模式下清空会同时删除云端记录。'
-        ]],
-        ['页面显示异常、按钮点不动怎么办？', [
-          '可以依次尝试：① 刷新页面；② 检查网络（AI 功能和云端同步依赖网络）；③ 换用 Chrome / Edge / Safari 等现代浏览器。',
-          '如果仍然异常，欢迎把浏览器版本和具体操作步骤反馈给我们。'
-        ]]
-      ];
-      faqs.forEach(function (f, i) {
-        children.push(new D.Paragraph({
-          children: [
-            new D.TextRun({ text: 'Q' + (i + 1) + '. ', bold: true, size: 24, font: FONT, color: '565d65' }),
-            new D.TextRun({ text: f[0], bold: true, size: 24, font: FONT, color: '1c1f23' })
-          ],
-          spacing: { before: 200, after: 100 },
-          indent: { left: 160 }
-        }));
-        f[1].forEach(function (line) {
-          children.push(new D.Paragraph({
-            children: [new D.TextRun({ text: line, size: 22, font: FONT, color: '4b5563' })],
-            spacing: { after: 100, line: 340 },
-            indent: { left: 360 }
-          }));
-        });
-      });
-
-      /* ---------- 三、工具小贴士 ---------- */
-      children.push(H1('三、工具小贴士'));
-      [
-        ['健康管理', '包含 BMI 计算、睡眠记录与生命体征三个子模块。BMI 支持 cm / m 与 kg / 斤 / 磅；睡眠记录自动处理跨夜；心率 / 血糖 / 血压会按参考范围自动标注正常、偏高或偏低。'],
-        ['运动记录', '先填好性别、年龄、身高、体重，再添加运动。运动状态可选「计划」或「已记录」；填入运动类型、时长、强度后，勾选「AI 辅助估算」可得到热量消耗参考值。'],
-        ['数学计算', '包含计算器（普通 / 专家模式）、单位换算与鞋码计算三个独立模块。BMI 已迁至健康管理。'],
-        ['鞋码计算', '输入脚长（mm 或 cm）与年龄，会区分成人码与童码，同时给出中国码、欧码、美码、英码、日码推荐，并附带公式与完整对照表。结果仅供参考。'],
-        ['文章分析', '字数统计按字符计算，中文、英文字母、数字、标点分别归类；词频分析的中文按双字组切分，可在结果上方切换是否过滤常见停用词。'],
-        ['小说助手', '先在列表页新建一本小说，进入后左侧添加章节、右侧编辑正文；章节可标记「前言 / 正文 / 番外 / 附录 / 后记 / 作者的话」，图表会按类型统计字数，支持导出 TXT 与 HTML。'],
-        ['人物印象表 / 影视收藏', '填好名称后可以点「✨ AI 生成小传 / 简介」让 AI 帮你起草，生成结果可一键插入到表单。'],
-        ['地点收藏', '国内请填写到具体门牌号或精确位置，国外写到城市或地标即可；不填百度百科链接时会自动按名称搜索。'],
-        ['我的日历', '点击日期格子即可添加安排，支持时间、地点、人物与内容；「导出本月图片」会生成一张当月日程长图。'],
-        ['我的记账本', '支持多种货币，按币种分别汇总本月与今日支出；「导出 CSV」可直接用 Excel 打开。'],
-        ['畅想画布', '支持鼠标与触屏书写，导出的是 1400 × 900 高清 PNG；清空之后仍然可以点「撤销」找回。'],
-        ['代码编辑器', 'JavaScript 模式会在沙箱中真实运行，console.log 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。']
-      ].forEach(function (t) {
-        children.push(Runs([
-          { text: '• ', color: '565d65', bold: true, size: 24 },
-          { text: t[0] + '：', bold: true, color: '565d65' },
-          { text: t[1] }
-        ]));
-      });
-
-      /* ---------- 四、快捷键速查（表格） ---------- */
-      children.push(H1('四、快捷键速查'));
-      var keyRows = [
-        ['数学计算 · 计算器', '0-9   +   -   *   /   (   )   .   %   ^      求值：Enter 或 =　退格：Backspace　清空：Esc'],
-        ['代码编辑器', 'Tab 插入两个空格缩进      立即运行 / 渲染：Ctrl / ⌘ + Enter（停止输入约 0.7 秒也会自动运行）'],
-        ['AI 聊天', '发送消息：Ctrl / ⌘ + Enter']
-      ];
-      children.push(new D.Table({
-        width: { size: 100, type: D.WidthType.PERCENTAGE },
-        rows: [
-          new D.TableRow({
-            tableHeader: true,
-            children: [
-              new D.TableCell({
-                width: { size: 25, type: D.WidthType.PERCENTAGE },
-                shading: { type: D.ShadingType.CLEAR, fill: 'f9fafb', color: 'auto' },
-                children: [new D.Paragraph({
-                  children: [new D.TextRun({ text: '场景', bold: true, size: 22, font: FONT, color: '6f7680' })]
-                })]
-              }),
-              new D.TableCell({
-                width: { size: 75, type: D.WidthType.PERCENTAGE },
-                shading: { type: D.ShadingType.CLEAR, fill: 'f9fafb', color: 'auto' },
-                children: [new D.Paragraph({
-                  children: [new D.TextRun({ text: '按键', bold: true, size: 22, font: FONT, color: '6f7680' })]
-                })]
-              })
-            ]
-          })
-        ].concat(keyRows.map(function (row) {
-          return new D.TableRow({
-            children: [
-              new D.TableCell({
-                width: { size: 25, type: D.WidthType.PERCENTAGE },
-                children: [new D.Paragraph({
-                  children: [new D.TextRun({ text: row[0], bold: true, size: 22, font: FONT, color: '1c1f23' })]
-                })]
-              }),
-              new D.TableCell({
-                width: { size: 75, type: D.WidthType.PERCENTAGE },
-                children: [new D.Paragraph({
-                  children: [new D.TextRun({ text: row[1], size: 22, font: FONT, color: '4b5563' })]
-                })]
-              })
-            ]
-          });
-        }))
-      }));
-      children.push(new D.Paragraph({ children: [], spacing: { after: 200 } }));
-
-      /* ---------- 五、数据与隐私 ---------- */
-      children.push(H1('五、数据与隐私'));
-      [
-        ['本地模式', '数据保存在浏览器 localStorage，不会上传到任何服务器；浏览器上限一般约 5 MB，可在设置页查看当前占用与进度条。'],
-        ['云端模式', '登录后数据通过 Supabase 同步，密码由 Supabase Auth 加密处理，工具箱不会保存你的明文密码。'],
-        ['图片压缩', '头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px，上传前自动压缩以节省空间。'],
-        ['导出格式', 'JSON（完整备份）、CSV（记账）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线）。']
-      ].forEach(function (t) {
-        children.push(Runs([
-          { text: '• ', color: '565d65', bold: true, size: 24 },
-          { text: t[0] + '：', bold: true, color: '565d65' },
-          { text: t[1] }
-        ]));
-      });
-
-      /* ---------- 六、联系与反馈 ---------- */
-      children.push(H1('六、联系与反馈'));
-      [
-        ['微博', '@岁窦工作室'],
-        ['邮箱', 'q13052830801@163.com'],
-        ['版本', 'V2.3 铂金版（2026.10）']
-      ].forEach(function (t) {
-        children.push(Runs([
-          { text: '• ', color: '565d65', bold: true, size: 24 },
-          { text: t[0] + '：', bold: true, color: '565d65' },
-          { text: t[1] }
-        ]));
-      });
-
-      /* ---------- 页脚 ---------- */
-      var dd = new Date();
-      var dateStr = dd.getFullYear() + '-' +
-        String(dd.getMonth() + 1).padStart(2, '0') + '-' +
-        String(dd.getDate()).padStart(2, '0');
-      children.push(new D.Paragraph({
-        children: [new D.TextRun({
-          text: '岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作',
-          size: 20, font: FONT, color: '9ca3af'
-        })],
-        alignment: D.AlignmentType.CENTER,
-        spacing: { before: 600 },
-        border: { top: { color: 'e3e6ea', space: 12, style: D.BorderStyle.SINGLE, size: 6 } }
-      }));
-
-      /* ---------- 生成并下载 ---------- */
-      try {
-        var doc = new D.Document({
-          creator: '岁窦工具箱',
-          title: '岁窦工具箱 · 帮助文档',
-          description: '岁窦工具箱 V2.3 铂金版帮助文档',
-          styles: {
-            default: {
-              document: { run: { font: FONT, size: 22 } }
-            }
-          },
-          sections: [{
-            properties: {
-              page: { margin: { top: 1100, bottom: 1100, left: 1100, right: 1100 } }
-            },
-            children: children
-          }]
-        });
-
-        var blob = await D.Packer.toBlob(doc);
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = '岁窦工具箱_帮助文档_' + stamp() + '.docx';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
-
-        toast('已开始下载 Word 文档');
-        console.log('[帮助] docx 已生成并触发下载');
-      } catch (err) {
-        console.error('[帮助] docx 生成失败：', err);
-        alert('生成 Word 文档失败：' + (err && err.message ? err.message : err));
-      }
-    }
-
-    /* ============================================================
-       七、绑定下载按钮（事件委托）
-       ============================================================ */
-    if (page.dataset.dlBound !== '1') {
-      page.dataset.dlBound = '1';
-
-      page.addEventListener('click', function (e) {
-        var btn = e.target.closest('[data-help-dl]');
-        if (!btn) return;
-        e.preventDefault();
-        var kind = btn.getAttribute('data-help-dl');
-        console.log('[帮助] 点击下载按钮：', kind);
-
-        if (kind === 'html') {
-          download(buildHtml(), '岁窦工具箱_帮助文档_' + stamp() + '.html', 'text/html;charset=utf-8');
-        } else if (kind === 'md') {
-          download(buildMd(), '岁窦工具箱_帮助文档_' + stamp() + '.md', 'text/markdown;charset=utf-8');
-        } else if (kind === 'docx') {
-          downloadDocx();
+            if (best) setActive(best.id);
+          }, { rootMargin: '-80px 0px -40% 0px', threshold: [0, .1, .25, .5, .75, 1] });
+          sections.forEach(function (s) { obs.observe(s); });
         }
-      });
-    }
 
-    console.log('[帮助] 帮助页脚本已加载');
-  })();
-  </script>
+        window.addEventListener('scroll', function () {
+          if (!page.classList.contains('active')) return;
+          var atBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 8);
+          if (atBottom && sections.length) setActive(sections[sections.length - 1].id);
+        }, { passive: true });
+      }
+
+      /* ============================================================
+         二、快速导航按钮：滚动到对应板块
+         ============================================================ */
+      if (page.dataset.tocBound !== '1') {
+        page.dataset.tocBound = '1';
+        page.querySelectorAll('[data-help]').forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            var target = document.getElementById(btn.getAttribute('data-help'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+      }
+
+      /* ============================================================
+         三、工具函数
+         ============================================================ */
+      function stamp() {
+        var d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
+        return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '_' + p(d.getHours()) + p(d.getMinutes());
+      }
+
+      function toast(msg) {
+        var el = document.getElementById('toast');
+        if (!el) { console.log('[帮助]', msg); return; }
+        el.textContent = msg;
+        el.classList.add('show');
+        clearTimeout(el.__helpToastTimer);
+        el.__helpToastTimer = setTimeout(function () { el.classList.remove('show'); }, 2200);
+      }
+
+      function download(text, filename, mime) {
+        try {
+          var blob = new Blob([text], { type: mime });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+          toast('已开始下载：' + filename);
+          console.log('[帮助] 下载已触发：', filename);
+        } catch (e) {
+          console.error('[帮助] 下载失败：', e);
+          alert('下载失败：' + (e && e.message ? e.message : e));
+        }
+      }
+
+      /* ============================================================
+         四、生成 HTML 帮助文档
+         ============================================================ */
+      function buildHtml() {
+        var d = new Date();
+        var dateStr = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
+
+        var css = '*{box-sizing:border-box;}' +
+          'body{margin:0;background:#f3f4f6;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#1c1f23;line-height:1.9;}' +
+          '.doc{max-width:860px;margin:0 auto;background:#fff;padding:56px 60px 64px;min-height:100vh;}' +
+          '.cover{text-align:center;padding-bottom:34px;border-bottom:3px solid #737b84;margin-bottom:44px;}' +
+          '.cover h1{font-size:32px;font-weight:800;letter-spacing:3px;margin:0 0 14px;}' +
+          '.cover .sub{color:#6f7680;font-size:15px;margin:0;}' +
+          '.cover .ver{display:inline-block;margin-top:16px;padding:5px 16px;border-radius:999px;background:#eceff2;color:#565d65;font-size:13px;font-weight:700;}' +
+          'h2{font-size:21px;margin:44px 0 18px;padding-left:14px;border-left:5px solid #737b84;}' +
+          'p{margin:0 0 12px;font-size:15px;color:#374151;}' +
+          'ul,ol{margin:0 0 14px;padding-left:26px;font-size:15px;color:#374151;}' +
+          'li{margin-bottom:7px;}' +
+          'b,strong{color:#1c1f23;}' +
+          'code{background:#eceff2;color:#565d65;padding:1px 7px;border-radius:5px;font-family:Consolas,Menlo,monospace;font-size:13.5px;}' +
+          '.qa{border:1px solid #e3e6ea;border-radius:10px;padding:15px 18px;margin-bottom:11px;background:#fafbfc;}' +
+          '.qa .q{font-size:15.5px;font-weight:700;margin:0 0 8px;}' +
+          '.qa .a{font-size:14.5px;color:#4b5563;}' +
+          '.qa .a p{margin:0 0 8px;font-size:14.5px;color:#4b5563;}' +
+          '.tip{border-left:4px solid #cfd4d9;background:#f7f8f9;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:11px;font-size:14.5px;color:#4b5563;}' +
+          '.tip b{color:#565d65;display:block;margin-bottom:4px;}' +
+          '.kbd{display:inline-block;padding:2px 8px;margin:0 2px;border:1px solid #d1d5db;border-bottom-width:2px;border-radius:6px;background:#fff;font-family:Consolas,Menlo,monospace;font-size:12.5px;color:#374151;white-space:nowrap;}' +
+          'table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14.5px;}' +
+          'th,td{text-align:left;padding:10px 13px;border-bottom:1px solid #e3e6ea;vertical-align:top;}' +
+          'th{background:#f9fafb;color:#6f7680;font-weight:600;font-size:13px;}' +
+          '.footer{margin-top:52px;padding-top:22px;border-top:1px solid #e3e6ea;text-align:center;color:#9ca3af;font-size:13px;}' +
+          '@media print{body{background:#fff;}.doc{padding:0;max-width:none;}.qa,.tip{break-inside:avoid;}}' +
+          '@media(max-width:640px){.doc{padding:28px 20px 40px;}.cover h1{font-size:24px;}h2{font-size:18px;}}';
+
+        var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档</h1>' +
+          '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
+          '<span class="ver">V2.3 铂金版（2026.10）</span></div>' +
+
+          '<h2>一、快速开始</h2><ol>' +
+          '<li><b>找到你要的工具</b>：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。</li>' +
+          '<li><b>用搜索框快速定位</b>：顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。</li>' +
+          '<li><b>不登录也能直接使用</b>：默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录等都不需要登录；仅 AI 相关能力需要登录。</li>' +
+          '<li><b>登录后开启云端同步与 AI</b>：点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、运动热量估算、健康数据分析等能力也只对登录用户开放。</li>' +
+          '<li><b>养成备份的习惯</b>：在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。</li>' +
+          '<li><b>健康数据仅供参考</b>：V2.3 起新增「健康管理」与「运动记录」。BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，<b>不能替代专业医疗意见</b>，如有不适请及时就医。</li>' +
+          '</ol>' +
+
+          '<h2>二、常见问题</h2>' +
+          '<div class="qa"><p class="q">数据保存在哪里？会不会丢？</p><div class="a">' +
+          '<p>不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 <code>suidou-</code> 开头），刷新或关闭页面都不会丢失。</p>' +
+          '<p>但<b>清除浏览器缓存、更换设备 / 浏览器、使用无痕模式</b>都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">换了一台设备，怎么把数据搬过去？</p><div class="a">' +
+          '<p><b>方式一（推荐）</b>：注册并登录账号 → 在设置页点「上传本地数据到云端」→ 另一台设备登录同一账号后点「从云端拉取数据」。</p>' +
+          '<p><b>方式二</b>：在旧设备导出 JSON 备份文件，在新设备通过「设置 → 导入数据」恢复。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">本地模式和云端模式有什么区别？</p><div class="a">' +
+          '<p><b>本地模式</b>：数据只存在你自己的浏览器里，不上传服务器，无需登录，适合单设备使用。</p>' +
+          '<p><b>云端模式</b>：登录后数据同步到 Supabase，多设备共用同一份数据；AI 相关功能也只对登录用户开放。</p>' +
+          '<p>右上角的徽章会实时显示当前所处的模式。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">为什么 AI 功能提示「请先登录」？</p><div class="a">' +
+          '<p>AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。</p>' +
+          '<p>登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析同样计入该额度。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">AI 每天能用多少次？额度什么时候重置？</p><div class="a">' +
+          '<p>每个账号每天有固定的免费调用次数，AI 助手聊天页会实时显示今日已用次数。</p>' +
+          '<p>额度按<b>自然日</b>重置，当天的使用量不会累计到第二天。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">忘记密码了怎么办？</p><div class="a">' +
+          '<p>在登录页点击「忘记密码？」，输入注册邮箱后我们会发送一封重置密码的邮件。</p>' +
+          '<p>如果没收到，请检查垃圾邮件文件夹；重置链接有时效，过期后可以重新发送。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">怎么修改用户名和头像？</p><div class="a">' +
+          '<p>登录后进入「设置 → 个人资料」，可以上传头像（自动压缩到 180px 以内）和修改用户名。</p>' +
+          '<p>用户名只用于主页右上角显示，<b>不影响登录邮箱</b>；未登录时这两项不可用。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">上传的图片会不会占用很多空间？</p><div class="a">' +
+          '<p>所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。</p>' +
+          '<p>浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。建议不要一次性放入过多高清大图。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">V2.3 新增的「健康管理」都能做什么？</p><div class="a">' +
+          '<p><b>BMI 计算</b>：原「数学计算 → BMI 计算」整体迁移过来，输入身高、体重（支持 cm / m、kg / 斤 / 磅）即可得到 BMI 数值、分级与理想体重区间。</p>' +
+          '<p><b>睡眠记录</b>：录入入睡时间与起床时间，自动计算睡眠时长（含跨夜），按日期绘制近 30 天睡眠曲线，支持导出 PNG。</p>' +
+          '<p><b>生命体征</b>：可录入心率、血糖、血压（收缩压 / 舒张压），系统按参考范围自动标出「正常 / 偏高 / 偏低」，并可把一段时间的数据整体交给 AI 做趋势解读。</p>' +
+          '<p>所有结果仅为生活参考，<b>不构成医疗建议</b>。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">睡眠记录怎么算跨夜时长？</p><div class="a">' +
+          '<p>若起床时间早于入睡时间，系统会判定为跨夜，自动加 24 小时再相减。例如 23:30 入睡、07:00 起床，睡眠时长为 7 小时 30 分。</p>' +
+          '<p>若入睡与起床时间完全相同，会视为 0 分钟并拒绝保存，请检查是否填错。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">「运动记录」的热量估算准不准？</p><div class="a">' +
+          '<p>系统会先基于你填写的性别、年龄、身高、体重做基础代谢与运动代谢估算；勾选「让 AI 辅助估算」后，AI 会结合运动类型、时长、强度给出更细化的参考区间。</p>' +
+          '<p>运动手环、心率带等专业设备的数据更准确，本工具结果<b>仅供参考</b>。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">鞋码计算为什么需要「年龄」？</p><div class="a">' +
+          '<p>儿童与青少年的脚部仍在发育，同一脚长在成人码与童码中对应关系不同。输入年龄后，系统会区分成人码表与童鞋码表，给出更合理的推荐区间。</p>' +
+          '<p>不同品牌、不同鞋型的尺码略有差异，建议同时参考具体商品的官方尺码说明。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">歌曲收藏能直接试听吗？</p><div class="a">' +
+          '<p>不能。本工具只记录歌曲信息与歌词，并提供 QQ 音乐、酷我音乐、酷狗音乐、网易云音乐的搜索 / 直链跳转，播放需要到对应平台进行。</p>' +
+          '<p>如果在「后台填写」里填了某平台的链接，跳转时会直接使用该直链。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">日历为什么只能查看 2026 年 10 月到 2036 年 12 月？</p><div class="a">' +
+          '<p>这是当前版本设定的可查看范围，超出范围的月份在年份 / 月份下拉框中会被禁用。</p>' +
+          '<p>点击「回到 2026-10」可以快速回到起点；点击某一天的格子即可查看、添加、修改或删除当天的安排。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">代码编辑器安全吗？支持哪些语言？</p><div class="a">' +
+          '<p>JavaScript 模式运行在带有 <code>sandbox</code> 属性的 iframe 中，无法访问本页面的数据和存储，相对安全。</p>' +
+          '<p>当前支持 <b>JavaScript 实时运行</b> 与 <b>Markdown 实时渲染</b>两种模式；仍建议只运行你自己信任的代码。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">点了导出按钮却找不到文件？</p><div class="a">' +
+          '<p>所有导出（JSON 备份、CSV、docx、TXT、HTML、PNG）都通过浏览器的下载功能保存到默认下载目录。</p>' +
+          '<p>如果没有反应，请检查浏览器是否拦截了下载、是否开启了「下载前询问保存位置」，以及手机端是否需要在文件管理器中查找。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">误删或清空的数据还能恢复吗？</p><div class="a">' +
+          '<p>不能。工具箱不保存历史版本，已清空且没有备份的数据无法找回。</p>' +
+          '<p>所以在执行「清空全部数据」之前，请务必先导出备份。云端模式下清空会同时删除云端记录。</p>' +
+          '</div></div>' +
+          '<div class="qa"><p class="q">页面显示异常、按钮点不动怎么办？</p><div class="a">' +
+          '<p>可以依次尝试：① 刷新页面；② 检查网络（AI 功能和云端同步依赖网络）；③ 换用 Chrome / Edge / Safari 等现代浏览器。</p>' +
+          '<p>如果仍然异常，欢迎把浏览器版本和具体操作步骤反馈给我们。</p>' +
+          '</div></div>' +
+
+          '<h2>三、工具小贴士</h2>' +
+          '<div class="tip"><b>健康管理</b>共三个子模块：BMI 计算、睡眠记录、生命体征。BMI 支持 cm / m 与 kg / 斤 / 磅；睡眠记录自动处理跨夜；心率 / 血糖 / 血压会按参考范围自动标注正常、偏高或偏低。</div>' +
+          '<div class="tip"><b>运动记录</b>先填好性别、年龄、身高、体重，再添加运动。运动状态可选「计划」或「已记录」；填入运动类型、时长、强度后，勾选「AI 辅助估算」可得到热量消耗参考值。</div>' +
+          '<div class="tip"><b>数学计算</b>包含计算器（普通 / 专家模式）、单位换算（长度 / 重量 / 面积 / 体积 / 温度 / 时间 / 速度 / 数据存储）与鞋码计算三个独立模块。BMI 已迁至健康管理。</div>' +
+          '<div class="tip"><b>鞋码计算</b>输入脚长（mm 或 cm）与年龄，会区分成人码与童码，同时给出中国码、欧码、美码、英码、日码推荐，并附带公式与完整对照表。结果仅供参考。</div>' +
+          '<div class="tip"><b>文章分析</b>字数统计按字符计算，中文、英文字母、数字、标点分别归类；词频分析的中文按双字组切分，可在结果上方切换是否过滤常见停用词。</div>' +
+          '<div class="tip"><b>小说助手</b>先在列表页新建一本小说，进入后左侧添加章节、右侧编辑正文；章节可标记「前言 / 正文 / 番外 / 附录 / 后记 / 作者的话」，图表会按类型统计字数，支持导出 TXT 与 HTML。</div>' +
+          '<div class="tip"><b>人物印象表 / 影视收藏</b>填好名称后可以点「AI 生成小传 / 简介」让 AI 帮你起草，生成结果可一键插入到表单。</div>' +
+          '<div class="tip"><b>地点收藏</b>国内请填写到具体门牌号或精确位置，国外写到城市或地标即可；不填百度百科链接时会自动按名称搜索。</div>' +
+          '<div class="tip"><b>我的日历</b>点击日期格子即可添加安排，支持时间、地点、人物与内容；「导出本月图片」会生成一张当月日程长图。</div>' +
+          '<div class="tip"><b>我的记账本</b>支持多种货币，按币种分别汇总本月与今日支出；「导出 CSV」可直接用 Excel 打开。</div>' +
+          '<div class="tip"><b>畅想画布</b>支持鼠标与触屏书写，导出的是 1400 × 900 高清 PNG；清空之后仍然可以点「撤销」找回。</div>' +
+          '<div class="tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>' +
+
+          '<h2>四、快捷键速查</h2>' +
+          '<table><thead><tr><th style="width:130px;">场景</th><th>按键</th></tr></thead><tbody>' +
+          '<tr><td>数学计算 · 计算器</td><td><span class="kbd">0-9</span><span class="kbd">+</span><span class="kbd">-</span><span class="kbd">*</span><span class="kbd">/</span><span class="kbd">(</span><span class="kbd">)</span><span class="kbd">.</span><span class="kbd">%</span><span class="kbd">^</span><br>求值：<span class="kbd">Enter</span> 或 <span class="kbd">=</span>　退格：<span class="kbd">Backspace</span>　清空：<span class="kbd">Esc</span></td></tr>' +
+          '<tr><td>代码编辑器</td><td><span class="kbd">Tab</span> 插入两个空格缩进<br>立即运行 / 渲染：<span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span>（停止输入约 0.7 秒也会自动运行）</td></tr>' +
+          '<tr><td>AI 聊天</td><td>发送消息：<span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span></td></tr>' +
+          '</tbody></table>' +
+
+          '<h2>五、数据与隐私</h2>' +
+          '<div class="tip"><b>本地模式</b>数据保存在浏览器 localStorage，不会上传到任何服务器；浏览器上限一般约 5 MB，可在设置页查看当前占用与进度条。</div>' +
+          '<div class="tip"><b>云端模式</b>登录后数据通过 Supabase 同步，密码由 Supabase Auth 加密处理，工具箱不会保存你的明文密码。</div>' +
+          '<div class="tip"><b>图片压缩</b>头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px，上传前自动压缩以节省空间。</div>' +
+          '<div class="tip"><b>导出格式</b>JSON（完整备份）、CSV（记账）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线）。</div>' +
+
+          '<h2>六、联系与反馈</h2>' +
+          '<ul>' +
+          '<li><b>微博</b>：@岁窦工作室</li>' +
+          '<li><b>邮箱</b>：q13052830801@163.com</li>' +
+          '<li><b>版本</b>：V2.3 铂金版（2026.10）</li>' +
+          '</ul>' +
+
+          '<div class="footer">岁窦工具箱 · 帮助文档<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>';
+
+        return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">' +
+          '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+          '<title>岁窦工具箱 · 帮助文档</title><style>' + css + '</style></head><body>' +
+          '<div class="doc">' + body + '</div></body></html>';
+      }
+
+      /* ============================================================
+         五、生成 Markdown 帮助文档
+         ============================================================ */
+      function buildMd() {
+        var d = new Date();
+        var dateStr = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
+        return [
+          '# 岁窦工具箱 · 帮助文档', '',
+          '> 新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明  ',
+          '> 版本：V2.3 铂金版（2026.10）', '', '---', '',
+
+          '## 一、快速开始', '',
+          '1. **找到你要的工具**：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。',
+          '2. **用搜索框快速定位**：顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。',
+          '3. **不登录也能直接使用**：默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录等都不需要登录；仅 AI 相关能力需要登录。',
+          '4. **登录后开启云端同步与 AI**：点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、运动热量估算、健康数据分析等能力也只对登录用户开放。',
+          '5. **养成备份的习惯**：在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。',
+          '6. **健康数据仅供参考**：V2.3 起新增「健康管理」与「运动记录」。BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，**不能替代专业医疗意见**，如有不适请及时就医。', '',
+
+          '## 二、常见问题', '',
+          '### Q1. 数据保存在哪里？会不会丢？',
+          '不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 `suidou-` 开头），刷新或关闭页面都不会丢失。',
+          '但**清除浏览器缓存、更换设备 / 浏览器、使用无痕模式**都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。', '',
+          '### Q2. 换了一台设备，怎么把数据搬过去？',
+          '- **方式一（推荐）**：注册并登录账号 → 在设置页点「上传本地数据到云端」→ 另一台设备登录同一账号后点「从云端拉取数据」。',
+          '- **方式二**：在旧设备导出 JSON 备份文件，在新设备通过「设置 → 导入数据」恢复。', '',
+          '### Q3. 本地模式和云端模式有什么区别？',
+          '- **本地模式**：数据只存在你自己的浏览器里，不上传服务器，无需登录，适合单设备使用。',
+          '- **云端模式**：登录后数据同步到 Supabase，多设备共用同一份数据；AI 相关功能也只对登录用户开放。',
+          '',
+          '右上角的徽章会实时显示当前所处的模式。', '',
+          '### Q4. 为什么 AI 功能提示「请先登录」？',
+          'AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析同样计入该额度。', '',
+          '### Q5. AI 每天能用多少次？额度什么时候重置？',
+          '每个账号每天有固定的免费调用次数，AI 助手聊天页会实时显示今日已用次数。额度按**自然日**重置，当天的使用量不会累计到第二天。', '',
+          '### Q6. 忘记密码了怎么办？',
+          '在登录页点击「忘记密码？」，输入注册邮箱后我们会发送一封重置密码的邮件。如果没收到，请检查垃圾邮件文件夹；重置链接有时效，过期后可以重新发送。', '',
+          '### Q7. 怎么修改用户名和头像？',
+          '登录后进入「设置 → 个人资料」，可以上传头像（自动压缩到 180px 以内）和修改用户名。用户名只用于主页右上角显示，**不影响登录邮箱**；未登录时这两项不可用。', '',
+          '### Q8. 上传的图片会不会占用很多空间？',
+          '所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。', '',
+          '### Q9. V2.3 新增的「健康管理」都能做什么？',
+          '- **BMI 计算**：原「数学计算 → BMI 计算」整体迁移过来。',
+          '- **睡眠记录**：录入入睡 / 起床时间自动算时长（含跨夜），绘制近 30 天曲线，可导出 PNG。',
+          '- **生命体征**：录入心率、血糖、血压，自动标注正常 / 偏高 / 偏低，可让 AI 做趋势解读。',
+          '',
+          '所有结果仅为生活参考，**不构成医疗建议**。', '',
+          '### Q10. 睡眠记录怎么算跨夜时长？',
+          '若起床时间早于入睡时间，系统判定为跨夜，自动加 24 小时再相减。例如 23:30 入睡、07:00 起床，睡眠时长为 7 小时 30 分。若入睡与起床完全相同，会视为 0 分钟并拒绝保存。', '',
+          '### Q11. 「运动记录」的热量估算准不准？',
+          '系统会先基于性别、年龄、身高、体重做基础估算；勾选「让 AI 辅助估算」后，AI 会结合运动类型、时长、强度给出更细化的参考区间。运动手环等专业设备的数据更准确，本工具结果**仅供参考**。', '',
+          '### Q12. 鞋码计算为什么需要「年龄」？',
+          '儿童与青少年的脚部仍在发育，同一脚长在成人码与童码中对应关系不同。输入年龄后，系统会区分成人码表与童鞋码表，给出更合理的推荐区间。不同品牌、鞋型略有差异，建议同时参考商品官方尺码说明。', '',
+          '### Q13. 歌曲收藏能直接试听吗？',
+          '不能。本工具只记录歌曲信息与歌词，并提供四大平台的搜索 / 直链跳转，播放需要到对应平台进行。', '',
+          '### Q14. 日历为什么只能查看 2026 年 10 月到 2036 年 12 月？',
+          '这是当前版本设定的可查看范围，超出范围的月份在年份 / 月份下拉框中会被禁用。点击「回到 2026-10」可以快速回到起点。', '',
+          '### Q15. 代码编辑器安全吗？支持哪些语言？',
+          'JavaScript 模式运行在带有 `sandbox` 属性的 iframe 中，无法访问本页面的数据和存储，相对安全。当前支持 **JavaScript 实时运行** 与 **Markdown 实时渲染**两种模式。', '',
+          '### Q16. 点了导出按钮却找不到文件？',
+          '所有导出都通过浏览器的下载功能保存到默认下载目录。如果没有反应，请检查浏览器是否拦截了下载、是否开启了「下载前询问保存位置」。', '',
+          '### Q17. 误删或清空的数据还能恢复吗？',
+          '不能。工具箱不保存历史版本，已清空且没有备份的数据无法找回。执行「清空全部数据」之前请务必先导出备份。', '',
+          '### Q18. 页面显示异常、按钮点不动怎么办？',
+          '可以依次尝试：① 刷新页面；② 检查网络；③ 换用 Chrome / Edge / Safari 等现代浏览器。', '',
+
+          '## 三、工具小贴士', '',
+          '- **健康管理**：BMI 计算 + 睡眠记录 + 生命体征三合一。心率 / 血糖 / 血压按参考范围自动标注，AI 可做趋势分析。',
+          '- **运动记录**：先填个人信息，再添加运动。状态可选「计划」或「已记录」，AI 可辅助估算热量，支持文字 + 图片，可导出 Word 与 PNG。',
+          '- **数学计算**：计算器（普通 / 专家）、单位换算（8 大类）、鞋码计算三合一。BMI 已迁至健康管理。',
+          '- **鞋码计算**：输入脚长与年龄，区分成人码 / 童码，给出中国码、欧码、美码、英码、日码推荐，并附公式与对照表。',
+          '- **文章分析**：字数统计按字符计算；词频分析中文按双字组切分，可切换停用词过滤。',
+          '- **小说助手**：章节分类（前言 / 正文 / 番外 / 附录 / 后记 / 作者的话）、字数统计图，可导出 TXT 与 HTML。',
+          '- **人物印象表 / 影视收藏**：支持 AI 生成小传 / 简介，结果可一键插入表单。',
+          '- **地点收藏**：国内填到门牌号，国外写到城市或地标即可。',
+          '- **我的日历**：点击日期格子添加安排，可导出当月图片。',
+          '- **我的记账本**：多币种，按币种汇总，可导出 CSV。',
+          '- **畅想画布**：支持鼠标与触屏书写，导出 1400 × 900 高清 PNG。',
+          '- **代码编辑器**：JavaScript 沙箱运行，`console.log` 输出显示在预览下方；Markdown 实时渲染。', '',
+
+          '## 四、快捷键速查', '',
+          '| 场景 | 按键 |',
+          '| --- | --- |',
+          '| 数学计算 · 计算器 | `0-9` `+` `-` `*` `/` `(` `)` `.` `%` `^`；`Enter` / `=` 求值；`Backspace` 退格；`Esc` 清空 |',
+          '| 代码编辑器 | `Tab` 缩进两个空格；`Ctrl` / `⌘` + `Enter` 立即运行或渲染 |',
+          '| AI 聊天 | `Ctrl` / `⌘` + `Enter` 发送消息 |', '',
+
+          '## 五、数据与隐私', '',
+          '- **本地模式**：数据保存在浏览器 localStorage，不上传服务器，上限约 5 MB。',
+          '- **云端模式**：登录后通过 Supabase 同步，密码由 Supabase Auth 加密处理。',
+          '- **图片压缩**：头像 180px、人物 400px、小说封面 600px、地点 / 影视 / 运动 800px。',
+          '- **导出格式**：JSON、CSV、docx、TXT / HTML、PNG。', '',
+
+          '## 六、联系与反馈', '',
+          '- 微博：@岁窦工作室',
+          '- 邮箱：q13052830801@163.com',
+          '- 版本：V2.3 铂金版（2026.10）', '',
+          '---', '',
+          '*岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
+        ].join('\n');
+      }
+
+      /* ============================================================
+         六、生成并下载 Word（docx）帮助文档
+         ============================================================ */
+      async function downloadDocx() {
+        if (typeof window.docx === 'undefined') {
+          alert('Word 导出库未加载，请刷新页面后重试');
+          return;
+        }
+
+        var D = window.docx;
+        var FONT = 'Microsoft YaHei';
+        var children = [];
+
+        /* ---------- 封面标题 ---------- */
+        children.push(new D.Paragraph({
+          children: [new D.TextRun({ text: '岁窦工具箱 · 帮助文档', bold: true, size: 44, font: FONT, color: '565d65' })],
+          alignment: D.AlignmentType.CENTER,
+          spacing: { before: 600, after: 200 }
+        }));
+        children.push(new D.Paragraph({
+          children: [new D.TextRun({ text: '新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明', size: 22, font: FONT, color: '6f7680' })],
+          alignment: D.AlignmentType.CENTER,
+          spacing: { after: 120 }
+        }));
+        children.push(new D.Paragraph({
+          children: [new D.TextRun({ text: 'V2.3 铂金版（2026.10）', size: 22, font: FONT, color: '565d65', bold: true })],
+          alignment: D.AlignmentType.CENTER,
+          spacing: { after: 400 },
+          border: { bottom: { color: '737b84', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
+        }));
+
+        /* ---------- 小工具函数 ---------- */
+        function H1(text) {
+          return new D.Paragraph({
+            children: [new D.TextRun({ text: text, bold: true, size: 30, font: FONT, color: '3d444b' })],
+            spacing: { before: 400, after: 200 },
+            border: { left: { color: '737b84', space: 8, style: D.BorderStyle.SINGLE, size: 24 } },
+            indent: { left: 160 }
+          });
+        }
+        function Runs(runs, opts) {
+          opts = opts || {};
+          return new D.Paragraph({
+            children: runs.map(function (r) {
+              return new D.TextRun({
+                text: r.text,
+                bold: !!r.bold,
+                size: r.size || 22,
+                font: FONT,
+                color: r.color || '374151'
+              });
+            }),
+            spacing: { after: opts.after !== undefined ? opts.after : 120, line: 340 },
+            indent: opts.indent
+          });
+        }
+
+        /* ---------- 一、快速开始 ---------- */
+        children.push(H1('一、快速开始'));
+        [
+          ['找到你要的工具', '首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心，从上到下依次是「分类」与「全部应用」。点击任意卡片即可进入对应工具页，点左上角「← 返回首页」随时回到首页。'],
+          ['用搜索框快速定位', '顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。'],
+          ['不登录也能直接使用', '默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录等都不需要登录；仅 AI 相关能力需要登录。'],
+          ['登录后开启云端同步与 AI', '点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、运动热量估算、健康数据分析等能力也只对登录用户开放。'],
+          ['养成备份的习惯', '在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。'],
+          ['健康数据仅供参考', 'V2.3 起新增「健康管理」与「运动记录」。BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，不能替代专业医疗意见，如有不适请及时就医。']
+        ].forEach(function (s, i) {
+          children.push(Runs([
+            { text: (i + 1) + '. ', bold: true, color: '565d65' },
+            { text: s[0] + '：', bold: true, color: '1c1f23' },
+            { text: s[1] }
+          ]));
+        });
+
+        /* ---------- 二、常见问题 ---------- */
+        children.push(H1('二、常见问题'));
+        var faqs = [
+          ['数据保存在哪里？会不会丢？', [
+            '不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 suidou- 开头），刷新或关闭页面都不会丢失。',
+            '但清除浏览器缓存、更换设备 / 浏览器、使用无痕模式都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。'
+          ]],
+          ['换了一台设备，怎么把数据搬过去？', [
+            '方式一（推荐）：注册并登录账号 → 在设置页点「上传本地数据到云端」→ 另一台设备登录同一账号后点「从云端拉取数据」。',
+            '方式二：在旧设备导出 JSON 备份文件，在新设备通过「设置 → 导入数据」恢复。'
+          ]],
+          ['本地模式和云端模式有什么区别？', [
+            '本地模式：数据只存在你自己的浏览器里，不上传服务器，无需登录，适合单设备使用。',
+            '云端模式：登录后数据同步到 Supabase，多设备共用同一份数据；AI 相关功能也只对登录用户开放。',
+            '右上角的徽章会实时显示当前所处的模式。'
+          ]],
+          ['为什么 AI 功能提示「请先登录」？', [
+            'AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。',
+            '登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析同样计入该额度。'
+          ]],
+          ['AI 每天能用多少次？额度什么时候重置？', [
+            '每个账号每天有固定的免费调用次数，AI 助手聊天页会实时显示今日已用次数。',
+            '额度按自然日重置，当天的使用量不会累计到第二天。'
+          ]],
+          ['忘记密码了怎么办？', [
+            '在登录页点击「忘记密码？」，输入注册邮箱后我们会发送一封重置密码的邮件。',
+            '如果没收到，请检查垃圾邮件文件夹；重置链接有时效，过期后可以重新发送。'
+          ]],
+          ['怎么修改用户名和头像？', [
+            '登录后进入「设置 → 个人资料」，可以上传头像（自动压缩到 180px 以内）和修改用户名。',
+            '用户名只用于主页右上角显示，不影响登录邮箱；未登录时这两项不可用。'
+          ]],
+          ['上传的图片会不会占用很多空间？', [
+            '所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。',
+            '浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。建议不要一次性放入过多高清大图。'
+          ]],
+          ['V2.3 新增的「健康管理」都能做什么？', [
+            'BMI 计算：原「数学计算 → BMI 计算」整体迁移过来，输入身高、体重（支持 cm / m、kg / 斤 / 磅）即可得到 BMI 数值、分级与理想体重区间。',
+            '睡眠记录：录入入睡时间与起床时间，自动计算睡眠时长（含跨夜），按日期绘制近 30 天睡眠曲线，支持导出 PNG。',
+            '生命体征：可录入心率、血糖、血压（收缩压 / 舒张压），系统按参考范围自动标出「正常 / 偏高 / 偏低」，并可把一段时间的数据整体交给 AI 做趋势解读。',
+            '所有结果仅为生活参考，不构成医疗建议。'
+          ]],
+          ['睡眠记录怎么算跨夜时长？', [
+            '若起床时间早于入睡时间，系统会判定为跨夜，自动加 24 小时再相减。例如 23:30 入睡、07:00 起床，睡眠时长为 7 小时 30 分。',
+            '若入睡与起床时间完全相同，会视为 0 分钟并拒绝保存，请检查是否填错。'
+          ]],
+          ['「运动记录」的热量估算准不准？', [
+            '系统会先基于你填写的性别、年龄、身高、体重做基础代谢与运动代谢估算；勾选「让 AI 辅助估算」后，AI 会结合运动类型、时长、强度给出更细化的参考区间。',
+            '运动手环、心率带等专业设备的数据更准确，本工具结果仅供参考。'
+          ]],
+          ['鞋码计算为什么需要「年龄」？', [
+            '儿童与青少年的脚部仍在发育，同一脚长在成人码与童码中对应关系不同。输入年龄后，系统会区分成人码表与童鞋码表，给出更合理的推荐区间。',
+            '不同品牌、不同鞋型的尺码略有差异，建议同时参考具体商品的官方尺码说明。'
+          ]],
+          ['歌曲收藏能直接试听吗？', [
+            '不能。本工具只记录歌曲信息与歌词，并提供 QQ音乐、酷我音乐、酷狗音乐、网易云音乐的搜索 / 直链跳转，播放需要到对应平台进行。',
+            '如果在「后台填写」里填了某平台的链接，跳转时会直接使用该直链。'
+          ]],
+          ['日历为什么只能查看 2026 年 10 月到 2036 年 12 月？', [
+            '这是当前版本设定的可查看范围，超出范围的月份在年份 / 月份下拉框中会被禁用。',
+            '点击「回到 2026-10」可以快速回到起点；点击某一天的格子即可查看、添加、修改或删除当天的安排。'
+          ]],
+          ['代码编辑器安全吗？支持哪些语言？', [
+            'JavaScript 模式运行在带有 sandbox 属性的 iframe 中，无法访问本页面的数据和存储，相对安全。',
+            '当前支持 JavaScript 实时运行 与 Markdown 实时渲染两种模式；仍建议只运行你自己信任的代码。'
+          ]],
+          ['点了导出按钮却找不到文件？', [
+            '所有导出（JSON 备份、CSV、docx、TXT、HTML、PNG）都通过浏览器的下载功能保存到默认下载目录。',
+            '如果没有反应，请检查浏览器是否拦截了下载、是否开启了「下载前询问保存位置」，以及手机端是否需要在文件管理器中查找。'
+          ]],
+          ['误删或清空的数据还能恢复吗？', [
+            '不能。工具箱不保存历史版本，已清空且没有备份的数据无法找回。',
+            '所以在执行「清空全部数据」之前，请务必先导出备份。云端模式下清空会同时删除云端记录。'
+          ]],
+          ['页面显示异常、按钮点不动怎么办？', [
+            '可以依次尝试：① 刷新页面；② 检查网络（AI 功能和云端同步依赖网络）；③ 换用 Chrome / Edge / Safari 等现代浏览器。',
+            '如果仍然异常，欢迎把浏览器版本和具体操作步骤反馈给我们。'
+          ]]
+        ];
+        faqs.forEach(function (f, i) {
+          children.push(new D.Paragraph({
+            children: [
+              new D.TextRun({ text: 'Q' + (i + 1) + '. ', bold: true, size: 24, font: FONT, color: '565d65' }),
+              new D.TextRun({ text: f[0], bold: true, size: 24, font: FONT, color: '1c1f23' })
+            ],
+            spacing: { before: 200, after: 100 },
+            indent: { left: 160 }
+          }));
+          f[1].forEach(function (line) {
+            children.push(new D.Paragraph({
+              children: [new D.TextRun({ text: line, size: 22, font: FONT, color: '4b5563' })],
+              spacing: { after: 100, line: 340 },
+              indent: { left: 360 }
+            }));
+          });
+        });
+
+        /* ---------- 三、工具小贴士 ---------- */
+        children.push(H1('三、工具小贴士'));
+        [
+          ['健康管理', '包含 BMI 计算、睡眠记录与生命体征三个子模块。BMI 支持 cm / m 与 kg / 斤 / 磅；睡眠记录自动处理跨夜；心率 / 血糖 / 血压会按参考范围自动标注正常、偏高或偏低。'],
+          ['运动记录', '先填好性别、年龄、身高、体重，再添加运动。运动状态可选「计划」或「已记录」；填入运动类型、时长、强度后，勾选「AI 辅助估算」可得到热量消耗参考值。'],
+          ['数学计算', '包含计算器（普通 / 专家模式）、单位换算与鞋码计算三个独立模块。BMI 已迁至健康管理。'],
+          ['鞋码计算', '输入脚长（mm 或 cm）与年龄，会区分成人码与童码，同时给出中国码、欧码、美码、英码、日码推荐，并附带公式与完整对照表。结果仅供参考。'],
+          ['文章分析', '字数统计按字符计算，中文、英文字母、数字、标点分别归类；词频分析的中文按双字组切分，可在结果上方切换是否过滤常见停用词。'],
+          ['小说助手', '先在列表页新建一本小说，进入后左侧添加章节、右侧编辑正文；章节可标记「前言 / 正文 / 番外 / 附录 / 后记 / 作者的话」，图表会按类型统计字数，支持导出 TXT 与 HTML。'],
+          ['人物印象表 / 影视收藏', '填好名称后可以点「 AI 生成小传 / 简介」让 AI 帮你起草，生成结果可一键插入到表单。'],
+          ['地点收藏', '国内请填写到具体门牌号或精确位置，国外写到城市或地标即可；不填百度百科链接时会自动按名称搜索。'],
+          ['我的日历', '点击日期格子即可添加安排，支持时间、地点、人物与内容；「导出本月图片」会生成一张当月日程长图。'],
+          ['我的记账本', '支持多种货币，按币种分别汇总本月与今日支出；「导出 CSV」可直接用 Excel 打开。'],
+          ['畅想画布', '支持鼠标与触屏书写，导出的是 1400 × 900 高清 PNG；清空之后仍然可以点「撤销」找回。'],
+          ['代码编辑器', 'JavaScript 模式会在沙箱中真实运行，console.log 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。']
+        ].forEach(function (t) {
+          children.push(Runs([
+            { text: '• ', color: '565d65', bold: true, size: 24 },
+            { text: t[0] + '：', bold: true, color: '565d65' },
+            { text: t[1] }
+          ]));
+        });
+
+        /* ---------- 四、快捷键速查（表格） ---------- */
+        children.push(H1('四、快捷键速查'));
+        var keyRows = [
+          ['数学计算 · 计算器', '0-9   +   -   *   /   (   )   .   %   ^      求值：Enter 或 =　退格：Backspace　清空：Esc'],
+          ['代码编辑器', 'Tab 插入两个空格缩进      立即运行 / 渲染：Ctrl / ⌘ + Enter（停止输入约 0.7 秒也会自动运行）'],
+          ['AI 聊天', '发送消息：Ctrl / ⌘ + Enter']
+        ];
+        children.push(new D.Table({
+          width: { size: 100, type: D.WidthType.PERCENTAGE },
+          rows: [
+            new D.TableRow({
+              tableHeader: true,
+              children: [
+                new D.TableCell({
+                  width: { size: 25, type: D.WidthType.PERCENTAGE },
+                  shading: { type: D.ShadingType.CLEAR, fill: 'f9fafb', color: 'auto' },
+                  children: [new D.Paragraph({
+                    children: [new D.TextRun({ text: '场景', bold: true, size: 22, font: FONT, color: '6f7680' })]
+                  })]
+                }),
+                new D.TableCell({
+                  width: { size: 75, type: D.WidthType.PERCENTAGE },
+                  shading: { type: D.ShadingType.CLEAR, fill: 'f9fafb', color: 'auto' },
+                  children: [new D.Paragraph({
+                    children: [new D.TextRun({ text: '按键', bold: true, size: 22, font: FONT, color: '6f7680' })]
+                  })]
+                })
+              ]
+            })
+          ].concat(keyRows.map(function (row) {
+            return new D.TableRow({
+              children: [
+                new D.TableCell({
+                  width: { size: 25, type: D.WidthType.PERCENTAGE },
+                  children: [new D.Paragraph({
+                    children: [new D.TextRun({ text: row[0], bold: true, size: 22, font: FONT, color: '1c1f23' })]
+                  })]
+                }),
+                new D.TableCell({
+                  width: { size: 75, type: D.WidthType.PERCENTAGE },
+                  children: [new D.Paragraph({
+                    children: [new D.TextRun({ text: row[1], size: 22, font: FONT, color: '4b5563' })]
+                  })]
+                })
+              ]
+            });
+          }))
+        }));
+        children.push(new D.Paragraph({ children: [], spacing: { after: 200 } }));
+
+        /* ---------- 五、数据与隐私 ---------- */
+        children.push(H1('五、数据与隐私'));
+        [
+          ['本地模式', '数据保存在浏览器 localStorage，不会上传到任何服务器；浏览器上限一般约 5 MB，可在设置页查看当前占用与进度条。'],
+          ['云端模式', '登录后数据通过 Supabase 同步，密码由 Supabase Auth 加密处理，工具箱不会保存你的明文密码。'],
+          ['图片压缩', '头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px，上传前自动压缩以节省空间。'],
+          ['导出格式', 'JSON（完整备份）、CSV（记账）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线）。']
+        ].forEach(function (t) {
+          children.push(Runs([
+            { text: '• ', color: '565d65', bold: true, size: 24 },
+            { text: t[0] + '：', bold: true, color: '565d65' },
+            { text: t[1] }
+          ]));
+        });
+
+        /* ---------- 六、联系与反馈 ---------- */
+        children.push(H1('六、联系与反馈'));
+        [
+          ['微博', '@岁窦工作室'],
+          ['邮箱', 'q13052830801@163.com'],
+          ['版本', 'V2.3 铂金版（2026.10）']
+        ].forEach(function (t) {
+          children.push(Runs([
+            { text: '• ', color: '565d65', bold: true, size: 24 },
+            { text: t[0] + '：', bold: true, color: '565d65' },
+            { text: t[1] }
+          ]));
+        });
+
+        /* ---------- 页脚 ---------- */
+        var dd = new Date();
+        var dateStr = dd.getFullYear() + '-' +
+          String(dd.getMonth() + 1).padStart(2, '0') + '-' +
+          String(dd.getDate()).padStart(2, '0');
+        children.push(new D.Paragraph({
+          children: [new D.TextRun({
+            text: '岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作',
+            size: 20, font: FONT, color: '9ca3af'
+          })],
+          alignment: D.AlignmentType.CENTER,
+          spacing: { before: 600 },
+          border: { top: { color: 'e3e6ea', space: 12, style: D.BorderStyle.SINGLE, size: 6 } }
+        }));
+
+        /* ---------- 生成并下载 ---------- */
+        try {
+          var doc = new D.Document({
+            creator: '岁窦工具箱',
+            title: '岁窦工具箱 · 帮助文档',
+            description: '岁窦工具箱 V2.3 铂金版帮助文档',
+            styles: {
+              default: {
+                document: { run: { font: FONT, size: 22 } }
+              }
+            },
+            sections: [{
+              properties: {
+                page: { margin: { top: 1100, bottom: 1100, left: 1100, right: 1100 } }
+              },
+              children: children
+            }]
+          });
+
+          var blob = await D.Packer.toBlob(doc);
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = '岁窦工具箱_帮助文档_' + stamp() + '.docx';
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+
+          toast('已开始下载 Word 文档');
+          console.log('[帮助] docx 已生成并触发下载');
+        } catch (err) {
+          console.error('[帮助] docx 生成失败：', err);
+          alert('生成 Word 文档失败：' + (err && err.message ? err.message : err));
+        }
+      }
+
+      /* ============================================================
+         七、绑定下载按钮（事件委托）
+         ============================================================ */
+      if (page.dataset.dlBound !== '1') {
+        page.dataset.dlBound = '1';
+
+        page.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-help-dl]');
+          if (!btn) return;
+          e.preventDefault();
+          var kind = btn.getAttribute('data-help-dl');
+          console.log('[帮助] 点击下载按钮：', kind);
+
+          if (kind === 'html') {
+            download(buildHtml(), '岁窦工具箱_帮助文档_' + stamp() + '.html', 'text/html;charset=utf-8');
+          } else if (kind === 'md') {
+            download(buildMd(), '岁窦工具箱_帮助文档_' + stamp() + '.md', 'text/markdown;charset=utf-8');
+          } else if (kind === 'docx') {
+            downloadDocx();
+          }
+        });
+      }
+
+      console.log('[帮助] 帮助页脚本已加载');
+    })();
+    </script>
   </section>
     <!-- ==================== 设置 ==================== -->
   <section id="page-settings" class="page">
@@ -2273,7 +2392,7 @@ details.sub .inner{padding-bottom:14px;}
         <div class="row-between">
           <span style="font-size:13px;color:var(--muted)">提示：统计按字符计算，空格与换行单独归类</span>
           <span>
-            <button class="ai-btn" id="wcAiBtn">✨ AI 润色</button>
+            <button class="ai-btn" id="wcAiBtn"> AI 润色</button>
             <button class="btn ghost small" id="wcSample">载入示例</button>
             <button class="btn ghost small" id="wcClear">清空</button>
           </span>
@@ -2312,11 +2431,11 @@ details.sub .inner{padding-bottom:14px;}
         </div>
         <div class="wf-grid">
           <div class="wf-col">
-            <h4>📊 高频词排行</h4>
+            <h4>高频词排行</h4>
             <div id="wfRanking"><p class="empty">还没有分析结果，请在上方输入文字～</p></div>
           </div>
           <div class="wf-col">
-            <h4>🌏 词云概览</h4>
+            <h4>词云概览</h4>
             <div id="wfCloud" style="background:#fafbfc;border:1px solid var(--border);border-radius:10px;padding:16px;min-height:300px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;"></div>
           </div>
         </div>
@@ -2625,7 +2744,7 @@ details.sub .inner{padding-bottom:14px;}
         <span>人物图片（会自动压缩到 400px 以内）</span>
         <div class="upload-row"><input type="file" id="pImg" accept="image/*"><div class="preview" id="pPreview">未选择</div></div>
       </div>
-      <button class="ai-btn" id="pAiBtn">✨ AI 生成小传</button>
+      <button class="ai-btn" id="pAiBtn">AI生成小传</button>
       <button class="btn" id="pAdd">＋ 添加人物</button>
       <button class="btn ghost" id="pReset">重置表单</button>
     </div>
@@ -2749,7 +2868,7 @@ details.sub .inner{padding-bottom:14px;}
           <div class="preview" id="mCoverPreview" style="width:88px;height:120px;">未选择</div>
         </div>
       </div>
-      <button class="ai-btn" id="mAiBtn">✨ AI 生成简介</button>
+      <button class="ai-btn" id="mAiBtn">AI生成简介</button>
       <button class="btn" id="mAdd">＋ 添加影视</button>
       <button class="btn ghost" id="mReset">重置表单</button>
     </div>
@@ -2917,7 +3036,7 @@ details.sub .inner{padding-bottom:14px;}
       <div class="panel">
         <h3 class="panel-head">AI 辅助分析</h3>
         <p class="tip" style="margin-bottom:12px;">点击后会把下方最近 30 条记录整体交给 AI 做趋势解读与生活建议（消耗一次 AI 额度，需登录）。</p>
-        <button class="ai-btn" id="vtAiBtn" style="margin-right:0;">✨ 生成健康分析</button>
+        <button class="ai-btn" id="vtAiBtn" style="margin-right:0;">生成健康分析</button>
         <div class="ai-analysis-box" id="vtAiResult">还没有分析结果。添加几条记录后，点击上方按钮试试～</div>
       </div>
 
@@ -2969,7 +3088,7 @@ details.sub .inner{padding-bottom:14px;}
         </div>
         <button class="btn" id="exerProfileSave">保存个人信息</button>
         <button class="btn ghost small" id="exerProfileClear" style="margin-left:8px;">清空</button>
-        <p class="tip" style="margin-top:12px;">个人信息用于估算基础代谢与运动热量，AI 估算时会一并作为上下文。仅保存在你的本地或云端数据中。</p>
+        <p class="tip" style="margin-top:12px;">个人信息用于估算基础代谢与运动热量，AI 估算时会一并作为上下文。登录后会自动同步到云端。</p>
       </div>
     </details>
 
@@ -3057,7 +3176,7 @@ details.sub .inner{padding-bottom:14px;}
         </div>
         <div class="code-actions">
           <button class="btn small" id="codeRun">▶ 运行 / 渲染</button>
-          <button class="ai-btn" id="codeAiBtn">✨ AI 解释代码</button>
+          <button class="ai-btn" id="codeAiBtn">AI 解释代码</button>
           <button class="btn ghost small" id="codeSample">载入示例</button>
           <button class="btn ghost small" id="codeClear">清空</button>
         </div>
@@ -3433,11 +3552,10 @@ details.sub .inner{padding-bottom:14px;}
 <!-- ==================== 第三方库 ==================== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
-
 <script>
 /* ============================================================
    岁窦工具箱 · V2.3 铂金版
-   主脚本（第一部分：配置 + 通用工具 + 认证 + 页面路由）
+   主脚本（第一部分：配置 + 通用工具 + 认证 + 页面路由 + 云同步）
    ============================================================ */
 
 /* ===================== 配置 ===================== */
@@ -3852,110 +3970,324 @@ resetSubmit.addEventListener('click', async () => {
 })();
 
 /* ===================== 云同步 ===================== */
+
+/* ============================================================
+   登录后数据合并策略：
+   · 云端为空      → 直接上传本地（不问）
+   · 本地为空      → 直接拉取云端（不问）
+   · 两边都有数据  → 让用户明确二选一，避免误覆盖
+   ============================================================ */
 async function maybeUploadLocalData(){
-  const localCount =
-    (JSON.parse(localStorage.getItem(PEOPLE_KEY) || '[]').length) +
-    (JSON.parse(localStorage.getItem(SONGS_KEY)  || '[]').length) +
-    (JSON.parse(localStorage.getItem(PLACES_KEY) || '[]').length) +
-    (JSON.parse(localStorage.getItem(MEDIA_KEY)  || '[]').length) +
-    (JSON.parse(localStorage.getItem(CAL_KEY)    || '[]').length) +
-    (JSON.parse(localStorage.getItem(LEDGER_KEY) || '[]').length);
-  if (localCount === 0){ await loadAllFromCloud(); return; }
-  if (!confirm(`检测到本地有 ${localCount} 条数据，是否上传到云端？\n\n点「确定」上传，点「取消」保留本地但云端从空开始。`)){
+  if (!currentUser) return;
+
+  /* 1. 统计本地总条数（含 V2.3 新表） */
+  const keys = [
+    PEOPLE_KEY, SONGS_KEY, PLACES_KEY, MEDIA_KEY, CAL_KEY, LEDGER_KEY,
+    NOTES_KEY, TL_KEY, NOVELS_KEY, SLEEP_KEY, VITAL_KEY, EXER_KEY
+  ];
+  let localCount = 0;
+  keys.forEach(k => {
+    try { localCount += (JSON.parse(localStorage.getItem(k) || '[]').length); } catch(e){}
+  });
+
+  /* 2. 探测云端该用户是否已有数据 */
+  const tables = [
+    'people','songs','places','medias','schedules','ledger',
+    'notes','timeline_events','novels','sleep_records','vitals','exercises'
+  ];
+  let cloudCount = 0;
+  for (const t of tables){
+    const { count, error } = await sb
+      .from(t)
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', currentUser.id);   // 显式过滤，双重保险
+    if (error){
+      console.warn('[云同步] 探测 ' + t + ' 失败：', error);
+      continue;
+    }
+    if (count) cloudCount += count;
+  }
+
+  /* 3. 分支处理 */
+  if (localCount === 0 && cloudCount === 0){
+    return;   // 全空，什么都不用做
+  }
+
+  if (localCount === 0){
     await loadAllFromCloud();
+    showToast('已从云端拉取 ' + cloudCount + ' 条数据');
     return;
   }
-  await uploadLocalToCloud();
-  showToast('本地数据已上传到云端');
-}
 
-async function uploadLocalToCloud(){
-  if (!currentUser) return;
-  const uid = currentUser.id;
-  const map = [
-    [PEOPLE_KEY, 'people',    'p'],
-    [SONGS_KEY,  'songs',     's'],
-    [PLACES_KEY, 'places',    'l'],
-    [MEDIA_KEY,  'medias',    'm'],
-    [CAL_KEY,    'schedules', 'c'],
-    [LEDGER_KEY, 'ledger',    'g'],
-  ];
-  for (const [key, table] of map){
-    const arr = JSON.parse(localStorage.getItem(key) || '[]');
-    if (!arr.length) continue;
-    const rows = arr.map(x => {
-      const { id, ...rest } = x;
-      if (table === 'places') { rest.desc_text = rest.desc; delete rest.desc; }
-      if (table === 'medias') { rest.desc_text = rest.desc; rest.cast_text = rest.cast; delete rest.desc; delete rest.cast; }
-      return { ...rest, user_id: uid };
-    });
-    const { error } = await sb.from(table).insert(rows);
-    if (error) console.warn('上传 ' + table + ' 失败：', error);
+  if (cloudCount === 0){
+    await uploadLocalToCloud();
+    showToast('本地 ' + localCount + ' 条数据已上传到云端');
+    return;
   }
-  await loadAllFromCloud();
+
+  /* 4. 两边都有数据 → 让用户明确选择 */
+  const choice = confirm(
+    '检测到本地与云端都有数据：\n\n' +
+    '· 本地 ' + localCount + ' 条\n' +
+    '· 云端 ' + cloudCount + ' 条\n\n' +
+    '点【确定】→ 以【本地】为准，覆盖云端\n' +
+    '点【取消】→ 以【云端】为准，覆盖本地\n\n' +
+    '若这台设备不是你的主力设备，建议点【取消】。'
+  );
+
+  if (choice){
+    await uploadLocalToCloud();
+    showToast('已用本地数据覆盖云端');
+  } else {
+    await loadAllFromCloud();
+    showToast('已用云端数据覆盖本地');
+  }
 }
 
+
+/* ============================================================
+   从云端拉取 → 覆盖本地
+   ============================================================ */
 async function loadAllFromCloud(){
   if (!currentUser) return;
+  const uid = currentUser.id;
+
+  /* 12 张表全部纳入同步 */
   const map = [
-    ['people',    PEOPLE_KEY],
-    ['songs',     SONGS_KEY],
-    ['places',    PLACES_KEY],
-    ['medias',    MEDIA_KEY],
-    ['schedules', CAL_KEY],
-    ['notes',     NOTES_KEY],
+    ['people',          PEOPLE_KEY],
+    ['songs',           SONGS_KEY],
+    ['places',          PLACES_KEY],
+    ['medias',          MEDIA_KEY],
+    ['schedules',       CAL_KEY],
+    ['ledger',          LEDGER_KEY],
+    ['notes',           NOTES_KEY],
     ['timeline_events', TL_KEY],
-    ['novels',    NOVELS_KEY],
-    ['ledger',    LEDGER_KEY],
+    ['novels',          NOVELS_KEY],
+    /* V2.3 新增 */
+    ['sleep_records',   SLEEP_KEY],
+    ['vitals',          VITAL_KEY],
+    ['exercises',       EXER_KEY],
   ];
+
   for (const [table, key] of map){
-    const { data, error } = await sb.from(table).select('*').order('created_at', { ascending: true });
-    if (error) { console.warn('拉取 ' + table + ' 失败：', error); continue; }
+    /* 显式按 user_id 过滤，避免 RLS 失效时误拉别人数据 */
+    const { data, error } = await sb
+      .from(table)
+      .select('*')
+      .eq('user_id', uid)
+      .order('created_at', { ascending: true });
+
+    if (error){
+      console.warn('[拉取] ' + table + ' 失败：', error);
+      continue;
+    }
     if (!data) continue;
+
+    /* 字段名映射回本地结构 */
     const arr = data.map(r => {
       const o = { ...r };
-      if (table === 'places') { o.desc = o.desc_text; delete o.desc_text; }
-      if (table === 'medias') { o.desc = o.desc_text; o.cast = o.cast_text; delete o.desc_text; delete o.cast_text; }
+      if (table === 'places'){
+        o.desc = o.desc_text; delete o.desc_text;
+      }
+      if (table === 'medias'){
+        o.desc = o.desc_text;
+        o.cast = o.cast_text;
+        delete o.desc_text;
+        delete o.cast_text;
+      }
       return o;
     });
+
     localStorage.setItem(key, JSON.stringify(arr));
   }
-  loadPeople();    renderPeople();
-  loadSongs();     renderSongs();
-  loadPlaces();    renderPlaces();
-  loadMedias();    renderMedias();
-  loadSchedules(); renderCalendar();
-  loadNotes();     renderNotes();
-  loadTimeline();
-  loadNovels();    renderNovelList();
-  loadLedger();    renderLedger();
+
+  /* ★ 章节单独拉：按 novel_id 分组 */
+  const novelsArr = JSON.parse(localStorage.getItem(NOVELS_KEY) || '[]');
+  if (novelsArr.length){
+    const novelIds = novelsArr.map(n => n.id).filter(Boolean);
+    const { data: chData, error: chErr } = await sb
+      .from('novel_chapters')
+      .select('*')
+      .in('novel_id', novelIds)
+      .order('order_index', { ascending: true });
+
+    if (!chErr && chData){
+      /* 本地保留非云端小说的章节（例如本地临时数据） */
+      const localCh = loadChaptersLocal();
+      const cloudNovelIds = new Set(novelIds.map(String));
+      const keptLocal = localCh.filter(c => !cloudNovelIds.has(String(c.novel_id)));
+      const merged = keptLocal.concat(chData);
+      saveChaptersLocal(merged);
+    }
+  }
+
+  /* 重新渲染全部模块 */
+  loadPeople();     renderPeople();
+  loadSongs();      renderSongs();
+  loadPlaces();     renderPlaces();
+  loadMedias();     renderMedias();
+  loadSchedules();  renderCalendar();
+  loadLedger();     renderLedger();
+  loadNotes();      renderNotes();
+  loadTimeline();   /* loadTimeline 内部已调 renderTimeline */
+  loadNovels();     renderNovelList();
+
   /* V2.3 */
-  loadSleep();     renderSleepList(); renderSleepChart();
-  loadVitals();    renderVitalList();
-  loadExercise();  renderExerciseList();
+  loadSleep();      renderSleepList(); renderSleepChart();
+  loadVitals();     renderVitalList();
+  loadExercise();   renderExerciseList();
+
   updateStorageUsage();
 }
 
+
+/* ============================================================
+   上传本地 → 覆盖云端（先清空该用户在云端的旧数据，再整批写入）
+   ============================================================ */
+async function uploadLocalToCloud(){
+  if (!currentUser) return;
+  const uid = currentUser.id;
+
+  const map = [
+    ['people',          PEOPLE_KEY],
+    ['songs',           SONGS_KEY],
+    ['places',          PLACES_KEY],
+    ['medias',          MEDIA_KEY],
+    ['schedules',       CAL_KEY],
+    ['ledger',          LEDGER_KEY],
+    ['notes',           NOTES_KEY],
+    ['timeline_events', TL_KEY],
+    ['novels',          NOVELS_KEY],
+    ['sleep_records',   SLEEP_KEY],
+    ['vitals',          VITAL_KEY],
+    ['exercises',       EXER_KEY],
+  ];
+
+  /* ---------- 1) 先处理普通表（先删后插） ---------- */
+  for (const [table, key] of map){
+    let arr = [];
+    try { arr = JSON.parse(localStorage.getItem(key) || '[]'); } catch(e){ arr = []; }
+
+    /* 本地该表为空：不动云端，避免误删 */
+    if (!arr.length) continue;
+
+    /* 1.1) 先删云端该用户的旧数据 */
+    const { error: delErr } = await sb.from(table).delete().eq('user_id', uid);
+    if (delErr){
+      console.error('[上传] 清空 ' + table + ' 失败，已跳过本表：', delErr);
+      showToast('⚠️ ' + table + ' 云端清空失败，请检查 RLS 删除策略');
+      continue;   // 不写半截，直接跳过
+    }
+
+    /* 1.2) 再把本地数据整批插入（丢掉本地 id，让云端重新生成 uuid） */
+    const rows = arr.map(x => {
+      const { id, ...rest } = x;
+      if (table === 'places'){
+        rest.desc_text = rest.desc; delete rest.desc;
+      }
+      if (table === 'medias'){
+        rest.desc_text = rest.desc;
+        rest.cast_text = rest.cast;
+        delete rest.desc;
+        delete rest.cast;
+      }
+      return { ...rest, user_id: uid };
+    });
+
+    const { error: insErr } = await sb.from(table).insert(rows);
+    if (insErr){
+      console.error('[上传] 写入 ' + table + ' 失败：', insErr);
+      showToast('⚠️ ' + table + ' 写入失败');
+    }
+  }
+
+  /* ---------- 2) 章节单独上传（放在 for 循环结束之后） ---------- */
+  /* ⚠️ 已知限制：本地章节通过「小说标题」桥接到云端 uuid。
+     如果用户建了两本同名小说，章节会全部挂到后一本。
+     彻底解决需在上传 novels 后立即拉回并更新本地 id，此处暂不处理。 */
+  const localChapters = loadChaptersLocal();
+  if (localChapters.length){
+    const { error: chDelErr } = await sb.from('novel_chapters').delete().eq('user_id', uid);
+    if (chDelErr){
+      console.error('[上传] 清空 novel_chapters 失败：', chDelErr);
+    } else {
+      /* 从云端重查一遍每本小说的新 uuid（此时 novels 表已经更新完毕） */
+      const { data: cloudNovels } = await sb
+        .from('novels')
+        .select('id, title')
+        .eq('user_id', uid);
+
+      /* 用「标题」做桥梁：本地章节 → 本地小说标题 → 云端小说 uuid */
+      const titleToCloudId = {};
+      (cloudNovels || []).forEach(n => { titleToCloudId[n.title] = n.id; });
+
+      const localNovels = JSON.parse(localStorage.getItem(NOVELS_KEY) || '[]');
+      const localIdToTitle = {};
+      localNovels.forEach(n => { localIdToTitle[String(n.id)] = n.title; });
+
+      const chRows = localChapters.map(c => {
+        const localNovelId = String(c.novel_id);
+        const title = localIdToTitle[localNovelId];
+        const cloudNovelId = titleToCloudId[title];
+        if (!cloudNovelId) return null;   // 找不到对应小说就跳过
+
+        const { id, novel_id, ...rest } = c;
+        return { ...rest, novel_id: cloudNovelId, user_id: uid };
+      }).filter(Boolean);
+
+      if (chRows.length){
+        const { error: chInsErr } = await sb.from('novel_chapters').insert(chRows);
+        if (chInsErr) console.error('[上传] 写入 novel_chapters 失败：', chInsErr);
+      }
+    }
+  }
+
+  /* ---------- 3) 上传完再拉一次，确保本地拿到云端 uuid ---------- */
+  await loadAllFromCloud();
+}
+
+
+/* ============================================================
+   设置页按钮
+   ============================================================ */
 document.getElementById('uploadLocalBtn').addEventListener('click', async () => {
   if (!currentUser){ showToast('请先登录'); return; }
-  if (!confirm('确定把本地数据上传到云端吗？云端已有的同类数据会保留，本地不会删除。')) return;
+  if (!confirm(
+    '将用【本地数据】覆盖云端：\n\n' +
+    '· 云端同类数据会被先删除，再写入本地数据\n' +
+    '· 本地为空的表不会动云端\n\n' +
+    '确定继续吗？'
+  )) return;
   await uploadLocalToCloud();
-  showToast('已上传到云端');
+  showToast('已用本地数据覆盖云端');
 });
+
 document.getElementById('pullCloudBtn').addEventListener('click', async () => {
   if (!currentUser){ showToast('请先登录'); return; }
-  if (!confirm('确定从云端拉取吗？会覆盖本地缓存。')) return;
+  if (!confirm(
+    '将用【云端数据】覆盖本地：\n\n' +
+    '· 本地缓存会被云端数据替换\n' +
+    '· 未上传到云端的本地改动会丢失\n\n' +
+    '确定继续吗？'
+  )) return;
   await loadAllFromCloud();
   showToast('已从云端拉取');
 });
 
+
+/* ============================================================
+   Auth 监听
+   ============================================================ */
 sb.auth.onAuthStateChange((event, session) => {
   currentUser = session?.user || null;
   updateAuthUI();
+  /* 登录状态变化后，重新读一次运动个人信息（云端 user_metadata 优先） */
+  if (currentUser && typeof loadExerProfile === 'function') loadExerProfile();
 });
 sb.auth.getSession().then(({ data }) => {
   currentUser = data.session?.user || null;
   updateAuthUI();
+  if (currentUser && typeof loadExerProfile === 'function') loadExerProfile();
 });
 
 /* ===================== 存储用量 & 图片压缩 ===================== */
@@ -4013,7 +4345,6 @@ async function cloudUpdate(table, id, patch){
 
 /* ===================== 初始化 ===================== */
 updateStorageUsage();
-
 /* ============================================================
    7. 文章分析
    ============================================================ */
@@ -4549,35 +4880,35 @@ const shoeResultBox = document.getElementById('shoeResultBox');
 
 /* 成人鞋码对照表（cm，参考值） */
 const SHOE_ADULT_TABLE = [
-  { cm:22.0, cn:220, eu:35, us_m:3.5, us_f:5.0, uk:2.5, jp:22.0 },
-  { cm:22.5, cn:225, eu:36, us_m:4.0, us_f:5.5, uk:3.5, jp:22.5 },
-  { cm:23.0, cn:230, eu:36.5, us_m:4.5, us_f:6.0, uk:4.0, jp:23.0 },
-  { cm:23.5, cn:235, eu:37.5, us_m:5.0, us_f:6.5, uk:4.5, jp:23.5 },
-  { cm:24.0, cn:240, eu:38, us_m:5.5, us_f:7.0, uk:5.0, jp:24.0 },
-  { cm:24.5, cn:245, eu:39, us_m:6.5, us_f:7.5, uk:6.0, jp:24.5 },
-  { cm:25.0, cn:250, eu:40, us_m:7.0, us_f:8.0, uk:6.5, jp:25.0 },
-  { cm:25.5, cn:255, eu:40.5, us_m:7.5, us_f:8.5, uk:7.0, jp:25.5 },
-  { cm:26.0, cn:260, eu:41, us_m:8.0, us_f:9.0, uk:7.5, jp:26.0 },
-  { cm:26.5, cn:265, eu:42, us_m:8.5, us_f:9.5, uk:8.0, jp:26.5 },
-  { cm:27.0, cn:270, eu:42.5, us_m:9.0, us_f:10.0, uk:8.5, jp:27.0 },
-  { cm:27.5, cn:275, eu:43, us_m:9.5, us_f:10.5, uk:9.0, jp:27.5 },
-  { cm:28.0, cn:280, eu:44, us_m:10.0, us_f:11.0, uk:9.5, jp:28.0 },
+  { cm:22.0, cn:220, eu:35,   us_m:3.5,  us_f:5.0,  uk:2.5,  jp:22.0 },
+  { cm:22.5, cn:225, eu:36,   us_m:4.0,  us_f:5.5,  uk:3.5,  jp:22.5 },
+  { cm:23.0, cn:230, eu:36.5, us_m:4.5,  us_f:6.0,  uk:4.0,  jp:23.0 },
+  { cm:23.5, cn:235, eu:37.5, us_m:5.0,  us_f:6.5,  uk:4.5,  jp:23.5 },
+  { cm:24.0, cn:240, eu:38,   us_m:5.5,  us_f:7.0,  uk:5.0,  jp:24.0 },
+  { cm:24.5, cn:245, eu:39,   us_m:6.5,  us_f:7.5,  uk:6.0,  jp:24.5 },
+  { cm:25.0, cn:250, eu:40,   us_m:7.0,  us_f:8.0,  uk:6.5,  jp:25.0 },
+  { cm:25.5, cn:255, eu:40.5, us_m:7.5,  us_f:8.5,  uk:7.0,  jp:25.5 },
+  { cm:26.0, cn:260, eu:41,   us_m:8.0,  us_f:9.0,  uk:7.5,  jp:26.0 },
+  { cm:26.5, cn:265, eu:42,   us_m:8.5,  us_f:9.5,  uk:8.0,  jp:26.5 },
+  { cm:27.0, cn:270, eu:42.5, us_m:9.0,  us_f:10.0, uk:8.5,  jp:27.0 },
+  { cm:27.5, cn:275, eu:43,   us_m:9.5,  us_f:10.5, uk:9.0,  jp:27.5 },
+  { cm:28.0, cn:280, eu:44,   us_m:10.0, us_f:11.0, uk:9.5,  jp:28.0 },
   { cm:28.5, cn:285, eu:44.5, us_m:10.5, us_f:11.5, uk:10.0, jp:28.5 },
-  { cm:29.0, cn:290, eu:45, us_m:11.0, us_f:12.0, uk:10.5, jp:29.0 },
+  { cm:29.0, cn:290, eu:45,   us_m:11.0, us_f:12.0, uk:10.5, jp:29.0 },
   { cm:29.5, cn:295, eu:45.5, us_m:11.5, us_f:12.5, uk:11.0, jp:29.5 },
-  { cm:30.0, cn:300, eu:46, us_m:12.0, us_f:13.0, uk:11.5, jp:30.0 },
+  { cm:30.0, cn:300, eu:46,   us_m:12.0, us_f:13.0, uk:11.5, jp:30.0 },
 ];
 
 /* 儿童鞋码对照表（cm，参考值） */
 const SHOE_KIDS_TABLE = [
-  { cm:14.0, cn:140, eu:23, us:7.0, uk:6.5, age:'1 - 2 岁' },
-  { cm:15.0, cn:150, eu:24, us:8.0, uk:7.5, age:'2 - 3 岁' },
-  { cm:16.0, cn:160, eu:26, us:9.0, uk:8.5, age:'3 - 4 岁' },
-  { cm:17.0, cn:170, eu:27, us:10.0, uk:9.5, age:'4 - 5 岁' },
+  { cm:14.0, cn:140, eu:23, us:7.0,  uk:6.5,  age:'1 - 2 岁' },
+  { cm:15.0, cn:150, eu:24, us:8.0,  uk:7.5,  age:'2 - 3 岁' },
+  { cm:16.0, cn:160, eu:26, us:9.0,  uk:8.5,  age:'3 - 4 岁' },
+  { cm:17.0, cn:170, eu:27, us:10.0, uk:9.5,  age:'4 - 5 岁' },
   { cm:18.0, cn:180, eu:29, us:11.0, uk:10.5, age:'5 - 6 岁' },
   { cm:19.0, cn:190, eu:30, us:12.0, uk:11.5, age:'6 - 7 岁' },
   { cm:20.0, cn:200, eu:31, us:13.0, uk:12.5, age:'7 - 8 岁' },
-  { cm:21.0, cn:210, eu:32, us:1.0, uk:13.0, age:'8 - 10 岁' },
+  { cm:21.0, cn:210, eu:32, us:1.0,  uk:13.0, age:'8 - 10 岁' },
 ];
 
 function findNearestAdult(cm){
@@ -4656,7 +4987,6 @@ function renderShoeTable(){
 [shoeLengthEl, shoeAgeEl].forEach(el => el && el.addEventListener('input', updateShoeCalc));
 [shoeLengthUnitEl, shoeGenderEl].forEach(el => el && el.addEventListener('change', updateShoeCalc));
 renderShoeTable();
-
 /* ============================================================
    10. 常见统计图生成
    ============================================================ */
@@ -5616,6 +5946,7 @@ loadMedias(); renderMedias();
   $('cdPause').addEventListener('click', pauseCd);
   $('cdReset').addEventListener('click', resetCd);
   updateCdDisplay();
+
   let tmElapsed = 0, tmTimer = null, tmRunning = false, tmStartTime = 0;
   function formatTm(ms){
     const totalCs = Math.floor(ms / 10);
@@ -5961,7 +6292,7 @@ const CODE_SAMPLE_JS = [
   'const fruits = ["苹果", "香蕉", "橙子", "葡萄"];',
   '',
   'const box = document.createElement("div");',
-  'box.innerHTML = "<h2>🍎 我的水果清单</h2>";',
+  'box.innerHTML = "<h2>我的水果清单</h2>";',
   '',
   'const ul = document.createElement("ul");',
   'fruits.forEach((f, i) => {',
@@ -7104,7 +7435,6 @@ document.getElementById('nvExportHtml').addEventListener('click', async () => {
 
 loadNovels();
 renderNovelList();
-
 /* ============================================================
    28. 健康管理（V2.3 新增）
    ============================================================ */
@@ -7312,6 +7642,13 @@ function renderSleepChart(){
   const wrap = canvas.parentElement;
   const cssW = Math.max(280, wrap.clientWidth - 28);
   const cssH = 260;
+
+  /* 容器不可见（宽度为 0）时，延迟重试，避免画成空白 */
+  if (wrap.clientWidth === 0){
+    setTimeout(renderSleepChart, 80);
+    return;
+  }
+
   const dpr = window.devicePixelRatio || 1;
   canvas.style.width = cssW + 'px';
   canvas.style.height = cssH + 'px';
@@ -7613,7 +7950,6 @@ document.getElementById('vtAiBtn').addEventListener('click', async () => {
     updateQuota();
   } catch(err){ box.textContent = '⚠️ ' + err.message; }
 });
-
 /* ============================================================
    29. 运动记录（V2.3 新增）
    ============================================================ */
@@ -7622,11 +7958,35 @@ let exerProfile = { gender: 'male', age: '', height: '', weight: '' };
 let pendingExerImg = '';
 let currentExerType = '跑步';
 
+/* ---------- 本地保存 ---------- */
 function saveExerProfile(){
   try { localStorage.setItem(EXER_PROFILE_KEY, JSON.stringify(exerProfile)); updateStorageUsage(); return true; } catch(e){ return false; }
 }
+
+/* ---------- 云端 + 本地双写（V2.3 修复：个人信息现在会同步到 user_metadata） ---------- */
+async function saveExerProfileCloud(){
+  saveExerProfile();
+  if (currentUser){
+    try {
+      const { error } = await sb.auth.updateUser({ data: { exer_profile: exerProfile } });
+      if (error) console.warn('[个人信息] 云端保存失败：', error);
+    } catch(e){ console.warn('[个人信息] 云端保存异常：', e); }
+  }
+}
+
 function loadExerProfile(){
-  try { const raw = localStorage.getItem(EXER_PROFILE_KEY); if (raw) exerProfile = { ...exerProfile, ...JSON.parse(raw) }; } catch(e){}
+  /* 1) 先读本地兜底 */
+  try {
+    const raw = localStorage.getItem(EXER_PROFILE_KEY);
+    if (raw) exerProfile = { ...exerProfile, ...JSON.parse(raw) };
+  } catch(e){}
+
+  /* 2) 已登录：云端 user_metadata 优先 */
+  if (currentUser && currentUser.user_metadata && currentUser.user_metadata.exer_profile){
+    exerProfile = { ...exerProfile, ...currentUser.user_metadata.exer_profile };
+    try { localStorage.setItem(EXER_PROFILE_KEY, JSON.stringify(exerProfile)); } catch(e){}
+  }
+
   document.getElementById('exerGender').value = exerProfile.gender || 'male';
   document.getElementById('exerAge').value    = exerProfile.age || '';
   document.getElementById('exerHeight').value = exerProfile.height || '';
@@ -7641,22 +8001,25 @@ function renderExerProfileBar(){
   if (exerProfile.height) items.push(exerProfile.height + ' cm');
   if (exerProfile.weight) items.push(exerProfile.weight + ' kg');
   txt.textContent = items.length
-    ? ('当前档案：' + items.join(' · '))
+    ? ('当前档案：' + items.join(' · ') + (currentUser ? '（已同步云端）' : ''))
     : '还没有填写个人信息，先点下方「编辑个人信息」补全吧～';
 }
-document.getElementById('exerProfileSave').addEventListener('click', () => {
+document.getElementById('exerProfileSave').addEventListener('click', async () => {
   exerProfile.gender = document.getElementById('exerGender').value;
   exerProfile.age    = document.getElementById('exerAge').value.trim();
   exerProfile.height = document.getElementById('exerHeight').value.trim();
   exerProfile.weight = document.getElementById('exerWeight').value.trim();
-  if (saveExerProfile()){ renderExerProfileBar(); showToast('个人信息已保存'); }
+  await saveExerProfileCloud();
+  renderExerProfileBar();
+  showToast('个人信息已保存' + (currentUser ? '（已同步云端）' : '（本地）'));
 });
-document.getElementById('exerProfileClear').addEventListener('click', () => {
+document.getElementById('exerProfileClear').addEventListener('click', async () => {
   if (!confirm('确定清空个人信息吗？')) return;
   exerProfile = { gender: 'male', age: '', height: '', weight: '' };
   document.getElementById('exerGender').value = 'male';
   ['exerAge','exerHeight','exerWeight'].forEach(id => document.getElementById(id).value = '');
-  saveExerProfile(); renderExerProfileBar(); showToast('个人信息已清空');
+  await saveExerProfileCloud();
+  renderExerProfileBar(); showToast('个人信息已清空');
 });
 
 /* 运动类型 chips */
@@ -8040,7 +8403,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     showToast('已导出运动记录图片');
   }
 });
-
 /* ============================================================
    30. 数据管理
    ============================================================ */
@@ -8146,6 +8508,100 @@ updateWordFreq();
 loadSleep();     renderSleepList(); renderSleepChart();
 loadVitals();    renderVitalList();
 loadExercise();  loadExerProfile(); renderExerciseList();
+
+/* ============================================================
+   V2.3 新增 · 工具面包屑导航
+   —— 自动给每个工具页顶部注入「首页 / 应用 / 当前工具」路径
+   —— 并附带一行「全部工具」快捷跳转 chips
+   —— 需要先有 go() 函数和 TOOL_REGISTRY 里的工具页都存在
+   ============================================================ */
+
+/* 工具注册表：与「应用中心」里的工具一一对应 */
+const TOOL_REGISTRY = [
+  { id: 'health',       name: '健康管理' },
+  { id: 'exercise',     name: '运动记录' },
+  { id: 'novel',        name: '小说助手' },
+  { id: 'textanalysis', name: '文章分析' },
+  { id: 'calc',         name: '数学计算' },
+  { id: 'chart',        name: '统计图生成' },
+  { id: 'ledger',       name: '我的记账本' },
+  { id: 'people',       name: '人物印象表' },
+  { id: 'songs',        name: '歌曲收藏' },
+  { id: 'places',       name: '地点收藏' },
+  { id: 'media',        name: '影视收藏' },
+  { id: 'calendar',     name: '我的日历' },
+  { id: 'clock',        name: '时钟工具' },
+  { id: 'ai',           name: 'AI 助手' },
+  { id: 'code',         name: '代码编辑器' },
+  { id: 'canvas',       name: '畅想画布' }
+];
+
+const SVG_HOME =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+  'stroke-linecap="round" stroke-linejoin="round">' +
+  '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>' +
+  '<path d="M9 22V12h6v10"/></svg>';
+
+const SVG_GRID =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+  'stroke-linecap="round" stroke-linejoin="round">' +
+  '<rect x="3" y="3" width="7" height="7" rx="1.5"/>' +
+  '<rect x="14" y="3" width="7" height="7" rx="1.5"/>' +
+  '<rect x="3" y="14" width="7" height="7" rx="1.5"/>' +
+  '<rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>';
+
+function injectToolCrumbs(){
+  TOOL_REGISTRY.forEach(function(tool){
+    var page = document.getElementById('page-' + tool.id);
+    if (!page){ console.warn('[面包屑] 找不到 page-' + tool.id); return; }
+    if (page.dataset.crumbInjected === '1') return;
+    page.dataset.crumbInjected = '1';
+
+    /* 移除原「← 返回首页」按钮（避免与面包屑重复） */
+    var oldBack = page.querySelector('.back-btn');
+    if (oldBack) oldBack.remove();
+
+    /* 构造面包屑 */
+    var nav = document.createElement('nav');
+    nav.className = 'tool-crumb';
+
+    var toolsHtml = TOOL_REGISTRY.map(function(t){
+      return '<button type="button" class="crumb-tool' +
+        (t.id === tool.id ? ' active' : '') +
+        '" data-crumb-nav="' + t.id + '">' + t.name + '</button>';
+    }).join('');
+
+    nav.innerHTML =
+      '<div class="crumb-path">' +
+        '<button type="button" class="crumb-link" data-crumb-nav="home">' + SVG_HOME + '<span>首页</span></button>' +
+        '<span class="crumb-sep">/</span>' +
+        '<button type="button" class="crumb-link" data-crumb-nav="apps">' + SVG_GRID + '<span>应用中心</span></button>' +
+        '<span class="crumb-sep">/</span>' +
+        '<span class="crumb-current">' + tool.name + '</span>' +
+      '</div>' +
+      '<div class="crumb-tools">' +
+        '<span class="crumb-tools-label">全部工具</span>' +
+        toolsHtml +
+      '</div>';
+
+    /* 插到页面最前面 */
+    page.insertBefore(nav, page.firstChild);
+
+    /* 绑定跳转（直接绑，不用全局委托，避免与其他 data-* 冲突） */
+    nav.querySelectorAll('[data-crumb-nav]').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var target = btn.getAttribute('data-crumb-nav');
+        if (!target) return;
+        if (typeof go === 'function') go(target);
+        else console.warn('[面包屑] go() 未定义');
+      });
+    });
+  });
+}
+
+/* 立即执行（主脚本位于 body 末尾，DOM 已就绪） */
+injectToolCrumbs();
 
 /* 收尾日志 */
 console.log('%c岁窦工具箱 · V2.3 铂金版 已加载', 'color:#565d65;font-weight:700;font-size:14px;');
