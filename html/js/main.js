@@ -5998,24 +5998,34 @@ injectToolCrumbs();
 
   /* =========================================================
      ① 通知数据
-     —— 用户发布新通知：往下面数组最前面插一条
+     —— 发布新通知：往下面数组最前面插一条
      —— id 必须唯一（自己起名字，改过就代表"新通知"）
      —— type 可选：info / success / warning / important
+     —— link 可选：填了点击整条通知会新标签打开
      ========================================================= */
   const NOTIFICATIONS = [
     {
-    id: 'exchange-tool',
-    type: 'info',
-    title: '新工具：汇率换算',
-    content: '「计算与数据」分类下新增汇率换算，支持常用货币互转，内置参考汇率离线可用，可联网更新当日参考值。',
-    time: '2026-09-27'
+      id: 'promo-minigames-2026-09',
+      type: 'info',
+      title: '小游戏网页上线啦！',
+      content: '发现一个有趣的小游戏集合站，摸鱼放松好去处，点此前往体验。',
+      time: '2026-09-27',
+      link: 'https://sulder20.github.io/html/XYX/games.html'
+    },
+    {
+      id: 'exchange-tool',
+      type: 'info',
+      title: '新工具：汇率换算',
+      content: '「计算与数据」分类下新增汇率换算，支持常用货币互转，内置参考汇率离线可用，可联网更新当日参考值。',
+      time: '2026-09-27'
     },
     {
       id: 'v3-0-release',
       type: 'success',
       title: 'V3.0 焕新版上线',
       content: '青柠绿主题全面焕新，界面、按钮、卡片全部升级；新增「冥想练习」与「JSON 格式化」两款工具。',
-      time: '2026-10-01'
+      time: '2026-10-01',
+      pinned: true
     },
     {
       id: 'json-tool',
@@ -6037,7 +6047,8 @@ injectToolCrumbs();
     //   type: 'warning',  // info / success / warning / important
     //   title: '通知标题',
     //   content: '通知内容。',
-    //   time: '2026-10-02'
+    //   time: '2026-10-02',
+    //   link: 'https://...'   // 可选
     // },
   ];
 
@@ -6082,9 +6093,12 @@ injectToolCrumbs();
     }[c]));
   }
 
+  /* ---------- 渲染通知列表 ---------- */
   function renderList(){
     const readSet = getReadSet();
-    const list = NOTIFICATIONS.slice(0, MAX_SHOW);
+    const list = NOTIFICATIONS.slice()
+  .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
+  .slice(0, MAX_SHOW);
 
     if (!list.length){
       listEl.innerHTML =
@@ -6101,10 +6115,12 @@ injectToolCrumbs();
     listEl.innerHTML = list.map(n => {
       const unread = !readSet.has(n.id);
       const type = ['info','success','warning','important'].includes(n.type) ? n.type : 'info';
+      const linkHint = n.link ? '<span class="notif-link-hint">点击前往 →</span>' : '';
+      const pinBadge = n.pinned ? '<span class="notif-pin-badge">置顶</span>' : '';
       return '<div class="notif-item ' + (unread ? 'unread ' : '') + 'type-' + type + '" data-nid="' + esc(n.id) + '">' +
-        '<p class="notif-item-title">' + esc(n.title || '通知') + '</p>' +
+      '<p class="notif-item-title">' + pinBadge + esc(n.title || '通知') + '</p>' +
         '<p class="notif-item-content">' + esc(n.content || '') + '</p>' +
-        '<div class="notif-item-time">' + esc(n.time || '') + '</div>' +
+        '<div class="notif-item-time">' + esc(n.time || '') + linkHint + '</div>' +
       '</div>';
     }).join('');
 
@@ -6116,10 +6132,16 @@ injectToolCrumbs();
         saveReadSet(readSet);
         el.classList.remove('unread');
         updateDot();
+
+        const item = NOTIFICATIONS.find(n => n.id === id);
+        if (item && item.link) {
+          window.open(item.link, '_blank', 'noopener');
+        }
       });
     });
   }
 
+  /* ---------- 面板开关 ---------- */
   function openPanel(){
     renderList();
     positionPanel();
@@ -6152,6 +6174,7 @@ injectToolCrumbs();
     panelEl.style.top = (rect.bottom + 8) + 'px';
   }
 
+  /* ---------- 事件绑定 ---------- */
   btnEl.addEventListener('click', e => {
     e.stopPropagation();
     togglePanel();
@@ -6187,7 +6210,6 @@ injectToolCrumbs();
 
   updateDot();
 })();
-
 /* ============================================================
    全部应用 · 按拼音首字母排序 + 分组
    ============================================================ */
