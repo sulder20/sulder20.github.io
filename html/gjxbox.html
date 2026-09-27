@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岁窦工具箱 · V2.3.2 铂金版</title>
+<title>岁窦工具箱 · V2.3.2 封存</title>
 <style>
 /* ============================================================
    V2.3.2 铂金版 · 全局配色（结构重整版，无新功能）
@@ -1097,7 +1097,45 @@ details.sub .inner{padding-bottom:14px;}
 </style>
 </head>
 <body>
-
+<!-- ==================== 新版迁移提示 ==================== -->
+<div id="migrationNotice" style="
+  background: linear-gradient(135deg, #f4ecd8, #faf3e3);
+  color: #7c5c14;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e3d9b8;
+  position: relative;
+  z-index: 81;
+">
+  <span>🚀 岁窦工具箱已迁移至新版，功能更丰富！</span>
+  <a href="https://sulder20.github.io/html/toolbox.html" style="
+    background: #737b84;
+    color: #fff;
+    padding: 6px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13.5px;
+    transition: 0.2s;
+  " onmouseover="this.style.background='#565d65'" onmouseout="this.style.background='#737b84'">前往新版工具箱</a>
+  <button onclick="document.getElementById('migrationNotice').style.display='none'" style="
+    background: none;
+    border: none;
+    color: #7c5c14;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0 6px;
+    opacity: 0.6;
+    transition: 0.2s;
+  " onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">✕</button>
+</div>
 <header>
   <div class="header-inner">
     <div class="logo" data-page="home">岁窦工具箱</div>
@@ -1119,6 +1157,17 @@ details.sub .inner{padding-bottom:14px;}
       <button class="btn ghost small" id="logoutBtn" style="display:none;">退出</button>
     </div>
   </div>
+  <!-- ==================== 封存说明 ==================== -->
+<div style="
+  background: #fbeaea;
+  color: #8f3a3a;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 13.5px;
+  border-bottom: 1px solid #e8c8c8;
+">
+  ⚠️ 本页面为旧版工具箱，已于 V2.3.2 铂金版后停止更新并封存。建议前往新版使用。
+</div>
 </header>
 
 <main>
@@ -1126,8 +1175,8 @@ details.sub .inner{padding-bottom:14px;}
   <!-- ==================== 首页 ==================== -->
   <section id="page-home" class="page active">
     <div class="hero">
-      <h1 style="color:#fff;">岁窦工具箱 · V2.3.2 铂金版</h1>
-      <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次新增时间戳转换、二维码生成、图片压缩、体感温度四款工具。</p>
+      <h1 style="color:#fff;">岁窦工具箱 · V2.3.2 铂金封存</h1>
+      <p style="color:#f3f4f6;">本版本已封存，不再更新。请前往新版工具箱继续使用。下方所有功能仍可正常访问，但建议尽快迁移到新版。</p>
     </div>
 
     <!-- ---------- 热门应用 ---------- -->
@@ -1190,8 +1239,8 @@ details.sub .inner{padding-bottom:14px;}
         <span class="version-label">V2.3.1</span>
         <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
         <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-        <span class="version-label">当前</span>
-        <span class="version-val">V2.3.2 铂金版</span>
+        <span class="version-label">旧版</span>
+        <span class="version-val" style="color:#9ca3af;">V2.3.2 铂金版 · 已封存</span>
       </div>
 
             <!-- ======= V2.3.2 铂金版 · 功能扩充与体验优化（当前） ======= -->
@@ -1367,15 +1416,17 @@ details.sub .inner{padding-bottom:14px;}
     <div class="editor-note">
       <h1 class="editor-title">编 者 的 话</h1>
       <div class="editor-body">
-        <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
-        <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
-        <p>V2.3.1 没有加新功能，只是把工具的分类重新梳理了一遍：AI 助手里不再堆杂物，创作相关工具收进「创作工坊」，日历 / 时钟 / 记账独立成「时间与生活」，鞋码回归健康类。V2.3.2 补充了四款实用工具：时间与生活新增时间戳转换，计算与数据新增二维码生成，创作工坊新增图片压缩，健康与运动新增体感温度与运动风险。同时重构了二维码生成模块，修复了不少细节问题。</p>
-        <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
+       <p>欢迎你打开这个页面。这里是岁窦工作室出品的岁窦工具箱 V2.3.2 铂金版，也是本系列的最后一个旧版页面。自新版工具箱上线后，本页面已正式封存，不再更新，仅作留档与过渡入口使用。</p>
+       <p>你仍然可以在这里使用文章分析、数学计算、常见统计图生成等已有功能，所有数据与操作均不受影响。但请注意，此后发现的问题不会再在此版本中修复，新功能也只会出现在新版工具箱中。</p>
+       <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
+       <p>建议在迁移到新版之前，先在本页「设置 → 数据管理」中导出完整 JSON 备份，然后到新版工具箱中通过「导入数据」恢复，避免数据丢失。</p>
+       <p>新版工具箱已经上线，功能更多、体验更好，后续所有更新都会在新版进行。请点击页面顶部的<span style="color:var(--primary-dark);font-weight:700;">「前往新版工具箱」</span>按钮迁移，或直接访问：<a href="https://sulder20.github.io/html/toolbox.html" style="color:var(--primary-dark);font-weight:700;word-break:break-all;">新网站</a></p>
+        <p>感谢你一路以来的使用与支持。岁窦工具箱会继续在新版中陪你走下去。</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
       </div>
       <div class="editor-sign">
         <p>2026 年 10 月</p>
-        <p>岁窦工具箱 · V2.3.2 铂金版</p>
+        <p>岁窦工具箱 · V2.3.2 封存</p>
       </div>
     </div>
   </section>
@@ -1647,6 +1698,13 @@ details.sub .inner{padding-bottom:14px;}
             快速开始
           </h3>
           <div class="help-step">
+            <span class="help-step-num" style="background:linear-gradient(135deg,#c17878,#8f3a3a);">!</span>
+            <div class="help-step-body">
+              <b>本版本已封存，请迁移到新版</b>
+              旧版工具箱已于 V2.3.2 铂金版后停止更新，仅作留档与过渡入口。新功能、bug 修复、体验优化都只会出现在新版工具箱中。请先在本页「设置 → 数据管理」导出 JSON 备份，然后前往新版工具箱导入。
+            </div>
+          </div>
+          <div class="help-step">
             <span class="help-step-num">1</span>
             <div class="help-step-body"><b>找到你要的工具</b>首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。V2.3.1 起，工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列，每个工具都归到最自然的位置。</div>
           </div>
@@ -1679,11 +1737,21 @@ details.sub .inner{padding-bottom:14px;}
             常见问题
           </h3>
 
+          <details class="faq-item" open>
+            <summary>这个版本还会更新吗？</summary>
+            <div class="faq-body">
+              <p><b>不会。</b>本页面为 V2.3.2 铂金版旧版，已正式封存，不再接收任何更新、修复或新功能。</p>
+              <p>新版工具箱地址：<code>https://sulder20.github.io/html/toolbox.html</code>，请尽快迁移。</p>
+              <p>迁移前建议先在「设置 → 数据管理」导出完整 JSON 备份，然后到新版通过「导入数据」恢复，避免数据丢失。</p>
+            </div>
+          </details>
+
           <details class="faq-item">
             <summary>数据保存在哪里？会不会丢？</summary>
             <div class="faq-body">
               <p>不登录时，所有数据保存在你浏览器的 localStorage 中（键名以 <code>suidou-</code> 开头），刷新或关闭页面都不会丢失。</p>
               <p>但<b>清除浏览器缓存、更换设备 / 浏览器、使用无痕模式</b>都会导致数据丢失，建议定期在「设置 → 数据管理」导出 JSON 备份。</p>
+              <p><b style="color:#8f3a3a;">本版本已封存，建议尽快导出备份并迁移到新版工具箱，旧版不再负责后续数据维护。</b></p>
             </div>
           </details>
 
@@ -1970,7 +2038,7 @@ details.sub .inner{padding-bottom:14px;}
           </div>
           <div class="help-info-row">
             <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <div class="help-info-body"><b>版本</b>：V2.3.2 铂金版（2026.10）</div>
+            <div class="help-info-body"><b>版本</b>：V2.3.2 铂金版 封存（2026.10）</div>
           </div>
         </div>
 
@@ -1993,6 +2061,9 @@ details.sub .inner{padding-bottom:14px;}
       <!-- ========== 右侧目录 ========== -->
       <aside class="help-sidebar" id="helpSidebar">
         <div class="hs-title">本页目录</div>
+        <a href="https://sulder20.github.io/html/toolbox.html" style="background:#fbeaea;color:#8f3a3a;font-weight:700;">
+          <span class="hs-dot" style="background:#8f3a3a;"></span>→ 前往新版工具箱
+        </a>
         <a href="#help-start" data-target="help-start"><span class="hs-dot"></span>快速开始</a>
         <a href="#help-faq" data-target="help-faq"><span class="hs-dot"></span>常见问题</a>
         <a href="#help-tools" data-target="help-tools"><span class="hs-dot"></span>工具小贴士</a>
@@ -2144,8 +2215,10 @@ details.sub .inner{padding-bottom:14px;}
           '@media(max-width:640px){.doc{padding:28px 20px 40px;}.cover h1{font-size:24px;}h2{font-size:18px;}}';
 
         var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档</h1>' +
-          '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
-          '<span class="ver">V2.3.2 铂金版（2026.10）</span></div>' +
+        '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
+        '<span class="ver" style="background:#fbeaea;color:#8f3a3a;">V2.3.2 铂金版（2026.10）· 旧版已封存</span>' +
+        '<p style="margin-top:14px;color:#8f3a3a;font-size:14px;">本帮助文档对应旧版工具箱，已停止更新。新版地址：https://sulder20.github.io/html/toolbox.html</p>' +
+        '</div>' +
 
           '<h2>一、快速开始</h2><ol>' +
           '<li><b>找到你要的工具</b>：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。V2.3.1 起，工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列。</li>' +
@@ -2266,7 +2339,7 @@ details.sub .inner{padding-bottom:14px;}
           '<ul>' +
           '<li><b>微博</b>：@岁窦工作室</li>' +
           '<li><b>邮箱</b>：q13052830801@163.com</li>' +
-          '<li><b>版本</b>：V2.3.2 铂金版（2026.10）</li>' +
+          '<li><b>版本</b>：V2.3.2 铂金版 封存（2026.10）</li>' +
           '</ul>' +
 
           '<div class="footer">岁窦工具箱 · 帮助文档<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>';
@@ -2286,7 +2359,8 @@ details.sub .inner{padding-bottom:14px;}
         return [
           '# 岁窦工具箱 · 帮助文档', '',
           '> 新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明  ',
-          '> 版本：V2.3.2 铂金版（2026.10）', '', '---', '',
+          '> 版本：V2.3.2 铂金版（2026.10）· 旧版已封存  ',
+          '> 新版地址：https://sulder20.github.io/html/toolbox.html', '', '---', '',
 
           '## 一、快速开始', '',
           '1. **找到你要的工具**：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。V2.3.1 起，工具按六大分类排列：① 健康与运动、② 创作工坊、③ 收藏与记录、④ 计算与数据、⑤ 时间与生活、⑥ AI 与开发。',
@@ -2378,7 +2452,7 @@ details.sub .inner{padding-bottom:14px;}
           '## 六、联系与反馈', '',
           '- 微博：@岁窦工作室',
           '- 邮箱：q13052830801@163.com',
-          '- 版本：V2.3.2 铂金版（2026.10）', '',
+          '- 版本：V2.3.2 铂金版 封存（2026.10）', '',
           '---', '',
           '*岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
         ].join('\n');
@@ -2398,17 +2472,23 @@ details.sub .inner{padding-bottom:14px;}
         var children = [];
 
         children.push(new D.Paragraph({
-          children: [new D.TextRun({ text: '岁窦工具箱 · 帮助文档', bold: true, size: 44, font: FONT, color: '565d65' })],
+          children: [new D.TextRun({ text: 'V2.3.2 铂金版（2026.10）· 旧版已封存', size: 22, font: FONT, color: '8f3a3a', bold: true })],
           alignment: D.AlignmentType.CENTER,
-          spacing: { before: 600, after: 200 }
+          spacing: { after: 120 },
+          border: { bottom: { color: '737b84', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
         }));
+        children.push(new D.Paragraph({
+          children: [new D.TextRun({ text: '本帮助文档对应旧版工具箱，已停止更新。新版地址：https://sulder20.github.io/html/toolbox.html', size: 20, font: FONT, color: '6f7680' })],
+            alignment: D.AlignmentType.CENTER,
+            spacing: { after: 400 }
+          }));
         children.push(new D.Paragraph({
           children: [new D.TextRun({ text: '新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明', size: 22, font: FONT, color: '6f7680' })],
           alignment: D.AlignmentType.CENTER,
           spacing: { after: 120 }
         }));
         children.push(new D.Paragraph({
-          children: [new D.TextRun({ text: 'V2.3.2 铂金版（2026.10）', size: 22, font: FONT, color: '565d65', bold: true })],
+          children: [new D.TextRun({ text: 'V2.3.2 铂金版 封存（2026.10）', size: 22, font: FONT, color: '565d65', bold: true })],
           alignment: D.AlignmentType.CENTER,
           spacing: { after: 400 },
           border: { bottom: { color: '737b84', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
@@ -2637,7 +2717,7 @@ details.sub .inner{padding-bottom:14px;}
         [
           ['微博', '@岁窦工作室'],
           ['邮箱', 'q13052830801@163.com'],
-          ['版本', 'V2.3.2 铂金版（2026.10）']
+          ['版本', 'V2.3.2 铂金版 封存（2026.10）']
         ].forEach(function (t) {
           children.push(Runs([
             { text: '• ', color: '565d65', bold: true, size: 24 },
@@ -2664,7 +2744,7 @@ details.sub .inner{padding-bottom:14px;}
           var doc = new D.Document({
             creator: '岁窦工具箱',
             title: '岁窦工具箱 · 帮助文档',
-            description: '岁窦工具箱 V2.3.2 铂金版帮助文档',
+            description: '岁窦工具箱 V2.3.2 铂金版（封存）帮助文档',
             styles: {
               default: {
                 document: { run: { font: FONT, size: 22 } }
@@ -2769,7 +2849,7 @@ details.sub .inner{padding-bottom:14px;}
       <h3 class="panel-head">关于</h3>
       <div class="version-line">
         <span class="version-label">版本号</span>
-        <span class="version-val">V2.3.2 铂金版（2026.10）</span>
+        <span class="version-val">V2.3.2 铂金版 封存（2026.10）</span>
       </div>
     </div>
   </section>
@@ -5064,7 +5144,7 @@ details.sub .inner{padding-bottom:14px;}
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V2.3.2 铂金版</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V2.3.2 铂金版 封存</footer>
 </main>
 
 <!-- ==================== 弹窗：歌词 ==================== -->
