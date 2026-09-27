@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230f380f'/><rect x='2' y='2' width='5' height='5' fill='%239bbc0f'/><rect x='9' y='2' width='5' height='5' fill='%238bac0f'/><rect x='2' y='9' width='5' height='5' fill='%23306230'/><rect x='9' y='9' width='5' height='5' fill='%239bbc0f'/></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f380f">
+<title>Pixel Arcade · 岁窦工作室 像素街机</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/menu.css">
+</head>
+<body class="menu-page">
+
+<header class="menu-header">
+  <h1 class="menu-logo">
+    PIXEL ARCADE
+    <small>岁窦工作室 · 像素街机 · 9 IN 1</small>
+  </h1>
+  <button class="btn btn-icon" id="btn-volume" aria-label="音量">🔊</button>
+  <button class="btn btn-icon" id="btn-mute" aria-label="音效开关">♪</button>
+</header>
+
+<main class="menu-grid" id="menu-grid"></main>
+
+<section class="menu-stats" id="menu-stats">
+  <div class="stat">
+    <span class="stat-label">已玩</span>
+    <span class="stat-value" id="stat-played">0</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">总次数</span>
+    <span class="stat-value" id="stat-visits">0</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">总分</span>
+    <span class="stat-value" id="stat-best">0</span>
+  </div>
+</section>
+
+<div class="menu-reset-row">
+  <button class="btn menu-reset" id="btn-reset">RESET DATA</button>
+</div>
+<footer class="menu-footer">© SULDER STUDIO    |    PIXEL ARCADE</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/common.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

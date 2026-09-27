@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230f380f'/><rect x='2' y='2' width='5' height='5' fill='%239bbc0f'/><rect x='9' y='2' width='5' height='5' fill='%238bac0f'/><rect x='2' y='9' width='5' height='5' fill='%23306230'/><rect x='9' y='9' width='5' height='5' fill='%239bbc0f'/></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f380f">
+<title>俄罗斯方块 · Pixel Arcade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/game.css">
+</head>
+<body class="game-page">
+
+<header class="game-bar">
+  <a class="btn btn-icon" href="../games.html" aria-label="返回菜单">←</a>
+  <h1 class="game-title">俄罗斯方块</h1>
+  <div class="game-bar-right">
+    <button class="btn btn-icon" id="btn-mute" aria-label="音效开关">♪</button>
+    <button class="btn btn-icon" id="btn-help" aria-label="玩法说明">?</button>
+  </div>
+</header>
+
+<div class="hud">
+  <div class="hud-item">
+    <span class="hud-label">SCORE</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="hud-item">
+    <span class="hud-label">LEVEL</span>
+    <span class="hud-value" id="level">1</span>
+  </div>
+  <div class="hud-item">
+    <span class="hud-label">BEST</span>
+    <span class="hud-value" id="best">0</span>
+  </div>
+</div>
+
+<main class="stage">
+  <div class="screen-wrap tall">
+    <canvas id="canvas" width="300" height="400"></canvas>
+    <div class="overlay" id="overlay">
+      <div class="overlay-title" id="ov-title">俄罗斯方块</div>
+      <div class="overlay-text" id="ov-text">方向键移动 · ↑ 旋转 · 空格落下</div>
+      <button class="btn btn-primary" id="ov-btn">开始</button>
+    </div>
+  </div>
+</main>
+
+<footer class="game-actions tetris-pad">
+  <div class="pad-row">
+    <button class="btn" id="btn-pause">暂停</button>
+    <button class="btn" data-act="drop">落下</button>
+    <button class="btn" id="btn-restart">重开</button>
+  </div>
+  <div class="pad-row">
+    <button class="btn btn-icon" data-act="left" aria-label="左移">◀</button>
+    <button class="btn btn-icon" data-act="rotate" aria-label="旋转">⟳</button>
+    <button class="btn btn-icon" data-act="down" aria-label="下移">▼</button>
+    <button class="btn btn-icon" data-act="right" aria-label="右移">▶</button>
+  </div>
+</footer>
+<div class="game-hint" id="game-hint"></div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/audio.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/games/tetris.js"></script>
+</body>
+</html>
