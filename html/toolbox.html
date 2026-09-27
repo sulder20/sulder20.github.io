@@ -3,14 +3,975 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岁窦工具箱 · V2.3.2 铂金版</title>
+<title>岁窦工具箱 · V3.0 焕新版</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="images/slogo.png">
+<style id="v3-visual-refresh">
+/* ============================================================
+   V3.0 焕新版 · 视觉焕新
+   ============================================================ */
+:root{
+  --radius:16px;
+  --radius-sm:12px;
+  --shadow-sm:0 2px 8px rgba(77,124,15,.06);
+  --shadow-md:0 8px 24px rgba(77,124,15,.10);
+  --shadow-lg:0 18px 40px rgba(77,124,15,.16);
+  --ring:0 0 0 4px rgba(132,204,22,.18);
+}
+
+/* ---------- 全局背景：淡网格 + 光晕 ---------- */
+body{
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(190,242,100,.30), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(132,204,22,.14), transparent 60%),
+    linear-gradient(180deg, #f9fbf2 0%, #f4f8ea 100%) !important;
+  background-attachment: fixed !important;
+  position: relative;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(132,204,22,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(132,204,22,.045) 1px, transparent 1px);
+  background-size:36px 36px;
+  mask-image:radial-gradient(circle at 50% 40%, #000 40%, transparent 85%);
+  -webkit-mask-image:radial-gradient(circle at 50% 40%, #000 40%, transparent 85%);
+}
+main, header{position:relative;z-index:1;}
+
+/* ---------- 顶栏：毛玻璃 + 绿光分隔线 ---------- */
+header{
+  background:rgba(255,255,255,.78) !important;
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid rgba(132,204,22,.22) !important;
+  box-shadow:0 6px 22px -12px rgba(77,124,15,.20) !important;
+}
+.logo{
+  display:flex !important;
+  align-items:center !important;
+  gap:9px !important;
+  font-weight:900 !important;
+  letter-spacing:.6px !important;
+}
+.logo img{
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  object-fit:contain;
+  display:block;
+  flex:0 0 auto;
+}
+nav button{
+  border-radius:999px !important;
+  padding:8px 18px !important;
+  font-weight:600 !important;
+  transition:all .2s ease !important;
+}
+nav button.active{
+  background:linear-gradient(135deg,var(--lime),var(--primary)) !important;
+  color:#fff !important;
+  box-shadow:0 6px 16px -6px rgba(77,124,15,.55) !important;
+}
+nav button:hover:not(.active){
+  background:var(--primary-soft) !important;
+  color:var(--primary-dark) !important;
+}
+.search-wrap input{
+  border-radius:999px !important;
+  background:rgba(247,250,240,.9) !important;
+  border-color:rgba(132,204,22,.22) !important;
+}
+#userBox .mode-badge{
+  border:1px solid rgba(132,204,22,.25);
+  background:rgba(236,252,203,.6) !important;
+  color:var(--primary-dark) !important;
+}
+
+/* ---------- Hero：分栏 + 装饰 ---------- */
+.hero{
+  padding:44px 44px 46px !important;
+  border-radius:22px !important;
+  background:
+    radial-gradient(600px 260px at 88% 20%, rgba(217,249,157,.55), transparent 70%),
+    radial-gradient(500px 320px at 110% 100%, rgba(77,124,15,.55), transparent 70%),
+    linear-gradient(135deg, #a3e635 0%, #84cc16 42%, #4d7c0f 100%) !important;
+  box-shadow:
+    0 24px 50px -20px rgba(77,124,15,.45),
+    inset 0 1px 0 rgba(255,255,255,.35) !important;
+  overflow:hidden;
+  position:relative;
+}
+.hero::before{
+  content:"";
+  position:absolute;right:-60px;top:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.5), transparent 65%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";
+  position:absolute;left:-40px;bottom:-90px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.22), transparent 70%);
+  pointer-events:none;
+}
+.hero h1{
+  font-size:32px !important;
+  font-weight:900 !important;
+  letter-spacing:.6px;
+  text-shadow:0 2px 10px rgba(45,80,10,.30);
+  position:relative;z-index:2;
+}
+.hero p{
+  font-size:15.5px !important;
+  opacity:.96 !important;
+  max-width:640px;
+  position:relative;z-index:2;
+}
+
+/* ---------- 面板：更大圆角 + 柔和阴影 ---------- */
+.panel{
+  border-radius:var(--radius) !important;
+  box-shadow:var(--shadow-sm) !important;
+  border-color:rgba(132,204,22,.16) !important;
+  transition:box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+}
+.panel:hover{
+  box-shadow:var(--shadow-md) !important;
+  border-color:rgba(132,204,22,.30) !important;
+}
+
+/* ---------- 工具卡 / 热门卡：结构重做 ---------- */
+.tool-card{
+  border-radius:var(--radius) !important;
+  padding:22px 20px 20px !important;
+  box-shadow:var(--shadow-sm) !important;
+  border-color:rgba(132,204,22,.16) !important;
+  overflow:hidden;
+  position:relative;
+}
+.tool-card::before{
+  height:4px !important;
+  background:linear-gradient(90deg,var(--lime),var(--primary),var(--primary-dark)) !important;
+  border-radius:4px 4px 0 0;
+}
+.tool-card::after{
+  content:"";
+  position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle, rgba(132,204,22,.10), transparent 70%);
+  opacity:0;transition:.25s;pointer-events:none;
+}
+.tool-card:hover{
+  transform:translateY(-4px) !important;
+  box-shadow:var(--shadow-lg) !important;
+  border-color:var(--primary) !important;
+}
+.tool-card:hover::after{opacity:1;}
+.tool-icon{
+  width:48px !important;height:48px !important;
+  border-radius:14px !important;
+  background:linear-gradient(135deg, var(--lime-shine), var(--primary-soft)) !important;
+  color:var(--primary-dark) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 2px 6px rgba(77,124,15,.08);
+}
+.tool-card:hover .tool-icon{
+  background:linear-gradient(135deg, var(--lime), var(--primary)) !important;
+  color:#fff !important;
+  box-shadow:0 8px 18px -6px rgba(77,124,15,.55);
+}
+.tool-icon svg{width:23px !important;height:23px !important;}
+
+.hot-card{
+  border-radius:var(--radius) !important;
+  box-shadow:var(--shadow-sm) !important;
+  border-color:rgba(132,204,22,.16) !important;
+}
+.hot-card:hover{
+  transform:translateY(-3px) !important;
+  box-shadow:var(--shadow-lg) !important;
+  border-color:var(--primary) !important;
+}
+.hot-card .tool-icon{width:44px !important;height:44px !important;}
+.hot-badge{
+  background:linear-gradient(135deg, var(--lime), var(--primary)) !important;
+  color:#fff !important;
+  box-shadow:0 4px 10px -4px rgba(77,124,15,.55);
+}
+
+/* ---------- 分类卡：顶部渐变条 ---------- */
+.category-card{
+  border-radius:var(--radius) !important;
+  box-shadow:var(--shadow-sm) !important;
+  border-color:rgba(132,204,22,.16) !important;
+  padding:20px 20px 18px !important;
+  position:relative;
+  overflow:hidden;
+}
+.category-card::before{
+  content:"";
+  position:absolute;left:0;top:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--lime),var(--primary-dark));
+  opacity:.7;
+}
+.category-card:hover{
+  border-color:var(--primary) !important;
+  box-shadow:var(--shadow-md) !important;
+  transform:translateY(-2px);
+}
+.cat-icon{
+  width:40px !important;height:40px !important;
+  border-radius:12px !important;
+  background:linear-gradient(135deg, var(--lime-shine), var(--primary-soft)) !important;
+  color:var(--primary-dark) !important;
+}
+.cat-icon svg{width:20px !important;height:20px !important;}
+.cat-list li{
+  border-radius:999px !important;
+  padding:8px 16px !important;
+  background:rgba(247,250,240,.9) !important;
+  border:1px solid rgba(132,204,22,.14) !important;
+  font-weight:600 !important;
+  transition:all .18s ease;
+}
+.cat-list li:hover{
+  background:linear-gradient(135deg, var(--lime), var(--primary)) !important;
+  color:#fff !important;
+  border-color:var(--primary) !important;
+  transform:translateY(-1px);
+  box-shadow:0 6px 14px -6px rgba(77,124,15,.55);
+}
+
+/* ---------- 按钮：渐变 + 阴影 ---------- */
+.btn{
+  border-radius:11px !important;
+  font-weight:700 !important;
+  letter-spacing:.3px;
+  transition:all .2s ease !important;
+}
+.btn:not(.ghost):not(.danger){
+  background:linear-gradient(135deg, var(--lime), var(--primary)) !important;
+  border-color:transparent !important;
+  color:#fff !important;
+  box-shadow:0 6px 16px -6px rgba(77,124,15,.55);
+}
+.btn:not(.ghost):not(.danger):hover{
+  background:linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  box-shadow:0 10px 22px -8px rgba(77,124,15,.75);
+  transform:translateY(-1px);
+}
+.btn.ghost{
+  border-radius:11px !important;
+  border-color:rgba(132,204,22,.25) !important;
+}
+.btn.ghost:hover{
+  background:var(--primary-soft) !important;
+  border-color:var(--primary) !important;
+  color:var(--primary-dark) !important;
+}
+
+/* ---------- 表单：更大圆角 + 亮 focus ---------- */
+.field input[type=text], .field textarea, .field select,
+#chartData, #wcText, #wfText, #jsonInput, #jsonOutput{
+  border-radius:12px !important;
+  border-color:rgba(132,204,22,.20) !important;
+}
+.field input[type=text]:focus, .field textarea:focus, .field select:focus{
+  box-shadow:var(--ring) !important;
+  border-color:var(--primary) !important;
+}
+
+/* ---------- 子标签：实心胶囊切换 ---------- */
+.ta-subtabs{
+  background:rgba(236,252,203,.55) !important;
+  padding:5px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(132,204,22,.18);
+  display:inline-flex;
+  gap:2px;
+}
+.ta-subtab{
+  border-radius:999px !important;
+  padding:9px 20px !important;
+  font-weight:600 !important;
+}
+.ta-subtab.active{
+  background:linear-gradient(135deg, var(--lime), var(--primary)) !important;
+  color:#fff !important;
+  box-shadow:0 6px 14px -6px rgba(77,124,15,.55) !important;
+}
+.ta-subtab:hover:not(.active){
+  background:#fff !important;
+  color:var(--primary-dark) !important;
+}
+
+/* ---------- 面包屑：轻盈条 ---------- */
+.tool-crumb{
+  border-radius:14px !important;
+  padding:14px 18px 12px !important;
+  border-color:rgba(132,204,22,.18) !important;
+  background:rgba(255,255,255,.92) !important;
+  backdrop-filter:blur(8px);
+  box-shadow:var(--shadow-sm);
+}
+.crumb-path{
+  font-size:13px !important;
+}
+.crumb-tools{
+  padding-top:12px !important;
+  margin-top:2px !important;
+  gap:6px !important;
+}
+.crumb-tool{
+  border-radius:999px !important;
+  padding:4px 12px !important;
+  background:rgba(236,252,203,.60) !important;
+  border:1px solid rgba(132,204,22,.16) !important;
+  font-weight:600;
+  transition:all .18s ease;
+}
+.crumb-tool:hover{
+  background:linear-gradient(135deg, var(--lime-shine), var(--primary-soft)) !important;
+  border-color:var(--primary) !important;
+  color:var(--primary-dark) !important;
+  transform:translateY(-1px);
+}
+.crumb-tool.active{
+  background:linear-gradient(135deg, var(--lime), var(--primary)) !important;
+  border-color:transparent !important;
+  color:#fff !important;
+  box-shadow:0 4px 10px -4px rgba(77,124,15,.55);
+}
+.crumb-link{
+  border-radius:8px !important;
+}
+
+/* ---------- 统计卡 / 版本卡：柔和 ---------- */
+.stat-card{
+  border-radius:14px !important;
+  background:linear-gradient(180deg, #ffffff 0%, #fbfdf6 100%) !important;
+  border-color:rgba(132,204,22,.16) !important;
+  box-shadow:var(--shadow-sm);
+}
+.upgrade-item{
+  border-radius:14px !important;
+  background:linear-gradient(180deg, #ffffff 0%, #fafcf5 100%) !important;
+  border-color:rgba(132,204,22,.16) !important;
+  box-shadow:var(--shadow-sm);
+}
+.upgrade-item:hover{
+  box-shadow:var(--shadow-md) !important;
+  border-color:var(--primary) !important;
+}
+
+/* ---------- 页面标题图标：渐变底 ---------- */
+.page-icon{
+  background:linear-gradient(135deg, var(--lime-shine), var(--primary-soft)) !important;
+  color:var(--primary-dark) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* ---------- 深色区：暖墨绿 + 内部高光 ---------- */
+.calc-display, .clock-display{
+  background:
+    radial-gradient(600px 200px at 100% 0%, rgba(132,204,22,.30), transparent 70%),
+    linear-gradient(135deg,#2f3d10,#1a2e05) !important;
+  box-shadow:inset 0 2px 10px rgba(0,0,0,.35), 0 10px 24px -12px rgba(26,46,5,.55);
+}
+#codeInput{
+  background:
+    radial-gradient(600px 200px at 100% 0%, rgba(132,204,22,.14), transparent 70%),
+    linear-gradient(180deg,#1f3408,#14260b) !important;
+}
+
+/* ---------- 侧栏 / 弹窗 ---------- */
+.help-sidebar{
+  border-radius:16px !important;
+  box-shadow:var(--shadow-sm);
+  border-color:rgba(132,204,22,.18) !important;
+}
+.modal, .ai-pop-card{
+  border-radius:20px !important;
+  box-shadow:0 30px 80px -20px rgba(26,46,5,.45);
+}
+
+/* ---------- 滚动条: 更细更亮 ---------- */
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg, var(--lime), var(--primary)) !important;
+  border:2px solid #f6f8f0 !important;
+}
+
+/* ---------- 页面切换动画 ---------- */
+.page.active{animation:pageIn .35s ease both;}
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:translateY(0);}
+}
+/* ---------- 空状态插画（覆盖所有 .empty） ---------- */
+.empty{
+  padding:56px 20px 44px !important;
+  position:relative;
+  font-size:13.5px !important;
+  line-height:1.75 !important;
+  letter-spacing:.2px;
+  color:var(--muted) !important;
+}
+.empty::before{
+  content:"";
+  display:block;
+  width:130px;
+  height:106px;
+  margin:0 auto 18px;
+  background-image:url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 130' fill='none'><ellipse cx='80' cy='112' rx='42' ry='6' fill='%2384cc16' opacity='0.15'/><path d='M40 62 L80 80 L120 62 L120 100 Q120 106 114 106 L46 106 Q40 106 40 100 Z' fill='%23ecfccb' stroke='%234d7c0f' stroke-width='2.4' stroke-linejoin='round'/><path d='M40 62 L80 44 L120 62 L80 80 Z' fill='%23d9f99d' stroke='%234d7c0f' stroke-width='2.4' stroke-linejoin='round'/><path d='M80 44 L80 80' stroke='%234d7c0f' stroke-width='2' opacity='0.45'/><path d='M47 98 L47 68' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' opacity='0.7'/><path d='M80 38 C72 32 72 20 80 12 C88 20 88 32 80 38 Z' fill='%23a3e635' stroke='%234d7c0f' stroke-width='2' stroke-linejoin='round'/><path d='M80 38 L80 44' stroke='%234d7c0f' stroke-width='2' stroke-linecap='round'/><path d='M80 19 L80 34' stroke='%234d7c0f' stroke-width='1.4' stroke-linecap='round' opacity='0.7'/></svg>");
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  animation:emptyFloat 3.2s ease-in-out infinite;
+}
+@keyframes emptyFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+
+/* 让空状态在网格布局里自动撑满整行 */
+.people-grid > .empty,
+.places-grid > .empty,
+.media-grid > .empty,
+.exer-grid > .empty,
+.novel-grid > .empty,
+.note-grid > .empty{
+  grid-column:1 / -1;
+}
+
+/* ============ 首页折叠公告：编者的话 ============ */
+.notice-box{
+  background:#fff;
+  border:1px solid rgba(132,204,22,.28);
+  border-radius:16px;
+  margin-bottom:24px;
+  overflow:hidden;
+  box-shadow:0 4px 16px -8px rgba(77,124,15,.18);
+  transition:box-shadow .25s ease, border-color .25s ease;
+}
+.notice-box:hover{
+  border-color:var(--primary);
+  box-shadow:0 8px 24px -10px rgba(77,124,15,.30);
+}
+.notice-box[open]{
+  box-shadow:0 12px 32px -12px rgba(77,124,15,.32);
+}
+
+/* 折叠条（summary） */
+.notice-summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 22px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:linear-gradient(135deg,#f7fee7,#ecfccb);
+  transition:background .2s ease;
+  user-select:none;
+  outline:none;
+}
+.notice-summary::-webkit-details-marker{display:none;}
+.notice-box[open] .notice-summary{
+  border-bottom:1px solid rgba(132,204,22,.18);
+  background:linear-gradient(135deg,#ecfccb,#d9f99d);
+}
+
+.notice-icon{
+  width:38px;height:38px;
+  border-radius:11px;
+  background:linear-gradient(135deg,var(--lime),var(--primary));
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  flex:0 0 auto;
+  box-shadow:0 6px 14px -6px rgba(77,124,15,.55);
+  transition:transform .25s ease;
+}
+.notice-icon svg{width:18px;height:18px;}
+.notice-box[open] .notice-icon{
+  transform:rotate(-8deg) scale(1.05);
+}
+
+.notice-text{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  flex:1;
+  min-width:0;
+}
+.notice-text b{
+  font-size:15.5px;
+  font-weight:800;
+  color:var(--primary-dark);
+  letter-spacing:.3px;
+}
+.notice-text i{
+  font-style:normal;
+  font-size:12.5px;
+  color:#6b7d54;
+}
+
+.notice-arrow{
+  flex:0 0 auto;
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--primary-dark);
+  transition:transform .28s cubic-bezier(.2,.9,.3,1.2);
+}
+.notice-arrow svg{width:18px;height:18px;}
+.notice-box[open] .notice-arrow{
+  transform:rotate(180deg);
+}
+
+/* 展开后的正文 */
+.notice-body{
+  padding:24px 26px 22px;
+  background:#fff;
+  animation:noticeIn .28s ease both;
+}
+.notice-body p{
+  margin:0 0 16px;
+  font-size:14.5px;
+  line-height:1.95;
+  color:#2b3140;
+  text-indent:2em;
+  letter-spacing:.3px;
+  font-weight:600;
+}
+.notice-body p:last-of-type{margin-bottom:18px;}
+.notice-sign{
+  margin-top:24px;
+  padding-top:16px;
+  border-top:1px dashed rgba(132,204,22,.28);
+  text-align:right;
+}
+.notice-sign p{
+  margin:0;
+  font-size:13.5px;
+  line-height:1.9;
+  color:var(--muted);
+  font-weight:700;
+  text-indent:0;
+  letter-spacing:.5px;
+}
+.notice-sign p:last-child{color:var(--primary-dark);}
+
+@keyframes noticeIn{
+  from{opacity:0;transform:translateY(-6px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@media (max-width:640px){
+  .notice-summary{padding:14px 16px;gap:10px;}
+  .notice-icon{width:34px;height:34px;border-radius:10px;}
+  .notice-icon svg{width:16px;height:16px;}
+  .notice-text b{font-size:14.5px;}
+  .notice-text i{font-size:11.5px;}
+  .notice-body{padding:18px 18px 16px;}
+  .notice-body p{font-size:13.5px;line-height:1.85;}
+}
+/* ============ 全部应用 · 拼音分组标题 ============ */
+.pinyin-head{
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 4px 6px;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--primary-dark);
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.pinyin-head:first-child{
+  margin-top: 0;
+}
+.pinyin-head::before{
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 22px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--lime), var(--primary));
+  box-shadow: 0 2px 6px -2px rgba(77,124,15,.5);
+}
+.pinyin-head::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(132,204,22,.35), transparent);
+}
+
+@media (max-width:640px){
+  .pinyin-head{
+    font-size: 17px;
+    letter-spacing: 2px;
+    margin: 14px 2px 4px;
+  }
+  .pinyin-head::before{
+    width: 5px;
+    height: 18px;
+  }
+}
+/* ============ 搜索无结果 · 插画 ============ */
+#noResult{
+  padding:56px 20px 48px !important;
+  position:relative;
+  color:var(--muted) !important;
+  font-size:14px !important;
+  line-height:1.75 !important;
+  letter-spacing:.2px;
+}
+#noResult::before{
+  content:"";
+  display:block;
+  width:140px;
+  height:120px;
+  margin:0 auto 20px;
+  background-image:url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 150' fill='none'><ellipse cx='85' cy='128' rx='46' ry='7' fill='%2384cc16' opacity='0.14'/><circle cx='72' cy='68' r='34' fill='%23f7fee7' stroke='%234d7c0f' stroke-width='2.6'/><circle cx='72' cy='68' r='34' fill='none' stroke='%23bef264' stroke-width='2.6' opacity='0.5'/><path d='M97 93 L120 116' stroke='%234d7c0f' stroke-width='6' stroke-linecap='round'/><path d='M97 93 L120 116' stroke='%23a3e635' stroke-width='2.4' stroke-linecap='round'/><path d='M60 58 Q72 50 84 58' stroke='%2384cc16' stroke-width='2.4' stroke-linecap='round' fill='none'/><circle cx='62' cy='76' r='2.4' fill='%234d7c0f'/><circle cx='82' cy='76' r='2.4' fill='%234d7c0f'/><path d='M66 86 Q72 82 78 86' stroke='%234d7c0f' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M118 40 Q120 30 128 28' stroke='%23a3e635' stroke-width='2' stroke-linecap='round' fill='none' opacity='0.7'/><path d='M132 46 Q137 40 144 42' stroke='%23bef264' stroke-width='2' stroke-linecap='round' fill='none' opacity='0.8'/><circle cx='40' cy='40' r='3' fill='%23bef264' opacity='0.65'/><circle cx='128' cy='88' r='2.6' fill='%23a3e635' opacity='0.7'/></svg>");
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  animation:noResultFloat 3.4s ease-in-out infinite;
+}
+@keyframes noResultFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+/* ============ 公告正文 · 图片样式 ============ */
+.notice-body .notice-img{
+  display:block;
+  width:100%;
+  max-width:560px;
+  margin:18px auto 8px;
+  border-radius:12px;
+  border:1px solid rgba(132,204,22,.22);
+  box-shadow:0 8px 22px -10px rgba(77,124,15,.28);
+  overflow:hidden;
+}
+.notice-body .notice-img img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.notice-body .notice-caption{
+  text-align:center;
+  font-size:12.5px;
+  color:var(--muted);
+  margin:0 auto 20px;
+  line-height:1.7;
+  text-indent:0;
+  font-weight:500;
+  letter-spacing:.3px;
+}
+
+/* 两张图并排（小屏自动竖排） */
+.notice-body .notice-img-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:18px 0 8px;
+}
+.notice-body .notice-img-row .notice-img{
+  max-width:100%;
+  margin:0;
+}
+@media (max-width:640px){
+  .notice-body .notice-img-row{grid-template-columns:1fr;}
+}
+
+/* 悬浮放大效果（可选，加 hover-zoom 类） */
+.notice-body .notice-img.hover-zoom{
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.notice-body .notice-img.hover-zoom:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 36px -12px rgba(77,124,15,.45);
+}
+</style>
+<style id="help-layout-fix">
+  #page-help .help-layout{
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) 182px !important;
+    gap: 22px !important;
+    align-items: start !important;
+  }
+  #page-help .help-content{ display: block !important; }
+  #page-help .help-sidebar{
+    position: sticky !important;
+    top: 84px !important;
+    display: block !important;
+    padding: 10px !important;
+    background: #fff !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    max-height: calc(100vh - 120px) !important;
+    overflow-y: auto !important;
+  }
+  #page-help .help-sidebar .hs-title{ display: block !important; }
+  #page-help .help-sidebar a{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 9px !important;
+    padding: 8px 10px !important;
+    margin-bottom: 2px !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent !important;
+    background: none !important;
+    font-size: 13.5px !important;
+    color: var(--muted) !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+  }
+  #page-help .help-sidebar a .hs-dot{ display: inline-block !important; }
+  #page-help .help-sidebar a.active{
+    background: var(--primary-soft) !important;
+    color: var(--primary-dark) !important;
+    font-weight: 600 !important;
+  }
+
+  #page-help .help-step{
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+    padding: 16px 0 !important;
+    border-bottom: 1px dashed var(--border) !important;
+  }
+  #page-help .help-step:first-child{ padding-top: 2px !important; }
+  #page-help .help-step:last-child{ border-bottom: none !important; padding-bottom: 2px !important; }
+  #page-help .help-step-num{
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    flex: 0 0 auto !important;
+    background: linear-gradient(135deg, var(--lime), var(--primary-dark)) !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 3px 9px rgba(77,124,15,.28) !important;
+  }
+  #page-help .help-step-body{
+    flex: 1 !important;
+    font-size: 14.5px !important;
+    line-height: 1.85 !important;
+    color: #4b5563 !important;
+    padding-top: 2px !important;
+  }
+  #page-help .help-step-body b{
+    display: block !important;
+    font-size: 15.5px !important;
+    font-weight: 700 !important;
+    color: var(--text) !important;
+    margin-bottom: 5px !important;
+  }
+
+  @media (max-width: 900px){
+    #page-help .help-layout{ grid-template-columns: 1fr !important; gap: 14px !important; }
+    #page-help .help-sidebar{
+      position: sticky !important;
+      top: 70px !important;
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 6px !important;
+      padding: 8px !important;
+      max-height: none !important;
+      overflow: visible !important;
+      order: -1 !important;
+      z-index: 20 !important;
+    }
+    #page-help .help-sidebar .hs-title{ display: none !important; }
+    #page-help .help-sidebar a{
+      padding: 6px 11px !important;
+      margin-bottom: 0 !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 999px !important;
+      background: #fafcf5 !important;
+      font-size: 12.5px !important;
+    }
+    #page-help .help-sidebar a .hs-dot{ display: none !important; }
+  }
+/* ============ 通知铃铛与面板 ============ */
+.notif-btn{
+  position:relative;
+  width:34px;height:34px;
+  border-radius:50%;
+  border:1px solid rgba(132,204,22,.25);
+  background:rgba(247,250,240,.9);
+  color:var(--primary-dark);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:.18s;
+  padding:0;
+  flex:0 0 auto;
+}
+.notif-btn:hover{
+  background:var(--primary-soft);
+  border-color:var(--primary);
+  transform:translateY(-1px);
+  box-shadow:0 4px 10px -4px rgba(77,124,15,.5);
+}
+.notif-btn.open{
+  background:linear-gradient(135deg,var(--lime),var(--primary));
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 6px 14px -6px rgba(77,124,15,.6);
+}
+.notif-btn svg{width:16px;height:16px;}
+.notif-dot{
+  position:absolute;
+  top:-3px;right:-3px;
+  min-width:16px;height:16px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  line-height:16px;
+  text-align:center;
+  padding:0 4px;
+  box-shadow:0 2px 6px rgba(220,38,38,.45);
+  animation:notifPulse 2s ease-in-out infinite;
+}
+@keyframes notifPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.12);}
+}
+
+.notif-panel{
+  position:fixed;
+  top:80px;right:20px;
+  width:380px;
+  max-height:520px;
+  background:#fff;
+  border:1px solid rgba(132,204,22,.22);
+  border-radius:16px;
+  box-shadow:0 24px 60px -16px rgba(26,46,5,.32), 0 2px 6px rgba(77,124,15,.08);
+  z-index:200;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  animation:notifIn .22s cubic-bezier(.2,.9,.3,1.2) both;
+}
+.notif-panel.show{display:flex;}
+@keyframes notifIn{
+  from{opacity:0;transform:translateY(-8px) scale(.96);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.notif-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 18px;
+  border-bottom:1px solid rgba(132,204,22,.16);
+  background:linear-gradient(180deg,#fbfdf6,#fff);
+}
+.notif-head-left{display:flex;align-items:center;gap:9px;}
+.notif-head-left svg{width:16px;height:16px;color:var(--primary-dark);}
+.notif-head h3{margin:0;font-size:15px;font-weight:700;color:var(--text);}
+.notif-clear{
+  border:none;background:none;
+  font-size:12.5px;color:var(--muted);
+  cursor:pointer;padding:4px 8px;border-radius:6px;
+  transition:.15s;font-weight:600;
+}
+.notif-clear:hover{background:var(--primary-soft);color:var(--primary-dark);}
+.notif-list{
+  flex:1;overflow-y:auto;
+  padding:6px 8px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.notif-item{
+  position:relative;
+  padding:12px 14px 12px 30px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.15s;
+  border:1px solid transparent;
+  background:#fff;
+}
+.notif-item:hover{background:#fbfdf6;border-color:rgba(132,204,22,.18);}
+.notif-item::before{
+  content:"";
+  position:absolute;
+  left:14px;top:18px;
+  width:8px;height:8px;border-radius:50%;
+  background:#d1d5db;
+  transition:.18s;
+}
+.notif-item.unread{background:rgba(236,252,203,.45);}
+.notif-item.unread::before{
+  background:linear-gradient(135deg,var(--lime),var(--primary));
+  box-shadow:0 0 0 3px rgba(132,204,22,.25);
+}
+.notif-item.type-info::before{background:#3b82f6;}
+.notif-item.type-success::before{background:linear-gradient(135deg,#a3e635,#4d7c0f);}
+.notif-item.type-warning::before{background:#f59e0b;}
+.notif-item.type-important::before{background:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.2);}
+.notif-item.unread.type-info::before{box-shadow:0 0 0 3px rgba(59,130,246,.2);}
+.notif-item.unread.type-warning::before{box-shadow:0 0 0 3px rgba(245,158,11,.2);}
+
+.notif-item-title{
+  font-size:14px;font-weight:700;color:var(--text);
+  margin:0 0 4px;
+  line-height:1.4;
+}
+.notif-item-content{
+  font-size:13px;color:#4b5563;
+  line-height:1.65;
+  margin:0 0 6px;
+  word-break:break-word;
+}
+.notif-item-time{
+  font-size:11px;color:#9ca3af;
+  font-variant-numeric:tabular-nums;
+}
+.notif-empty{
+  padding:44px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13.5px;
+}
+.notif-empty svg{
+  width:40px;height:40px;
+  margin:0 auto 12px;display:block;
+  color:var(--primary);
+  opacity:.55;
+}
+.notif-foot{
+  padding:10px 18px;
+  border-top:1px solid rgba(132,204,22,.14);
+  background:#fbfdf6;
+  text-align:center;
+}
+.notif-hint{font-size:11.5px;color:#9ca3af;}
+
+@media (max-width:520px){
+  .notif-panel{
+    top:auto !important;
+    left:10px !important;
+    right:10px !important;
+    width:auto !important;
+    max-height:70vh;
+  }
+}
+</style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <div class="logo" data-page="home">岁窦工具箱</div>
+    <div class="logo" data-page="home">
+      <img src="images/slogo.png" alt="岁窦工具箱">
+      <span>岁窦工具箱</span>
+    </div>
     <span id="homeDate" style="font-size:13px;color:var(--muted);white-space:nowrap;"></span>
     <nav>
       <button data-page="home" class="active">首页</button>
@@ -23,6 +984,12 @@
     </div>
     <div id="userBox">
       <span class="mode-badge local" id="modeBadge">本地模式</span>
+      <button class="notif-btn" id="notifBtn" type="button" aria-label="通知">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg><span class="notif-dot" id="notifDot" style="display:none;">0</span>
+      </button>
       <img id="userAvatar" alt="">
       <span class="user-email" id="userEmail" style="display:none;"></span>
       <button class="btn small" id="loginBtn">登录</button>
@@ -30,15 +997,63 @@
     </div>
   </div>
 </header>
+<!-- ==================== 通知面板 ==================== -->
+<div class="notif-panel" id="notifPanel" role="dialog" aria-label="通知面板">
+  <div class="notif-head">
+    <div class="notif-head-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+      <h3>通知</h3>
+    </div>
+    <button class="notif-clear" id="notifClearAll" type="button">全部标为已读</button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+  <div class="notif-foot">
+    <span class="notif-hint">显示最近 30 条 · 未读会高亮</span>
+  </div>
+</div>
 
 <main>
 
   <!-- ==================== 首页 ==================== -->
   <section id="page-home" class="page active">
     <div class="hero">
-      <h1 style="color:#fff;">岁窦工具箱 · V2.3.2 铂金版</h1>
-      <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次新增时间戳转换、二维码生成、图片压缩、体感温度四款工具。</p>
+      <h1 style="color:#fff;">岁窦工具箱 · V3.0 焕新版</h1>
+      <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次焕新以青柠绿为主题，界面全面升级，焕然一新。</p>
     </div>
+    <!-- ---------- 公告：编者的话 ---------- -->
+    <details class="notice-box" id="editorNotice">
+      <summary class="notice-summary">
+        <span class="notice-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11l18-8v18L3 13v-2z"/>
+            <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+          </svg>
+        </span>
+        <span class="notice-text">
+          <b>编者的话</b>
+          <i>岁窦工作室 · 点击展开阅读</i>
+        </span>
+        <span class="notice-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </span>
+      </summary>
+      <div class="notice-body">
+        <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
+        <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
+        <p>V3.0 焕新版做了两件事。一是把整套界面从铂金金属灰换成青柠绿主题：顶栏、按钮、卡片、表单、图标底色全部焕然一新；计算器、时钟、代码编辑器这三处深色区改成深墨绿，与主题呼应；同时保留图表、词云、章节类型、风险条等数据色的独立性，确保数据依然一眼可辨。二是新增两款工具：健康与运动分类加入了「冥想练习」，AI 与开发分类加入了「JSON 格式化 / 校验」，前者帮你在忙碌中放松身心，后者帮开发者更顺手地处理数据。</p>
+        <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
+        <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
+        <div class="notice-sign">
+          <p>2026 年 10 月</p>
+          <p>岁窦工具箱 · V3.0 焕新版</p>
+        </div>
+      </div>
+    </details>
 
     <!-- ---------- 热门应用 ---------- -->
     <h2 class="section-title" id="hotTitle">热门应用</h2>
@@ -53,6 +1068,11 @@
       <div class="hot-card" data-target="exercise" data-keywords="运动 记录 健身 跑步 消耗 卡路里 热量 锻炼 计划">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg></div>
         <div><h3>运动记录</h3><p>计划 / 记录运动，AI 估算热量，可导 Word / 图片</p></div>
+      </div>
+
+      <div class="hot-card" data-target="meditation" data-keywords="冥想 呼吸 放松 减压 助眠 4-7-8 箱式呼吸 正念">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div><h3>冥想练习</h3><p>4-7-8 等呼吸节奏，圆形随节律缩放，附提示音</p></div>
       </div>
 
       <div class="hot-card" data-target="novel" data-keywords="小说 助手 管理 章节 封面 字数 统计 导出 角色 时间线">
@@ -82,216 +1102,7 @@
 
     </div>
 
-    <!-- ---------- 版本更迭（三个版本 + V2.3.2 说明） ---------- -->
-    <h2 class="section-title" id="upgradeTitle" style="margin-top:34px;">版本更迭</h2>
-    <div class="panel">
 
-      <!-- 版本路径 -->
-      <div class="version-line" style="margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-        <span class="version-label">V2.1</span>
-        <span class="version-val" style="color:#9ca3af;font-size:15px;">正式版</span>
-        <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-        <span class="version-label">V2.2.1</span>
-        <span class="version-val" style="color:#9ca3af;font-size:15px;">黄金版</span>
-        <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-        <span class="version-label">V2.3</span>
-        <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
-        <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-        <span class="version-label">V2.3.1</span>
-        <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
-        <span style="color:var(--platinum);font-weight:800;font-size:16px;">→</span>
-        <span class="version-label">当前</span>
-        <span class="version-val">V2.3.2 铂金版</span>
-      </div>
-
-            <!-- ======= V2.3.2 铂金版 · 功能扩充与体验优化（当前） ======= -->
-      <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
-        V2.3.2 铂金版 · 功能扩充与体验优化
-      </h3>
-      <div class="upgrade-grid" style="margin-bottom:26px;">
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">追加</span><b>菜谱收藏工具</b></div>
-          <p>「收藏与记录」分类新增菜谱收藏工具。支持录入菜名、分类、难度、食材清单和制作步骤，可上传成品图（自动压缩），方便随手记录和查找家常菜谱。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>图片压缩工具</b></div>
-          <p>「创作工坊」分类新增图片压缩工具，纯浏览器本地处理，支持调节压缩质量、目标文件大小，原图与压缩后并排预览对比，支持 JPG / WebP / PNG 格式输出。</p>
-        </div>
-          <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>时间戳转换</b></div>
-          <p>「时间与生活」分类新增时间戳工具，支持时间戳与日期双向互转、秒/毫秒自动识别、多时区切换、多格式输出，并附时间差计算。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>二维码工具</b></div>
-          <p>我们上线了二维码生成工具，支持文字、网站、电话号码等多功能，支持导出、修改。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>体感温度与运动风险</b></div>
-          <p>「健康与运动」分类新增体感温度工具，结合气温、湿度、风速自动切换酷热指数/风寒指数模型，评估户外运动风险等级，给出对应补水与防护建议。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">优化</span><b>风险条动态指示</b></div>
-          <p>体感温度风险条新增指示箭头，根据计算结果自动滑动到对应风险等级，带平滑过渡动画，风险等级直观可视。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">修复</span><b>本地模式兼容性</b></div>
-          <p>修复多个工具在本地文件协议（file://）下的渲染异常、跨域报错、Canvas 导出失败等问题，核心功能离线可用。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">细节</span><b>交互体验打磨</b></div>
-          <p>统一各工具上传区域视觉样式，修复元素错位问题；优化表单焦点反馈、按钮过渡动画，全局交互手感更统一。</p>
-        </div>
-      </div>
-
-      <!-- ======= 版本四：V2.3.1 结构调整======= -->
-      <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
-        V2.3.1 铂金版 · 结构重整（无新功能）
-      </h3>
-      <div class="upgrade-grid" style="margin-bottom:26px;">
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">分类</span><b>六大分类重新归位</b></div>
-          <p>从原来的「健康 / 统计与计算 / 收藏 / 创作」四类，重组为「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六类，每个工具都归到用户心智中最自然的位置。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">调整</span><b>鞋码迁入健康与运动</b></div>
-          <p>「数学计算 → 鞋码计算」整体迁入「健康管理」，作为 BMI、睡眠、生命体征之外的第四个身体数据子工具，避免与数学计算混在一起。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">拆分</span><b>AI 助手只留聊天</b></div>
-          <p>原「AI 助手」下的 6 个子工具，除「聊天」保留外，其余全部拆出：时间线、起名器、对话生成器、随机灵感、灵感速记独立成页，归入「创作工坊」。它们内部仍可调用 AI，但入口不再挂在 AI 助手下面。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">独立</span><b>时间线 / 随机灵感 / 灵感速记成页</b></div>
-          <p>这三个工具本身不依赖 AI 也能用（时间线纯本地、随机灵感本地+AI、灵感速记纯本地），独立成页后，用户想用哪个就直接进哪个，不用再先点 AI 助手。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">归位</span><b>人物印象表迁入创作工坊</b></div>
-          <p>人物印象表原本在「收藏」里，但它本质是创作素材，与小说助手、对话生成器是天生一对。迁入创作工坊后，与起名器、对话生成器并排。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">独立</span><b>时间与生活独立成类</b></div>
-          <p>「时钟工具 / 我的记账本 / 我的日历」从「统计与计算」和「收藏」中迁出，组成新的「时间与生活」分类，与它们的实际用途一致。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">收拢</span><b>文章分析归入创作工坊</b></div>
-          <p>「文章分析」本质是写作辅助，从「统计与计算」迁入「创作工坊」，与小说助手、灵感速记一起，构成写作全流程工具链。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">同步</span><b>版本号与面包屑同步</b></div>
-          <p>全站版本号统一为 V2.3.2，各工具页顶部面包屑的「全部工具」快捷入口按新分类顺序排列，切工具更方便。</p>
-        </div>
-      </div>
-
-      <!-- ======= 版本三：V2.3 铂金版（历史） ======= -->
-      <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-        V2.3 铂金版 · 健康主题 + 金属质感（历史版本）
-      </h3>
-      <div class="upgrade-grid" style="margin-bottom:26px;">
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">配色</span><b>全局换装铂金主题</b></div>
-          <p>整套界面从原来的蓝色系改为铂金金属灰（<code>#737b84</code> 主色），按钮、图标底、标签、进度条、渐变卡统一为铂金质感。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>健康管理</b></div>
-          <p>把原「数学计算 → BMI 计算」整体迁入「健康管理」，并新增「睡眠记录」与「生命体征」两大模块。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>睡眠记录</b></div>
-          <p>录入入睡 / 起床时间自动算时长，绘制近 30 天睡眠曲线，支持导出 PNG。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>生命体征 + AI 分析</b></div>
-          <p>可录入心率、血糖、血压，系统自动做基础健康判定，并可把记录整体交给 AI 输出趋势解读。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>运动记录</b></div>
-          <p>支持「计划」与「已记录」两种状态，运动类型 8 选 1；填入个人信息后 AI 可估算热量消耗，可导出 Word 与 PNG。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>鞋码计算</b></div>
-          <p>「数学计算」内新增鞋码计算模块，输入脚长与年龄给出多国鞋码参考值与完整对照表。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>工具页面包屑导航</b></div>
-          <p>每个工具页顶部新增统一的面包屑，含「全部工具」快捷入口。</p>
-        </div>
-      </div>
-
-      <!-- ======= 版本二：V2.2.1 黄金版 ======= -->
-      <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#b48a4a;"></span>
-        V2.2.1 黄金版 · 结构收敛与功能扩充
-      </h3>
-      <div class="upgrade-grid" style="margin-bottom:26px;">
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">布局</span><b>导航精简为四入口</b></div>
-          <p>导航栏只保留「首页 / 应用 / 帮助 / 设置」；原「AI 助手」不再单独占一个入口，统一并入「应用」中心。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">首页</span><b>聚焦热门应用与编者的话</b></div>
-          <p>首页仅保留热门应用卡片与编者的话；分类导航与完整工具列表全部移出首页。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">应用</span><b>分类 + 全部应用</b></div>
-          <p>「应用」页从上到下依次为「分类」与「全部应用」，全部应用默认展开，顶部搜索框会自动跳转到本页并筛选结果。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">功能</span><b>计算器升级为数学计算</b></div>
-          <p>原「计算器」改名「数学计算」，拆为计算器（普通 / 专家）、单位换算、BMI 计算三个独立模块。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>单位换算</b></div>
-          <p>覆盖 8 大类常用单位，一键交换换算方向；温度单独按摄氏 / 华氏 / 开尔文处理。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">新增</span><b>BMI 计算</b></div>
-          <p>输入身高体重（支持 cm / m、kg / 斤 / 磅），按中国成人标准给出偏瘦 / 正常 / 偏胖 / 肥胖分级与理想体重区间。</p>
-        </div>
-      </div>
-
-      <!-- ======= 版本一：V2.1 正式版 ======= -->
-      <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-        V2.1 正式版 · 奠定基础
-      </h3>
-      <div class="upgrade-grid">
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">框架</span><b>单页应用骨架</b></div>
-          <p>确定「首页 / 应用 / 帮助 / 设置」四大导航入口，单文件单页应用结构，所有工具共用一套 CSS 变量与卡片体系。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">核心</span><b>常用工具落地</b></div>
-          <p>文章分析、计算器、统计图、时钟、记事本、人物印象表、歌曲 / 地点 / 影视收藏、我的日历、代码编辑器、畅想画布等工具首次成型。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">数据</span><b>本地存储 + JSON 备份</b></div>
-          <p>所有数据写入浏览器 localStorage，设置页可导出 / 导入完整 JSON 备份。</p>
-        </div>
-        <div class="upgrade-item">
-          <div class="up-head"><span class="up-badge">账号</span><b>Supabase 登录与云同步</b></div>
-          <p>接入 Supabase Auth 与数据库，登录后可把本地数据上传到云端，多设备登录同一账号可拉取。</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---------- 编者的话 ---------- -->
-    <div class="editor-note">
-      <h1 class="editor-title">编 者 的 话</h1>
-      <div class="editor-body">
-        <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
-        <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
-        <p>V2.3.1 没有加新功能，只是把工具的分类重新梳理了一遍：AI 助手里不再堆杂物，创作相关工具收进「创作工坊」，日历 / 时钟 / 记账独立成「时间与生活」，鞋码回归健康类。V2.3.2 补充了四款实用工具：时间与生活新增时间戳转换，计算与数据新增二维码生成，创作工坊新增图片压缩，健康与运动新增体感温度与运动风险。同时重构了二维码生成模块，修复了不少细节问题。</p>
-        <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
-        <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
-      </div>
-      <div class="editor-sign">
-        <p>2026 年 10 月</p>
-        <p>岁窦工具箱 · V2.3.2 铂金版</p>
-      </div>
-    </div>
   </section>
 
   <!-- ==================== 应用中心 ==================== -->
@@ -310,6 +1121,7 @@
           <li data-target="health">健康管理</li>
           <li data-target="exercise">运动记录</li>
           <li data-target="heatindex">体感温度</li>
+          <li data-target="meditation">冥想练习</li>
         </ul>
       </div>
 
@@ -368,6 +1180,7 @@
         <ul class="cat-list">
           <li data-target="ai">AI 助手</li>
           <li data-target="code">代码编辑器</li>
+          <li data-target="json">JSON 格式化</li>
         </ul>
       </div>
 
@@ -388,6 +1201,10 @@
       <div class="tool-card" data-target="heatindex" data-keywords="体感温度 酷热指数 风寒 运动风险 气温 湿度 风速 户外 热指数">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="5"/></svg></div>
         <h3>体感温度与运动风险</h3><p>结合温湿度风速计算体感温度，评估户外运动风险与防护建议</p>
+      </div>
+      <div class="tool-card" data-target="meditation" data-keywords="冥想 呼吸 放松 减压 助眠 4-7-8 箱式呼吸 正念">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>冥想练习</h3><p>4-7-8 / 箱式呼吸等多种节奏，圆形跟随放大缩小，附提示音</p>
       </div>
 
       <!-- ② 创作工坊 -->
@@ -432,7 +1249,6 @@
         <h3>图片压缩</h3><p>本地压缩图片体积，可调画质与目标大小，原图/压缩后并排对比</p>
       </div>
 
-
       <!-- ③ 收藏与记录 -->
       <div class="tool-card" data-target="songs" data-keywords="歌曲 音乐 收藏 歌词 音源 QQ音乐 酷我 酷狗 网易云">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
@@ -448,7 +1264,7 @@
       </div>
       <div class="tool-card" data-target="recipe" data-keywords="菜谱 食谱 做饭 烹饪 美食 收藏">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-         <h3>菜谱收藏</h3><p>记录家常菜、甜点的食材与做法</p>
+        <h3>菜谱收藏</h3><p>记录家常菜、甜点的食材与做法</p>
       </div>
 
       <!-- ④ 计算与数据 -->
@@ -492,11 +1308,16 @@
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></div>
         <h3>代码编辑器</h3><p>JavaScript 实时运行预览，Markdown 实时渲染，支持 AI 解释代码</p>
       </div>
+      <div class="tool-card" data-target="json" data-keywords="JSON 格式化 校验 压缩 转义 解析 开发者 工具">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2"/><circle cx="12" cy="12" r="1"/></svg></div>
+        <h3>JSON 格式化</h3><p>格式化 / 压缩 / 转义，语法错误定位到行列，纯本地运行</p>
+      </div>
 
     </div>
     <p id="noResult">没有找到相关工具，换个关键词试试吧～</p>
   </section>
-    <!-- ==================== 帮助中心 ==================== -->
+
+  <!-- ==================== 帮助中心 ==================== -->
   <section id="page-help" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
 
@@ -510,10 +1331,9 @@
       </span>
       帮助中心
     </h2>
-    <p class="page-desc">新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
+    <p class="page-desc">V3.0 焕新版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
 
     <div class="help-layout">
-      <!-- ========== 左侧主内容 ========== -->
       <div class="help-content">
 
         <!-- 快速导航 -->
@@ -567,7 +1387,7 @@
           </h3>
           <div class="help-step">
             <span class="help-step-num">1</span>
-            <div class="help-step-body"><b>找到你要的工具</b>首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。V2.3.1 起，工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列，每个工具都归到最自然的位置。</div>
+            <div class="help-step-body"><b>找到你要的工具</b>首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列，每个工具都归到最自然的位置。V3.0 起，全站以青柠绿为主题色，并新增「冥想练习」与「JSON 格式化」两款工具。</div>
           </div>
           <div class="help-step">
             <span class="help-step-num">2</span>
@@ -597,6 +1417,19 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.2a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.1 1-1.1 1.8v.3"/><path d="M12 17.2h.01"/></svg>
             常见问题
           </h3>
+
+          <details class="faq-item" open>
+            <summary>V3.0 焕新版相比 V2.3.2 改了什么？</summary>
+            <div class="faq-body">
+              <p><b>V3.0 主要做了两件事</b>：一是界面全面焕新，二是新增两款实用工具。</p>
+              <p><b>界面方面</b>：① 全站主题色从铂金金属灰换成青柠绿（<code>#84cc16</code>）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。</p>
+              <p>同时，<b>所有数据展示色保持不变</b>：统计图、词云、小说章节类型分布、BMI 分段、体感温度风险条、生命体征状态、音乐平台品牌色等，依然是原来的多色方案，确保数据一眼可辨。</p>
+              <p><b>新增工具方面</b>：</p>
+              <p>① 「健康与运动」分类新增<b>冥想练习</b>：内置 4-7-8 呼吸、箱式呼吸、等长呼吸、深度放松四种节奏，圆形随呼吸节律放大缩小，附呼吸提示音与循环计数，纯本地运行。</p>
+              <p>② 「AI 与开发」分类新增<b>JSON 格式化 / 校验</b>：支持 2/4 空格格式化、一键压缩、转义 / 去转义；语法错误会定位到具体行列，输入时实时校验。纯本地运行，不上传数据。</p>
+              <p>原有数据、操作方式、其他工具入口均无变化，无需迁移。</p>
+            </div>
+          </details>
 
           <details class="faq-item">
             <summary>数据保存在哪里？会不会丢？</summary>
@@ -664,7 +1497,7 @@
           </details>
 
           <details class="faq-item">
-            <summary>V2.3.1 相比 V2.3 改了什么？</summary>
+            <summary>V2.3.1 相比 V2.3 改了什么？（历史版本）</summary>
             <div class="faq-body">
               <p><b>只调整了工具的分类归属，没有新增或删除任何功能。</b></p>
               <p>分类从四类重组为六类：① 健康与运动、② 创作工坊、③ 收藏与记录、④ 计算与数据、⑤ 时间与生活、⑥ AI 与开发。</p>
@@ -673,7 +1506,7 @@
             </div>
           </details>
           <details class="faq-item">
-            <summary>V2.3.2 相比 V2.3.1 改了什么？</summary>
+            <summary>V2.3.2 相比 V2.3.1 改了什么？（历史版本）</summary>
             <div class="faq-body">
               <p>V2.3.2 新增了四款工具：<b>时间戳转换</b>（时间与生活）、<b>二维码生成</b>（计算与数据）、<b>图片压缩</b>（创作工坊）、<b>体感温度与运动风险</b>（健康与运动）。</p>
               <p>同时优化了二维码模块，修复了本地文件协议下的导出兼容性。</p>
@@ -726,7 +1559,7 @@
           <details class="faq-item">
             <summary>「起名器 / 对话生成器 / 时间线 / 灵感速记」为什么不在 AI 助手里了？</summary>
             <div class="faq-body">
-              <p>因为它们的本质是<b>创作工具</b>，只是部分功能借助 AI 实现。V2.3.1 起它们归入「创作工坊」，与小说助手、人物印象表并列，入口更直观。</p>
+              <p>因为它们的本质是<b>创作工具</b>，只是部分功能借助 AI 实现。从 V2.3.1 起它们归入「创作工坊」，与小说助手、人物印象表并列，入口更直观。</p>
               <p>其中时间线和灵感速记<b>完全不依赖 AI</b>，本地即可使用；起名器和对话生成器需要登录后才能调用 AI。</p>
             </div>
           </details>
@@ -789,6 +1622,8 @@
           <div class="help-tip-grid">
             <div class="help-tip"><b>健康管理</b>共四个子模块：BMI 计算、鞋码计算、睡眠记录、生命体征。BMI 支持 cm / m 与 kg / 斤 / 磅；鞋码区分成人码与童码；睡眠记录自动处理跨夜；心率 / 血糖 / 血压会按参考范围自动标注正常、偏高或偏低。</div>
             <div class="help-tip"><b>运动记录</b>先填好性别、年龄、身高、体重，再添加运动。运动状态可选「计划」或「已记录」；填入运动类型、时长、强度后，勾选「AI 辅助估算」可得到热量消耗参考值。</div>
+            <div class="help-tip"><b>体感温度</b>结合温湿度风速计算体感温度，自动切换酷热/风寒模型，给出户外运动风险与建议。</div>
+            <div class="help-tip"><b>冥想练习</b>四种呼吸节奏可选：4-7-8 助眠放松、箱式呼吸专注前稳定、等长呼吸最易上手、深度放松适合睡前。圆形随呼吸节律放大缩小，可开 / 关提示音。</div>
             <div class="help-tip"><b>数学计算</b>包含计算器（普通 / 专家模式）与单位换算（长度 / 重量 / 面积 / 体积 / 温度 / 时间 / 速度 / 数据存储）两个模块。BMI 与鞋码已迁至健康管理。</div>
             <div class="help-tip"><b>文章分析</b>字数统计按字符计算，中文、英文字母、数字、标点分别归类；词频分析的中文按双字组切分，可在结果上方切换是否过滤常见停用词。</div>
             <div class="help-tip"><b>小说助手</b>先在列表页新建一本小说，进入后左侧添加章节、右侧编辑正文；章节可标记「前言 / 正文 / 番外 / 附录 / 后记 / 作者的话」，图表会按类型统计字数，支持导出 TXT 与 HTML。</div>
@@ -803,9 +1638,7 @@
             <div class="help-tip"><b>畅想画布</b>支持鼠标与触屏书写，导出的是 1400 × 900 高清 PNG；清空之后仍然可以点「撤销」找回。</div>
             <div class="help-tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>
             <div class="help-tip"><b>图片压缩</b>本地浏览器压缩，支持质量滑块、目标大小、格式切换，原图与压缩后并排对比体积。</div>
-            <div class="help-tip"><b>体感温度</b>结合温湿度风速计算体感温度，自动切换酷热/风寒模型，给出户外运动风险与建议。</div>
-            <div class="help-tip"><b>时间戳转换</b>支持秒/毫秒自动识别、多时区、ISO/RFC/中文多格式输出；时间差子页可计算两个时间戳或日期的差距。</div>
-            <div class="help-tip"><b>二维码生成</b>文本 / 网址 / 电话 / WiFi 四类内容，参数可调，支持导出 PNG 与 SVG；SVG 为矢量图放大不糊。</div>
+            <div class="help-tip"><b>JSON 格式化</b>格式化 / 压缩 / 转义，语法错误定位到行列；Ctrl / ⌘ + Enter 一键格式化。</div>
           </div>
         </div>
 
@@ -835,7 +1668,7 @@
               <span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span> 发送消息
             </div>
           </div>
-                    <div class="help-key-row">
+          <div class="help-key-row">
             <div class="help-key-label">随机灵感</div>
             <div class="help-key-desc">
               关键词输入框中按 <span class="kbd">Enter</span> 直接触发生成
@@ -845,6 +1678,12 @@
             <div class="help-key-label">时间戳转换</div>
             <div class="help-key-desc">
               输入框中按 <span class="kbd">Enter</span> 直接触发转换
+            </div>
+          </div>
+          <div class="help-key-row">
+            <div class="help-key-label">JSON 格式化</div>
+            <div class="help-key-desc">
+              <span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span> 一键格式化（2 空格缩进）
             </div>
           </div>
         </div>
@@ -889,7 +1728,7 @@
           </div>
           <div class="help-info-row">
             <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <div class="help-info-body"><b>版本</b>：V2.3.2 铂金版（2026.10）</div>
+            <div class="help-info-body"><b>版本</b>：V3.0 焕新版（2026.10）</div>
           </div>
         </div>
 
@@ -899,7 +1738,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
             下载帮助文档
           </h3>
-          <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。</p>
+          <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V3.0 焕新版。</p>
           <div class="help-dl-actions">
             <button type="button" class="btn" data-help-dl="html">下载 HTML 帮助文档</button>
             <button type="button" class="btn ghost" data-help-dl="docx">下载 Word（docx）</button>
@@ -909,7 +1748,6 @@
 
       </div><!-- /.help-content -->
 
-      <!-- ========== 右侧目录 ========== -->
       <aside class="help-sidebar" id="helpSidebar">
         <div class="hs-title">本页目录</div>
         <a href="#help-start" data-target="help-start"><span class="hs-dot"></span>快速开始</a>
@@ -921,8 +1759,6 @@
         <a href="#help-download" data-target="help-download"><span class="hs-dot"></span>下载帮助文档</a>
       </aside>
     </div><!-- /.help-layout -->
-
-    
   </section>
 
   <!-- ==================== 设置 ==================== -->
@@ -971,10 +1807,191 @@
 
     <div class="panel">
       <h3 class="panel-head">关于</h3>
+
       <div class="version-line">
-        <span class="version-label">版本号</span>
-        <span class="version-val">V2.3.2 铂金版（2026.10）</span>
+        <span class="version-label">当前版本</span>
+        <span class="version-val">V3.0 焕新版（2026.10）</span>
       </div>
+
+      <details class="sub" id="versionHistory" style="margin-top:18px;margin-bottom:0;">
+        <summary>查看完整版本更迭（V2.1 → V3.0）</summary>
+        <div class="inner">
+
+          <!-- 版本路径 -->
+          <div class="version-line" style="margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+            <span class="version-label">V2.1</span>
+            <span class="version-val" style="color:#9ca3af;font-size:15px;">正式版</span>
+            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+            <span class="version-label">V2.2.1</span>
+            <span class="version-val" style="color:#9ca3af;font-size:15px;">黄金版</span>
+            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+            <span class="version-label">V2.3</span>
+            <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
+            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+            <span class="version-label">V2.3.1</span>
+            <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
+            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+            <span class="version-label">V2.3.2</span>
+            <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
+            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+            <span class="version-label">当前</span>
+            <span class="version-val">V3.0 焕新版</span>
+          </div>
+
+          <!-- ======= V3.0 焕新版 ======= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
+            V3.0 焕新版 · 青柠绿主题全面焕新
+          </h3>
+          <div class="upgrade-grid" style="margin-bottom:26px;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">配色</span><b>全局换装青柠绿主题</b></div>
+              <p>整套界面从铂金金属灰改为青柠绿（<code>#84cc16</code> 主色），顶栏、按钮、卡片悬停、标签、进度条、渐变卡统一为青柠质感。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">首页</span><b>Hero 换成青柠渐变</b></div>
+              <p>首页大标题区从灰渐变改为绿渐变（浅青柠 → 青柠 → 深绿），右上角新增一层柔光晕，页面第一眼就充满生机。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">卡片</span><b>工具卡悬停细节打磨</b></div>
+              <p>工具卡悬停时顶部出现一条青柠渐变细线，图标底色从浅青柠变为实心青柠 + 白色图标；热门卡悬停时右下角浮出淡青柠光晕。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">深色区</span><b>计算器 / 时钟 / 代码编辑器</b></div>
+              <p>这三处的深色底统一改成深墨绿（<code>#1a2e05</code>），文字与代码色改用淡青柠，既保持对深色底的对比，又与整体主题一致。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">数据</span><b>数据颜色保持独立</b></div>
+              <p>统计图、词云、小说章节类型、BMI 分段、体感温度风险条、生命体征状态、音乐平台标识等数据色全部保留原样，确保数据依然一眼可辨。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">细节</span><b>表单 / 标签 / 面包屑统一</b></div>
+              <p>输入框 focus 光圈改为青柠绿，子标签激活态改为实心青柠，面包屑「全部工具」快捷入口激活态同步换色，全站交互手感一致。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>冥想练习</b></div>
+              <p>「健康与运动」分类新增冥想练习工具。内置 4-7-8 呼吸、箱式呼吸、等长呼吸、深度放松四种节奏，圆形随呼吸节律放大缩小，附呼吸提示音与循环计数，纯本地运行。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>JSON 格式化 / 校验</b></div>
+              <p>「AI 与开发」分类新增 JSON 工具。支持 2/4 空格格式化、一键压缩、转义 / 去转义；语法错误会定位到具体行列，输入时实时校验。纯本地运行，不上传数据。</p>
+            </div>
+          </div>
+
+          <!-- ======= V2.3.2 铂金版 ======= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+            V2.3.2 铂金版 · 功能扩充与体验优化
+          </h3>
+          <div class="upgrade-grid" style="margin-bottom:26px;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">追加</span><b>菜谱收藏工具</b></div>
+              <p>「收藏与记录」分类新增菜谱收藏工具。支持录入菜名、分类、难度、食材清单和制作步骤，可上传成品图（自动压缩），方便随手记录和查找家常菜谱。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>图片压缩工具</b></div>
+              <p>「创作工坊」分类新增图片压缩工具，纯浏览器本地处理，支持调节压缩质量、目标文件大小，原图与压缩后并排预览对比，支持 JPG / WebP / PNG 格式输出。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>时间戳转换</b></div>
+              <p>「时间与生活」分类新增时间戳工具，支持时间戳与日期双向互转、秒/毫秒自动识别、多时区切换、多格式输出，并附时间差计算。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>二维码工具</b></div>
+              <p>我们上线了二维码生成工具，支持文字、网站、电话号码等多功能，支持导出、修改。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>体感温度与运动风险</b></div>
+              <p>「健康与运动」分类新增体感温度工具，结合气温、湿度、风速自动切换酷热指数/风寒指数模型，评估户外运动风险等级，给出对应补水与防护建议。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">优化</span><b>风险条动态指示</b></div>
+              <p>体感温度风险条新增指示箭头，根据计算结果自动滑动到对应风险等级，带平滑过渡动画，风险等级直观可视。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">修复</span><b>本地模式兼容性</b></div>
+              <p>修复多个工具在本地文件协议（file://）下的渲染异常、跨域报错、Canvas 导出失败等问题，核心功能离线可用。</p>
+            </div>
+          </div>
+
+          <!-- ======= V2.3.1 结构调整 ======= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+            V2.3.1 铂金版 · 结构重整（无新功能）
+          </h3>
+          <div class="upgrade-grid" style="margin-bottom:26px;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">分类</span><b>六大分类重新归位</b></div>
+              <p>从原来的「健康 / 统计与计算 / 收藏 / 创作」四类，重组为「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六类。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">调整</span><b>鞋码迁入健康与运动</b></div>
+              <p>「数学计算 → 鞋码计算」整体迁入「健康管理」，作为 BMI、睡眠、生命体征之外的第四个身体数据子工具。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">拆分</span><b>AI 助手只留聊天</b></div>
+              <p>原「AI 助手」下的 6 个子工具，除「聊天」保留外，其余全部拆出，归入「创作工坊」。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">独立</span><b>时间与生活独立成类</b></div>
+              <p>「时钟工具 / 我的记账本 / 我的日历」从其他分类迁出，组成新的「时间与生活」分类。</p>
+            </div>
+          </div>
+
+          <!-- ======= V2.3 铂金版 ======= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+            V2.3 铂金版 · 健康主题 + 金属质感（历史版本）
+          </h3>
+          <div class="upgrade-grid" style="margin-bottom:26px;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">配色</span><b>全局换装铂金主题</b></div>
+              <p>整套界面从原来的蓝色系改为铂金金属灰，按钮、图标底、标签、进度条统一为铂金质感。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>健康管理</b></div>
+              <p>把原「数学计算 → BMI 计算」整体迁入「健康管理」，并新增「睡眠记录」与「生命体征」两大模块。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>运动记录</b></div>
+              <p>支持「计划」与「已记录」两种状态，运动类型 8 选 1；填入个人信息后 AI 可估算热量消耗。</p>
+            </div>
+          </div>
+
+          <!-- ======= V2.2.1 黄金版 ======= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#b48a4a;"></span>
+            V2.2.1 黄金版 · 结构收敛与功能扩充
+          </h3>
+          <div class="upgrade-grid" style="margin-bottom:26px;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">布局</span><b>导航精简为四入口</b></div>
+              <p>导航栏只保留「首页 / 应用 / 帮助 / 设置」；原「AI 助手」不再单独占一个入口，统一并入「应用」中心。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">功能</span><b>计算器升级为数学计算</b></div>
+              <p>原「计算器」改名「数学计算」，拆为计算器（普通 / 专家）、单位换算、BMI 计算三个独立模块。</p>
+            </div>
+          </div>
+
+          <!-- ======= V2.1 正式版 ======= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+            V2.1 正式版 · 奠定基础
+          </h3>
+          <div class="upgrade-grid" style="margin-bottom:0;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">框架</span><b>单页应用骨架</b></div>
+              <p>确定「首页 / 应用 / 帮助 / 设置」四大导航入口，所有工具共用一套 CSS 变量与卡片体系。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">核心</span><b>常用工具落地</b></div>
+              <p>文章分析、计算器、统计图、时钟、记事本、人物印象表、歌曲 / 地点 / 影视收藏等工具首次成型。</p>
+            </div>
+          </div>
+
+        </div>
+      </details>
     </div>
   </section>
 
@@ -995,7 +2012,6 @@
       </button>
     </div>
 
-    <!-- 字数统计 -->
     <div class="ta-subpage active" data-ta-page="wordcount">
       <div class="panel">
         <textarea id="wcText" placeholder="在此粘贴文章内容…"></textarea>
@@ -1020,7 +2036,6 @@
       </div>
     </div>
 
-    <!-- 词频分析 -->
     <div class="ta-subpage" data-ta-page="wordfreq">
       <div class="panel">
         <textarea id="wfText" placeholder="在此粘贴文章内容，自动分析高频词…"></textarea>
@@ -1104,7 +2119,7 @@
     <div class="ld-list" id="ldList"></div>
   </section>
 
-  <!-- ==================== 数学计算（已移除鞋码，仅计算器 + 单位换算） ==================== -->
+  <!-- ==================== 数学计算 ==================== -->
   <section id="page-calc" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></span>数学计算</h2>
@@ -1121,7 +2136,6 @@
       </button>
     </div>
 
-    <!-- 计算器 -->
     <div class="ta-subpage active" data-mc-page="calc">
       <div class="panel calc-box">
         <div class="calc-display" id="calcDisplay">0</div>
@@ -1163,7 +2177,6 @@
       </div>
     </div>
 
-    <!-- 单位换算 -->
     <div class="ta-subpage" data-mc-page="unit">
       <div class="panel">
         <h3 class="panel-head">单位换算</h3>
@@ -1201,7 +2214,8 @@
       </div>
     </div>
   </section>
-    <!-- ==================== 常见统计图生成 ==================== -->
+
+  <!-- ==================== 常见统计图生成 ==================== -->
   <section id="page-chart" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>常见统计图生成</h2>
@@ -1419,59 +2433,59 @@
     </div>
     <div class="media-grid" id="mediaList"></div>
   </section>
-<!-- ==================== 菜谱收藏 ==================== -->
-<section id="page-recipe" class="page">
-  <button class="back-btn" data-back>← 返回首页</button>
-  <h2 class="page-title">
-    <span class="page-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-    </span>
-    菜谱收藏
-  </h2>
-  <p class="page-desc">记录你喜欢的菜谱，支持上传成品图、分类、食材和做法。</p>
 
-  <!-- 录入表单 -->
-  <div class="panel">
-    <div class="form-grid">
-      <label class="field"><span>菜名 *</span><input type="text" id="rcName" placeholder="如：番茄炒蛋"></label>
-      <label class="field"><span>分类</span>
-        <select id="rcType">
-          <option value="家常菜">家常菜</option>
-          <option value="早餐">早餐</option>
-          <option value="甜点">甜点</option>
-          <option value="饮品">饮品</option>
-          <option value="汤羹">汤羹</option>
-        </select>
-      </label>
-      <label class="field"><span>难度</span>
-        <select id="rcLevel">
-          <option value="简单">简单</option>
-          <option value="中等">中等</option>
-          <option value="困难">困难</option>
-        </select>
-      </label>
-      <label class="field"><span>标签（逗号分隔）</span><input type="text" id="rcTags" placeholder="如：酸甜,快手,下饭"></label>
-    </div>
-    <div class="field"><span>食材清单</span><textarea id="rcIngredients" rows="2" placeholder="如：番茄2个，鸡蛋3个，盐适量..."></textarea></div>
-    <div class="field"><span>制作步骤</span><textarea id="rcSteps" rows="4" placeholder="1. 鸡蛋打散...&#10;2. 番茄切块..."></textarea></div>
-    <div class="field">
-      <span>成品图（选填，会自动压缩）</span>
-      <div class="upload-row">
-        <input type="file" id="rcImg" accept="image/*">
-        <div class="preview" id="rcPreview">未选择</div>
+  <!-- ==================== 菜谱收藏 ==================== -->
+  <section id="page-recipe" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </span>
+      菜谱收藏
+    </h2>
+    <p class="page-desc">记录你喜欢的菜谱，支持上传成品图、分类、食材和做法。</p>
+
+    <div class="panel">
+      <div class="form-grid">
+        <label class="field"><span>菜名 *</span><input type="text" id="rcName" placeholder="如：番茄炒蛋"></label>
+        <label class="field"><span>分类</span>
+          <select id="rcType">
+            <option value="家常菜">家常菜</option>
+            <option value="早餐">早餐</option>
+            <option value="甜点">甜点</option>
+            <option value="饮品">饮品</option>
+            <option value="汤羹">汤羹</option>
+          </select>
+        </label>
+        <label class="field"><span>难度</span>
+          <select id="rcLevel">
+            <option value="简单">简单</option>
+            <option value="中等">中等</option>
+            <option value="困难">困难</option>
+          </select>
+        </label>
+        <label class="field"><span>标签（逗号分隔）</span><input type="text" id="rcTags" placeholder="如：酸甜,快手,下饭"></label>
       </div>
+      <div class="field"><span>食材清单</span><textarea id="rcIngredients" rows="2" placeholder="如：番茄2个，鸡蛋3个，盐适量..."></textarea></div>
+      <div class="field"><span>制作步骤</span><textarea id="rcSteps" rows="4" placeholder="1. 鸡蛋打散...&#10;2. 番茄切块..."></textarea></div>
+      <div class="field">
+        <span>成品图（选填，会自动压缩）</span>
+        <div class="upload-row">
+          <input type="file" id="rcImg" accept="image/*">
+          <div class="preview" id="rcPreview">未选择</div>
+        </div>
+      </div>
+      <button class="btn" id="rcAdd">＋ 添加菜谱</button>
+      <button class="btn ghost" id="rcReset">重置表单</button>
     </div>
-    <button class="btn" id="rcAdd">＋ 添加菜谱</button>
-    <button class="btn ghost" id="rcReset">重置表单</button>
-  </div>
 
-  <!-- 列表展示 -->
-  <div class="list-head">
-    <h2>菜谱列表（<span id="rcCount">0</span>）</h2>
-    <button class="btn ghost small" id="rcClearAll">清空全部</button>
-  </div>
-  <div class="places-grid" id="recipeList"></div> <!-- 复用 places-grid 的样式 -->
-</section>
+    <div class="list-head">
+      <h2>菜谱列表（<span id="rcCount">0</span>）</h2>
+      <button class="btn ghost small" id="rcClearAll">清空全部</button>
+    </div>
+    <div class="places-grid" id="recipeList"></div>
+  </section>
+
   <!-- ==================== 我的日历 ==================== -->
   <section id="page-calendar" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
@@ -1505,7 +2519,8 @@
       </div>
     </div>
   </section>
-    <!-- ==================== 时间戳转换 ==================== -->
+
+  <!-- ==================== 时间戳转换 ==================== -->
   <section id="page-timestamp" class="page">
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></span>
@@ -1513,7 +2528,6 @@
     </h2>
     <p class="page-desc">Unix 时间戳与日期时间互转，支持秒/毫秒自动识别、多时区、多格式；另附时间差计算。</p>
 
-    <!-- 实时当前时间戳 -->
     <div class="ts-now-bar">
       <div class="ts-now-left">
         <span class="ts-now-label">当前 Unix 时间戳</span>
@@ -1533,14 +2547,12 @@
       </div>
     </div>
 
-    <!-- 子标签 -->
     <div class="ta-subtabs">
       <button class="ta-subtab active" data-ts="to-date">时间戳 → 日期</button>
       <button class="ta-subtab" data-ts="to-ts">日期 → 时间戳</button>
       <button class="ta-subtab" data-ts="diff">时间差计算</button>
     </div>
 
-    <!-- 时间戳 → 日期 -->
     <div class="ta-subpage active" data-ts-page="to-date">
       <div class="panel">
         <h3 class="panel-head">输入时间戳</h3>
@@ -1558,7 +2570,6 @@
       </div>
     </div>
 
-    <!-- 日期 → 时间戳 -->
     <div class="ta-subpage" data-ts-page="to-ts">
       <div class="panel">
         <h3 class="panel-head">输入日期时间</h3>
@@ -1589,7 +2600,6 @@
       </div>
     </div>
 
-    <!-- 时间差计算 -->
     <div class="ta-subpage" data-ts-page="diff">
       <div class="panel">
         <h3 class="panel-head">输入两个时间</h3>
@@ -1617,146 +2627,137 @@
       </div>
     </div>
   </section>
-    <!-- ==================== 二维码生成 ==================== -->
-<section id="page-qrcode" class="page">
-  <h2 class="page-title">
-    <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-7M17 17h.01"/></svg></span>
-    二维码生成
-  </h2>
-  <p class="page-desc">把文本、网址、电话、WiFi 密码转成二维码。参数可调、可嵌 Logo，支持导出 PNG 与 SVG。</p>
-  <div class="qr-layout">
-    <!-- ========== 左侧：配置 ========== -->
-    <div class="qr-left">
-      <!-- 内容类型标签 -->
-      <div class="panel">
-        <h3 class="panel-head">内容</h3>
-        <div class="ta-subtabs" id="qrTabs">
-          <button class="ta-subtab active" data-qr="text">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
-            纯文本
-          </button>
-          <button class="ta-subtab" data-qr="url">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>
-            网址
-          </button>
-          <button class="ta-subtab" data-qr="tel">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            电话
-          </button>
-          <button class="ta-subtab" data-qr="wifi">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><path d="M12 20h.01"/></svg>
-            WiFi
-          </button>
-        </div>
 
-        <!-- 纯文本面板 -->
-        <div class="ta-subpage active" data-qr-page="text">
-          <div class="field">
-            <span>文本内容</span>
-            <textarea id="qrTextInput" rows="4" placeholder="输入任意文本，如：你好，岁窦工具箱！"></textarea>
+  <!-- ==================== 二维码生成 ==================== -->
+  <section id="page-qrcode" class="page">
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-7M17 17h.01"/></svg></span>
+      二维码生成
+    </h2>
+    <p class="page-desc">把文本、网址、电话、WiFi 密码转成二维码。参数可调、可嵌 Logo，支持导出 PNG 与 SVG。</p>
+    <div class="qr-layout">
+      <div class="qr-left">
+        <div class="panel">
+          <h3 class="panel-head">内容</h3>
+          <div class="ta-subtabs" id="qrTabs">
+            <button class="ta-subtab active" data-qr="text">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
+              纯文本
+            </button>
+            <button class="ta-subtab" data-qr="url">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>
+              网址
+            </button>
+            <button class="ta-subtab" data-qr="tel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              电话
+            </button>
+            <button class="ta-subtab" data-qr="wifi">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><path d="M12 20h.01"/></svg>
+              WiFi
+            </button>
           </div>
-        </div>
 
-        <!-- 网址面板 -->
-        <div class="ta-subpage" data-qr-page="url">
-          <div class="field">
-            <span>网址 URL</span>
-            <input type="text" id="qrUrlInput" placeholder="如：www.example.com 或 https://…">
-            <span class="field-hint">未填协议时会自动补 https://</span>
-          </div>
-        </div>
-
-        <!-- 电话面板 -->
-        <div class="ta-subpage" data-qr-page="tel">
-          <div class="field">
-            <span>电话号码</span>
-            <input type="text" id="qrTelInput" placeholder="如：1380013800">
-            <span class="field-hint">扫码后手机会弹出拨号界面</span>
-          </div>
-        </div>
-
-        <!-- WiFi面板 -->
-        <div class="ta-subpage" data-qr-page="wifi">
-          <div class="qr-wifi-field field">
-            <span>网络名称（SSID）*</span>
-            <input type="text" id="qrWifiSsid" placeholder="如：MyHome_5G">
-          </div>
-          <div class="qr-wifi-field field">
-            <span>密码</span>
-            <input type="text" id="qrWifiPwd" placeholder="无密码可留空">
-          </div>
-          <div class="qr-wifi-field field">
-            <span>加密方式</span>
-            <select id="qrWifiEnc">
-              <option value="WPA">WPA / WPA2 / WPA3（常见）</option>
-              <option value="WEP">WEP（老式）</option>
-              <option value="nopass">无密码（开放网络）</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- 参数面板 -->
-      <div class="panel">
-        <h3 class="panel-head">参数</h3>
-        <div class="form-grid">
-          <label class="field">
-            <span>尺寸（px）</span>
-            <input type="text" id="qrSize" value="320" placeholder="100 - 2000">
-            <span class="field-hint">仅影响 PNG / 预览，SVG 为矢量无损</span>
-          </label>
-          <label class="field">
-            <span>纠错等级</span>
-            <select id="qrLevel">
-              <option value="L">L（7%，最省空间）</option>
-              <option value="M" selected>M（15%，推荐）</option>
-              <option value="Q">Q（25%）</option>
-              <option value="H">H（30%，带 Logo 时推荐）</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>留白边距（模块数）</span>
-            <input type="text" id="qrMargin" value="2" placeholder="0 - 10">
-            <span class="field-hint">四周空白，扫码更稳</span>
-          </label>
-          <div class="field">
-            <span>中心 Logo（选填）</span>
-            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-              <div class="qr-logo-preview" id="qrLogoPreview">未选择</div>
-              <input type="file" id="qrLogoInput" accept="image/*" style="font-size:13px;">
-              <button class="btn ghost small" id="qrLogoClear" type="button">清除</button>
+          <div class="ta-subpage active" data-qr-page="text">
+            <div class="field">
+              <span>文本内容</span>
+              <textarea id="qrTextInput" rows="4" placeholder="输入任意文本，如：你好，岁窦工具箱！"></textarea>
             </div>
-            <span class="field-hint">纠错等级越高越抗损，H 等级约 30% 冗余</span>
+          </div>
+
+          <div class="ta-subpage" data-qr-page="url">
+            <div class="field">
+              <span>网址 URL</span>
+              <input type="text" id="qrUrlInput" placeholder="如：www.example.com 或 https://…">
+              <span class="field-hint">未填协议时会自动补 https://</span>
+            </div>
+          </div>
+
+          <div class="ta-subpage" data-qr-page="tel">
+            <div class="field">
+              <span>电话号码</span>
+              <input type="text" id="qrTelInput" placeholder="如：1380013800">
+              <span class="field-hint">扫码后手机会弹出拨号界面</span>
+            </div>
+          </div>
+
+          <div class="ta-subpage" data-qr-page="wifi">
+            <div class="qr-wifi-field field">
+              <span>网络名称（SSID）*</span>
+              <input type="text" id="qrWifiSsid" placeholder="如：MyHome_5G">
+            </div>
+            <div class="qr-wifi-field field">
+              <span>密码</span>
+              <input type="text" id="qrWifiPwd" placeholder="无密码可留空">
+            </div>
+            <div class="qr-wifi-field field">
+              <span>加密方式</span>
+              <select id="qrWifiEnc">
+                <option value="WPA">WPA / WPA2 / WPA3（常见）</option>
+                <option value="WEP">WEP（老式）</option>
+                <option value="nopass">无密码（开放网络）</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-head">参数</h3>
+          <div class="form-grid">
+            <label class="field">
+              <span>尺寸（px）</span>
+              <input type="text" id="qrSize" value="320" placeholder="100 - 2000">
+              <span class="field-hint">仅影响 PNG / 预览，SVG 为矢量无损</span>
+            </label>
+            <label class="field">
+              <span>纠错等级</span>
+              <select id="qrLevel">
+                <option value="L">L（7%，最省空间）</option>
+                <option value="M" selected>M（15%，推荐）</option>
+                <option value="Q">Q（25%）</option>
+                <option value="H">H（30%，带 Logo 时推荐）</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>留白边距（模块数）</span>
+              <input type="text" id="qrMargin" value="2" placeholder="0 - 10">
+              <span class="field-hint">四周空白，扫码更稳</span>
+            </label>
+            <div class="field">
+              <span>中心 Logo（选填）</span>
+              <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+                <div class="qr-logo-preview" id="qrLogoPreview">未选择</div>
+                <input type="file" id="qrLogoInput" accept="image/*" style="font-size:13px;">
+                <button class="btn ghost small" id="qrLogoClear" type="button">清除</button>
+              </div>
+              <span class="field-hint">纠错等级越高越抗损，H 等级约 30% 冗余</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-head">导出</h3>
+          <div class="qr-actions">
+            <button class="btn" id="qrDownloadPng">下载 PNG</button>
+            <button class="btn ghost" id="qrDownloadSvg">下载 SVG</button>
+            <button class="btn ghost small" id="qrCopyPayload">复制编码内容</button>
           </div>
         </div>
       </div>
 
-      <!-- 导出按钮 -->
-      <div class="panel">
-        <h3 class="panel-head">导出</h3>
-        <div class="qr-actions">
-          <button class="btn" id="qrDownloadPng">下载 PNG</button>
-          <button class="btn ghost" id="qrDownloadSvg">下载 SVG</button>
-          <button class="btn ghost small" id="qrCopyPayload">复制编码内容</button>
+      <div class="qr-right">
+        <div class="panel qr-preview-panel">
+          <h3 class="panel-head">预览</h3>
+          <div class="qr-preview-wrap" id="qrPreviewWrap">
+            <canvas id="qrCanvas" width="320" height="320"></canvas>
+          </div>
+          <p class="qr-preview-hint" id="qrPreviewHint">输入内容后自动生成</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- ========== 右侧：预览 ========== -->
-    <div class="qr-right">
-      <div class="panel qr-preview-panel">
-        <h3 class="panel-head">预览</h3>
-        <div class="qr-preview-wrap" id="qrPreviewWrap">
-          <canvas id="qrCanvas" width="320" height="320"></canvas>
-        </div>
-        <p class="qr-preview-hint" id="qrPreviewHint">输入内容后自动生成</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-    <!-- ==================== 健康管理（V2.3.1 含鞋码） ==================== -->
+  <!-- ==================== 健康管理 ==================== -->
   <section id="page-health" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title">
@@ -1784,7 +2785,6 @@
       </button>
     </div>
 
-    <!-- ---------- BMI 计算 ---------- -->
     <div class="ta-subpage active" data-hl-page="bmi">
       <div class="panel">
         <h3 class="panel-head">BMI 计算</h3>
@@ -1820,7 +2820,6 @@
       </div>
     </div>
 
-    <!-- ---------- 鞋码计算（V2.3.1 从数学计算迁入） ---------- -->
     <div class="ta-subpage" data-hl-page="shoe">
       <div class="panel">
         <h3 class="panel-head">鞋码计算</h3>
@@ -1887,7 +2886,6 @@
       </div>
     </div>
 
-    <!-- ---------- 睡眠记录 ---------- -->
     <div class="ta-subpage" data-hl-page="sleep">
       <div class="panel">
         <h3 class="panel-head">添加睡眠记录</h3>
@@ -1927,7 +2925,6 @@
       <div class="vital-list" id="slpList"></div>
     </div>
 
-    <!-- ---------- 生命体征 ---------- -->
     <div class="ta-subpage" data-hl-page="vital">
       <div class="panel">
         <h3 class="panel-head">记录生命体征</h3>
@@ -2072,82 +3069,134 @@
     <div class="exer-grid" id="exerList"></div>
   </section>
 
-<!-- ==================== 体感温度与运动风险 ==================== -->
-<section id="page-heatindex" class="page">
-  <button class="back-btn" data-back>← 返回首页</button>
-  <h2 class="page-title">
-    <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="5"/></svg></span>
-    体感温度与运动风险
-  </h2>
-  <p class="page-desc">结合气温、相对湿度与风速计算体感温度，评估户外运动的舒适程度与风险等级，给出补水、防护建议。</p>
+  <!-- ==================== 冥想练习 ==================== -->
+  <section id="page-meditation" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg></span>
+      冥想练习
+    </h2>
+    <p class="page-desc">跟随呼吸节奏放松身心。圆形会随呼吸节律放大缩小，附提示音，适合睡前、焦虑、专注前使用。纯本地运行。</p>
 
-  <div class="panel">
-    <h3 class="panel-head">环境参数</h3>
-    <p class="heat-form-note">高温采用酷热指数（Heat Index）、低温采用风寒指数，自动切换计算模型</p>
-    <div class="form-grid">
-      <label class="field">
-        <span>气温（℃）*</span>
-        <input type="text" id="heatTemp" value="25" placeholder="如：28">
-      </label>
-      <label class="field">
-        <span>相对湿度（%）*</span>
-        <input type="text" id="heatHumidity" value="60" placeholder="如：65">
-      </label>
-      <label class="field">
-        <span>风速（m/s）</span>
-        <input type="text" id="heatWind" value="2" placeholder="无风填0">
-        <span class="field-hint">可留空，默认 2m/s</span>
-      </label>
-      <label class="field">
-        <span>运动强度</span>
-        <select id="heatIntensity">
-          <option value="light">低强度（散步、拉伸）</option>
-          <option value="moderate" selected>中等强度（慢跑、骑行）</option>
-          <option value="high">高强度（冲刺、大重量）</option>
-        </select>
-      </label>
-    </div>
-    <button class="btn" id="heatCalcBtn">计算体感与风险</button>
-    <button class="btn ghost small" id="heatResetBtn" style="margin-left:8px;">重置</button>
-  </div>
-
-  <!-- 结果卡片 -->
-  <div class="heat-result-box" id="heatResultBox">
-    <div class="heat-res-label">体感温度</div>
-    <div class="heat-res-value" id="heatFeelsLike">—</div>
-    <div class="heat-res-tag" id="heatRiskTag">请输入参数后计算</div>
-  </div>
-
-  <!-- 风险条与建议 -->
-  <div class="panel" style="margin-top:16px;">
-    <h3 class="panel-head">风险评估与建议</h3>
-        <div class="heat-risk-bar-wrap">
-      <div class="heat-risk-arrow" id="heatRiskArrow"></div>
-      <div class="heat-risk-bar">
-        <div class="heat-risk-seg cold" title="严寒冻伤风险"></div>
-        <div class="heat-risk-seg ok" title="舒适适宜"></div>
-        <div class="heat-risk-seg low" title="轻度风险"></div>
-        <div class="heat-risk-seg mid" title="中度风险"></div>
-        <div class="heat-risk-seg high" title="高度风险"></div>
-        <div class="heat-risk-seg extreme" title="极高风险"></div>
+    <div class="panel">
+      <h3 class="panel-head">选择呼吸节奏</h3>
+      <div class="med-preset-grid" id="medPresetGrid">
+        <div class="med-preset-chip active" data-med="478">
+          <b>4-7-8 呼吸</b><span>吸气 4s · 屏息 7s · 呼气 8s</span>
+        </div>
+        <div class="med-preset-chip" data-med="box">
+          <b>箱式呼吸</b><span>吸 4 · 屏 4 · 呼 4 · 停 4</span>
+        </div>
+        <div class="med-preset-chip" data-med="equal">
+          <b>等长呼吸</b><span>吸气 4s · 呼气 4s</span>
+        </div>
+        <div class="med-preset-chip" data-med="deep">
+          <b>深度放松</b><span>吸气 5s · 屏息 2s · 呼气 7s</span>
+        </div>
       </div>
     </div>
 
-    <ul class="heat-suggest-list" id="heatSuggestList">
-      <li>输入环境参数后，自动生成对应运动建议</li>
-    </ul>
-  </div>
+    <div class="med-stage" id="medStage">
+      <div class="med-circle" id="medCircle"></div>
+      <div class="med-phase" id="medPhase">准备开始</div>
+      <div class="med-countdown" id="medCountdown">—</div>
+    </div>
 
-  <!-- 说明 -->
-  <div class="panel">
-    <h3 class="panel-head">说明</h3>
-    <p class="tip" style="margin-bottom:0;">
-      本工具结果仅为户外运动参考，实际体感还受日照、着装、个体差异影响。<br>
-      高温高湿环境下请谨慎安排户外运动，如出现头晕、心慌、恶心请立即停止并转移到阴凉处。
-    </p>
-  </div>
-  
-</section>
+    <div class="panel">
+      <div class="med-info-row">
+        <span>已完成循环：<b id="medCycles">0</b> 次</span>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;">
+          <input type="checkbox" id="medSound" checked> 呼吸提示音
+        </label>
+      </div>
+      <div class="clock-actions" style="margin-top:14px;">
+        <button class="btn" id="medStart">开始</button>
+        <button class="btn ghost" id="medPause">暂停</button>
+        <button class="btn ghost" id="medReset">重置</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">说明</h3>
+      <p class="tip" style="margin-bottom:0;">
+        4-7-8 呼吸常用于助眠与放松；箱式呼吸常用于专注前稳定情绪；等长呼吸最易上手，适合初学者。<br>
+        练习时坐直或平躺，用鼻吸气、口呼气，节奏不适时可自行暂停。<b>本工具不构成医疗建议。</b>
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 体感温度与运动风险 ==================== -->
+  <section id="page-heatindex" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="5"/></svg></span>
+      体感温度与运动风险
+    </h2>
+    <p class="page-desc">结合气温、相对湿度与风速计算体感温度，评估户外运动的舒适程度与风险等级，给出补水、防护建议。</p>
+
+    <div class="panel">
+      <h3 class="panel-head">环境参数</h3>
+      <p class="heat-form-note">高温采用酷热指数（Heat Index）、低温采用风寒指数，自动切换计算模型</p>
+      <div class="form-grid">
+        <label class="field">
+          <span>气温（℃）*</span>
+          <input type="text" id="heatTemp" value="25" placeholder="如：28">
+        </label>
+        <label class="field">
+          <span>相对湿度（%）*</span>
+          <input type="text" id="heatHumidity" value="60" placeholder="如：65">
+        </label>
+        <label class="field">
+          <span>风速（m/s）</span>
+          <input type="text" id="heatWind" value="2" placeholder="无风填0">
+          <span class="field-hint">可留空，默认 2m/s</span>
+        </label>
+        <label class="field">
+          <span>运动强度</span>
+          <select id="heatIntensity">
+            <option value="light">低强度（散步、拉伸）</option>
+            <option value="moderate" selected>中等强度（慢跑、骑行）</option>
+            <option value="high">高强度（冲刺、大重量）</option>
+          </select>
+        </label>
+      </div>
+      <button class="btn" id="heatCalcBtn">计算体感与风险</button>
+      <button class="btn ghost small" id="heatResetBtn" style="margin-left:8px;">重置</button>
+    </div>
+
+    <div class="heat-result-box" id="heatResultBox">
+      <div class="heat-res-label">体感温度</div>
+      <div class="heat-res-value" id="heatFeelsLike">—</div>
+      <div class="heat-res-tag" id="heatRiskTag">请输入参数后计算</div>
+    </div>
+
+    <div class="panel" style="margin-top:16px;">
+      <h3 class="panel-head">风险评估与建议</h3>
+      <div class="heat-risk-bar-wrap">
+        <div class="heat-risk-arrow" id="heatRiskArrow"></div>
+        <div class="heat-risk-bar">
+          <div class="heat-risk-seg cold" title="严寒冻伤风险"></div>
+          <div class="heat-risk-seg ok" title="舒适适宜"></div>
+          <div class="heat-risk-seg low" title="轻度风险"></div>
+          <div class="heat-risk-seg mid" title="中度风险"></div>
+          <div class="heat-risk-seg high" title="高度风险"></div>
+          <div class="heat-risk-seg extreme" title="极高风险"></div>
+        </div>
+      </div>
+
+      <ul class="heat-suggest-list" id="heatSuggestList">
+        <li>输入环境参数后，自动生成对应运动建议</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">说明</h3>
+      <p class="tip" style="margin-bottom:0;">
+        本工具结果仅为户外运动参考，实际体感还受日照、着装、个体差异影响。<br>
+        高温高湿环境下请谨慎安排户外运动，如出现头晕、心慌、恶心请立即停止并转移到阴凉处。
+      </p>
+    </div>
+  </section>
 
   <!-- ==================== 代码编辑器 ==================== -->
   <section id="page-code" class="page">
@@ -2172,6 +3221,53 @@
         <div class="code-preview-wrap"><iframe id="codePreview" title="预览" sandbox="allow-scripts allow-modals allow-forms allow-popups"></iframe></div>
       </div>
       <p class="code-hint" id="codeHint">提示：停止输入约 0.7 秒后会自动运行，也可以点击「运行 / 渲染」，或按 Ctrl / ⌘ + Enter。</p>
+    </div>
+  </section>
+
+  <!-- ==================== JSON 格式化 / 校验 ==================== -->
+  <section id="page-json" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2"/><circle cx="12" cy="12" r="1"/></svg></span>
+      JSON 格式化 / 校验
+    </h2>
+    <p class="page-desc">粘贴 JSON，一键格式化或压缩；语法错误会定位到具体行列并给出提示。纯本地运行，不上传任何数据。</p>
+
+    <div class="panel">
+      <div class="json-toolbar">
+        <div class="json-actions-left">
+          <button class="btn small" id="jsonFormat2">格式化（2 空格）</button>
+          <button class="btn ghost small" id="jsonFormat4">格式化（4 空格）</button>
+          <button class="btn ghost small" id="jsonMinify">压缩一行</button>
+          <button class="btn ghost small" id="jsonEscape">转义</button>
+          <button class="btn ghost small" id="jsonUnescape">去转义</button>
+        </div>
+        <div class="json-actions-right">
+          <button class="btn ghost small" id="jsonCopy">复制结果</button>
+          <button class="btn ghost small" id="jsonClear">清空</button>
+        </div>
+      </div>
+
+      <div class="json-status" id="jsonStatus">等待输入…</div>
+
+      <div class="json-split">
+        <div class="field" style="margin:0;">
+          <span>输入</span>
+          <textarea id="jsonInput" spellcheck="false" placeholder='如：{"name":"岁窦工具箱","version":"V3.0","tools":["冥想练习","JSON 格式化"]}'></textarea>
+        </div>
+        <div class="field" style="margin:0;">
+          <span>输出</span>
+          <textarea id="jsonOutput" spellcheck="false" readonly placeholder="结果显示在这里…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">说明</h3>
+      <p class="tip" style="margin-bottom:0;">
+        支持标准 JSON 解析；如果输入了非法 JSON，会在顶部提示错误类型和所在行列。<br>
+        「转义 / 去转义」用于把 JSON 字符串当作纯文本嵌入到其他 JSON 或代码中。
+      </p>
     </div>
   </section>
 
@@ -2204,95 +3300,89 @@
     </div>
   </section>
 
-<!-- ==================== 图片压缩 ==================== -->
-<section id="page-imagecompress" class="page">
-  <button class="back-btn" data-back>← 返回首页</button>
-  <h2 class="page-title">
-    <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M21 15l-5-5-4 4-3-3-4 4"/><circle cx="9" cy="9" r="2"/></svg></span>
-    图片压缩
-  </h2>
-  <p class="page-desc">浏览器本地压缩图片体积，支持调节画质、目标大小，原图与压缩后并排预览对比。纯本地处理，图片不上传服务器。</p>
+  <!-- ==================== 图片压缩 ==================== -->
+  <section id="page-imagecompress" class="page">
+    <button class="back-btn" data-back>← 返回首页</button>
+    <h2 class="page-title">
+      <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M21 15l-5-5-4 4-3-3-4 4"/><circle cx="9" cy="9" r="2"/></svg></span>
+      图片压缩
+    </h2>
+    <p class="page-desc">浏览器本地压缩图片体积，支持调节画质、目标大小，原图与压缩后并排预览对比。纯本地处理，图片不上传服务器。</p>
 
-  <!-- 上传区域 -->
-  <div class="panel">
-    <label class="compress-upload-area" for="compressFileInput">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      <p><b>点击选择图片</b> 或拖拽到此处</p>
-      <p style="font-size:12px;margin-top:4px;">支持 JPG / PNG / WebP，单张处理</p>
-    </label>
-    <input type="file" id="compressFileInput" accept="image/*">
-  </div>
-
-  <!-- 参数设置 -->
-  <div class="panel">
-    <h3 class="panel-head">压缩参数</h3>
-    <div class="compress-param-row">
-      <label class="field">
-        <span>压缩质量</span>
-        <div class="compress-range-row">
-          <input type="range" id="compressQuality" min="1" max="100" value="80">
-          <span id="compressQualityVal">80%</span>
-        </div>
-        <span class="field-hint">数值越高画质越好、体积越大</span>
-      </label>
-      <label class="field">
-        <span>目标文件大小（KB，选填）</span>
-        <input type="text" id="compressTargetSize" placeholder="如：200">
-        <span class="field-hint">填写后自动调整质量逼近目标大小</span>
-      </label>
-      <label class="field">
-        <span>输出格式</span>
-        <select id="compressFormat">
-          <option value="image/jpeg">JPEG（推荐）</option>
-          <option value="image/webp">WebP（体积更小）</option>
-          <option value="image/png">PNG（无损不推荐）</option>
-        </select>
-      </label>
-    </div>
-    <div class="row-between">
-      <span style="font-size:13px;color:var(--muted);">提示：PNG 透明图压缩效果有限；目标大小为近似值</span>
-      <button class="btn ghost small" id="compressResetBtn">重置参数</button>
-    </div>
-  </div>
-
-  <!-- 预览对比 -->
-  <div class="compress-layout">
-    <!-- 原图 -->
     <div class="panel">
-      <div class="compress-preview-card">
-        <div class="compress-preview-title"><b>原图</b><span id="originalSize">—</span></div>
-        <div class="compress-img-box" id="originalBox">
-          <span style="color:#b0b6c4;font-size:13px;">选择图片后显示</span>
+      <label class="compress-upload-area" for="compressFileInput">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><b>点击选择图片</b> 或拖拽到此处</p>
+        <p style="font-size:12px;margin-top:4px;">支持 JPG / PNG / WebP，单张处理</p>
+      </label>
+      <input type="file" id="compressFileInput" accept="image/*">
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">压缩参数</h3>
+      <div class="compress-param-row">
+        <label class="field">
+          <span>压缩质量</span>
+          <div class="compress-range-row">
+            <input type="range" id="compressQuality" min="1" max="100" value="80">
+            <span id="compressQualityVal">80%</span>
+          </div>
+          <span class="field-hint">数值越高画质越好、体积越大</span>
+        </label>
+        <label class="field">
+          <span>目标文件大小（KB，选填）</span>
+          <input type="text" id="compressTargetSize" placeholder="如：200">
+          <span class="field-hint">填写后自动调整质量逼近目标大小</span>
+        </label>
+        <label class="field">
+          <span>输出格式</span>
+          <select id="compressFormat">
+            <option value="image/jpeg">JPEG（推荐）</option>
+            <option value="image/webp">WebP（体积更小）</option>
+            <option value="image/png">PNG（无损不推荐）</option>
+          </select>
+        </label>
+      </div>
+      <div class="row-between">
+        <span style="font-size:13px;color:var(--muted);">提示：PNG 透明图压缩效果有限；目标大小为近似值</span>
+        <button class="btn ghost small" id="compressResetBtn">重置参数</button>
+      </div>
+    </div>
+
+    <div class="compress-layout">
+      <div class="panel">
+        <div class="compress-preview-card">
+          <div class="compress-preview-title"><b>原图</b><span id="originalSize">—</span></div>
+          <div class="compress-img-box" id="originalBox">
+            <span style="color:#b0b6c4;font-size:13px;">选择图片后显示</span>
+          </div>
+          <div class="compress-info-bar">
+            <span>尺寸：<b id="originalDim">—</b></span>
+            <span>格式：<b id="originalFormat">—</b></span>
+          </div>
         </div>
-        <div class="compress-info-bar">
-          <span>尺寸：<b id="originalDim">—</b></span>
-          <span>格式：<b id="originalFormat">—</b></span>
+      </div>
+      <div class="panel">
+        <div class="compress-preview-card">
+          <div class="compress-preview-title"><b>压缩后</b><span id="compressedSize">—</span></div>
+          <div class="compress-img-box" id="compressedBox">
+            <span style="color:#b0b6c4;font-size:13px;">压缩后显示</span>
+          </div>
+          <div class="compress-info-bar">
+            <span>尺寸：<b id="compressedDim">—</b></span>
+            <span class="compress-rate" id="compressRate">—</span>
+          </div>
         </div>
       </div>
     </div>
-    <!-- 压缩后 -->
-    <div class="panel">
-      <div class="compress-preview-card">
-        <div class="compress-preview-title"><b>压缩后</b><span id="compressedSize">—</span></div>
-        <div class="compress-img-box" id="compressedBox">
-          <span style="color:#b0b6c4;font-size:13px;">压缩后显示</span>
-        </div>
-        <div class="compress-info-bar">
-          <span>尺寸：<b id="compressedDim">—</b></span>
-          <span class="compress-rate" id="compressRate">—</span>
-        </div>
+
+    <div class="panel" style="margin-top:16px;">
+      <div class="row-between" style="margin-top:0;">
+        <span style="font-size:13px;color:var(--muted);">压缩完成后点击下载保存到本地</span>
+        <button class="btn" id="compressDownloadBtn" disabled>下载压缩图片</button>
       </div>
     </div>
-  </div>
-
-  <!-- 下载按钮 -->
-  <div class="panel" style="margin-top:16px;">
-    <div class="row-between" style="margin-top:0;">
-      <span style="font-size:13px;color:var(--muted);">压缩完成后点击下载保存到本地</span>
-      <button class="btn" id="compressDownloadBtn" disabled>下载压缩图片</button>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- ==================== 登录 ==================== -->
   <section id="page-login" class="page">
@@ -2338,7 +3428,8 @@
       </div>
     </div>
   </section>
-    <!-- ==================== AI 助手（仅保留聊天） ==================== -->
+
+  <!-- ==================== AI 助手 ==================== -->
   <section id="page-ai" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>AI 助手</h2>
@@ -2361,7 +3452,7 @@
     </div>
   </section>
 
-  <!-- ==================== 时间线（独立页） ==================== -->
+  <!-- ==================== 时间线 ==================== -->
   <section id="page-timeline" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg></span>时间线</h2>
@@ -2382,7 +3473,7 @@
     </div>
   </section>
 
-  <!-- ==================== 起名器（独立页） ==================== -->
+  <!-- ==================== 起名器 ==================== -->
   <section id="page-namer" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg></span>起名器</h2>
@@ -2407,7 +3498,7 @@
     </div>
   </section>
 
-  <!-- ==================== 对话生成器（独立页） ==================== -->
+  <!-- ==================== 对话生成器 ==================== -->
   <section id="page-dialogue" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></span>对话生成器</h2>
@@ -2427,7 +3518,7 @@
     </div>
   </section>
 
-  <!-- ==================== 随机灵感（独立页） ==================== -->
+  <!-- ==================== 随机灵感 ==================== -->
   <section id="page-random" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg></span>随机灵感</h2>
@@ -2449,7 +3540,7 @@
     </div>
   </section>
 
-  <!-- ==================== 灵感速记（独立页） ==================== -->
+  <!-- ==================== 灵感速记 ==================== -->
   <section id="page-notes" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>灵感速记</h2>
@@ -2575,7 +3666,7 @@
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V2.3.2 铂金版</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V3.0 焕新版</footer>
 </main>
 
 <!-- ==================== 弹窗：歌词 ==================== -->

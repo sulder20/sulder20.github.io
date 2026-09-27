@@ -105,12 +105,28 @@ searchInput.addEventListener('input', () => {
   const q = searchInput.value.trim().toLowerCase();
   const isSearching = !!q;
   let any = false;
+
   document.querySelectorAll('#page-apps .tool-card').forEach(card => {
     const hay = ((card.dataset.keywords || '') + ' ' + card.textContent).toLowerCase();
     const show = !q || hay.includes(q);
     card.style.display = show ? '' : 'none';
     if (show) any = true;
   });
+
+  // 处理拼音分组标题：所在组全部隐藏时，标题也隐藏
+  document.querySelectorAll('#page-apps .pinyin-head').forEach(head => {
+    let next = head.nextElementSibling;
+    let groupHasVisible = false;
+    while (next && !next.classList.contains('pinyin-head')) {
+      if (next.classList.contains('tool-card') && next.style.display !== 'none') {
+        groupHasVisible = true;
+        break;
+      }
+      next = next.nextElementSibling;
+    }
+    head.style.display = (isSearching && !groupHasVisible) ? 'none' : '';
+  });
+
   const toggle = (id, show) => { const el = document.getElementById(id); if (el) el.style.display = show ? '' : 'none'; };
   toggle('appsCategoryTitle', !isSearching);
   toggle('categorySection',   !isSearching);
@@ -5485,6 +5501,7 @@ const TOOL_REGISTRY = [
   { id: 'health',       name: '健康管理' },
   { id: 'exercise',     name: '运动记录' },
   { id: 'heatindex',    name: '体感温度' },
+  { id: 'meditation',   name: '冥想练习' },
   /* ② 创作工坊 */
   { id: 'novel',        name: '小说助手' },
   { id: 'textanalysis', name: '文章分析' },
@@ -5512,7 +5529,8 @@ const TOOL_REGISTRY = [
   { id: 'timestamp',    name: '时间戳转换' },
   /* ⑥ AI 与开发 */
   { id: 'ai',           name: 'AI 助手' },
-  { id: 'code',         name: '代码编辑器' }
+  { id: 'code',         name: '代码编辑器' },
+  { id: 'json',         name: 'JSON 格式化' }
 ];
 
 const SVG_HOME =
@@ -5577,4 +5595,650 @@ function injectToolCrumbs(){
 
 injectToolCrumbs();
 
+
+/* ============================================================
+   冥想练习
+   ============================================================ */
+(function initMeditation(){
+  'use strict';
+
+  const PRESETS = {
+    '478': {
+      name: '4-7-8 呼吸',
+      phases: [
+        { label: '吸气', sec: 4, scale: 1.00, tone: 523 },
+        { label: '屏息', sec: 7, scale: 1.00, tone: 440 },
+        { label: '呼气', sec: 8, scale: 0.55, tone: 392 }
+      ]
+    },
+    'box': {
+      name: '箱式呼吸',
+      phases: [
+        { label: '吸气', sec: 4, scale: 1.00, tone: 523 },
+        { label: '屏息', sec: 4, scale: 1.00, tone: 440 },
+        { label: '呼气', sec: 4, scale: 0.55, tone: 392 },
+        { label: '停留', sec: 4, scale: 0.55, tone: 349 }
+      ]
+    },
+    'equal': {
+      name: '等长呼吸',
+      phases: [
+        { label: '吸气', sec: 4, scale: 1.00, tone: 523 },
+        { label: '呼气', sec: 4, scale: 0.55, tone: 392 }
+      ]
+    },
+    'deep': {
+      name: '深度放松',
+      phases: [
+        { label: '吸气', sec: 5, scale: 1.00, tone: 523 },
+        { label: '屏息', sec: 2, scale: 1.00, tone: 440 },
+        { label: '呼气', sec: 7, scale: 0.55, tone: 392 }
+      ]
+    }
+  };
+
+  const stageEl     = document.getElementById('medStage');
+  const circleEl    = document.getElementById('medCircle');
+  const phaseEl     = document.getElementById('medPhase');
+  const countdownEl = document.getElementById('medCountdown');
+  const cyclesEl    = document.getElementById('medCycles');
+  const startBtn    = document.getElementById('medStart');
+  const pauseBtn    = document.getElementById('medPause');
+  const resetBtn    = document.getElementById('medReset');
+  const soundEl     = document.getElementById('medSound');
+  const presetGrid  = document.getElementById('medPresetGrid');
+  if (!stageEl || !circleEl) return;
+
+  let currentPreset = '478';
+  let running = false;
+  let paused = false;
+  let phaseIndex = 0;
+  let remaining = 0;
+  let cycles = 0;
+  let timer = null;
+  let audioCtx = null;
+
+  function beep(freq, dur) {
+    if (!soundEl || !soundEl.checked) return;
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const now = audioCtx.currentTime;
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.16, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+      osc.start(now);
+      osc.stop(now + dur + 0.05);
+    } catch(e){}
+  }
+
+  function applyPhase() {
+    const preset = PRESETS[currentPreset];
+    const phase = preset.phases[phaseIndex];
+    phaseEl.textContent = phase.label;
+    countdownEl.textContent = phase.sec;
+
+    // 圆形动画：transition 时长与 phase.sec 一致
+    circleEl.style.transition = 'transform ' + phase.sec + 's ease-in-out';
+    // 让 transition 先生效，再改 scale
+    requestAnimationFrame(() => {
+      circleEl.style.transform = 'scale(' + phase.scale + ')';
+    });
+
+    beep(phase.tone, Math.min(0.25, phase.sec * 0.15));
+    remaining = phase.sec;
+  }
+
+  function nextPhase() {
+    const preset = PRESETS[currentPreset];
+    phaseIndex++;
+    if (phaseIndex >= preset.phases.length) {
+      phaseIndex = 0;
+      cycles++;
+      cyclesEl.textContent = cycles;
+    }
+    applyPhase();
+  }
+
+  function tick() {
+    remaining--;
+    if (remaining <= 0) {
+      nextPhase();
+    } else {
+      countdownEl.textContent = remaining;
+    }
+  }
+
+  function start() {
+    if (running && !paused) return;
+    if (!running) {
+      // 全新开始
+      running = true;
+      paused = false;
+      phaseIndex = 0;
+      cycles = 0;
+      cyclesEl.textContent = 0;
+      stageEl.classList.add('running');
+      applyPhase();
+    } else if (paused) {
+      paused = false;
+    }
+    clearInterval(timer);
+    timer = setInterval(tick, 1000);
+    startBtn.textContent = '进行中…';
+    startBtn.disabled = true;
+    pauseBtn.textContent = '暂停';
+  }
+
+  function pause() {
+    if (!running || paused) return;
+    paused = true;
+    clearInterval(timer);
+    timer = null;
+    // 停下圆形动画，保持当前大小
+    const cs = getComputedStyle(circleEl).transform;
+    circleEl.style.transition = 'none';
+    circleEl.style.transform = cs === 'none' ? 'scale(0.55)' : cs;
+    pauseBtn.textContent = '继续';
+  }
+
+  function reset() {
+    clearInterval(timer);
+    timer = null;
+    running = false;
+    paused = false;
+    phaseIndex = 0;
+    remaining = 0;
+    cycles = 0;
+    cyclesEl.textContent = 0;
+    phaseEl.textContent = '准备开始';
+    countdownEl.textContent = '—';
+    circleEl.style.transition = 'transform .5s ease';
+    circleEl.style.transform = 'scale(0.55)';
+    stageEl.classList.remove('running');
+    startBtn.textContent = '开始';
+    startBtn.disabled = false;
+    pauseBtn.textContent = '暂停';
+  }
+
+  startBtn.addEventListener('click', start);
+  pauseBtn.addEventListener('click', pause);
+  resetBtn.addEventListener('click', reset);
+
+  presetGrid.querySelectorAll('.med-preset-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (running) {
+        if (!confirm('切换呼吸节奏会重置当前进度，继续吗？')) return;
+      }
+      presetGrid.querySelectorAll('.med-preset-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentPreset = chip.dataset.med;
+      reset();
+    });
+  });
+})();
+
+
+/* ============================================================
+   JSON 格式化 / 校验
+   ============================================================ */
+(function initJsonTool(){
+  'use strict';
+
+  const inputEl   = document.getElementById('jsonInput');
+  const outputEl  = document.getElementById('jsonOutput');
+  const statusEl  = document.getElementById('jsonStatus');
+  if (!inputEl || !outputEl) return;
+
+  function setStatus(text, kind, extraHtml) {
+    statusEl.innerHTML = text + (extraHtml || '');
+    statusEl.className = 'json-status' + (kind ? ' ' + kind : '');
+  }
+
+  function locateError(msg, src) {
+    const m = msg.match(/position (\d+)/i);
+    if (!m) return null;
+    const pos = parseInt(m[1], 10);
+    if (!isFinite(pos)) return null;
+    const before = src.slice(0, pos);
+    const lines = before.split('\n');
+    const line = lines.length;
+    const col = lines[lines.length - 1].length + 1;
+    return { pos, line, col };
+  }
+
+  function friendlyError(rawMsg, src) {
+    const loc = locateError(rawMsg, src);
+    let msg = rawMsg.replace(/^JSON\.parse:\s*/i, '');
+    msg = msg.replace(/in JSON at position \d+/i, '').trim();
+    const zhMap = {
+      'Unexpected token': '出现意外字符',
+      'Unexpected end of JSON input': 'JSON 未完整结束',
+      'Unexpected number in JSON': '数字格式异常',
+      'Unexpected string in JSON': '字符串格式异常'
+    };
+    for (const k in zhMap) {
+      if (msg.indexOf(k) === 0) { msg = zhMap[k] + msg.slice(k.length); break; }
+    }
+    return { msg, loc };
+  }
+
+  function parseInput() {
+    const src = inputEl.value;
+    if (!src.trim()) {
+      return { empty: true };
+    }
+    try {
+      const data = JSON.parse(src);
+      return { data };
+    } catch(e) {
+      const info = friendlyError(e.message || String(e), src);
+      return { error: info.msg, loc: info.loc };
+    }
+  }
+
+  function handleResult(rawResult, successHint) {
+    if (rawResult.empty) {
+      setStatus('等待输入…', '');
+      outputEl.value = '';
+      return;
+    }
+    if (rawResult.error) {
+      const locHtml = rawResult.loc
+        ? ' <span class="pos">第 ' + rawResult.loc.line + ' 行</span> <span class="pos">第 ' + rawResult.loc.col + ' 列</span>'
+        : '';
+      setStatus('✗ 语法错误：' + rawResult.error + locHtml, 'err');
+      outputEl.value = '';
+      return;
+    }
+    outputEl.value = rawResult.output;
+    setStatus('✓ ' + (successHint || '处理成功') + '，共 ' + rawResult.output.length + ' 字符', 'ok');
+  }
+
+  function tryFormat(indent) {
+    const r = parseInput();
+    if (r.empty || r.error) { handleResult(r); return; }
+    const out = JSON.stringify(r.data, null, indent);
+    handleResult({ output: out }, '格式化完成（' + indent + ' 空格缩进）');
+  }
+
+  function tryMinify() {
+    const r = parseInput();
+    if (r.empty || r.error) { handleResult(r); return; }
+    const out = JSON.stringify(r.data);
+    handleResult({ output: out }, '已压缩为一行');
+  }
+
+  function tryEscape() {
+    const src = inputEl.value;
+    if (!src) { setStatus('等待输入…', ''); outputEl.value = ''; return; }
+    try {
+      const out = JSON.stringify(src);
+      outputEl.value = out;
+      setStatus('✓ 转义完成（把整段输入当成字符串处理）', 'ok');
+    } catch(e) {
+      setStatus('✗ 转义失败：' + (e.message || e), 'err');
+    }
+  }
+
+  function tryUnescape() {
+    const src = inputEl.value.trim();
+    if (!src) { setStatus('等待输入…', ''); outputEl.value = ''; return; }
+    // 去掉最外层的引号（如果存在）
+    let s = src;
+    if ((s[0] === '"' && s[s.length - 1] === '"') ||
+        (s[0] === '\'' && s[s.length - 1] === '\'')) {
+      s = s.slice(1, -1);
+    }
+    try {
+      const out = JSON.parse('"' + s.replace(/"/g, '\\"') + '"');
+      outputEl.value = out;
+      setStatus('✓ 去转义完成', 'ok');
+    } catch(e) {
+      // 退化为手动替换
+      try {
+        const fallback = s.replace(/\\n/g, '\n').replace(/\\r/g, '\r')
+          .replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+        outputEl.value = fallback;
+        setStatus('✓ 已去转义（使用宽松模式）', 'ok');
+      } catch(err) {
+        setStatus('✗ 去转义失败：' + (e.message || e), 'err');
+      }
+    }
+  }
+
+  function tryCopy() {
+    if (!outputEl.value) { showToast('没有可复制的内容'); return; }
+    navigator.clipboard.writeText(outputEl.value)
+      .then(() => showToast('已复制到剪贴板'))
+      .catch(() => showToast('复制失败，请手动复制'));
+  }
+
+  function tryClear() {
+    inputEl.value = '';
+    outputEl.value = '';
+    setStatus('等待输入…', '');
+    inputEl.focus();
+  }
+
+  document.getElementById('jsonFormat2').addEventListener('click', () => tryFormat(2));
+  document.getElementById('jsonFormat4').addEventListener('click', () => tryFormat(4));
+  document.getElementById('jsonMinify').addEventListener('click', tryMinify);
+  document.getElementById('jsonEscape').addEventListener('click', tryEscape);
+  document.getElementById('jsonUnescape').addEventListener('click', tryUnescape);
+  document.getElementById('jsonCopy').addEventListener('click', tryCopy);
+  document.getElementById('jsonClear').addEventListener('click', tryClear);
+
+  // 输入时自动校验（不自动格式化）
+  let inputDebounce = null;
+  inputEl.addEventListener('input', () => {
+    clearTimeout(inputDebounce);
+    inputDebounce = setTimeout(() => {
+      const src = inputEl.value;
+      if (!src.trim()) { setStatus('等待输入…', ''); return; }
+      try {
+        JSON.parse(src);
+        setStatus('✓ 语法正确，点击上方按钮格式化', 'ok');
+      } catch(e) {
+        const info = friendlyError(e.message || String(e), src);
+        const locHtml = info.loc
+          ? ' <span class="pos">第 ' + info.loc.line + ' 行</span> <span class="pos">第 ' + info.loc.col + ' 列</span>'
+          : '';
+        setStatus('✗ ' + info.msg + locHtml, 'err');
+      }
+    }, 300);
+  });
+
+  // 快捷键：Ctrl/Cmd + Enter 格式化 2 空格
+  inputEl.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      tryFormat(2);
+    }
+  });
+})();
+
+/* ============================================================
+   通知系统
+   —— 发布通知：在 NOTIFICATIONS 数组里加一条即可
+   ============================================================ */
+(function initNotifications(){
+  'use strict';
+
+  /* =========================================================
+     ① 通知数据
+     —— 用户发布新通知：往下面数组最前面插一条
+     —— id 必须唯一（自己起名字，改过就代表"新通知"）
+     —— type 可选：info / success / warning / important
+     ========================================================= */
+  const NOTIFICATIONS = [
+    {
+      id: 'v3-0-release',
+      type: 'success',
+      title: 'V3.0 焕新版上线',
+      content: '青柠绿主题全面焕新，界面、按钮、卡片全部升级；新增「冥想练习」与「JSON 格式化」两款工具。',
+      time: '2026-10-01'
+    },
+    {
+      id: 'json-tool',
+      type: 'info',
+      title: '新工具：JSON 格式化',
+      content: '「AI 与开发」分类下新增 JSON 格式化 / 校验工具，支持格式化、压缩、转义、错误定位。',
+      time: '2026-10-01'
+    },
+    {
+      id: 'meditation-tool',
+      type: 'info',
+      title: '新工具：冥想练习',
+      content: '「健康与运动」分类下新增冥想练习，内置 4-7-8、箱式呼吸等多种节奏，附提示音与循环计数。',
+      time: '2026-10-01'
+    }
+    // 👆 在这里加更多通知：
+    // {
+    //   id: 'my-notice-1',
+    //   type: 'warning',  // info / success / warning / important
+    //   title: '通知标题',
+    //   content: '通知内容。',
+    //   time: '2026-10-02'
+    // },
+  ];
+
+  const READ_KEY = 'suidou-notif-read-v1';
+  const MAX_SHOW = 30;
+
+  const btnEl    = document.getElementById('notifBtn');
+  const dotEl    = document.getElementById('notifDot');
+  const panelEl  = document.getElementById('notifPanel');
+  const listEl   = document.getElementById('notifList');
+  const clearEl  = document.getElementById('notifClearAll');
+  if (!btnEl || !panelEl || !listEl) return;
+
+  function getReadSet(){
+    try {
+      const raw = localStorage.getItem(READ_KEY);
+      return new Set(raw ? JSON.parse(raw) : []);
+    } catch(e){ return new Set(); }
+  }
+  function saveReadSet(set){
+    try { localStorage.setItem(READ_KEY, JSON.stringify(Array.from(set))); } catch(e){}
+  }
+
+  function getUnreadCount(readSet){
+    return NOTIFICATIONS.filter(n => !readSet.has(n.id)).length;
+  }
+
+  function updateDot(){
+    const readSet = getReadSet();
+    const n = getUnreadCount(readSet);
+    if (n > 0){
+      dotEl.style.display = '';
+      dotEl.textContent = n > 99 ? '99+' : String(n);
+    } else {
+      dotEl.style.display = 'none';
+    }
+  }
+
+  function esc(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  function renderList(){
+    const readSet = getReadSet();
+    const list = NOTIFICATIONS.slice(0, MAX_SHOW);
+
+    if (!list.length){
+      listEl.innerHTML =
+        '<div class="notif-empty">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>' +
+            '<path d="M13.73 21a2 2 0 0 1-3.46 0"/>' +
+          '</svg>' +
+          '暂无通知' +
+        '</div>';
+      return;
+    }
+
+    listEl.innerHTML = list.map(n => {
+      const unread = !readSet.has(n.id);
+      const type = ['info','success','warning','important'].includes(n.type) ? n.type : 'info';
+      return '<div class="notif-item ' + (unread ? 'unread ' : '') + 'type-' + type + '" data-nid="' + esc(n.id) + '">' +
+        '<p class="notif-item-title">' + esc(n.title || '通知') + '</p>' +
+        '<p class="notif-item-content">' + esc(n.content || '') + '</p>' +
+        '<div class="notif-item-time">' + esc(n.time || '') + '</div>' +
+      '</div>';
+    }).join('');
+
+    listEl.querySelectorAll('.notif-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = el.dataset.nid;
+        const readSet = getReadSet();
+        readSet.add(id);
+        saveReadSet(readSet);
+        el.classList.remove('unread');
+        updateDot();
+      });
+    });
+  }
+
+  function openPanel(){
+    renderList();
+    positionPanel();
+    panelEl.classList.add('show');
+    btnEl.classList.add('open');
+  }
+  function closePanel(){
+    panelEl.classList.remove('show');
+    btnEl.classList.remove('open');
+  }
+  function togglePanel(){
+    if (panelEl.classList.contains('show')) closePanel();
+    else openPanel();
+  }
+
+  function positionPanel(){
+    const rect = btnEl.getBoundingClientRect();
+    if (window.innerWidth <= 520) {
+      // 移动端：CSS 里已经用媒体查询定好了位置
+      return;
+    }
+    const panelWidth = 380;
+    let left = rect.right - panelWidth;
+    if (left < 12) left = 12;
+    if (left + panelWidth > window.innerWidth - 12) {
+      left = window.innerWidth - 12 - panelWidth;
+    }
+    panelEl.style.left = left + 'px';
+    panelEl.style.right = 'auto';
+    panelEl.style.top = (rect.bottom + 8) + 'px';
+  }
+
+  btnEl.addEventListener('click', e => {
+    e.stopPropagation();
+    togglePanel();
+  });
+
+  panelEl.addEventListener('click', e => {
+    e.stopPropagation();
+  });
+
+  clearEl.addEventListener('click', () => {
+    const readSet = getReadSet();
+    NOTIFICATIONS.forEach(n => readSet.add(n.id));
+    saveReadSet(readSet);
+    renderList();
+    updateDot();
+    if (typeof showToast === 'function') showToast('已全部标为已读');
+  });
+
+  document.addEventListener('click', () => {
+    if (panelEl.classList.contains('show')) closePanel();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && panelEl.classList.contains('show')) closePanel();
+  });
+
+  window.addEventListener('resize', () => {
+    if (panelEl.classList.contains('show')) positionPanel();
+  });
+  window.addEventListener('scroll', () => {
+    if (panelEl.classList.contains('show') && window.innerWidth > 520) positionPanel();
+  }, { passive: true });
+
+  updateDot();
+})();
+
+/* ============================================================
+   全部应用 · 按拼音首字母排序 + 分组
+   ============================================================ */
+(function initSortAllAppsByPinyin(){
+  'use strict';
+
+  var grid = document.getElementById('allApps');
+  if (!grid) return;
+
+  /* 工具名 → 首字母。
+     以后新增工具，只要在这里加一行就行；不加也不会报错，会归到「#」组。 */
+  var PINYIN = {
+    'AI 助手': 'A',
+    'JSON 格式化': 'J',
+    '畅想画布': 'C',
+    '常见统计图生成': 'C',
+    '菜谱收藏': 'C',
+    '代码编辑器': 'D',
+    '对话生成器': 'D',
+    '地点收藏': 'D',
+    '二维码生成': 'E',
+    '歌曲收藏': 'G',
+    '健康管理': 'J',
+    '灵感速记': 'L',
+    '冥想练习': 'M',
+    '起名器': 'Q',
+    '人物印象表': 'R',
+    '数学计算': 'S',
+    '时间戳转换': 'S',
+    '时间线': 'S',
+    '时钟工具': 'S',
+    '随机灵感': 'S',
+    '体感温度与运动风险': 'T',
+    '图片压缩': 'T',
+    '我的记账本': 'W',
+    '我的日历': 'W',
+    '文章分析': 'W',
+    '小说助手': 'X',
+    '影视收藏': 'Y',
+    '运动记录': 'Y'
+  };
+
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.tool-card'));
+  if (!cards.length) return;
+
+  // 给每张卡打上首字母标记
+  cards.forEach(function(card){
+    var h3 = card.querySelector('h3');
+    var name = h3 ? h3.textContent.trim() : '';
+    card.dataset.pname = name;
+    card.dataset.letter = PINYIN[name] || '#';
+  });
+
+  // 按拼音排序（同组内用 localeCompare 做二次排序）
+  cards.sort(function(a, b){
+    var la = a.dataset.letter, lb = b.dataset.letter;
+    if (la !== lb) return la < lb ? -1 : 1;
+    try {
+      return a.dataset.pname.localeCompare(b.dataset.pname, 'zh-Hans-CN', { sensitivity: 'base' });
+    } catch(e){
+      return a.dataset.pname.localeCompare(b.dataset.pname);
+    }
+  });
+
+  // 按字母分组
+  var groups = {};
+  cards.forEach(function(card){
+    var L = card.dataset.letter;
+    (groups[L] = groups[L] || []).push(card);
+  });
+
+  // 重新插入 DOM：字母标题 + 该组的所有卡片
+  var letters = Object.keys(groups).sort();
+  grid.innerHTML = '';
+  letters.forEach(function(L){
+    var head = document.createElement('div');
+    head.className = 'pinyin-head';
+    head.setAttribute('data-letter', L);
+    head.textContent = L;
+    grid.appendChild(head);
+    groups[L].forEach(function(card){
+      grid.appendChild(card);
+    });
+  });
+})();
 console.log('%c岁窦工具箱 · V2.3.2 铂金版 已加载', 'color:#565d65;font-weight:700;font-size:14px;');

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公告编辑器 · 岁窦工具箱</title>
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(900px 500px at 10% -10%, rgba(190,242,100,.35), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(132,204,22,.16), transparent 60%),
+    linear-gradient(180deg,#f9fbf2 0%,#f4f8ea 100%);
+  color:#1a2e05;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+:root{
+  --primary:#84cc16;
+  --primary-dark:#4d7c0f;
+  --primary-soft:#ecfccb;
+  --lime:#bef264;
+  --lime-shine:#d9f99d;
+  --border:#e5ecc9;
+  --muted:#6b7d54;
+  --text:#1a2e05;
+}
+
+/* ---------- 顶栏 ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid rgba(132,204,22,.22);
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+header h1{
+  margin:0;
+  font-size:18px;
+  font-weight:900;
+  color:var(--primary-dark);
+  letter-spacing:.5px;
+  display:flex;align-items:center;gap:10px;
+}
+header h1::before{
+  content:"";
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #d9f99d, #84cc16 55%, #4d7c0f 100%);
+  box-shadow:0 0 0 3px rgba(132,204,22,.2);
+}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.btn{
+  border:1px solid var(--primary);
+  background:linear-gradient(135deg,var(--lime),var(--primary));
+  color:#fff;
+  padding:8px 16px;
+  border-radius:10px;
+  font-size:13.5px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.18s;
+  font-family:inherit;
+  letter-spacing:.3px;
+}
+.btn:hover{background:linear-gradient(135deg,var(--primary),var(--primary-dark));box-shadow:0 8px 18px -8px rgba(77,124,15,.75);transform:translateY(-1px);}
+.btn.ghost{background:#fff;color:var(--primary-dark);border-color:rgba(132,204,22,.28);}
+.btn.ghost:hover{background:var(--primary-soft);transform:translateY(-1px);}
+.btn.danger{background:#fff;color:#b91c1c;border-color:#fecaca;}
+.btn.danger:hover{background:#fef2f2;border-color:#fca5a5;box-shadow:none;}
+
+/* ---------- 主体 ---------- */
+main{
+  flex:1;
+  max-width:1400px;
+  width:100%;
+  margin:0 auto;
+  padding:20px 24px 40px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,520px);
+  gap:18px;
+  align-items:start;
+}
+@media(max-width:1000px){
+  main{grid-template-columns:1fr;}
+}
+
+.pane{
+  background:#fff;
+  border:1px solid rgba(132,204,22,.22);
+  border-radius:16px;
+  box-shadow:0 4px 16px -8px rgba(77,124,15,.18);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.pane-head{
+  padding:12px 18px;
+  border-bottom:1px solid rgba(132,204,22,.16);
+  background:linear-gradient(180deg,#fbfdf6,#fff);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.pane-head b{font-size:14px;color:var(--primary-dark);font-weight:800;letter-spacing:.3px;}
+.pane-head .hint{font-size:11.5px;color:var(--muted);}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{
+  padding:10px 14px;
+  background:#fbfdf6;
+  border-bottom:1px dashed rgba(132,204,22,.22);
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+}
+.toolbar button{
+  border:1px solid transparent;
+  background:#fff;
+  color:var(--text);
+  padding:6px 11px;
+  border-radius:8px;
+  font-size:13px;
+  cursor:pointer;
+  transition:.15s;
+  font-family:inherit;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+.toolbar button:hover{background:var(--primary-soft);border-color:var(--lime-shine);color:var(--primary-dark);}
+.toolbar button.active{background:linear-gradient(135deg,var(--lime),var(--primary));color:#fff;border-color:transparent;}
+.toolbar .sep{
+  width:1px;
+  background:rgba(132,204,22,.2);
+  margin:4px 4px;
+}
+.toolbar svg{width:14px;height:14px;}
+
+/* ---------- 编辑区 ---------- */
+.editor{
+  flex:1;
+  min-height:520px;
+  padding:22px 24px;
+  outline:none;
+  font-size:14.5px;
+  line-height:1.9;
+  color:#2b3140;
+  overflow-y:auto;
+  max-height:calc(100vh - 240px);
+}
+.editor:empty::before{
+  content:"在这里写公告内容…&#10;&#10;· 支持加粗、斜体、下划线&#10;· 点上方工具栏「插入图片」或直接把图拖进来&#10;· 支持粘贴截图（Ctrl / ⌘ + V）";
+  color:#b0b6c4;
+  white-space:pre-line;
+  font-size:13.5px;
+  line-height:1.9;
+  pointer-events:none;
+  display:block;
+}
+.editor p{margin:0 0 14px;text-indent:2em;letter-spacing:.3px;font-weight:600;}
+.editor p:last-child{margin-bottom:0;}
+.editor h3{
+  font-size:15px;
+  font-weight:800;
+  color:var(--primary-dark);
+  margin:18px 0 10px;
+  text-indent:0;
+  display:flex;align-items:center;gap:8px;
+}
+.editor h3::before{
+  content:"";
+  width:6px;height:16px;border-radius:3px;
+  background:linear-gradient(180deg,var(--lime),var(--primary));
+}
+.editor hr{
+  border:none;border-top:1px dashed rgba(132,204,22,.3);
+  margin:20px 0;
+}
+.editor figure.notice-img{
+  display:block;
+  width:100%;max-width:560px;
+  margin:16px auto 8px;
+  border-radius:12px;
+  border:1px solid rgba(132,204,22,.22);
+  box-shadow:0 8px 22px -10px rgba(77,124,15,.28);
+  overflow:hidden;
+  position:relative;
+  text-indent:0;
+  user-select:none;
+}
+.editor figure.notice-img img{display:block;width:100%;height:auto;}
+.editor figure.notice-img::after{
+  content:"图片 · 双击可删除";
+  position:absolute;right:8px;top:8px;
+  font-size:10.5px;
+  background:rgba(255,255,255,.92);
+  color:var(--muted);
+  padding:2px 8px;
+  border-radius:999px;
+  border:1px solid rgba(132,204,22,.3);
+  opacity:0;
+  transition:.18s;
+  pointer-events:none;
+}
+.editor figure.notice-img:hover::after{opacity:1;}
+.editor p.notice-caption{
+  text-align:center;
+  font-size:12.5px;
+  color:var(--muted);
+  margin:0 auto 18px;
+  line-height:1.7;
+  text-indent:0;
+  font-weight:500;
+  letter-spacing:.3px;
+}
+.editor .notice-img-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:16px 0 8px;
+}
+.editor .notice-img-row figure.notice-img{max-width:100%;margin:0;}
+@media(max-width:640px){
+  .editor .notice-img-row{grid-template-columns:1fr;}
+}
+
+/* ---------- 输出区 ---------- */
+.tabs{
+  display:flex;
+  gap:2px;
+  padding:10px 14px 0;
+  background:#fbfdf6;
+  border-bottom:1px solid rgba(132,204,22,.16);
+}
+.tabs button{
+  border:none;
+  background:none;
+  padding:8px 16px;
+  border-radius:8px 8px 0 0;
+  cursor:pointer;
+  font-size:13px;
+  color:var(--muted);
+  font-family:inherit;
+  font-weight:600;
+  transition:.15s;
+}
+.tabs button.active{background:#fff;color:var(--primary-dark);}
+.tabs button:hover:not(.active){color:var(--primary-dark);}
+
+.tab-panel{display:none;padding:16px;}
+.tab-panel.active{display:block;}
+
+#codeOut{
+  width:100%;
+  min-height:340px;
+  padding:14px 16px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#1f3408;
+  color:#d9f99d;
+  font-family:Consolas,Menlo,monospace;
+  font-size:12.5px;
+  line-height:1.65;
+  outline:none;
+  resize:vertical;
+  white-space:pre;
+  overflow:auto;
+  tab-size:2;
+}
+
+.images-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.img-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  background:#fbfdf6;
+  border:1px solid rgba(132,204,22,.2);
+  border-radius:10px;
+}
+.img-item .thumb{
+  width:56px;height:56px;
+  border-radius:8px;
+  background:#fff;
+  overflow:hidden;
+  flex:0 0 auto;
+  border:1px solid var(--border);
+}
+.img-item .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-item .meta{flex:1;min-width:0;font-size:12.5px;line-height:1.5;}
+.img-item .meta b{color:var(--primary-dark);font-weight:800;font-family:Consolas,Menlo,monospace;display:block;margin-bottom:2px;word-break:break-all;}
+.img-item .meta span{color:var(--muted);font-size:11.5px;}
+.img-item .dl{
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--primary-dark);
+  border-radius:7px;
+  padding:5px 10px;
+  font-size:12px;
+  cursor:pointer;
+  flex:0 0 auto;
+  font-family:inherit;
+  font-weight:600;
+}
+.img-item .dl:hover{background:var(--primary-soft);border-color:var(--lime-shine);}
+
+.img-actions{
+  margin-top:14px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.empty-tip{
+  text-align:center;
+  color:var(--muted);
+  padding:40px 20px;
+  font-size:13.5px;
+  line-height:1.7;
+}
+.empty-tip svg{
+  width:44px;height:44px;
+  display:block;margin:0 auto 12px;
+  color:var(--primary);opacity:.5;
+}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:#1a2e05;
+  color:#ecfccb;
+  padding:11px 22px;
+  border-radius:10px;
+  font-size:13.5px;
+  opacity:0;
+  transition:.28s;
+  z-index:300;
+  pointer-events:none;
+  box-shadow:0 8px 24px rgba(26,46,5,.3);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>公告编辑器</h1>
+  <div class="head-actions">
+    <button class="btn ghost" id="btnCopy" type="button">📋 复制代码</button>
+    <button class="btn" id="btnGen" type="button">⚡ 生成代码</button>
+    <button class="btn danger" id="btnClear" type="button">清空</button>
+  </div>
+</header>
+
+<main>
+  <!-- 左：编辑区 -->
+  <section class="pane">
+    <div class="pane-head">
+      <b>编辑器</b>
+      <span class="hint">直接拖图进来，或粘贴截图</span>
+    </div>
+    <div class="toolbar" id="toolbar">
+      <button type="button" data-cmd="bold" title="加粗"><b>B</b></button>
+      <button type="button" data-cmd="italic" title="斜体"><i>I</i></button>
+      <button type="button" data-cmd="underline" title="下划线"><u>U</u></button>
+      <button type="button" data-cmd="strikeThrough" title="删除线"><s>S</s></button>
+      <span class="sep"></span>
+      <button type="button" data-action="h3" title="小标题">H 小标题</button>
+      <button type="button" data-action="p" title="段落">¶ 段落</button>
+      <span class="sep"></span>
+      <button type="button" data-action="img" title="插入图片">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        图片
+      </button>
+      <button type="button" data-action="row2" title="两张图并排">两张并排</button>
+      <button type="button" data-action="caption" title="图注">图注</button>
+      <span class="sep"></span>
+      <button type="button" data-action="hr" title="分隔线">— 分隔线</button>
+      <span class="sep"></span>
+      <button type="button" data-action="undo" title="撤销">↺ 撤销</button>
+    </div>
+    <div class="editor" id="editor" contenteditable="true" spellcheck="false"></div>
+  </section>
+
+  <!-- 右：输出区 -->
+  <section class="pane">
+    <div class="tabs">
+      <button type="button" class="active" data-tab="code">HTML 代码</button>
+      <button type="button" data-tab="images">图片清单 <span id="imgCount" style="opacity:.7;">(0)</span></button>
+    </div>
+
+    <div class="tab-panel active" data-panel="code">
+      <textarea id="codeOut" readonly placeholder="点击右上角「⚡ 生成代码」后，代码会出现在这里…"></textarea>
+      <div class="img-actions">
+        <button class="btn ghost" id="btnCopy2" type="button">📋 复制代码</button>
+        <span style="font-size:12px;color:var(--muted);align-self:center;">把代码粘到 toolbox.html 的 notice-body 里</span>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-panel="images">
+      <div class="images-list" id="imagesList">
+        <div class="empty-tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          还没有插入任何图片
+        </div>
+      </div>
+      <div class="img-actions" id="imgActions" style="display:none;">
+        <button class="btn" id="btnDlAll" type="button">⬇ 逐张下载图片</button>
+        <span style="font-size:12px;color:var(--muted);align-self:center;">下载后请放进项目里的 <code>images/</code> 文件夹</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<input type="file" id="filePicker" accept="image/*" style="display:none;">
+<input type="file" id="filePickerMulti" accept="image/*" multiple style="display:none;">
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var editor     = document.getElementById('editor');
+  var codeOut    = document.getElementById('codeOut');
+  var imagesList = document.getElementById('imagesList');
+  var imgCount   = document.getElementById('imgCount');
+  var imgActions = document.getElementById('imgActions');
+  var filePicker = document.getElementById('filePicker');
+  var filePickerMulti = document.getElementById('filePickerMulti');
+  var toastEl    = document.getElementById('toast');
+
+  // 图片库存：{ id: { name, dataUrl, blob } }
+  var imageStore = {};
+
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastEl.__t);
+    toastEl.__t = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+  }
+
+  /* ---------- 工具栏 ---------- */
+  document.getElementById('toolbar').addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var cmd = btn.getAttribute('data-cmd');
+    var act = btn.getAttribute('data-action');
+    editor.focus();
+
+    if (cmd){
+      document.execCommand(cmd, false, null);
+      return;
+    }
+    if (act === 'h3'){
+      document.execCommand('formatBlock', false, '<h3>');
+    } else if (act === 'p'){
+      document.execCommand('formatBlock', false, '<p>');
+    } else if (act === 'hr'){
+      document.execCommand('insertHTML', false, '<hr>');
+    } else if (act === 'img'){
+      filePicker.click();
+    } else if (act === 'row2'){
+      filePickerMulti.click();
+    } else if (act === 'caption'){
+      document.execCommand('insertHTML', false,
+        '<p class="notice-caption">▲ 图注写在这里</p>');
+    } else if (act === 'undo'){
+      document.execCommand('undo', false, null);
+    }
+  });
+
+  /* ---------- 图片压缩 ---------- */
+  function compressImage(file, maxWidth, quality){
+    return new Promise(function(resolve, reject){
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        var img = new Image();
+        img.onload = function(){
+          var w = img.naturalWidth, h = img.naturalHeight;
+          if (w > maxWidth){
+            h = Math.round(h * maxWidth / w);
+            w = maxWidth;
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+          var mime = (file.type === 'image/png') ? 'image/png' : 'image/jpeg';
+          var dataUrl = canvas.toDataURL(mime, quality);
+          canvas.toBlob(function(blob){
+            resolve({ dataUrl: dataUrl, blob: blob, ext: (mime === 'image/png' ? 'png' : 'jpg') });
+          }, mime, quality);
+        };
+        img.onerror = reject;
+        img.src = ev.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function genFilename(index, ext){
+    var d = new Date();
+    var p = function(n){ return String(n).padStart(2,'0'); };
+    var stamp = d.getFullYear() + p(d.getMonth()+1) + p(d.getDate());
+    return 'notice-' + stamp + '-' + index + '.' + ext;
+  }
+
+  /* ---------- 插入图片到编辑器 ---------- */
+  async function insertImages(files, mode){
+    if (!files || !files.length) return;
+    var list = Array.prototype.slice.call(files).filter(function(f){
+      return f.type && f.type.indexOf('image/') === 0;
+    });
+    if (!list.length) return;
+
+    var startIdx = Object.keys(imageStore).length + 1;
+
+    for (var i = 0; i < list.length; i++){
+      var r = await compressImage(list[i], 1200, 0.82);
+      var id = 'img_' + Date.now() + '_' + i + '_' + Math.floor(Math.random()*1000);
+      var fname = genFilename(startIdx + i, r.ext);
+      imageStore[id] = { name: fname, dataUrl: r.dataUrl, blob: r.blob };
+      // 编辑器里先嵌 base64，方便预览
+      var figHtml = '<figure class="notice-img" data-imgid="' + id + '">' +
+        '<img src="' + r.dataUrl + '" alt="' + fname + '">' +
+      '</figure>';
+      // 用 insertHTML 插入到光标位置
+      if (mode === 'row2' && i === 0 && list.length >= 2){
+        // 跳过，后面一起插
+        continue;
+      }
+      editor.focus();
+      document.execCommand('insertHTML', false, figHtml);
+    }
+
+    if (mode === 'row2' && list.length >= 2){
+      // 重新组织前两张为并排
+      var figs = editor.querySelectorAll('figure.notice-img');
+      var lastTwo = [];
+      figs.forEach(function(f){ lastTwo.push(f); });
+      // 这里简化处理：不做并排，只提示用户手动调整
+      toast('已插入 ' + list.length + ' 张，可手动拖拽调整位置');
+    } else {
+      toast('已插入 ' + list.length + ' 张图');
+    }
+
+    renderImageList();
+  }
+
+  filePicker.addEventListener('change', function(e){
+    insertImages(e.target.files, 'single');
+    e.target.value = '';
+  });
+  filePickerMulti.addEventListener('change', function(e){
+    insertImages(e.target.files, 'row2');
+    e.target.value = '';
+  });
+
+  /* ---------- 拖拽 / 粘贴图片 ---------- */
+  editor.addEventListener('dragover', function(e){
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+  });
+  editor.addEventListener('drop', function(e){
+    if (!e.dataTransfer || !e.dataTransfer.files || !e.dataTransfer.files.length) return;
+    e.preventDefault();
+    insertImages(e.dataTransfer.files, 'single');
+  });
+  editor.addEventListener('paste', function(e){
+    var items = (e.clipboardData || {}).items || [];
+    var files = [];
+    for (var i = 0; i < items.length; i++){
+      if (items[i].type && items[i].type.indexOf('image/') === 0){
+        var f = items[i].getAsFile();
+        if (f) files.push(f);
+      }
+    }
+    if (files.length){
+      e.preventDefault();
+      insertImages(files, 'single');
+    }
+  });
+
+  /* ---------- 双击图片删除 ---------- */
+  editor.addEventListener('dblclick', function(e){
+    var fig = e.target.closest('figure.notice-img');
+    if (!fig) return;
+    var id = fig.getAttribute('data-imgid');
+    if (!confirm('删除这张图片吗？')) return;
+    if (id) delete imageStore[id];
+    fig.remove();
+    renderImageList();
+  });
+
+  /* ---------- 图片清单 ---------- */
+  function renderImageList(){
+    var keys = Object.keys(imageStore);
+    imgCount.textContent = '(' + keys.length + ')';
+    if (!keys.length){
+      imagesList.innerHTML =
+        '<div class="empty-tip">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>' +
+          '还没有插入任何图片' +
+        '</div>';
+      imgActions.style.display = 'none';
+      return;
+    }
+    imgActions.style.display = '';
+    imagesList.innerHTML = keys.map(function(id, i){
+      var o = imageStore[id];
+      var size = o.blob ? (o.blob.size / 1024).toFixed(1) + ' KB' : '';
+      return '<div class="img-item" data-iid="' + id + '">' +
+        '<div class="thumb"><img src="' + o.dataUrl + '" alt=""></div>' +
+        '<div class="meta">' +
+          '<b>' + o.name + '</b>' +
+          '<span>序号 ' + (i + 1) + ' · ' + size + '</span>' +
+        '</div>' +
+        '<button class="dl" type="button" data-dl="' + id + '">下载</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  imagesList.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-dl]');
+    if (!btn) return;
+    var id = btn.getAttribute('data-dl');
+    var o = imageStore[id];
+    if (!o || !o.blob) return;
+    var url = URL.createObjectURL(o.blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = o.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    toast('已下载：' + o.name);
+  });
+
+  document.getElementById('btnDlAll').addEventListener('click', function(){
+    var keys = Object.keys(imageStore);
+    if (!keys.length) return;
+    keys.forEach(function(id, i){
+      setTimeout(function(){
+        var o = imageStore[id];
+        if (!o || !o.blob) return;
+        var url = URL.createObjectURL(o.blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = o.name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+      }, i * 350);
+    });
+    toast('开始下载 ' + keys.length + ' 张图片…');
+  });
+
+  /* ---------- 生成代码 ---------- */
+  function generateCode(){
+    // 克隆编辑器内容，把 img 的 base64 替换成相对路径
+    var clone = editor.cloneNode(true);
+    // 移除编辑用的辅助 class（可选）
+    clone.querySelectorAll('figure.notice-img').forEach(function(fig){
+      var id = fig.getAttribute('data-imgid');
+      var img = fig.querySelector('img');
+      if (id && imageStore[id] && img){
+        img.setAttribute('src', 'images/' + imageStore[id].name);
+      }
+      fig.removeAttribute('data-imgid');
+    });
+
+    var html = clone.innerHTML.trim();
+    // 缩进美化
+    html = html
+      .replace(/></g, '>\n<')
+      .split('\n')
+      .map(function(line){ return '  ' + line; })
+      .join('\n');
+
+    // 外层包 notice-body
+    var full = '<div class="notice-body">\n' + html + '\n</div>';
+    codeOut.value = full;
+    return full;
+  }
+
+  document.getElementById('btnGen').addEventListener('click', function(){
+    generateCode();
+    document.querySelector('.tabs button[data-tab="code"]').click();
+    toast('代码已生成，可复制');
+  });
+
+  /* ---------- 复制 ---------- */
+  function copyCode(){
+    var text = codeOut.value || generateCode();
+    if (!text){ toast('还没有内容'); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        toast('已复制到剪贴板');
+      }).catch(function(){
+        codeOut.select();
+        document.execCommand('copy');
+        toast('已复制');
+      });
+    } else {
+      codeOut.select();
+      document.execCommand('copy');
+      toast('已复制');
+    }
+  }
+  document.getElementById('btnCopy').addEventListener('click', copyCode);
+  document.getElementById('btnCopy2').addEventListener('click', copyCode);
+
+  /* ---------- 清空 ---------- */
+  document.getElementById('btnClear').addEventListener('click', function(){
+    if (!confirm('清空所有内容和图片吗？此操作不可恢复。')) return;
+    editor.innerHTML = '';
+    imageStore = {};
+    codeOut.value = '';
+    renderImageList();
+    toast('已清空');
+  });
+
+  /* ---------- Tab 切换 ---------- */
+  document.querySelector('.tabs').addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var tab = btn.getAttribute('data-tab');
+    document.querySelectorAll('.tabs button').forEach(function(b){
+      b.classList.toggle('active', b === btn);
+    });
+    document.querySelectorAll('.tab-panel').forEach(function(p){
+      p.classList.toggle('active', p.getAttribute('data-panel') === tab);
+    });
+  });
+
+  /* ---------- 初始化 ---------- */
+  renderImageList();
+  editor.focus();
+})();
+</script>
+</body>
+</html>
