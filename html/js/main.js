@@ -6005,12 +6005,12 @@ injectToolCrumbs();
      ========================================================= */
   const NOTIFICATIONS = [
     {
-      id: 'promo-minigames-2026-09',
-      type: 'info',
-      title: '小游戏网页上线啦！',
-      content: '发现一个有趣的小游戏集合站，摸鱼放松好去处，点此前往体验。',
-      time: '2026-09-27',
-      link: 'https://sulder20.github.io/html/XYX/games.html'
+      id: 'national-day-77',
+      type: 'important',                     // 节日通知用 important，圆点会显红
+      title: '庆祝中华人民共和国成立 77 周年',
+      content: '1949 - 2026 · 山河锦绣，国泰民安。祝祖国繁荣昌盛，祝大家节日快乐！',
+      time: '2026-10-01',
+      link: 'https://www.gov.cn/'
     },
     {
       id: 'exchange-tool',

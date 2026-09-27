@@ -1482,3 +1482,482 @@ details.sub .inner{padding-bottom:14px;}
     gap: 8px !important;
   }
 }
+
+/* ============ 推广横幅 · 国庆主题（红金调） ============ */
+.promo-banner--national{
+  background:
+    radial-gradient(400px 160px at 100% 0%, rgba(255, 214, 140, .45), transparent 70%),
+    linear-gradient(135deg, #fff5e6 0%, #ffe3c2 100%);
+  border-color: rgba(191, 30, 30, .35);
+  box-shadow:0 8px 24px -12px rgba(158, 20, 20, .35);
+}
+.promo-banner--national::before{
+  background:linear-gradient(180deg, #f6c453, #c62828);
+}
+.promo-banner--national .promo-badge{
+  background:linear-gradient(135deg, #f6c453, #c62828);
+  box-shadow:0 4px 10px -4px rgba(158, 20, 20, .55);
+}
+.promo-banner--national .promo-title{
+  color:#9e1414;
+  letter-spacing:.8px;
+}
+.promo-banner--national .promo-desc{
+  color:#7a3a17;
+}
+.promo-banner--national .promo-close{
+  border-color:rgba(198, 40, 40, .3);
+  color:#9e1414;
+}
+.promo-banner--national .promo-close:hover{
+  background:#fde8e8;
+  color:#9e1414;
+  border-color:#f2b8b8;
+}
+
+/* 国庆主题下的「了解国庆」按钮：金红渐变 */
+.promo-banner--national .btn.small:not(.ghost){
+  background:linear-gradient(135deg, #f6c453, #c62828);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 6px 16px -6px rgba(158, 20, 20, .65);
+}
+.promo-banner--national .btn.small:not(.ghost):hover{
+  background:linear-gradient(135deg, #e8b23c, #a91f1f);
+  box-shadow:0 10px 22px -8px rgba(158, 20, 20, .8);
+}
+
+/* ============================================================
+   国庆节顶部主题（覆盖 header 和 hero）
+   ============================================================ */
+
+/* ---------- 1. 顶部导航栏：金色/红色渐变 + 金色分隔线 ---------- */
+header {
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe3c2 100%) !important;
+  border-bottom: 2px solid #c62828 !important;
+  box-shadow: 0 4px 12px rgba(158, 20, 20, 0.1) !important;
+}
+
+/* 导航按钮激活态改为国庆红 */
+nav button.active {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 16px -6px rgba(158, 20, 20, 0.6) !important;
+}
+
+/* 导航按钮悬停态改为浅金 */
+nav button:hover:not(.active) {
+  background: #fff0d4 !important;
+  color: #9e1414 !important;
+}
+
+/* Logo 文字颜色改深红 */
+.logo {
+  color: #9e1414 !important;
+}
+
+/* 搜索框适配国庆色调 */
+.search-wrap input {
+  border-color: rgba(198, 40, 40, 0.25) !important;
+  background: rgba(255, 250, 240, 0.9) !important;
+}
+.search-wrap input:focus {
+  border-color: #c62828 !important;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15) !important;
+}
+
+/* 模式徽章适配 */
+#userBox .mode-badge {
+  border-color: rgba(198, 40, 40, 0.25) !important;
+  background: rgba(255, 235, 204, 0.8) !important;
+  color: #9e1414 !important;
+}
+
+/* 关闭按钮等元素的边框颜色适配 */
+.promo-banner--national .promo-close:hover {
+  background: #fde8e8;
+  color: #9e1414;
+  border-color: #f2b8b8;
+}
+
+/* ---------- 2. 首页大图（Hero）：红金渐变 + 光晕 ---------- */
+.hero {
+  background:
+    radial-gradient(600px 260px at 88% 20%, rgba(246, 196, 83, 0.45), transparent 70%),
+    radial-gradient(500px 320px at 110% 100%, rgba(198, 40, 40, 0.6), transparent 70%),
+    linear-gradient(135deg, #b71c1c 0%, #8e0000 100%) !important;
+  box-shadow:
+    0 24px 50px -20px rgba(158, 20, 20, 0.5),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 大图里的装饰光晕改成金色 */
+.hero::before {
+  background: radial-gradient(circle at 40% 40%, rgba(246, 196, 83, 0.5), transparent 65%) !important;
+}
+.hero::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2), transparent 70%) !important;
+}
+
+/* 大图文字改成金色/米色，保证在红底上的对比度 */
+.hero h1 {
+  color: #f6c453 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+.hero p {
+  color: #ffe3c2 !important;
+  opacity: 1 !important;
+}
+
+/* 移动端：保证文字缩放正常 */
+@media (max-width: 640px) {
+  header {
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe3c2 100%) !important;
+  }
+  .hero {
+    background: linear-gradient(135deg, #b71c1c 0%, #8e0000 100%) !important;
+  }
+  .hero h1 {
+    font-size: 21px !important;
+  }
+}
+
+/* 顶栏加一条细微的金色纹理线（纯 CSS 实现） */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f6c453, transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #b71c1c, #f6c453, #b71c1c);
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* ============================================================
+   国庆主题 · 中档
+   —— 全局变量替换 + 顶栏 + Hero + 卡片 + 背景 + 细节
+   ============================================================ */
+
+/* ---------- 1. 全局变量：把青柠绿换成中国红 + 金色 ---------- */
+:root {
+  --primary: #c62828;              /* 主红 */
+  --primary-dark: #8e0000;         /* 深红 */
+  --primary-soft: #ffe3c2;         /* 浅金（用于浅底） */
+  --lime: #f6c453;                 /* 金 */
+  --lime-shine: #ffd766;           /* 亮金 */
+  --lime-deep: #6d0000;            /* 暗红 */
+  --bg: #fffaf2;                   /* 背景改暖米色 */
+  --border: #f2d8b8;               /* 边框改浅金 */
+  --text: #3a1a10;                 /* 正文改红棕 */
+  --muted: #9a5a3c;                /* 次要文字改暖棕 */
+}
+
+/* ---------- 2. 全局背景：米金底 + 微弱网格 ---------- */
+body {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(246, 196, 83, .28), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(198, 40, 40, .12), transparent 60%),
+    linear-gradient(180deg, #fffaf2 0%, #fff2dd 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--text);
+}
+body::before {
+  background-image:
+    linear-gradient(rgba(198, 40, 40, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(198, 40, 40, .04) 1px, transparent 1px) !important;
+}
+
+/* ---------- 3. 顶栏：金红渐变 + 金色分隔线 ---------- */
+header {
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe3c2 100%) !important;
+  border-bottom: 2px solid #c62828 !important;
+  box-shadow: 0 4px 12px rgba(158, 20, 20, .1) !important;
+}
+.logo { color: #9e1414 !important; }
+nav button { color: #9a5a3c !important; }
+nav button:hover:not(.active) {
+  background: #fff0d4 !important;
+  color: #9e1414 !important;
+}
+nav button.active {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 16px -6px rgba(158, 20, 20, .6) !important;
+}
+.search-wrap input {
+  border-color: rgba(198, 40, 40, .25) !important;
+  background: rgba(255, 250, 240, .9) !important;
+}
+.search-wrap input:focus {
+  border-color: #c62828 !important;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, .15) !important;
+}
+#userBox .mode-badge {
+  border-color: rgba(198, 40, 40, .25) !important;
+  background: rgba(255, 235, 204, .8) !important;
+  color: #9e1414 !important;
+}
+
+/* ---------- 4. Hero：红金渐变 + 金星光晕 ---------- */
+.hero {
+  background:
+    radial-gradient(600px 260px at 88% 20%, rgba(246, 196, 83, .45), transparent 70%),
+    radial-gradient(500px 320px at 110% 100%, rgba(198, 40, 40, .65), transparent 70%),
+    linear-gradient(135deg, #b71c1c 0%, #8e0000 100%) !important;
+  box-shadow:
+    0 24px 50px -20px rgba(158, 20, 20, .5),
+    inset 0 1px 0 rgba(255, 215, 0, .35) !important;
+}
+.hero::before {
+  background: radial-gradient(circle at 40% 40%, rgba(246, 196, 83, .5), transparent 65%) !important;
+}
+.hero::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, .22), transparent 70%) !important;
+}
+.hero h1 {
+  color: #f6c453 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .45) !important;
+}
+.hero p { color: #ffe3c2 !important; opacity: 1 !important; }
+
+/* ---------- 5. 卡片：金色边框、红色悬停、金色描边 ---------- */
+.tool-card,
+.hot-card,
+.category-card,
+.panel,
+.stat-card,
+.upgrade-item,
+.person-card,
+.place-card,
+.media-card,
+.novel-card,
+.exer-card {
+  border-color: rgba(198, 40, 40, .18) !important;
+  background: #fffaf2 !important;
+}
+.tool-card:hover,
+.hot-card:hover,
+.category-card:hover,
+.panel:hover {
+  border-color: #c62828 !important;
+  box-shadow: 0 12px 28px -12px rgba(158, 20, 20, .35) !important;
+}
+.tool-card::before {
+  background: linear-gradient(90deg, #f6c453, #c62828, #8e0000) !important;
+}
+.tool-icon,
+.cat-icon,
+.page-icon {
+  background: linear-gradient(135deg, #ffe3c2, #ffd0a0) !important;
+  color: #9e1414 !important;
+}
+.tool-card:hover .tool-icon {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 18px -6px rgba(158, 20, 20, .6) !important;
+}
+.hot-badge {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  color: #fff !important;
+}
+
+/* ---------- 6. 按钮：金红渐变 ---------- */
+.btn:not(.ghost):not(.danger) {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 6px 16px -6px rgba(158, 20, 20, .6) !important;
+}
+.btn:not(.ghost):not(.danger):hover {
+  background: linear-gradient(135deg, #e8b23c, #a91f1f) !important;
+  box-shadow: 0 10px 22px -8px rgba(158, 20, 20, .8) !important;
+}
+.btn.ghost {
+  border-color: rgba(198, 40, 40, .3) !important;
+  color: #9e1414 !important;
+}
+.btn.ghost:hover {
+  background: #fff0d4 !important;
+  border-color: #c62828 !important;
+  color: #8e0000 !important;
+}
+
+/* ---------- 7. 子标签：金红切换 ---------- */
+.ta-subtabs {
+  background: rgba(255, 227, 194, .6) !important;
+  border-color: rgba(198, 40, 40, .2) !important;
+}
+.ta-subtab.active {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 14px -6px rgba(158, 20, 20, .6) !important;
+}
+.ta-subtab:hover:not(.active) {
+  background: #fff !important;
+  color: #9e1414 !important;
+}
+
+/* ---------- 8. 面包屑 ---------- */
+.tool-crumb {
+  background: rgba(255, 250, 242, .92) !important;
+  border-color: rgba(198, 40, 40, .2) !important;
+}
+.crumb-tool {
+  background: rgba(255, 235, 204, .7) !important;
+  border-color: rgba(198, 40, 40, .18) !important;
+}
+.crumb-tool:hover {
+  background: linear-gradient(135deg, #ffe3c2, #ffd0a0) !important;
+  border-color: #c62828 !important;
+  color: #8e0000 !important;
+}
+.crumb-tool.active {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* ---------- 9. 滚动条 + 选中色 ---------- */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f6c453, #c62828) !important;
+  border: 2px solid #fffaf2 !important;
+}
+::selection {
+  background: #ffe3c2 !important;
+  color: #8e0000 !important;
+}
+
+/* ---------- 10. 数据色保留（统计图、词云、风险条等不受影响） ----------
+   注意：下面这些类我们不动，确保数据依然一眼可辨：
+   .bmi-seg / .vital-item-badge / .heat-risk-seg / 词云颜色 / 图表 COLORS 数组
+   --------------------------------------------------------------- */
+
+   /* ============================================================
+   国庆主题 · 浓档装饰（在中档基础上叠加）
+   ============================================================ */
+
+/* ---------- A. 顶栏最上方加一条金红渐变通栏条 ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #b71c1c, #f6c453, #b71c1c, #f6c453, #b71c1c);
+  background-size: 200% 100%;
+  z-index: 200;
+  pointer-events: none;
+  animation: nationalBarFlow 6s linear infinite;
+}
+@keyframes nationalBarFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---------- B. Hero 右上角加一颗五角星 ---------- */
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  width: 60px;
+  height: 60px;
+  background: #ffd766;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  opacity: .55;
+  animation: starPulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes starPulse {
+  0%, 100% { transform: scale(1); opacity: .55; }
+  50% { transform: scale(1.15); opacity: .85; }
+}
+
+/* ---------- C. 工具卡片 hover 时右上角浮现金色光晕 ---------- */
+.tool-card::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 196, 83, .35), transparent 70%);
+  opacity: 0;
+  transition: .3s;
+  pointer-events: none;
+}
+.tool-card:hover::after {
+  opacity: 1;
+}
+
+/* ---------- D. 主标题加一点金色描边 ---------- */
+.hero h1 {
+  -webkit-text-stroke: 1px rgba(246, 196, 83, .5);
+  text-stroke: 1px rgba(246, 196, 83, .5);
+}
+
+/* ---------- E. 通知铃铛红点用金色边框 ---------- */
+.notif-dot {
+  box-shadow: 0 0 0 2px #f6c453, 0 2px 6px rgba(220, 38, 38, .45) !important;
+}
+
+/* ---------- F. 页脚加一句国庆标语 ---------- */
+.site-footer::before {
+  content: "1949 - 2026 · 山河锦绣，国泰民安";
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #9e1414;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+/* ---------- G. 页面切换时给 active 页加一点金色顶部高光 ---------- */
+.page.active::before {
+  content: "";
+  display: block;
+  height: 3px;
+  margin: -3px -20px 16px;
+  background: linear-gradient(90deg, transparent, #f6c453, transparent);
+  border-radius: 3px;
+  opacity: .8;
+}
+
+.promo-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-flag-bg {
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  width: 160px;
+  height: 110px;
+  opacity: 0.08;
+  pointer-events: none;
+  transform: rotate(-12deg);
+}
+
+.promo-flag-bg svg {
+  width: 100%;
+  height: 100%;
+}
+

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岁窦工具箱 · V3.0 焕新版</title>
+<title>岁窦工具箱 · V3.0.10.1国庆特别版</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/slogo.png">
 <style id="v3-visual-refresh">
 /* ============================================================
-   V3.0 焕新版 · 视觉焕新
+   V3.0.10.1国庆特别版 · 视觉焕新
    ============================================================ */
 :root{
   --radius:16px;
@@ -373,16 +373,17 @@ nav button:hover:not(.active){
 }
 
 /* ---------- 深色区：暖墨绿 + 内部高光 ---------- */
-.calc-display, .clock-display{
+.calc-display,
+.clock-display {
   background:
-    radial-gradient(600px 200px at 100% 0%, rgba(132,204,22,.30), transparent 70%),
-    linear-gradient(135deg,#2f3d10,#1a2e05) !important;
-  box-shadow:inset 0 2px 10px rgba(0,0,0,.35), 0 10px 24px -12px rgba(26,46,5,.55);
+    radial-gradient(600px 200px at 100% 0%, rgba(246, 196, 83, .25), transparent 70%),
+    linear-gradient(135deg, #4a1010, #2a0a0a) !important;
 }
-#codeInput{
+#codeInput {
   background:
-    radial-gradient(600px 200px at 100% 0%, rgba(132,204,22,.14), transparent 70%),
-    linear-gradient(180deg,#1f3408,#14260b) !important;
+    radial-gradient(600px 200px at 100% 0%, rgba(246, 196, 83, .14), transparent 70%),
+    linear-gradient(180deg, #3a0d0d, #220606) !important;
+  color: #ffd766 !important;
 }
 
 /* ---------- 侧栏 / 弹窗 ---------- */
@@ -691,6 +692,38 @@ nav button:hover:not(.active){
 .notice-body .notice-img.hover-zoom:hover{
   transform:translateY(-3px);
   box-shadow:0 16px 36px -12px rgba(77,124,15,.45);
+}
+/* ============ 首页大图 Hero · 国庆红金主题 ============ */
+.hero {
+  background:
+    /* 右侧金色光晕 */
+    radial-gradient(600px 260px at 88% 20%, rgba(246, 196, 83, 0.45), transparent 70%),
+    /* 右下角深红光晕 */
+    radial-gradient(500px 320px at 110% 100%, rgba(198, 40, 40, 0.65), transparent 70%),
+    /* 主体深红渐变 */
+    linear-gradient(135deg, #b71c1c 0%, #8e0000 100%) !important;
+  
+  box-shadow:
+    0 24px 50px -20px rgba(158, 20, 20, 0.5),
+    inset 0 1px 0 rgba(255, 215, 0, 0.35) !important;
+}
+
+/* 让大图里的装饰圆球变成金色 */
+.hero::before {
+  background: radial-gradient(circle at 40% 40%, rgba(246, 196, 83, 0.5), transparent 65%) !important;
+}
+.hero::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.22), transparent 70%) !important;
+}
+
+/* 确保文字在红底上的对比度 */
+.hero h1 {
+  color: #f6c453 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
+}
+.hero p {
+  color: #ffe3c2 !important;
+  opacity: 1 !important;
 }
 </style>
 <style id="help-layout-fix">
@@ -1025,18 +1058,28 @@ nav button:hover:not(.active){
   <!-- ==================== 首页 ==================== -->
   <section id="page-home" class="page active">
     <div class="hero">
-      <h1 style="color:#fff;">岁窦工具箱 · V3.0 焕新版</h1>
-      <p style="color:#f3f4f6;">各种小工具，欢迎你前来探索 ~ 本次焕新以青柠绿为主题，界面全面升级，焕然一新。</p>
-    </div>
+      <h1 style="color:#f6c453;">岁窦工具箱 · 庆祝中华人民共和国成立 77 周年</h1>
+      <p style="color:#ffe3c2;">1949 - 2026 · 山河锦绣，国泰民安。祝祖国繁荣昌盛，祝大家节日快乐！</p>
+</div>
 <!-- ---------- 推广横幅：小游戏网页 ---------- -->
-<div class="promo-banner" id="promoBanner">
-  <span class="promo-badge">推广</span>
+<div class="promo-banner promo-banner--national" id="promoBanner">
+  <span class="promo-badge">国庆</span>
+  <div class="promo-flag-bg">
+  <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
+    <rect width="30" height="20" fill="#de2910"/>
+    <polygon points="4,2 5.8,6.5 10.5,6.5 6.8,9.5 8.2,14 4,11 0,14 1.4,9.5 -2.3,6.5 2.4,6.5" fill="#ffde00"/>
+    <polygon points="11.5,1.5 12,3 13.5,3 12.3,4 12.8,5.5 11.5,4.5 10.2,5.5 10.7,4 9.5,3 11,3" fill="#ffde00"/>
+    <polygon points="13.5,4 14,5.5 15.5,5.5 14.3,6.5 14.8,8 13.5,7 12.2,8 12.7,6.5 11.5,5.5 13,5.5" fill="#ffde00"/>
+    <polygon points="13.5,8 14,9.5 15.5,9.5 14.3,10.5 14.8,12 13.5,11 12.2,12 12.7,10.5 11.5,9.5 13,9.5" fill="#ffde00"/>
+    <polygon points="11.5,10.5 12,12 13.5,12 12.3,13 12.8,14.5 11.5,13.5 10.2,14.5 10.7,13 9.5,12 11,12" fill="#ffde00"/>
+  </svg>
+</div>
   <div class="promo-body">
-    <h3 class="promo-title">小游戏网页上线啦！</h3>
-    <p class="promo-desc">发现一个有趣的小游戏集合站，摸鱼放松好去处，点进去看看～</p>
+   <h3 class="promo-title">庆祝中华人民共和国成立 77 周年</h3>
+    <p class="promo-desc">1949 - 2026 · 山河锦绣，国泰民安。祝祖国繁荣昌盛，祝大家节日快乐！</p>
   </div>
   <div class="promo-actions">
-    <a class="btn small" id="promoGo" href="https://sulder20.github.io/html/XYX/games.html" target="_blank" rel="noopener">立即前往</a>
+    <a class="btn small" id="promoGo" href="https://www.gov.cn/" target="_blank" rel="noopener">了解国庆</a>
     <button class="promo-close" id="promoClose" type="button" aria-label="关闭推广" title="不再显示">✕</button>
   </div>
 </div>
@@ -1062,13 +1105,13 @@ nav button:hover:not(.active){
       <div class="notice-body">
         <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
         <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
-        <p>V3.0 焕新版做了两件事。一是把整套界面从铂金金属灰换成青柠绿主题：顶栏、按钮、卡片、表单、图标底色全部焕然一新；计算器、时钟、代码编辑器这三处深色区改成深墨绿，与主题呼应；同时保留图表、词云、章节类型、风险条等数据色的独立性，确保数据依然一眼可辨。二是新增两款工具：健康与运动分类加入了「冥想练习」，AI 与开发分类加入了「JSON 格式化 / 校验」，前者帮你在忙碌中放松身心，后者帮开发者更顺手地处理数据。</p>
+        <p>V3.0.10.1国庆特别版做了两件事。一是把整套界面从铂金金属灰换成青柠绿主题：顶栏、按钮、卡片、表单、图标底色全部焕然一新；计算器、时钟、代码编辑器这三处深色区改成深墨绿，与主题呼应；同时保留图表、词云、章节类型、风险条等数据色的独立性，确保数据依然一眼可辨。二是新增两款工具：健康与运动分类加入了「冥想练习」，AI 与开发分类加入了「JSON 格式化 / 校验」，前者帮你在忙碌中放松身心，后者帮开发者更顺手地处理数据。</p>
         <p>本次小版本更新，「计算与数据」分类新增了<span style="color:var(--primary-dark);">汇率换算</span>工具：内置参考汇率离线可用，也可以联网拉取当日参考值。</p>
         <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
         <div class="notice-sign">
           <p>2026 年 10 月</p>
-          <p>岁窦工具箱 · V3.0 焕新版</p>
+          <p>岁窦工具箱 · V3.0.10.1国庆特别版</p>
         </div>
       </div>
     </details>
@@ -1360,7 +1403,7 @@ nav button:hover:not(.active){
       </span>
       帮助中心
     </h2>
-    <p class="page-desc">V3.0 焕新版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
+    <p class="page-desc">V3.0.10.1国庆特别版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
 
     <div class="help-layout">
       <div class="help-content">
@@ -1448,7 +1491,7 @@ nav button:hover:not(.active){
           </h3>
 
           <details class="faq-item" open>
-            <summary>V3.0 焕新版相比 V2.3.2 改了什么？</summary>
+            <summary>V3.0.10.1国庆特别版相比 V2.3.2 改了什么？</summary>
             <div class="faq-body">
               <p><b>V3.0 主要做了两件事</b>：一是界面全面焕新，二是新增两款实用工具。</p>
               <p><b>界面方面</b>：① 全站主题色从铂金金属灰换成青柠绿（<code>#84cc16</code>）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。</p>
@@ -1764,7 +1807,7 @@ nav button:hover:not(.active){
           </div>
           <div class="help-info-row">
             <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <div class="help-info-body"><b>版本</b>：V3.0 焕新版（2026.10）</div>
+            <div class="help-info-body"><b>版本</b>：V3.0.10.1国庆特别版（2026.10）</div>
           </div>
         </div>
 
@@ -1774,7 +1817,7 @@ nav button:hover:not(.active){
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
             下载帮助文档
           </h3>
-          <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V3.0 焕新版。</p>
+          <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V3.0.10.1国庆特别版。</p>
           <div class="help-dl-actions">
             <button type="button" class="btn" data-help-dl="html">下载 HTML 帮助文档</button>
             <button type="button" class="btn ghost" data-help-dl="docx">下载 Word（docx）</button>
@@ -1846,7 +1889,7 @@ nav button:hover:not(.active){
 
       <div class="version-line">
         <span class="version-label">当前版本</span>
-        <span class="version-val">V3.0 焕新版（2026.10）</span>
+        <span class="version-val">V3.0.10.1国庆特别版（2026.10）</span>
       </div>
 
       <details class="sub" id="versionHistory" style="margin-top:18px;margin-bottom:0;">
@@ -1871,13 +1914,13 @@ nav button:hover:not(.active){
             <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
             <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
             <span class="version-label">当前</span>
-            <span class="version-val">V3.0 焕新版</span>
+            <span class="version-val">V3.0.10.1国庆特别版</span>
           </div>
 
-          <!-- ======= V3.0 焕新版 ======= -->
+          <!-- ======= V3.0.10.1国庆特别版 ======= -->
           <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
             <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
-            V3.0 焕新版 · 青柠绿主题全面焕新
+            V3.0.10.1国庆特别版 · 红金主题国庆焕新
           </h3>
           <div class="upgrade-grid" style="margin-bottom:26px;">
             <div class="upgrade-item">
@@ -3772,7 +3815,7 @@ nav button:hover:not(.active){
     </div>
   </section>
 
-  <footer class="site-footer">2026© 岁窦制作 · V3.0 焕新版</footer>
+  <footer class="site-footer">2026© 岁窦制作 · V3.0.10.1国庆特别版</footer>
 </main>
 
 <!-- ==================== 弹窗：歌词 ==================== -->
