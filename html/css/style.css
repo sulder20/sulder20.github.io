@@ -1977,3 +1977,72 @@ body::after {
     background: #fff !important;
   }
 }
+
+
+/* ============ 帮助中心 · 国庆红金主题 ============ */
+#page-help .page-icon {
+  background: linear-gradient(135deg, #ffe3c2, #ffd0a0) !important;
+  color: #9e1414 !important;
+}
+#page-help .panel {
+  border-color: rgba(198, 40, 40, .18) !important;
+  background: #fffaf2 !important;
+}
+#page-help .panel-head {
+  color: #9e1414 !important;
+  border-bottom-color: rgba(198, 40, 40, .2) !important;
+}
+#page-help .panel-head svg {
+  color: #c62828 !important;
+}
+.help-toc button {
+  background: #fffaf2 !important;
+  border-color: rgba(198, 40, 40, .2) !important;
+  color: #7a3a17 !important;
+}
+.help-toc button svg { color: #c62828 !important; }
+.help-toc button:hover {
+  background: #fff0d4 !important;
+  border-color: #c62828 !important;
+  color: #8e0000 !important;
+}
+.help-step-num {
+  background: linear-gradient(135deg, #f6c453, #c62828) !important;
+  box-shadow: 0 3px 9px rgba(158, 20, 20, .35) !important;
+}
+.help-step-body b { color: #9e1414 !important; }
+.faq-item {
+  background: #fffaf2 !important;
+  border-color: rgba(198, 40, 40, .18) !important;
+}
+.faq-item[open] {
+  background: #fff !important;
+  border-color: rgba(198, 40, 40, .35) !important;
+}
+.faq-item summary::before { background: #c62828 !important; }
+.faq-item[open] summary::before { box-shadow: 0 0 0 4px #ffe3c2 !important; }
+.faq-item summary:hover { color: #9e1414 !important; }
+.faq-body code { background: #ffe3c2 !important; color: #8e0000 !important; }
+.help-tip {
+  background: #fffaf2 !important;
+  border-color: rgba(198, 40, 40, .18) !important;
+}
+.help-tip:hover {
+  background: #fff0d4 !important;
+  border-color: #c62828 !important;
+}
+.help-tip b { color: #9e1414 !important; }
+.help-info-icon {
+  background: #ffe3c2 !important;
+  color: #9e1414 !important;
+}
+.help-sidebar {
+  border-color: rgba(198, 40, 40, .18) !important;
+  background: #fffaf2 !important;
+}
+.help-sidebar a.active {
+  background: #ffe3c2 !important;
+  color: #8e0000 !important;
+}
+.help-sidebar a.active .hs-dot { background: #c62828 !important; }
+.kbd { border-color: #f2b8b8 !important; }

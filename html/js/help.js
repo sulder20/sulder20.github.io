@@ -109,36 +109,35 @@
         var d = new Date();
         var dateStr = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
 
-        var css = '*{box-sizing:border-box;}' +
-          'body{margin:0;background:#f3f4f6;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#1c1f23;line-height:1.9;}' +
-          '.doc{max-width:860px;margin:0 auto;background:#fff;padding:56px 60px 64px;min-height:100vh;}' +
-          '.cover{text-align:center;padding-bottom:34px;border-bottom:3px solid #84cc16;margin-bottom:44px;}' +
-          '.cover h1{font-size:32px;font-weight:800;letter-spacing:3px;margin:0 0 14px;}' +
-          '.cover .sub{color:#6f7680;font-size:15px;margin:0;}' +
-          '.cover .ver{display:inline-block;margin-top:16px;padding:5px 16px;border-radius:999px;background:#ecfccb;color:#4d7c0f;font-size:13px;font-weight:700;}' +
-          'h2{font-size:21px;margin:44px 0 18px;padding-left:14px;border-left:5px solid #84cc16;}' +
-          'p{margin:0 0 12px;font-size:15px;color:#374151;}' +
-          'ul,ol{margin:0 0 14px;padding-left:26px;font-size:15px;color:#374151;}' +
-          'li{margin-bottom:7px;}' +
-          'b,strong{color:#1c1f23;}' +
-          'code{background:#ecfccb;color:#4d7c0f;padding:1px 7px;border-radius:5px;font-family:Consolas,Menlo,monospace;font-size:13.5px;}' +
-          '.qa{border:1px solid #e5ecc9;border-radius:10px;padding:15px 18px;margin-bottom:11px;background:#fafcf5;}' +
-          '.qa .q{font-size:15.5px;font-weight:700;margin:0 0 8px;}' +
-          '.qa .a{font-size:14.5px;color:#4b5563;}' +
-          '.qa .a p{margin:0 0 8px;font-size:14.5px;color:#4b5563;}' +
-          '.tip{border-left:4px solid #bef264;background:#f8fcf2;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:11px;font-size:14.5px;color:#4b5563;}' +
-          '.tip b{color:#4d7c0f;display:block;margin-bottom:4px;}' +
-          '.kbd{display:inline-block;padding:2px 8px;margin:0 2px;border:1px solid #d1d5db;border-bottom-width:2px;border-radius:6px;background:#fff;font-family:Consolas,Menlo,monospace;font-size:12.5px;color:#374151;white-space:nowrap;}' +
-          'table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14.5px;}' +
-          'th,td{text-align:left;padding:10px 13px;border-bottom:1px solid #e5ecc9;vertical-align:top;}' +
-          'th{background:#f7faf0;color:#6b7d54;font-weight:600;font-size:13px;}' +
-          '.footer{margin-top:52px;padding-top:22px;border-top:1px solid #e5ecc9;text-align:center;color:#9ca3af;font-size:13px;}' +
-          '@media print{body{background:#fff;}.doc{padding:0;max-width:none;}.qa,.tip{break-inside:avoid;}}' +
-          '@media(max-width:640px){.doc{padding:28px 20px 40px;}.cover h1{font-size:24px;}h2{font-size:18px;}}';
-
-        var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档</h1>' +
+        var css = '*{box-sizing:border-box;}' +        
+        'body{margin:0;background:#fffaf2;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#3a1a10;line-height:1.9;}' +
+        '.doc{max-width:860px;margin:0 auto;background:#fff;padding:56px 60px 64px;min-height:100vh;}' +
+        '.cover{text-align:center;padding-bottom:34px;border-bottom:3px solid #c62828;margin-bottom:44px;}' +
+        '.cover h1{font-size:32px;font-weight:800;letter-spacing:3px;margin:0 0 14px;color:#8e0000;}' +
+        '.cover .sub{color:#9a5a3c;font-size:15px;margin:0;}' +
+        '.cover .ver{display:inline-block;margin-top:16px;padding:5px 16px;border-radius:999px;background:#ffe3c2;color:#8e0000;font-size:13px;font-weight:700;}';
+        'h2{font-size:21px;margin:44px 0 18px;padding-left:14px;border-left:5px solid #c62828;color:#8e0000;}' +
+        'p{margin:0 0 12px;font-size:15px;color:#4b2a1a;}' +
+        'ul,ol{margin:0 0 14px;padding-left:26px;font-size:15px;color:#4b2a1a;}' +
+        'li{margin-bottom:7px;}' +
+        'b,strong{color:#3a1a10;}' +
+        'code{background:#ffe3c2;color:#8e0000;padding:1px 7px;border-radius:5px;font-family:Consolas,Menlo,monospace;font-size:13.5px;}' +
+        '.qa{border:1px solid #f2d8b8;border-radius:10px;padding:15px 18px;margin-bottom:11px;background:#fffaf2;}' +
+        '.qa .q{font-size:15.5px;font-weight:700;margin:0 0 8px;color:#8e0000;}' +
+        '.qa .a{font-size:14.5px;color:#4b2a1a;}' +
+        '.qa .a p{margin:0 0 8px;font-size:14.5px;color:#4b2a1a;}' +
+        '.tip{border-left:4px solid #f6c453;background:#fffaf2;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:11px;font-size:14.5px;color:#4b2a1a;}' +
+        '.tip b{color:#8e0000;display:block;margin-bottom:4px;}' +
+        '.kbd{display:inline-block;padding:2px 8px;margin:0 2px;border:1px solid #f2b8b8;border-bottom-width:2px;border-radius:6px;background:#fff;font-family:Consolas,Menlo,monospace;font-size:12.5px;color:#7a3a17;white-space:nowrap;}' +
+        'table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14.5px;}' +
+        'th,td{text-align:left;padding:10px 13px;border-bottom:1px solid #f2d8b8;vertical-align:top;}' +
+        'th{background:#fff0d4;color:#9a5a3c;font-weight:600;font-size:13px;}' +
+        '.footer{margin-top:52px;padding-top:22px;border-top:1px solid #f2d8b8;text-align:center;color:#b08868;font-size:13px;}' +
+        '@media print{body{background:#fff;}.doc{padding:0;max-width:none;}.qa,.tip{break-inside:avoid;}}' +
+        '@media(max-width:640px){.doc{padding:28px 20px 40px;}.cover h1{font-size:24px;}h2{font-size:18px;}}';
+        var body = '<div class="cover"><h1>岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）</h1>' +
           '<p class="sub">新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明</p>' +
-          '<span class="ver">V3.0 焕新版（2026.10）</span></div>' +
+          '<span class="ver">3.0.10.1 国庆特别版（2026.10）</span>'
 
           '<h2>一、快速开始</h2><ol>' +
           '<li><b>找到你要的工具</b>：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列。V3.0 起，全站以青柠绿为主题色，并新增「冥想练习」与「JSON 格式化」两款工具。</li>' +
@@ -152,7 +151,7 @@
           '<h2>二、常见问题</h2>' +
           '<div class="qa"><p class="q">V3.0 焕新版相比 V2.3.2 改了什么？</p><div class="a">' +
           '<p><b>V3.0 主要做了两件事</b>：一是界面全面焕新，二是新增两款实用工具。</p>' +
-          '<p><b>界面方面</b>：① 全站主题色从铂金金属灰换成青柠绿（<code>#84cc16</code>）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。</p>' +
+          '<p><b>界面方面</b>：① 全站主题色从铂金金属灰换成青柠绿（<code>#c62828</code>）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。</p>' +
           '<p>同时，<b>所有数据展示色保持不变</b>：统计图、词云、小说章节类型分布、BMI 分段、体感温度风险条、生命体征状态、音乐平台品牌色等，依然是原来的多色方案，确保数据一眼可辨。</p>' +
           '<p><b>新增工具方面</b>：</p>' +
           '<p>① 「健康与运动」分类新增<b>冥想练习</b>：内置 4-7-8 呼吸、箱式呼吸、等长呼吸、深度放松四种节奏，圆形随呼吸节律放大缩小，附呼吸提示音与循环计数，纯本地运行。</p>' +
@@ -276,14 +275,13 @@
           '<ul>' +
           '<li><b>微博</b>：@岁窦工作室</li>' +
           '<li><b>邮箱</b>：q13052830801@163.com</li>' +
-          '<li><b>版本</b>：V3.0 焕新版（2026.10）</li>' +
+          '<li><b>版本</b>：3.0.10.1 国庆特别版</li>' +
           '</ul>' +
-
-          '<div class="footer">岁窦工具箱 · 帮助文档<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>';
-
+          
+          '<div class="footer">岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）（3.0.10.1 国庆特别版）<br>导出时间：' + dateStr + '　|　2026© 岁窦制作</div>'
         return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">' +
           '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-          '<title>岁窦工具箱 · 帮助文档</title><style>' + css + '</style></head><body>' +
+          '<title>岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）</title><style>' + css + '</style></head><body>' +
           '<div class="doc">' + body + '</div></body></html>';
       }
 
@@ -294,9 +292,9 @@
         var d = new Date();
         var dateStr = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
         return [
-          '# 岁窦工具箱 · 帮助文档', '',
+          '# 岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）', '',
           '> 新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明  ',
-          '> 版本：V3.0 焕新版（2026.10）', '', '---', '',
+          '> 版本：V3.0.10.1 国庆特别版（2026.10）', '', '---', '',
 
           '## 一、快速开始', '',
           '1. **找到你要的工具**：首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。工具按六大分类排列：① 健康与运动、② 创作工坊、③ 收藏与记录、④ 计算与数据、⑤ 时间与生活、⑥ AI 与开发。V3.0 起，全站以青柠绿为主题色，并新增「冥想练习」与「JSON 格式化」两款工具。',
@@ -310,7 +308,7 @@
           '### Q1. V3.0 焕新版相比 V2.3.2 改了什么？',
           '**V3.0 主要做了两件事**：一是界面全面焕新，二是新增两款实用工具。',
           '',
-          '**界面方面**：① 全站主题色从铂金金属灰换成青柠绿（`#84cc16`）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。',
+          '**界面方面**：① 全站主题色从铂金金属灰换成青柠绿（`#c62828`）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。',
           '',
           '同时，**所有数据展示色保持不变**：统计图、词云、小说章节类型分布、BMI 分段、体感温度风险条、生命体征状态、音乐平台品牌色等，依然是原来的多色方案。',
           '',
@@ -409,9 +407,9 @@
           '## 六、联系与反馈', '',
           '- 微博：@岁窦工作室',
           '- 邮箱：q13052830801@163.com',
-          '- 版本：V3.0 焕新版（2026.10）', '',
+          '- 版本：V3.0.10.1 国庆特别版', '',
           '---', '',
-          '*岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
+          '*岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）　|　导出时间：' + dateStr + '　|　2026© 岁窦制作*', ''
         ].join('\n');
       }
 
@@ -429,27 +427,27 @@
         var children = [];
 
         children.push(new D.Paragraph({
-          children: [new D.TextRun({ text: '岁窦工具箱 · 帮助文档', bold: true, size: 44, font: FONT, color: '4d7c0f' })],
+          children: [new D.TextRun({ text: '岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）', bold: true, size: 44, font: FONT, color: '8e0000' })],
           alignment: D.AlignmentType.CENTER,
           spacing: { before: 600, after: 200 }
         }));
         children.push(new D.Paragraph({
-          children: [new D.TextRun({ text: '新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明', size: 22, font: FONT, color: '6b7d54' })],
+          children: [new D.TextRun({ text: '新手教程 · 常见问题 · 工具小贴士 · 快捷键 · 数据说明', size: 22, font: FONT, color: '9a5a3c' })],
           alignment: D.AlignmentType.CENTER,
           spacing: { after: 120 }
         }));
         children.push(new D.Paragraph({
-          children: [new D.TextRun({ text: 'V3.0 焕新版（2026.10）', size: 22, font: FONT, color: '4d7c0f', bold: true })],
+          children: [new D.TextRun({ text: 'V3.0.10.1 国庆特别版（2026.10）', size: 22, font: FONT, color: '8e0000', bold: true })],
           alignment: D.AlignmentType.CENTER,
           spacing: { after: 400 },
-          border: { bottom: { color: '84cc16', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
+          border: { bottom: { color: 'c62828', space: 6, style: D.BorderStyle.SINGLE, size: 12 } }
         }));
 
         function H1(text) {
           return new D.Paragraph({
-            children: [new D.TextRun({ text: text, bold: true, size: 30, font: FONT, color: '3d444b' })],
+            children: [new D.TextRun({ text: text, bold: true, size: 30, font: FONT, color: '8e0000' })],
             spacing: { before: 400, after: 200 },
-            border: { left: { color: '84cc16', space: 8, style: D.BorderStyle.SINGLE, size: 24 } },
+            border: { left: { color: 'c62828', space: 8, style: D.BorderStyle.SINGLE, size: 24 } },
             indent: { left: 160 }
           });
         }
@@ -480,7 +478,7 @@
           ['健康数据仅供参考', 'BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，不能替代专业医疗意见。']
         ].forEach(function (s, i) {
           children.push(Runs([
-            { text: (i + 1) + '. ', bold: true, color: '4d7c0f' },
+            { text: (i + 1) + '. ', bold: true, color: '8e0000' },
             { text: s[0] + '：', bold: true, color: '1c1f23' },
             { text: s[1] }
           ]));
@@ -490,7 +488,7 @@
         var faqs = [
           ['V3.0 焕新版相比 V2.3.2 改了什么？', [
             'V3.0 主要做了两件事：一是界面全面焕新，二是新增两款实用工具。',
-            '界面方面：① 全站主题色从铂金金属灰换成青柠绿（#84cc16）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。',
+            '界面方面：① 全站主题色从铂金金属灰换成青柠绿（#c62828）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。',
             '同时，所有数据展示色保持不变：统计图、词云、小说章节类型分布、BMI 分段、体感温度风险条、生命体征状态、音乐平台品牌色等，依然是原来的多色方案。',
             '新增工具方面：① 「健康与运动」分类新增冥想练习；② 「AI 与开发」分类新增 JSON 格式化 / 校验。'
           ]],
@@ -570,7 +568,7 @@
         faqs.forEach(function (f, i) {
           children.push(new D.Paragraph({
             children: [
-              new D.TextRun({ text: 'Q' + (i + 1) + '. ', bold: true, size: 24, font: FONT, color: '4d7c0f' }),
+              new D.TextRun({ text: 'Q' + (i + 1) + '. ', bold: true, size: 24, font: FONT, color: '8e0000' }),
               new D.TextRun({ text: f[0], bold: true, size: 24, font: FONT, color: '1c1f23' })
             ],
             spacing: { before: 200, after: 100 },
@@ -607,8 +605,8 @@
           ['JSON 格式化', '格式化 / 压缩 / 转义，语法错误定位到行列。']
         ].forEach(function (t) {
           children.push(Runs([
-            { text: '• ', color: '4d7c0f', bold: true, size: 24 },
-            { text: t[0] + '：', bold: true, color: '4d7c0f' },
+            { text: '• ', color: '8e0000', bold: true, size: 24 },
+            { text: t[0] + '：', bold: true, color: '8e0000' },
             { text: t[1] }
           ]));
         });
@@ -629,16 +627,16 @@
               children: [
                 new D.TableCell({
                   width: { size: 25, type: D.WidthType.PERCENTAGE },
-                  shading: { type: D.ShadingType.CLEAR, fill: 'f7faf0', color: 'auto' },
+                  shading: { type: D.ShadingType.CLEAR, fill: 'fff0d4', color: 'auto' },
                   children: [new D.Paragraph({
-                    children: [new D.TextRun({ text: '场景', bold: true, size: 22, font: FONT, color: '6b7d54' })]
+                    children: [new D.TextRun({ text: '场景', bold: true, size: 22, font: FONT, color: '9a5a3c' })]
                   })]
                 }),
                 new D.TableCell({
                   width: { size: 75, type: D.WidthType.PERCENTAGE },
-                  shading: { type: D.ShadingType.CLEAR, fill: 'f7faf0', color: 'auto' },
+                  shading: { type: D.ShadingType.CLEAR, fill: 'fff0d4', color: 'auto' },
                   children: [new D.Paragraph({
-                    children: [new D.TextRun({ text: '按键', bold: true, size: 22, font: FONT, color: '6b7d54' })]
+                    children: [new D.TextRun({ text: '按键', bold: true, size: 22, font: FONT, color: '9a5a3c' })]
                   })]
                 })
               ]
@@ -672,8 +670,8 @@
           ['导出格式', 'JSON（完整备份）、CSV（记账）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线）。']
         ].forEach(function (t) {
           children.push(Runs([
-            { text: '• ', color: '4d7c0f', bold: true, size: 24 },
-            { text: t[0] + '：', bold: true, color: '4d7c0f' },
+            { text: '• ', color: '8e0000', bold: true, size: 24 },
+            { text: t[0] + '：', bold: true, color: '8e0000' },
             { text: t[1] }
           ]));
         });
@@ -682,11 +680,11 @@
         [
           ['微博', '@岁窦工作室'],
           ['邮箱', 'q13052830801@163.com'],
-          ['版本', 'V3.0 焕新版（2026.10）']
+          ['版本', 'V3.0.10.1 国庆特别版（2026.10）']
         ].forEach(function (t) {
           children.push(Runs([
-            { text: '• ', color: '4d7c0f', bold: true, size: 24 },
-            { text: t[0] + '：', bold: true, color: '4d7c0f' },
+            { text: '• ', color: '8e0000', bold: true, size: 24 },
+            { text: t[0] + '：', bold: true, color: '8e0000' },
             { text: t[1] }
           ]));
         });
@@ -697,18 +695,18 @@
           String(dd.getDate()).padStart(2, '0');
         children.push(new D.Paragraph({
           children: [new D.TextRun({
-            text: '岁窦工具箱 · 帮助文档　|　导出时间：' + dateStr + '　|　2026© 岁窦制作',
+            text: '岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）　|　导出时间：' + dateStr + '　|　2026© 岁窦制作',
             size: 20, font: FONT, color: '9ca3af'
           })],
           alignment: D.AlignmentType.CENTER,
           spacing: { before: 600 },
-          border: { top: { color: 'e5ecc9', space: 12, style: D.BorderStyle.SINGLE, size: 6 } }
+          border: { top: { color: 'f2d8b8', space: 12, style: D.BorderStyle.SINGLE, size: 6 } }
         }));
 
         try {
           var doc = new D.Document({
             creator: '岁窦工具箱',
-            title: '岁窦工具箱 · 帮助文档',
+            title: '岁窦工具箱 · 帮助文档（V3.0.10.1 国庆特别版）',
             description: '岁窦工具箱 V3.0 焕新版帮助文档',
             styles: {
               default: {
