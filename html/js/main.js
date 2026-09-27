@@ -100,8 +100,16 @@ document.querySelectorAll('[data-back]').forEach(btn => {
 
 /* ===================== 全局搜索 ===================== */
 const searchInput = document.getElementById('searchInput');
+const searchClearBtn = document.getElementById('searchClear');
+
+// 根据输入框是否有内容，切换清除按钮的显示
+function syncSearchClear(){
+  if (searchClearBtn) searchClearBtn.hidden = searchInput.value.length === 0;
+}
 
 searchInput.addEventListener('input', () => {
+  syncSearchClear();                                    // ← 新增
+
   const q = searchInput.value.trim().toLowerCase();
   const isSearching = !!q;
   let any = false;
@@ -134,6 +142,19 @@ searchInput.addEventListener('input', () => {
   if (noRes) noRes.style.display = (any || !q) ? 'none' : 'block';
   if (isSearching && !document.getElementById('page-apps').classList.contains('active')) go('apps');
 });
+
+/* ---------- 清除按钮点击逻辑（就是这里，紧跟在 input 监听器下面） ---------- */
+if (searchClearBtn){
+  searchClearBtn.addEventListener('click', () => {
+    if (!searchInput.value) return;
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+    searchInput.focus();
+  });
+
+  // 首次加载时同步一次按钮状态（浏览器可能记住输入内容）
+  syncSearchClear();
+}
 
 /* ===================== 认证 ===================== */
 const loginBtn  = document.getElementById('loginBtn');

@@ -37,14 +37,51 @@ nav{display:flex;gap:2px;flex-wrap:wrap;}
 nav button{background:none;border:none;padding:8px 14px;border-radius:8px;font-size:14.5px;color:var(--muted);cursor:pointer;transition:.15s;}
 nav button:hover{background:var(--primary-soft);color:var(--primary-dark);}
 nav button.active{background:var(--primary);color:#fff;}
-.search-wrap{margin-left:auto;}
+.search-wrap{
+  margin-left:auto;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  flex-shrink:0;        /* ★ 关键：禁止被 flex 压缩，宽度跟随 input */
+}
 .search-wrap input{
-  width:200px;max-width:50vw;padding:9px 16px 9px 38px;border-radius:999px;
+  width:200px;max-width:50vw;padding:9px 36px 9px 38px;border-radius:999px;
   border:1px solid var(--border);background:#fafcf5;outline:none;font-size:14px;transition:.18s;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7d54' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.6-3.6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:13px center;background-size:15px;
 }
-.search-wrap input:focus{border-color:var(--primary);background-color:#fff;width:230px;box-shadow:0 0 0 3px rgba(132,204,22,.18);}
+.search-wrap input:focus{border-color:var(--primary);background-color:#fff;box-shadow:0 0 0 3px rgba(132,204,22,.18);}
+/* 搜索框一键清除按钮 */
+.search-clear{
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:none;
+  padding:0;
+  background:rgba(107,125,84,.16);
+  color:var(--muted);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease, transform .15s ease;
+}
+.search-clear svg{width:12px;height:12px;display:block;}
+.search-clear:hover{background:var(--primary);color:#fff;transform:translateY(-50%) scale(1.08);}
+.search-clear:active{transform:translateY(-50%) scale(.94);}
+.search-clear[hidden]{display:none;}
+
+/* 隐藏浏览器原生 type=search 的清除叉，避免出现两个按钮 */
+.search-wrap input::-webkit-search-cancel-button,
+.search-wrap input::-webkit-search-decoration{
+  -webkit-appearance:none;
+  appearance:none;
+}
 #userBox{margin-left:auto;display:flex;align-items:center;gap:10px;}
 #userBox .user-email{font-size:13px;color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
