@@ -1326,3 +1326,17 @@ details.sub .inner{padding-bottom:14px;}
   .help-sidebar a.active .hs-dot{display:none !important;}
   .help-sidebar a .hs-dot{display:none !important;}
 }
+
+/* ============ 汇率换算 ============ */
+#page-exchange .mc-result-box{
+  margin-top:0;
+}
+#fxMeta{
+  font-weight:600;
+  color:var(--primary-dark);
+}
+#fxTable td:last-child,
+#fxTable th:last-child{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}

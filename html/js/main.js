@@ -80,6 +80,9 @@ function go(name){
   if (name === 'exercise')     setTimeout(() => { loadExerProfile(); renderExerciseList(); }, 60);
   if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
   if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
+  if (name === 'exchange')     setTimeout(() => {
+  if (typeof window.__fxInit === 'function') window.__fxInit();
+}, 60);
   if (name === 'qrcode')       setTimeout(() => {
     if (typeof window.__qrRender === 'function'){
       try { window.__qrRender(); }
@@ -5543,6 +5546,7 @@ const TOOL_REGISTRY = [
   { id: 'calc',         name: '数学计算' },
   { id: 'chart',        name: '统计图生成' },
   { id: 'qrcode',       name: '二维码生成' },
+  { id: 'exchange',     name: '汇率换算' },
   /* ⑤ 时间与生活 */
   { id: 'calendar',     name: '我的日历' },
   { id: 'clock',        name: '时钟工具' },
@@ -6000,6 +6004,13 @@ injectToolCrumbs();
      ========================================================= */
   const NOTIFICATIONS = [
     {
+    id: 'exchange-tool',
+    type: 'info',
+    title: '新工具：汇率换算',
+    content: '「计算与数据」分类下新增汇率换算，支持常用货币互转，内置参考汇率离线可用，可联网更新当日参考值。',
+    time: '2026-09-27'
+    },
+    {
       id: 'v3-0-release',
       type: 'success',
       title: 'V3.0 焕新版上线',
@@ -6198,6 +6209,7 @@ injectToolCrumbs();
     '对话生成器': 'D',
     '地点收藏': 'D',
     '二维码生成': 'E',
+    '汇率换算': 'H',
     '歌曲收藏': 'G',
     '健康管理': 'J',
     '灵感速记': 'L',

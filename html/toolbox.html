@@ -1051,6 +1051,7 @@ nav button:hover:not(.active){
         <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。在这里，你可以进行文章分析、数学计算、常见统计图生成等非常常见且实用的功能，其余功能我们还在不断制作中，发现的 bug 还将继续改进，体验还在持续优化中。</p>
         <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
         <p>V3.0 焕新版做了两件事。一是把整套界面从铂金金属灰换成青柠绿主题：顶栏、按钮、卡片、表单、图标底色全部焕然一新；计算器、时钟、代码编辑器这三处深色区改成深墨绿，与主题呼应；同时保留图表、词云、章节类型、风险条等数据色的独立性，确保数据依然一眼可辨。二是新增两款工具：健康与运动分类加入了「冥想练习」，AI 与开发分类加入了「JSON 格式化 / 校验」，前者帮你在忙碌中放松身心，后者帮开发者更顺手地处理数据。</p>
+        <p>本次小版本更新，「计算与数据」分类新增了<span style="color:var(--primary-dark);">汇率换算</span>工具：内置参考汇率离线可用，也可以联网拉取当日参考值。</p>
         <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
         <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
         <div class="notice-sign">
@@ -1165,6 +1166,7 @@ nav button:hover:not(.active){
           <li data-target="calc">数学计算</li>
           <li data-target="chart">常见统计图生成</li>
           <li data-target="qrcode">二维码生成</li>
+          <li data-target="exchange">汇率换算</li>
         </ul>
       </div>
 
@@ -1284,6 +1286,16 @@ nav button:hover:not(.active){
       <div class="tool-card" data-target="qrcode" data-keywords="二维码 QR code 生成 链接 网址 文本 电话 WiFi 密码 二维码制作 扫码">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-7M17 17h.01"/></svg></div>
         <h3>二维码生成</h3><p>文本 / 网址 / 电话 / WiFi 生成二维码，支持 Logo、参数调节，导出 PNG 与 SVG</p>
+      </div>
+      <div class="tool-card" data-target="exchange" data-keywords="汇率 换算 货币 美元 人民币 欧元 日元 英镑 港币 外币 兑换 外汇">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M8 12h8M12 8l4 4-4 4"/>
+          </svg>
+        </div>
+        <h3>汇率换算</h3>
+        <p>常用货币互转，内置参考汇率，支持联网更新实时汇率</p>
       </div>
 
       <!-- ⑤ 时间与生活 -->
@@ -1644,6 +1656,7 @@ nav button:hover:not(.active){
             <div class="help-tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>
             <div class="help-tip"><b>图片压缩</b>本地浏览器压缩，支持质量滑块、目标大小、格式切换，原图与压缩后并排对比体积。</div>
             <div class="help-tip"><b>JSON 格式化</b>格式化 / 压缩 / 转义，语法错误定位到行列；Ctrl / ⌘ + Enter 一键格式化。</div>
+            <div class="help-tip"><b>汇率换算</b>内置参考汇率，离线可用；点「联网更新实时汇率」可拉取当日参考值。结果为参考性质，实际以银行或支付平台成交价为准。</div>
           </div>
         </div>
 
@@ -1689,6 +1702,12 @@ nav button:hover:not(.active){
             <div class="help-key-label">JSON 格式化</div>
             <div class="help-key-desc">
               <span class="kbd">Ctrl</span> / <span class="kbd">⌘</span> + <span class="kbd">Enter</span> 一键格式化（2 空格缩进）
+            </div>
+          </div>
+          <div class="help-key-row">
+            <div class="help-key-label">汇率换算</div>
+            <div class="help-key-desc">
+              金额输入框中按 <span class="kbd">Enter</span> 直接换算
             </div>
           </div>
         </div>
@@ -1880,6 +1899,10 @@ nav button:hover:not(.active){
             <div class="upgrade-item">
               <div class="up-head"><span class="up-badge">新增</span><b>JSON 格式化 / 校验</b></div>
               <p>「AI 与开发」分类新增 JSON 工具。支持 2/4 空格格式化、一键压缩、转义 / 去转义；语法错误会定位到具体行列，输入时实时校验。纯本地运行，不上传数据。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>汇率换算</b></div>
+              <p>「计算与数据」分类新增汇率换算。内置常用货币参考汇率，离线可用；支持联网更新当日参考值，并缓存到本地。结果为参考性质，实际以银行或支付平台成交价为准。</p>
             </div>
           </div>
 
@@ -2761,7 +2784,73 @@ nav button:hover:not(.active){
       </div>
     </div>
   </section>
+<!-- ==================== 汇率换算 ==================== -->
+<section id="page-exchange" class="page">
+  <button class="back-btn" data-back>← 返回首页</button>
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M8 12h8M12 8l4 4-4 4"/>
+      </svg>
+    </span>
+    汇率换算
+  </h2>
+  <p class="page-desc">人民币、美元、欧元等常用货币互转。内置参考汇率，离线可用；联网可更新实时汇率。</p>
 
+  <div class="panel">
+    <h3 class="panel-head">换算</h3>
+    <div class="form-grid">
+      <label class="field">
+        <span>金额 *</span>
+        <input type="text" id="fxAmount" value="100" placeholder="如：100">
+      </label>
+      <label class="field">
+        <span>从</span>
+        <select id="fxFrom"></select>
+      </label>
+      <label class="field">
+        <span>到</span>
+        <select id="fxTo"></select>
+      </label>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+      <button class="btn ghost small" id="fxSwap">⇄ 交换货币</button>
+      <button class="btn ghost small" id="fxReset">重置</button>
+    </div>
+
+    <div class="mc-result-box" id="fxResult">
+      <div class="mc-res-label">换算结果</div>
+      <div class="mc-res-value">—</div>
+      <div class="mc-res-sub">请输入金额</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">汇率数据</h3>
+    <p class="tip" id="fxMeta">正在读取汇率数据…</p>
+    <div class="data-actions">
+      <button class="btn" id="fxUpdate">联网更新实时汇率</button>
+      <button class="btn ghost" id="fxRestore">恢复内置参考汇率</button>
+    </div>
+    <p class="tip" style="margin-top:12px;">
+      内置汇率为参考值，仅供参考，实际以银行或支付平台成交价为准。
+      联网更新依赖公开汇率接口，若网络异常或浏览器拦截请求，会自动回退到本地数据。
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">常用货币对照（以 1 CNY 为基准）</h3>
+    <div class="table-wrap">
+      <table class="shoe-table" id="fxTable">
+        <thead>
+          <tr><th>货币</th><th>代码</th><th>1 CNY 约等于</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
   <!-- ==================== 健康管理 ==================== -->
   <section id="page-health" class="page">
     <button class="back-btn" data-back>← 返回首页</button>
@@ -3711,6 +3800,7 @@ nav button:hover:not(.active){
 <script src="js/qrcode.js"></script>
 <script src="js/heatindex.js"></script>
 <script src="js/imagecompress.js"></script>
+<script src="js/exchange.js"></script>
 
 </body>
 </html>
