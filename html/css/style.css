@@ -1445,44 +1445,6 @@ details.sub .inner{padding-bottom:14px;}
   box-shadow:0 2px 6px -2px rgba(77,124,15,.6);
 }
 
-/* ============ 移动端推广横幅修复补丁 ============ */
-@media (max-width: 640px) {
-  .promo-banner {
-    position: relative !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    padding: 16px 16px 14px !important;
-    gap: 12px !important;
-    border-radius: 16px !important;
-    /* 关键：用纯色打底，防止移动端渐变解析失败导致整个背景丢失 */
-    background-color: #f7fee7 !important;
-    background-image: linear-gradient(135deg, #f7fee7 0%, #ecfccb 100%) !important;
-    border: 1px solid rgba(132,204,22,.28) !important;
-    box-shadow: 0 8px 24px -12px rgba(77,124,15,.25) !important;
-    overflow: hidden !important;
-  }
-  /* 恢复左侧竖条 */
-  .promo-banner::before {
-    display: block !important;
-  }
-  /* 恢复右上角“推广”标签 */
-  .promo-badge {
-    position: absolute !important;
-    top: 10px !important;
-    right: 14px !important;
-    background: linear-gradient(135deg, var(--lime), var(--primary)) !important;
-    color: #fff !important;
-  }
-  /* 恢复底部按钮布局 */
-  .promo-actions {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-}
-
 /* ============ 推广横幅 · 国庆主题（红金调） ============ */
 .promo-banner--national{
   background:
@@ -1961,3 +1923,57 @@ body::after {
   height: 100%;
 }
 
+/* ============================================================
+   手机端国庆主题补丁（强制覆盖青柠绿）
+   ============================================================ */
+@media (max-width: 640px) {
+
+  /* 1. 顶部导航栏改为红金背景 */
+  header {
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe3c2 100%) !important;
+    border-bottom: 2px solid #c62828 !important;
+  }
+  
+  /* 2. 顶部登录按钮、模式徽章改为红金 */
+  #userBox .mode-badge {
+    background: rgba(255, 235, 204, 0.8) !important;
+    color: #9e1414 !important;
+    border-color: rgba(198, 40, 40, 0.25) !important;
+  }
+  #loginBtn, .btn.small {
+    background: linear-gradient(135deg, #f6c453, #c62828) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+  }
+
+  /* 3. 推广横幅改为红金背景（覆盖掉原来的青柠绿） */
+  .promo-banner--national {
+    background-color: #fff5e6 !important;
+    background-image: linear-gradient(135deg, #fff5e6 0%, #ffe3c2 100%) !important;
+    border: 1px solid rgba(198, 40, 40, 0.35) !important;
+    box-shadow: 0 8px 24px -12px rgba(158, 20, 20, 0.35) !important;
+  }
+  
+  /* 4. 推广横幅左侧竖条和标签改为金红渐变 */
+  .promo-banner--national::before {
+    background: linear-gradient(180deg, #f6c453, #c62828) !important;
+  }
+  .promo-banner--national .promo-badge {
+    background: linear-gradient(135deg, #f6c453, #c62828) !important;
+    color: #fff !important;
+  }
+  
+  /* 5. 推广横幅的“了解国庆”按钮改为红金 */
+  .promo-banner--national .btn.small:not(.ghost) {
+    background: linear-gradient(135deg, #f6c453, #c62828) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+  }
+  
+  /* 6. 关闭按钮改为红金色 */
+  .promo-banner--national .promo-close {
+    border-color: rgba(198, 40, 40, 0.3) !important;
+    color: #9e1414 !important;
+    background: #fff !important;
+  }
+}
