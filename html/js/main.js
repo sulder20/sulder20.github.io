@@ -80,6 +80,7 @@ function go(name){
   if (name === 'exercise')     setTimeout(() => { loadExerProfile(); renderExerciseList(); }, 60);
   if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
   if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
+  if (name === 'tablefill')    setTimeout(() => { if (typeof window.__tablefillInit === 'function') window.__tablefillInit(); }, 60);
   if (name === 'exchange')     setTimeout(() => {
   if (typeof window.__fxInit === 'function') window.__fxInit();
 }, 60);
@@ -5542,6 +5543,7 @@ const TOOL_REGISTRY = [
   { id: 'places',       name: '地点收藏' },
   { id: 'media',        name: '影视收藏' },
   { id: 'recipe',       name: '菜谱收藏' },
+  { id: 'tablefill',    name: '表格填入器' },
   /* ④ 计算与数据 */
   { id: 'calc',         name: '数学计算' },
   { id: 'chart',        name: '统计图生成' },
@@ -6013,6 +6015,13 @@ injectToolCrumbs();
       link: 'https://www.gov.cn/'
     },
     {
+      id: 'tablefill-tool',
+      type: 'info',
+      title: '新工具：表格填入器',
+      content: '「收藏与记录」分类下新增表格填入器。提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。',
+      time: '2026-10-01'
+    },
+    {
       id: 'exchange-tool',
       type: 'info',
       title: '新工具：汇率换算',
@@ -6023,7 +6032,7 @@ injectToolCrumbs();
       id: 'v3-0-release',
       type: 'success',
       title: 'V3.0 焕新版上线',
-      content: '青柠绿主题全面焕新，界面、按钮、卡片全部升级；新增「冥想练习」与「JSON 格式化」两款工具。',
+      content: '青柠绿主题全面焕新，界面、按钮、卡片全部升级；新增「冥想练习」与「JSON 格式化」两款工具。国庆期间短暂变为红色主题，祝大家节日快乐！',
       time: '2026-10-01',
       pinned: true
     },
@@ -6250,7 +6259,8 @@ injectToolCrumbs();
     '文章分析': 'W',
     '小说助手': 'X',
     '影视收藏': 'Y',
-    '运动记录': 'Y'
+    '运动记录': 'Y',
+    '表格填入器': 'B'
   };
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.tool-card'));

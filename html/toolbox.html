@@ -1104,10 +1104,15 @@ nav button:hover:not(.active){
   </summary>
   <div class="notice-body">
     <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。值此中华人民共和国成立 77 周年之际，工具箱特别推出「3.0.10.1 国庆特别版」，将全站主题色换装为喜庆的中国红与金色，共祝祖国繁荣昌盛、国泰民安！</p>
+
     <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
-    <p>本次国庆特别版不仅更新了视觉主题，还为大家带来了全新的「汇率换算」工具，支持常用货币互转，内置参考汇率离线可用，也可联网更新当日参考值。同时，AI 助手、JSON 格式化、冥想练习等功能也在持续优化中，体验会越来越顺手。</p>
+
+    <p>本次国庆特别版不仅更新了视觉主题，还为大家带来了全新工具。<b>「汇率换算」</b>支持常用货币互转，内置参考汇率离线可用，也可联网更新当日参考值；<b>「表格填入器」</b>提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，一键导出为 2 倍分辨率高清 PNG，适合做主观评价图、榜单图。同时，AI 助手、JSON 格式化、冥想练习等功能也在持续优化中，体验会越来越顺手。</p>
+
     <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
+
     <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
+
     <div class="notice-sign">
       <p>2026 年 10 月</p>
       <p>岁窦工具箱 · 3.0.10.1 国庆特别版</p>
@@ -1210,6 +1215,7 @@ nav button:hover:not(.active){
           <li data-target="places">地点收藏</li>
           <li data-target="media">影视收藏</li>
           <li data-target="recipe">菜谱收藏</li>
+          <li data-target="tablefill">表格填入器</li>
         </ul>
       </div>
 
@@ -1326,6 +1332,11 @@ nav button:hover:not(.active){
       <div class="tool-card" data-target="recipe" data-keywords="菜谱 食谱 做饭 烹饪 美食 收藏">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
         <h3>菜谱收藏</h3><p>记录家常菜、甜点的食材与做法</p>
+      </div>
+      <div class="tool-card" data-target="tablefill" data-keywords="表格 填入 图片 评价 夯 顶级 人上人 NPC 拉完了 导出 PNG 标题 分档">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
+        <h3>表格填入器</h3>
+        <p>把图片填入分档表格，支持多图、跨格移动，导出为高清 PNG</p>
       </div>
 
       <!-- ④ 计算与数据 -->
@@ -1489,7 +1500,7 @@ nav button:hover:not(.active){
             常见问题
           </h3>
 
-          <details class="faq-item" open>
+          <details class="faq-item">
             <summary>V3.0.10.1国庆特别版相比 V2.3.2 改了什么？</summary>
             <div class="faq-body">
               <p><b>V3.0 主要做了两件事</b>：一是界面全面焕新，二是新增两款实用工具。</p>
@@ -1602,6 +1613,14 @@ nav button:hover:not(.active){
               <p>若入睡与起床时间完全相同，会视为 0 分钟并拒绝保存，请检查是否填错。</p>
             </div>
           </details>
+          
+          <details class="faq-item">
+            <summary>「表格填入器」的图片怎么移动？</summary>
+            <div class="faq-body">
+              <p>表格里的图片可以直接拖到其他单元格；也可以拖回下方素材区，重新分配。点击图片右上角的 × 可以删除。</p>
+              <p>如果先点击下方素材区的某张图，再点击表格单元格，也能直接放入。</p>
+            </div>
+          </details>
 
           <details class="faq-item">
             <summary>「运动记录」的热量估算准不准？</summary>
@@ -1710,6 +1729,7 @@ nav button:hover:not(.active){
             <div class="help-tip"><b>代码编辑器</b>JavaScript 模式会在沙箱中真实运行，<code>console.log</code> 的输出会显示在预览内容下方；Markdown 模式实时渲染排版效果。</div>
             <div class="help-tip"><b>图片压缩</b>本地浏览器压缩，支持质量滑块、目标大小、格式切换，原图与压缩后并排对比体积。</div>
             <div class="help-tip"><b>JSON 格式化</b>格式化 / 压缩 / 转义，语法错误定位到行列；Ctrl / ⌘ + Enter 一键格式化。</div>
+            <div class="help-tip"><b>表格填入器</b>把图片拖进「夯 / 顶级 / 人上人 / NPC / 拉完了」五个档位，支持多图、跨格移动。可自定义标题并勾选是否导出标题，最终导出为高清 PNG。适合做主观评价图、榜单图。</div>
             <div class="help-tip"><b>汇率换算</b>内置参考汇率，离线可用；点「联网更新实时汇率」可拉取当日参考值。结果为参考性质，实际以银行或支付平台成交价为准。</div>
           </div>
         </div>
@@ -1921,6 +1941,7 @@ nav button:hover:not(.active){
             <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
             V3.0.10.1国庆特别版 · 红金主题国庆焕新
           </h3>
+
           <div class="upgrade-grid" style="margin-bottom:26px;">
             <div class="upgrade-item">
               <div class="up-head"><span class="up-badge">配色</span><b>全局换装青柠绿主题</b></div>
@@ -1958,6 +1979,10 @@ nav button:hover:not(.active){
               <div class="up-head"><span class="up-badge">新增</span><b>汇率换算</b></div>
               <p>「计算与数据」分类新增汇率换算。内置常用货币参考汇率，离线可用；支持联网更新当日参考值，并缓存到本地。结果为参考性质，实际以银行或支付平台成交价为准。</p>
             </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>表格填入器</b></div>
+              <p>新增「表格填入器」工具：提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配。可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。</p>
+          </div>
           </div>
 
           <!-- ======= V2.3.2 铂金版 ======= -->
@@ -3531,6 +3556,74 @@ nav button:hover:not(.active){
       </div>
     </div>
   </section>
+    <!-- ==================== 表格填入器 ==================== -->
+  <section id="page-tablefill" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M3 10h18M9 4v16"/>
+        </svg>
+      </span>
+      表格填入器
+    </h2>
+    <p class="page-desc">把图片拖进对应档位，支持多图、跨格移动，导出为高清 PNG。可自定义标题，或勾选是否导出标题。</p>
+
+    <!-- 标题输入 -->
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7h16M4 12h10M4 17h7"/>
+        </svg>
+        标题（可留空）
+      </h3>
+      <div class="title-wrap" style="margin-bottom:0;">
+        <input type="text" id="titleInput" class="title-input"
+               value="从夯到拉评价…………" placeholder="输入标题…"
+               autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+
+    <!-- 表格 -->
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M3 10h18M9 4v16"/>
+        </svg>
+        分档填图
+      </h3>
+      <div class="table-wrap">
+        <table class="fill-table" id="tbl"><tbody></tbody></table>
+      </div>
+    </div>
+
+    <!-- 图片选择器 + 导出 -->
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        图片素材
+      </h3>
+
+      <div class="toolbar">
+        <div class="picker" id="picker"></div>
+        <label class="chk" for="exportTitleChk">
+          <input type="checkbox" id="exportTitleChk" checked> 导出标题
+        </label>
+        <button class="btn" id="exportBtn" type="button">导出图片</button>
+      </div>
+
+      <p class="page-desc" style="margin:12px 0 0;font-size:12.5px;">
+        提示：点击图片素材区选择图片，拖到上方表格；也可以直接点击单元格后再选文件。表格中的图片可拖到其他单元格，或拖回素材区。
+      </p>
+    </div>
+
+    <input type="file" id="fileInput" accept="image/*" multiple hidden>
+  </section>
 
   <!-- ==================== 登录 ==================== -->
   <section id="page-login" class="page">
@@ -3850,6 +3943,7 @@ nav button:hover:not(.active){
 
 <!-- ==================== 自定义脚本 ==================== -->
 <script src="js/main.js"></script>
+<script src="js/tablefill.js"></script>
 <script src="js/help.js"></script>
 <script src="js/qrcode.js"></script>
 <script src="js/heatindex.js"></script>
