@@ -6306,4 +6306,93 @@ injectToolCrumbs();
     });
   });
 })();
+
+
+/* ============================================================
+   国庆倒计时 / 正计时
+   阶段一：2026-10-01 之前 → 倒计时
+   阶段二：2026-10-01 ~ 2026-10-08 → 正计时（假期中）
+   阶段三：2026-10-08 之后 → 假期已结束
+   ============================================================ */
+(function initNationalCountdown(){
+  'use strict';
+
+  var box = document.getElementById('nationalCountdown');
+  if (!box) return;
+
+  var elBadgeText = document.getElementById('ncBadgeText');
+  var elTitle     = document.getElementById('ncTitle');
+  var elDate      = document.getElementById('ncDate');
+  var elDay       = document.getElementById('ncDay');
+  var elHour      = document.getElementById('ncHour');
+  var elMin       = document.getElementById('ncMin');
+  var elSec       = document.getElementById('ncSec');
+  if (!elDay || !elHour || !elMin || !elSec) return;
+
+  /* 2026 国庆假期：10-01 00:00 开始，10-08 00:00 结束（假期 10.1 - 10.7） */
+  var START = new Date(2026, 9, 1, 0, 0, 0).getTime();
+  var END   = new Date(2026, 9, 8, 0, 0, 0).getTime();
+
+  function pad2(n){ return n < 10 ? '0' + n : String(n); }
+
+  function setUnits(totalSec){
+    var day  = Math.floor(totalSec / 86400);
+    var hour = Math.floor((totalSec % 86400) / 3600);
+    var min  = Math.floor((totalSec % 3600) / 60);
+    var sec  = totalSec % 60;
+    elDay.textContent  = day;
+    elHour.textContent = pad2(hour);
+    elMin.textContent  = pad2(min);
+    elSec.textContent  = pad2(sec);
+  }
+
+  var lastPhase = '';
+
+  function tick(){
+    var now = Date.now();
+    var phase;
+
+    if (now < START) phase = 'counting';
+    else if (now < END) phase = 'active';
+    else phase = 'ended';
+
+    /* 阶段没变时只更新数字，避免每秒钟重复改文案 */
+    if (phase === lastPhase){
+      if (phase === 'counting') setUnits(Math.floor((START - now) / 1000));
+      else if (phase === 'active') setUnits(Math.floor((now - START) / 1000));
+      return;
+    }
+    lastPhase = phase;
+
+    /* 切换外层状态类 */
+    box.classList.remove('nc-counting', 'nc-active', 'nc-ended');
+    box.classList.add('nc-' + phase);
+
+    if (phase === 'counting'){
+      elBadgeText.textContent = '国庆倒计时';
+      elTitle.textContent = '距离 2026 年国庆节';
+      elDate.textContent  = '2026 年 10 月 1 日';
+      setUnits(Math.floor((START - now) / 1000));
+    } else if (phase === 'active'){
+      elBadgeText.textContent = '国庆假期进行中';
+      elTitle.textContent = '🎉 国庆节快乐！';
+      elDate.textContent  = '1949 - 2026 · 山河锦绣，国泰民安';
+      setUnits(Math.floor((now - START) / 1000));
+    } else {
+      elBadgeText.textContent = '国庆假期已结束';
+      elTitle.textContent = '期待下一个国庆';
+      elDate.textContent  = '2027 年 10 月 1 日 · 再会';
+      elDay.textContent  = '--';
+      elHour.textContent = '--';
+      elMin.textContent  = '--';
+      elSec.textContent  = '--';
+    }
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  console.log('[国庆倒计时] 已启动：2026-10-01 00:00 ~ 2026-10-08 00:00');
+})();
+
 console.log('%c岁窦工具箱 · V2.3.2 铂金版 已加载', 'color:#565d65;font-weight:700;font-size:14px;');

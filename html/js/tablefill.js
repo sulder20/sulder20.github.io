@@ -19,7 +19,7 @@
   let selectedPendingId = null;
   let targetRow = null;
 
-  let table, tbody, picker, fileInput, exportBtn, titleInput, exportTitleChk;
+  let table, tbody, picker, fileInput, exportBtn, clearBtn, titleInput, exportTitleChk;
   const cellInners = [];
   const cellTds = [];
 
@@ -42,9 +42,11 @@
     exportBtn = document.getElementById('exportBtn');
     titleInput = document.getElementById('titleInput');
     exportTitleChk = document.getElementById('exportTitleChk');
+    clearBtn = document.getElementById('clearBtn');
 
     buildTable();
     bindPicker();
+    bindClear();  
     bindExport();
 
     ROWS.forEach((_, i) => renderCell(i));
@@ -428,6 +430,32 @@
       setTimeout(() => URL.revokeObjectURL(url), 3000);
       toast('已导出图片');
     }, 'image/png');
+  }
+
+    /* ---------- 清空 ---------- */
+  function bindClear() {
+    if (!clearBtn) return;
+    clearBtn.addEventListener('click', () => {
+      const hasCellImgs = cells.some(arr => arr.length > 0);
+      const hasPending = pending.length > 0;
+      if (!hasCellImgs && !hasPending) {
+        toast('已经是空的了');
+        return;
+      }
+      if (!confirm('确定清空表格中的所有图片吗？\n（素材区的图片也会一起清空，标题会保留）')) return;
+
+      // 清空所有单元格
+      for (let i = 0; i < cells.length; i++) {
+        cells[i] = [];
+        renderCell(i);
+      }
+      // 清空素材区
+      pending = [];
+      selectedPendingId = null;
+      renderPending();
+
+      toast('已清空');
+    });
   }
 
   function bindExport() {
