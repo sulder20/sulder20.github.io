@@ -3180,21 +3180,16 @@ body.tool-active{
 @media (max-width: 900px){
   :root{ --header-h: 0px; }
 
-  /* 为 fixed 的侧栏让出高度（侧栏约 52px 高） */
-body.tool-active{
-  padding-left: 0;
-  padding-top: 0;          /* 不要推 header */
-}
+  /* 清掉之前设置的所有额外 padding */
+  body.tool-active{
+    padding-left: 0;
+    padding-top: 0;
+  }
 
-/* 只让主内容让出侧栏高度 */
-body.tool-active main{
-  padding-top: 52px;
-}
-
-  /* 侧栏固定在 header 下方 */
+  /* 侧栏贴视口最顶部 */
   .global-tool-sidebar{
     position: fixed;
-    top: var(--header-h);          /* header 的实际高度，由 JS 动态设置 */
+    top: 0;
     left: 0;
     right: 0;
     bottom: auto;
@@ -3207,7 +3202,7 @@ body.tool-active main{
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 6px 18px -12px rgba(158,20,20,.25);
-    z-index: 70;
+    z-index: 90;
     display: flex;
     flex-direction: column;
   }
@@ -3216,6 +3211,18 @@ body.tool-active main{
     display: none;
   }
 
+  /* header 被推到侧栏下方，滚动时也固定在那里 */
+  body.tool-active header{
+    top: 52px;
+    margin-top: 52px;
+  }
+
+  /* 主内容跟随 header 正常排布，不要再额外加 padding */
+  body.tool-active main{
+    padding-top: 0;
+  }
+
+  /* ---------- 以下胶囊条样式保持不变 ---------- */
   .gts-head{
     padding: 8px 14px 2px;
     border-bottom: none;
@@ -3290,7 +3297,6 @@ body.tool-active main{
 
   body.tool-active .page.active{ padding-left: 0; }
 }
-
 /* ============================================================
    饮水量计算
    ============================================================ */
