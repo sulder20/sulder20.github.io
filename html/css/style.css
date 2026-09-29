@@ -3177,112 +3177,113 @@ body.tool-active{
 /* ============================================================
    移动端（≤900px）：侧栏变成顶部横向滚动胶囊条（粘在 header 下方）
    ============================================================ */
-@media (max-width:900px){
+@media (max-width: 900px){
   :root{ --header-h: 0px; }
 
-  /* 移动端不再让位（侧边栏回归普通文档流） */
+  /* 为 fixed 的侧栏让出高度（侧栏约 52px 高） */
   body.tool-active{
-    padding-left:0;
-    padding-top:0;
+    padding-left: 0;
+    padding-top: 52px;
   }
 
-  /* 侧边栏：sticky 粘在 header 下方 */
+  /* 侧栏固定在 header 下方 */
   .global-tool-sidebar{
-    position:sticky;
-    top:var(--header-h);        /* header 的实际高度，由 JS 动态设置 */
-    left:auto;right:auto;bottom:auto;
-    width:100%;
-    height:auto;
-    max-height:none;
-    border-right:none;
-    border-bottom:1px solid var(--border);
-    background:rgba(255,255,255,.96);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    box-shadow:0 6px 18px -12px rgba(158,20,20,.25);
-    z-index:70;                 /* 低于 header 的 80 */
-    transform:none;
-    display:flex;
-    flex-direction:column;
+    position: fixed;
+    top: var(--header-h);          /* header 的实际高度，由 JS 动态设置 */
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 6px 18px -12px rgba(158,20,20,.25);
+    z-index: 70;
+    display: flex;
+    flex-direction: column;
   }
 
   body:not(.tool-active) .global-tool-sidebar{
-    display:none;
+    display: none;
   }
 
   .gts-head{
-    padding:8px 14px 2px;
-    border-bottom:none;
-    background:transparent;
+    padding: 8px 14px 2px;
+    border-bottom: none;
+    background: transparent;
   }
   .gts-current{
-    font-size:12.5px;
-    letter-spacing:.3px;
-    color:#9e1414;
-    font-weight:800;
+    font-size: 12.5px;
+    letter-spacing: .3px;
+    color: #9e1414;
+    font-weight: 800;
   }
 
   .gts-nav{
-    display:flex;
-    flex-wrap:nowrap;
-    gap:6px;
-    padding:0 12px 8px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    flex:0 0 auto;
-    align-items:center;
-    scrollbar-width:thin;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 0 12px 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex: 0 0 auto;
+    align-items: center;
+    scrollbar-width: thin;
   }
-  .gts-nav::-webkit-scrollbar{height:4px;}
+  .gts-nav::-webkit-scrollbar{ height: 4px; }
   .gts-nav::-webkit-scrollbar-thumb{
-    background:rgba(198,40,40,.22);
-    border-radius:2px;
+    background: rgba(198,40,40,.22);
+    border-radius: 2px;
   }
 
   .gts-group{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    margin-bottom:0;
-    flex:0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0;
+    flex: 0 0 auto;
   }
   .gts-group:not(:last-child)::after{
-    content:"";
-    display:block;
-    width:1px;
-    height:16px;
-    background:var(--border);
-    margin:0 2px;
-    flex:0 0 auto;
+    content: "";
+    display: block;
+    width: 1px;
+    height: 16px;
+    background: var(--border);
+    margin: 0 2px;
+    flex: 0 0 auto;
   }
   .gts-group-title{
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:.8px;
-    padding:0 2px 0 0;
-    white-space:nowrap;
-    flex:0 0 auto;
-    color:#b08868;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    padding: 0 2px 0 0;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    color: #b08868;
   }
 
   .gts-item{
-    flex:0 0 auto;
-    width:auto;
-    padding:6px 12px;
-    border-radius:999px;
-    background:rgba(255,227,194,.55);
-    border:1px solid rgba(198,40,40,.15);
-    font-size:12.5px;
-    margin-bottom:0;
-    white-space:nowrap;
+    flex: 0 0 auto;
+    width: auto;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,227,194,.55);
+    border: 1px solid rgba(198,40,40,.15);
+    font-size: 12.5px;
+    margin-bottom: 0;
+    white-space: nowrap;
   }
-  .gts-item-icon{ display:none; }
+  .gts-item-icon{ display: none; }
   .gts-item-text{
-    display:inline;
-    font-size:12.5px;
+    display: inline;
+    font-size: 12.5px;
   }
 
-  body.tool-active .page.active{ padding-left:0; }
+  body.tool-active .page.active{ padding-left: 0; }
 }
 
 /* ============================================================
