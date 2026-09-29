@@ -3181,10 +3181,15 @@ body.tool-active{
   :root{ --header-h: 0px; }
 
   /* 为 fixed 的侧栏让出高度（侧栏约 52px 高） */
-  body.tool-active{
-    padding-left: 0;
-    padding-top: 52px;
-  }
+body.tool-active{
+  padding-left: 0;
+  padding-top: 0;          /* 不要推 header */
+}
+
+/* 只让主内容让出侧栏高度 */
+body.tool-active main{
+  padding-top: 52px;
+}
 
   /* 侧栏固定在 header 下方 */
   .global-tool-sidebar{
