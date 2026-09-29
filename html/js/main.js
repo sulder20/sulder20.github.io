@@ -1,6 +1,6 @@
 /* ============================================================
-   岁窦工具箱 · V2.3.2 铂金版
-   主脚本（结构调整版，无新功能）
+   岁窦工具箱 · V3.0.10.1 国庆特别版
+   主脚本
    ============================================================ */
 
 /* ===================== 配置 ===================== */
@@ -67,21 +67,26 @@ function go(name){
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
+  /* 侧边栏联动 */
+  if (typeof updateSidebarForPage === 'function') {
+    updateSidebarForPage(name);
+  }
+
   /* 按页面懒加载 / 重绘 */
   if (name === 'chart')        setTimeout(renderChart, 60);
   if (name === 'calendar')     setTimeout(renderCalendar, 60);
   if (name === 'code')         setTimeout(runCodeEditor, 60);
   if (name === 'ai')           setTimeout(() => { updateQuota(); chatInput.focus(); }, 60);
-  if (name === 'hydration') setTimeout(function () {
-  if (typeof window.__hydrationInit === 'function') window.__hydrationInit();
+  if (name === 'hydration')    setTimeout(function () {
+    if (typeof window.__hydrationInit === 'function') window.__hydrationInit();
   }, 60);
   if (name === 'novel')        setTimeout(renderNovelList, 60);
   if (name === 'ledger')       setTimeout(renderLedger, 60);
-  if (name === 'carlist') setTimeout(function () {
-  if (typeof window.__carlistInit === 'function') window.__carlistInit();
+  if (name === 'carlist')      setTimeout(function () {
+    if (typeof window.__carlistInit === 'function') window.__carlistInit();
   }, 60);
-  if (name === 'countdown') setTimeout(function () {
-  if (typeof window.__countdownInit === 'function') window.__countdownInit();
+  if (name === 'countdown')    setTimeout(function () {
+    if (typeof window.__countdownInit === 'function') window.__countdownInit();
   }, 60);
   if (name === 'textanalysis') setTimeout(() => { updateWC(); updateWordFreq(); }, 60);
   if (name === 'calc')         setTimeout(() => { updateUnitConvert(); }, 60);
@@ -90,18 +95,18 @@ function go(name){
   if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
   if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
   if (name === 'reactiontest') setTimeout(function () {
-  if (typeof window.__reactiontestInit === 'function') window.__reactiontestInit();
+    if (typeof window.__reactiontestInit === 'function') window.__reactiontestInit();
   }, 60);
   if (name === 'tablefill')    setTimeout(() => { if (typeof window.__tablefillInit === 'function') window.__tablefillInit(); }, 60);
-  if (name === 'coinflip') setTimeout(function () {
-  if (typeof window.__coinflipInit === 'function') window.__coinflipInit();
+  if (name === 'coinflip')     setTimeout(function () {
+    if (typeof window.__coinflipInit === 'function') window.__coinflipInit();
   }, 60);
-  if (name === 'luckywheel') setTimeout(function () {
-  if (typeof window.__luckywheelInit === 'function') window.__luckywheelInit();
+  if (name === 'luckywheel')   setTimeout(function () {
+    if (typeof window.__luckywheelInit === 'function') window.__luckywheelInit();
   }, 60);
   if (name === 'exchange')     setTimeout(() => {
-  if (typeof window.__fxInit === 'function') window.__fxInit();
-}, 60);
+    if (typeof window.__fxInit === 'function') window.__fxInit();
+  }, 60);
   if (name === 'qrcode')       setTimeout(() => {
     if (typeof window.__qrRender === 'function'){
       try { window.__qrRender(); }
@@ -124,13 +129,12 @@ document.querySelectorAll('[data-back]').forEach(btn => {
 const searchInput = document.getElementById('searchInput');
 const searchClearBtn = document.getElementById('searchClear');
 
-// 根据输入框是否有内容，切换清除按钮的显示
 function syncSearchClear(){
   if (searchClearBtn) searchClearBtn.hidden = searchInput.value.length === 0;
 }
 
 searchInput.addEventListener('input', () => {
-  syncSearchClear();                                    // ← 新增
+  syncSearchClear();
 
   const q = searchInput.value.trim().toLowerCase();
   const isSearching = !!q;
@@ -143,7 +147,6 @@ searchInput.addEventListener('input', () => {
     if (show) any = true;
   });
 
-  // 处理拼音分组标题：所在组全部隐藏时，标题也隐藏
   document.querySelectorAll('#page-apps .pinyin-head').forEach(head => {
     let next = head.nextElementSibling;
     let groupHasVisible = false;
@@ -165,7 +168,6 @@ searchInput.addEventListener('input', () => {
   if (isSearching && !document.getElementById('page-apps').classList.contains('active')) go('apps');
 });
 
-/* ---------- 清除按钮点击逻辑（就是这里，紧跟在 input 监听器下面） ---------- */
 if (searchClearBtn){
   searchClearBtn.addEventListener('click', () => {
     if (!searchInput.value) return;
@@ -173,8 +175,6 @@ if (searchClearBtn){
     searchInput.dispatchEvent(new Event('input', { bubbles: true }));
     searchInput.focus();
   });
-
-  // 首次加载时同步一次按钮状态（浏览器可能记住输入内容）
   syncSearchClear();
 }
 
@@ -1945,6 +1945,7 @@ function renderPlaces(){
   });
 }
 loadPlaces(); renderPlaces();
+
 /* ============================================================
    菜谱收藏
    ============================================================ */
@@ -1953,7 +1954,6 @@ let recipes = [], pendingRecipeImg = '', recipeImageProcessing = false;
 function saveRecipes(){ try { localStorage.setItem(RECIPE_KEY, JSON.stringify(recipes)); updateStorageUsage(); return true; } catch(e){ return false; } }
 function loadRecipes(){ try { const raw = localStorage.getItem(RECIPE_KEY); if (raw) recipes = JSON.parse(raw) || []; } catch(e){ recipes = []; } }
 
-// 图片上传处理
 document.getElementById('rcImg').addEventListener('change', e => {
   const file = e.target.files[0];
   const preview = document.getElementById('rcPreview');
@@ -1968,7 +1968,6 @@ document.getElementById('rcImg').addEventListener('change', e => {
   });
 });
 
-// 重置表单
 function resetRecipeForm(){
   ['rcName','rcTags','rcIngredients','rcSteps'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('rcType').value = '家常菜';
@@ -1979,12 +1978,11 @@ function resetRecipeForm(){
 }
 document.getElementById('rcReset').addEventListener('click', resetRecipeForm);
 
-// 添加菜谱
 document.getElementById('rcAdd').addEventListener('click', async () => {
   if (recipeImageProcessing) { alert('图片正在处理中，请稍候…'); return; }
   const name = document.getElementById('rcName').value.trim();
   if (!name) { alert('请先填写菜名～'); document.getElementById('rcName').focus(); return; }
-  
+
   const data = {
     name,
     type: document.getElementById('rcType').value,
@@ -1997,7 +1995,7 @@ document.getElementById('rcAdd').addEventListener('click', async () => {
 
   try {
     if (appMode === 'cloud' && currentUser){
-      const row = await cloudInsert('recipes', data); // 注意：云端需要建表
+      const row = await cloudInsert('recipes', data);
       recipes.push(row);
     } else {
       recipes.push({ id: Date.now() + '-' + Math.floor(Math.random()*1000), ...data });
@@ -2008,7 +2006,6 @@ document.getElementById('rcAdd').addEventListener('click', async () => {
   } catch(err){ alert('保存失败：' + err.message); }
 });
 
-// 清空全部
 document.getElementById('rcClearAll').addEventListener('click', async () => {
   if (recipes.length === 0) return;
   if (!confirm('确定要清空全部菜谱吗？此操作不可恢复。')) return;
@@ -2020,15 +2017,14 @@ document.getElementById('rcClearAll').addEventListener('click', async () => {
   } catch(err){ alert('清空失败：' + err.message); }
 });
 
-// 渲染菜谱列表
 function renderRecipes(){
   const list = document.getElementById('recipeList');
   document.getElementById('rcCount').textContent = recipes.length;
-  if (recipes.length === 0){ 
-    list.innerHTML = '<p class="empty" style="grid-column:1/-1;">还没有菜谱，先在上方添加一道吧～</p>'; 
-    return; 
+  if (recipes.length === 0){
+    list.innerHTML = '<p class="empty" style="grid-column:1/-1;">还没有菜谱，先在上方添加一道吧～</p>';
+    return;
   }
-  
+
   list.innerHTML = recipes.map(r => {
     const tags = (r.tags || '').split(/[,，\s]+/).filter(Boolean);
     return '<div class="place-card">' +
@@ -2062,7 +2058,6 @@ function renderRecipes(){
   });
 }
 
-// 初始化加载
 loadRecipes(); renderRecipes();
 
 /* ============================================================
@@ -2602,7 +2597,7 @@ function exportCalImage(){
   ctx.fillStyle = '#1c1f23'; ctx.font = 'bold 32px ' + FONT;
   ctx.fillText(y + ' 年 ' + m + ' 月', PAD, PAD + 2);
   ctx.fillStyle = '#9ca3af'; ctx.font = '15px ' + FONT;
-  ctx.fillText('我的日历 · 岁窦工具箱 V2.3.2', PAD, PAD + 48);
+  ctx.fillText('我的日历 · 岁窦工具箱 V3.0', PAD, PAD + 48);
   const weekTop = PAD + HEAD;
   ctx.font = 'bold 14px ' + FONT; ctx.textAlign = 'center';
   for (let c = 0; c < 7; c++){
@@ -5067,13 +5062,13 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     showToast('已导出运动记录图片');
   }
 });
+
 /* ============================================================
    时间戳转换
    ============================================================ */
 (function initTimestamp(){
   'use strict';
 
-  /* ---------- 子标签切换 ---------- */
   document.querySelectorAll('#page-timestamp .ta-subtab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('#page-timestamp .ta-subtab').forEach(t => t.classList.remove('active'));
@@ -5086,7 +5081,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
   function pad2n(n){ return String(n).padStart(2, '0'); }
   function pad3n(n){ return String(n).padStart(3, '0'); }
 
-  /* ---------- 实时当前时间戳 ---------- */
   function updateNowTS(){
     const now = Date.now();
     const sec = Math.floor(now / 1000);
@@ -5105,7 +5099,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
   updateNowTS();
   setInterval(updateNowTS, 1000);
 
-  /* ---------- 复制工具 ---------- */
   function copyText(text){
     if (navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(() => showToast('已复制：' + text))
@@ -5132,7 +5125,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     copyText(String(Date.now()));
   });
 
-  /* ---------- 把任意输入归一化为毫秒时间戳 ---------- */
   function normalizeToMs(input){
     const raw = String(input).trim();
     if (!raw) return null;
@@ -5147,7 +5139,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     return null;
   }
 
-  /* ---------- 相对时间描述 ---------- */
   const WEEK_CN = ['日','一','二','三','四','五','六'];
   function relTime(diffMs){
     const abs = Math.abs(diffMs);
@@ -5165,7 +5156,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     return Math.floor(mon / 12) + ' 年' + suffix;
   }
 
-  /* ---------- 结果列表渲染 ---------- */
   function renderTSResult(list, items){
     list.innerHTML = items.map(it =>
       '<div class="ts-result-item">' +
@@ -5179,9 +5169,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     });
   }
 
-  /* ============================================================
-     一、时间戳 → 日期
-     ============================================================ */
   const tsInputNum = document.getElementById('tsInputNum');
   const tsResultList = document.getElementById('tsResultList');
   const tsInputHint = document.getElementById('tsInputHint');
@@ -5259,9 +5246,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     if (e.key === 'Enter'){ e.preventDefault(); doConvertTS(); }
   });
 
-  /* ============================================================
-     二、日期 → 时间戳
-     ============================================================ */
   const tsDateInput = document.getElementById('tsDateInput');
   const tsTimeInput = document.getElementById('tsTimeInput');
   const tsTimezone = document.getElementById('tsTimezone');
@@ -5326,9 +5310,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
     tsTimeInput.value = pad2n(d.getHours()) + ':' + pad2n(d.getMinutes()) + ':' + pad2n(d.getSeconds());
   });
 
-  /* ============================================================
-     三、时间差计算
-     ============================================================ */
   const tsDiffA = document.getElementById('tsDiffA');
   const tsDiffB = document.getElementById('tsDiffB');
   const tsDiffResultList = document.getElementById('tsDiffResultList');
@@ -5425,8 +5406,6 @@ document.getElementById('exerExportImg').addEventListener('click', () => {
   console.log('[时间戳转换] 已加载');
 })();
 
-
-
 /* ============================================================
    数据管理
    ============================================================ */
@@ -5434,7 +5413,7 @@ function exportAll(){
   let chapters = [];
   try { chapters = loadChaptersLocal(); } catch(e){ chapters = []; }
   const data = {
-    app: '岁窦工具箱', version: 'V2.3.2', exportTime: new Date().toISOString(),
+    app: '岁窦工具箱', version: 'V3.0.10.1', exportTime: new Date().toISOString(),
     people, songs, places, medias, schedules, notes, timelineEvents, novels, chapters, ledger,
     sleepRecords, vitalRecords, exerciseRecords, exerProfile
   };
@@ -5537,7 +5516,7 @@ loadTimeline();
 loadNotes();
 
 /* ============================================================
-   V3.0.10.1 · 工具分类侧边栏（方案 A）
+   V3.0.10.1 · 工具分类侧边栏（方案 A · 固定展开）
    ============================================================ */
 const TOOL_REGISTRY = [
   /* ① 健康与运动 */
@@ -5658,7 +5637,13 @@ function initToolSidebar() {
   sidebar.className = 'global-tool-sidebar';
   sidebar.setAttribute('aria-label', '工具分类导航');
 
-  document.body.appendChild(sidebar);
+  /* 插到 main 之前，移动端可以走正常文档流 */
+  var mainEl = document.querySelector('main');
+  if (mainEl && mainEl.parentNode) {
+    mainEl.parentNode.insertBefore(sidebar, mainEl);
+  } else {
+    document.body.appendChild(sidebar);
+  }
   buildToolSidebar(sidebar);
 
   /* 清掉旧的返回按钮（侧栏已替代） */
@@ -5666,15 +5651,8 @@ function initToolSidebar() {
 
   updateHeaderHeight();
   window.addEventListener('resize', updateHeaderHeight);
-
-  /* 监听 go() 切换页面 */
-  var origGo = window.go;
-  if (typeof origGo === 'function' && !origGo.__sidebarWrapped) {
-    window.go = function (name) {
-      origGo.apply(this, arguments);
-      updateSidebarForPage(name);
-    };
-    window.go.__sidebarWrapped = true;
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateHeaderHeight);
   }
 
   /* 初始状态 */
@@ -5734,48 +5712,7 @@ function updateSidebarForPage(name) {
 
 /* ---------- 启动 ---------- */
 initToolSidebar();
-/* ---------- 切换页面时更新侧栏 ---------- */
-function updateSidebarForPage(name) {
-  var sidebar = document.getElementById('globalToolSidebar');
-  if (!sidebar) return;
 
-  var isTool = ALL_TOOL_IDS.indexOf(name) !== -1;
-
-  if (!isTool) {
-    document.body.classList.remove('tool-active');
-    return;
-  }
-
-  document.body.classList.add('tool-active');
-
-  /* 高亮当前工具 */
-  sidebar.querySelectorAll('.gts-item').forEach(function (item) {
-    var active = item.dataset.crumbNav === name;
-    item.classList.toggle('active', active);
-  });
-
-  /* 更新顶部当前工具名 */
-  var tool = null;
-  for (var i = 0; i < TOOL_REGISTRY.length; i++) {
-    if (TOOL_REGISTRY[i].id === name) { tool = TOOL_REGISTRY[i]; break; }
-  }
-  var cur = document.getElementById('gtsCurrent');
-  if (cur && tool) cur.textContent = tool.name;
-
-  /* 让高亮项在侧栏内可见（不滚动页面） */
-  var activeEl = sidebar.querySelector('.gts-item.active');
-  var nav = sidebar.querySelector('.gts-nav');
-  if (activeEl && nav && nav.scrollHeight > nav.clientHeight) {
-    var navRect = nav.getBoundingClientRect();
-    var itemRect = activeEl.getBoundingClientRect();
-    if (itemRect.top < navRect.top || itemRect.bottom > navRect.bottom) {
-      nav.scrollTop = activeEl.offsetTop - nav.clientHeight / 2;
-    }
-  }
-}
-
-/* ---------- 启动 ---------- */
-initToolSidebar();
 /* ============================================================
    冥想练习
    ============================================================ */
@@ -5864,9 +5801,7 @@ initToolSidebar();
     phaseEl.textContent = phase.label;
     countdownEl.textContent = phase.sec;
 
-    // 圆形动画：transition 时长与 phase.sec 一致
     circleEl.style.transition = 'transform ' + phase.sec + 's ease-in-out';
-    // 让 transition 先生效，再改 scale
     requestAnimationFrame(() => {
       circleEl.style.transform = 'scale(' + phase.scale + ')';
     });
@@ -5898,7 +5833,6 @@ initToolSidebar();
   function start() {
     if (running && !paused) return;
     if (!running) {
-      // 全新开始
       running = true;
       paused = false;
       phaseIndex = 0;
@@ -5921,7 +5855,6 @@ initToolSidebar();
     paused = true;
     clearInterval(timer);
     timer = null;
-    // 停下圆形动画，保持当前大小
     const cs = getComputedStyle(circleEl).transform;
     circleEl.style.transition = 'none';
     circleEl.style.transform = cs === 'none' ? 'scale(0.55)' : cs;
@@ -5963,7 +5896,6 @@ initToolSidebar();
     });
   });
 })();
-
 
 /* ============================================================
    JSON 格式化 / 校验
@@ -6070,7 +6002,6 @@ initToolSidebar();
   function tryUnescape() {
     const src = inputEl.value.trim();
     if (!src) { setStatus('等待输入…', ''); outputEl.value = ''; return; }
-    // 去掉最外层的引号（如果存在）
     let s = src;
     if ((s[0] === '"' && s[s.length - 1] === '"') ||
         (s[0] === '\'' && s[s.length - 1] === '\'')) {
@@ -6081,7 +6012,6 @@ initToolSidebar();
       outputEl.value = out;
       setStatus('✓ 去转义完成', 'ok');
     } catch(e) {
-      // 退化为手动替换
       try {
         const fallback = s.replace(/\\n/g, '\n').replace(/\\r/g, '\r')
           .replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
@@ -6115,7 +6045,6 @@ initToolSidebar();
   document.getElementById('jsonCopy').addEventListener('click', tryCopy);
   document.getElementById('jsonClear').addEventListener('click', tryClear);
 
-  // 输入时自动校验（不自动格式化）
   let inputDebounce = null;
   inputEl.addEventListener('input', () => {
     clearTimeout(inputDebounce);
@@ -6135,7 +6064,6 @@ initToolSidebar();
     }, 300);
   });
 
-  // 快捷键：Ctrl/Cmd + Enter 格式化 2 空格
   inputEl.addEventListener('keydown', e => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
       e.preventDefault();
@@ -6146,22 +6074,14 @@ initToolSidebar();
 
 /* ============================================================
    通知系统
-   —— 发布通知：在 NOTIFICATIONS 数组里加一条即可
    ============================================================ */
 (function initNotifications(){
   'use strict';
 
-  /* =========================================================
-     ① 通知数据
-     —— 发布新通知：往下面数组最前面插一条
-     —— id 必须唯一（自己起名字，改过就代表"新通知"）
-     —— type 可选：info / success / warning / important
-     —— link 可选：填了点击整条通知会新标签打开
-     ========================================================= */
   const NOTIFICATIONS = [
     {
       id: 'national-day-77',
-      type: 'important',                     // 节日通知用 important，圆点会显红
+      type: 'important',
       title: '庆祝中华人民共和国成立 77 周年',
       content: '1949 - 2026 · 山河锦绣，国泰民安。祝祖国繁荣昌盛，祝大家节日快乐！',
       time: '2026-10-01',
@@ -6213,7 +6133,7 @@ initToolSidebar();
       id: 'tablefill-tool',
       type: 'info',
       title: '新工具：表格填入器',
-      content: '「收藏与记录」分类下新增表格填入器。提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。',
+      content: '「创作工坊」分类下新增表格填入器。提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。',
       time: '2026-10-01'
     },
     {
@@ -6245,15 +6165,6 @@ initToolSidebar();
       content: '「健康与运动」分类下新增冥想练习，内置 4-7-8、箱式呼吸等多种节奏，附提示音与循环计数。',
       time: '2026-10-01'
     }
-    // 👆 在这里加更多通知：
-    // {
-    //   id: 'my-notice-1',
-    //   type: 'warning',  // info / success / warning / important
-    //   title: '通知标题',
-    //   content: '通知内容。',
-    //   time: '2026-10-02',
-    //   link: 'https://...'   // 可选
-    // },
   ];
 
   const READ_KEY = 'suidou-notif-read-v1';
@@ -6297,7 +6208,6 @@ initToolSidebar();
     }[c]));
   }
 
-  /* ---------- 渲染通知列表 ---------- */
   function renderList(){
     const readSet = getReadSet();
     const list = NOTIFICATIONS.slice()
@@ -6345,7 +6255,6 @@ initToolSidebar();
     });
   }
 
-  /* ---------- 面板开关 ---------- */
   function openPanel(){
     renderList();
     positionPanel();
@@ -6364,7 +6273,6 @@ initToolSidebar();
   function positionPanel(){
     const rect = btnEl.getBoundingClientRect();
     if (window.innerWidth <= 520) {
-      // 移动端：CSS 里已经用媒体查询定好了位置
       return;
     }
     const panelWidth = 380;
@@ -6378,7 +6286,6 @@ initToolSidebar();
     panelEl.style.top = (rect.bottom + 8) + 'px';
   }
 
-  /* ---------- 事件绑定 ---------- */
   btnEl.addEventListener('click', e => {
     e.stopPropagation();
     togglePanel();
@@ -6414,6 +6321,7 @@ initToolSidebar();
 
   updateDot();
 })();
+
 /* ============================================================
    全部应用 · 按拼音首字母排序 + 分组
    ============================================================ */
@@ -6423,8 +6331,6 @@ initToolSidebar();
   var grid = document.getElementById('allApps');
   if (!grid) return;
 
-  /* 工具名 → 首字母。
-     以后新增工具，只要在这里加一行就行；不加也不会报错，会归到「#」组。 */
   var PINYIN = {
     'AI 助手': 'A',
     'JSON 格式化': 'J',
@@ -6467,7 +6373,6 @@ initToolSidebar();
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.tool-card'));
   if (!cards.length) return;
 
-  // 给每张卡打上首字母标记
   cards.forEach(function(card){
     var h3 = card.querySelector('h3');
     var name = h3 ? h3.textContent.trim() : '';
@@ -6475,7 +6380,6 @@ initToolSidebar();
     card.dataset.letter = PINYIN[name] || '#';
   });
 
-  // 按拼音排序（同组内用 localeCompare 做二次排序）
   cards.sort(function(a, b){
     var la = a.dataset.letter, lb = b.dataset.letter;
     if (la !== lb) return la < lb ? -1 : 1;
@@ -6486,14 +6390,12 @@ initToolSidebar();
     }
   });
 
-  // 按字母分组
   var groups = {};
   cards.forEach(function(card){
     var L = card.dataset.letter;
     (groups[L] = groups[L] || []).push(card);
   });
 
-  // 重新插入 DOM：字母标题 + 该组的所有卡片
   var letters = Object.keys(groups).sort();
   grid.innerHTML = '';
   letters.forEach(function(L){
@@ -6507,7 +6409,6 @@ initToolSidebar();
     });
   });
 })();
-
 
 /* ============================================================
    国庆倒计时 / 正计时
@@ -6530,7 +6431,6 @@ initToolSidebar();
   var elSec       = document.getElementById('ncSec');
   if (!elDay || !elHour || !elMin || !elSec) return;
 
-  /* 2026 国庆假期：10-01 00:00 开始，10-08 00:00 结束（假期 10.1 - 10.7） */
   var START = new Date(2026, 9, 1, 0, 0, 0).getTime();
   var END   = new Date(2026, 9, 8, 0, 0, 0).getTime();
 
@@ -6557,7 +6457,6 @@ initToolSidebar();
     else if (now < END) phase = 'active';
     else phase = 'ended';
 
-    /* 阶段没变时只更新数字，避免每秒钟重复改文案 */
     if (phase === lastPhase){
       if (phase === 'counting') setUnits(Math.floor((START - now) / 1000));
       else if (phase === 'active') setUnits(Math.floor((now - START) / 1000));
@@ -6565,7 +6464,6 @@ initToolSidebar();
     }
     lastPhase = phase;
 
-    /* 切换外层状态类 */
     box.classList.remove('nc-counting', 'nc-active', 'nc-ended');
     box.classList.add('nc-' + phase);
 
@@ -6596,4 +6494,4 @@ initToolSidebar();
   console.log('[国庆倒计时] 已启动：2026-10-01 00:00 ~ 2026-10-08 00:00');
 })();
 
-console.log('%c岁窦工具箱 · V2.3.2 铂金版 已加载', 'color:#565d65;font-weight:700;font-size:14px;');
+console.log('%c岁窦工具箱 · V3.0.10.1 国庆特别版 已加载', 'color:#c62828;font-weight:700;font-size:14px;');

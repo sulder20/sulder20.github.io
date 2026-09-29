@@ -3175,51 +3175,58 @@ body.tool-active{
 }
 
 /* ============================================================
-   移动端（≤900px）：侧栏变成顶部横向滚动胶囊条
+   移动端（≤900px）：侧栏变成顶部横向滚动胶囊条（粘在 header 下方）
    ============================================================ */
 @media (max-width:900px){
   :root{ --header-h: 0px; }
 
+  /* 移动端不再让位（侧边栏回归普通文档流） */
   body.tool-active{
     padding-left:0;
-    padding-top:104px;
-    transition:padding-top .2s ease;
+    padding-top:0;
   }
 
+  /* 侧边栏：sticky 粘在 header 下方 */
   .global-tool-sidebar{
-    top:var(--header-h);
-    left:0;right:0;bottom:auto;
+    position:sticky;
+    top:var(--header-h);        /* header 的实际高度，由 JS 动态设置 */
+    left:auto;right:auto;bottom:auto;
     width:100%;
     height:auto;
     max-height:none;
     border-right:none;
     border-bottom:1px solid var(--border);
     background:rgba(255,255,255,.96);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
     box-shadow:0 6px 18px -12px rgba(158,20,20,.25);
+    z-index:70;                 /* 低于 header 的 80 */
     transform:none;
+    display:flex;
+    flex-direction:column;
   }
 
   body:not(.tool-active) .global-tool-sidebar{
     display:none;
-    transform:none;
-    pointer-events:auto;
   }
 
   .gts-head{
-    padding:10px 14px 4px;
+    padding:8px 14px 2px;
     border-bottom:none;
     background:transparent;
   }
   .gts-current{
-    font-size:13px;
+    font-size:12.5px;
     letter-spacing:.3px;
+    color:#9e1414;
+    font-weight:800;
   }
 
   .gts-nav{
     display:flex;
     flex-wrap:nowrap;
     gap:6px;
-    padding:0 12px 10px;
+    padding:0 12px 8px;
     overflow-x:auto;
     overflow-y:hidden;
     flex:0 0 auto;
@@ -3277,7 +3284,6 @@ body.tool-active{
 
   body.tool-active .page.active{ padding-left:0; }
 }
-
 
 /* ============================================================
    饮水量计算
