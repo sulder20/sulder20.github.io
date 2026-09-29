@@ -1304,7 +1304,9 @@ nav button:hover:not(.active){
 
     <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
 
-    <p>本次国庆特别版不仅更新了视觉主题，还为大家带来了全新工具。<b>「汇率换算」</b>支持常用货币互转，内置参考汇率离线可用，也可联网更新当日参考值；<b>「表格填入器」</b>提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，一键导出为 2 倍分辨率高清 PNG，适合做主观评价图、榜单图。同时，AI 助手、JSON 格式化、冥想练习等功能也在持续优化中，体验会越来越顺手。</p>
+    <p>本次国庆特别版恰逢节日到来，除了视觉焕新之外，还<b>一口气新增了七款实用工具</b>：<b>「表格填入器」</b>支持五档填图与标题导出；<b>「幸运转盘」</b>支持自定义选项与权重概率；<b>「抛硬币模拟器」</b>支持单次 3D 翻转与批量投掷；<b>「反应速度测试」</b>用于测量你的手速；<b>「中国车牌一览表」</b>按大区浏览全国车牌代码；<b>「饮水量计算」</b>按体重与活动量估算每日建议饮水量；<b>「倒数日」</b>内置十种常见节日，实时显示距下一个节日的天数。同时还上线了<b>首页国庆倒计时</b>与<b>侧边栏工具导航</b>，工具再多也不迷路。</p>
+
+    <p>工具箱整体结构也做了较大的调整：<b>原有的面包屑导航升级为左侧分类侧边栏</b>，按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具」七大分类重新梳理，每一个工具都归到最自然的位置。原有的 AI 助手、JSON 格式化、冥想练习、汇率换算等功能也在持续优化中。</p>
 
     <p>后续，我们还将上线<span style="color:var(--primary-dark);">小程序版本、手机 APP 版本</span>等多端渠道，目前的网页版会有很多瑕疵，请慎用！</p>
 
@@ -1369,7 +1371,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 应用中心 ==================== -->
   <section id="page-apps" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>应用中心</h2>
     <p class="page-desc">全部工具都在这里。先按分类查找，或直接在下方「全部应用」中挑选；顶部搜索框也可以快速定位。</p>
 
@@ -1384,6 +1386,8 @@ nav button:hover:not(.active){
           <li data-target="exercise">运动记录</li>
           <li data-target="heatindex">体感温度</li>
           <li data-target="meditation">冥想练习</li>
+          <li data-target="hydration">饮水量计算</li>
+          
         </ul>
       </div>
 
@@ -1400,7 +1404,6 @@ nav button:hover:not(.active){
           <li data-target="random">随机灵感</li>
           <li data-target="notes">灵感速记</li>
           <li data-target="canvas">畅想画布</li>
-          <li data-target="imagecompress">图片压缩</li>
         </ul>
       </div>
 
@@ -1422,7 +1425,6 @@ nav button:hover:not(.active){
         <ul class="cat-list">
           <li data-target="calc">数学计算</li>
           <li data-target="chart">常见统计图生成</li>
-          <li data-target="qrcode">二维码生成</li>
           <li data-target="exchange">汇率换算</li>
         </ul>
       </div>
@@ -1447,6 +1449,26 @@ nav button:hover:not(.active){
           <li data-target="json">JSON 格式化</li>
         </ul>
       </div>
+      <!-- ⑦ 实用工具 -->
+      <div class="category-card">
+        <div class="category-head">
+          <span class="cat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </span>
+          <h3>实用工具</h3>
+        </div>
+        <ul class="cat-list">
+          <li data-target="imagecompress">图片压缩</li>
+          <li data-target="qrcode">二维码生成</li>
+          <li data-target="luckywheel">幸运转盘</li>
+          <li data-target="coinflip">抛硬币模拟器</li>
+          <li data-target="reactiontest">反应速度测试</li>
+          <li data-target="carlist">中国车牌一览表</li>
+          <li data-target="countdown">倒数日</li>
+        </ul>
+      </div>
 
     </div>
 
@@ -1469,6 +1491,11 @@ nav button:hover:not(.active){
       <div class="tool-card" data-target="meditation" data-keywords="冥想 呼吸 放松 减压 助眠 4-7-8 箱式呼吸 正念">
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg></div>
         <h3>冥想练习</h3><p>4-7-8 / 箱式呼吸等多种节奏，圆形跟随放大缩小，附提示音</p>
+      </div>
+      <div class="tool-card" data-target="hydration" data-keywords="饮水 喝水 补水 水量 计算 每日 体重 活动量 气温 孕期">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5S5 10.5 5 15a7 7 0 0 0 14 0c0-4.5-7-12.5-7-12.5z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg></div>
+        <h3>饮水量计算</h3>
+        <p>按体重、活动量、气温估算每日建议饮水量，含分时段参考</p>
       </div>
 
       <!-- ② 创作工坊 -->
@@ -1591,6 +1618,31 @@ nav button:hover:not(.active){
         <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2"/><circle cx="12" cy="12" r="1"/></svg></div>
         <h3>JSON 格式化</h3><p>格式化 / 压缩 / 转义，语法错误定位到行列，纯本地运行</p>
       </div>
+      <div class="tool-card" data-target="luckywheel" data-keywords="幸运转盘 转盘 抽奖 随机 选项 主题 历史">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="1.5"/></svg></div>
+        <h3>幸运转盘</h3>
+        <p>自定义选项与主题，一键旋转，结果自动记录</p>
+      </div>
+      <div class="tool-card" data-target="coinflip" data-keywords="抛硬币 硬币 正面 反面 随机 概率 模拟 统计">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h6M9 12h6M9 14.5h3"/></svg></div>
+        <h3>抛硬币模拟器</h3>
+        <p>单次 3D 翻转，批量最多 10000 次，统计正反占比与连续记录</p>
+      </div>
+      <div class="tool-card" data-target="reactiontest" data-keywords="反应 速度 测试 点击 毫秒 手速 电竞 平均 历史">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>反应速度测试</h3>
+        <p>变绿立即点击，6 次取平均，7 档评级与历史记录</p>
+      </div>
+      <div class="tool-card" data-target="carlist" data-keywords="车牌 车牌号 中国 省份 城市 代号 京 沪 粤 川 鲁 冀 搜索">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h2M11 10h2M15 10h2M7 14h10"/></svg></div>
+        <h3>中国车牌一览表</h3>
+        <p>按大区浏览省市车牌代码，支持省份 / 城市 / 代码搜索</p>
+      </div>
+      <div class="tool-card" data-target="countdown" data-keywords="倒数日 节日 倒计时 春节 元旦 中秋 国庆 端午 清明 母亲节 父亲节 教师节 劳动节 2024 2036">
+        <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg></div>
+        <h3>倒数日</h3>
+        <p>内置常见节日，实时显示距下一个节日的天数，可查 2024-2036 年日期</p>
+      </div>
 
     </div>
     <p id="noResult">没有找到相关工具，换个关键词试试吧～</p>
@@ -1598,7 +1650,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 帮助中心 ==================== -->
   <section id="page-help" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
 
     <h2 class="page-title">
       <span class="page-icon">
@@ -1666,11 +1718,7 @@ nav button:hover:not(.active){
           </h3>
           <div class="help-step">
             <span class="help-step-num">1</span>
-            <div class="help-step-body"><b>找到你要的工具</b>首页「热门应用」可直接进入常用工具；完整工具列表请进入顶部导航的「应用」中心。工具按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六大分类排列，每个工具都归到最自然的位置。V3.0 起，全站以青柠绿为主题色，并新增「冥想练习」与「JSON 格式化」两款工具。</div>
-          </div>
-          <div class="help-step">
-            <span class="help-step-num">2</span>
-            <div class="help-step-body"><b>用搜索框快速定位</b>顶部搜索框支持按工具名称和关键词检索。输入「睡眠」「运动」「鞋码」「血压」等词会自动跳转到「应用」页并筛出相关工具；清空搜索框即可恢复完整列表。</div>
+            <div class="help-step-body"><b>找到你要的工具</b>首页「热门应用」可直接进入常用工具；进入任意工具页后，<b>左侧会显示分类侧边栏</b>，按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具」七大分类排列，当前工具高亮显示，点击即可切换。移动端侧边栏会自动折叠为顶部横向滚动胶囊条。V3.0 起，全站以中国红 + 金色为主题色，国庆版更是一口气新增了「表格填入器」「幸运转盘」「抛硬币模拟器」「反应速度测试」「中国车牌一览表」「饮水量计算」「倒数日」七款工具。</div>
           </div>
           <div class="help-step">
             <span class="help-step-num">3</span>
@@ -1697,15 +1745,21 @@ nav button:hover:not(.active){
             常见问题
           </h3>
 
-          <details class="faq-item">
+          <details class="faq-item" >
             <summary>V3.0.10.1国庆特别版相比 V2.3.2 改了什么？</summary>
             <div class="faq-body">
-              <p><b>V3.0 主要做了两件事</b>：一是界面全面焕新，二是新增两款实用工具。</p>
-              <p><b>界面方面</b>：① 全站主题色从铂金金属灰换成青柠绿（<code>#84cc16</code>）；② 首页 Hero 换成青绿渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态、面包屑快捷入口统一换色。</p>
+              <p><b>V3.0 主要做了两件事</b>：一是界面全面焕新，二是新增多款实用工具与导航结构调整。</p>
+              <p><b>界面方面</b>：① 全站主题色改为中国红 + 金色（国庆版）；② 首页 Hero 换成红金渐变并加了柔光装饰；③ 工具卡、热门卡悬停细节重做；④ 计算器、时钟、代码编辑器三处深色区改为深墨绿；⑤ 表单 focus 光圈、子标签激活态统一换色。</p>
               <p>同时，<b>所有数据展示色保持不变</b>：统计图、词云、小说章节类型分布、BMI 分段、体感温度风险条、生命体征状态、音乐平台品牌色等，依然是原来的多色方案，确保数据一眼可辨。</p>
-              <p><b>新增工具方面</b>：</p>
-              <p>① 「健康与运动」分类新增<b>冥想练习</b>：内置 4-7-8 呼吸、箱式呼吸、等长呼吸、深度放松四种节奏，圆形随呼吸节律放大缩小，附呼吸提示音与循环计数，纯本地运行。</p>
-              <p>② 「AI 与开发」分类新增<b>JSON 格式化 / 校验</b>：支持 2/4 空格格式化、一键压缩、转义 / 去转义；语法错误会定位到具体行列，输入时实时校验。纯本地运行，不上传数据。</p>
+              <p><b>新增工具方面</b>（共 7 款）：</p>
+              <p>① 「创作工坊」新增<b>表格填入器</b>：五档填图表格，支持多图拖拽、跨格移动，可自定义标题并勾选是否导出标题，导出 2 倍分辨率 PNG。</p>
+              <p>② 「实用工具」新增<b>幸运转盘</b>：可自定义 2-12 个选项与权重（1-100），六套主题，结果自动记录。</p>
+              <p>③ 「实用工具」新增<b>抛硬币模拟器</b>：单次 3D 翻转，批量最多 10000 次，统计正反占比与连续记录。</p>
+              <p>④ 「实用工具」新增<b>反应速度测试</b>：6 次取平均，7 档评级，历史自动保存，不支持键盘。</p>
+              <p>⑤ 「实用工具」新增<b>中国车牌一览表</b>：按七大地理大区浏览车牌代码，含特殊车牌，支持实时搜索。</p>
+              <p>⑥ 「健康与运动」新增<b>饮水量计算</b>：按体重、活动量、气温估算每日饮水量，含分时段参考。</p>
+              <p>⑦ 「实用工具」新增<b>倒数日</b>：内置 10 种常见节日，实时显示距下一个节日的天数，可查 2024-2036 年日期。</p>
+              <p><b>结构与导航方面</b>：① 原有的面包屑导航升级为<b>左侧固定侧边栏</b>，按七大分类重新梳理；② 新增<b>「实用工具」分类</b>，把图片压缩、二维码生成、幸运转盘、抛硬币模拟器、反应速度测试、中国车牌一览表、倒数日归入其中；③ 首页新增<b>国庆倒计时卡片</b>，国庆前倒计时、假期中正计时；④ 顶部新增<b>通知铃铛</b>，新工具与公告自动推送。</p>
               <p>原有数据、操作方式、其他工具入口均无变化，无需迁移。</p>
             </div>
           </details>
@@ -1928,6 +1982,12 @@ nav button:hover:not(.active){
             <div class="help-tip"><b>JSON 格式化</b>格式化 / 压缩 / 转义，语法错误定位到行列；Ctrl / ⌘ + Enter 一键格式化。</div>
             <div class="help-tip"><b>表格填入器</b>把图片拖进「夯 / 顶级 / 人上人 / NPC / 拉完了」五个档位，支持多图、跨格移动。可自定义标题并勾选是否导出标题，最终导出为高清 PNG。适合做主观评价图、榜单图。</div>
             <div class="help-tip"><b>汇率换算</b>内置参考汇率，离线可用；点「联网更新实时汇率」可拉取当日参考值。结果为参考性质，实际以银行或支付平台成交价为准。</div>
+            <div class="help-tip"><b>幸运转盘</b>每个选项右侧可以设置权重（1-100），权重越大扇区越宽、中奖概率越高，百分比实时显示在输入框右边。六套主题一键切换，结果自动记录在下方历史。</div>
+            <div class="help-tip"><b>抛硬币模拟器</b>单次投掷带 3D 翻转动画，批量投掷可一次跑 10000 次。下方统计卡实时显示正面 / 反面次数与占比、最长连续正面 / 反面。历史记录里 ≤ 20 次会显示红 / 灰小圆点序列。</div>
+            <div class="help-tip"><b>反应速度测试</b>点击开始 → 等待 1-4 秒后变绿 → 立即点击。共 6 次取平均，从「超人」到「需要练习」共 7 档评级。抢跑（变绿前点击）本次不计入，会提示重新开始。仅支持鼠标与触摸，不响应键盘。</div>
+            <div class="help-tip"><b>中国车牌一览表</b>按华北 / 东北 / 华东 / 华中 / 华南 / 西南 / 西北七大地理大区浏览。搜索框支持省份名、城市名、车牌代码（如「粤B」「广东」「深圳」），匹配省份名时显示该省全部代码，只匹配代码时只显示命中项。</div>
+            <div class="help-tip"><b>饮水量计算</b>输入体重（必填）与年龄、身高（选填），选择性别、活动量、气温、孕期 / 哺乳期，按「体重 × 35ml × 性别 × 年龄 × 活动量 × 气温 × 特殊时期」计算。结果含 ml、L、250ml 杯数、500ml 瓶数、分时段参考。仅供参考，不能替代专业医嘱。</div>
+            <div class="help-tip"><b>倒数日</b>顶部大卡片实时显示最近的一个节日与倒计时天数。下方列表按距今天数升序排列，点击任意节日卡片会横向展开 2024-2036 年该节日的完整日期，当前年（离现在最近的年）用红金渐变高亮。</div>
           </div>
         </div>
 
@@ -2180,6 +2240,59 @@ nav button:hover:not(.active){
               <div class="up-head"><span class="up-badge">新增</span><b>表格填入器</b></div>
               <p>新增「表格填入器」工具：提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配。可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。</p>
           </div>
+                      <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">配色</span><b>全局换装红金主题</b></div>
+              <p>整套界面从铂金金属灰改为中国红 + 金色（<code>#c62828</code> 主色，<code>#f6c453</code> 金色），顶栏、按钮、卡片悬停、标签、进度条、渐变卡统一为红金质感。首页 Hero 换成红金渐变并加了柔光装饰。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>表格填入器</b></div>
+              <p>「创作工坊」分类下新增表格填入器。提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。纯本地运行。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>幸运转盘</b></div>
+              <p>「实用工具」分类下新增幸运转盘。可自定义 2-12 个选项，每个选项可单独设置权重（1-100），扇区宽度按权重实时变化，所见即所得。内置彩虹 / 马卡龙 / 霓虹 / 森林 / 海洋 / 红金 六套主题，点击中间按钮旋转，缓动减速停在指针扇区，结果自动记录到历史。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>抛硬币模拟器</b></div>
+              <p>「实用工具」分类下新增抛硬币模拟器。支持单次 3D 翻转动画与批量投掷（10 / 100 / 1000 / 自定义，最多 10000 次），累计统计正面 / 反面次数、占比、最长连续正面与反面记录，历史自动保存，可显示投掷序列小圆点。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>反应速度测试</b></div>
+              <p>「实用工具」分类下新增反应速度测试。等待绿色出现后立即点击，共 6 次取平均，评级从「超人」到「需要练习」共 7 档，含最快 / 最慢 / 明细展示，历史自动保存。仅支持鼠标与触摸，不响应键盘。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>中国车牌一览表</b></div>
+              <p>「实用工具」分类下新增中国车牌一览表。按华北 / 东北 / 华东 / 华中 / 华南 / 西南 / 西北七大地理大区浏览全国各省市车牌代码，含使 / 领 / 警 / 军 / 挂 / 学 / 试 / 超等特殊车牌。支持按省份、城市、代码实时搜索。纯本地运行。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>饮水量计算</b></div>
+              <p>「健康与运动」分类下新增饮水量计算。输入体重、年龄，选择性别、活动量与气温环境，估算每日建议饮水量，并给出分时段参考、杯子 / 瓶装换算与计算依据。历史自动保存。结果仅供参考，不能替代专业医嘱。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>倒数日</b></div>
+              <p>「实用工具」分类下新增倒数日。内置元旦、春节、清明节、劳动节、端午节、母亲节、父亲节、教师节、中秋节、国庆节等常见节日，实时显示距离下一个节日的天数。点击任意节日可横向展开 2024 - 2036 年完整日期。图标使用扁平线性 SVG。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">调整</span><b>左侧分类侧边栏</b></div>
+              <p>原有的面包屑导航升级为左侧固定侧边栏。按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具」七大分类重新梳理，每一个工具都归到最自然的位置，当前工具高亮显示。移动端自动折叠为顶部横向滚动胶囊条。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">调整</span><b>分类重新规划</b></div>
+              <p>新增「实用工具」分类，把图片压缩、二维码生成、幸运转盘、抛硬币模拟器、反应速度测试、中国车牌一览表、倒数日归入其中。同时把时间戳转换从「时间与生活」迁到「计算与数据」，使分类更符合使用直觉。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>首页国庆倒计时</b></div>
+              <p>首页 Hero 下方新增国庆倒计时卡片，实时显示距离 2026 年 10 月 1 日的天、时、分、秒。进入假期后自动切换为正计时，假期结束后显示「期待下一个国庆」。红金渐变配色，与国庆主题一致。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>通知系统</b></div>
+              <p>顶部导航新增通知铃铛，未读数量实时显示。点击展开通知面板，展示最近 30 条通知，支持全部标为已读。新工具上线与重要公告会通过通知推送。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">优化</span><b>应用中心分类卡</b></div>
+              <p>应用中心的分类卡同步调整为七大分类，与侧边栏保持一致。「全部应用」按拼音首字母排序并分组显示，新增工具自动归位。</p>
+            </div>
+          </div>
           </div>
 
           <!-- ======= V2.3.2 铂金版 ======= -->
@@ -2301,7 +2414,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 文章分析 ==================== -->
   <section id="page-textanalysis" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></span>文章分析</h2>
     <p class="page-desc">对文章进行字数统计与词频分析，写作与阅读的好帮手。</p>
 
@@ -2374,7 +2487,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 我的记账本 ==================== -->
   <section id="page-ledger" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M2 9h20"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></span>我的记账本</h2>
     <p class="page-desc">记录每一笔消费，支持人民币、美元、欧元等多种货币，自动汇总本月支出。</p>
 
@@ -2425,7 +2538,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 数学计算 ==================== -->
   <section id="page-calc" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></span>数学计算</h2>
     <p class="page-desc">计算器与单位换算两大模块。BMI 与鞋码已迁入「健康管理」。</p>
 
@@ -2521,7 +2634,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 常见统计图生成 ==================== -->
   <section id="page-chart" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>常见统计图生成</h2>
     <p class="page-desc">每行输入一条数据，格式为「标签,数值」，支持逗号、空格或制表符分隔。</p>
     <div class="panel">
@@ -2544,7 +2657,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 时钟工具 ==================== -->
   <section id="page-clock" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>时钟工具</h2>
     <p class="page-desc">倒计时支持 1 秒 - 20 小时，结束时自动震动反馈；计时器可精确到 0.01 秒。</p>
     <div class="clock-tabs" id="clockTabs">
@@ -2577,7 +2690,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 人物印象表格 ==================== -->
   <section id="page-people" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span>人物印象表格</h2>
     <p class="page-desc">记录现实人物、历史人物或小说人物的基本信息，以及你对他 / 她的专属印象。支持上传图片和 AI 生成小传。</p>
     <div class="panel">
@@ -2612,7 +2725,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 歌曲收藏 ==================== -->
   <section id="page-songs" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>歌曲收藏</h2>
     <p class="page-desc">记录你喜欢的歌曲信息与歌词，并一键跳转到 QQ音乐、酷我音乐、酷狗音乐、网易云音乐查找音源。（本工具不提供试听功能）</p>
     <div class="panel">
@@ -2657,7 +2770,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 地点收藏 ==================== -->
   <section id="page-places" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>地点收藏</h2>
     <p class="page-desc">收藏某个地方。国内填写到具体门牌号或精确位置；国外做模糊处理，写到城市或地标即可。支持添加图片、人均价格 / 门票价格，并可直达百度百科查看。</p>
     <div class="panel">
@@ -2697,7 +2810,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 影视收藏 ==================== -->
   <section id="page-media" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></span>影视收藏</h2>
     <p class="page-desc">收藏你喜欢的电视剧、电影、综艺、纪录片、动画片等影视作品。填写名称、类型、国别、年份、主要角色与简介，可一键导出「我的追剧信息」文档与图片，支持 AI 生成简介。</p>
     <div class="panel">
@@ -2740,7 +2853,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 菜谱收藏 ==================== -->
   <section id="page-recipe" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -2792,7 +2905,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 我的日历 ==================== -->
   <section id="page-calendar" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></span>我的日历</h2>
     <p class="page-desc">在日历中安排每天的计划，支持新增、修改与删除，并可把当月安排导出为图片。可查看范围：2026 年 10 月 — 2036 年 12 月。</p>
     <div class="panel">
@@ -3062,7 +3175,7 @@ nav button:hover:not(.active){
   </section>
 <!-- ==================== 汇率换算 ==================== -->
 <section id="page-exchange" class="page">
-  <button class="back-btn" data-back>← 返回首页</button>
+  
   <h2 class="page-title">
     <span class="page-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
@@ -3129,7 +3242,7 @@ nav button:hover:not(.active){
 </section>
   <!-- ==================== 健康管理 ==================== -->
   <section id="page-health" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></span>
       健康管理
@@ -3329,7 +3442,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 运动记录 ==================== -->
   <section id="page-exercise" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg></span>
       运动记录
@@ -3441,7 +3554,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 冥想练习 ==================== -->
   <section id="page-meditation" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg></span>
       冥想练习
@@ -3494,10 +3607,102 @@ nav button:hover:not(.active){
       </p>
     </div>
   </section>
+  <!-- ==================== 饮水量计算 ==================== -->
+  <section id="page-hydration" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2.5S5 10.5 5 15a7 7 0 0 0 14 0c0-4.5-7-12.5-7-12.5z"/>
+          <path d="M9 15a3 3 0 0 0 3 3"/>
+        </svg>
+      </span>
+      饮水量计算
+    </h2>
+    <p class="page-desc">根据体重、活动量与气温，估算每日建议饮水量，并给出分时段参考。结果仅供参考，不能替代专业医嘱。</p>
 
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>
+        </svg>
+        基本信息
+      </h3>
+      <div class="form-grid">
+        <label class="field">
+          <span>体重（kg）*</span>
+          <input type="text" id="hydWeight" placeholder="如：60">
+        </label>
+        <label class="field">
+          <span>身高（cm）</span>
+          <input type="text" id="hydHeight" placeholder="选填，如：170">
+        </label>
+        <label class="field">
+          <span>年龄</span>
+          <input type="text" id="hydAge" placeholder="选填，如：25">
+        </label>
+      </div>
+
+      <div class="field">
+        <span>性别</span>
+        <div class="hyd-chips" id="hydGender">
+          <button type="button" class="hyd-chip active" data-value="male">男</button>
+          <button type="button" class="hyd-chip" data-value="female">女</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span>日常活动量</span>
+        <div class="hyd-chips" id="hydActivity">
+          <button type="button" class="hyd-chip active" data-value="sit">久坐少动</button>
+          <button type="button" class="hyd-chip" data-value="light">轻度活动</button>
+          <button type="button" class="hyd-chip" data-value="mid">中等活动</button>
+          <button type="button" class="hyd-chip" data-value="high">高强度</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span>气温环境</span>
+        <div class="hyd-chips" id="hydClimate">
+          <button type="button" class="hyd-chip" data-value="cold">凉爽</button>
+          <button type="button" class="hyd-chip active" data-value="norm">常温</button>
+          <button type="button" class="hyd-chip" data-value="warm">偏热</button>
+          <button type="button" class="hyd-chip" data-value="hot">炎热</button>
+        </div>
+      </div>
+
+      <label class="hyd-special-check">
+        <input type="checkbox" id="hydSpecial">
+        <span>孕期 / 哺乳期（+20%）</span>
+      </label>
+
+      <div class="hyd-actions">
+        <button class="btn" id="hydCalc" type="button">计算每日饮水量</button>
+        <button class="btn ghost" id="hydReset" type="button">重置</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2.5S5 10.5 5 15a7 7 0 0 0 14 0c0-4.5-7-12.5-7-12.5z"/>
+        </svg>
+        计算结果
+      </h3>
+      <div class="hyd-result" id="hydResult"></div>
+    </div>
+
+    <div class="panel">
+      <div class="list-head" style="margin-top:0;">
+        <h2>历史记录（<span id="hydHistoryCount">0</span>）</h2>
+        <button class="btn ghost small" id="hydClearHistory" type="button">清空历史</button>
+      </div>
+      <div class="hyd-history" id="hydHistory"></div>
+    </div>
+  </section>
   <!-- ==================== 体感温度与运动风险 ==================== -->
   <section id="page-heatindex" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="5"/></svg></span>
       体感温度与运动风险
@@ -3570,7 +3775,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 代码编辑器 ==================== -->
   <section id="page-code" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></span>代码编辑器</h2>
     <p class="page-desc">左侧写代码，右侧即时看效果。JavaScript 模式会在沙箱中真实运行；Markdown 模式会实时渲染。登录后可让 AI 解释代码。</p>
     <div class="panel">
@@ -3596,7 +3801,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== JSON 格式化 / 校验 ==================== -->
   <section id="page-json" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2"/><circle cx="12" cy="12" r="1"/></svg></span>
       JSON 格式化 / 校验
@@ -3643,7 +3848,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 畅想画布 ==================== -->
   <section id="page-canvas" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>畅想画布</h2>
     <p class="page-desc">一块自由的白板：选择颜色与粗细随手涂鸦，支持橡皮擦、撤销与清空，完成后可一键导出为 PNG 图片。</p>
     <div class="panel">
@@ -3672,7 +3877,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 图片压缩 ==================== -->
   <section id="page-imagecompress" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title">
       <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M21 15l-5-5-4 4-3-3-4 4"/><circle cx="9" cy="9" r="2"/></svg></span>
       图片压缩
@@ -3752,6 +3957,224 @@ nav button:hover:not(.active){
         <button class="btn" id="compressDownloadBtn" disabled>下载压缩图片</button>
       </div>
     </div>
+  </section>
+    <!-- ==================== 幸运转盘 ==================== -->
+  <section id="page-luckywheel" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3v9l6 3"/>
+          <circle cx="12" cy="12" r="1.5"/>
+        </svg>
+      </span>
+      幸运转盘
+    </h2>
+    <p class="page-desc">自定义选项，点击中间按钮旋转。多种主题可选，结果自动记录到下方历史。纯本地运行。</p>
+
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7h16M4 12h10M4 17h7"/>
+        </svg>
+        选项设置（2 - 12 个）
+      </h3>
+      <div class="lw-options" id="lwOptions"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn ghost small" id="lwAddOption" type="button">＋ 添加选项</button>
+        <button class="btn ghost small" id="lwAvgWeight" type="button">恢复平均权重</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        转盘主题
+      </h3>
+      <div class="lw-themes" id="lwThemes"></div>
+    </div>
+
+    <div class="panel">
+      <div class="lw-stage">
+        <div class="lw-pointer"></div>
+        <div class="lw-wheel-wrap" id="lwWheelWrap">
+          <canvas id="lwCanvas" width="560" height="560"></canvas>
+        </div>
+        <button class="lw-go" id="lwGo" type="button">开始</button>
+      </div>
+      <div class="lw-result" id="lwResult">
+        <span class="lw-result-label">本次结果</span>
+        <span class="lw-result-value" id="lwResultValue">—</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="list-head" style="margin-top:0;">
+        <h2>历史记录（<span id="lwHistoryCount">0</span>）</h2>
+        <button class="btn ghost small" id="lwClearHistory" type="button">清空历史</button>
+      </div>
+      <div class="lw-history" id="lwHistory"></div>
+    </div>
+  </section>
+    <!-- ==================== 抛硬币模拟器 ==================== -->
+  <section id="page-coinflip" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M9 9.5h6M9 12h6M9 14.5h3"/>
+        </svg>
+      </span>
+      抛硬币模拟器
+    </h2>
+    <p class="page-desc">单次投掷带 3D 翻转动画，也可一次投掷上百次。累计统计正面 / 反面次数、占比与最长连续记录，历史自动保存。纯本地运行。</p>
+
+    <div class="panel">
+      <div class="cf-stage" id="cfStage">
+        <div class="cf-coin" id="cfCoin">
+          <div class="cf-face cf-front"><span>正</span></div>
+          <div class="cf-face cf-back"><span>反</span></div>
+        </div>
+      </div>
+
+      <div class="cf-result" id="cfResult">
+        <div class="cf-result-value" id="cfResultValue">—</div>
+        <div class="cf-result-sub" id="cfResultSub">点击上方按钮开始</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        投掷
+      </h3>
+      <div class="cf-btns">
+        <button class="btn" type="button" data-cf-flip="1">投掷 1 次</button>
+        <button class="btn ghost" type="button" data-cf-flip="10">投掷 10 次</button>
+        <button class="btn ghost" type="button" data-cf-flip="100">投掷 100 次</button>
+        <button class="btn ghost" type="button" data-cf-flip="1000">投掷 1000 次</button>
+      </div>
+      <div class="cf-custom">
+        <input type="number" id="cfCustomCount" min="1" max="10000" placeholder="自定义次数（1 - 10000）">
+        <button class="btn small" id="cfCustomGo" type="button">开始</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18"/>
+          <rect x="7" y="12" width="3" height="6"/>
+          <rect x="12" y="8" width="3" height="10"/>
+          <rect x="17" y="5" width="3" height="13"/>
+        </svg>
+        累计统计
+      </h3>
+      <div class="cf-stats" id="cfStats"></div>
+    </div>
+
+    <div class="panel">
+      <div class="list-head" style="margin-top:0;">
+        <h2>历史记录（<span id="cfHistoryCount">0</span>）</h2>
+        <button class="btn ghost small" id="cfClearHistory" type="button">清空历史</button>
+      </div>
+      <div class="cf-history" id="cfHistory"></div>
+    </div>
+  </section>
+    <!-- ==================== 反应速度测试 ==================== -->
+  <section id="page-reactiontest" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </span>
+      反应速度测试
+    </h2>
+    <p class="page-desc">等待绿色出现后立即点击，共 6 次取平均。评级包含超人 / 顶尖 / 优秀 / 良好 / 普通 / 偏慢 / 需要练习，历史自动保存。纯本地运行。</p>
+
+    <div class="panel">
+      <div class="rt-stage rt-idle" id="rtStage">
+        <div class="rt-stage-round" id="rtRound">0 / 6</div>
+        <div class="rt-stage-title" id="rtStageTitle">点击开始</div>
+        <div class="rt-stage-hint" id="rtStageHint">共 6 次，取平均</div>
+      </div>
+
+      <div class="rt-result" id="rtResult"></div>
+
+      <div class="rt-actions">
+        <button class="btn" id="rtStart" type="button">点击开始</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="list-head" style="margin-top:0;">
+        <h2>历史记录（<span id="rtHistoryCount">0</span>）</h2>
+        <button class="btn ghost small" id="rtClearHistory" type="button">清空历史</button>
+      </div>
+      <div class="rt-history" id="rtHistory"></div>
+    </div>
+  </section>
+    <!-- ==================== 中国车牌一览表 ==================== -->
+  <section id="page-carlist" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="6" width="18" height="12" rx="2"/>
+          <path d="M7 10h2M11 10h2M15 10h2M7 14h10"/>
+        </svg>
+      </span>
+      中国车牌一览表
+    </h2>
+    <p class="page-desc">按地理大区浏览中国各省市车牌代码。支持按省份、城市、代码搜索。参考资料，如有出入以官方为准。</p>
+
+    <div class="panel">
+      <div class="cl-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M20 20l-3.6-3.6"/>
+        </svg>
+        <input type="search" id="clSearch" placeholder="搜索省份、城市或车牌代码，如：广东、深圳、粤B" autocomplete="off">
+        <button type="button" class="cl-clear" id="clClear" hidden aria-label="清空搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="cl-stats" id="clStats"></div>
+    </div>
+
+    <div id="clList"></div>
+
+    <p class="empty" id="clEmpty" style="display:none;">没有找到匹配的车牌信息，换个关键词试试～</p>
+  </section>
+    <!-- ==================== 倒数日 ==================== -->
+  <section id="page-countdown" class="page">
+    <h2 class="page-title">
+      <span class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <path d="M16 2v4M8 2v4M3 10h18"/>
+          <path d="M12 14v4M10 16h4"/>
+        </svg>
+      </span>
+      倒数日
+    </h2>
+    <p class="page-desc">内置元旦、春节、清明节、劳动节、端午节、母亲节、父亲节、教师节、中秋节、国庆节等常见节日，实时显示距离下一个节日的天数，支持查看 2024 - 2036 年日期。纯本地运行。</p>
+
+    <div class="cd-next-card" id="cdNextCard"></div>
+
+    <div class="list-head">
+      <h2>全部节日</h2>
+      <span style="font-size:12.5px;color:var(--muted);">点击任意节日查看历年日期</span>
+    </div>
+    <div class="cd-list" id="cdList"></div>
   </section>
     <!-- ==================== 表格填入器 ==================== -->
   <section id="page-tablefill" class="page">
@@ -3873,7 +4296,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== AI 助手 ==================== -->
   <section id="page-ai" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>AI 助手</h2>
     <p class="page-desc">由 DeepSeek 驱动。登录后每天有固定免费额度。其他 AI 能力已分散到各创作工具中（起名器、对话生成器、随机灵感等）。</p>
     <div class="panel">
@@ -3896,7 +4319,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 时间线 ==================== -->
   <section id="page-timeline" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg></span>时间线</h2>
     <p class="page-desc">按时间顺序记录事件，支持分类与排序。纯本地工具，无需登录。</p>
     <div class="panel">
@@ -3917,7 +4340,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 起名器 ==================== -->
   <section id="page-namer" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg></span>起名器</h2>
     <p class="page-desc">输入关键词和风格，让 AI 一次给你 10 个候选名。</p>
     <div class="panel">
@@ -3942,7 +4365,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 对话生成器 ==================== -->
   <section id="page-dialogue" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></span>对话生成器</h2>
     <p class="page-desc">输入两个角色和场景，让 AI 模拟他们的对话。会从「人物印象表」中拉取角色设定。</p>
     <div class="panel">
@@ -3962,7 +4385,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 随机灵感 ==================== -->
   <section id="page-random" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg></span>随机灵感</h2>
     <p class="page-desc">卡文时点一下，随机给点灵感。本地随机不消耗 AI 额度；AI 批量生成需要登录。</p>
     <div class="panel">
@@ -3984,7 +4407,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 灵感速记 ==================== -->
   <section id="page-notes" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>灵感速记</h2>
     <p class="page-desc">随手记下灵感碎片，支持标签和全文搜索。登录后自动同步云端。</p>
     <div class="panel">
@@ -4001,7 +4424,7 @@ nav button:hover:not(.active){
 
   <!-- ==================== 小说助手 ==================== -->
   <section id="page-novel" class="page">
-    <button class="back-btn" data-back>← 返回首页</button>
+    
     <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>小说助手</h2>
     <p class="page-desc">多本小说独立管理，每本可分章节、分类统计字数，支持封面、字数统计图，一键导出全文。</p>
 
@@ -4150,6 +4573,12 @@ nav button:hover:not(.active){
 <script src="js/heatindex.js"></script>
 <script src="js/imagecompress.js"></script>
 <script src="js/exchange.js"></script>
+<script src="js/luckywheel.js"></script>
+<script src="js/coinflip.js"></script>
+<script src="js/reactiontest.js"></script>
+<script src="js/carlist.js"></script>
+<script src="js/hydration.js"></script>
+<script src="js/countdown.js"></script>
 
 </body>
 </html>

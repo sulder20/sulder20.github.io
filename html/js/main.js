@@ -72,15 +72,33 @@ function go(name){
   if (name === 'calendar')     setTimeout(renderCalendar, 60);
   if (name === 'code')         setTimeout(runCodeEditor, 60);
   if (name === 'ai')           setTimeout(() => { updateQuota(); chatInput.focus(); }, 60);
+  if (name === 'hydration') setTimeout(function () {
+  if (typeof window.__hydrationInit === 'function') window.__hydrationInit();
+  }, 60);
   if (name === 'novel')        setTimeout(renderNovelList, 60);
   if (name === 'ledger')       setTimeout(renderLedger, 60);
+  if (name === 'carlist') setTimeout(function () {
+  if (typeof window.__carlistInit === 'function') window.__carlistInit();
+  }, 60);
+  if (name === 'countdown') setTimeout(function () {
+  if (typeof window.__countdownInit === 'function') window.__countdownInit();
+  }, 60);
   if (name === 'textanalysis') setTimeout(() => { updateWC(); updateWordFreq(); }, 60);
   if (name === 'calc')         setTimeout(() => { updateUnitConvert(); }, 60);
   if (name === 'health')       setTimeout(() => { updateBmi(); updateShoeCalc(); renderShoeTable(); renderSleepChart(); renderSleepList(); renderVitalList(); }, 60);
   if (name === 'exercise')     setTimeout(() => { loadExerProfile(); renderExerciseList(); }, 60);
   if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
   if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
+  if (name === 'reactiontest') setTimeout(function () {
+  if (typeof window.__reactiontestInit === 'function') window.__reactiontestInit();
+  }, 60);
   if (name === 'tablefill')    setTimeout(() => { if (typeof window.__tablefillInit === 'function') window.__tablefillInit(); }, 60);
+  if (name === 'coinflip') setTimeout(function () {
+  if (typeof window.__coinflipInit === 'function') window.__coinflipInit();
+  }, 60);
+  if (name === 'luckywheel') setTimeout(function () {
+  if (typeof window.__luckywheelInit === 'function') window.__luckywheelInit();
+  }, 60);
   if (name === 'exchange')     setTimeout(() => {
   if (typeof window.__fxInit === 'function') window.__fxInit();
 }, 60);
@@ -5519,7 +5537,7 @@ loadTimeline();
 loadNotes();
 
 /* ============================================================
-   V2.3.2 · 工具面包屑导航
+   V3.0.10.1 · 工具分类侧边栏（方案 A）
    ============================================================ */
 const TOOL_REGISTRY = [
   /* ① 健康与运动 */
@@ -5527,6 +5545,7 @@ const TOOL_REGISTRY = [
   { id: 'exercise',     name: '运动记录' },
   { id: 'heatindex',    name: '体感温度' },
   { id: 'meditation',   name: '冥想练习' },
+  { id: 'hydration',    name: '饮水量计算' },
   /* ② 创作工坊 */
   { id: 'novel',        name: '小说助手' },
   { id: 'textanalysis', name: '文章分析' },
@@ -5537,92 +5556,226 @@ const TOOL_REGISTRY = [
   { id: 'random',       name: '随机灵感' },
   { id: 'notes',        name: '灵感速记' },
   { id: 'canvas',       name: '畅想画布' },
-  { id: 'imagecompress', name: '图片压缩' },
+  { id: 'tablefill',    name: '表格填入器' },
   /* ③ 收藏与记录 */
   { id: 'songs',        name: '歌曲收藏' },
   { id: 'places',       name: '地点收藏' },
   { id: 'media',        name: '影视收藏' },
   { id: 'recipe',       name: '菜谱收藏' },
-  { id: 'tablefill',    name: '表格填入器' },
   /* ④ 计算与数据 */
   { id: 'calc',         name: '数学计算' },
   { id: 'chart',        name: '统计图生成' },
-  { id: 'qrcode',       name: '二维码生成' },
   { id: 'exchange',     name: '汇率换算' },
+  { id: 'timestamp',    name: '时间戳转换' },
   /* ⑤ 时间与生活 */
   { id: 'calendar',     name: '我的日历' },
   { id: 'clock',        name: '时钟工具' },
   { id: 'ledger',       name: '我的记账本' },
-  { id: 'timestamp',    name: '时间戳转换' },
   /* ⑥ AI 与开发 */
   { id: 'ai',           name: 'AI 助手' },
   { id: 'code',         name: '代码编辑器' },
-  { id: 'json',         name: 'JSON 格式化' }
+  { id: 'json',         name: 'JSON 格式化' },
+  /* ⑦ 实用工具 */
+  { id: 'imagecompress',name: '图片压缩' },
+  { id: 'qrcode',       name: '二维码生成' },
+  { id: 'luckywheel',   name: '幸运转盘' },
+  { id: 'coinflip',     name: '抛硬币模拟器' },
+  { id: 'reactiontest', name: '反应速度测试' },
+  { id: 'carlist',      name: '中国车牌一览表' },
+  { id: 'countdown',    name: '倒数日' }
 ];
 
-const SVG_HOME =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-  'stroke-linecap="round" stroke-linejoin="round">' +
-  '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>' +
-  '<path d="M9 22V12h6v10"/></svg>';
+/* 分类 → 工具 id 列表 */
+const TOOL_CATEGORIES = [
+  { name: '健康与运动', tools: ['health','exercise','heatindex','meditation','hydration'] },
+  { name: '创作工坊',   tools: ['novel','textanalysis','people','timeline','namer','dialogue','random','notes','canvas','tablefill'] },
+  { name: '收藏与记录', tools: ['songs','places','media','recipe'] },
+  { name: '计算与数据', tools: ['calc','chart','exchange','timestamp'] },
+  { name: '时间与生活', tools: ['calendar','clock','ledger'] },
+  { name: 'AI 与开发',  tools: ['ai','code','json'] },
+  { name: '实用工具',   tools: ['imagecompress','qrcode','luckywheel','coinflip','reactiontest','carlist','countdown'] }
+];
 
-const SVG_GRID =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-  'stroke-linecap="round" stroke-linejoin="round">' +
-  '<rect x="3" y="3" width="7" height="7" rx="1.5"/>' +
-  '<rect x="14" y="3" width="7" height="7" rx="1.5"/>' +
-  '<rect x="3" y="14" width="7" height="7" rx="1.5"/>' +
-  '<rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>';
+/* 用到的所有工具 id，供 go() 判断是否为工具页 */
+const ALL_TOOL_IDS = TOOL_REGISTRY.map(function (t) { return t.id; });
 
-function injectToolCrumbs(){
-  TOOL_REGISTRY.forEach(function(tool){
-    var page = document.getElementById('page-' + tool.id);
-    if (!page){ console.warn('[面包屑] 找不到 page-' + tool.id); return; }
-    if (page.dataset.crumbInjected === '1') return;
-    page.dataset.crumbInjected = '1';
+/* 从「全部应用」卡片里抓取图标（保持视觉一致） */
+function getToolIcon(toolId) {
+  var card = document.querySelector('#allApps .tool-card[data-target="' + toolId + '"]');
+  if (card) {
+    var svg = card.querySelector('.tool-icon svg');
+    if (svg) return svg.outerHTML;
+  }
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>';
+}
 
-    var oldBack = page.querySelector('.back-btn');
-    if (oldBack) oldBack.remove();
+/* ---------- 构建侧边栏 ---------- */
+function buildToolSidebar(sidebar) {
+  var html = '';
 
-    var nav = document.createElement('nav');
-    nav.className = 'tool-crumb';
+  /* 顶部当前工具名 */
+  html += '<div class="gts-head">' +
+    '<span class="gts-current" id="gtsCurrent">工具导航</span>' +
+  '</div>';
 
-    var toolsHtml = TOOL_REGISTRY.map(function(t){
-      return '<button type="button" class="crumb-tool' +
-        (t.id === tool.id ? ' active' : '') +
-        '" data-crumb-nav="' + t.id + '">' + t.name + '</button>';
-    }).join('');
+  /* 导航区 */
+  html += '<nav class="gts-nav" id="gtsNav">';
+  TOOL_CATEGORIES.forEach(function (cat) {
+    html += '<div class="gts-group">';
+    html += '<div class="gts-group-title">' + cat.name + '</div>';
+    cat.tools.forEach(function (toolId) {
+      var tool = null;
+      for (var i = 0; i < TOOL_REGISTRY.length; i++) {
+        if (TOOL_REGISTRY[i].id === toolId) { tool = TOOL_REGISTRY[i]; break; }
+      }
+      if (!tool) return;
+      html += '<button type="button" class="gts-item" data-crumb-nav="' + tool.id + '" title="' + tool.name + '">' +
+        '<span class="gts-item-icon">' + getToolIcon(toolId) + '</span>' +
+        '<span class="gts-item-text">' + tool.name + '</span>' +
+      '</button>';
+    });
+    html += '</div>';
+  });
+  html += '</nav>';
 
-    nav.innerHTML =
-      '<div class="crumb-path">' +
-        '<button type="button" class="crumb-link" data-crumb-nav="home">' + SVG_HOME + '<span>首页</span></button>' +
-        '<span class="crumb-sep">/</span>' +
-        '<button type="button" class="crumb-link" data-crumb-nav="apps">' + SVG_GRID + '<span>应用中心</span></button>' +
-        '<span class="crumb-sep">/</span>' +
-        '<span class="crumb-current">' + tool.name + '</span>' +
-      '</div>' +
-      '<div class="crumb-tools">' +
-        '<span class="crumb-tools-label">全部工具</span>' +
-        toolsHtml +
-      '</div>';
+  sidebar.innerHTML = html;
 
-    page.insertBefore(nav, page.firstChild);
-
-    nav.querySelectorAll('[data-crumb-nav]').forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        var target = btn.getAttribute('data-crumb-nav');
-        if (!target) return;
-        if (typeof go === 'function') go(target);
-        else console.warn('[面包屑] go() 未定义');
-      });
+  /* 绑定跳转 */
+  sidebar.querySelectorAll('[data-crumb-nav]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = btn.dataset.crumbNav;
+      if (target && typeof go === 'function') go(target);
     });
   });
 }
 
-injectToolCrumbs();
+/* ---------- 初始化侧边栏 ---------- */
+function initToolSidebar() {
+  if (document.getElementById('globalToolSidebar')) return;
 
+  var sidebar = document.createElement('aside');
+  sidebar.id = 'globalToolSidebar';
+  sidebar.className = 'global-tool-sidebar';
+  sidebar.setAttribute('aria-label', '工具分类导航');
 
+  document.body.appendChild(sidebar);
+  buildToolSidebar(sidebar);
+
+  /* 清掉旧的返回按钮（侧栏已替代） */
+  document.querySelectorAll('.page .back-btn[data-back]').forEach(function (b) { b.remove(); });
+
+  updateHeaderHeight();
+  window.addEventListener('resize', updateHeaderHeight);
+
+  /* 监听 go() 切换页面 */
+  var origGo = window.go;
+  if (typeof origGo === 'function' && !origGo.__sidebarWrapped) {
+    window.go = function (name) {
+      origGo.apply(this, arguments);
+      updateSidebarForPage(name);
+    };
+    window.go.__sidebarWrapped = true;
+  }
+
+  /* 初始状态 */
+  var initialPage = document.querySelector('.page.active');
+  if (initialPage) {
+    updateSidebarForPage(initialPage.id.replace(/^page-/, ''));
+  }
+}
+
+function updateHeaderHeight() {
+  var header = document.querySelector('header');
+  if (header) {
+    var h = header.offsetHeight;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+}
+
+/* ---------- 切换页面时更新侧栏 ---------- */
+function updateSidebarForPage(name) {
+  var sidebar = document.getElementById('globalToolSidebar');
+  if (!sidebar) return;
+
+  var isTool = ALL_TOOL_IDS.indexOf(name) !== -1;
+
+  if (!isTool) {
+    document.body.classList.remove('tool-active');
+    return;
+  }
+
+  document.body.classList.add('tool-active');
+
+  /* 高亮当前工具 */
+  sidebar.querySelectorAll('.gts-item').forEach(function (item) {
+    var active = item.dataset.crumbNav === name;
+    item.classList.toggle('active', active);
+  });
+
+  /* 更新顶部当前工具名 */
+  var tool = null;
+  for (var i = 0; i < TOOL_REGISTRY.length; i++) {
+    if (TOOL_REGISTRY[i].id === name) { tool = TOOL_REGISTRY[i]; break; }
+  }
+  var cur = document.getElementById('gtsCurrent');
+  if (cur && tool) cur.textContent = tool.name;
+
+  /* 让高亮项在侧栏内可见（不滚动页面） */
+  var activeEl = sidebar.querySelector('.gts-item.active');
+  var nav = sidebar.querySelector('.gts-nav');
+  if (activeEl && nav && nav.scrollHeight > nav.clientHeight) {
+    var navRect = nav.getBoundingClientRect();
+    var itemRect = activeEl.getBoundingClientRect();
+    if (itemRect.top < navRect.top || itemRect.bottom > navRect.bottom) {
+      nav.scrollTop = activeEl.offsetTop - nav.clientHeight / 2;
+    }
+  }
+}
+
+/* ---------- 启动 ---------- */
+initToolSidebar();
+/* ---------- 切换页面时更新侧栏 ---------- */
+function updateSidebarForPage(name) {
+  var sidebar = document.getElementById('globalToolSidebar');
+  if (!sidebar) return;
+
+  var isTool = ALL_TOOL_IDS.indexOf(name) !== -1;
+
+  if (!isTool) {
+    document.body.classList.remove('tool-active');
+    return;
+  }
+
+  document.body.classList.add('tool-active');
+
+  /* 高亮当前工具 */
+  sidebar.querySelectorAll('.gts-item').forEach(function (item) {
+    var active = item.dataset.crumbNav === name;
+    item.classList.toggle('active', active);
+  });
+
+  /* 更新顶部当前工具名 */
+  var tool = null;
+  for (var i = 0; i < TOOL_REGISTRY.length; i++) {
+    if (TOOL_REGISTRY[i].id === name) { tool = TOOL_REGISTRY[i]; break; }
+  }
+  var cur = document.getElementById('gtsCurrent');
+  if (cur && tool) cur.textContent = tool.name;
+
+  /* 让高亮项在侧栏内可见（不滚动页面） */
+  var activeEl = sidebar.querySelector('.gts-item.active');
+  var nav = sidebar.querySelector('.gts-nav');
+  if (activeEl && nav && nav.scrollHeight > nav.clientHeight) {
+    var navRect = nav.getBoundingClientRect();
+    var itemRect = activeEl.getBoundingClientRect();
+    if (itemRect.top < navRect.top || itemRect.bottom > navRect.bottom) {
+      nav.scrollTop = activeEl.offsetTop - nav.clientHeight / 2;
+    }
+  }
+}
+
+/* ---------- 启动 ---------- */
+initToolSidebar();
 /* ============================================================
    冥想练习
    ============================================================ */
@@ -6015,6 +6168,48 @@ injectToolCrumbs();
       link: 'https://www.gov.cn/'
     },
     {
+      id: 'countdown-tool',
+      type: 'info',
+      title: '新工具：倒数日',
+      content: '「实用工具」分类下新增倒数日。内置元旦、春节、清明节、劳动节、端午节、母亲节、父亲节、教师节、中秋节、国庆节等常见节日，实时显示距离下一个节日的天数，点击任意节日可查看 2024 - 2036 年完整日期。纯本地运行。',
+      time: '2026-09-30'
+    },
+    {
+      id: 'hydration-tool',
+      type: 'info',
+      title: '新工具：饮水量计算',
+      content: '「健康与运动」分类下新增饮水量计算。输入体重、年龄，选择性别、活动量与气温环境，估算每日建议饮水量，并给出分时段参考、杯子 / 瓶装换算与计算依据。历史自动保存。纯本地运行。',
+      time: '2026-09-30'
+    },
+    {
+      id: 'carlist-tool',
+      type: 'info',
+      title: '新工具：中国车牌一览表',
+      content: '「实用工具」分类下新增中国车牌一览表。按地理大区（华北 / 东北 / 华东 / 华中 / 华南 / 西南 / 西北）浏览各省市车牌代码，含使 / 领 / 警 / 军 / 挂等特殊车牌。支持按省份、城市、代码实时搜索。纯本地运行。',
+      time: '2026-09-30'
+    },
+    {
+      id: 'reactiontest-tool',
+      type: 'info',
+      title: '新工具：反应速度测试',
+      content: '「实用工具」分类下新增反应速度测试。等待绿色出现后立即点击，共 6 次取平均，评级从「超人」到「需要练习」共 7 档，历史自动保存。不支持键盘，鼠标 / 触摸均可。纯本地运行。',
+      time: '2026-09-30'
+    },
+    {
+      id: 'coinflip-tool',
+      type: 'info',
+      title: '新工具：抛硬币模拟器',
+      content: '「实用工具」分类下新增抛硬币模拟器。支持单次 3D 翻转与批量投掷（最多 10000 次），累计统计正面 / 反面次数、占比与最长连续记录，历史自动保存。纯本地运行。',
+      time: '2026-09-30'
+    },
+    {
+      id: 'luckywheel-tool',
+      type: 'info',
+      title: '新工具：幸运转盘',
+      content: '「实用工具」分类下新增幸运转盘。可自定义 2-12 个选项、六套主题配色，点击中间按钮旋转，缓动减速停在某个扇区，结果自动记录到下方历史。纯本地运行。',
+      time: '2026-09-30'
+    },
+    {
       id: 'tablefill-tool',
       type: 'info',
       title: '新工具：表格填入器',
@@ -6233,6 +6428,11 @@ injectToolCrumbs();
   var PINYIN = {
     'AI 助手': 'A',
     'JSON 格式化': 'J',
+    '饮水量计算': 'Y',
+    '反应速度测试': 'F',
+    '中国车牌一览表': 'Z',
+    '倒数日': 'D',
+    '抛硬币模拟器': 'P',
     '畅想画布': 'C',
     '常见统计图生成': 'C',
     '菜谱收藏': 'C',
@@ -6243,6 +6443,7 @@ injectToolCrumbs();
     '汇率换算': 'H',
     '歌曲收藏': 'G',
     '健康管理': 'J',
+    '幸运转盘': 'X',
     '灵感速记': 'L',
     '冥想练习': 'M',
     '起名器': 'Q',
