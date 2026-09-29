@@ -3178,20 +3178,25 @@ body.tool-active{
    移动端（≤900px）：侧栏变成顶部横向滚动胶囊条（粘在 header 下方）
    ============================================================ */
 @media (max-width: 900px){
-  :root{ --header-h: 0px; }
-
-  /* 清掉之前设置的所有额外 padding */
+  /* ========== 布局重置 ========== */
   body.tool-active{
-    padding-left: 0;
-    padding-top: 0;
+    padding-left: 0 !important;
+    padding-top: 0 !important;
   }
 
-  /* 侧栏贴视口最顶部 */
+  /* header 回归正常文档流，不做任何 sticky / 偏移 */
+  body.tool-active header{
+    position: relative !important;
+    top: auto !important;
+    margin-top: 0 !important;
+  }
+
+  /* ========== 侧栏：正常文档流，收起 / 展开 ========== */
   .global-tool-sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative !important;
+    top: auto !important;
+    left: auto;
+    right: auto;
     bottom: auto;
     width: 100%;
     height: auto;
@@ -3199,100 +3204,140 @@ body.tool-active{
     border-right: none;
     border-bottom: 1px solid var(--border);
     background: rgba(255,255,255,.96);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 6px 18px -12px rgba(158,20,20,.25);
-    z-index: 90;
     display: flex;
     flex-direction: column;
+    z-index: 1;
   }
 
   body:not(.tool-active) .global-tool-sidebar{
     display: none;
   }
 
-  /* header 被推到侧栏下方，滚动时也固定在那里 */
-  body.tool-active header{
-    top: 52px;
-    margin-top: 52px;
-  }
-
-  /* 主内容跟随 header 正常排布，不要再额外加 padding */
-  body.tool-active main{
-    padding-top: 0;
-  }
-
-  /* ---------- 以下胶囊条样式保持不变 ---------- */
+  /* ---------- 可点击的收起 / 展开头 ---------- */
   .gts-head{
-    padding: 8px 14px 2px;
-    border-bottom: none;
-    background: transparent;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #fffaf2, #fff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
   }
+
+  /* 当前工具名：过长自动省略号，不挤掉右侧箭头 */
   .gts-current{
-    font-size: 12.5px;
+    font-size: 13.5px;
     letter-spacing: .3px;
     color: #9e1414;
     font-weight: 800;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .gts-nav{
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 6px;
-    padding: 0 12px 8px;
-    overflow-x: auto;
-    overflow-y: hidden;
+  /* 右侧向下箭头 */
+  .gts-head::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #b08868;
+    transition: transform .25s ease;
     flex: 0 0 auto;
-    align-items: center;
+  }
+  .global-tool-sidebar.expanded .gts-head::after{
+    transform: rotate(180deg);
+  }
+
+  /* ---------- 导航默认收起 ---------- */
+  .gts-nav{
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 12px;
+    display: block;
+    transition: max-height .32s ease, padding .32s ease;
+  }
+
+  .global-tool-sidebar.expanded .gts-nav{
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 8px 12px 14px;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
-  .gts-nav::-webkit-scrollbar{ height: 4px; }
-  .gts-nav::-webkit-scrollbar-thumb{
+  .global-tool-sidebar.expanded .gts-nav::-webkit-scrollbar{ width: 4px; }
+  .global-tool-sidebar.expanded .gts-nav::-webkit-scrollbar-thumb{
     background: rgba(198,40,40,.22);
     border-radius: 2px;
   }
 
+  /* ---------- 分类组：纵向排列 ---------- */
   .gts-group{
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 0;
-    flex: 0 0 auto;
-  }
-  .gts-group:not(:last-child)::after{
-    content: "";
     display: block;
-    width: 1px;
-    height: 16px;
-    background: var(--border);
-    margin: 0 2px;
-    flex: 0 0 auto;
+    margin-bottom: 12px;
+    flex: none;
   }
+  .gts-group::after{ display: none; }
+
   .gts-group-title{
-    font-size: 10px;
+    font-size: 10.5px;
     font-weight: 800;
-    letter-spacing: .8px;
-    padding: 0 2px 0 0;
-    white-space: nowrap;
-    flex: 0 0 auto;
+    letter-spacing: 1.5px;
     color: #b08868;
+    padding: 8px 6px 6px;
+    white-space: normal;
+    display: block;
   }
 
+  /* ---------- 工具项：整行按钮 ---------- */
   .gts-item{
-    flex: 0 0 auto;
-    width: auto;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(255,227,194,.55);
-    border: 1px solid rgba(198,40,40,.15);
-    font-size: 12.5px;
-    margin-bottom: 0;
-    white-space: nowrap;
+    display: flex;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,227,194,.4);
+    border: 1px solid rgba(198,40,40,.1);
+    font-size: 13.5px;
+    margin-bottom: 4px;
+    white-space: normal;
+    gap: 10px;
+    align-items: center;
+    flex: none;
   }
-  .gts-item-icon{ display: none; }
+  .gts-item.active{
+    background: linear-gradient(135deg, var(--lime), var(--primary));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 12px -4px rgba(158,20,20,.55);
+  }
+
+  .gts-item-icon{
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+  }
+  .gts-item-icon svg{
+    width: 16px;
+    height: 16px;
+  }
+
   .gts-item-text{
     display: inline;
-    font-size: 12.5px;
+    font-size: 13.5px;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   body.tool-active .page.active{ padding-left: 0; }
