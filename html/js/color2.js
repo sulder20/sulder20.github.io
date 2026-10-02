@@ -188,7 +188,7 @@
     renderPresets();
     bindEvents();
 
-    // 从 HEX 输入框读取初始颜色
+    /* 从 HEX 输入框读取初始颜色 */
     var init0 = hexToRgb(hexInput.value);
     if (init0) {
       state = init0;
@@ -200,13 +200,11 @@
 
   /* ---------- 事件 ---------- */
   function bindEvents() {
-    // HEX 输入
+    /* HEX 输入 */
     hexInput.addEventListener('input', function () {
       var hex = hexInput.value.trim();
-      // 允许用户写一半时补 "#"
       if (hex && hex[0] !== '#') {
         hexInput.value = '#' + hex;
-        hex = hexInput.value;
       }
       var rgb = hexToRgb(hexInput.value);
       if (rgb) {
@@ -216,18 +214,16 @@
     });
 
     hexInput.addEventListener('blur', function () {
-      // 失焦时规范化
       var rgb = hexToRgb(hexInput.value);
       if (rgb) {
         state = rgb;
         renderAll('all');
       } else {
-        // 恢复当前值
         renderAll('hex');
       }
     });
 
-    // RGB 滑块
+    /* RGB 滑块 */
     rRange.addEventListener('input', function () {
       state.r = clamp(rRange.value, 0, 255);
       renderAll('rgb');
@@ -241,47 +237,50 @@
       renderAll('rgb');
     });
 
-    // HSL 滑块
+    /* HSL 滑块 */
     hRange.addEventListener('input', function () {
       var hsl = rgbToHsl(state.r, state.g, state.b);
-      var rgb = hslToRgb(hRange.value, hsl.s, hsl.l);
-      state = rgb;
+      state = hslToRgb(hRange.value, hsl.s, hsl.l);
       renderAll('hsl');
     });
     sRange.addEventListener('input', function () {
       var hsl = rgbToHsl(state.r, state.g, state.b);
-      var rgb = hslToRgb(hsl.h, sRange.value, hsl.l);
-      state = rgb;
+      state = hslToRgb(hsl.h, sRange.value, hsl.l);
       renderAll('hsl');
     });
     lRange.addEventListener('input', function () {
       var hsl = rgbToHsl(state.r, state.g, state.b);
-      var rgb = hslToRgb(hsl.h, hsl.s, lRange.value);
-      state = rgb;
+      state = hslToRgb(hsl.h, hsl.s, lRange.value);
       renderAll('hsl');
     });
 
-    // 取色器
-    document.getElementById('ccPick').addEventListener('click', function () {
-      if (pickerEl) {
-        pickerEl.value = rgbToHex(state.r, state.g, state.b);
-        pickerEl.click();
-      }
-    });
+    /* 取色器：<label> 已包着 <input type="color">，点击 label 会自动打开，
+       只需要监听颜色变化，把新颜色同步到 state */
+    if (pickerEl) {
+      pickerEl.addEventListener('input', function () {
+        var rgb = hexToRgb(pickerEl.value);
+        if (rgb) {
+          state = rgb;
+          renderAll('all');
+        }
+      });
     }
 
-    // 随机
-    document.getElementById('ccRandom').addEventListener('click', function () {
-      state = {
-        r: Math.floor(Math.random() * 256),
-        g: Math.floor(Math.random() * 256),
-        b: Math.floor(Math.random() * 256)
-      };
-      renderAll('all');
-      toast('已随机颜色');
-    });
+    /* 随机 */
+    var randomBtn = document.getElementById('ccRandom');
+    if (randomBtn) {
+      randomBtn.addEventListener('click', function () {
+        state = {
+          r: Math.floor(Math.random() * 256),
+          g: Math.floor(Math.random() * 256),
+          b: Math.floor(Math.random() * 256)
+        };
+        renderAll('all');
+        toast('已随机颜色');
+      });
+    }
 
-    // 复制
+    /* 复制 */
     document.querySelectorAll('[data-cc-copy]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var key = btn.dataset.ccCopy;
@@ -330,26 +329,30 @@
     var hsl  = rgbToHsl(r, g, b);
     var cmyk = rgbToCmyk(r, g, b);
 
-    // 预览
-    previewEl.style.background = hex;
-    previewTextEl.textContent = hex.toUpperCase();
-    previewEl.classList.toggle('light', isLightColor(r, g, b));
+    /* 预览 */
+    if (previewEl) {
+      previewEl.style.background = hex;
+      previewEl.classList.toggle('light', isLightColor(r, g, b));
+    }
+    if (previewTextEl) {
+      previewTextEl.textContent = hex.toUpperCase();
+    }
 
-    // HEX
+    /* HEX */
     if (source !== 'hex') {
       hexInput.value = hex.toUpperCase();
     }
 
-    // RGB
+    /* RGB */
     rgbInput.value = 'rgb(' + r + ', ' + g + ', ' + b + ')';
 
-    // HSL
+    /* HSL */
     hslInput.value = 'hsl(' + Math.round(hsl.h) + ', ' + Math.round(hsl.s) + '%, ' + Math.round(hsl.l) + '%)';
 
-    // CMYK
+    /* CMYK */
     cmykInput.value = 'cmyk(' + Math.round(cmyk.c) + '%, ' + Math.round(cmyk.m) + '%, ' + Math.round(cmyk.y) + '%, ' + Math.round(cmyk.k) + '%)';
 
-    // 滑块
+    /* 滑块 */
     rRange.value = r;
     gRange.value = g;
     bRange.value = b;
@@ -364,14 +367,14 @@
     sVal.textContent = Math.round(hsl.s) + '%';
     lVal.textContent = Math.round(hsl.l) + '%';
 
-    // 预设色板高亮
+    /* 预设色板高亮 */
     if (presetsEl) {
       presetsEl.querySelectorAll('.cc-preset').forEach(function (el) {
         el.classList.toggle('active',
           String(el.dataset.hex).toUpperCase() === hex.toUpperCase());
       });
     }
-    // 同步取色器 input 的值
+    /* 同步取色器 input 的值 */
     if (pickerEl) pickerEl.value = hex;
   }
 

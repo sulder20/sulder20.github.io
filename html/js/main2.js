@@ -87,6 +87,21 @@ function go(name){
 }, 60);
   if (name === 'code')         setTimeout(runCodeEditor, 60);
   if (name === 'ai')           setTimeout(() => { updateQuota(); chatInput.focus(); }, 60);
+  if (name === 'earthmodule') setTimeout(function () {
+  if (typeof window.__earthmoduleInit === 'function') window.__earthmoduleInit();
+}, 60);
+if (name === 'chinageo') setTimeout(function () {
+  if (typeof window.__chinageoInit === 'function') window.__chinageoInit();
+}, 60);
+if (name === 'worldhistory') setTimeout(function () {
+  if (typeof window.__worldhistoryInit === 'function') window.__worldhistoryInit();
+}, 60);
+if (name === 'poetryrecite') setTimeout(function () {
+  if (typeof window.__poetryInit === 'function') window.__poetryInit();
+}, 60);
+if (name === 'cellstructure') setTimeout(function () {
+  if (typeof window.__cellstructureInit === 'function') window.__cellstructureInit();
+}, 60);
   if (name === 'hydration')    setTimeout(function () {
   if (typeof window.__hydrationInit === 'function') window.__hydrationInit();
   }, 60);
@@ -117,6 +132,9 @@ if (name === 'loan') setTimeout(function () {
 if (name === 'discount') setTimeout(function () {
   if (typeof window.__discountInit === 'function') window.__discountInit();
 }, 60);
+if (name === 'funcplot') setTimeout(function () {
+  if (typeof window.__funcplotInit === 'function') window.__funcplotInit();
+}, 60);
   if (name === 'novel')        setTimeout(renderNovelList, 60);
   if (name === 'ledger')       setTimeout(renderLedger, 60);
   if (name === 'carlist')      setTimeout(function () {
@@ -130,6 +148,33 @@ if (name === 'discount') setTimeout(function () {
   if (name === 'health')       setTimeout(() => { updateBmi(); updateShoeCalc(); renderShoeTable(); renderSleepChart(); renderSleepList(); renderVitalList(); }, 60);
   if (name === 'exercise')     setTimeout(() => { loadExerProfile(); renderExerciseList(); }, 60);
   if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
+  if (name === 'chemistry') setTimeout(function () {
+  if (typeof window.__chemistryInit === 'function') window.__chemistryInit();
+}, 60);
+if (name === 'periodictable') setTimeout(function () {
+  if (typeof window.__periodictableInit === 'function') window.__periodictableInit();
+}, 60);
+if (name === 'physicsformula') setTimeout(function () {
+  if (typeof window.__physicsformulaInit === 'function') window.__physicsformulaInit();
+}, 60);
+if (name === 'equationsolve') setTimeout(function () {
+  if (typeof window.__equationsolveInit === 'function') window.__equationsolveInit();
+}, 60);
+if (name === 'chinahistory') setTimeout(function () {
+  if (typeof window.__chinahistoryInit === 'function') window.__chinahistoryInit();
+}, 60);
+if (name === 'matrixcalc') setTimeout(function () {
+  if (typeof window.__matrixcalcInit === 'function') window.__matrixcalcInit();
+}, 60);
+if (name === 'circuitcalc') setTimeout(function () {
+  if (typeof window.__circuitcalcInit === 'function') window.__circuitcalcInit();
+}, 60);
+if (name === 'geneticscalc') setTimeout(function () {
+  if (typeof window.__geneticscalcInit === 'function') window.__geneticscalcInit();
+}, 60);
+if (name === 'bodysystems') setTimeout(function () {
+  if (typeof window.__bodysystemsInit === 'function') window.__bodysystemsInit();
+}, 60);
   if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
   if (name === 'reactiontest') setTimeout(function () {
   if (typeof window.__reactiontestInit === 'function') window.__reactiontestInit();
@@ -5601,6 +5646,22 @@ const TOOL_REGISTRY = [
   { id: 'datecalc',     name: '日期计算' },
   { id: 'loan',         name: '贷款计算器' },
   { id: 'discount',     name: '折扣计算器' },
+  { id: 'funcplot',     name: '函数图像绘制' },
+  { id: 'chemistry',    name: '化学方程式' },
+  { id: 'periodictable', name: '元素周期表' },
+  { id: 'physicsformula', name: '物理公式计算' },
+  { id: 'equationsolve', name: '解方程组' },
+  { id: 'chinahistory',  name: '中国历史简表' },
+  { id: 'chinahistory',  name: '中国历史简表' },
+  { id: 'matrixcalc',    name: '矩阵运算' },
+  { id: 'circuitcalc',   name: '电路计算' },
+  { id: 'geneticscalc',  name: '遗传计算' },
+  { id: 'bodysystems',   name: '人体系统速查' },
+  { id: 'earthmodule',   name: '地球模块' },
+  { id: 'chinageo',      name: '中国地理' },
+  { id: 'worldhistory',  name: '世界历史简表' },
+  { id: 'poetryrecite',  name: '古诗词默写' },
+  { id: 'cellstructure', name: '细胞结构速查' },
   /* ⑤ 时间与生活 */
   { id: 'calendar',     name: '我的日历' },
   { id: 'clock',        name: '时钟工具' },
@@ -5628,6 +5689,9 @@ const TOOL_CATEGORIES = [
   { name: '健康与运动', tools: ['health','exercise','heatindex','meditation','hydration','whitenoise','allergy'] },
   { name: '创作工坊', tools: ['novel','textanalysis','people','timeline','namer','dialogue','random','notes','canvas','relgraph'] },
   { name: '收藏与记录', tools: ['songs','places','media','recipe','tablefill','novelcollect'] },
+  { name: '数理化',     tools: ['funcplot','chemistry','periodictable','physicsformula','equationsolve','matrixcalc','circuitcalc','geneticscalc'] },
+  { name: '人文与自然',   tools: ['chinahistory','earthmodule','chinageo','bodysystems','worldhistory','poetryrecite','cellstructure'
+  ] },
   { name: '计算与数据', tools: ['calc','chart','exchange','fuel','color','datecalc','loan','discount','timestamp'] },
   { name: '时间与生活', tools: ['calendar','clock','ledger','worldclock','zodiac'] },
   { name: 'AI 与开发',  tools: ['ai','code','json','cron'] },
@@ -6474,6 +6538,33 @@ initToolSidebar();
   if (!grid) return;
 
   var PINYIN = {
+        /* J */
+    '解方程组': 'J',
+    '矩阵运算': 'J',
+
+        /* S */
+    '世界历史简表': 'S',
+
+    /* G */
+    '古诗词默写': 'G',
+
+    /* X */
+    '细胞结构速查': 'X',
+    /* D */
+    '电路计算': 'D',
+    '电路计算': 'D',
+    '地球模块': 'D',
+
+    /* Z */
+    '中国地理': 'Z',
+    '中国历史简表': 'Z',
+
+    /* Y */
+    '元素周期表': 'Y',
+    '遗传计算': 'Y',
+
+    /* R */
+    '人体系统速查': 'R',
     /* A */
     'AI 助手': 'A',
 
@@ -6506,11 +6597,14 @@ initToolSidebar();
 
     /* H */
     '汇率换算': 'H',
+    '函数图像绘制': 'H',
+    '化学方程式': 'H',
 
     /* J */
     '健康管理': 'J',
     '角色关系图': 'J',
     'JSON 格式化': 'J',
+    '解方程组': 'J',
 
     /* L */
     '灵感速记': 'L',
@@ -6546,6 +6640,7 @@ initToolSidebar();
     '我的记账本': 'W',
     '我的日历': 'W',
     '文章分析': 'W',
+    '物理公式计算': 'W',
 
     /* X */
     '小说助手': 'X',
@@ -6558,10 +6653,12 @@ initToolSidebar();
     '运动记录': 'Y',
     '颜色转换': 'Y',
     '油耗计算': 'Y',
+    '元素周期表': 'Y',
 
     /* Z */
     '中国车牌一览表': 'Z',
-    '折扣计算器': 'Z'
+    '折扣计算器': 'Z',
+    '中国历史简表': 'Z',
   };
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.tool-card'));
