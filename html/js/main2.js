@@ -1,5 +1,5 @@
 /* ============================================================
-   岁窦工具箱 · V3.0.10.1 国庆特别版
+   岁窦工具箱 · V4.1 活力版
    主脚本
    ============================================================ */
 
@@ -47,6 +47,8 @@ const SLEEP_KEY    = 'suidou-sleep-v1';
 const VITAL_KEY    = 'suidou-vitals-v1';
 const EXER_KEY     = 'suidou-exercise-v1';
 const EXER_PROFILE_KEY = 'suidou-exer-profile-v1';
+const VIDEOS_KEY   = 'suidou-videos-v1';
+const STICKERS_KEY = 'suidou-stickers-v1';
 
 /* ===================== 页面切换 ===================== */
 const pages = document.querySelectorAll('.page');
@@ -55,11 +57,38 @@ function navFor(name){
   if (name === 'home') return 'home';
   if (name === 'help') return 'help';
   if (name === 'settings') return 'settings';
+  if (name === 'apps') setTimeout(function () {
+  if (typeof window.__appsCenterInit === 'function') window.__appsCenterInit();
+  }, 60);
   if (name === 'login' || name === 'reset') return 'home';
   return 'apps';
+
 }
 
 function go(name){
+  /* ---- 小说助手子工具统一重定向 ---- */
+  const NA_SUB_MAP = {
+    'timeline':  'timeline',
+    'namer':     'namer',
+    'dialogue':  'dialogue',
+    'random':    'random',
+    'notes':     'notes',
+    'novel':     'novelmanage'
+  };
+  if (NA_SUB_MAP[name]){
+    const sub = NA_SUB_MAP[name];
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-novelassistant'));
+    document.querySelectorAll('nav button[data-page]').forEach(b => {
+      b.classList.toggle('active', b.dataset.page === 'apps');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof updateSidebarForPage === 'function') updateSidebarForPage('novelassistant');
+    setTimeout(() => {
+      if (typeof window.__naSwitchSub === 'function') window.__naSwitchSub(sub);
+    }, 60);
+    return;
+  }
+
   pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
   const target = navFor(name);
   document.querySelectorAll('nav button[data-page]').forEach(b => {
@@ -75,7 +104,7 @@ function go(name){
   /* 按页面懒加载 / 重绘 */
   if (name === 'chart')        setTimeout(renderChart, 60);
   if (name === 'calendar')     setTimeout(renderCalendar, 60);
-    if (name === 'home' || name === 'help') {
+  if (name === 'home' || name === 'help') {
     setTimeout(function () {
       if (typeof window.__snapscrollRefresh === 'function') {
         window.__snapscrollRefresh(name);
@@ -83,121 +112,155 @@ function go(name){
     }, 80);
   }
   if (name === 'decibel') setTimeout(function () {
-  if (typeof window.__decibelInit === 'function') window.__decibelInit();
-}, 60);
+    if (typeof window.__decibelInit === 'function') window.__decibelInit();
+  }, 60);
+  if (name === 'randomnumber') setTimeout(function () {
+    if (typeof window.__randomnumberInit === 'function') window.__randomnumberInit();
+  }, 60);
   if (name === 'code')         setTimeout(runCodeEditor, 60);
   if (name === 'ai')           setTimeout(() => { updateQuota(); chatInput.focus(); }, 60);
+  if (name === 'visualization') setTimeout(function () {
+    if (typeof window.__vizInit === 'function') window.__vizInit();
+  }, 60);
   if (name === 'earthmodule') setTimeout(function () {
-  if (typeof window.__earthmoduleInit === 'function') window.__earthmoduleInit();
-}, 60);
-if (name === 'chinageo') setTimeout(function () {
-  if (typeof window.__chinageoInit === 'function') window.__chinageoInit();
-}, 60);
-if (name === 'worldhistory') setTimeout(function () {
-  if (typeof window.__worldhistoryInit === 'function') window.__worldhistoryInit();
-}, 60);
-if (name === 'poetryrecite') setTimeout(function () {
-  if (typeof window.__poetryInit === 'function') window.__poetryInit();
-}, 60);
-if (name === 'cellstructure') setTimeout(function () {
-  if (typeof window.__cellstructureInit === 'function') window.__cellstructureInit();
-}, 60);
+    if (typeof window.__earthmoduleInit === 'function') window.__earthmoduleInit();
+  }, 60);
+  if (name === 'chinageo') setTimeout(function () {
+    if (typeof window.__chinageoInit === 'function') window.__chinageoInit();
+  }, 60);
+  if (name === 'lab') setTimeout(function () {
+    if (typeof window.__labInit === 'function') window.__labInit();
+  }, 60);
+  if (name === 'worldhistory') setTimeout(function () {
+    if (typeof window.__worldhistoryInit === 'function') window.__worldhistoryInit();
+  }, 60);
+  if (name === 'poetryrecite') setTimeout(function () {
+    if (typeof window.__poetryInit === 'function') window.__poetryInit();
+  }, 60);
+  if (name === 'cellstructure') setTimeout(function () {
+    if (typeof window.__cellstructureInit === 'function') window.__cellstructureInit();
+  }, 60);
   if (name === 'hydration')    setTimeout(function () {
-  if (typeof window.__hydrationInit === 'function') window.__hydrationInit();
+    if (typeof window.__hydrationInit === 'function') window.__hydrationInit();
   }, 60);
   if (name === 'whitenoise') setTimeout(function () {
-  if (typeof window.__whitenoiseInit === 'function') window.__whitenoiseInit();
-}, 60);
+    if (typeof window.__whitenoiseInit === 'function') window.__whitenoiseInit();
+  }, 60);
   if (name === 'allergy') setTimeout(function () {
-  if (typeof window.__allergyInit === 'function') window.__allergyInit();
-}, 60);
+    if (typeof window.__allergyInit === 'function') window.__allergyInit();
+  }, 60);
   if (name === 'relgraph') setTimeout(function () {
-  if (typeof window.__relgraphInit === 'function') window.__relgraphInit();
-}, 60);
+    if (typeof window.__relgraphInit === 'function') window.__relgraphInit();
+  }, 60);
   if (name === 'novelcollect') setTimeout(function () {
     if (typeof window.__novelcollectInit === 'function') window.__novelcollectInit();
   }, 60);
+  if (name === 'videocollect') setTimeout(function () {
+    if (typeof window.__videocollectInit === 'function') window.__videocollectInit();
+  }, 60);
+  if (name === 'sticker') setTimeout(function () {
+    if (typeof window.__stickerInit === 'function') window.__stickerInit();
+  }, 60);
+  if (name === 'firstaid') setTimeout(function () {
+    if (typeof window.__firstaidInit === 'function') window.__firstaidInit();
+  }, 60);
+  if (name === 'acupoint') setTimeout(function () {
+    if (typeof window.__acupointInit === 'function') window.__acupointInit();
+  }, 60);
+  if (name === 'fasting') setTimeout(function () {
+    if (typeof window.__fastingInit === 'function') window.__fastingInit();
+  }, 60);
+  if (name === 'sportsinjury') setTimeout(function () {
+    if (typeof window.__sportsinjuryInit === 'function') window.__sportsinjuryInit();
+  }, 60);
+  if (name === 'devicetest') setTimeout(function () {
+    if (typeof window.__devicetestInit === 'function') window.__devicetestInit();
+  }, 60);
+  if (name === 'novelassistant') setTimeout(function () {
+    if (typeof window.__novelassistantInit === 'function') window.__novelassistantInit();
+  }, 60);
   if (name === 'fuel') setTimeout(function () {
-  if (typeof window.__fuelInit === 'function') window.__fuelInit();
-}, 60);
-if (name === 'color') setTimeout(function () {
-  if (typeof window.__colorInit === 'function') window.__colorInit();
-}, 60);
-if (name === 'datecalc') setTimeout(function () {
-  if (typeof window.__datecalcInit === 'function') window.__datecalcInit();
-}, 60);
-if (name === 'loan') setTimeout(function () {
-  if (typeof window.__loanInit === 'function') window.__loanInit();
-}, 60);
-if (name === 'discount') setTimeout(function () {
-  if (typeof window.__discountInit === 'function') window.__discountInit();
-}, 60);
-if (name === 'funcplot') setTimeout(function () {
-  if (typeof window.__funcplotInit === 'function') window.__funcplotInit();
-}, 60);
-  if (name === 'novel')        setTimeout(renderNovelList, 60);
+    if (typeof window.__fuelInit === 'function') window.__fuelInit();
+  }, 60);
+  if (name === 'color') setTimeout(function () {
+    if (typeof window.__colorInit === 'function') window.__colorInit();
+  }, 60);
+  if (name === 'datecalc') setTimeout(function () {
+    if (typeof window.__datecalcInit === 'function') window.__datecalcInit();
+  }, 60);
+  if (name === 'loan') setTimeout(function () {
+    if (typeof window.__loanInit === 'function') window.__loanInit();
+  }, 60);
+  if (name === 'discount') setTimeout(function () {
+    if (typeof window.__discountInit === 'function') window.__discountInit();
+  }, 60);
+  if (name === 'funcplot') setTimeout(function () {
+    if (typeof window.__funcplotInit === 'function') window.__funcplotInit();
+  }, 60);
   if (name === 'ledger')       setTimeout(renderLedger, 60);
   if (name === 'carlist')      setTimeout(function () {
-  if (typeof window.__carlistInit === 'function') window.__carlistInit();
+    if (typeof window.__carlistInit === 'function') window.__carlistInit();
   }, 60);
   if (name === 'countdown')    setTimeout(function () {
-  if (typeof window.__countdownInit === 'function') window.__countdownInit();
+    if (typeof window.__countdownInit === 'function') window.__countdownInit();
   }, 60);
   if (name === 'textanalysis') setTimeout(() => { updateWC(); updateWordFreq(); }, 60);
   if (name === 'calc')         setTimeout(() => { updateUnitConvert(); }, 60);
   if (name === 'health')       setTimeout(() => { updateBmi(); updateShoeCalc(); renderShoeTable(); renderSleepChart(); renderSleepList(); renderVitalList(); }, 60);
   if (name === 'exercise')     setTimeout(() => { loadExerProfile(); renderExerciseList(); }, 60);
-  if (name === 'timeline')     setTimeout(() => { loadTimeline(); }, 60);
   if (name === 'chemistry') setTimeout(function () {
-  if (typeof window.__chemistryInit === 'function') window.__chemistryInit();
-}, 60);
-if (name === 'periodictable') setTimeout(function () {
-  if (typeof window.__periodictableInit === 'function') window.__periodictableInit();
-}, 60);
-if (name === 'physicsformula') setTimeout(function () {
-  if (typeof window.__physicsformulaInit === 'function') window.__physicsformulaInit();
-}, 60);
-if (name === 'equationsolve') setTimeout(function () {
-  if (typeof window.__equationsolveInit === 'function') window.__equationsolveInit();
-}, 60);
-if (name === 'chinahistory') setTimeout(function () {
-  if (typeof window.__chinahistoryInit === 'function') window.__chinahistoryInit();
-}, 60);
-if (name === 'matrixcalc') setTimeout(function () {
-  if (typeof window.__matrixcalcInit === 'function') window.__matrixcalcInit();
-}, 60);
-if (name === 'circuitcalc') setTimeout(function () {
-  if (typeof window.__circuitcalcInit === 'function') window.__circuitcalcInit();
-}, 60);
-if (name === 'geneticscalc') setTimeout(function () {
-  if (typeof window.__geneticscalcInit === 'function') window.__geneticscalcInit();
-}, 60);
-if (name === 'bodysystems') setTimeout(function () {
-  if (typeof window.__bodysystemsInit === 'function') window.__bodysystemsInit();
-}, 60);
-  if (name === 'notes')        setTimeout(() => { loadNotes(); }, 60);
+    if (typeof window.__chemistryInit === 'function') window.__chemistryInit();
+  }, 60);
+  if (name === 'periodictable') setTimeout(function () {
+    if (typeof window.__periodictableInit === 'function') window.__periodictableInit();
+  }, 60);
+  if (name === 'physicsformula') setTimeout(function () {
+    if (typeof window.__physicsformulaInit === 'function') window.__physicsformulaInit();
+  }, 60);
+  if (name === 'equationsolve') setTimeout(function () {
+    if (typeof window.__equationsolveInit === 'function') window.__equationsolveInit();
+  }, 60);
+  if (name === 'chinahistory') setTimeout(function () {
+    if (typeof window.__chinahistoryInit === 'function') window.__chinahistoryInit();
+  }, 60);
+  if (name === 'matrixcalc') setTimeout(function () {
+    if (typeof window.__matrixcalcInit === 'function') window.__matrixcalcInit();
+  }, 60);
+  if (name === 'circuitcalc') setTimeout(function () {
+    if (typeof window.__circuitcalcInit === 'function') window.__circuitcalcInit();
+  }, 60);
+  if (name === 'geneticscalc') setTimeout(function () {
+    if (typeof window.__geneticscalcInit === 'function') window.__geneticscalcInit();
+  }, 60);
+  if (name === 'bodysystems') setTimeout(function () {
+    if (typeof window.__bodysystemsInit === 'function') window.__bodysystemsInit();
+  }, 60);
   if (name === 'reactiontest') setTimeout(function () {
-  if (typeof window.__reactiontestInit === 'function') window.__reactiontestInit();
+    if (typeof window.__reactiontestInit === 'function') window.__reactiontestInit();
   }, 60);
   if (name === 'worldclock') setTimeout(function () {
-  if (typeof window.__worldclockInit === 'function') window.__worldclockInit();
-}, 60);
-if (name === 'zodiac') setTimeout(function () {
-  if (typeof window.__zodiacInit === 'function') window.__zodiacInit();
-}, 60);
+    if (typeof window.__worldclockInit === 'function') window.__worldclockInit();
+  }, 60);
+  if (name === 'zodiac') setTimeout(function () {
+    if (typeof window.__zodiacInit === 'function') window.__zodiacInit();
+  }, 60);
   if (name === 'tablefill')    setTimeout(() => { if (typeof window.__tablefillInit === 'function') window.__tablefillInit(); }, 60);
   if (name === 'coinflip')     setTimeout(function () {
-  if (typeof window.__coinflipInit === 'function') window.__coinflipInit();
+    if (typeof window.__coinflipInit === 'function') window.__coinflipInit();
   }, 60);
+    // 记录工具使用次数（只对真实工具页生效）
+  if (typeof window.__appsCenterTrack === 'function') {
+    window.__appsCenterTrack(name);
+  }
   if (name === 'luckywheel')   setTimeout(function () {
-  if (typeof window.__luckywheelInit === 'function') window.__luckywheelInit();
+    if (typeof window.__luckywheelInit === 'function') window.__luckywheelInit();
   }, 60);
   if (name === 'exchange')     setTimeout(() => {
     if (typeof window.__fxInit === 'function') window.__fxInit();
   }, 60);
   if (name === 'cron') setTimeout(function () {
-  if (typeof window.__cronInit === 'function') window.__cronInit();
-}, 60);
+    if (typeof window.__cronInit === 'function') window.__cronInit();
+  }, 60);
   if (name === 'qrcode')       setTimeout(() => {
     if (typeof window.__qrRender === 'function'){
       try { window.__qrRender(); }
@@ -577,7 +640,8 @@ async function maybeUploadLocalData(){
 
   const keys = [
     PEOPLE_KEY, SONGS_KEY, PLACES_KEY, MEDIA_KEY, CAL_KEY, LEDGER_KEY,
-    NOTES_KEY, TL_KEY, NOVELS_KEY, SLEEP_KEY, VITAL_KEY, EXER_KEY
+    NOTES_KEY, TL_KEY, NOVELS_KEY, SLEEP_KEY, VITAL_KEY, EXER_KEY,
+    VIDEOS_KEY, STICKERS_KEY
   ];
   let localCount = 0;
   keys.forEach(k => {
@@ -586,7 +650,8 @@ async function maybeUploadLocalData(){
 
   const tables = [
     'people','songs','places','medias','schedules','ledger',
-    'notes','timeline_events','novels','sleep_records','vitals','exercises'
+    'notes','timeline_events','novels','sleep_records','vitals','exercises',
+    'videos','stickers'
   ];
   let cloudCount = 0;
   for (const t of tables){
@@ -652,6 +717,8 @@ async function loadAllFromCloud(){
     ['sleep_records',   SLEEP_KEY],
     ['vitals',          VITAL_KEY],
     ['exercises',       EXER_KEY],
+    ['videos',          VIDEOS_KEY],
+    ['stickers',        STICKERS_KEY],
   ];
 
   for (const [table, key] of map){
@@ -677,6 +744,12 @@ async function loadAllFromCloud(){
         o.cast = o.cast_text;
         delete o.desc_text;
         delete o.cast_text;
+      }
+      if (table === 'videos'){
+        o.desc = o.desc_text; delete o.desc_text;
+      }
+      if (table === 'stickers'){
+        o.desc = o.desc_text; delete o.desc_text;
       }
       return o;
     });
@@ -716,6 +789,9 @@ async function loadAllFromCloud(){
   loadVitals();     renderVitalList();
   loadExercise();   renderExerciseList();
 
+  if (typeof window.__videocollectInit === 'function') window.__videocollectInit();
+  if (typeof window.__stickerInit === 'function') window.__stickerInit();
+
   updateStorageUsage();
 }
 
@@ -736,6 +812,8 @@ async function uploadLocalToCloud(){
     ['sleep_records',   SLEEP_KEY],
     ['vitals',          VITAL_KEY],
     ['exercises',       EXER_KEY],
+    ['videos',          VIDEOS_KEY],
+    ['stickers',        STICKERS_KEY],
   ];
 
   for (const [table, key] of map){
@@ -761,6 +839,12 @@ async function uploadLocalToCloud(){
         rest.cast_text = rest.cast;
         delete rest.desc;
         delete rest.cast;
+      }
+      if (table === 'videos'){
+        rest.desc_text = rest.desc; delete rest.desc;
+      }
+      if (table === 'stickers'){
+        rest.desc_text = rest.desc; delete rest.desc;
       }
       return { ...rest, user_id: uid };
     });
@@ -843,6 +927,27 @@ sb.auth.getSession().then(({ data }) => {
   currentUser = data.session?.user || null;
   updateAuthUI();
   if (currentUser && typeof loadExerProfile === 'function') loadExerProfile();
+
+  if (currentUser){
+    setTimeout(async () => {
+      try {
+        const probeKeys = [
+          PEOPLE_KEY, SONGS_KEY, PLACES_KEY, MEDIA_KEY, CAL_KEY, LEDGER_KEY,
+          NOTES_KEY, TL_KEY, NOVELS_KEY, SLEEP_KEY, VITAL_KEY, EXER_KEY,
+          VIDEOS_KEY, STICKERS_KEY
+        ];
+        let localCount = 0;
+        probeKeys.forEach(k => {
+          try { localCount += (JSON.parse(localStorage.getItem(k) || '[]').length); } catch(e){}
+        });
+        if (localCount === 0){
+          await loadAllFromCloud();
+          if (typeof window.__videocollectInit === 'function') window.__videocollectInit();
+          if (typeof window.__stickerInit === 'function') window.__stickerInit();
+        }
+      } catch(e){ console.warn('[启动同步] 失败：', e); }
+    }, 600);
+  }
 });
 
 /* ===================== 存储用量 & 图片压缩 ===================== */
@@ -2049,7 +2154,7 @@ document.getElementById('rcImg').addEventListener('change', e => {
   const file = e.target.files[0];
   const preview = document.getElementById('rcPreview');
   if (!file) { pendingRecipeImg = ''; preview.textContent = '未选择'; return; }
-  if (!file.type.startsWith('image/')) { alert('请选择图片文件'); return; }
+  if (!file.type.startsWith('image/')){ alert('请选择图片文件'); return; }
   recipeImageProcessing = true;
   preview.textContent = '处理中…';
   compressImage(file, 800, 0.75, dataUrl => {
@@ -2688,7 +2793,7 @@ function exportCalImage(){
   ctx.fillStyle = '#1c1f23'; ctx.font = 'bold 32px ' + FONT;
   ctx.fillText(y + ' 年 ' + m + ' 月', PAD, PAD + 2);
   ctx.fillStyle = '#9ca3af'; ctx.font = '15px ' + FONT;
-  ctx.fillText('我的日历 · 岁窦工具箱 V3.0', PAD, PAD + 48);
+  ctx.fillText('我的日历 · 岁窦工具箱 V4.1', PAD, PAD + 48);
   const weekTop = PAD + HEAD;
   ctx.font = 'bold 14px ' + FONT; ctx.textAlign = 'center';
   for (let c = 0; c < 7; c++){
@@ -3422,7 +3527,7 @@ const RNG_META = {
       '.rng-ai-item{position:relative;padding:9px 44px 9px 13px;border-radius:9px;background:#fff;' +
       'border:1px solid var(--border);margin-bottom:7px;font-size:14.5px;line-height:1.7;' +
       'color:#3d444b;cursor:pointer;transition:.15s;word-break:break-word;}' +
-      '.rng-ai-item:hover{border-color:var(--platinum);background:#f8f9fa;}' +
+      '.rng-ai-item:hover{border-color:var(--primary);background:#fffdf5;}' +
       '.rng-ai-item:last-child{margin-bottom:0;}' +
       '.rng-ai-item::after{content:"复制";position:absolute;right:12px;top:50%;transform:translateY(-50%);' +
       'font-size:11px;color:#c3c8d3;pointer-events:none;}' +
@@ -3666,7 +3771,7 @@ document.getElementById('noteClearAll').addEventListener('click', async () => {
 });
 
 /* ============================================================
-   小说助手
+   小说管理（原「小说助手」，已改名）
    ============================================================ */
 let novels = [], currentNovel = null, currentChapter = null;
 let pendingNovelCover = '', pendingEditCover = '';
@@ -5504,9 +5609,11 @@ function exportAll(){
   let chapters = [];
   try { chapters = loadChaptersLocal(); } catch(e){ chapters = []; }
   const data = {
-    app: '岁窦工具箱', version: 'V3.0.10.1', exportTime: new Date().toISOString(),
+    app: '岁窦工具箱', version: 'V4.1', exportTime: new Date().toISOString(),
     people, songs, places, medias, schedules, notes, timelineEvents, novels, chapters, ledger,
-    sleepRecords, vitalRecords, exerciseRecords, exerProfile
+    sleepRecords, vitalRecords, exerciseRecords, exerProfile,
+    videos,
+    stickers
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
   const url = URL.createObjectURL(blob);
@@ -5540,6 +5647,14 @@ document.getElementById('importFile').addEventListener('change', e => {
       if (Array.isArray(data.sleepRecords))   { sleepRecords    = data.sleepRecords;    saveSleep();    renderSleepList(); renderSleepChart(); }
       if (Array.isArray(data.vitalRecords))   { vitalRecords    = data.vitalRecords;    saveVitals();   renderVitalList(); }
       if (Array.isArray(data.exerciseRecords)){ exerciseRecords = data.exerciseRecords; saveExercise(); renderExerciseList(); }
+      if (Array.isArray(data.videos)) {
+        try { localStorage.setItem(VIDEOS_KEY, JSON.stringify(data.videos)); } catch(err){}
+        if (typeof window.__videocollectInit === 'function') window.__videocollectInit();
+      }
+      if (Array.isArray(data.stickers)) {
+        try { localStorage.setItem(STICKERS_KEY, JSON.stringify(data.stickers)); } catch(err){}
+        if (typeof window.__stickerInit === 'function') window.__stickerInit();
+      }
       if (data.exerProfile && typeof data.exerProfile === 'object'){
         exerProfile = { ...exerProfile, ...data.exerProfile };
         saveExerProfile(); loadExerProfile();
@@ -5554,7 +5669,7 @@ document.getElementById('clearAllData').addEventListener('click', async () => {
   if (!confirm('确定要清空全部数据吗？建议先导出备份！')) return;
   try {
     if (appMode === 'cloud' && currentUser){
-      for (const t of ['people','songs','places','medias','schedules','notes','timeline_events','novels','novel_chapters','ledger','sleep_records','vitals','exercises']){
+      for (const t of ['people','songs','places','medias','schedules','notes','timeline_events','novels','novel_chapters','ledger','sleep_records','vitals','exercises','videos','stickers']){
         await sb.from(t).delete().eq('user_id', currentUser.id);
       }
     }
@@ -5564,11 +5679,14 @@ document.getElementById('clearAllData').addEventListener('click', async () => {
     exerProfile = { gender: 'male', age: '', height: '', weight: '' };
     try {
       [PEOPLE_KEY, SONGS_KEY, PLACES_KEY, MEDIA_KEY, CAL_KEY, NOTES_KEY, TL_KEY,
-       NOVELS_KEY, CHAPTERS_KEY, LEDGER_KEY, SLEEP_KEY, VITAL_KEY, EXER_KEY, EXER_PROFILE_KEY].forEach(k => localStorage.removeItem(k));
+       NOVELS_KEY, CHAPTERS_KEY, LEDGER_KEY, SLEEP_KEY, VITAL_KEY, EXER_KEY, EXER_PROFILE_KEY,
+       VIDEOS_KEY, STICKERS_KEY, 'suidou-firstaid-infocard-v1', 'suidou-acupoint-fav-v1', 'suidou-fasting-v1', 'suidou-notif-read-v1'].forEach(k => localStorage.removeItem(k));
     } catch(e){}
     renderPeople(); renderSongs(); renderPlaces(); renderMedias(); renderCalendar();
     renderNotes(); renderTimeline(); renderNovelList(); renderLedger();
     renderSleepList(); renderSleepChart(); renderVitalList(); renderExerciseList();
+    if (typeof window.__videocollectInit === 'function') window.__videocollectInit();
+    if (typeof window.__stickerInit === 'function') window.__stickerInit();
     loadExerProfile();
     updateStorageUsage(); showToast('全部数据已清空');
   } catch(err){ alert('清空失败：' + err.message); }
@@ -5607,7 +5725,7 @@ loadTimeline();
 loadNotes();
 
 /* ============================================================
-   V3.0.10.1 · 工具分类侧边栏（方案 A · 固定展开）
+   工具分类侧边栏（方案 A · 固定展开）
    ============================================================ */
 const TOOL_REGISTRY = [
   /* ① 健康与运动 */
@@ -5618,8 +5736,13 @@ const TOOL_REGISTRY = [
   { id: 'hydration',    name: '饮水量计算' },
   { id: 'whitenoise',   name: '白噪音助眠' },
   { id: 'allergy',      name: '食物过敏清单' },
+  { id: 'firstaid',     name: '急救知识速查' },
+  { id: 'acupoint',     name: '常见穴位速查' },
+  { id: 'fasting',      name: '轻断食时间表' },
+  { id: 'sportsinjury', name: '运动损伤应急处理' },
   /* ② 创作工坊 */
-  { id: 'novel',        name: '小说助手' },
+  { id: 'novelassistant', name: '小说助手' },
+  { id: 'novel',        name: '小说管理' },
   { id: 'textanalysis', name: '文章分析' },
   { id: 'people',       name: '人物印象表' },
   { id: 'timeline',     name: '时间线' },
@@ -5635,7 +5758,9 @@ const TOOL_REGISTRY = [
   { id: 'media',        name: '影视收藏' },
   { id: 'recipe',       name: '菜谱收藏' },
   { id: 'tablefill',    name: '表格填入器' },
-  { id: 'novelcollect', name: '小说收藏' }, 
+  { id: 'novelcollect', name: '小说收藏' },
+  { id: 'videocollect', name: '视频收藏' },
+  { id: 'sticker',      name: '表情包收藏' },
   /* ④ 计算与数据 */
   { id: 'calc',         name: '数学计算' },
   { id: 'chart',        name: '统计图生成' },
@@ -5652,16 +5777,17 @@ const TOOL_REGISTRY = [
   { id: 'physicsformula', name: '物理公式计算' },
   { id: 'equationsolve', name: '解方程组' },
   { id: 'chinahistory',  name: '中国历史简表' },
-  { id: 'chinahistory',  name: '中国历史简表' },
   { id: 'matrixcalc',    name: '矩阵运算' },
   { id: 'circuitcalc',   name: '电路计算' },
   { id: 'geneticscalc',  name: '遗传计算' },
   { id: 'bodysystems',   name: '人体系统速查' },
   { id: 'earthmodule',   name: '地球模块' },
   { id: 'chinageo',      name: '中国地理' },
+  { id: 'visualization', name: '生活可视化' },
   { id: 'worldhistory',  name: '世界历史简表' },
   { id: 'poetryrecite',  name: '古诗词默写' },
   { id: 'cellstructure', name: '细胞结构速查' },
+  { id: 'lab',          name: '数理化实验' },
   /* ⑤ 时间与生活 */
   { id: 'calendar',     name: '我的日历' },
   { id: 'clock',        name: '时钟工具' },
@@ -5674,28 +5800,29 @@ const TOOL_REGISTRY = [
   { id: 'json',         name: 'JSON 格式化' },
   { id: 'cron',         name: 'Cron 表达式' },
   /* ⑦ 实用工具 */
-  { id: 'imagecompress',name: '图片压缩' },
+  { id: 'imagecompress',name: '图片工具' },
   { id: 'qrcode',       name: '二维码生成' },
   { id: 'luckywheel',   name: '幸运转盘' },
   { id: 'coinflip',     name: '抛硬币模拟器' },
   { id: 'reactiontest', name: '反应速度测试' },
   { id: 'carlist',      name: '中国车牌一览表' },
   { id: 'countdown',    name: '倒数日' },
-  { id: 'decibel',      name: '分贝仪' }
+  { id: 'decibel',      name: '分贝仪' },
+  { id: 'randomnumber', name: '随机数' },
+  { id: 'devicetest',   name: '实用测试' }
 ];
 
 /* 分类 → 工具 id 列表 */
 const TOOL_CATEGORIES = [
-  { name: '健康与运动', tools: ['health','exercise','heatindex','meditation','hydration','whitenoise','allergy'] },
-  { name: '创作工坊', tools: ['novel','textanalysis','people','timeline','namer','dialogue','random','notes','canvas','relgraph'] },
-  { name: '收藏与记录', tools: ['songs','places','media','recipe','tablefill','novelcollect'] },
-  { name: '数理化',     tools: ['funcplot','chemistry','periodictable','physicsformula','equationsolve','matrixcalc','circuitcalc','geneticscalc'] },
-  { name: '人文与自然',   tools: ['chinahistory','earthmodule','chinageo','bodysystems','worldhistory','poetryrecite','cellstructure'
-  ] },
+  { name: '健康与运动', tools: ['health','exercise','heatindex','meditation','hydration','whitenoise','allergy','firstaid','acupoint','fasting','sportsinjury'] },
+  { name: '创作工坊', tools: ['novelassistant','textanalysis','people','canvas','relgraph'] },
+  { name: '收藏与记录', tools: ['songs','places','media','recipe','tablefill','novelcollect','videocollect','sticker'] },
+  { name: '数理化',     tools: ['funcplot','chemistry','periodictable','physicsformula','equationsolve','matrixcalc','circuitcalc','geneticscalc','lab'] },
+  { name: '人文与自然', tools: ['chinahistory','worldhistory','earthmodule','chinageo','poetryrecite','bodysystems','cellstructure','visualization'] },
   { name: '计算与数据', tools: ['calc','chart','exchange','fuel','color','datecalc','loan','discount','timestamp'] },
   { name: '时间与生活', tools: ['calendar','clock','ledger','worldclock','zodiac'] },
   { name: 'AI 与开发',  tools: ['ai','code','json','cron'] },
- { name: '实用工具',   tools: ['imagecompress','qrcode','luckywheel','coinflip','reactiontest','carlist','countdown','decibel'] }
+  { name: '实用工具',   tools: ['imagecompress','qrcode','luckywheel','coinflip','reactiontest','carlist','countdown','decibel','randomnumber','devicetest'] }
 ];
 
 /* 用到的所有工具 id，供 go() 判断是否为工具页 */
@@ -5703,11 +5830,22 @@ const ALL_TOOL_IDS = TOOL_REGISTRY.map(function (t) { return t.id; });
 
 /* 从「全部应用」卡片里抓取图标（保持视觉一致） */
 function getToolIcon(toolId) {
+  /* 优先：从应用中心暴露的数据里取 */
+  if (window.__appsData && window.__appsIcons) {
+    for (var i = 0; i < window.__appsData.length; i++) {
+      var app = window.__appsData[i];
+      if (app.id === toolId && window.__appsIcons[app.icon]) {
+        return window.__appsIcons[app.icon];
+      }
+    }
+  }
+  /* 兼容：旧版 #allApps 卡片（如果还有的话） */
   var card = document.querySelector('#allApps .tool-card[data-target="' + toolId + '"]');
   if (card) {
     var svg = card.querySelector('.tool-icon svg');
     if (svg) return svg.outerHTML;
   }
+  /* 兜底：通用图标 */
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>';
 }
 
@@ -5715,12 +5853,10 @@ function getToolIcon(toolId) {
 function buildToolSidebar(sidebar) {
   var html = '';
 
-  /* 顶部当前工具名 */
   html += '<div class="gts-head">' +
     '<span class="gts-current" id="gtsCurrent">工具导航</span>' +
   '</div>';
 
-  /* 导航区 */
   html += '<nav class="gts-nav" id="gtsNav">';
   TOOL_CATEGORIES.forEach(function (cat) {
     html += '<div class="gts-group">';
@@ -5742,7 +5878,6 @@ function buildToolSidebar(sidebar) {
 
   sidebar.innerHTML = html;
 
-  /* 绑定跳转 */
   sidebar.querySelectorAll('[data-crumb-nav]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var target = btn.dataset.crumbNav;
@@ -5760,7 +5895,6 @@ function initToolSidebar() {
   sidebar.className = 'global-tool-sidebar';
   sidebar.setAttribute('aria-label', '工具分类导航');
 
-  /* 插到 main 之前，移动端可以走正常文档流 */
   var mainEl = document.querySelector('main');
   if (mainEl && mainEl.parentNode) {
     mainEl.parentNode.insertBefore(sidebar, mainEl);
@@ -5769,7 +5903,6 @@ function initToolSidebar() {
   }
   buildToolSidebar(sidebar);
 
-  /* 清掉旧的返回按钮（侧栏已替代） */
   document.querySelectorAll('.page .back-btn[data-back]').forEach(function (b) { b.remove(); });
 
   updateHeaderHeight();
@@ -5778,7 +5911,6 @@ function initToolSidebar() {
     document.fonts.ready.then(updateHeaderHeight);
   }
 
-  /* 初始状态 */
   var initialPage = document.querySelector('.page.active');
   if (initialPage) {
     updateSidebarForPage(initialPage.id.replace(/^page-/, ''));
@@ -5798,7 +5930,18 @@ function updateSidebarForPage(name) {
   var sidebar = document.getElementById('globalToolSidebar');
   if (!sidebar) return;
 
-  var isTool = ALL_TOOL_IDS.indexOf(name) !== -1;
+  // 子工具名映射到父工具
+  var parentMap = {
+    'timeline': 'novelassistant',
+    'namer':    'novelassistant',
+    'dialogue': 'novelassistant',
+    'random':   'novelassistant',
+    'notes':    'novelassistant',
+    'novel':    'novelassistant'
+  };
+  var lookupName = parentMap[name] || name;
+
+  var isTool = ALL_TOOL_IDS.indexOf(lookupName) !== -1;
 
   if (!isTool) {
     document.body.classList.remove('tool-active');
@@ -5807,21 +5950,18 @@ function updateSidebarForPage(name) {
 
   document.body.classList.add('tool-active');
 
-  /* 高亮当前工具 */
   sidebar.querySelectorAll('.gts-item').forEach(function (item) {
-    var active = item.dataset.crumbNav === name;
+    var active = item.dataset.crumbNav === lookupName;
     item.classList.toggle('active', active);
   });
 
-  /* 更新顶部当前工具名 */
   var tool = null;
   for (var i = 0; i < TOOL_REGISTRY.length; i++) {
-    if (TOOL_REGISTRY[i].id === name) { tool = TOOL_REGISTRY[i]; break; }
+    if (TOOL_REGISTRY[i].id === lookupName) { tool = TOOL_REGISTRY[i]; break; }
   }
   var cur = document.getElementById('gtsCurrent');
   if (cur && tool) cur.textContent = tool.name;
 
-  /* 让高亮项在侧栏内可见（不滚动页面） */
   var activeEl = sidebar.querySelector('.gts-item.active');
   var nav = sidebar.querySelector('.gts-nav');
   if (activeEl && nav && nav.scrollHeight > nav.clientHeight) {
@@ -6203,6 +6343,69 @@ initToolSidebar();
 
   const NOTIFICATIONS = [
     {
+      id: 'novelassistant-refactor',
+      type: 'success',
+      title: '创作工坊重构：小说助手一站式',
+      content: '把原来的时间线、起名器、对话生成器、随机灵感、灵感速记并入「小说助手」，并作为统一入口。原「小说助手」改名为「小说管理」，作为其中一个子标签。所有工具数据互通，切换流畅，旧书签仍可用（自动跳转到对应子标签）。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'devicetest-tool',
+      type: 'success',
+      title: '新工具：实用测试',
+      content: '「实用工具」分类下新增实用测试。键盘测试（全键位可视化 + key / code / keyCode / location 信息 + 已测键位标记）、鼠标测试（坐标十字线 + 左键轨迹 + 各键点击统计 + 滚轮 + 双击检测）、网络测速（navigator.connection 信息 + Cloudflare 10MB 真实下载测速）、麦克风测试（实时音量条 + 时域波形）。全部纯本地运行，不上传任何数据。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'sportsinjury-tool',
+      type: 'success',
+      title: '新工具：运动损伤应急处理',
+      content: '「健康与运动」分类下新增运动损伤应急处理。10 种常见运动损伤（踝扭伤、肌肉拉伤、DOMS、抽筋、脱臼、骨折、擦伤水泡、跟腱炎、网球肘、运动性中暑）的识别、分步处理、就医指征、停训建议、恢复期与预防方法。含 RICE / PRICE 分步指导与急救速查跳转。纯本地运行。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'fasting-tool',
+      type: 'success',
+      title: '新工具：轻断食时间表',
+      content: '「健康与运动」分类下新增轻断食时间表。支持 16:8 / 18:6 / 20:4 / 14:10 与自定义模式，实时显示进食窗口、断食窗口、当前状态与倒计时，附带 24 小时时间轴与 30 天打卡统计。含常见问题速查与安全提示。纯本地运行。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'acupoint-tool',
+      type: 'success',
+      title: '新工具：常见穴位速查',
+      content: '「健康与运动」分类下新增常见穴位速查。收录 25 个常用穴位，含定位、主治、按摩方法、配伍、禁忌与局部示意图；支持按症状、按部位、按经络三种视角查询，支持收藏与朗读。纯本地运行。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'firstaid-tool',
+      type: 'success',
+      title: '新工具：急救知识速查',
+      content: '「健康与运动」分类下新增急救知识速查。12 个常见紧急场景的分步处理指南，覆盖 CPR、海姆立克、溺水、触电、昏迷、大出血、中风、心脏病、中暑、烧烫伤、扭伤骨折、常见小意外；含 CPR 节拍器（110 次/分，支持人声数数）、AED 使用引导、可导出的紧急信息卡。全部离线可用。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'sticker-tool',
+      type: 'success',
+      title: '新工具：表情包收藏',
+      content: '「收藏与记录」分类下新增表情包收藏。支持拖拽批量上传，静态图自动压缩到 480px 以内（保留透明通道），GIF 保留动图；点击缩略图即可一键复制到剪贴板，直接粘到聊天窗口。支持分类、标签、常用标记、使用次数统计与多种排序。纯本地运行，登录后自动同步云端。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'videocollect-tool',
+      type: 'success',
+      title: '新工具：视频收藏',
+      content: '「收藏与记录」分类下新增视频收藏。支持 B站、抖音、快手、小红书、微博、YouTube、腾讯视频、爱奇艺、优酷、西瓜视频等多平台链接，记录博主、发布日期、类型、时长、评分与备注，不填链接时自动用「博主 + 标题」去对应平台搜索。支持 AI 生成简介、筛选排序与多种导出。',
+      time: '2026-10-05',
+    },
+    {
+      id: 'watermark-tool',
+      type: 'info',
+      title: '图片工具升级：新增图片加水印',
+      content: '「实用工具 → 图片工具」新增第 4 个子标签「图片加水印」。支持文字水印（字号、颜色、透明度、旋转、9 宫格位置、平铺）与图片水印（大小、透明度、9 宫格位置），实时预览，导出 JPG / PNG。纯本地运行。',
+      time: '2026-10-05'
+    },
+    {
       id: 'decibel-tool',
       type: 'info',
       title: '新工具：分贝仪',
@@ -6273,18 +6476,18 @@ initToolSidebar();
       time: '2026-10-01'
     },
     {
-    id: 'relgraph-tool',
-    type: 'info',
-    title: '新工具：角色关系图',
-    content: '「创作工坊」分类下新增角色关系图。可视化绘制小说、剧本人物关系网，支持拖拽、连线、自动布局与导出高清 PNG。纯本地运行。',
-    time: '2026-10-01'
+      id: 'relgraph-tool',
+      type: 'info',
+      title: '新工具：角色关系图',
+      content: '「创作工坊」分类下新增角色关系图。可视化绘制小说、剧本人物关系网，支持拖拽、连线、自动布局与导出高清 PNG。纯本地运行。',
+      time: '2026-10-01'
     },
     {
-    id: 'allergy-tool',
-    type: 'info',
-    title: '新工具：食物过敏清单',
-    content: '「健康与运动」分类下新增食物过敏清单。记录过敏原、类别、严重程度、典型症状与应对方法，支持分类筛选、搜索与导出 JSON / CSV。纯本地运行。',
-    time: '2026-10-01'
+      id: 'allergy-tool',
+      type: 'info',
+      title: '新工具：食物过敏清单',
+      content: '「健康与运动」分类下新增食物过敏清单。记录过敏原、类别、严重程度、典型症状与应对方法，支持分类筛选、搜索与导出 JSON / CSV。纯本地运行。',
+      time: '2026-10-01'
     },
     {
       id: 'whitenoise-tool',
@@ -6417,8 +6620,8 @@ initToolSidebar();
   function renderList(){
     const readSet = getReadSet();
     const list = NOTIFICATIONS.slice()
-  .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
-  .slice(0, MAX_SHOW);
+      .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0))
+      .slice(0, MAX_SHOW);
 
     if (!list.length){
       listEl.innerHTML =
@@ -6438,7 +6641,7 @@ initToolSidebar();
       const linkHint = n.link ? '<span class="notif-link-hint">点击前往 →</span>' : '';
       const pinBadge = n.pinned ? '<span class="notif-pin-badge">置顶</span>' : '';
       return '<div class="notif-item ' + (unread ? 'unread ' : '') + 'type-' + type + '" data-nid="' + esc(n.id) + '">' +
-      '<p class="notif-item-title">' + pinBadge + esc(n.title || '通知') + '</p>' +
+        '<p class="notif-item-title">' + pinBadge + esc(n.title || '通知') + '</p>' +
         '<p class="notif-item-content">' + esc(n.content || '') + '</p>' +
         '<div class="notif-item-time">' + esc(n.time || '') + linkHint + '</div>' +
       '</div>';
@@ -6538,91 +6741,44 @@ initToolSidebar();
   if (!grid) return;
 
   var PINYIN = {
-        /* J */
-    '解方程组': 'J',
-    '矩阵运算': 'J',
-
-        /* S */
-    '世界历史简表': 'S',
-
-    /* G */
-    '古诗词默写': 'G',
-
-    /* X */
-    '细胞结构速查': 'X',
-    /* D */
-    '电路计算': 'D',
-    '电路计算': 'D',
-    '地球模块': 'D',
-
-    /* Z */
-    '中国地理': 'Z',
-    '中国历史简表': 'Z',
-
-    /* Y */
-    '元素周期表': 'Y',
-    '遗传计算': 'Y',
-
-    /* R */
-    '人体系统速查': 'R',
-    /* A */
     'AI 助手': 'A',
-
-    /* B */
     '白噪音助眠': 'B',
     '表格填入器': 'B',
-
-    /* C */
-    '畅想画布': 'C',
+    '表情包收藏': 'B',
     '常见统计图生成': 'C',
+    '常见穴位速查': 'C',
     '菜谱收藏': 'C',
     'Cron 表达式': 'C',
-
-    /* D */
+    '畅想画布': 'C',
     '代码编辑器': 'D',
     '对话生成器': 'D',
     '地点收藏': 'D',
     '倒数日': 'D',
     '贷款计算器': 'D',
-
-    /* E */
+    '电路计算': 'D',
+    '地球模块': 'D',
     '二维码生成': 'E',
-
-    /* F */
     '反应速度测试': 'F',
     '分贝仪': 'F',
-
-    /* G */
     '歌曲收藏': 'G',
-
-    /* H */
+    '古诗词默写': 'G',
     '汇率换算': 'H',
     '函数图像绘制': 'H',
     '化学方程式': 'H',
-
-    /* J */
     '健康管理': 'J',
     '角色关系图': 'J',
+    '急救知识速查': 'J',
     'JSON 格式化': 'J',
+    '矩阵运算': 'J',
     '解方程组': 'J',
-
-    /* L */
     '灵感速记': 'L',
-
-    /* M */
     '冥想练习': 'M',
-
-    /* P */
     '抛硬币模拟器': 'P',
-
-    /* Q */
     '起名器': 'Q',
-
-    /* R */
+    '轻断食时间表': 'Q',
     '人物印象表': 'R',
     '日期计算': 'R',
-
-    /* S */
+    '人体系统速查': 'R',
     '数学计算': 'S',
     '时间戳转换': 'S',
     '时间线': 'S',
@@ -6631,34 +6787,35 @@ initToolSidebar();
     '食物过敏清单': 'S',
     '世界时钟': 'S',
     '生肖星座': 'S',
-
-    /* T */
+    '视频收藏': 'S',
+    '数理化实验': 'S',
+    '生活可视化': 'S',
+    '世界历史简表': 'S',
+    '随机数': 'S',
+    '实用测试': 'S',
     '体感温度与运动风险': 'T',
-    '图片压缩': 'T',
-
-    /* W */
+    '图片工具': 'T',
     '我的记账本': 'W',
     '我的日历': 'W',
     '文章分析': 'W',
     '物理公式计算': 'W',
-
-    /* X */
     '小说助手': 'X',
+    '小说管理': 'X',
     '小说收藏': 'X',
     '幸运转盘': 'X',
-
-    /* Y */
+    '细胞结构速查': 'X',
     '饮水量计算': 'Y',
     '影视收藏': 'Y',
     '运动记录': 'Y',
+    '运动损伤应急处理': 'Y',
     '颜色转换': 'Y',
     '油耗计算': 'Y',
     '元素周期表': 'Y',
-
-    /* Z */
+    '遗传计算': 'Y',
     '中国车牌一览表': 'Z',
     '折扣计算器': 'Z',
-    '中国历史简表': 'Z',
+    '中国地理': 'Z',
+    '中国历史简表': 'Z'
   };
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.tool-card'));
@@ -6703,9 +6860,6 @@ initToolSidebar();
 
 /* ============================================================
    国庆倒计时 / 正计时
-   阶段一：2026-10-01 之前 → 倒计时
-   阶段二：2026-10-01 ~ 2026-10-08 → 正计时（假期中）
-   阶段三：2026-10-08 之后 → 假期已结束
    ============================================================ */
 (function initNationalCountdown(){
   'use strict';
@@ -6785,4 +6939,4 @@ initToolSidebar();
   console.log('[国庆倒计时] 已启动：2026-10-01 00:00 ~ 2026-10-08 00:00');
 })();
 
-console.log('%c岁窦工具箱 · V3.0.10.1 国庆特别版 已加载', 'color:#c62828;font-weight:700;font-size:14px;');
+console.log('%c岁窦工具箱 · V4.1 活力版 已加载', 'color:#b47c00;font-weight:700;font-size:14px;');

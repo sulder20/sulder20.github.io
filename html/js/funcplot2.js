@@ -1,5 +1,6 @@
 /* ============================================================
-   函数图像绘制 · 岁窦工具箱 V4.0
+   函数图像绘制 · 岁窦工具箱 V4.1.2
+   教材字体 · x/y 斜体 · 变量斜体 · f(x)= 前缀
    ============================================================ */
 (function () {
   'use strict';
@@ -11,7 +12,19 @@
   var wrap = canvas.parentElement;
 
   var STORE_KEY = 'suidou-funcplot-v1';
-  var FONT = '"PingFang SC","Microsoft YaHei",system-ui,sans-serif';
+
+  /* ---------- 教材字体 ---------- */
+  var FONT = '"Times New Roman","Cambria Math","Latin Modern Math","Songti SC","STSong","SimSun","Source Han Serif SC",serif';
+
+  /* ---------- 数学函数名（正体显示） ---------- */
+  var MATH_FUNCS = [
+    'asin','acos','atan','sinh','cosh','tanh',
+    'sqrt','floor','ceil','round','sign',
+    'sin','cos','tan',
+    'log2','log10','log','ln','exp','abs','pow',
+    'min','max','PI','pi','E'
+  ];
+
   var PALETTE = ['#b47c00', '#4a7fb5', '#3f8f6b', '#c0524a', '#8a6bbf', '#c47a2b', '#5a6b7d', '#b04a8a'];
 
   /* ---------- 数学作用域 ---------- */
@@ -63,6 +76,26 @@
   }
   function fpPad2(n) { return n < 10 ? '0' + n : String(n); }
 
+  /* ---------- 表达式美化：去掉乘号 ---------- */
+  function prettyExpr(s) {
+    s = String(s == null ? '' : s);
+    s = s.replace(/([a-zA-Z_)])\*([a-zA-Z_(])/g, '$1$2');
+    s = s.replace(/([0-9])\*([a-zA-Z_(])/g, '$1$2');
+    s = s.replace(/([a-zA-Z_)])\*([0-9])/g, '$1$2');
+    return s;
+  }
+
+  /* ---------- 自动生成函数标签：统一用 f(x)= 前缀 ---------- */
+  function autoLabel(f) {
+    var expr = String(f.expr || '').trim();
+    if (!expr) return '';
+
+    /* 剥离用户可能写的前缀 */
+    expr = expr.replace(/^\s*y\s*=\s*/i, '');
+    expr = expr.replace(/^\s*f\s*\(\s*x\s*\)\s*=\s*/i, '');
+    return 'f(x) = ' + prettyExpr(expr);
+  }
+
   /* ---------- 表达式编译 ---------- */
   function compileExpr(raw) {
     var s = String(raw == null ? '' : raw).trim();
@@ -86,6 +119,71 @@
         return typeof v === 'number' ? v : NaN;
       } catch (err) { return NaN; }
     };
+  }
+
+  /* ============================================================
+     数学文本混排：变量用斜体，函数名用正体
+     ============================================================ */
+  /* 拆分文本，返回 [{ text, isItalic }, ...] */
+  function splitMathText(text) {
+    var out = [];
+    var i = 0;
+    while (i < text.length) {
+      var matched = null;
+      for (var k = 0; k < MATH_FUNCS.length; k++) {
+        var fn = MATH_FUNCS[k];
+        if (text.substr(i, fn.length) === fn) {
+          /* 后面不能紧跟字母，避免误匹配 */
+          var nextCh = text.charAt(i + fn.length);
+          if (!/[a-zA-Z]/.test(nextCh)) {
+            matched = fn;
+            break;
+          }
+        }
+      }
+      if (matched) {
+        out.push({ text: matched, isItalic: false });
+        i += matched.length;
+      } else {
+        var ch = text.charAt(i);
+        out.push({ text: ch, isItalic: /[a-zA-Z]/.test(ch) });
+        i++;
+      }
+    }
+    return out;
+  }
+
+  /* 测量混排文本宽度 */
+  function measureMathText(text, size) {
+    var parts = splitMathText(text);
+    var total = 0;
+    for (var i = 0; i < parts.length; i++) {
+      ctx.font = (parts[i].isItalic ? 'italic ' : '') + '500 ' + size + 'px ' + FONT;
+      total += ctx.measureText(parts[i].text).width;
+    }
+    return total;
+  }
+
+  /* 绘制混排文本（带白色描边 + 填充色） */
+  function drawMathText(text, x, y, size, fillColor, strokeColor) {
+    var parts = splitMathText(text);
+    var pos = x;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      ctx.font = (p.isItalic ? 'italic ' : '') + '500 ' + size + 'px ' + FONT;
+      if (strokeColor) {
+        ctx.lineWidth = Math.max(3, size * 0.26);
+        ctx.strokeStyle = strokeColor;
+        ctx.lineJoin = 'round';
+        ctx.strokeText(p.text, pos, y);
+      }
+      ctx.fillStyle = fillColor;
+      ctx.fillText(p.text, pos, y);
+      pos += ctx.measureText(p.text).width;
+    }
+    return pos - x;
   }
 
   /* ---------- 刻度计算 ---------- */
@@ -151,7 +249,7 @@
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, W, H);
 
-    /* ---- 读取视图范围 ---- */
+    /* ---- 视图范围 ---- */
     var xMin = num('fpXMin', -10), xMax = num('fpXMax', 10);
     var yMin = num('fpYMin', -6),  yMax = num('fpYMax', 6);
 
@@ -167,7 +265,7 @@
     var mapX = function (x) { return (x - xMin) / (xMax - xMin) * W; };
     var mapY = function (y) { return H - (y - yMin) / (yMax - yMin) * H; };
 
-    /* ---- 坐标轴自身范围（数据坐标，留空 = 跟随视图范围） ---- */
+    /* ---- 坐标轴自身范围 ---- */
     function readAxisRange(idStart, idEnd, defStart, defEnd) {
       var sRaw = String(val(idStart, '')).trim();
       var eRaw = String(val(idEnd,   '')).trim();
@@ -190,7 +288,7 @@
     var yAxVisible = yAxVisS <= yAxVisE;
 
     /* ---- 坐标轴设置 ---- */
-    var axisColor  = '#5a4a20';
+    var axisColor  = '#000000';
     var axisW      = Math.max(0.4, num('fpAxisWidth', 1.6));
     var showAxisX  = chk('fpAxisX');
     var showAxisY  = chk('fpAxisY');
@@ -241,12 +339,12 @@
 
     /* ---- 画刻度 ---- */
     if (tickShow || tickNum) {
+      ctx.lineCap = 'butt';      // ← 新增这一行
       ctx.strokeStyle = axisColor;
       ctx.lineWidth = tickW;
       ctx.font = tickFont + 'px ' + FONT;
       ctx.fillStyle = axisColor;
 
-      /* X 轴刻度：只在 X 轴可见段内绘制，且 X 轴可见才绘制 */
       if (showAxisX && xAxVisible && (tickShow || tickNum)) {
         var xDown = tickDir === 'out';
         var xNumBelow = axisYPos >= H / 2;
@@ -272,7 +370,6 @@
         }
       }
 
-      /* Y 轴刻度：只在 Y 轴可见段内绘制，且 Y 轴可见才绘制 */
       if (showAxisY && yAxVisible && (tickShow || tickNum)) {
         var yLeft = tickDir === 'out';
         var yNumRight = axisXPos < W / 2;
@@ -300,6 +397,7 @@
     }
 
     /* ---- 画函数曲线 ---- */
+    ctx.lineCap = 'round';
     var lineW  = Math.max(0.5, num('fpLineWidth', 2.4));
     var smooth = val('fpSmooth', 'normal');
     var steps  = smooth === 'high' ? 3200 : 1400;
@@ -343,21 +441,21 @@
       ctx.stroke();
     });
 
-    /* ---- 坐标轴标签 x / y ---- */
+    /* ---- 坐标轴标签 x / y（斜体） ---- */
     var xLab = String(val('fpXLabel', 'x')).trim();
     var yLab = String(val('fpYLabel', 'y')).trim();
 
     if (showAxisX && xAxVisible && xLab) {
-      ctx.font = 'italic 700 15px ' + FONT;
+      ctx.font = 'italic 500 17px ' + FONT;
       ctx.fillStyle = axisColor;
       ctx.textAlign = 'right';
       ctx.textBaseline = 'top';
-      var labY = (axisYPos + 20 > H) ? axisYPos - 22 : axisYPos + 6;
+      var labY = (axisYPos + 20 > H) ? axisYPos - 24 : axisYPos + 6;
       var labX = mapX(xAxVisE);
       ctx.fillText(xLab, labX - 8, labY);
     }
     if (showAxisY && yAxVisible && yLab) {
-      ctx.font = 'italic 700 15px ' + FONT;
+      ctx.font = 'italic 500 17px ' + FONT;
       ctx.fillStyle = axisColor;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
@@ -365,20 +463,28 @@
       ctx.fillText(yLab, axisXPos + 8, labYY + 8);
     }
 
-    /* ---- 函数标签 ---- */
+        /* ---- 原点标签 O（斜体） ---- */
+    if (showAxisX && showAxisY && xAxVisible && yAxVisible &&
+        axisXPos >= 0 && axisXPos <= W && axisYPos >= 0 && axisYPos <= H) {
+      ctx.font = 'italic 500 17px ' + FONT;
+      ctx.fillStyle = axisColor;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'top';
+      ctx.fillText('O', axisXPos - 6, axisYPos + 6);
+    }
+
+
+    /* ---- 函数标签（变量斜体，函数名正体） ---- */
     funcs.forEach(function (f) {
       if (!f.visible) return;
-      var text = (f.label && f.label.trim()) ? f.label.trim() : ('y = ' + (f.expr || '').trim());
-      if (!text || text === 'y =') return;
+      var text = (f.label && f.label.trim()) ? f.label.trim() : autoLabel(f);
+      if (!text || text === 'f(x) =') return;
 
       var size = f.lsize || 15;
-      ctx.font = '700 ' + size + 'px ' + FONT;
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'middle';
-
       var lx = (typeof f.lx === 'number' ? f.lx : 0.84) * W;
       var ly = (typeof f.ly === 'number' ? f.ly : 0.12) * H;
-      var tw = ctx.measureText(text).width;
+
+      var tw = measureMathText(text, size);
 
       hitBoxes.push({
         kind: 'label', id: f.id,
@@ -387,12 +493,7 @@
         ax: lx, ay: ly
       });
 
-      ctx.lineWidth = Math.max(3, size * 0.26);
-      ctx.strokeStyle = 'rgba(255,255,255,.92)';
-      ctx.lineJoin = 'round';
-      ctx.strokeText(text, lx, ly);
-      ctx.fillStyle = f.color;
-      ctx.fillText(text, lx, ly);
+      drawMathText(text, lx, ly, size, f.color, 'rgba(255,255,255,.92)');
     });
 
     /* ---- 图像标题 ---- */
@@ -400,7 +501,7 @@
     if (titleText) {
       var tSize  = Math.max(8, num('fpTitleSize', 20));
       var tColor = val('fpTitleColor', '#3a2a00');
-      ctx.font = '800 ' + tSize + 'px ' + FONT;
+      ctx.font = '700 ' + tSize + 'px ' + FONT;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
@@ -571,11 +672,11 @@
         '<div class="fp-func-row" data-fid="' + f.id + '">' +
           '<div class="fp-func-main">' +
             '<input type="color" class="fp-func-color" value="' + fpEsc(f.color) + '" title="曲线颜色">' +
-            '<span class="fp-func-eq">y =</span>' +
-            '<input type="text" class="fp-func-input' + bad + '" value="' + fpEsc(f.expr) + '" placeholder="如：sin(x)、x^2、1/x" spellcheck="false">' +
+            '<span class="fp-func-eq">f(x) =</span>' +
+            '<input type="text" class="fp-func-input' + bad + '" value="' + fpEsc(f.expr) + '" placeholder="如：sin(x)、x^2、0.5*x+1" spellcheck="false">' +
           '</div>' +
           '<div class="fp-func-sub">' +
-            '<input type="text" class="fp-func-label" value="' + fpEsc(f.label) + '" placeholder="图像标签（留空显示 y = 表达式）">' +
+            '<input type="text" class="fp-func-label" value="' + fpEsc(f.label) + '" placeholder="图像标签（留空自动显示 f(x) = …）">' +
             '<label class="fp-mini-check"><input type="checkbox" class="fp-func-vis"' + (f.visible ? ' checked' : '') + '><span>显示</span></label>' +
             '<button class="mini-btn danger fp-func-del" type="button">删除</button>' +
           '</div>' +

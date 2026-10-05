@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岁窦工具箱 · V4.1 活力版</title>
+<title>岁窦工具箱 · V4.2</title>
 <link rel="stylesheet" href="css/style2.css">
 <link rel="icon" type="image/png" href="images/slogo.png">
 <style id="v4-visual-refresh">
@@ -1150,6 +1150,15 @@ html, body { overflow-x: hidden !important; }
     color: var(--text) !important;
     margin-bottom: 5px !important;
   }
+    /* 行内加粗用 <strong>，不受 b 的 block 影响 */
+  #page-help .help-step-body strong{
+    display: inline !important;
+    font-size: inherit !important;
+    font-weight: 700 !important;
+    color: var(--primary-dark) !important;
+    margin-bottom: 0 !important;
+    line-height: inherit !important;
+  }
 </style>
 </head>
 <body>
@@ -1168,13 +1177,13 @@ html, body { overflow-x: hidden !important; }
       <button data-page="settings">设置</button>
     </nav>
     <div class="search-wrap">
-      <input id="searchInput" type="search" placeholder="搜索工具…">
-      <button type="button" class="search-clear" id="searchClear" aria-label="清空搜索" title="清空搜索" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6L6 18M6 6l12 12"/>
-        </svg>
-      </button>
-    </div>
+  <!-- 保留原 input 但隐藏，避免 main2.js 里引用报错 -->
+  <input id="searchInput" type="search" style="display:none;" placeholder="搜索工具…">
+  <button type="button" class="search-btn" id="searchBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+    搜索
+  </button>
+</div>
     <div id="userBox">
       <span class="mode-badge local" id="modeBadge">本地模式</span>
       <button class="notif-btn" id="notifBtn" type="button" aria-label="通知">
@@ -1210,515 +1219,554 @@ html, body { overflow-x: hidden !important; }
 
 <main>
 
-<!-- ==================== 首页（整屏翻页） ==================== -->
+<!-- ==================== 首页 ==================== -->
 <section id="page-home" class="page active">
-  <div class="snap-wrap" id="snapHome">
+  <div class="hp">
 
-    <!-- ========== ① 欢迎 ========== -->
-    <section class="snap-section" data-snap-title="欢迎">
-      <div class="snap-inner">
-        <div class="welcome-board">
-          <div class="hero">
-            <h1>岁窦工具箱 · V4.1 活力版</h1>
-            <p>常用小工具集合，本地优先，打开即用。健康、创作、收藏、计算、时间、AI、实用工具，一站搞定。</p>
+    <!-- ========== ① Hero ========== -->
+    <div class="hp-hero">
+      <div class="hp-hero-inner">
+        <div class="hp-hero-main">
+          <span class="hp-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg>
+            <V4 class="2">4.2</V4> 活力版
+          </span>
+          <h1>岁窦工具箱</h1>
+          <p class="hp-sub">69 款本地小工具 · 打开即用 · 数据不上传</p>
+          <div class="hp-picks">
+  <button type="button" class="hp-pick" data-jump="funcplot">
+    <span class="hp-pick-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M6.5 17c1.6-6.4 3.1-9.5 4.6-9.5s2.4 8.5 3.9 8.5 1.8-4.2 3.5-5.5"/></svg>
+    </span>
+    <b>函数图像</b>
+    <em>多函数叠加</em>
+  </button>
+
+  <button type="button" class="hp-pick" data-jump="qrcode">
+    <span class="hp-pick-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-7M17 17h.01"/></svg>
+    </span>
+    <b>二维码</b>
+    <em>文本 · 网址 · WiFi</em>
+  </button>
+
+  <button type="button" class="hp-pick" data-jump="ledger">
+    <span class="hp-pick-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M2 9h20"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg>
+    </span>
+    <b>记账本</b>
+    <em>多币种 · 汇总</em>
+  </button>
+
+  <button type="button" class="hp-pick" data-jump="health">
+    <span class="hp-pick-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg>
+    </span>
+    <b>健康管理</b>
+    <em>BMI · 睡眠</em>
+  </button>
+
+  <button type="button" class="hp-pick" data-jump="firstaid">
+    <span class="hp-pick-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M12 9v6M9 12h6"/></svg>
+    </span>
+    <b>急救速查</b>
+    <em>CPR · AED</em>
+  </button>
+
+  <button type="button" class="hp-pick" data-jump="whitenoise">
+    <span class="hp-pick-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    </span>
+    <b>白噪音</b>
+    <em>实时合成</em>
+  </button>
+</div>
+
+
+
+        </div>
+
+        <div class="hp-stats">
+          <div class="hp-stat"><b>69</b><span>款工具</span></div>
+          <div class="hp-stat"><b>9</b><span>大分类</span></div>
+          <div class="hp-stat"><b>100%</b><span>本地运行</span></div>
+          <div class="hp-stat"><b>0</b><span>数据上传</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ② 推广轮播 ========== -->
+    <section class="hp-sec">
+      <div class="hp-promo" id="hpPromo">
+        <div class="hp-promo-track" id="hpPromoTrack">
+
+          <!-- slide 1 -->
+          <div class="hp-promo-slide slide-study">
+            <div class="hp-promo-body">
+              <span class="hp-promo-tag">V4.2 更新</span>
+              <h3>「学科与学习」专区上线</h3>
+              <p>函数图像、化学方程式、元素周期表、古诗词默写、地球模块、中国历史简表……15 款学习工具一站收纳，拆分数理化与文史地理两个子分类，学生党专属工作台。</p>
+              <button type="button" class="hp-promo-btn" data-jump="apps">立即体验 →</button>
+            </div>
+            <div class="hp-promo-illo illo-study">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M30 22h60v76H30z"/>
+                <path d="M45 22v76M75 22v76"/>
+                <path d="M38 40h4M38 52h4M38 64h4M68 40h4M68 52h4M68 64h4"/>
+                <circle cx="60" cy="46" r="5"/>
+                <path d="M60 41v-6M60 51v6M55 46h-6M65 46h6"/>
+              </svg>
+            </div>
           </div>
-          <div class="welcome-stats">
-            <div class="welcome-stat"><b>60+</b><span>款工具</span></div>
-            <div class="welcome-stat"><b>9</b><span>大分类</span></div>
-            <div class="welcome-stat"><b>0</b><span>数据上传</span></div>
-            <div class="welcome-stat"><b>100%</b><span>本地运行</span></div>
+
+          <!-- slide 2 -->
+          <div class="hp-promo-slide slide-health">
+            <div class="hp-promo-body">
+              <span class="hp-promo-tag">健康与运动</span>
+              <h3>急救知识速查 + CPR 节拍器</h3>
+              <p>12 个常见紧急场景的分步处理指南，覆盖 CPR、海姆立克、溺水、触电、中风、烧烫伤；含 110 次/分的 CPR 节拍器、AED 使用引导，以及可导出的紧急信息卡。全部离线可用。</p>
+              <button type="button" class="hp-promo-btn" data-jump="firstaid">马上查看 →</button>
+            </div>
+            <div class="hp-promo-illo illo-health">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M60 100s-38-24-38-54a20 20 0 0 1 38-10 20 20 0 0 1 38 10c0 30-38 54-38 54z"/>
+                <path d="M60 50v22M50 61h20"/>
+              </svg>
+            </div>
           </div>
+
+          <!-- slide 3 -->
+          <div class="hp-promo-slide slide-create">
+            <div class="hp-promo-body">
+              <span class="hp-promo-tag">创作工坊</span>
+              <h3>小说助手 · 创作一站式</h3>
+              <p>时间线、起名器、对话生成器、随机灵感、灵感速记、小说管理六个子工具统一入口，数据互通。角色关系图、表格填入器、畅想画布，让小说、剧本、长图创作一站搞定。</p>
+              <button type="button" class="hp-promo-btn" data-jump="novelassistant">进入创作 →</button>
+            </div>
+            <div class="hp-promo-illo illo-create">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M28 90l10-22 44-44 12 12-44 44z"/>
+                <path d="M82 24l12 12M38 68l12 12"/>
+                <path d="M28 90l-6 8 10-4"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- slide 4 -->
+          <div class="hp-promo-slide slide-utility">
+            <div class="hp-promo-body">
+              <span class="hp-promo-tag">实用工具</span>
+              <h3>表情包收藏 · 一键复制到剪贴板</h3>
+              <p>拖拽批量上传，静态图自动压缩到 480px 以内，GIF 保留动图。点击缩略图即可复制到剪贴板，直接粘到微信 / QQ / 钉钉。支持分类、标签、常用标记与使用次数统计。</p>
+              <button type="button" class="hp-promo-btn" data-jump="sticker">去试试 →</button>
+            </div>
+            <div class="hp-promo-illo illo-utility">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="60" cy="60" r="36"/>
+                <path d="M46 52h.01M74 52h.01"/>
+                <path d="M44 74a20 20 0 0 0 32 0"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="hp-promo-arrow prev" id="hpPromoPrev" type="button" aria-label="上一张">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="hp-promo-arrow next" id="hpPromoNext" type="button" aria-label="下一张">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+
+        <div class="hp-promo-dots" id="hpPromoDots"></div>
+      </div>
+    </section>
+
+
+    <!-- ========== ③ 热门工具 ========== -->
+    <section class="hp-sec">
+      <div class="hp-sec-head">
+        <h2>热门工具</h2>
+        <span class="hp-sec-sub">大家用得最多的几款</span>
+      </div>
+
+      <div class="hp-tools">
+        <button type="button" class="hp-tool" data-jump="health">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></span>
+          <span class="hp-tool-body"><b>健康管理</b><em>BMI · 鞋码 · 睡眠 · 生命体征</em></span>
+          <span class="hp-tool-hot">HOT</span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="calc">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></span>
+          <span class="hp-tool-body"><b>数学计算</b><em>计算器 · 单位换算 · 亲戚称呼</em></span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="ledger">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M2 9h20"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg></span>
+          <span class="hp-tool-body"><b>我的记账本</b><em>多币种 · 按月汇总 · CSV 导出</em></span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="qrcode">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-7M17 17h.01"/></svg></span>
+          <span class="hp-tool-body"><b>二维码生成</b><em>文本 · 网址 · WiFi · 可嵌 Logo</em></span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="funcplot">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M6.5 17c1.6-6.4 3.1-9.5 4.6-9.5s2.4 8.5 3.9 8.5 1.8-4.2 3.5-5.5"/></svg></span>
+          <span class="hp-tool-body"><b>函数图像绘制</b><em>多函数叠加 · 标签可拖拽 · 高清导出</em></span>
+          <span class="hp-tool-hot">NEW</span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="whitenoise">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span>
+          <span class="hp-tool-body"><b>白噪音助眠</b><em>雨声 · 海浪 · 壁炉 · 实时合成</em></span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="poetryrecite">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h5"/></svg></span>
+          <span class="hp-tool-body"><b>古诗词默写</b><em>160 首经典 · 名句填空 · 朗读</em></span>
+        </button>
+
+        <button type="button" class="hp-tool" data-jump="firstaid">
+          <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M12 9v6M9 12h6"/></svg></span>
+          <span class="hp-tool-body"><b>急救知识速查</b><em>12 个紧急场景 · CPR 节拍器 · AED</em></span>
+          <span class="hp-tool-hot">NEW</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== ⑤ 最新上架 ========== -->
+    <section class="hp-sec">
+      <div class="hp-sec-head">
+        <h2>最新上架</h2>
+        <span class="hp-sec-sub">V4.2 新增的 6 款</span>
+      </div>
+
+      <div class="hp-new">
+        <button type="button" class="hp-new-card" data-jump="sportsinjury">
+          <span class="hp-new-badge">NEW</span>
+          <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/><circle cx="12" cy="5" r="1.5"/></svg></span>
+          <b>运动损伤应急处理</b>
+          <em>10 种常见损伤 · RICE 分步指导</em>
+        </button>
+
+        <button type="button" class="hp-new-card" data-jump="fasting">
+          <span class="hp-new-badge">NEW</span>
+          <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M18 4.5l1.5-1.5"/></svg></span>
+          <b>轻断食时间表</b>
+          <em>16:8 / 18:6 / 20:4 · 打卡统计</em>
+        </button>
+
+        <button type="button" class="hp-new-card" data-jump="acupoint">
+          <span class="hp-new-badge">NEW</span>
+          <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
+          <b>常见穴位速查</b>
+          <em>25 个常用穴位 · 症状 / 部位 / 经络</em>
+        </button>
+
+        <button type="button" class="hp-new-card" data-jump="devicetest">
+          <span class="hp-new-badge">NEW</span>
+          <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg></span>
+          <b>实用测试</b>
+          <em>键盘 · 鼠标 · 网络 · 麦克风</em>
+        </button>
+
+        <button type="button" class="hp-new-card" data-jump="videocollect">
+          <span class="hp-new-badge">NEW</span>
+          <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 8l6 4-6 4V8z"/></svg></span>
+          <b>视频收藏</b>
+          <em>B站 / 抖音 / 小红书 / YouTube</em>
+        </button>
+
+        <button type="button" class="hp-new-card" data-jump="sticker">
+          <span class="hp-new-badge">NEW</span>
+          <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4 4 0 0 0 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg></span>
+          <b>表情包收藏</b>
+          <em>一键复制到剪贴板 · GIF 保留</em>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== ⑥ 专题推荐 ========== -->
+    <section class="hp-sec">
+      <div class="hp-sec-head">
+        <h2>专题推荐</h2>
+        <span class="hp-sec-sub">按场景打包，直接开用</span>
+      </div>
+
+      <div class="hp-topics">
+
+        <div class="hp-topic topic-study">
+          <div class="hp-topic-head">
+            <span class="hp-topic-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 9V3"/><path d="M6.5 14h11"/></svg>
+            </span>
+            <div>
+              <b>学习专区</b>
+              <em>学生党的随身工具箱</em>
+            </div>
+          </div>
+          <div class="hp-topic-tools">
+            <button type="button" data-jump="funcplot">函数图像</button>
+            <button type="button" data-jump="chemistry">化学方程式</button>
+            <button type="button" data-jump="periodictable">元素周期表</button>
+            <button type="button" data-jump="physicsformula">物理公式</button>
+            <button type="button" data-jump="equationsolve">解方程组</button>
+            <button type="button" data-jump="poetryrecite">古诗词默写</button>
+          </div>
+        </div>
+
+        <div class="hp-topic topic-life">
+          <div class="hp-topic-head">
+            <span class="hp-topic-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg>
+            </span>
+            <div>
+              <b>健康生活</b>
+              <em>从记录到管理一站搞定</em>
+            </div>
+          </div>
+          <div class="hp-topic-tools">
+            <button type="button" data-jump="health">健康管理</button>
+            <button type="button" data-jump="exercise">运动记录</button>
+            <button type="button" data-jump="hydration">饮水量</button>
+            <button type="button" data-jump="fasting">轻断食</button>
+            <button type="button" data-jump="firstaid">急救速查</button>
+            <button type="button" data-jump="meditation">冥想练习</button>
+          </div>
+        </div>
+
+        <div class="hp-topic topic-create">
+          <div class="hp-topic-head">
+            <span class="hp-topic-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            </span>
+            <div>
+              <b>创作工坊</b>
+              <em>小说 · 剧本 · 长图</em>
+            </div>
+          </div>
+          <div class="hp-topic-tools">
+            <button type="button" data-jump="novelassistant">小说助手</button>
+            <button type="button" data-jump="relgraph">角色关系图</button>
+            <button type="button" data-jump="canvas">畅想画布</button>
+            <button type="button" data-jump="tablefill">表格填入器</button>
+            <button type="button" data-jump="textanalysis">文章分析</button>
+            <button type="button" data-jump="notes">灵感速记</button>
+          </div>
+        </div>
+
+        <div class="hp-topic topic-utility">
+          <div class="hp-topic-head">
+            <span class="hp-topic-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <div>
+              <b>效率工具</b>
+              <em>日常琐事一把梭</em>
+            </div>
+          </div>
+          <div class="hp-topic-tools">
+            <button type="button" data-jump="qrcode">二维码</button>
+            <button type="button" data-jump="imagecompress">图片工具</button>
+            <button type="button" data-jump="json">JSON</button>
+            <button type="button" data-jump="cron">Cron</button>
+            <button type="button" data-jump="luckywheel">幸运转盘</button>
+            <button type="button" data-jump="reactiontest">反应速度</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== ⑦ 为什么选择岁窦 ========== -->
+    <section class="hp-sec">
+      <div class="hp-sec-head">
+        <h2>为什么选择岁窦工具箱</h2>
+      </div>
+
+      <div class="hp-why">
+        <div class="hp-why-card">
+          <span class="hp-why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <b>纯本地运行</b>
+          <p>所有工具都在浏览器里跑，数据不会离开你的设备。</p>
+        </div>
+
+        <div class="hp-why-card">
+          <span class="hp-why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M4 12h16M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+          </span>
+          <b>零数据上传</b>
+          <p>不记录、不上传、不追踪，AI 相关能力除外（需主动调用）。</p>
+        </div>
+
+        <div class="hp-why-card">
+          <span class="hp-why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </span>
+          <b>打开即用</b>
+          <p>无需注册，本地模式直接上手；登录后可开启云端同步与 AI。</p>
+        </div>
+
+        <div class="hp-why-card">
+          <span class="hp-why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          </span>
+          <b>可导出可备份</b>
+          <p>JSON / CSV / PNG / Word 全支持，数据随时带走。</p>
         </div>
       </div>
     </section>
 
-    <!-- ========== ② 编者的话 ========== -->
-    <section class="snap-section" data-snap-title="编者的话">
-      <div class="snap-head">
-        <span class="snap-head-num">02</span>
-        <span class="snap-head-name">编者的话</span>
+    <!-- ========== ⑧ 编者的话 ========== -->
+    <section class="hp-sec">
+      <div class="hp-sec-head">
+        <h2>编者的话</h2>
       </div>
 
-      <div class="snap-inner">
-        <details class="notice-box" id="editorNotice" open>
-          <summary class="notice-summary">
-            <span class="notice-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 11l18-8v18L3 13v-2z"/>
-                <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
-              </svg>
-            </span>
-            <span class="notice-text">
-              <b>编者的话</b>
-              <i>岁窦工作室 · V4.1 活力版 · 点击展开 / 收起</i>
-            </span>
-            <span class="notice-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9l6 6 6-6"/>
-              </svg>
-            </span>
-          </summary>
-                    <div class="notice-body">
-            <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。V4.1 活力版在 V4.0 的基础上继续打磨，全站以蜂蜜黄为主色，配合暖棕与阳光橙点缀，整体明亮温暖、元气满满。</p>
+      <details class="hp-note" open>
+        <summary>
+          <span class="hp-note-title">岁窦工作室 · V4.2 </span>
+          <span class="hp-note-hint">点击展开 / 收起</span>
+          <svg class="hp-note-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+
+          <div class="notice-body">
+            <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。V4.2 活力版在 V4.1 的基础上继续打磨：首页彻底重构，搜索系统升级为独立搜索页，帮助文档和编者的话也同步更新。</p>
 
             <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
 
-            <p>V4.1 活力版最大的变化是新增了「学科与学习」大类，把函数图像绘制、化学方程式、元素周期表、物理公式计算、解方程组、矩阵运算、电路计算、遗传计算、人体系统速查、中国历史简表、世界历史简表、地球模块、中国地理、古诗词默写、细胞结构速查等 15 款学习类工具统一收纳，并拆分为「数理化」「文史地理」两个子分类。函数图像绘制支持多函数叠加、标题与标签拖拽缩放、坐标轴范围自定义；化学方程式支持自动配平、电荷守恒、反应类型判断、气体 / 沉淀 / 水判定、摩尔质量计算；地球模块三合一（公转与四季 / 自转 / 板块构造 / 经纬度距离）；中国地理三合一（地形 / 河流湖泊 / 行政区划）。古诗词默写内置 160 首经典诗词，支持名句填空、朗读与诗词库浏览。</p>
+            <p>V4.2 最大的变化是首页。原来的「整屏翻页」改为常规单页滚动布局，新增推广轮播、专题推荐、最新上架、「为什么选择岁窦」等板块，浏览体验更像一个完整的工具箱主页，而不是一张张幻灯片。首页 Hero 区域保留了大标题、快捷胶囊和数据统计，同时腾出更多空间给内容板块，让用户在首屏就能看到推广、热门和最新。</p>
+
+            <p>搜索系统是 V4.2 的第二大变化。顶部搜索框改为一颗「🔍 搜索」按钮，点击进入独立搜索页，不再有下拉遮挡的问题。搜索页支持<b>模糊搜索</b>（匹配名称、简介、关键词、分类）和<b>精确搜索</b>（只匹配工具名或 id）两种模式，内置 12 个热门搜索标签，结果列表关键词自动高亮。空状态时搜索框+热门标签居中显示，开始输入后自动靠顶，符合直觉。当关键词只命中一款工具时，会直接跳到该工具页，省去中转。</p>
+
+            <p>应用中心保持 V4.1 的 C 方案（吸顶搜索栏 + 分类胶囊 + 我的常用 + 全部应用拼音分组），学科与学习、健康与运动、创作工坊等九大分类工具不变。「学科与学习」大类依旧收纳函数图像绘制、化学方程式、元素周期表、物理公式计算、解方程组、矩阵运算、电路计算、遗传计算、人体系统速查、中国历史简表、世界历史简表、地球模块、中国地理、古诗词默写、细胞结构速查等 15 款学习工具，并拆分为「数理化」「文史地理」两个子分类。</p>
 
             <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
 
             <div class="notice-sign">
               <p>2026 年 10 月</p>
-              <p>岁窦工具箱 · V4.1 活力版</p>
+              <p>岁窦工具箱 · V4.2 活力版</p>
             </div>
           </div>
-        </details>
-      </div>
-
-      <div class="snap-cue" aria-hidden="true">
-        <span>继续向下</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
+      </details>
     </section>
 
-    <!-- ========== ③ 热门应用 ========== -->
-    <section class="snap-section" data-snap-title="热门应用">
-      <div class="snap-head">
-        <span class="snap-head-num">03</span>
-        <span class="snap-head-name">热门应用</span>
+    <!-- ========== ⑨ 页脚 ========== -->
+    <footer class="hp-footer">
+      <div class="hp-footer-logo">岁窦工具箱</div>
+      <div class="hp-footer-sub">V4.2 活力版 · 2026© 岁窦制作</div>
+
+      <div class="hp-footer-links">
+        <button type="button" data-jump="apps">应用中心</button>
+        <button type="button" data-jump="help">帮助中心</button>
+        <button type="button" data-jump="settings">设置</button>
       </div>
 
-      <div class="snap-inner">
-        <div class="hot-header">
-          <div class="hot-header-left">
-            <h2 class="section-title" id="hotTitle">热门应用</h2>
-            <p class="hot-header-desc">精选最常用的工具，覆盖健康、创作、计算、学习多个方向。点击卡片直接进入，也可以在顶部搜索框里输入关键词。</p>
-          </div>
-          <button class="hot-header-more" data-snap-jump="apps">查看全部 60+ 款 →</button>
-        </div>
-
-        <div class="hot-body">
-          <div class="hot-main">
-
-            <div class="hot-grid" id="hotSection">
-
-              <div class="hot-card" data-target="funcplot">
-                <span class="hot-badge">新增</span>
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M6.5 17c1.6-6.4 3.1-9.5 4.6-9.5s2.4 8.5 3.9 8.5 1.8-4.2 3.5-5.5"/></svg></div>
-                <div><h3>函数图像绘制</h3><p>多函数叠加，标题与标签可拖拽缩放，导出高清 PNG</p></div>
-              </div>
-
-              <div class="hot-card" data-target="chemistry">
-                <span class="hot-badge">新增</span>
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10"/><path d="M8 3v7l-4 8a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-4-8V3"/><circle cx="9.5" cy="15" r="1"/><circle cx="14" cy="16" r="1"/></svg></div>
-                <div><h3>化学方程式</h3><p>自动配平 + 电荷守恒 + 反应类型 + 摩尔质量计算</p></div>
-              </div>
-
-              <div class="hot-card" data-target="earthmodule">
-                <span class="hot-badge">新增</span>
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div>
-                <div><h3>地球模块</h3><p>公转与四季 + 自转 + 板块构造 + 经纬度距离</p></div>
-              </div>
-
-              <div class="hot-card" data-target="chinahistory">
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
-                <div><h3>中国历史简表</h3><p>38 个时期时间轴 + 朝代对比 + 历史地图 + 历代帝王</p></div>
-              </div>
-
-              <div class="hot-card" data-target="poetryrecite">
-                <span class="hot-badge">新增</span>
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h5"/></svg></div>
-                <div><h3>古诗词默写</h3><p>160 首内置诗词，名句填空、朗读、诗词库</p></div>
-              </div>
-
-              <div class="hot-card" data-target="health">
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></div>
-                <div><h3>健康管理</h3><p>BMI + 鞋码 + 睡眠 + 生命体征，AI 辅助分析</p></div>
-              </div>
-
-              <div class="hot-card" data-target="tablefill">
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
-                <div><h3>表格填入器</h3><p>五档填图表格，支持多图、跨格移动，导出高清 PNG</p></div>
-              </div>
-
-              <div class="hot-card" data-target="whitenoise">
-                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></div>
-                <div><h3>白噪音助眠</h3><p>雨声 / 海浪 / 壁炉 / 咖啡厅，纯 Web Audio 合成</p></div>
-              </div>
-
-            </div>
-
-            <div class="hot-footer">
-              <span>以上是常用工具，还有更多在应用中心等你发现 →</span>
-              <button class="btn small" data-snap-jump="apps">打开全部工具</button>
-            </div>
-
-            <div class="hot-cats" id="hotCats">
-              <button class="hot-cat" type="button" data-cat="健康与运动">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></span>
-                <b>健康与运动</b>
-                <span>7 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="创作工坊">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
-                <b>创作工坊</b>
-                <span>10 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="收藏与记录">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
-                <b>收藏与记录</b>
-                <span>6 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="计算与数据">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></span>
-                <b>计算与数据</b>
-                <span>9 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="时间与生活">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-                <b>时间与生活</b>
-                <span>5 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="AI 与开发">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></span>
-                <b>AI 与开发</b>
-                <span>4 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="实用工具">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-                <b>实用工具</b>
-                <span>8 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="数理化">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 9V3"/><path d="M6.5 14h11"/></svg></span>
-                <b>数理化</b>
-                <span>8 款</span>
-              </button>
-              <button class="hot-cat" type="button" data-cat="文史地理">
-                <span class="hot-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l-6 3v12l6-3 6 3 6-3V3l-6 3z"/><path d="M9 3v12M15 6v12"/></svg></span>
-                <b>文史地理</b>
-                <span>7 款</span>
-              </button>
-            </div>
-
-            <div class="hot-tips">
-              <div class="hot-tip">
-                <span class="hot-tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg></span>
-                <div><b>及时导出</b><p>数据存浏览器本地，清理会丢，重要内容用完就导出。</p></div>
-              </div>
-              <div class="hot-tip">
-                <span class="hot-tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-                <div><b>纯本地运行</b><p>使用这些工具都在你浏览器里完成，不上传服务器。</p></div>
-              </div>
-              <div class="hot-tip">
-                <span class="hot-tip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></span>
-                <div><b>搜索更快</b><p>顶部搜索框输入关键词即可直达任意工具，不用翻分类。</p></div>
-              </div>
-            </div>
-
-          </div>
-          <aside class="hot-side-stats">
-            <div class="hot-side-stat"><b>60+</b><span>款工具</span></div>
-            <div class="hot-side-stat"><b>9</b><span>大分类</span></div>
-            <div class="hot-side-stat"><b>V4.1</b><span>活力版</span></div>
-            <div class="hot-side-stat"><b>0</b><span>数据上传</span></div>
-        </div>
+      <div class="hp-footer-contact">
+        微博 @岁窦工作室 · q13052830801@163.com
       </div>
-
-      <div class="snap-cue" aria-hidden="true">
-        <span>继续向下</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-    </section>
-
-    <!-- ========== ④ 页脚 ========== -->
-    <section class="snap-section" data-snap-title="页脚">
-      <div class="snap-inner snap-footer-wrap">
-        <div class="snap-footer">
-          <div class="snap-footer-logo">岁窦工具箱</div>
-          <div class="snap-footer-version">V4.1 活力版</div>
-          <div class="snap-footer-copy">2026© 岁窦制作 · 本地优先 · 纯前端实现</div>
-
-          <div class="snap-footer-links">
-            <a data-snap-jump="apps">应用中心</a>
-            <a data-snap-jump="help">帮助中心</a>
-            <a data-snap-jump="settings">设置</a>
-          </div>
-
-          <div class="snap-footer-info">
-            <div><b>60+</b><span>款工具</span></div>
-            <div><b>9</b><span>大分类</span></div>
-            <div><b>0</b><span>数据上传</span></div>
-            <div><b>100%</b><span>本地运行</span></div>
-          </div>
-
-          <div class="snap-footer-contact">
-            <span>微博 @岁窦工作室</span>
-            <span>·</span>
-            <span>q13052830801@163.com</span>
-          </div>
-
-          <div class="snap-footer-slogan">本地优先 · 打开即用 · 不登录也能用</div>
-        </div>
-      </div>
-    </section>
+    </footer>
 
   </div>
-
-  <!-- 静态指示器 -->
-  <nav class="snap-indicator show" id="snapIndicatorHome" aria-label="首页导航">
-    <button type="button" class="snap-dot active" data-snap-index="0">
-      <span class="snap-dot-dot"></span><span class="snap-dot-text">欢迎</span>
-    </button>
-    <button type="button" class="snap-dot" data-snap-index="1">
-      <span class="snap-dot-dot"></span><span class="snap-dot-text">编者的话</span>
-    </button>
-    <button type="button" class="snap-dot" data-snap-index="2">
-      <span class="snap-dot-dot"></span><span class="snap-dot-text">热门应用</span>
-    </button>
-    <button type="button" class="snap-dot" data-snap-index="3">
-      <span class="snap-dot-dot"></span><span class="snap-dot-text">页脚</span>
-    </button>
-  </nav>
 </section>
 
+<!-- ==================== 搜索 ==================== -->
+<section id="page-search" class="page">
+  <div class="sp">
+
+    <div class="sp-bar">
+      <div class="sp-bar-inner">
+        <svg class="sp-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        <input id="searchPageInput" type="search" placeholder="搜索工具，如 BMI、二维码、函数图像…" autocomplete="off">
+        <button type="button" class="sp-bar-clear" id="searchPageClear" hidden aria-label="清空">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="sp-bar-modes">
+        <button type="button" class="sp-mode active" data-mode="fuzzy">模糊搜索</button>
+        <button type="button" class="sp-mode" data-mode="exact">精确搜索</button>
+      </div>
+    </div>
+
+    <div class="sp-hot" id="spHot">
+      <div class="sp-hot-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 5 4 9a4 4 0 1 1-8 0c0-4 4-9 4-9z"/><path d="M8 15a4 4 0 0 0 4 4"/></svg>
+        热门搜索
+      </div>
+      <div class="sp-hot-tags" id="spHotTags"></div>
+    </div>
+
+    <div class="sp-result-head" id="spResultHead" style="display:none;">
+      <span id="spResultText"></span>
+    </div>
+
+    <div class="sp-results" id="spResults"></div>
+
+    <p class="sp-empty" id="spEmpty" style="display:none;">
+      <span>😶</span>
+      没有找到匹配的工具<br>换个关键词试试吧～
+    </p>
+
+  </div>
+</section>
 <!-- ==================== 应用中心 ==================== -->
 <section id="page-apps" class="page">
-  <h2 class="page-title"><span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>应用中心</h2>
-  <p class="page-desc">全部工具都在这里。先按分类查找，或直接在下方「全部应用」中挑选；顶部搜索框也可以快速定位。</p>
-
-  <h2 class="section-title" id="appsCategoryTitle">分类</h2>
-  <div class="category-grid" id="categorySection">
-
-    <div class="category-card">
-      <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></span><h3>健康与运动</h3></div>
-      <ul class="cat-list">
-        <li data-target="health">健康管理</li>
-        <li data-target="exercise">运动记录</li>
-        <li data-target="heatindex">体感温度</li>
-        <li data-target="meditation">冥想练习</li>
-        <li data-target="hydration">饮水量计算</li>
-        <li data-target="whitenoise">白噪音助眠</li>
-        <li data-target="allergy">食物过敏清单</li>
-      </ul>
-    </div>
-
-    <div class="category-card">
-      <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span><h3>创作工坊</h3></div>
-      <ul class="cat-list">
-        <li data-target="novel">小说助手</li>
-        <li data-target="textanalysis">文章分析</li>
-        <li data-target="people">人物印象表</li>
-        <li data-target="timeline">时间线</li>
-        <li data-target="namer">起名器</li>
-        <li data-target="dialogue">对话生成器</li>
-        <li data-target="random">随机灵感</li>
-        <li data-target="notes">灵感速记</li>
-        <li data-target="canvas">畅想画布</li>
-        <li data-target="relgraph">角色关系图</li>
-      </ul>
-    </div>
-
-    <div class="category-card">
-      <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span><h3>收藏与记录</h3></div>
-      <ul class="cat-list">
-        <li data-target="songs">歌曲收藏</li>
-        <li data-target="places">地点收藏</li>
-        <li data-target="media">影视收藏</li>
-        <li data-target="recipe">菜谱收藏</li>
-        <li data-target="tablefill">表格填入器</li>
-        <li data-target="novelcollect">小说收藏</li>
-      </ul>
-    </div>
-
-    <div class="category-card">
-      <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span><h3>计算与数据</h3></div>
-      <ul class="cat-list">
-        <li data-target="calc">数学计算</li>
-        <li data-target="chart">常见统计图生成</li>
-        <li data-target="exchange">汇率换算</li>
-        <li data-target="fuel">油耗计算</li>
-        <li data-target="color">颜色转换</li>
-        <li data-target="datecalc">日期计算</li>
-        <li data-target="loan">贷款计算器</li>
-        <li data-target="discount">折扣计算器</li>
-      </ul>
-    </div>
-
-    <div class="category-card">
-      <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>时间与生活</h3></div>
-      <ul class="cat-list">
-        <li data-target="calendar">我的日历</li>
-        <li data-target="clock">时钟工具</li>
-        <li data-target="ledger">我的记账本</li>
-        <li data-target="timestamp">时间戳转换</li>
-        <li data-target="worldclock">世界时钟</li>
-        <li data-target="zodiac">生肖星座</li>
-      </ul>
-    </div>
-
-    <div class="category-card">
-      <div class="category-head"><span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></span><h3>AI 与开发</h3></div>
-      <ul class="cat-list">
-        <li data-target="ai">AI 助手</li>
-        <li data-target="code">代码编辑器</li>
-        <li data-target="json">JSON 格式化</li>
-        <li data-target="cron">Cron 表达式</li>
-      </ul>
-    </div>
-
-    <div class="category-card">
-      <div class="category-head">
-        <span class="cat-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-          </svg>
-        </span>
-        <h3>实用工具</h3>
-      </div>
-      <ul class="cat-list">
-        <li data-target="imagecompress">图片压缩</li>
-        <li data-target="qrcode">二维码生成</li>
-        <li data-target="luckywheel">幸运转盘</li>
-        <li data-target="coinflip">抛硬币模拟器</li>
-        <li data-target="reactiontest">反应速度测试</li>
-        <li data-target="carlist">中国车牌一览表</li>
-        <li data-target="countdown">倒数日</li>
-        <li data-target="decibel">分贝仪</li>
-      </ul>
-    </div>
-
-<div class="category-card">
-  <div class="category-head">
-    <span class="cat-icon">
+  <h2 class="page-title">
+    <span class="page-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 9V3"/>
-        <path d="M6.5 14h11"/>
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
       </svg>
     </span>
-    <h3>数理化</h3>
-  </div>
-  <ul class="cat-list">
-    <li data-target="funcplot">函数图像绘制</li>
-    <li data-target="chemistry">化学方程式</li>
-    <li data-target="periodictable">元素周期表</li>
-    <li data-target="physicsformula">物理公式计算</li>
-    <li data-target="equationsolve">解方程组</li>
-    <li data-target="matrixcalc">矩阵运算</li>
-    <li data-target="circuitcalc">电路计算</li>
-    <li data-target="geneticscalc">遗传计算</li>
-  </ul>
-</div>
+    应用中心
+  </h2>
+  <p class="page-desc">全部工具都在这里。搜索、分类、收藏，一站导航。</p>
 
-<div class="category-card">
-  <div class="category-head">
-    <span class="cat-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 3l-6 3v12l6-3 6 3 6-3V3l-6 3z"/>
-        <path d="M9 3v12M15 6v12"/>
-      </svg>
-    </span>
-    <h3>人文与自然</h3>
-  </div>
-    <ul class="cat-list">
-      <li data-target="chinahistory">中国历史简表</li>
-      <li data-target="worldhistory">世界历史简表</li>
-      <li data-target="earthmodule">地球模块</li>
-      <li data-target="chinageo">中国地理</li>
-      <li data-target="poetryrecite">古诗词默写</li>
-      <li data-target="bodysystems">人体系统速查</li>
-      <li data-target="cellstructure">细胞结构速查</li>
-    </ul>
-</div>
-
+  <div class="apps-search-wrap" id="appsSearchWrap">
+    <svg class="apps-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/>
+    </svg>
+    <input id="appsSearch" type="search" placeholder="搜索工具，如：记账、CPR、函数图像…" autocomplete="off">
+    <button id="appsSearchClear" type="button" hidden aria-label="清空搜索">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
   </div>
 
-  <h2 class="section-title" id="allTitle" style="margin-top:34px;">全部应用</h2>
-  <div class="tools-grid" id="allApps">
-    <!-- 由 main.js 按拼音重排 -->
-    <div class="tool-card" data-target="health" data-keywords="健康 管理 BMI 鞋码 脚长 尺码 睡眠 心率 血糖 血压 身体 体检 分析 曲线">
-      <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M9 10h2l1-2 1 4 1-2h2"/></svg></div>
-      <h3>健康管理</h3><p>BMI + 鞋码 + 睡眠记录 + 生命体征（心率 / 血糖 / 血压）+ AI 分析</p>
+  <div id="appsBannerWrap">
+    <div class="apps-banner" id="appsBanner">
+      <div class="apps-banner-track" id="appsBannerTrack"></div>
+      <div class="apps-banner-dots" id="appsBannerDots"></div>
+      <button class="apps-banner-close" id="appsBannerClose" type="button" aria-label="关闭公告">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
     </div>
-    <div class="tool-card" data-target="exercise"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg></div><h3>运动记录</h3><p>计划 / 记录运动，AI 估算热量，支持文字 + 图片，导出 Word / PNG</p></div>
-    <div class="tool-card" data-target="heatindex"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="5"/></svg></div><h3>体感温度与运动风险</h3><p>结合温湿度风速计算体感温度，评估户外运动风险与防护建议</p></div>
-    <div class="tool-card" data-target="meditation"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg></div><h3>冥想练习</h3><p>4-7-8 / 箱式呼吸等多种节奏，圆形跟随放大缩小，附提示音</p></div>
-    <div class="tool-card" data-target="hydration"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5S5 10.5 5 15a7 7 0 0 0 14 0c0-4.5-7-12.5-7-12.5z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg></div><h3>饮水量计算</h3><p>按体重、活动量、气温估算每日建议饮水量，含分时段参考</p></div>
-    <div class="tool-card" data-target="whitenoise"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></div><h3>白噪音助眠</h3><p>雨声 / 海浪 / 壁炉 / 咖啡厅 / 森林 / 风扇 / 火车，纯 Web Audio 合成</p></div>
-    <div class="tool-card" data-target="allergy"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h3>食物过敏清单</h3><p>记录过敏原、严重程度与应对方法，支持分类筛选、搜索与导出</p></div>
-
-    <div class="tool-card" data-target="novel"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>小说助手</h3><p>封面、章节分类、字数统计图、导出 TXT / HTML</p></div>
-    <div class="tool-card" data-target="textanalysis"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div><h3>文章分析</h3><p>字数统计 + 词频分析，写作与阅读的好帮手</p></div>
-    <div class="tool-card" data-target="people"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div><h3>人物印象表</h3><p>记录人物信息与印象，支持上传图片和 AI 生成小传</p></div>
-    <div class="tool-card" data-target="timeline"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg></div><h3>时间线</h3><p>按时间顺序记录事件，支持分类与排序</p></div>
-    <div class="tool-card" data-target="namer"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg></div><h3>起名器</h3><p>输入类型与风格，AI 一次给出 10 个候选名</p></div>
-    <div class="tool-card" data-target="dialogue"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></div><h3>对话生成器</h3><p>输入两个角色和场景，AI 模拟对话</p></div>
-    <div class="tool-card" data-target="random"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg></div><h3>随机灵感</h3><p>卡文时随机给点灵感，支持 AI 批量生成</p></div>
-    <div class="tool-card" data-target="notes"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></div><h3>灵感速记</h3><p>随手记灵感碎片，支持标签与全文搜索</p></div>
-    <div class="tool-card" data-target="canvas"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><h3>畅想画布</h3><p>自由白板随手涂鸦，多种颜色与粗细，可擦除、撤销并导出 PNG</p></div>
-    <div class="tool-card" data-target="imagecompress"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M21 15l-5-5-4 4-3-3-4 4"/><circle cx="9" cy="9" r="2"/></svg></div><h3>图片压缩</h3><p>本地压缩图片体积，可调画质与目标大小，原图/压缩后并排对比</p></div>
-    <div class="tool-card" data-target="relgraph"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.6 7.6L11 15M15.4 7.6L13 15M9 6h6"/></svg></div><h3>角色关系图</h3><p>拖拽式人物关系网，支持自定义角色与关系，可导出高清 PNG</p></div>
-
-    <div class="tool-card" data-target="songs"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3>歌曲收藏</h3><p>收录歌曲信息与歌词，一键跳转四大平台查找音源</p></div>
-    <div class="tool-card" data-target="places"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>地点收藏</h3><p>收藏去过的或想去的地点，支持图片、价格与百度百科直达</p></div>
-    <div class="tool-card" data-target="media"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16"/><path d="M2 9h5M2 15h5M17 9h5M17 15h5"/></svg></div><h3>影视收藏</h3><p>收藏影视作品，可导出追剧信息文档与图片，支持 AI 生成简介</p></div>
-    <div class="tool-card" data-target="recipe"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>菜谱收藏</h3><p>记录家常菜、甜点的食材与做法</p></div>
-    <div class="tool-card" data-target="tablefill"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div><h3>表格填入器</h3><p>把图片填入分档表格，支持多图、跨格移动，导出为高清 PNG</p></div>
-    <div class="tool-card" data-target="novelcollect"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h5"/></svg></div><h3>小说收藏</h3><p>记录读过的书，书名、作者、阅读进度、评分与短评，支持筛选与导出</p></div>
-
-    <div class="tool-card" data-target="calc"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></div><h3>数学计算</h3><p>计算器（普通 / 专家模式）与单位换算两大模块</p></div>
-    <div class="tool-card" data-target="chart"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><h3>常见统计图生成</h3><p>输入数据一键生成柱状图、折线图与饼图</p></div>
-    <div class="tool-card" data-target="qrcode"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3M21 14v7h-7M17 17h.01"/></svg></div><h3>二维码生成</h3><p>文本 / 网址 / 电话 / WiFi 生成二维码，支持 Logo、参数调节，导出 PNG 与 SVG</p></div>
-    <div class="tool-card" data-target="exchange"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8l4 4-4 4"/></svg></div><h3>汇率换算</h3><p>常用货币互转，内置参考汇率，支持联网更新实时汇率</p></div>
-    <div class="tool-card" data-target="fuel"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h12V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v18z"/><path d="M3 8h12"/><path d="M15 10h2a2 2 0 0 1 2 2v7a2 2 0 0 0 4 0v-9l-3-3"/><path d="M6 12h6v6H6z"/></svg></div><h3>油耗计算</h3><p>记录加油台账，自动计算百公里油耗、每公里花费与累计里程</p></div>
-    <div class="tool-card" data-target="color"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="16.5" r="2.5"/><path d="M12 22a10 10 0 1 1 0-20 8 8 0 0 0 0 16h1a2 2 0 0 1 0 4z"/></svg></div><h3>颜色转换</h3><p>HEX / RGB / HSL / CMYK 四种格式实时互转，支持滑块调节与取色器</p></div>
-    <div class="tool-card" data-target="datecalc"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>日期计算</h3><p>日期间隔、日期加减、工作日计算，三种模式一站搞定</p></div>
-    <div class="tool-card" data-target="loan"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M7 14h4M7 18h10"/><circle cx="17" cy="15" r="2"/></svg></div><h3>贷款计算器</h3><p>等额本息 / 等额本金两种还款方式，含月供、总利息与还款明细</p></div>
-    <div class="tool-card" data-target="discount"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg></div><h3>折扣计算器</h3><p>打折、满减、折上折、优惠券叠加，一键算出到手价与省了多少</p></div>
-    <div class="tool-card" data-target="periodictable"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><h3>元素周期表</h3><p>118 种元素完整数据：原子量、电子排布、熔点沸点密度、发现年，按类别上色，支持搜索</p></div>
-
-    <div class="tool-card" data-target="physicsformula"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M8 8l4 4-2 6"/><circle cx="15" cy="9" r="2"/></svg></div><h3>物理公式计算</h3><p>速度、密度、压强、功、功率、动能、欧姆定律、电功率等常用公式，输入已知量自动求未知量</p></div>
-
-    <div class="tool-card" data-target="equationsolve"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16M4 16h16"/><path d="M8 4v16M16 4v16"/></svg></div><h3>解方程组</h3><p>一元一次、一元二次、二元一次、三元一次方程组，给出解与判别式，附带步骤说明</p></div>
-
-    <div class="tool-card" data-target="chinahistory"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>中国历史简表</h3><p>从夏商周到新中国成立，各朝代起止年、都城、代表人物与大事，支持按朝代搜索</p></div>
-        <div class="tool-card" data-target="matrixcalc"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div><h3>矩阵运算</h3><p>加法、乘法、转置、行列式、逆矩阵，支持 1×1 到 5×5，含计算步骤</p></div>
-
-    <div class="tool-card" data-target="circuitcalc"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-4 4 8 2-4h6"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/></svg></div><h3>电路计算</h3><p>串并联电阻、欧姆定律、电功率、分压分流，一次算出多个量</p></div>
-
-    <div class="tool-card" data-target="geneticscalc"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4c4 4 4 12 0 16M20 4c-4 4-4 12 0 16M4 12h16"/></svg></div><h3>遗传计算</h3><p>孟德尔遗传、庞纳特方格、基因型与表现型比例、连锁与自由组合</p></div>
-
-    <div class="tool-card" data-target="bodysystems"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v9M7 11h10M9 21l3-5 3 5"/></svg></div><h3>人体系统速查</h3><p>运动、消化、呼吸、循环、泌尿、神经、内分泌、生殖八大系统</p></div>
-        <div class="tool-card" data-target="earthmodule"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><h3>地球模块</h3><p>地球公转与四季、世界板块构造、经纬度距离计算，三合一</p></div>
-    <div class="tool-card" data-target="worldhistory"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div><h3>世界历史简表</h3><p>古埃及到当代，主要文明、帝国、事件时间轴，含君主与大事记</p></div>
-
-    <div class="tool-card" data-target="poetryrecite"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h5"/></svg></div><h3>古诗词默写</h3><p>上下句填空、按朝代或作者筛选、诗词朗读、名句赏析</p></div>
-
-    <div class="tool-card" data-target="cellstructure"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div><h3>细胞结构速查</h3><p>动物 / 植物 / 原核细胞结构对比，细胞器功能，可点击图示查看</p></div>
-    <div class="tool-card" data-target="chinageo"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l-6 3v12l6-3 6 3 6-3V3l-6 3z"/><path d="M9 3v12M15 6v12"/></svg></div><h3>中国地理</h3><p>中国地形、河流湖泊、34 个省级行政区，三合一速查</p></div>
-    <div class="tool-card" data-target="funcplot"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M6.5 17c1.6-6.4 3.1-9.5 4.6-9.5s2.4 8.5 3.9 8.5 1.8-4.2 3.5-5.5"/></svg></div><h3>函数图像绘制</h3><p>输入一个或多个函数表达式，自动生成图像。坐标范围、刻度、箭头、颜色可自定义，标题与函数标签可拖拽缩放，支持导出高清 PNG</p></div>
-    <div class="tool-card" data-target="chemistry"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10"/><path d="M8 3v7l-4 8a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-4-8V3"/><circle cx="9.5" cy="15" r="1"/><circle cx="14" cy="16" r="1"/></svg></div><h3>化学方程式</h3><p>输入化学方程式自动配平，附原子守恒验证与常见方程式参考，支持导出 PNG</p></div>
-
-    <div class="tool-card" data-target="calendar"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>我的日历</h3><p>在日历里安排每日计划，支持增删改与导出图片</p></div>
-    <div class="tool-card" data-target="clock"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>时钟工具</h3><p>倒计时（1 秒 - 20 小时，结束振动）与计时器</p></div>
-    <div class="tool-card" data-target="ledger"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M2 9h20"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></div><h3>我的记账本</h3><p>记录每一笔消费，多币种支持，自动汇总本月支出</p></div>
-    <div class="tool-card" data-target="timestamp"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div><h3>时间戳转换</h3><p>Unix 时间戳与日期互转，支持秒/毫秒识别、多格式、多时区、时间差</p></div>
-    <div class="tool-card" data-target="worldclock"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18M3 12h18M4.5 6.5h15M4.5 17.5h15"/></svg></div><h3>世界时钟</h3><p>多城市时间并排对比，支持添加常用城市与查看时差</p></div>
-    <div class="tool-card" data-target="zodiac"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9L21 11l-5.5 4.2L17.5 22 12 18.2 6.5 22l2-6.8L3 11l6.6-2.1z"/></svg></div><h3>生肖星座</h3><p>输入出生日期，一键查询生肖与星座，附性格、幸运色与幸运数字</p></div>
-
-    <div class="tool-card" data-target="ai"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><h3>AI 助手</h3><p>由 DeepSeek 驱动的通用 AI 聊天</p></div>
-    <div class="tool-card" data-target="code"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></svg></div><h3>代码编辑器</h3><p>JavaScript 实时运行预览，Markdown 实时渲染，支持 AI 解释代码</p></div>
-    <div class="tool-card" data-target="json"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2"/><circle cx="12" cy="12" r="1"/></svg></div><h3>JSON 格式化</h3><p>格式化 / 压缩 / 转义，语法错误定位到行列，纯本地运行</p></div>
-    <div class="tool-card" data-target="cron"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M3 3l3 3M21 3l-3 3"/></svg></div><h3>Cron 表达式</h3><p>可视化选择秒 / 分 / 时 / 日 / 月 / 周，实时生成并解释 Cron 表达式</p></div>
-
-    <div class="tool-card" data-target="luckywheel"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="1.5"/></svg></div><h3>幸运转盘</h3><p>自定义选项与主题，一键旋转，结果自动记录</p></div>
-    <div class="tool-card" data-target="coinflip"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h6M9 12h6M9 14.5h3"/></svg></div><h3>抛硬币模拟器</h3><p>单次 3D 翻转，批量最多 10000 次，统计正反占比与连续记录</p></div>
-    <div class="tool-card" data-target="reactiontest"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>反应速度测试</h3><p>变绿立即点击，6 次取平均，7 档评级与历史记录</p></div>
-    <div class="tool-card" data-target="carlist"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h2M11 10h2M15 10h2M7 14h10"/></svg></div><h3>中国车牌一览表</h3><p>按大区浏览省市车牌代码，支持省份 / 城市 / 代码搜索</p></div>
-    <div class="tool-card" data-target="countdown"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg></div><h3>倒数日</h3><p>内置常见节日，实时显示距下一个节日的天数，可查 2024-2036 年日期</p></div>
-    <div class="tool-card" data-target="decibel"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 6v12M19 6v12M8 9v6M16 9v6"/></svg></div><h3>分贝仪</h3><p>用麦克风实时测量环境噪音，显示分贝值、噪音等级与最大 / 最小 / 平均值</p></div>
   </div>
-  <p id="noResult">没有找到相关工具，换个关键词试试吧～</p>
+
+  <div class="apps-cats-wrap" id="appsCatsWrap">
+    <div class="apps-cats" id="appsCats"></div>
+  </div>
+
+  <div class="apps-favs-wrap" id="appsFavsWrap">
+    <div class="apps-section-head">
+      <span>我的常用</span>
+      <span class="apps-section-hint" id="appsFavsHint">点击 ☆ 收藏，使用 3 次自动加入</span>
+    </div>
+    <div class="apps-favs-scroll">
+      <div class="apps-favs" id="appsFavs"></div>
+    </div>
+    <p class="apps-favs-empty" id="appsFavsEmpty" style="display:none;">还没有常用工具。<br>点击任意工具卡右上角的 ☆ 收藏，或使用 3 次后会自动出现在这里。</p>
+  </div>
+
+  <div class="apps-all-wrap" id="appsAllWrap"></div>
+
+  <p class="empty" id="appsNoResult" style="display:none;">没有找到相关工具，换个关键词试试吧～</p>
 </section>
 
   <!-- ==================== 帮助中心 ==================== -->
@@ -1734,7 +1782,7 @@ html, body { overflow-x: hidden !important; }
     </span>
     帮助中心
   </h2>
-  <p class="page-desc">V4.1 活力版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
+  <p class="page-desc">V4.2 活力版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
 
   <div class="help-layout">
     <div class="help-content">
@@ -1790,26 +1838,30 @@ html, body { overflow-x: hidden !important; }
         </h3>
         <div class="help-step">
           <span class="help-step-num">1</span>
-          <div class="help-step-body"><b>先逛一圈首页</b>首页采用整屏翻页布局，共四屏：欢迎、编者的话、热门应用、页脚。右侧竖排导航显示当前章节，鼠标滚轮 / 触屏滑动 / 方向键都能翻屏，点小圆点可直接跳转。首页「热门应用」是最常用的 8 个工具，新用户建议先从这里入手。</div>
+          <div class="help-step-body"><b>先逛一圈首页</b>首页采用常规单页滚动布局，从上到下依次是：Hero 区（大标题 + 数据统计）、推广轮播、热门工具、最新上架、专题推荐、「为什么选择岁窦工具箱」、编者的话、页脚。推广轮播会自动切换，鼠标悬停暂停，支持左右箭头与圆点手动切换。首页 Hero 右侧显示工具总数、分类数、本地运行比例与数据上传量。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">2</span>
-          <div class="help-step-body"><b>从应用中心挑选工具</b>点击顶部导航「应用」进入应用中心，按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具 / 数理化 / 文史地理」九大分类浏览，也可以在「全部应用」里按拼音首字母查找。顶部搜索框输入「BMI」「记账」「二维码」等关键词可实时过滤。</div>
+          <div class="help-step-body"><b>从应用中心挑选工具</b>点击顶部导航「应用」进入应用中心，按「健康与运动 / 创作工坊 / 收藏与记录 / 数理化 / 人文与自然 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具」九大分类浏览，也可以在「全部应用」里按拼音首字母查找。支持「我的常用」收藏，工具用满 3 次会自动加入。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">3</span>
-          <div class="help-step-body"><b>不登录也能直接使用</b>默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录、学科与学习等都不需要登录；仅 AI 相关能力需要登录。</div>
+          <div class="help-step-body"><b>用搜索快速找到工具</b>点击顶部导航栏的「🔍 搜索」按钮进入独立搜索页。搜索页支持两种模式：<strong>模糊搜索</strong>（匹配名称、简介、关键词、分类）与<strong>精确搜索</strong>（只匹配工具名或 id）。页面内置 12 个热门搜索标签，点击即搜；结果列表关键词会自动高亮；只命中一款工具时会直接跳到该工具页，省去中转。空状态时搜索框与热门标签整体居中，输入后自动靠顶。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">4</span>
-          <div class="help-step-body"><b>登录后开启云端同步与 AI</b>点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、AI 估算热量、AI 分析健康数据等能力也只对登录用户开放。</div>
+          <div class="help-step-body"><b>不登录也能直接使用</b>默认是「本地模式」，所有数据保存在你自己的浏览器里，不需要注册。文章分析、数学计算、统计图、时钟、画布、代码编辑器、小说助手、健康管理、运动记录、学科与学习等都不需要登录；仅 AI 相关能力需要登录。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">5</span>
-          <div class="help-step-body"><b>养成备份的习惯</b>在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。单工具页也各自带导出按钮（CSV / JSON / PNG / Word / TXT）。</div>
+          <div class="help-step-body"><b>登录后开启云端同步与 AI</b>点击右上角「登录」注册账号后，数据会同步到云端，换设备登录同一账号即可继续使用；AI 助手、AI 生成简介、AI 估算热量、AI 分析健康数据等能力也只对登录用户开放。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">6</span>
+          <div class="help-step-body"><b>养成备份的习惯</b>在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。单工具页也各自带导出按钮（CSV / JSON / PNG / Word / TXT）。</div>
+        </div>
+        <div class="help-step">
+          <span class="help-step-num">7</span>
           <div class="help-step-body"><b>健康数据仅供参考</b>「健康管理」与「运动记录」中的 BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，<b>不能替代专业医疗意见，如有不适请及时就医。</b></div>
         </div>
       </div>
@@ -1821,6 +1873,25 @@ html, body { overflow-x: hidden !important; }
           常见问题
         </h3>
 
+                <details class="faq-item" >
+          <summary>V4.2 活力版相比 V4.1 改了什么？</summary>
+          <div class="faq-body">
+            <p><b>V4.2 的核心是首页重构与搜索系统升级。</b></p>
+            <p><b>首页重构</b>：从「整屏翻页」改为常规单页滚动布局，新增推广轮播（4 张自动轮播）、最新上架、专题推荐、「为什么选择岁窦工具箱」等板块，让首页内容更丰富、浏览更顺畅，更接近一个完整的工具箱主页。</p>
+            <p><b>搜索系统升级</b>：顶部搜索框改为「🔍 搜索」按钮，点击进入独立搜索页，告别下拉面板遮挡问题。搜索页支持<b>模糊搜索</b>与<b>精确搜索</b>两种模式，内置 12 个热门搜索标签、关键词自动高亮、空状态居中显示；只命中一款工具时直接跳到该工具页。切换搜索模式即时生效，无需重新输入。</p>
+            <p><b>专题推荐</b>：按使用场景打包四组专题——学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口，一键直达。</p>
+            <p><b>帮助文档 &amp; 编者的话</b>：同步更新到 V4.2，覆盖首页重构、搜索升级等所有新变化。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>搜索用模糊还是精确？有什么区别？</summary>
+          <div class="faq-body">
+            <p><b>模糊搜索</b>（默认）：关键词命中工具的名称、简介、关键词、分类中任意一项即可，适合记不清工具全名时使用。</p>
+            <p><b>精确搜索</b>：关键词必须完全等于工具的名称或 id，用来快速定位某一款具体工具。</p>
+            <p>两种模式可以随时切换，切换后立即重新出结果，不需要重新输入。</p>
+          </div>
+        </details>
         <details class="faq-item" >
           <summary>V4.1 活力版相比 V4.0 改了什么？</summary>
           <div class="faq-body">
@@ -2002,6 +2073,14 @@ html, body { overflow-x: hidden !important; }
             <p>如果仍然异常，欢迎把浏览器版本和具体操作步骤反馈给我们。</p>
           </div>
         </details>
+
+        <details class="faq-item">
+          <summary>为什么点了搜索会直接跳到工具页？</summary>
+          <div class="faq-body">
+            <p>当搜索关键词只命中一款工具时，系统会直接跳到该工具页，省去中转。</p>
+            <p>命中多款或没有命中时，会停留在搜索页显示结果列表或空状态提示。你也可以手动切换为「精确搜索」，只匹配工具名或 id。</p>
+          </div>
+        </details>
       </div>
 
       <!-- 工具小贴士 -->
@@ -2067,6 +2146,9 @@ html, body { overflow-x: hidden !important; }
           <div class="help-tip"><b>中国车牌一览表</b>按七大地理大区浏览车牌代码，支持省份 / 城市 / 代码搜索。</div>
           <div class="help-tip"><b>倒数日</b>内置 10 种常见节日，实时显示距下一个节日的天数，可查 2024-2036 年日期。</div>
           <div class="help-tip"><b>分贝仪</b>用麦克风实时测量环境噪音，显示相对分贝值与噪音等级。所有处理本地完成，不会录制或上传任何音频。</div>
+          <div class="help-tip"><b>首页 · 推广轮播</b>首页自动轮播 4 张主题卡片，覆盖「学科与学习 / 急救知识速查 / 创作工坊 / 表情包收藏」。支持左右箭头、圆点切换、鼠标悬停暂停与触屏滑动。</div>
+          <div class="help-tip"><b>搜索页 · 模糊 / 精确</b>模糊搜索匹配名称、简介、关键词、分类；精确搜索只匹配工具名或 id。内置 12 个热门搜索标签、关键词高亮、空状态居中显示。</div>
+          <div class="help-tip"><b>首页 · 专题推荐</b>按场景打包四组专题：学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口。</div>
         </div>
       </div>
 
@@ -2076,12 +2158,6 @@ html, body { overflow-x: hidden !important; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
           快捷键速查
         </h3>
-        <div class="help-key-row">
-          <div class="help-key-label">首页翻页</div>
-          <div class="help-key-desc">
-            <span class="kbd">↓</span> / <span class="kbd">PageDown</span> 下一屏　·　<span class="kbd">↑</span> / <span class="kbd">PageUp</span> 上一屏　·　<span class="kbd">Home</span> 回到首屏　·　<span class="kbd">End</span> 跳到底部
-          </div>
-        </div>
         <div class="help-key-row">
           <div class="help-key-label">数学计算 · 计算器</div>
           <div class="help-key-desc">
@@ -2132,6 +2208,12 @@ html, body { overflow-x: hidden !important; }
             金额输入框中按 <span class="kbd">Enter</span> 直接换算
           </div>
         </div>
+        <div class="help-key-row">
+          <div class="help-key-label">搜索页</div>
+          <div class="help-key-desc">
+            输入框中按 <span class="kbd">Enter</span> 直接搜索
+          </div>
+        </div>
       </div>
 
       <!-- 数据与隐私 -->
@@ -2174,7 +2256,7 @@ html, body { overflow-x: hidden !important; }
         </div>
         <div class="help-info-row">
           <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-          <div class="help-info-body"><b>版本</b>：V4.1 活力版（2026.10）</div>
+          <div class="help-info-body"><b>版本</b>：V4.2 活力版（2026.10）</div>
         </div>
       </div>
 
@@ -2184,7 +2266,7 @@ html, body { overflow-x: hidden !important; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           下载帮助文档
         </h3>
-        <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V4.1 活力版。</p>
+        <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V4.2 活力版。</p>
         <div class="help-dl-actions">
           <button type="button" class="btn" data-help-dl="html">下载 HTML 帮助文档</button>
           <button type="button" class="btn ghost" data-help-dl="docx">下载 Word（docx）</button>
@@ -2255,11 +2337,11 @@ html, body { overflow-x: hidden !important; }
 
     <div class="version-line">
       <span class="version-label">当前版本</span>
-      <span class="version-val">V4.1 活力版（2026.10）</span>
+      <span class="version-val">V4.2 活力版（2026.10）</span>
     </div>
 
           <details class="sub" id="versionHistory" style="margin-top:18px;margin-bottom:0;">
-        <summary>查看完整版本更迭（V2.1 → V4.1）</summary>
+        <summary>查看完整版本更迭（V2.1 → V4.2）</summary>
         <div class="inner">
 
           <!-- 版本路径 -->
@@ -2285,8 +2367,56 @@ html, body { overflow-x: hidden !important; }
             <span class="version-label">V4.0</span>
             <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
             <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+            <span class="version-label">V4.1</span>
+            <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
+            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
             <span class="version-label">当前</span>
-            <span class="version-val">V4.1 活力版</span>
+            <span class="version-val">V4.2 活力版</span>
+          </div>
+
+                    <!-- ================= V4.2 活力版 ================= -->
+          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
+            V4.2 活力版 · 首页重构 + 搜索系统升级
+          </h3>
+
+          <div class="upgrade-grid" style="margin-bottom:26px;">
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">首页</span><b>首页彻底重构</b></div>
+              <p>从「整屏翻页」改为常规单页滚动布局，结构更清晰：Hero 区、推广轮播、热门工具、最新上架、专题推荐、卖点说明、编者的话、页脚，一屏到底，浏览更顺畅。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>推广轮播</b></div>
+              <p>首页新增 4 张自动轮播卡片，覆盖「学科与学习更新 / 急救知识速查 / 创作工坊 / 表情包收藏」四大主题。支持左右箭头、圆点切换、鼠标悬停暂停与触屏滑动。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>专题推荐</b></div>
+              <p>按使用场景打包四组专题：学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口，一键直达。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">新增</span><b>最新上架 & 卖点说明</b></div>
+              <p>首页新增「最新上架」区，集中展示 6 款新工具；另设「为什么选择岁窦工具箱」，用 4 张卡片讲清楚本地运行、零数据上传、打开即用、可导出可备份四大特点。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">搜索</span><b>搜索系统升级：顶部按钮 + 独立搜索页</b></div>
+              <p>顶部搜索框改为「🔍 搜索」按钮，点击进入独立搜索页。告别下拉面板遮挡问题，搜索空间更大、结果更清晰。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">搜索</span><b>模糊搜索 + 精确搜索双模式</b></div>
+              <p>搜索页支持两种模式：模糊搜索匹配名称、简介、关键词与分类；精确搜索只匹配工具名或 id，用来精准定位某一款工具。切换即时生效，无需重新输入。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">搜索</span><b>热门搜索 + 关键词高亮</b></div>
+              <p>搜索页内置 12 个热门搜索标签（BMI、二维码、记账、函数图像等），点击即搜；结果列表中关键词会自动高亮，一眼看出命中位置。空状态时搜索框+热门标签整体居中，输入后自动靠顶。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">优化</span><b>一键直达工具</b></div>
+              <p>搜索关键词只命中一款工具时，直接跳到该工具页，省去中转；命中多款时进入搜索页展示结果列表，点击任意结果直接进入对应工具。</p>
+            </div>
+            <div class="upgrade-item">
+              <div class="up-head"><span class="up-badge">同步</span><b>帮助文档 & 编者的话更新</b></div>
+              <p>帮助文档、编者的话、版本更迭全部同步到 V4.2，覆盖首页重构、搜索升级、专题推荐等所有新变化。帮助文档仍支持 HTML / Markdown / Word 三种格式导出。</p>
+            </div>
           </div>
 
           <!-- ================= V4.1 活力版 ================= -->
@@ -2756,6 +2886,10 @@ html, body { overflow-x: hidden !important; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13l-3-3"/><path d="M21 17H8l3 3"/><path d="M3 7l4 4"/><path d="M21 17l-4-4"/></svg>
       单位换算
     </button>
+    <button class="ta-subtab" data-mc="qinqi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15 20c0-2 1.5-3.5 4-3.5s3 1 3 3"/></svg>
+      亲戚计算器
+    </button>
   </div>
 
   <div class="ta-subpage active" data-mc-page="calc">
@@ -2833,6 +2967,63 @@ html, body { overflow-x: hidden !important; }
         <div class="mc-res-label">换算结果</div>
         <div class="mc-res-value">—</div>
       </div>
+    </div>
+  </div>
+    <div class="ta-subpage" data-mc-page="qinqi">
+    <div class="panel">
+      <h3 class="panel-head">亲戚称呼计算</h3>
+      <p class="tip" style="margin-top:-6px;">从「我」出发，逐级点击关系，自动算出对应的亲戚称谓。支持父母、配偶、子女、兄弟姐妹等常见关系。</p>
+
+      <div class="qq-result-box">
+        <div class="qq-result-label">称 呼</div>
+        <div class="qq-result-value" id="qqResult">我</div>
+        <div class="qq-chain" id="qqChain">从「我」开始</div>
+      </div>
+
+      <div class="qq-quick">
+        <span class="qq-quick-label">快速选择：</span>
+        <button class="mini-btn" data-qq-quick="f,f" type="button">爷爷</button>
+        <button class="mini-btn" data-qq-quick="f,m" type="button">奶奶</button>
+        <button class="mini-btn" data-qq-quick="m,f" type="button">外公</button>
+        <button class="mini-btn" data-qq-quick="m,m" type="button">外婆</button>
+        <button class="mini-btn" data-qq-quick="f,ob" type="button">伯父</button>
+        <button class="mini-btn" data-qq-quick="f,lb" type="button">叔叔</button>
+        <button class="mini-btn" data-qq-quick="f,os" type="button">姑妈</button>
+        <button class="mini-btn" data-qq-quick="m,ob" type="button">舅舅</button>
+        <button class="mini-btn" data-qq-quick="m,os" type="button">姨妈</button>
+        <button class="mini-btn" data-qq-quick="ob,s" type="button">侄子</button>
+        <button class="mini-btn" data-qq-quick="os,s" type="button">外甥</button>
+        <button class="mini-btn" data-qq-quick="s,s" type="button">孙子</button>
+        <button class="mini-btn" data-qq-quick="f,ob,s" type="button">堂兄弟</button>
+        <button class="mini-btn" data-qq-quick="m,ob,s" type="button">表兄弟</button>
+      </div>
+
+      <div class="qq-buttons" id="qqButtons">
+        <button class="qq-btn" data-qq="f" type="button">父</button>
+        <button class="qq-btn" data-qq="m" type="button">母</button>
+        <button class="qq-btn" data-qq="h" type="button">夫</button>
+        <button class="qq-btn" data-qq="w" type="button">妻</button>
+        <button class="qq-btn" data-qq="s" type="button">子</button>
+        <button class="qq-btn" data-qq="d" type="button">女</button>
+        <button class="qq-btn" data-qq="ob" type="button">兄</button>
+        <button class="qq-btn" data-qq="lb" type="button">弟</button>
+        <button class="qq-btn" data-qq="os" type="button">姐</button>
+        <button class="qq-btn" data-qq="ls" type="button">妹</button>
+      </div>
+
+      <div class="qq-actions">
+        <button class="btn ghost" id="qqUndo" type="button">撤销</button>
+        <button class="btn ghost" id="qqClear" type="button">清空</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">说明</h3>
+      <p class="tip" style="margin-bottom:0;">
+        · 支持常见亲属关系，覆盖直系、旁系、姻亲三大类。<br>
+        · 部分称谓因地区差异略有不同，以普通话通用称谓为准。<br>
+        · 关系链最多支持 6 级，超出后可能无法给出标准称谓。
+      </p>
     </div>
   </div>
 </section>
@@ -3218,6 +3409,312 @@ html, body { overflow-x: hidden !important; }
     <div class="field"><span>短评</span><textarea id="nceReview" rows="3"></textarea></div>
     <button class="btn" id="ncEditSave" type="button">保存修改</button>
     <button class="btn danger small" id="ncEditDelete" type="button" style="margin-left:8px;">删除</button>
+  </div>
+</section>
+
+<!-- 视频收藏 -->
+<section id="page-videocollect" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="M10 8l6 4-6 4V8z"/>
+      </svg>
+    </span>
+    视频收藏
+  </h2>
+  <p class="page-desc">收藏 B站、抖音、快手、小红书、微博、YouTube、腾讯视频、爱奇艺、优酷、西瓜视频等平台的视频作品。记录博主、发布日期、类型、时长、评分与备注；不填链接时自动用「博主 + 标题」去对应平台搜索。纯本地运行，登录后自动同步云端。</p>
+
+  <div class="ld-summary" style="margin-bottom:18px;">
+    <div class="ld-sum-card"><div class="ld-sum-label">总收藏</div><div class="ld-sum-value" id="vcStatTotal">0</div></div>
+    <div class="ld-sum-card green"><div class="ld-sum-label">已看完</div><div class="ld-sum-value" id="vcStatDone">0</div></div>
+    <div class="ld-sum-card orange"><div class="ld-sum-label">在看</div><div class="ld-sum-value" id="vcStatReading">0</div></div>
+    <div class="ld-sum-card gray"><div class="ld-sum-label">平均评分</div><div class="ld-sum-value" id="vcStatAvg">—</div></div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head" id="vcFormHead">添加视频</h3>
+    <div class="form-grid">
+      <label class="field"><span>视频标题 *</span><input type="text" id="vcTitle" placeholder="如：【干货】30 分钟看懂前端工程化"></label>
+      <label class="field"><span>博主 / UP 主 *</span><input type="text" id="vcAuthor" placeholder="如：影视飓风"></label>
+      <label class="field"><span>平台</span>
+        <select id="vcPlatform">
+          <option value="bilibili">B站</option>
+          <option value="douyin">抖音</option>
+          <option value="kuaishou">快手</option>
+          <option value="xiaohongshu">小红书</option>
+          <option value="weibo">微博</option>
+          <option value="youtube">YouTube</option>
+          <option value="qq">腾讯视频</option>
+          <option value="iqiyi">爱奇艺</option>
+          <option value="youku">优酷</option>
+          <option value="ixigua">西瓜视频</option>
+          <option value="other">其他 / 未指定</option>
+        </select>
+      </label>
+      <label class="field"><span>发布日期</span><input type="text" id="vcPublishDate" placeholder="如：2026-03-14"></label>
+      <label class="field"><span>视频类型</span>
+        <select id="vcType">
+          <option value="知识科普">知识科普</option>
+          <option value="游戏">游戏</option>
+          <option value="音乐">音乐</option>
+          <option value="影视解说">影视解说</option>
+          <option value="美食">美食</option>
+          <option value="生活vlog">生活 vlog</option>
+          <option value="教程">教程</option>
+          <option value="科技数码">科技数码</option>
+          <option value="搞笑">搞笑</option>
+          <option value="体育">体育</option>
+          <option value="其他">其他</option>
+        </select>
+      </label>
+      <label class="field"><span>自定义类型（选填）</span><input type="text" id="vcTypeCustom" placeholder="填写后优先"></label>
+      <label class="field"><span>时长</span><input type="text" id="vcDuration" placeholder="如：12:34"></label>
+      <label class="field"><span>观看状态</span>
+        <select id="vcStatus">
+          <option value="想看">想看</option>
+          <option value="在看" selected>在看</option>
+          <option value="已看完">已看完</option>
+        </select>
+      </label>
+      <label class="field"><span>评分（1 - 5 星）</span>
+        <select id="vcRating">
+          <option value="0">未评分</option>
+          <option value="5">★★★★★ 力荐</option>
+          <option value="4">★★★★☆ 推荐</option>
+          <option value="3">★★★☆☆ 还行</option>
+          <option value="2">★★☆☆☆ 一般</option>
+          <option value="1">★☆☆☆☆ 不推荐</option>
+        </select>
+      </label>
+      <label class="field"><span>合集 / 系列（选填）</span><input type="text" id="vcSeries" placeholder="如：前端系列 第 3 集"></label>
+    </div>
+    <div class="field"><span>标签（逗号分隔）</span><input type="text" id="vcTags" placeholder="如：编程,教程,前端"></div>
+    <div class="field"><span>主链接（选填，不填则自动用「博主 + 标题」搜索）</span><input type="text" id="vcMainLink" placeholder="https://..."></div>
+
+    <details class="sub">
+      <summary>补充平台链接（选填，不填则自动搜索）</summary>
+      <div class="inner">
+        <div class="form-grid">
+          <label class="field"><span>B站链接</span><input type="text" id="vcLinkBilibili"></label>
+          <label class="field"><span>抖音链接</span><input type="text" id="vcLinkDouyin"></label>
+          <label class="field"><span>快手链接</span><input type="text" id="vcLinkKuaishou"></label>
+          <label class="field"><span>小红书链接</span><input type="text" id="vcLinkXiaohongshu"></label>
+          <label class="field"><span>微博链接</span><input type="text" id="vcLinkWeibo"></label>
+          <label class="field"><span>YouTube 链接</span><input type="text" id="vcLinkYoutube"></label>
+          <label class="field"><span>腾讯视频链接</span><input type="text" id="vcLinkQq"></label>
+          <label class="field"><span>爱奇艺链接</span><input type="text" id="vcLinkIqiyi"></label>
+          <label class="field"><span>优酷链接</span><input type="text" id="vcLinkYouku"></label>
+          <label class="field"><span>西瓜视频链接</span><input type="text" id="vcLinkIxigua"></label>
+        </div>
+      </div>
+    </details>
+
+    <div class="field"><span>简介 / 备注</span><textarea id="vcDesc" rows="3" placeholder="为什么收藏？印象最深的一句话？"></textarea></div>
+    <div class="field">
+      <span>封面图（选填，会自动压缩到 800px 以内）</span>
+      <div class="upload-row">
+        <input type="file" id="vcCover" accept="image/*">
+        <div class="preview" id="vcCoverPreview" style="width:120px;height:70px;">未选择</div>
+      </div>
+    </div>
+    <label class="hyd-special-check">
+      <input type="checkbox" id="vcWatchLater">
+      <span>标记为「稍后再看」</span>
+    </label>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+      <button class="ai-btn" id="vcAiBtn" style="margin-right:0;">AI 生成简介</button>
+      <button class="btn" id="vcAdd">＋ 添加视频</button>
+      <button class="btn ghost" id="vcReset">重置表单</button>
+      <button class="btn ghost small" id="vcCancelEdit" style="display:none;">取消编辑</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="vc-toolbar">
+      <input type="search" id="vcSearch" class="vc-search" placeholder="搜索标题、博主、标签或备注…" autocomplete="off">
+      <select id="vcFilterPlatform" class="vc-select">
+        <option value="">全部平台</option>
+        <option value="bilibili">B站</option>
+        <option value="douyin">抖音</option>
+        <option value="kuaishou">快手</option>
+        <option value="xiaohongshu">小红书</option>
+        <option value="weibo">微博</option>
+        <option value="youtube">YouTube</option>
+        <option value="qq">腾讯视频</option>
+        <option value="iqiyi">爱奇艺</option>
+        <option value="youku">优酷</option>
+        <option value="ixigua">西瓜视频</option>
+        <option value="other">其他</option>
+      </select>
+      <select id="vcFilterType" class="vc-select">
+        <option value="">全部类型</option>
+        <option value="知识科普">知识科普</option>
+        <option value="游戏">游戏</option>
+        <option value="音乐">音乐</option>
+        <option value="影视解说">影视解说</option>
+        <option value="美食">美食</option>
+        <option value="生活vlog">生活 vlog</option>
+        <option value="教程">教程</option>
+        <option value="科技数码">科技数码</option>
+        <option value="搞笑">搞笑</option>
+        <option value="体育">体育</option>
+        <option value="其他">其他</option>
+      </select>
+      <select id="vcFilterStatus" class="vc-select">
+        <option value="">全部状态</option>
+        <option value="想看">想看</option>
+        <option value="在看">在看</option>
+        <option value="已看完">已看完</option>
+      </select>
+      <select id="vcSort" class="vc-select">
+        <option value="recent">最近添加</option>
+        <option value="publish">按发布日期</option>
+        <option value="rating">评分最高</option>
+        <option value="title">标题排序</option>
+      </select>
+    </div>
+
+    <div class="list-head" style="margin-top:14px;">
+      <h2>收藏列表（<span id="vcCount">0</span>）</h2>
+      <div class="head-actions">
+        <button class="btn small" id="vcExportJson">导出 JSON</button>
+        <button class="btn ghost small" id="vcExportCsv">导出 CSV</button>
+        <button class="btn ghost small" id="vcExportDoc">导出 Word</button>
+        <button class="btn ghost small" id="vcExportImg">导出图片</button>
+        <button class="btn ghost small" id="vcClearAll">清空全部</button>
+      </div>
+    </div>
+
+    <div class="vc-list" id="vcList"></div>
+    <p class="empty" id="vcEmpty" style="display:none;">还没有视频收藏，先在上方添加一条吧～</p>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · 主链接与补充平台链接都留空时，会自动用「博主 + 标题」跳转对应平台搜索结果。<br>
+      · 封面图自动压缩到 800px 以内，节省本地存储。<br>
+      · 数据存浏览器本地；登录后会自动同步到云端。<br>
+      · 所有跳转均为外部链接，本工具不抓取、不下载、不缓存任何视频内容。
+    </p>
+  </div>
+</section>
+
+<!-- 表情包收藏 -->
+<section id="page-sticker" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M8.5 14.5a4 4 0 0 0 7 0"/>
+        <path d="M9 9.5h.01M15 9.5h.01"/>
+      </svg>
+    </span>
+    表情包收藏
+  </h2>
+  <p class="page-desc">收藏、分类、一键复制表情包。支持拖拽批量上传，静态图自动压缩到 480px 以内，GIF 保留动图；点击缩略图即可复制到剪贴板，直接粘到聊天窗口。纯本地运行，登录后自动同步云端。</p>
+
+  <div class="ld-summary" style="margin-bottom:18px;">
+    <div class="ld-sum-card"><div class="ld-sum-label">总数</div><div class="ld-sum-value" id="stStatTotal">0</div></div>
+    <div class="ld-sum-card green"><div class="ld-sum-label">常用</div><div class="ld-sum-value" id="stStatFav">0</div></div>
+    <div class="ld-sum-card orange"><div class="ld-sum-label">今日新增</div><div class="ld-sum-value" id="stStatToday">0</div></div>
+    <div class="ld-sum-card gray"><div class="ld-sum-label">累计使用</div><div class="ld-sum-value" id="stStatUse">0</div></div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">添加表情包</h3>
+    <label class="sticker-drop" for="stickerFileInput" id="stickerDrop">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="3"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <path d="M21 15l-5-5-4 4-3-3-6 6"/>
+      </svg>
+      <p><b>点击选择表情包</b> 或直接拖拽到此处</p>
+      <p style="font-size:12px;margin-top:2px;">支持 PNG / JPG / WebP / GIF，可一次选多张</p>
+    </label>
+    <input type="file" id="stickerFileInput" accept="image/*" multiple style="display:none;">
+
+    <div id="stickerPendingWrap" style="display:none;">
+      <div class="sticker-pending-head">
+        <span>待添加（<b id="stickerPendingCount">0</b> 张）</span>
+        <button class="mini-btn" id="stickerPendingClear" type="button">清空待添加</button>
+      </div>
+      <div class="sticker-pending-grid" id="stickerPendingGrid"></div>
+
+      <h4 class="sticker-form-title">统一设置（应用到本次全部）</h4>
+      <div class="form-grid">
+        <label class="field"><span>分类</span>
+          <select id="stickerBatchCategory">
+            <option value="搞笑">搞笑</option>
+            <option value="可爱">可爱</option>
+            <option value="日常">日常</option>
+            <option value="怼人">怼人</option>
+            <option value="赞同">赞同</option>
+            <option value="无奈">无奈</option>
+            <option value="惊讶">惊讶</option>
+            <option value="猫狗">猫狗</option>
+            <option value="工作">工作</option>
+            <option value="其他" selected>其他</option>
+          </select>
+        </label>
+        <label class="field"><span>标签（逗号分隔）</span><input type="text" id="stickerBatchTags" placeholder="如：熊猫头,无语,常用"></label>
+        <label class="field"><span>来源</span><input type="text" id="stickerBatchSource" placeholder="如：某群 / 微博 / 朋友发的"></label>
+      </div>
+      <button class="btn" id="stickerBatchAdd" type="button">＋ 全部添加到收藏</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="sticker-toolbar">
+      <input type="search" id="stickerSearch" class="sticker-search" placeholder="搜索名称、标签、来源或备注…" autocomplete="off">
+      <select id="stickerFilterCategory" class="sticker-select">
+        <option value="">全部分类</option>
+        <option value="搞笑">搞笑</option>
+        <option value="可爱">可爱</option>
+        <option value="日常">日常</option>
+        <option value="怼人">怼人</option>
+        <option value="赞同">赞同</option>
+        <option value="无奈">无奈</option>
+        <option value="惊讶">惊讶</option>
+        <option value="猫狗">猫狗</option>
+        <option value="工作">工作</option>
+        <option value="其他">其他</option>
+      </select>
+      <select id="stickerFilterFav" class="sticker-select">
+        <option value="">全部</option>
+        <option value="fav">只看常用</option>
+      </select>
+      <select id="stickerSort" class="sticker-select">
+        <option value="recent">最近添加</option>
+        <option value="used">最近使用</option>
+        <option value="count">使用最多</option>
+        <option value="name">按名称</option>
+      </select>
+    </div>
+
+    <div class="list-head" style="margin-top:14px;">
+      <h2>表情包（<span id="stickerCount">0</span>）</h2>
+      <div class="head-actions">
+        <button class="btn ghost small" id="stickerExportJson">导出 JSON</button>
+        <button class="btn ghost small" id="stickerClearAll">清空全部</button>
+      </div>
+    </div>
+
+    <div class="sticker-grid" id="stickerGrid"></div>
+    <p class="empty" id="stickerEmpty" style="display:none;">还没有表情包，先在上方添加几张吧～</p>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · <b>复制到剪贴板</b>：点击缩略图右下角的「复制」按钮，或在大图预览里点「复制图片」，即可直接粘贴到微信 / QQ / 钉钉等聊天窗口。<br>
+      · 复制功能需要浏览器支持 <code>ClipboardItem</code>（Chrome / Edge 90+、Safari 13.1+）。不支持时会提示你右键图片手动复制。<br>
+      · <b>静态图</b>会自动压缩到 480px 以内，保留透明通道；<b>GIF 动图</b>不压缩，但单张建议不超过 2MB。<br>
+      · 数据存浏览器本地（上限约 5MB），登录后自动同步云端。<br>
+      · 所有处理都在本地完成，图片不会上传到任何第三方服务器。
+    </p>
   </div>
 </section>
 
@@ -5990,71 +6487,511 @@ html, body { overflow-x: hidden !important; }
   </div>
 </section>
 
-<!-- 图片压缩 -->
+<!-- 图片工具 -->
 <section id="page-imagecompress" class="page">
   <h2 class="page-title">
     <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M21 15l-5-5-4 4-3-3-4 4"/><circle cx="9" cy="9" r="2"/></svg></span>
-    图片压缩
+    图片工具
   </h2>
-  <p class="page-desc">浏览器本地压缩图片体积，支持调节画质、目标大小，原图与压缩后并排预览对比。纯本地处理，图片不上传服务器。</p>
-  <div class="panel">
-    <label class="compress-upload-area" for="compressFileInput">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      <p><b>点击选择图片</b> 或拖拽到此处</p>
-      <p style="font-size:12px;margin-top:4px;">支持 JPG / PNG / WebP，单张处理</p>
-    </label>
-    <input type="file" id="compressFileInput" accept="image/*">
+  <p class="page-desc">图片压缩、拼图长图、去除背景，三个子工具一站搞定。纯本地处理，图片不上传服务器。</p>
+
+  <div class="ta-subtabs" id="itTabs">
+    <button class="ta-subtab active" data-it="compress" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M21 15l-5-5-4 4-3-3-4 4"/><circle cx="9" cy="9" r="2"/></svg>
+      图片压缩
+    </button>
+    <button class="ta-subtab" data-it="stitch" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1"/><rect x="4" y="14" width="16" height="7" rx="1"/><path d="M12 10v4"/></svg>
+      拼图（长图）
+    </button>
+    <button class="ta-subtab" data-it="bgremove" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5 5l14 14"/></svg>
+      去除背景
+    </button>
+    <button class="ta-subtab" data-it="watermark" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      图片加水印
+    </button>
   </div>
-  <div class="panel">
-    <h3 class="panel-head">压缩参数</h3>
-    <div class="compress-param-row">
-      <label class="field"><span>压缩质量</span>
-        <div class="compress-range-row">
-          <input type="range" id="compressQuality" min="1" max="100" value="80">
-          <span id="compressQualityVal">80%</span>
-        </div>
-      </label>
-      <label class="field"><span>目标文件大小（KB，选填）</span><input type="text" id="compressTargetSize"></label>
-      <label class="field"><span>输出格式</span>
-        <select id="compressFormat">
-          <option value="image/jpeg">JPEG（推荐）</option>
-          <option value="image/webp">WebP（体积更小）</option>
-          <option value="image/png">PNG（无损不推荐）</option>
-        </select>
-      </label>
-    </div>
-    <div class="row-between">
-      <span style="font-size:13px;color:var(--muted);">提示：PNG 透明图压缩效果有限；目标大小为近似值</span>
-      <button class="btn ghost small" id="compressResetBtn">重置参数</button>
-    </div>
-  </div>
-  <div class="compress-layout">
+
+  <!-- ========== 子页 1：图片压缩 ========== -->
+  <div class="ta-subpage active" data-it-page="compress">
     <div class="panel">
-      <div class="compress-preview-card">
-        <div class="compress-preview-title"><b>原图</b><span id="originalSize">—</span></div>
-        <div class="compress-img-box" id="originalBox"><span style="color:#b0b6c4;font-size:13px;">选择图片后显示</span></div>
-        <div class="compress-info-bar">
-          <span>尺寸：<b id="originalDim">—</b></span>
-          <span>格式：<b id="originalFormat">—</b></span>
+      <label class="compress-upload-area" for="compressFileInput">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><b>点击选择图片</b> 或拖拽到此处</p>
+        <p style="font-size:12px;margin-top:4px;">支持 JPG / PNG / WebP，单张处理</p>
+      </label>
+      <input type="file" id="compressFileInput" accept="image/*">
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">压缩参数</h3>
+      <div class="compress-param-row">
+        <label class="field"><span>压缩质量</span>
+          <div class="compress-range-row">
+            <input type="range" id="compressQuality" min="1" max="100" value="80">
+            <span id="compressQualityVal">80%</span>
+          </div>
+        </label>
+        <label class="field"><span>目标文件大小（KB，选填）</span><input type="text" id="compressTargetSize"></label>
+        <label class="field"><span>输出格式</span>
+          <select id="compressFormat">
+            <option value="image/jpeg">JPEG（推荐）</option>
+            <option value="image/webp">WebP（体积更小）</option>
+            <option value="image/png">PNG（无损不推荐）</option>
+          </select>
+        </label>
+      </div>
+      <div class="row-between">
+        <span style="font-size:13px;color:var(--muted);">提示：PNG 透明图压缩效果有限；目标大小为近似值</span>
+        <button class="btn ghost small" id="compressResetBtn">重置参数</button>
+      </div>
+    </div>
+
+    <div class="compress-layout">
+      <div class="panel">
+        <div class="compress-preview-card">
+          <div class="compress-preview-title"><b>原图</b><span id="originalSize">—</span></div>
+          <div class="compress-img-box" id="originalBox"><span style="color:#b0b6c4;font-size:13px;">选择图片后显示</span></div>
+          <div class="compress-info-bar">
+            <span>尺寸：<b id="originalDim">—</b></span>
+            <span>格式：<b id="originalFormat">—</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="compress-preview-card">
+          <div class="compress-preview-title"><b>压缩后</b><span id="compressedSize">—</span></div>
+          <div class="compress-img-box" id="compressedBox"><span style="color:#b0b6c4;font-size:13px;">压缩后显示</span></div>
+          <div class="compress-info-bar">
+            <span>尺寸：<b id="compressedDim">—</b></span>
+            <span class="compress-rate" id="compressRate">—</span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="panel">
-      <div class="compress-preview-card">
-        <div class="compress-preview-title"><b>压缩后</b><span id="compressedSize">—</span></div>
-        <div class="compress-img-box" id="compressedBox"><span style="color:#b0b6c4;font-size:13px;">压缩后显示</span></div>
-        <div class="compress-info-bar">
-          <span>尺寸：<b id="compressedDim">—</b></span>
-          <span class="compress-rate" id="compressRate">—</span>
-        </div>
+    <div class="panel" style="margin-top:16px;">
+      <div class="row-between" style="margin-top:0;">
+        <span style="font-size:13px;color:var(--muted);">压缩完成后点击下载保存到本地</span>
+        <button class="btn" id="compressDownloadBtn" disabled>下载压缩图片</button>
       </div>
     </div>
   </div>
-  <div class="panel" style="margin-top:16px;">
-    <div class="row-between" style="margin-top:0;">
-      <span style="font-size:13px;color:var(--muted);">压缩完成后点击下载保存到本地</span>
-      <button class="btn" id="compressDownloadBtn" disabled>下载压缩图片</button>
+
+  <!-- ========== 子页 2：拼图（长图） ========== -->
+  <div class="ta-subpage" data-it-page="stitch">
+    <div class="panel">
+      <h3 class="panel-head">选择图片</h3>
+      <label class="stitch-upload-area" for="stitchFileInput">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><b>点击选择多张图片</b> 或拖拽到此处</p>
+        <p style="font-size:12px;margin-top:4px;">按选择顺序从上到下拼接</p>
+      </label>
+      <input type="file" id="stitchFileInput" accept="image/*" multiple style="display:none;">
+      <div class="stitch-list" id="stitchList"></div>
+      <div class="head-actions" style="margin-top:10px;">
+        <button class="btn ghost small" id="stitchClear" type="button">清空图片</button>
+      </div>
     </div>
+
+    <div class="panel">
+      <h3 class="panel-head">拼接参数</h3>
+      <div class="rn-form">
+        <label class="field"><span>图片间距（px）</span><input type="text" id="stitchGap" value="0"></label>
+        <label class="field"><span>最大宽度（px，0=原宽）</span><input type="text" id="stitchMaxW" value="800"></label>
+        <label class="field"><span>背景色</span><input type="color" id="stitchBg" value="#ffffff" style="padding:4px;height:38px;"></label>
+      </div>
+      <div class="head-actions">
+        <button class="btn" id="stitchRun" type="button">生成长图</button>
+        <button class="btn ghost small" id="stitchDownload" type="button" disabled>下载 PNG</button>
+      </div>
+      <div class="mx-msg" id="stitchMsg"></div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">预览</h3>
+      <div class="stitch-preview" id="stitchPreview">
+        <span style="color:#b0b6c4;font-size:13px;">生成后显示预览</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 子页 3：去除背景 ========== -->
+  <div class="ta-subpage" data-it-page="bgremove">
+    <div class="panel">
+      <h3 class="panel-head">选择图片</h3>
+      <label class="stitch-upload-area" for="bgFileInput">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><b>点击选择图片</b> 或拖拽到此处</p>
+        <p style="font-size:12px;margin-top:4px;">背景越单一效果越好（纯色 / 简单背景）</p>
+      </label>
+      <input type="file" id="bgFileInput" accept="image/*" style="display:none;">
+    </div>
+
+    <div class="panel" id="bgControlPanel" style="display:none;">
+      <h3 class="panel-head">去背景设置</h3>
+      <div class="rn-form">
+        <label class="field">
+          <span>取样颜色 <span class="bg-color-preview" id="bgColorPreview"></span></span>
+          <input type="color" id="bgColorInput" value="#ffffff" style="padding:4px;height:38px;width:100%;">
+        </label>
+        <label class="field">
+          <span>容差：<b id="bgTolVal">30</b></span>
+          <input type="range" id="bgTolerance" min="0" max="100" value="30" style="width:100%;">
+        </label>
+        <label class="field">
+          <span>快捷操作</span>
+          <button class="mini-btn" id="bgAutoPick" type="button">自动取样四角</button>
+        </label>
+      </div>
+      <p class="tip" style="margin:6px 0 12px;">在图片上点击可重新取样背景色。容差越大，去除范围越广。</p>
+      <div class="head-actions">
+        <button class="btn" id="bgRun" type="button">应用</button>
+        <button class="btn ghost small" id="bgDownload" type="button" disabled>下载 PNG</button>
+        <button class="btn ghost small" id="bgReset" type="button">重置</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">预览</h3>
+      <div class="bg-canvas-wrap" id="bgCanvasWrap">
+        <canvas id="bgCanvas"></canvas>
+        <div class="bg-hint" id="bgHint" style="display:none;">点击图片取样背景色</div>
+      </div>
+    </div>
+  </div>
+    <!-- ========== 子页 4：图片加水印 ========== -->
+  <div class="ta-subpage" data-it-page="watermark">
+    <div class="panel">
+      <label class="compress-upload-area" for="wmFileInput">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><b>点击选择图片</b> 或拖拽到此处</p>
+        <p style="font-size:12px;margin-top:4px;">支持 JPG / PNG / WebP；GIF 会导出为静态图</p>
+      </label>
+      <input type="file" id="wmFileInput" accept="image/*" style="display:none;">
+      <div class="wm-file-info" id="wmFileInfo" style="display:none;"></div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">水印类型</h3>
+      <div class="wm-type-switch" id="wmTypeSwitch">
+        <button class="wm-type-btn active" data-wm-type="text" type="button">文字水印</button>
+        <button class="wm-type-btn" data-wm-type="image" type="button">图片水印</button>
+      </div>
+
+      <!-- 文字水印 -->
+      <div class="wm-type-panel active" data-wm-panel="text">
+        <div class="form-grid">
+          <label class="field"><span>文字内容</span><input type="text" id="wmText" value="@岁窦工具箱"></label>
+          <label class="field"><span>字号（px）</span><input type="text" id="wmTextSize" value="32"></label>
+          <label class="field"><span>颜色</span><input type="color" id="wmTextColor" value="#ffffff" style="padding:4px;height:38px;"></label>
+          <label class="field"><span>字体</span>
+            <select id="wmTextFont">
+              <option value="'PingFang SC','Microsoft YaHei',sans-serif">默认（黑体）</option>
+              <option value="'Songti SC','STSong',serif">宋体</option>
+              <option value="'Kaiti SC','KaiTi',serif">楷体</option>
+              <option value="Consolas,Menlo,monospace">等宽</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-grid">
+          <label class="field"><span>透明度：<b id="wmTextOpacityVal">80%</b></span>
+            <input type="range" id="wmTextOpacity" min="5" max="100" value="80">
+          </label>
+          <label class="field"><span>旋转：<b id="wmTextRotateVal">0°</b></span>
+            <input type="range" id="wmTextRotate" min="-90" max="90" value="0">
+          </label>
+        </div>
+        <div class="field">
+          <span>位置（9 宫格）</span>
+          <div class="wm-pos-grid" id="wmTextPos">
+            <button data-pos="tl" type="button">左上</button>
+            <button data-pos="tc" type="button">上中</button>
+            <button data-pos="tr" type="button">右上</button>
+            <button data-pos="ml" type="button">左中</button>
+            <button data-pos="mc" type="button" class="active">正中</button>
+            <button data-pos="mr" type="button">右中</button>
+            <button data-pos="bl" type="button">左下</button>
+            <button data-pos="bc" type="button">下中</button>
+            <button data-pos="br" type="button">右下</button>
+          </div>
+        </div>
+        <label class="wm-check"><input type="checkbox" id="wmTile"><span>平铺水印（铺满整张图）</span></label>
+      </div>
+
+      <!-- 图片水印 -->
+      <div class="wm-type-panel" data-wm-panel="image">
+        <div class="field">
+          <span>水印图片（建议 PNG 透明背景）</span>
+          <div class="upload-row">
+            <input type="file" id="wmImageInput" accept="image/*">
+            <div class="preview" id="wmImagePreview" style="width:72px;height:72px;">未选择</div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <label class="field"><span>大小：<b id="wmImageSizeVal">20%</b></span>
+            <input type="range" id="wmImageSize" min="3" max="80" value="20">
+          </label>
+          <label class="field"><span>透明度：<b id="wmImageOpacityVal">80%</b></span>
+            <input type="range" id="wmImageOpacity" min="5" max="100" value="80">
+          </label>
+        </div>
+        <div class="field">
+          <span>位置（9 宫格）</span>
+          <div class="wm-pos-grid" id="wmImagePos">
+            <button data-pos="tl" type="button">左上</button>
+            <button data-pos="tc" type="button">上中</button>
+            <button data-pos="tr" type="button">右上</button>
+            <button data-pos="ml" type="button">左中</button>
+            <button data-pos="mc" type="button">正中</button>
+            <button data-pos="mr" type="button">右中</button>
+            <button data-pos="bl" type="button">左下</button>
+            <button data-pos="bc" type="button">下中</button>
+            <button data-pos="br" type="button" class="active">右下</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">预览</h3>
+      <div class="wm-preview-wrap">
+        <canvas id="wmCanvas"></canvas>
+        <div class="wm-preview-empty" id="wmPreviewEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5-4 4-3-3-6 6"/>
+          </svg>
+          <p>上传图片后在这里预览</p>
+        </div>
+      </div>
+      <div class="row-between" style="margin-top:14px;">
+        <span style="font-size:13px;color:var(--muted);" id="wmHint">调整参数后实时预览</span>
+        <button class="btn" id="wmDownload" type="button" disabled>下载图片</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · <b>图片压缩</b>：可调画质与目标大小，原图 / 压缩后并排对比。<br>
+      · <b>拼图</b>：多张图片按顺序从上到下拼接成长图，可设间距、最大宽度、背景色。<br>
+      · <b>去除背景</b>：基于色差抠图，适合纯色 / 简单背景的图片，输出透明 PNG。<br>
+      · 三个子工具全部在浏览器本地运行，图片不会上传服务器。
+    </p>
+  </div>
+</section>
+<!-- 数理化实验 -->
+<section id="page-lab" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 9V3"/>
+        <path d="M6.5 14h11"/>
+        <circle cx="10" cy="17" r="0.8"/>
+        <circle cx="14" cy="18" r="0.8"/>
+      </svg>
+    </span>
+    数理化实验
+  </h2>
+  <p class="page-desc">高中数理化经典实验：现象演示 + 手册速查 + 交互仿真。30 个实验，覆盖数学、物理、化学三科。纯本地运行。</p>
+
+  <!-- 列表视图 -->
+  <div id="labListView">
+    <div class="panel">
+      <div class="lab-toolbar">
+        <input type="search" id="labSearch" class="lab-search" placeholder="搜索实验名称、标签、原理…" autocomplete="off">
+        <div class="ta-subtabs lab-subject-tabs" id="labSubjectTabs">
+          <button class="ta-subtab active" data-lab-subject="all" type="button">全部</button>
+          <button class="ta-subtab" data-lab-subject="math" type="button">数学</button>
+          <button class="ta-subtab" data-lab-subject="physics" type="button">物理</button>
+          <button class="ta-subtab" data-lab-subject="chemistry" type="button">化学</button>
+        </div>
+      </div>
+      <div class="lab-stats" id="labStats"></div>
+    </div>
+    <div class="lab-grid" id="labGrid"></div>
+    <p class="empty" id="labEmpty" style="display:none;">没有匹配的实验，换个关键词试试～</p>
+  </div>
+
+  <!-- 详情视图 -->
+  <div id="labDetailView" style="display:none;">
+    <button class="btn ghost small" id="labBack" type="button">← 返回实验列表</button>
+
+    <div class="lab-detail-layout">
+      <!-- 左栏：实验信息 -->
+      <div class="lab-info">
+        <div class="lab-info-head">
+          <h3 id="labDetailName"></h3>
+          <div class="lab-info-tags" id="labDetailTags"></div>
+        </div>
+
+        <div class="lab-section">
+          <div class="lab-section-title">实验目的</div>
+          <p id="labDetailPurpose"></p>
+        </div>
+        <div class="lab-section">
+          <div class="lab-section-title">实验原理</div>
+          <p id="labDetailPrinciple"></p>
+        </div>
+        <div class="lab-section">
+          <div class="lab-section-title">实验器材</div>
+          <p id="labDetailApparatus"></p>
+        </div>
+        <div class="lab-section">
+          <div class="lab-section-title">实验步骤</div>
+          <ol id="labDetailSteps" class="lab-steps"></ol>
+        </div>
+        <div class="lab-section">
+          <div class="lab-section-title">实验现象</div>
+          <p id="labDetailPhenomenon"></p>
+        </div>
+        <div class="lab-section">
+          <div class="lab-section-title">实验结论</div>
+          <p id="labDetailConclusion"></p>
+        </div>
+        <div class="lab-section lab-section-notice">
+          <div class="lab-section-title">注意事项</div>
+          <p id="labDetailNotice"></p>
+        </div>
+      </div>
+
+      <!-- 右栏：动画舞台 -->
+      <div class="lab-stage">
+        <div class="lab-canvas-wrap">
+          <canvas id="labCanvas" width="720" height="480"></canvas>
+        </div>
+        <div class="lab-controls">
+          <button class="btn small" id="labPlayBtn" type="button">▶ 播放</button>
+          <button class="btn ghost small" id="labResetBtn" type="button">重置</button>
+          <input type="range" id="labProgress" min="0" max="1000" value="0" step="1" class="lab-progress">
+          <span class="lab-time" id="labTime">0.0 / 0.0 s</span>
+        </div>
+        <div class="lab-params" id="labParams"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · 每个实验包含：目的、原理、器材、步骤、现象、结论、注意事项七部分。<br>
+      · 动画区域基于 Canvas 实时绘制，可播放 / 暂停 / 重置 / 拖动进度条。<br>
+      · 部分实验支持参数调节，拖动滑块实时看结果变化。<br>
+      · 所有实验在浏览器本地运行，不上传任何数据。
+    </p>
+  </div>
+</section>
+<!-- 生活可视化 -->
+<section id="page-visualization" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 3v4M12 17v4M3 12h4M17 12h4"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </span>
+    生活可视化
+  </h2>
+  <p class="page-desc">生物、地理、其它三大类的动画科普。血液循环、呼吸过程、水循环、月相、潮汐、声音波形、光的色散…… 共 18 个可视化，全部本地运行。</p>
+
+  <div id="vizListView">
+    <div class="panel">
+      <div class="viz-toolbar">
+        <input type="search" id="vizSearch" class="viz-search" placeholder="搜索名称、关键词、说明…" autocomplete="off">
+        <div class="ta-subtabs viz-cat-tabs" id="vizTabs">
+          <button class="ta-subtab active" data-viz-cat="all" type="button">全部</button>
+          <button class="ta-subtab" data-viz-cat="biology" type="button">生物</button>
+          <button class="ta-subtab" data-viz-cat="geography" type="button">地理</button>
+          <button class="ta-subtab" data-viz-cat="others" type="button">其它</button>
+        </div>
+      </div>
+      <div class="viz-stats" id="vizStats"></div>
+    </div>
+    <div class="viz-grid" id="vizGrid"></div>
+    <p class="empty" id="vizEmpty" style="display:none;">没有匹配的可视化，换个关键词试试～</p>
+  </div>
+
+  <div id="vizDetailView" style="display:none;">
+    <button class="btn ghost small" id="vizBack" type="button">← 返回列表</button>
+
+    <div class="viz-detail-layout">
+      <div class="viz-info">
+        <div class="viz-info-head">
+          <h3 id="vizDetailName"></h3>
+          <div class="viz-info-tags" id="vizDetailTags"></div>
+        </div>
+        <p class="viz-info-desc" id="vizDetailDesc"></p>
+        <div class="viz-info-more" id="vizDetailMore"></div>
+      </div>
+
+      <div class="viz-stage">
+        <div class="viz-canvas-wrap">
+          <canvas id="vizCanvas" width="720" height="480"></canvas>
+        </div>
+        <div class="viz-controls">
+          <button class="btn small" id="vizPlayBtn" type="button">▶ 播放</button>
+          <button class="btn ghost small" id="vizResetBtn" type="button">重置</button>
+          <input type="range" id="vizProgress" min="0" max="1000" value="0" step="1" class="viz-progress">
+          <span class="viz-time" id="vizTime">0.0 / 0.0 s</span>
+        </div>
+        <div class="viz-params" id="vizParams"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · 每个可视化都是一段动画演示，点击卡片查看。<br>
+      · 支持播放 / 暂停 / 重置 / 拖动进度条，部分可视化支持参数调节。<br>
+      · 所有动画基于 Canvas 实时绘制，纯本地运行，不上传任何数据。
+    </p>
+  </div>
+</section>
+<!-- 随机数 -->
+<section id="page-randomnumber" class="page">
+  <h2 class="page-title">
+    <span class="page-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg></span>
+    随机数
+  </h2>
+  <p class="page-desc">随机整数、随机小数、从列表抽取、随机洗牌，四种模式一站搞定。纯本地运行，不消耗任何网络或 AI 额度。</p>
+
+  <div class="ta-subtabs" id="rnTabs">
+    <button class="ta-subtab active" data-rn="int" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>
+      随机整数
+    </button>
+    <button class="ta-subtab" data-rn="float" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="3"/><path d="M10 12h8"/><circle cx="19" cy="12" r="1.5"/></svg>
+      随机小数
+    </button>
+    <button class="ta-subtab" data-rn="pick" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/><path d="M18 15l3 3-3 3"/></svg>
+      从列表抽取
+    </button>
+    <button class="ta-subtab" data-rn="shuffle" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      随机洗牌
+    </button>
+  </div>
+
+  <div id="rnContainer"></div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · <b>随机整数</b>：指定范围、生成个数、是否去重。<br>
+      · <b>随机小数</b>：指定范围、个数、小数位数（0-10）。<br>
+      · <b>从列表抽取</b>：粘贴候选列表（每行一个），抽取 N 项，可指定是否去重。<br>
+      · <b>随机洗牌</b>：粘贴列表，一键打乱顺序。<br>
+      · 使用浏览器内置 <code>Math.random</code>，适合抽奖、随机分组、测试数据生成等场景，<b>不适合密码学用途</b>。<br>
+      · 全部本地计算，不上传任何数据。
+    </p>
   </div>
 </section>
 
@@ -6630,6 +7567,550 @@ html, body { overflow-x: hidden !important; }
     </div>
   </div>
 </section>
+<!-- 轻断食时间表 -->
+<section id="page-fasting" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+        <path d="M18 4.5l1.5-1.5"/>
+      </svg>
+    </span>
+    轻断食时间表
+  </h2>
+  <p class="page-desc">设置进食窗口，实时显示当前状态与倒计时，每天打卡记录，附 30 天完成率统计。纯本地运行。</p>
+
+  <div class="fs-warning-banner">
+    ⚠️ 轻断食不适合所有人。<b>孕妇 / 哺乳期、未成年人、糖尿病、低血糖、进食障碍、慢性病患者</b>请先咨询医生，不要自行尝试。
+  </div>
+
+  <!-- 状态卡 -->
+  <div class="panel fs-status-panel">
+    <div class="fs-status-ring">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="fsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffd54f"/>
+            <stop offset="100%" stop-color="#b47c00"/>
+          </linearGradient>
+        </defs>
+        <circle class="fs-ring-bg" cx="100" cy="100" r="86"/>
+        <circle class="fs-ring-progress" id="fsRingProgress" cx="100" cy="100" r="86"
+                stroke-dasharray="540.35" stroke-dashoffset="540.35"/>
+      </svg>
+      <div class="fs-status-center">
+        <div class="fs-status-label" id="fsPhaseLabel">正在断食</div>
+        <div class="fs-status-timer" id="fsTimer">--:--:--</div>
+        <div class="fs-status-sub" id="fsPhaseSub">距下次进食</div>
+      </div>
+    </div>
+    <div class="fs-status-info">
+      <div class="fs-status-item">
+        <span>进食窗口</span>
+        <b id="fsEatingWindow">--:-- - --:--</b>
+      </div>
+      <div class="fs-status-item">
+        <span>断食窗口</span>
+        <b id="fsFastingWindow">--:-- - --:--</b>
+      </div>
+      <div class="fs-status-item">
+        <span>当前时间</span>
+        <b id="fsNow">--:--:--</b>
+      </div>
+      <div class="fs-status-item">
+        <span>进食时长 / 断食时长</span>
+        <b id="fsDurations">8h / 16h</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- 配置 -->
+  <div class="panel">
+    <h3 class="panel-head">设置</h3>
+    <div class="field">
+      <span>断食模式</span>
+      <div class="fs-modes" id="fsModes">
+        <button type="button" class="fs-mode-btn active" data-mode="16:8">16:8（8 小时进食）</button>
+        <button type="button" class="fs-mode-btn" data-mode="18:6">18:6（6 小时进食）</button>
+        <button type="button" class="fs-mode-btn" data-mode="20:4">20:4（4 小时进食）</button>
+        <button type="button" class="fs-mode-btn" data-mode="14:10">14:10（10 小时进食）</button>
+        <button type="button" class="fs-mode-btn" data-mode="custom">自定义</button>
+      </div>
+    </div>
+    <div class="form-grid">
+      <label class="field">
+        <span>进食开始时间</span>
+        <input type="time" id="fsEatingStart" value="12:00">
+      </label>
+      <label class="field" id="fsCustomField" style="display:none;">
+        <span>进食时长（小时，1-23）</span>
+        <input type="text" id="fsCustomHours" value="8" placeholder="如：8">
+      </label>
+    </div>
+    <p class="tip" style="margin:8px 0 0;">提示：进食窗口可以跨天，比如 20:00 开始进食 8 小时，就是 20:00 到次日 04:00。</p>
+  </div>
+
+  <!-- 时间轴 -->
+  <div class="panel">
+    <h3 class="panel-head">24 小时时间轴</h3>
+    <div class="fs-timeline-bar">
+      <div class="fs-timeline-eating" id="fsTimelineEating"></div>
+      <div class="fs-timeline-now" id="fsTimelineNow" style="left:0;"></div>
+    </div>
+    <div class="fs-timeline-labels">
+      <span>0:00</span><span>6:00</span><span>12:00</span><span>18:00</span><span>24:00</span>
+    </div>
+    <div class="fs-timeline-legend">
+      <span><i class="fs-legend-dot eating"></i>进食窗口</span>
+      <span><i class="fs-legend-dot fasting"></i>断食窗口</span>
+      <span><i class="fs-legend-dot now"></i>当前时间</span>
+    </div>
+  </div>
+
+  <!-- 今日打卡 -->
+  <div class="panel">
+    <h3 class="panel-head">今日打卡</h3>
+    <button type="button" class="btn fs-checkin-btn" id="fsCheckin">✓ 今天完成了</button>
+    <div class="fs-checkin-history" id="fsCheckinHistory"></div>
+    <p class="tip" style="margin:14px 0 0;text-align:center;">显示最近 7 天。点击过去的日期可以补打卡 / 取消。</p>
+  </div>
+
+  <!-- 30 天统计 -->
+  <div class="panel">
+    <h3 class="panel-head">近 30 天完成情况</h3>
+    <div class="fs-stats-bar" id="fsStatsBar"></div>
+    <div class="fs-stats-text" id="fsStatsText">还没有打卡记录</div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="panel">
+    <h3 class="panel-head">常见问题</h3>
+
+    <details class="faq-item">
+      <summary>断食期可以喝什么？</summary>
+      <div class="faq-body">
+        <p>可以喝：白开水、气泡水、黑咖啡（不加糖不加奶）、无糖茶、淡盐水。</p>
+        <p>不建议：加糖饮料、奶茶、牛奶、豆浆、果汁、任何有热量的东西。</p>
+        <p>口香糖、薄荷糖也建议避免，会刺激胰岛素分泌。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>断食期可以吃水果吗？</summary>
+      <div class="faq-body">
+        <p>不行。水果含有果糖，会打断断食状态。所有水果都放在进食窗口内吃。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>进食窗口内可以随便吃吗？</summary>
+      <div class="faq-body">
+        <p>不建议。16:8 只是控制进食时间，不是放纵。窗口内仍应保持均衡饮食，优先蛋白质、蔬菜、优质脂肪。</p>
+        <p>如果窗口内暴饮暴食，等于没断食。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>16:8 和 18:6、20:4 有什么区别？</summary>
+      <div class="faq-body">
+        <p>数字表示断食小时数：16:8 是断食 16 小时、进食 8 小时；18:6 是断食 18 小时、进食 6 小时；20:4 更严格，进食窗口只有 4 小时。</p>
+        <p>新手建议从 14:10 开始，适应一周后再过渡到 16:8。不要直接上 20:4。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>断食期饿了怎么办？</summary>
+      <div class="faq-body">
+        <p>先喝水、气泡水、黑咖啡、无糖茶。多数"饿"是习惯性反应，5-15 分钟会过去。</p>
+        <p>如果出现头晕、心慌、手抖、出冷汗，说明低血糖，立即停止断食，吃点东西。反复出现请就医。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>月经期可以断食吗？</summary>
+      <div class="faq-body">
+        <p>建议暂停。经期激素波动大，断食可能加重疲劳、情绪波动、贫血。</p>
+        <p>如果一定要坚持，建议降低强度（14:10），并补充铁和蛋白质。</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>这项功能会上传我的数据吗？</summary>
+      <div class="faq-body">
+        <p>不会。所有数据只存在你的浏览器 localStorage 里，不上传任何服务器。清空浏览器数据会丢，请在「设置」里导出备份。</p>
+      </div>
+    </details>
+  </div>
+</section>
+<!-- 急救知识速查 -->
+<section id="page-firstaid" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/>
+        <path d="M12 9v6M9 12h6"/>
+      </svg>
+    </span>
+    急救知识速查
+  </h2>
+  <p class="page-desc">12 个常见紧急场景的分步处理指南，含 CPR 节拍器、AED 使用引导与紧急信息卡。所有内容均为静态内置，离线可用。若这里没有覆盖你的情况，请立即拨打 120。</p>
+
+  <div class="fa-warning-banner">
+    ⚠️ 本工具仅供日常参考，<b>不能替代专业医疗诊断与治疗</b>。紧急情况请立即拨打 <b>120</b>。
+  </div>
+
+  <div class="fa-topbar">
+    <a href="tel:120" class="fa-call120">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      <span>一键拨打 120</span>
+    </a>
+    <button class="btn ghost small" id="faInfoCardBtn" type="button">🆔 紧急信息卡</button>
+  </div>
+
+  <div id="faMainView">
+    <div class="panel">
+      <div class="fa-audience-switch" id="faAudienceSwitch">
+        <button data-aud="adult" class="active" type="button">成人</button>
+        <button data-aud="child" type="button">儿童（1-8 岁）</button>
+        <button data-aud="infant" type="button">婴儿（&lt;1 岁）</button>
+      </div>
+      <input type="search" id="faSearch" class="fa-search" placeholder="搜索症状或场景，如：喉咙卡住、CPR、烧伤…" autocomplete="off">
+      <div class="fa-special-grid">
+        <button class="fa-special-card" data-fa-jump="cpr-metronome" type="button">
+          <span class="fa-special-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/>
+              <path d="M8.5 11h2l1-2 1.5 4 1-2h1.5"/>
+            </svg>
+          </span>
+          <b>CPR 节拍器</b>
+          <span>110 次/分 · 跟拍按压</span>
+        </button>
+        <button class="fa-special-card" data-fa-jump="aed" type="button">
+          <span class="fa-special-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+            </svg>
+          </span>
+          <b>AED 使用引导</b>
+          <span>7 步图卡</span>
+        </button>
+        <button class="fa-special-card" data-fa-jump="infocard" type="button">
+          <span class="fa-special-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <circle cx="9" cy="11" r="2.5"/>
+              <path d="M4.5 17c.7-2 2.4-3 4.5-3s3.8 1 4.5 3"/>
+              <path d="M15 10h4M15 13h3"/>
+            </svg>
+          </span>
+          <b>紧急信息卡</b>
+          <span>血型 · 过敏 · 联系人</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="fa-grid" id="faGrid"></div>
+    <p class="empty" id="faEmpty" style="display:none;">没有匹配的场景，换个关键词试试～</p>
+  </div>
+
+  <div id="faDetailView" style="display:none"></div>
+  <div id="faCprMetronome" style="display:none"></div>
+  <div id="faAedView" style="display:none"></div>
+  <div id="faInfoCardView" style="display:none"></div>
+</section>
+
+<!-- 常见穴位速查 -->
+<section id="page-acupoint" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <circle cx="12" cy="12" r="2.5"/>
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
+      </svg>
+    </span>
+    常见穴位速查
+  </h2>
+  <p class="page-desc">25 个常用穴位的定位、主治、按摩方法与禁忌，支持按症状、按部位、按经络三种视角查询。含局部示意图与朗读。纯本地运行。</p>
+
+  <div class="ap-warning-banner">
+    ⚠️ 本工具仅供日常保健参考，<b>不能替代医疗诊断与治疗</b>。孕妇、皮肤破损、急性病请咨询医生。
+  </div>
+
+<div class="ta-subtabs" id="apTabs">
+    <button data-ap="symptom" class="ta-subtab active" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+      按症状查
+    </button>
+    <button data-ap="part" class="ta-subtab" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v9M7 11h10M9 21l3-5 3 5"/></svg>
+      按部位查
+    </button>
+    <button data-ap="meridian" class="ta-subtab" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4c4 4 4 12 0 16M20 4c-4 4-4 12 0 16M4 12h16"/></svg>
+      按经络查
+    </button>
+</div>
+
+  <div class="ta-subpage active" data-ap-page="symptom">
+    <div class="panel">
+      <input type="search" id="apSymSearch" class="ap-search" placeholder="搜索症状，如：头痛、失眠、便秘…" autocomplete="off">
+    </div>
+    <div class="ap-sym-grid" id="apSymGrid"></div>
+    <div id="apSymDetail" style="display:none"></div>
+  </div>
+
+  <div class="ta-subpage" data-ap-page="part">
+    <div class="panel">
+      <div class="ap-part-tabs" id="apPartTabs"></div>
+    </div>
+    <div class="ap-part-layout">
+      <div class="panel ap-svg-panel">
+        <svg id="apPartSvg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"></svg>
+        <p class="ap-svg-hint">点击圆点查看穴位详情</p>
+      </div>
+      <div class="panel">
+        <div class="ap-point-list" id="apPartList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ta-subpage" data-ap-page="meridian">
+    <div class="ap-mer-grid" id="apMerGrid"></div>
+  </div>
+
+  <div class="ap-detail-overlay" id="apDetail"></div>
+</section>
+<!-- 运动损伤应急处理 -->
+<section id="page-sportsinjury" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/>
+        <circle cx="12" cy="5" r="1.5"/>
+      </svg>
+    </span>
+    运动损伤应急处理
+  </h2>
+  <p class="page-desc">10 种常见运动损伤的识别、现场处理、就医指征、停训建议与预防方法。含 RICE / PRICE 分步指导。纯本地运行。</p>
+
+  <div class="si-warning-banner">
+    ⚠️ 本工具仅供日常运动参考，<b>不能替代专业医疗诊断与治疗</b>。出现严重畸形、麻木、剧烈疼痛、意识异常时，请立即就医或拨打 <b>120</b>。
+  </div>
+
+  <div id="siMainView">
+    <div class="panel">
+      <div class="si-toolbar">
+        <input type="search" id="siSearch" class="si-search" placeholder="搜索损伤名称、部位或症状，如：脚踝、膝盖、肿痛…" autocomplete="off">
+      </div>
+      <div class="si-sev-filter" id="siSevFilter">
+        <button type="button" class="si-sev-btn active" data-sev="">全部</button>
+        <button type="button" class="si-sev-btn" data-sev="minor">轻微</button>
+        <button type="button" class="si-sev-btn" data-sev="moderate">中度</button>
+        <button type="button" class="si-sev-btn" data-sev="severe">严重</button>
+      </div>
+    </div>
+
+    <div class="si-grid" id="siGrid"></div>
+    <p class="empty" id="siEmpty" style="display:none;">没有匹配的损伤，换个关键词试试～</p>
+  </div>
+
+  <div id="siDetailView" style="display:none"></div>
+</section>
+<!-- 实用测试 -->
+<section id="page-devicetest" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2"/>
+        <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/>
+      </svg>
+    </span>
+    实用测试
+  </h2>
+  <p class="page-desc">键盘、鼠标、网络、麦克风四项硬件测试。全部在浏览器本地完成，不上传任何数据。</p>
+
+  <div class="ta-subtabs" id="dtTabs">
+    <button class="ta-subtab active" data-dt="keyboard" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
+      键盘测试
+    </button>
+    <button class="ta-subtab" data-dt="mouse" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M12 3v8"/></svg>
+      鼠标测试
+    </button>
+    <button class="ta-subtab" data-dt="network" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.18 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><path d="M12 20h.01"/></svg>
+      网络测速
+    </button>
+    <button class="ta-subtab" data-dt="mic" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>
+      麦克风测试
+    </button>
+  </div>
+
+  <!-- 键盘测试 -->
+  <div class="ta-subpage active" data-dt-page="keyboard">
+    <div class="panel">
+      <h3 class="panel-head">当前按键</h3>
+      <div class="dt-key-display">
+        <div class="dt-key-main" id="dtKeyMain">—</div>
+        <div class="dt-key-grid">
+          <div class="dt-key-info"><span>key</span><b id="dtKeyKey">—</b></div>
+          <div class="dt-key-info"><span>code</span><b id="dtKeyCode">—</b></div>
+          <div class="dt-key-info"><span>keyCode</span><b id="dtKeyNum">—</b></div>
+          <div class="dt-key-info"><span>location</span><b id="dtKeyLoc">—</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="panel-head">键盘布局</h3>
+      <p class="tip" style="margin-top:-6px;">按下任意键，对应位置会高亮。已按过的键会保留淡黄色标记。</p>
+      <div class="dt-kb-fn-row" id="dtKbFnRow"></div>
+      <div class="dt-kb-wrap" id="dtKbWrap"></div>
+      <div class="dt-kb-actions">
+        <span>已测试：<b id="dtKbTested">0</b> / <b id="dtKbTotal">0</b></span>
+        <button class="btn ghost small" id="dtKbReset" type="button">重置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 鼠标测试 -->
+  <div class="ta-subpage" data-dt-page="mouse">
+    <div class="panel">
+      <h3 class="panel-head">鼠标轨迹板</h3>
+      <p class="tip" style="margin-top:-6px;">在这个区域内移动鼠标，会显示坐标与十字线；按住左键拖动会留下轨迹。</p>
+      <div class="dt-mouse-stage">
+        <canvas id="dtMouseCanvas" width="800" height="360"></canvas>
+        <div class="dt-mouse-coords" id="dtMouseCoords">0, 0</div>
+        <div class="dt-mouse-hint" id="dtMouseHint">移入鼠标查看坐标</div>
+      </div>
+      <div class="dt-mouse-actions">
+        <button class="btn ghost small" id="dtMouseClear" type="button">清空轨迹</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="panel-head">点击统计</h3>
+      <div class="dt-mouse-stats">
+        <div class="dt-mouse-stat"><span>左键</span><b id="dtMLeft">0</b></div>
+        <div class="dt-mouse-stat"><span>中键</span><b id="dtMMid">0</b></div>
+        <div class="dt-mouse-stat"><span>右键</span><b id="dtMRight">0</b></div>
+        <div class="dt-mouse-stat"><span>侧键</span><b id="dtMSide">0</b></div>
+        <div class="dt-mouse-stat"><span>滚轮 ↑</span><b id="dtMWheelUp">0</b></div>
+        <div class="dt-mouse-stat"><span>滚轮 ↓</span><b id="dtMWheelDown">0</b></div>
+        <div class="dt-mouse-stat"><span>双击</span><b id="dtMDbl">0</b></div>
+      </div>
+      <div class="dt-mouse-actions">
+        <button class="btn ghost small" id="dtMouseReset" type="button">重置统计</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 网络测速 -->
+  <div class="ta-subpage" data-dt-page="network">
+    <div class="panel">
+      <h3 class="panel-head">网络信息</h3>
+      <p class="tip" style="margin-top:-6px;">来自浏览器的 <code>navigator.connection</code>，并非所有浏览器都支持。</p>
+      <div class="dt-net-info">
+        <div class="dt-net-item"><span>在线状态</span><b id="dtNetOnline">—</b></div>
+        <div class="dt-net-item"><span>网络类型</span><b id="dtNetType">—</b></div>
+        <div class="dt-net-item"><span>下行带宽（估算）</span><b id="dtNetDownlink">—</b></div>
+        <div class="dt-net-item"><span>往返延迟 RTT</span><b id="dtNetRtt">—</b></div>
+        <div class="dt-net-item"><span>省流量模式</span><b id="dtNetSaveData">—</b></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="panel-head">下载测速</h3>
+      <p class="tip" style="margin-top:-6px;">从 Cloudflare 公开测速端点下载 10MB 测试文件，测完即丢弃。测速会消耗约 10MB 流量，请按需使用。</p>
+      <div class="dt-speed-result">
+        <div class="dt-speed-value" id="dtSpeedValue">—</div>
+        <div class="dt-speed-unit">Mbps</div>
+      </div>
+      <div class="dt-speed-progress">
+        <div class="dt-speed-progress-bar" id="dtSpeedProgress"></div>
+      </div>
+      <div class="dt-speed-detail" id="dtSpeedDetail">点击「开始测速」开始</div>
+      <div class="dt-net-actions">
+        <button class="btn" id="dtNetStart" type="button">开始测速</button>
+        <button class="btn ghost" id="dtNetStop" type="button" disabled>停止</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 麦克风测试 -->
+  <div class="ta-subpage" data-dt-page="mic">
+    <div class="panel">
+      <h3 class="panel-head">麦克风输入</h3>
+      <p class="tip" style="margin-top:-6px;">点击「开始」后浏览器会请求麦克风权限。所有音频处理都在本地完成，不录制、不上传。</p>
+      <div class="dt-mic-stage">
+        <div class="dt-mic-level">
+          <div class="dt-mic-level-bar" id="dtMicLevelBar"></div>
+          <span class="dt-mic-level-text" id="dtMicLevelText">0%</span>
+        </div>
+        <canvas id="dtMicCanvas" width="720" height="200"></canvas>
+      </div>
+      <div class="dt-mic-actions">
+        <button class="btn" id="dtMicStart" type="button">开始</button>
+        <button class="btn ghost" id="dtMicStop" type="button" disabled>停止</button>
+      </div>
+      <div class="dt-mic-tip" id="dtMicTip">还没有启动</div>
+    </div>
+  </div>
+</section>
+<!-- 小说助手（容器） -->
+<section id="page-novelassistant" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        <path d="M9 7h7M9 11h5"/>
+      </svg>
+    </span>
+    小说助手
+  </h2>
+  <p class="page-desc">创作一站集合：时间线、起名器、对话生成器、随机灵感、灵感速记、小说管理。用下方标签页切换，所有工具数据互通（比如起名器的结果能直接进对话生成器，人物印象表的角色能进对话生成器）。</p>
+
+  <div class="ta-subtabs na-tabs" id="naTabs">
+    <button type="button" class="ta-subtab active" data-na="timeline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg>
+      时间线
+    </button>
+    <button type="button" class="ta-subtab" data-na="namer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg>
+      起名器
+    </button>
+    <button type="button" class="ta-subtab" data-na="dialogue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg>
+      对话生成器
+    </button>
+    <button type="button" class="ta-subtab" data-na="random">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg>
+      随机灵感
+    </button>
+    <button type="button" class="ta-subtab" data-na="notes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg>
+      灵感速记
+    </button>
+    <button type="button" class="ta-subtab" data-na="novelmanage">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      小说管理
+    </button>
+  </div>
+
+  <div class="na-slots">
+    <div class="na-slot" data-na-slot="timeline" style="display:none"></div>
+    <div class="na-slot" data-na-slot="namer" style="display:none"></div>
+    <div class="na-slot" data-na-slot="dialogue" style="display:none"></div>
+    <div class="na-slot" data-na-slot="random" style="display:none"></div>
+    <div class="na-slot" data-na-slot="notes" style="display:none"></div>
+    <div class="na-slot" data-na-slot="novelmanage" style="display:none"></div>
+  </div>
+</section>
 
 </main>
 
@@ -6662,12 +8143,14 @@ html, body { overflow-x: hidden !important; }
 <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 
+<script src="js/appscenter2.js"></script>
 <script src="js/main2.js"></script>
 <script src="js/tablefill2.js"></script>
 <script src="js/help2.js"></script>
 <script src="js/qrcode2.js"></script>
 <script src="js/heatindex2.js"></script>
 <script src="js/imagecompress2.js"></script>
+<script src="js/watermark2.js"></script>
 <script src="js/exchange2.js"></script>
 <script src="js/luckywheel2.js"></script>
 <script src="js/coinflip2.js"></script>
@@ -6708,6 +8191,340 @@ html, body { overflow-x: hidden !important; }
 <script src="js/worldhistory2.js"></script>
 <script src="js/poetry2.js"></script>
 <script src="js/cellstructure2.js"></script>
+<script src="js/qinqi2.js"></script>
+<script src="js/randomnumber2.js"></script>
+<script src="js/lab-data2.js"></script>
+<script src="js/lab2.js"></script>
+<script src="js/viz-data2.js"></script>
+<script src="js/viz2.js"></script>
+<script src="js/videocollect2.js"></script>
+<script src="js/sticker2.js"></script>
+<script src="js/firstaid2.js"></script>
+<script src="js/acupoint2.js"></script>
+<script src="js/fasting2.js"></script>
+<script src="js/sportsinjury2.js"></script>
+<script src="js/devicetest2.js"></script>
+<script src="js/novelassistant2.js"></script>
+
+<!-- 首页交互 -->
+<script>
+(function () {
+  /* ---------- 通用跳转 ---------- */
+  function jump(target) {
+    if (target && typeof go === 'function') go(target);
+  }
+  document.querySelectorAll('#page-home [data-jump]').forEach(function (el) {
+    el.addEventListener('click', function () { jump(el.dataset.jump); });
+  });
+
+  /* ---------- 分类卡片：跳应用中心并尝试选中对应分类 ---------- */
+  document.querySelectorAll('#page-home .hp-cat').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var cat = card.dataset.cat;
+      jump('apps');
+      if (!cat) return;
+      setTimeout(function () {
+        var pills = document.querySelectorAll('#appsCats .apps-cat');
+        for (var i = 0; i < pills.length; i++) {
+          if ((pills[i].textContent || '').indexOf(cat) !== -1) {
+            pills[i].click();
+            break;
+          }
+        }
+      }, 320);
+    });
+  });
+
+
+
+  /* ---------- 推广轮播 ---------- */
+  var track = document.getElementById('hpPromoTrack');
+  var dotsBox = document.getElementById('hpPromoDots');
+  var prevBtn = document.getElementById('hpPromoPrev');
+  var nextBtn = document.getElementById('hpPromoNext');
+  if (!track || !dotsBox) return;
+
+  var slides = track.querySelectorAll('.hp-promo-slide');
+  var total = slides.length;
+  var current = 0;
+  var autoTimer = null;
+
+  /* 生成圆点 */
+  dotsBox.innerHTML = '';
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'hp-promo-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', '第 ' + (i + 1) + ' 张');
+    (function (idx) {
+      d.addEventListener('click', function () { goTo(idx); });
+    })(i);
+    dotsBox.appendChild(d);
+  }
+  var dots = dotsBox.querySelectorAll('.hp-promo-dot');
+
+  function goTo(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('active', i === current);
+    }
+  }
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(next, 5200);
+  }
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  if (nextBtn) nextBtn.addEventListener('click', function () { next(); startAuto(); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAuto(); });
+
+  var promoEl = document.getElementById('hpPromo');
+  if (promoEl) {
+    promoEl.addEventListener('mouseenter', stopAuto);
+    promoEl.addEventListener('mouseleave', startAuto);
+    /* 触摸滑动 */
+    var startX = 0, moving = false;
+    promoEl.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      moving = true;
+      stopAuto();
+    }, { passive: true });
+    promoEl.addEventListener('touchend', function (e) {
+      if (!moving) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (dx > 40) prev();
+      else if (dx < -40) next();
+      moving = false;
+      startAuto();
+    });
+  }
+
+  startAuto();
+})();
+
+/* ---------- 搜索页面 ---------- */
+(function initSearchPage(){
+  var btn      = document.getElementById('searchBtn');
+  var page     = document.getElementById('page-search');
+  var input    = document.getElementById('searchPageInput');
+  var clearBtn = document.getElementById('searchPageClear');
+  var hotBox   = document.getElementById('spHotTags');
+  var hotWrap  = document.getElementById('spHot');
+  var headEl   = document.getElementById('spResultHead');
+  var headText = document.getElementById('spResultText');
+  var results  = document.getElementById('spResults');
+  var emptyEl  = document.getElementById('spEmpty');
+
+  if (!btn || !page || !input) return;
+
+  var HOT_WORDS = [
+    'BMI', '二维码', '记账', '函数图像', '急救', '白噪音',
+    '古诗词', '元素周期表', '世界时钟', '贷款', '颜色转换', '小说助手'
+  ];
+  var mode = 'fuzzy';
+  var searchIndex = [];
+
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  /* 建立索引：优先 apps 数据 → 页面 apps-card → TOOL_REGISTRY */
+  function buildIndex(){
+    var list = [];
+
+    if (Array.isArray(window.__appsData) && window.__appsData.length){
+      window.__appsData.forEach(function (app) {
+        list.push({
+          id: app.id,
+          name: app.name || '',
+          desc: app.desc || '',
+          keywords: app.keywords || '',
+          cat: app.cat || app.category || '',
+          tags: app.tags || []
+        });
+      });
+      return list;
+    }
+
+    var cards = document.querySelectorAll('#appsAllWrap .apps-card');
+    if (cards.length){
+      cards.forEach(function (card) {
+        var id = card.dataset.target || card.dataset.id || '';
+        var nEl = card.querySelector('.apps-card-name');
+        var dEl = card.querySelector('.apps-card-desc');
+        if (id && nEl){
+          list.push({
+            id: id,
+            name: nEl.textContent.trim(),
+            desc: dEl ? dEl.textContent.trim() : '',
+            keywords: '', cat: '', tags: []
+          });
+        }
+      });
+      if (list.length) return list;
+    }
+
+    if (typeof TOOL_REGISTRY !== 'undefined' && Array.isArray(TOOL_REGISTRY)){
+      TOOL_REGISTRY.forEach(function (t) {
+        list.push({ id: t.id, name: t.name, desc: '', keywords: '', cat: '', tags: [] });
+      });
+    }
+    return list;
+  }
+
+  /* 渲染热门搜索 */
+  function renderHot(){
+    hotBox.innerHTML = HOT_WORDS.map(function (w) {
+      return '<button type="button" data-hot="' + escapeHtml(w) + '">' + escapeHtml(w) + '</button>';
+    }).join('');
+    hotBox.querySelectorAll('[data-hot]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        input.value = b.dataset.hot;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.focus();
+      });
+    });
+  }
+
+  /* 关键词高亮 */
+  function highlight(text, kw){
+    text = String(text || '');
+    if (!kw) return escapeHtml(text);
+    var idx = text.toLowerCase().indexOf(kw.toLowerCase());
+    if (idx === -1) return escapeHtml(text);
+    return escapeHtml(text.slice(0, idx)) +
+      '<mark>' + escapeHtml(text.slice(idx, idx + kw.length)) + '</mark>' +
+      escapeHtml(text.slice(idx + kw.length));
+  }
+
+  /* 打开搜索页 */
+  function openSearch(){
+    document.querySelectorAll('.page').forEach(function (p) {
+      p.classList.toggle('active', p.id === 'page-search');
+    });
+    document.querySelectorAll('nav button[data-page]').forEach(function (b) {
+      b.classList.remove('active');
+    });
+    document.body.classList.remove('tool-active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    /* 每次打开：清空输入，回到居中空状态 */
+    input.value = '';
+    searchIndex = buildIndex();
+    renderHot();
+
+    /* 加 .sp-idle 类让 CSS 居中（doSearch 里也会再判断一次，双保险） */
+    var sp = page.querySelector('.sp');
+    if (sp) sp.classList.add('sp-idle');
+
+    doSearch();
+    setTimeout(function () { input.focus(); }, 120);
+  }
+
+  /* 执行搜索 */
+  function doSearch(){
+    if (!searchIndex.length) searchIndex = buildIndex();
+
+    var kw = input.value.trim();
+    clearBtn.hidden = kw.length === 0;
+
+    var sp = page.querySelector('.sp');
+
+    /* —— 空内容：居中显示搜索框 + 热门搜索 —— */
+    if (!kw){
+      if (sp) sp.classList.add('sp-idle');
+      hotWrap.style.display = '';
+      results.innerHTML = '';
+      headEl.style.display = 'none';
+      emptyEl.style.display = 'none';
+      return;
+    }
+
+    /* —— 有内容：搜索框靠顶，隐藏热门搜索 —— */
+    if (sp) sp.classList.remove('sp-idle');
+    hotWrap.style.display = 'none';
+
+    var lower = kw.toLowerCase();
+    var matched;
+
+    if (mode === 'exact'){
+      matched = searchIndex.filter(function (item) {
+        return (item.name || '').toLowerCase() === lower ||
+               (item.id || '').toLowerCase() === lower;
+      });
+    } else {
+      matched = searchIndex.filter(function (item) {
+        var hay = [item.name, item.desc, item.keywords, item.cat]
+          .concat(item.tags || []).join(' ').toLowerCase();
+        return hay.indexOf(lower) !== -1;
+      });
+    }
+
+    headEl.style.display = '';
+    headText.innerHTML = '共找到 <b>' + matched.length + '</b> 款工具 · ' +
+      (mode === 'exact' ? '精确匹配' : '模糊匹配');
+
+    if (!matched.length){
+      results.innerHTML = '';
+      emptyEl.style.display = '';
+      return;
+    }
+    emptyEl.style.display = 'none';
+
+    results.innerHTML = matched.map(function (item) {
+      var icon = (typeof getToolIcon === 'function') ? getToolIcon(item.id) : '';
+      return '<button type="button" class="sp-result" data-goto="' + escapeHtml(item.id) + '">' +
+        '<span class="sp-result-icon">' + icon + '</span>' +
+        '<span class="sp-result-body">' +
+          '<span class="sp-result-name">' + highlight(item.name, kw) + '</span>' +
+          (item.desc ? '<span class="sp-result-desc">' + highlight(item.desc, kw) + '</span>' : '') +
+        '</span>' +
+        '<span class="sp-result-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>' +
+      '</button>';
+    }).join('');
+
+    results.querySelectorAll('[data-goto]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var id = el.dataset.goto;
+        if (!id) return;
+        if (document.getElementById('page-' + id) && typeof go === 'function') go(id);
+      });
+    });
+  }
+
+  btn.addEventListener('click', openSearch);
+  input.addEventListener('input', doSearch);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+  });
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.focus();
+  });
+  document.querySelectorAll('.sp-mode').forEach(function (m) {
+    m.addEventListener('click', function () {
+      document.querySelectorAll('.sp-mode').forEach(function (x) { x.classList.remove('active'); });
+      m.classList.add('active');
+      mode = m.dataset.mode;
+      if (input.value.trim()) doSearch();
+    });
+  });
+
+  /* 暴露给外部：方便别处调用 */
+  window.__openSearch = openSearch;
+})();
+</script>
 
 </body>
 </html>
