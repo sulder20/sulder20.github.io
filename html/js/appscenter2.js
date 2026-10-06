@@ -80,7 +80,8 @@
     countdown:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16h4"/></svg>',
     volume:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 6v12M19 6v12M8 9v6M16 9v6"/></svg>',
     shuffle:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="8" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg>',
-    keyboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>'
+    keyboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>',
+    lock:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1.5"/></svg>'
   };
 
     /* ============================================================
@@ -171,6 +172,7 @@
     { id: 'ledger',        name: '我的记账本',      cat: '时间与生活', icon: 'wallet',     desc: '多币种记账，自动汇总本月支出' },
     { id: 'worldclock',    name: '世界时钟',        cat: '时间与生活', icon: 'worldClock', desc: '多城市时间并排，自动处理夏令时' },
     { id: 'zodiac',        name: '生肖星座',        cat: '时间与生活', icon: 'star',       desc: '输入生日查生肖与星座，附性格幸运信息' },
+    { id: 'passwordgen',   name: '密码生成器',      cat: '时间与生活', icon: 'lock',       desc: '随机密码 / 口令短语 / PIN 码，本地生成不上传', newDate: NEW_DATE },
 
     /* ---------- AI 与开发 ---------- */
     { id: 'ai',            name: 'AI 助手',         cat: 'AI 与开发', icon: 'bot',  desc: 'DeepSeek 驱动的通用 AI 聊天', ai: true },
@@ -440,13 +442,8 @@
   }
 
   function isNewApp(a){
-    if (!a.newDate) return false;
-    const t = new Date(a.newDate + 'T00:00:00').getTime();
-    const now = Date.now();
-    const days = (now - t) / 86400000;
-    return days >= 0 && days <= 30;
+    return false; // V5.0：彻底移除所有“新”标签
   }
-
   function bindCardEvents(){
     const wrap = $('appsAllWrap');
     // 卡片点击 → 跳转

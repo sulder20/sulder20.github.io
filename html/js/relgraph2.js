@@ -1,5 +1,5 @@
 /* ============================================================
-   岁窦工具箱 · 角色关系图
+   岁窦工具箱 · 角色关系图 (V5.0 稳定版 · 淡蓝主题)
    ============================================================ */
 (function () {
   'use strict';
@@ -14,15 +14,16 @@
 
   var cw = 0, ch = 0, dpr = 1;
 
+  // V5.0 淡蓝色系调色板（替换原有蜂蜜黄）
   var COLORS = [
-    { bg:'#f5b301', fg:'#3a2a00' },  // 琥珀黄
-    { bg:'#ff8f00', fg:'#ffffff' },  // 阳光橙
-    { bg:'#e09070', fg:'#ffffff' },  // 陶土红
-    { bg:'#c9a02b', fg:'#ffffff' },  // 金棕
-    { bg:'#7a9c5f', fg:'#ffffff' },  // 苔绿
-    { bg:'#8ba6c0', fg:'#ffffff' },  // 雾蓝
-    { bg:'#a69bbf', fg:'#ffffff' },  // 烟紫
-    { bg:'#c996ad', fg:'#ffffff' }   // 豆沙
+    { bg:'#4a90e2', fg:'#ffffff' },  // 主蓝
+    { bg:'#2c5f8a', fg:'#ffffff' },  // 深蓝
+    { bg:'#7bb8e8', fg:'#1a2e42' },  // 浅蓝
+    { bg:'#5fa8a8', fg:'#ffffff' },  // 青绿
+    { bg:'#6d5a8c', fg:'#ffffff' },  // 烟紫
+    { bg:'#8fb59a', fg:'#ffffff' },  // 苔绿
+    { bg:'#c17878', fg:'#ffffff' },  // 陶土红（保留一点红用于区分）
+    { bg:'#8ba6c0', fg:'#ffffff' }   // 雾蓝
   ];
 
   var FONT_NAME = '700 15px "PingFang SC","Microsoft YaHei",sans-serif';
@@ -47,12 +48,6 @@
   function toast(msg) {
     if (typeof window.showToast === 'function') window.showToast(msg);
     else console.log('[角色关系图]', msg);
-  }
-
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
-    });
   }
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
@@ -143,84 +138,76 @@
   }
 
   /* ---------- 初始化 ---------- */
- function init() {
-  var page = document.getElementById('page-relgraph');
-  if (!page) return;
+  function init() {
+    var page = document.getElementById('page-relgraph');
+    if (!page) return;
 
-  // 已经初始化过：每次切页进来重新计算画布尺寸
-  if (inited) {
+    if (inited) {
+      requestAnimationFrame(function () {
+        resize();
+        draw();
+      });
+      return;
+    }
+
+    canvas = document.getElementById('rgCanvas');
+    if (!canvas) return;
+    ctx = canvas.getContext('2d');
+    stageEl = document.getElementById('rgStage');
+    emptyEl = document.getElementById('rgEmpty');
+    hintEl  = document.getElementById('rgHint');
+
+    nodePanel = document.getElementById('rgNodePanel');
+    edgePanel = document.getElementById('rgEdgePanel');
+    npName  = document.getElementById('rgNpName');
+    npRole  = document.getElementById('rgNpRole');
+    npColor = document.getElementById('rgNpColor');
+    epLabel = document.getElementById('rgEpLabel');
+
+    inited = true;
+    load();
+    bindEvents();
+
     requestAnimationFrame(function () {
       resize();
       draw();
     });
-    return;
-  }
 
-  canvas = document.getElementById('rgCanvas');
-  if (!canvas) return;
-  ctx = canvas.getContext('2d');
-  stageEl = document.getElementById('rgStage');
-  emptyEl = document.getElementById('rgEmpty');
-  hintEl  = document.getElementById('rgHint');
-
-  nodePanel = document.getElementById('rgNodePanel');
-  edgePanel = document.getElementById('rgEdgePanel');
-  npName  = document.getElementById('rgNpName');
-  npRole  = document.getElementById('rgNpRole');
-  npColor = document.getElementById('rgNpColor');
-  epLabel = document.getElementById('rgEpLabel');
-
-  inited = true;
-  load();
-  bindEvents();
-
-  // 延迟到下一帧，等页面渲染完成再测量尺寸
-  requestAnimationFrame(function () {
-    resize();
-    draw();
-  });
-
-  // 监听窗口变化
-  window.addEventListener('resize', function () {
-    clearTimeout(window.__rgResizeTimer);
-    window.__rgResizeTimer = setTimeout(resize, 160);
-  });
-
-  // 监听容器尺寸变化（更稳）
-  if (typeof ResizeObserver !== 'undefined' && stageEl) {
-    var ro = new ResizeObserver(function () {
+    window.addEventListener('resize', function () {
       clearTimeout(window.__rgResizeTimer);
-      window.__rgResizeTimer = setTimeout(resize, 80);
+      window.__rgResizeTimer = setTimeout(resize, 160);
     });
-    ro.observe(stageEl);
-  }
 
-  console.log('[角色关系图] 已加载');
-}
+    if (typeof ResizeObserver !== 'undefined' && stageEl) {
+      var ro = new ResizeObserver(function () {
+        clearTimeout(window.__rgResizeTimer);
+        window.__rgResizeTimer = setTimeout(resize, 80);
+      });
+      ro.observe(stageEl);
+    }
+  }
 
   /* ---------- 画布尺寸 ---------- */
-function resize() {
-  if (!canvas || !stageEl) return;
-  var rect = stageEl.getBoundingClientRect();
+  function resize() {
+    if (!canvas || !stageEl) return;
+    var rect = stageEl.getBoundingClientRect();
 
-  // 页面隐藏时宽高为 0，直接跳过，避免尺寸被错误兜底
-  if (rect.width < 10 || rect.height < 10) return;
+    if (rect.width < 10 || rect.height < 10) return;
 
-  cw = Math.max(200, rect.width);
-  ch = Math.max(200, rect.height);
-  dpr = window.devicePixelRatio || 1;
+    cw = Math.max(200, rect.width);
+    ch = Math.max(200, rect.height);
+    dpr = window.devicePixelRatio || 1;
 
-  canvas.width = Math.round(cw * dpr);
-  canvas.height = Math.round(ch * dpr);
-  canvas.style.width = cw + 'px';
-  canvas.style.height = ch + 'px';
+    canvas.width = Math.round(cw * dpr);
+    canvas.height = Math.round(ch * dpr);
+    canvas.style.width = cw + 'px';
+    canvas.style.height = ch + 'px';
 
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // 把越界节点拉回来
-  state.nodes.forEach(clampNode);
-  draw();
-}
+    state.nodes.forEach(clampNode);
+    draw();
+  }
 
   function clampNode(n) {
     var halfW = n._w / 2 + 10;
@@ -235,16 +222,14 @@ function resize() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cw, ch);
 
-    // 背景
-    ctx.fillStyle = '#fffdf5';
+    // 背景 (V5.0 极浅蓝)
+    ctx.fillStyle = '#f5f9fc';
     ctx.fillRect(0, 0, cw, ch);
 
     drawGrid();
 
-    // 连线
     state.edges.forEach(drawEdge);
 
-    // 连线模式下的临时线
     if (state.mode === 'connect' && state.connectFrom) {
       var from = findNode(state.connectFrom);
       if (from) {
@@ -252,7 +237,8 @@ function resize() {
         ctx.beginPath();
         ctx.moveTo(from.x, from.y);
         ctx.lineTo(state.pointer.x, state.pointer.y);
-        ctx.strokeStyle = 'rgba(255,143,0,.75)';
+        // 临时连线颜色：淡蓝
+        ctx.strokeStyle = 'rgba(74,144,226,.75)';
         ctx.lineWidth = 2.5;
         ctx.setLineDash([8, 6]);
         ctx.stroke();
@@ -260,17 +246,16 @@ function resize() {
       }
     }
 
-    // 节点（后绘制的在上层）
     state.nodes.forEach(drawNode);
 
-    // 空状态
     if (emptyEl) {
       emptyEl.style.display = state.nodes.length ? 'none' : 'flex';
     }
   }
 
   function drawGrid() {
-    ctx.fillStyle = 'rgba(245,179,1,.18)';
+    // 网格点颜色：淡蓝
+    ctx.fillStyle = 'rgba(74,144,226,.18)';
     var step = 32;
     for (var x = step / 2; x < cw; x += step) {
       for (var y = step / 2; y < ch; y += step) {
@@ -306,13 +291,13 @@ function resize() {
     ctx.beginPath();
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
-    ctx.strokeStyle = active ? '#b47c00' : 'rgba(180,124,0,.42)';
+    // 连线颜色：主蓝/淡蓝
+    ctx.strokeStyle = active ? '#4a90e2' : 'rgba(74,144,226,.42)';
     ctx.lineWidth = active ? 3 : 2;
     ctx.lineCap = 'round';
     ctx.stroke();
     ctx.restore();
 
-    // 关系标签
     if (e.label) {
       var mx = (p1.x + p2.x) / 2;
       var my = (p1.y + p2.y) / 2;
@@ -321,13 +306,16 @@ function resize() {
       var tw = ctx.measureText(e.label).width;
       var bw = tw + 18;
       var bh = 22;
-      ctx.fillStyle = '#fffdf5';
+      // 标签底色
+      ctx.fillStyle = '#f5f9fc';
       roundRect(ctx, mx - bw / 2, my - bh / 2, bw, bh, 8);
       ctx.fill();
-      ctx.strokeStyle = active ? '#b47c00' : 'rgba(245,179,1,.45)';
+      // 标签边框
+      ctx.strokeStyle = active ? '#4a90e2' : 'rgba(74,144,226,.45)';
       ctx.lineWidth = 1;
       ctx.stroke();
-      ctx.fillStyle = '#8d5a00';
+      // 标签文字：深蓝
+      ctx.fillStyle = '#2c5f8a';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(e.label, mx, my);
@@ -341,9 +329,9 @@ function resize() {
     var y = n.y - h / 2;
     var c = COLORS[(n.colorIdx || 0) % COLORS.length];
 
-    // 阴影
+    // 阴影：蓝色阴影
     ctx.save();
-    ctx.shadowColor = 'rgba(180,124,0,.22)';
+    ctx.shadowColor = 'rgba(74,144,226,.22)';
     ctx.shadowBlur = 12;
     ctx.shadowOffsetY = 3;
     ctx.fillStyle = c.bg;
@@ -351,32 +339,31 @@ function resize() {
     ctx.fill();
     ctx.restore();
 
-    // 描边
     ctx.strokeStyle = 'rgba(255,255,255,.45)';
     ctx.lineWidth = 1;
     roundRect(ctx, x + 0.5, y + 0.5, w - 1, h - 1, 12);
     ctx.stroke();
 
-    // 选中 / 连线起点高亮
+    // 选中高亮：蓝色虚线
     if (state.selectedNode === n.id) {
       ctx.save();
       roundRect(ctx, x - 4, y - 4, w + 8, h + 8, 15);
-      ctx.strokeStyle = '#b47c00';
+      ctx.strokeStyle = '#4a90e2';
       ctx.lineWidth = 2;
       ctx.setLineDash([6, 4]);
       ctx.stroke();
       ctx.restore();
     }
+    // 连线模式起点高亮：明亮蓝
     if (state.mode === 'connect' && state.connectFrom === n.id) {
       ctx.save();
       roundRect(ctx, x - 5, y - 5, w + 10, h + 10, 16);
-      ctx.strokeStyle = '#ff8f00';
+      ctx.strokeStyle = '#5b9bd5';
       ctx.lineWidth = 3;
       ctx.stroke();
       ctx.restore();
     }
 
-    // 文字
     ctx.save();
     ctx.fillStyle = c.fg;
     ctx.textAlign = 'center';
@@ -507,7 +494,6 @@ function resize() {
         return;
       }
 
-      // 选择模式
       state.selectedNode = n.id;
       state.selectedEdge = null;
       showNodePanel(n);
@@ -532,7 +518,6 @@ function resize() {
       return;
     }
 
-    // 空白
     state.selectedNode = null;
     state.selectedEdge = null;
     state.connectFrom = null;
@@ -656,7 +641,6 @@ function resize() {
   /* ---------- 边增删改 ---------- */
   function addEdge(fromId, toId, label) {
     if (fromId === toId) return;
-    // 判断是否已有同向或反向连线
     var exist = state.edges.find(function (e) {
       return (e.from === fromId && e.to === toId) ||
              (e.from === toId   && e.to === fromId);
@@ -802,11 +786,11 @@ function resize() {
     octx.scale(scale, scale);
 
     // 背景
-    octx.fillStyle = '#fffdf5';
+    octx.fillStyle = '#f5f9fc';
     octx.fillRect(0, 0, W, H);
 
-    // 淡网格
-    octx.fillStyle = 'rgba(245,179,1,.15)';
+    // 淡蓝网格
+    octx.fillStyle = 'rgba(74,144,226,.15)';
     var step = 32;
     for (var x = step / 2; x < W; x += step) {
       for (var y = step / 2; y < H; y += step) {
@@ -816,10 +800,8 @@ function resize() {
       }
     }
 
-    // 平移到内容原点
     octx.translate(-minX + pad, -minY + pad);
 
-    // 暂时把 ctx 切到离屏上下文
     var oldCtx = ctx;
     var oldSelNode = state.selectedNode;
     var oldSelEdge = state.selectedEdge;
@@ -841,10 +823,10 @@ function resize() {
     state.connectFrom = oldConnect;
     state.mode = oldMode;
 
-    // 右下角水印
+    // 右下角水印：灰蓝色
     octx.save();
     octx.font = '500 12px "PingFang SC","Microsoft YaHei",sans-serif';
-    octx.fillStyle = 'rgba(138,115,64,.6)';
+    octx.fillStyle = 'rgba(107,130,153,.6)';
     octx.textAlign = 'right';
     octx.textBaseline = 'bottom';
     octx.fillText('岁窦工具箱 · 角色关系图', W - pad, H - 18);

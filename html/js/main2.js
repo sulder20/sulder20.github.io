@@ -1,7 +1,12 @@
 /* ============================================================
-   岁窦工具箱 · V4.1 活力版
-   主脚本
+   岁窦工具箱 · V5.0 稳定版
+   主脚本 main2.js
    ============================================================ */
+
+/* ---- 版本常量（全站唯一来源） ---- */
+window.__APP_VERSION__      = 'V5.0';
+window.__APP_VERSION_FULL__ = 'V5.0 稳定版';
+window.__APP_BUILD_DATE__   = '2026.10';
 
 /* ===================== 配置 ===================== */
 const SUPABASE_URL      = 'https://gsyyaxmqtrxdxuiamkcr.supabase.co';
@@ -106,9 +111,6 @@ function go(name){
   if (name === 'calendar')     setTimeout(renderCalendar, 60);
   if (name === 'home' || name === 'help') {
     setTimeout(function () {
-      if (typeof window.__snapscrollRefresh === 'function') {
-        window.__snapscrollRefresh(name);
-      }
     }, 80);
   }
   if (name === 'decibel') setTimeout(function () {
@@ -158,6 +160,9 @@ function go(name){
   if (name === 'videocollect') setTimeout(function () {
     if (typeof window.__videocollectInit === 'function') window.__videocollectInit();
   }, 60);
+  if (name === 'passwordgen') setTimeout(function () {
+  if (typeof window.__pwdgenInit === 'function') window.__pwdgenInit();
+}, 60);
   if (name === 'sticker') setTimeout(function () {
     if (typeof window.__stickerInit === 'function') window.__stickerInit();
   }, 60);
@@ -287,42 +292,45 @@ function syncSearchClear(){
   if (searchClearBtn) searchClearBtn.hidden = searchInput.value.length === 0;
 }
 
-searchInput.addEventListener('input', () => {
-  syncSearchClear();
+if (searchInput && searchClearBtn) {
+  function syncSearchClear(){
+    searchClearBtn.hidden = searchInput.value.length === 0;
+  }
 
-  const q = searchInput.value.trim().toLowerCase();
-  const isSearching = !!q;
-  let any = false;
+  searchInput.addEventListener('input', () => {
+    syncSearchClear();
+    const q = searchInput.value.trim().toLowerCase();
+    const isSearching = !!q;
+    let any = false;
 
-  document.querySelectorAll('#page-apps .tool-card').forEach(card => {
-    const hay = ((card.dataset.keywords || '') + ' ' + card.textContent).toLowerCase();
-    const show = !q || hay.includes(q);
-    card.style.display = show ? '' : 'none';
-    if (show) any = true;
-  });
+    document.querySelectorAll('#page-apps .tool-card').forEach(card => {
+      const hay = ((card.dataset.keywords || '') + ' ' + card.textContent).toLowerCase();
+      const show = !q || hay.includes(q);
+      card.style.display = show ? '' : 'none';
+      if (show) any = true;
+    });
 
-  document.querySelectorAll('#page-apps .pinyin-head').forEach(head => {
-    let next = head.nextElementSibling;
-    let groupHasVisible = false;
-    while (next && !next.classList.contains('pinyin-head')) {
-      if (next.classList.contains('tool-card') && next.style.display !== 'none') {
-        groupHasVisible = true;
-        break;
+    document.querySelectorAll('#page-apps .pinyin-head').forEach(head => {
+      let next = head.nextElementSibling;
+      let groupHasVisible = false;
+      while (next && !next.classList.contains('pinyin-head')) {
+        if (next.classList.contains('tool-card') && next.style.display !== 'none') {
+          groupHasVisible = true;
+          break;
+        }
+        next = next.nextElementSibling;
       }
-      next = next.nextElementSibling;
-    }
-    head.style.display = (isSearching && !groupHasVisible) ? 'none' : '';
+      head.style.display = (isSearching && !groupHasVisible) ? 'none' : '';
+    });
+
+    const toggle = (id, show) => { const el = document.getElementById(id); if (el) el.style.display = show ? '' : 'none'; };
+    toggle('appsCategoryTitle', !isSearching);
+    toggle('categorySection',   !isSearching);
+    const noRes = document.getElementById('noResult');
+    if (noRes) noRes.style.display = (any || !q) ? 'none' : 'block';
+    if (isSearching && !document.getElementById('page-apps').classList.contains('active')) go('apps');
   });
 
-  const toggle = (id, show) => { const el = document.getElementById(id); if (el) el.style.display = show ? '' : 'none'; };
-  toggle('appsCategoryTitle', !isSearching);
-  toggle('categorySection',   !isSearching);
-  const noRes = document.getElementById('noResult');
-  if (noRes) noRes.style.display = (any || !q) ? 'none' : 'block';
-  if (isSearching && !document.getElementById('page-apps').classList.contains('active')) go('apps');
-});
-
-if (searchClearBtn){
   searchClearBtn.addEventListener('click', () => {
     if (!searchInput.value) return;
     searchInput.value = '';
@@ -4815,7 +4823,7 @@ document.getElementById('vtAiBtn').addEventListener('click', async () => {
     const text = data.choices?.[0]?.message?.content || data.error || '无结果';
     box.textContent = text;
     updateQuota();
-  } catch(err){ box.textContent = '⚠️ ' + err.message; }
+  } catch(err){ box.textContent = '错误：' + err.message;  }
 });
 
 /* ============================================================
@@ -5609,7 +5617,7 @@ function exportAll(){
   let chapters = [];
   try { chapters = loadChaptersLocal(); } catch(e){ chapters = []; }
   const data = {
-    app: '岁窦工具箱', version: 'V4.1', exportTime: new Date().toISOString(),
+    app: '岁窦工具箱',   version: window.__APP_VERSION__ || 'V5.0', exportTime: new Date().toISOString(),
     people, songs, places, medias, schedules, notes, timelineEvents, novels, chapters, ledger,
     sleepRecords, vitalRecords, exerciseRecords, exerProfile,
     videos,
@@ -5794,6 +5802,7 @@ const TOOL_REGISTRY = [
   { id: 'ledger',       name: '我的记账本' },
   { id: 'worldclock',   name: '世界时钟' },
   { id: 'zodiac',       name: '生肖星座' },
+  { id: 'passwordgen', name: '密码生成器' },
   /* ⑥ AI 与开发 */
   { id: 'ai',           name: 'AI 助手' },
   { id: 'code',         name: '代码编辑器' },
@@ -5820,7 +5829,7 @@ const TOOL_CATEGORIES = [
   { name: '数理化',     tools: ['funcplot','chemistry','periodictable','physicsformula','equationsolve','matrixcalc','circuitcalc','geneticscalc','lab'] },
   { name: '人文与自然', tools: ['chinahistory','worldhistory','earthmodule','chinageo','poetryrecite','bodysystems','cellstructure','visualization'] },
   { name: '计算与数据', tools: ['calc','chart','exchange','fuel','color','datecalc','loan','discount','timestamp'] },
-  { name: '时间与生活', tools: ['calendar','clock','ledger','worldclock','zodiac'] },
+  { name: '时间与生活', tools: ['calendar','clock','ledger','worldclock','zodiac', 'passwordgen'] },
   { name: 'AI 与开发',  tools: ['ai','code','json','cron'] },
   { name: '实用工具',   tools: ['imagecompress','qrcode','luckywheel','coinflip','reactiontest','carlist','countdown','decibel','randomnumber','devicetest'] }
 ];
@@ -6342,6 +6351,14 @@ initToolSidebar();
   'use strict';
 
   const NOTIFICATIONS = [
+    {
+      id: 'v5-0-release',
+      type: 'success',
+      title: 'V5.0 稳定版上线',
+      content: '淡蓝色主题全面启用，新增暗色模式与密码生成器，代码与样式完成收敛。之后进入维护期，只做 bug 修复与安全更新，不再频繁新增工具。',
+      time: '2026-10-05',
+      pinned: true,
+    },
     {
       id: 'novelassistant-refactor',
       type: 'success',
@@ -6939,4 +6956,113 @@ initToolSidebar();
   console.log('[国庆倒计时] 已启动：2026-10-01 00:00 ~ 2026-10-08 00:00');
 })();
 
-console.log('%c岁窦工具箱 · V4.1 活力版 已加载', 'color:#b47c00;font-weight:700;font-size:14px;');
+/* ============================================================
+   主题切换（V5.0：三态 + 快捷键 + 跟随系统）
+   ============================================================ */
+(function initTheme() {
+  var KEY  = 'suidou-theme';
+  var root = document.documentElement;
+
+  function applyTheme(mode) {
+    if (mode === 'dark') root.setAttribute('data-theme', 'dark');
+    else root.removeAttribute('data-theme');
+  }
+
+  function getStored() {
+    try { return localStorage.getItem(KEY); } catch(e) { return null; }
+  }
+
+  function getPreferred() {
+    var saved = getStored();
+    if (saved === 'dark' || saved === 'light') return saved;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return 'light';
+  }
+
+  function withTransition(fn) {
+    root.classList.add('theme-transition');
+    fn();
+    setTimeout(function () { root.classList.remove('theme-transition'); }, 320);
+  }
+
+  function toggle() {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    withTransition(function () {
+      applyTheme(next);
+      try { localStorage.setItem(KEY, next); } catch(e) {}
+    });
+  }
+
+  /* 首次应用 */
+  applyTheme(getPreferred());
+
+  /* ① 顶栏开关 */
+  var btn = document.getElementById('themeToggle');
+  if (btn) btn.addEventListener('click', toggle);
+
+  /* ② 设置页三态 */
+  var choice = document.getElementById('themeChoice');
+  if (choice) {
+    var syncChoice = function () {
+      var saved = getStored() || 'system';
+      choice.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.themeValue === saved);
+      });
+    };
+    syncChoice();
+    choice.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.dataset.themeValue;
+        withTransition(function () {
+          if (v === 'system') {
+            try { localStorage.removeItem(KEY); } catch(e) {}
+            applyTheme(getPreferred());
+          } else {
+            try { localStorage.setItem(KEY, v); } catch(e) {}
+            applyTheme(v);
+          }
+        });
+        syncChoice();
+      });
+    });
+  }
+
+  /* ③ 快捷键 Shift + D */
+  document.addEventListener('keydown', function (e) {
+    if (!e.shiftKey || (e.key !== 'D' && e.key !== 'd')) return;
+    var tag = (e.target && e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+    e.preventDefault();
+    toggle();
+  });
+
+  /* 跟随系统变化（仅当用户未手动选择时） */
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var handler = function (e) {
+      if (!getStored()) applyTheme(e.matches ? 'dark' : 'light');
+    };
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else if (mq.addListener) mq.addListener(handler);
+  }
+})();
+
+/* ============================================================
+   版本号动态注入
+   ============================================================ */
+(function injectVersion() {
+  var full = window.__APP_VERSION_FULL__ || 'V5.0 稳定版';
+  var short = window.__APP_VERSION__ || 'V5.0';
+
+  document.querySelectorAll('[data-app-version]').forEach(function (el) {
+    el.textContent = full;
+  });
+  document.querySelectorAll('[data-app-version-short]').forEach(function (el) {
+    el.textContent = short;
+  });
+})();
+
+console.log(
+  '%c岁窦工具箱 · ' + (window.__APP_VERSION_FULL__ || 'V5.0 稳定版') + ' 已加载',
+  'color:#4a90e2;font-weight:700;font-size:14px;'
+);

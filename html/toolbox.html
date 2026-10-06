@@ -1,1115 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<script>
+window.__APP_VERSION__ = 'V5.0';
+window.__APP_VERSION_FULL__ = 'V5.0 稳定版';
+window.__APP_BUILD_DATE__ = '2026.10';
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岁窦工具箱 · V4.2</title>
+<title>岁窦工具箱 · V5.0</title>
 <link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="css/themes.css">
 <link rel="icon" type="image/png" href="images/slogo.png">
-<style id="v4-visual-refresh">
-/* ============================================================
-   V4.1 活力版 · 蜂蜜黄视觉主题
-   ============================================================ */
-:root{
-  --radius:16px;
-  --radius-sm:12px;
-  --shadow-sm:0 2px 8px rgba(180,124,0,.08);
-  --shadow-md:0 8px 24px rgba(180,124,0,.12);
-  --shadow-lg:0 18px 40px rgba(180,124,0,.18);
-  --ring:0 0 0 4px rgba(245,179,1,.22);
 
-  --primary:#f5b301;
-  --primary-dark:#b47c00;
-  --primary-soft:#fff4cc;
-  --lime:#ffd54f;
-  --lime-shine:#ffe9a8;
-  --lime-deep:#8d5a00;
 
-  --accent:#ff8f00;
-  --accent-soft:#fff3e0;
 
-  --bg:#fffdf5;
-  --card:#ffffff;
-  --text:#3a2a00;
-  --muted:#8a7340;
-  --border:#f0e0b0;
-}
-
-body{
-  background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(255,213,79,.35), transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, rgba(245,179,1,.16), transparent 60%),
-    linear-gradient(180deg, #fffdf5 0%, #fff8e1 100%) !important;
-  background-attachment: fixed !important;
-  color: var(--text);
-  position: relative;
-}
-body::before{
-  content:"";
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(rgba(245,179,1,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245,179,1,.05) 1px, transparent 1px);
-  background-size:36px 36px;
-  mask-image:radial-gradient(circle at 50% 40%, #000 40%, transparent 85%);
-  -webkit-mask-image:radial-gradient(circle at 50% 40%, #000 40%, transparent 85%);
-}
-main, header{position:relative;z-index:1;}
-
-header{
-  background:rgba(255,253,245,.82) !important;
-  backdrop-filter:saturate(180%) blur(14px);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);
-  border-bottom:1px solid rgba(245,179,1,.28) !important;
-  box-shadow:0 6px 22px -12px rgba(180,124,0,.22) !important;
-}
-.logo{
-  display:flex !important;
-  align-items:center !important;
-  gap:9px !important;
-  font-weight:900 !important;
-  letter-spacing:.6px !important;
-  color:#b47c00 !important;
-}
-.logo img{
-  width:28px;
-  height:28px;
-  border-radius:8px;
-  object-fit:contain;
-  display:block;
-  flex:0 0 auto;
-}
-nav button{
-  border-radius:999px !important;
-  padding:8px 18px !important;
-  font-weight:600 !important;
-  transition:all .2s ease !important;
-  color:#8a7340 !important;
-}
-nav button.active{
-  background:linear-gradient(135deg,#ffd54f,#f5b301) !important;
-  color:#3a2a00 !important;
-  box-shadow:0 6px 16px -6px rgba(180,124,0,.55) !important;
-}
-nav button:hover:not(.active){
-  background:var(--primary-soft) !important;
-  color:var(--primary-dark) !important;
-}
-.search-wrap input{
-  border-radius:999px !important;
-  background:rgba(255,250,235,.9) !important;
-  border-color:rgba(245,179,1,.28) !important;
-}
-.search-wrap input:focus{
-  border-color:#f5b301 !important;
-  box-shadow:0 0 0 3px rgba(245,179,1,.20) !important;
-}
-#userBox .mode-badge{
-  border:1px solid rgba(245,179,1,.30);
-  background:rgba(255,244,204,.65) !important;
-  color:var(--primary-dark) !important;
-}
-
-.hero{
-  padding:44px 44px 46px !important;
-  border-radius:22px !important;
-  background:
-    radial-gradient(600px 260px at 88% 20%, rgba(255,233,168,.65), transparent 70%),
-    radial-gradient(500px 320px at 110% 100%, rgba(180,124,0,.55), transparent 70%),
-    linear-gradient(135deg, #ffd54f 0%, #f5b301 42%, #b47c00 100%) !important;
-  box-shadow:
-    0 24px 50px -20px rgba(180,124,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.40) !important;
-  overflow:hidden;
-  position:relative;
-}
-.hero::before{
-  content:"";
-  position:absolute;right:-60px;top:-60px;
-  width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.55), transparent 65%);
-  pointer-events:none;
-}
-.hero::after{
-  content:"";
-  position:absolute;left:-40px;bottom:-90px;
-  width:260px;height:260px;border-radius:50%;
-  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 70%);
-  pointer-events:none;
-}
-.hero h1{
-  font-size:32px !important;
-  font-weight:900 !important;
-  letter-spacing:.6px;
-  color:#3a2a00 !important;
-  text-shadow:0 2px 10px rgba(255,255,255,.35) !important;
-  position:relative;z-index:2;
-}
-.hero p{
-  font-size:15.5px !important;
-  color:#5a4200 !important;
-  opacity:1 !important;
-  max-width:640px;
-  position:relative;z-index:2;
-}
-
-.panel{
-  border-radius:var(--radius) !important;
-  box-shadow:var(--shadow-sm) !important;
-  border-color:rgba(245,179,1,.18) !important;
-  background:#fffdf5 !important;
-  transition:box-shadow .2s ease, border-color .2s ease, transform .2s ease;
-}
-.panel:hover{
-  box-shadow:var(--shadow-md) !important;
-  border-color:rgba(245,179,1,.35) !important;
-}
-
-.tool-card{
-  border-radius:var(--radius) !important;
-  padding:22px 20px 20px !important;
-  box-shadow:var(--shadow-sm) !important;
-  border-color:rgba(245,179,1,.18) !important;
-  background:#fffdf5 !important;
-  overflow:hidden;
-  position:relative;
-}
-.tool-card::before{
-  height:4px !important;
-  background:linear-gradient(90deg,#ffd54f,#f5b301,#b47c00) !important;
-  border-radius:4px 4px 0 0;
-}
-.tool-card::after{
-  content:"";
-  position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;
-  background:radial-gradient(circle, rgba(245,179,1,.12), transparent 70%);
-  opacity:0;transition:.25s;pointer-events:none;
-}
-.tool-card:hover{
-  transform:translateY(-4px) !important;
-  box-shadow:var(--shadow-lg) !important;
-  border-color:var(--primary) !important;
-}
-.tool-card:hover::after{opacity:1;}
-.tool-icon{
-  width:48px !important;height:48px !important;
-  border-radius:14px !important;
-  background:linear-gradient(135deg, #ffe9a8, #fff4cc) !important;
-  color:#b47c00 !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 2px 6px rgba(180,124,0,.10);
-}
-.tool-card:hover .tool-icon{
-  background:linear-gradient(135deg, #ffd54f, #f5b301) !important;
-  color:#3a2a00 !important;
-  box-shadow:0 8px 18px -6px rgba(180,124,0,.55);
-}
-.tool-icon svg{width:23px !important;height:23px !important;}
-
-.hot-card{
-  border-radius:var(--radius) !important;
-  box-shadow:var(--shadow-sm) !important;
-  border-color:rgba(245,179,1,.18) !important;
-  background:#fffdf5 !important;
-}
-.hot-card:hover{
-  transform:translateY(-3px) !important;
-  box-shadow:var(--shadow-lg) !important;
-  border-color:var(--primary) !important;
-}
-.hot-card .tool-icon{width:44px !important;height:44px !important;}
-.hot-badge{
-  background:linear-gradient(135deg, #ffd54f, #f5b301) !important;
-  color:#3a2a00 !important;
-  box-shadow:0 4px 10px -4px rgba(180,124,0,.55);
-}
-
-.category-card{
-  border-radius:var(--radius) !important;
-  box-shadow:var(--shadow-sm) !important;
-  border-color:rgba(245,179,1,.18) !important;
-  background:#fffdf5 !important;
-  padding:20px 20px 18px !important;
-  position:relative;
-  overflow:hidden;
-}
-.category-card::before{
-  content:"";
-  position:absolute;left:0;top:0;right:0;height:3px;
-  background:linear-gradient(90deg,#ffd54f,#b47c00);
-  opacity:.75;
-}
-.category-card:hover{
-  border-color:var(--primary) !important;
-  box-shadow:var(--shadow-md) !important;
-  transform:translateY(-2px);
-}
-.cat-icon{
-  width:40px !important;height:40px !important;
-  border-radius:12px !important;
-  background:linear-gradient(135deg, #ffe9a8, #fff4cc) !important;
-  color:#b47c00 !important;
-}
-.cat-icon svg{width:20px !important;height:20px !important;}
-.cat-list li{
-  border-radius:999px !important;
-  padding:8px 16px !important;
-  background:rgba(255,250,235,.9) !important;
-  border:1px solid rgba(245,179,1,.16) !important;
-  font-weight:600 !important;
-  color:#8a7340 !important;
-  transition:all .18s ease;
-}
-.cat-list li:hover{
-  background:linear-gradient(135deg, #ffd54f, #f5b301) !important;
-  color:#3a2a00 !important;
-  border-color:var(--primary) !important;
-  transform:translateY(-1px);
-  box-shadow:0 6px 14px -6px rgba(180,124,0,.55);
-}
-
-.btn{
-  border-radius:11px !important;
-  font-weight:700 !important;
-  letter-spacing:.3px;
-  transition:all .2s ease !important;
-}
-.btn:not(.ghost):not(.danger){
-  background:linear-gradient(135deg, #ffd54f, #f5b301) !important;
-  border-color:transparent !important;
-  color:#3a2a00 !important;
-  box-shadow:0 6px 16px -6px rgba(180,124,0,.55);
-}
-.btn:not(.ghost):not(.danger):hover{
-  background:linear-gradient(135deg, #f5b301, #b47c00) !important;
-  color:#fff !important;
-  box-shadow:0 10px 22px -8px rgba(180,124,0,.75);
-  transform:translateY(-1px);
-}
-.btn.ghost{
-  border-radius:11px !important;
-  border-color:rgba(245,179,1,.32) !important;
-  color:#b47c00 !important;
-}
-.btn.ghost:hover{
-  background:var(--primary-soft) !important;
-  border-color:var(--primary) !important;
-  color:#8d5a00 !important;
-}
-
-.field input[type=text], .field textarea, .field select,
-#chartData, #wcText, #wfText, #jsonInput, #jsonOutput{
-  border-radius:12px !important;
-  border-color:rgba(245,179,1,.24) !important;
-  background:#fffaf0 !important;
-}
-.field input[type=text]:focus, .field textarea:focus, .field select:focus{
-  box-shadow:var(--ring) !important;
-  border-color:var(--primary) !important;
-  background:#fff !important;
-}
-
-.ta-subtabs{
-  background:rgba(255,244,204,.65) !important;
-  padding:5px !important;
-  border-radius:999px !important;
-  border:1px solid rgba(245,179,1,.22);
-  display:inline-flex;
-  gap:2px;
-}
-.ta-subtab{
-  border-radius:999px !important;
-  padding:9px 20px !important;
-  font-weight:600 !important;
-  color:#8a7340 !important;
-}
-.ta-subtab.active{
-  background:linear-gradient(135deg, #ffd54f, #f5b301) !important;
-  color:#3a2a00 !important;
-  box-shadow:0 6px 14px -6px rgba(180,124,0,.55) !important;
-}
-.ta-subtab:hover:not(.active){
-  background:#fff !important;
-  color:var(--primary-dark) !important;
-}
-
-.tool-crumb{
-  border-radius:14px !important;
-  padding:14px 18px 12px !important;
-  border-color:rgba(245,179,1,.22) !important;
-  background:rgba(255,253,245,.94) !important;
-  backdrop-filter:blur(8px);
-  box-shadow:var(--shadow-sm);
-}
-.crumb-tool{
-  border-radius:999px !important;
-  padding:4px 12px !important;
-  background:rgba(255,244,204,.65) !important;
-  border:1px solid rgba(245,179,1,.20) !important;
-  color:#8a7340 !important;
-  font-weight:600;
-  transition:all .18s ease;
-}
-.crumb-tool:hover{
-  background:linear-gradient(135deg, #ffe9a8, #fff4cc) !important;
-  border-color:var(--primary) !important;
-  color:var(--primary-dark) !important;
-  transform:translateY(-1px);
-}
-.crumb-tool.active{
-  background:linear-gradient(135deg, #ffd54f, #f5b301) !important;
-  border-color:transparent !important;
-  color:#3a2a00 !important;
-  box-shadow:0 4px 10px -4px rgba(180,124,0,.55);
-}
-
-.stat-card{
-  border-radius:14px !important;
-  background:linear-gradient(180deg, #ffffff 0%, #fffdf5 100%) !important;
-  border-color:rgba(245,179,1,.18) !important;
-  box-shadow:var(--shadow-sm);
-}
-.upgrade-item{
-  border-radius:14px !important;
-  background:linear-gradient(180deg, #ffffff 0%, #fffdf5 100%) !important;
-  border-color:rgba(245,179,1,.18) !important;
-  box-shadow:var(--shadow-sm);
-}
-.upgrade-item:hover{
-  box-shadow:var(--shadow-md) !important;
-  border-color:var(--primary) !important;
-}
-
-.page-icon{
-  background:linear-gradient(135deg, #ffe9a8, #fff4cc) !important;
-  color:#b47c00 !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
-}
-
-.calc-display,
-.clock-display {
-  background:
-    radial-gradient(600px 200px at 100% 0%, rgba(255,213,79,.22), transparent 70%),
-    linear-gradient(135deg, #3a2a00, #1f1700) !important;
-  color:#ffe9a8 !important;
-}
-#codeInput {
-  background:
-    radial-gradient(600px 200px at 100% 0%, rgba(255,213,79,.14), transparent 70%),
-    linear-gradient(180deg, #3a2a00, #1f1700) !important;
-  color: #ffd54f !important;
-}
-
-.help-sidebar{
-  border-radius:16px !important;
-  box-shadow:var(--shadow-sm);
-  border-color:rgba(245,179,1,.20) !important;
-  background:#fffdf5 !important;
-}
-.modal, .ai-pop-card{
-  border-radius:20px !important;
-  box-shadow:0 30px 80px -20px rgba(58,42,0,.45);
-}
-
-::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,#ffd54f,#f5b301) !important;
-  border:2px solid #fffdf5 !important;
-}
-::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(180deg,#f5b301,#b47c00) !important;
-}
-
-.page.active{animation:pageIn .35s ease both;}
-@keyframes pageIn{
-  from{opacity:0;transform:translateY(8px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.empty{
-  padding:56px 20px 44px !important;
-  position:relative;
-  font-size:13.5px !important;
-  line-height:1.75 !important;
-  letter-spacing:.2px;
-  color:#8a7340 !important;
-}
-.empty::before{
-  content:"";
-  display:block;
-  width:130px;
-  height:106px;
-  margin:0 auto 18px;
-  background-image:url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 130' fill='none'><ellipse cx='80' cy='112' rx='42' ry='6' fill='%23f5b301' opacity='0.18'/><path d='M40 62 L80 80 L120 62 L120 100 Q120 106 114 106 L46 106 Q40 106 40 100 Z' fill='%23fff4cc' stroke='%23b47c00' stroke-width='2.4' stroke-linejoin='round'/><path d='M40 62 L80 44 L120 62 L80 80 Z' fill='%23ffe9a8' stroke='%23b47c00' stroke-width='2.4' stroke-linejoin='round'/><path d='M80 44 L80 80' stroke='%23b47c00' stroke-width='2' opacity='0.45'/><path d='M47 98 L47 68' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' opacity='0.7'/><path d='M80 38 C72 32 72 20 80 12 C88 20 88 32 80 38 Z' fill='%23ffd54f' stroke='%23b47c00' stroke-width='2' stroke-linejoin='round'/><path d='M80 38 L80 44' stroke='%23b47c00' stroke-width='2' stroke-linecap='round'/><path d='M80 19 L80 34' stroke='%23b47c00' stroke-width='1.4' stroke-linecap='round' opacity='0.7'/></svg>");
-  background-size:contain;
-  background-repeat:no-repeat;
-  background-position:center;
-  animation:emptyFloat 3.2s ease-in-out infinite;
-}
-@keyframes emptyFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
-}
-
-.people-grid > .empty,
-.places-grid > .empty,
-.media-grid > .empty,
-.exer-grid > .empty,
-.novel-grid > .empty,
-.note-grid > .empty{
-  grid-column:1 / -1;
-}
-
-.notice-box{
-  background:#fffdf5;
-  border:1px solid rgba(245,179,1,.32);
-  border-radius:16px;
-  margin-bottom:24px;
-  overflow:hidden;
-  box-shadow:0 4px 16px -8px rgba(180,124,0,.20);
-  transition:box-shadow .25s ease, border-color .25s ease;
-}
-.notice-box:hover{
-  border-color:var(--primary);
-  box-shadow:0 8px 24px -10px rgba(180,124,0,.32);
-}
-.notice-box[open]{
-  box-shadow:0 12px 32px -12px rgba(180,124,0,.35);
-}
-.notice-summary{
-  list-style:none;
-  cursor:pointer;
-  padding:16px 22px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  background:linear-gradient(135deg,#fffdf5,#fff4cc);
-  transition:background .2s ease;
-  user-select:none;
-  outline:none;
-}
-.notice-summary::-webkit-details-marker{display:none;}
-.notice-box[open] .notice-summary{
-  border-bottom:1px solid rgba(245,179,1,.22);
-  background:linear-gradient(135deg,#fff4cc,#ffe9a8);
-}
-.notice-icon{
-  width:38px;height:38px;
-  border-radius:11px;
-  background:linear-gradient(135deg,#ffd54f,#f5b301);
-  color:#3a2a00;
-  display:flex;align-items:center;justify-content:center;
-  flex:0 0 auto;
-  box-shadow:0 6px 14px -6px rgba(180,124,0,.55);
-  transition:transform .25s ease;
-}
-.notice-icon svg{width:18px;height:18px;}
-.notice-box[open] .notice-icon{
-  transform:rotate(-8deg) scale(1.05);
-}
-.notice-text{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  flex:1;
-  min-width:0;
-}
-.notice-text b{
-  font-size:15.5px;
-  font-weight:800;
-  color:var(--primary-dark);
-  letter-spacing:.3px;
-}
-.notice-text i{
-  font-style:normal;
-  font-size:12.5px;
-  color:#8a7340;
-}
-.notice-arrow{
-  flex:0 0 auto;
-  width:22px;height:22px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--primary-dark);
-  transition:transform .28s cubic-bezier(.2,.9,.3,1.2);
-}
-.notice-arrow svg{width:18px;height:18px;}
-.notice-box[open] .notice-arrow{
-  transform:rotate(180deg);
-}
-.notice-body{
-  padding:24px 26px 22px;
-  background:#fff;
-  animation:noticeIn .28s ease both;
-}
-.notice-body p{
-  margin:0 0 16px;
-  font-size:14.5px;
-  line-height:1.95;
-  color:#3a2a00;
-  text-indent:2em;
-  letter-spacing:.3px;
-  font-weight:600;
-}
-.notice-body p:last-of-type{margin-bottom:18px;}
-.notice-sign{
-  margin-top:24px;
-  padding-top:16px;
-  border-top:1px dashed rgba(245,179,1,.32);
-  text-align:right;
-}
-.notice-sign p{
-  margin:0;
-  font-size:13.5px;
-  line-height:1.9;
-  color:var(--muted);
-  font-weight:700;
-  text-indent:0;
-  letter-spacing:.5px;
-}
-.notice-sign p:last-child{color:var(--primary-dark);}
-
-@keyframes noticeIn{
-  from{opacity:0;transform:translateY(-6px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-@media (max-width:640px){
-  .notice-summary{padding:14px 16px;gap:10px;}
-  .notice-icon{width:34px;height:34px;border-radius:10px;}
-  .notice-icon svg{width:16px;height:16px;}
-  .notice-text b{font-size:14.5px;}
-  .notice-text i{font-size:11.5px;}
-  .notice-body{padding:18px 18px 16px;}
-  .notice-body p{font-size:13.5px;line-height:1.85;}
-}
-
-.pinyin-head{
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 18px 4px 6px;
-  font-size: 20px;
-  font-weight: 900;
-  color: var(--primary-dark);
-  letter-spacing: 3px;
-  line-height: 1;
-}
-.pinyin-head:first-child{
-  margin-top: 0;
-}
-.pinyin-head::before{
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 22px;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #ffd54f, #f5b301);
-  box-shadow: 0 2px 6px -2px rgba(180,124,0,.55);
-}
-.pinyin-head::after{
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, rgba(245,179,1,.40), transparent);
-}
-
-@media (max-width:640px){
-  .pinyin-head{
-    font-size: 17px;
-    letter-spacing: 2px;
-    margin: 14px 2px 4px;
-  }
-  .pinyin-head::before{
-    width: 5px;
-    height: 18px;
-  }
-}
-
-#noResult{
-  padding:56px 20px 48px !important;
-  position:relative;
-  color:#8a7340 !important;
-  font-size:14px !important;
-  line-height:1.75 !important;
-  letter-spacing:.2px;
-}
-#noResult::before{
-  content:"";
-  display:block;
-  width:140px;
-  height:120px;
-  margin:0 auto 20px;
-  background-image:url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 150' fill='none'><ellipse cx='85' cy='128' rx='46' ry='7' fill='%23f5b301' opacity='0.16'/><circle cx='72' cy='68' r='34' fill='%23fffdf5' stroke='%23b47c00' stroke-width='2.6'/><circle cx='72' cy='68' r='34' fill='none' stroke='%23ffd54f' stroke-width='2.6' opacity='0.6'/><path d='M97 93 L120 116' stroke='%23b47c00' stroke-width='6' stroke-linecap='round'/><path d='M97 93 L120 116' stroke='%23f5b301' stroke-width='2.4' stroke-linecap='round'/><path d='M60 58 Q72 50 84 58' stroke='%23f5b301' stroke-width='2.4' stroke-linecap='round' fill='none'/><circle cx='62' cy='76' r='2.4' fill='%23b47c00'/><circle cx='82' cy='76' r='2.4' fill='%23b47c00'/><path d='M66 86 Q72 82 78 86' stroke='%23b47c00' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M118 40 Q120 30 128 28' stroke='%23f5b301' stroke-width='2' stroke-linecap='round' fill='none' opacity='0.7'/><path d='M132 46 Q137 40 144 42' stroke='%23ffd54f' stroke-width='2' stroke-linecap='round' fill='none' opacity='0.8'/><circle cx='40' cy='40' r='3' fill='%23ffd54f' opacity='0.65'/><circle cx='128' cy='88' r='2.6' fill='%23f5b301' opacity='0.7'/></svg>");
-  background-size:contain;
-  background-repeat:no-repeat;
-  background-position:center;
-  animation:noResultFloat 3.4s ease-in-out infinite;
-}
-@keyframes noResultFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
-}
-
-.notif-btn{
-  position:relative;
-  width:34px;height:34px;
-  border-radius:50%;
-  border:1px solid rgba(245,179,1,.28);
-  background:rgba(255,253,245,.9);
-  color:var(--primary-dark);
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  transition:.18s;
-  padding:0;
-  flex:0 0 auto;
-}
-.notif-btn:hover{
-  background:var(--primary-soft);
-  border-color:var(--primary);
-  transform:translateY(-1px);
-  box-shadow:0 4px 10px -4px rgba(180,124,0,.5);
-}
-.notif-btn.open{
-  background:linear-gradient(135deg,#ffd54f,#f5b301);
-  border-color:transparent;
-  color:#3a2a00;
-  box-shadow:0 6px 14px -6px rgba(180,124,0,.6);
-}
-.notif-btn svg{width:16px;height:16px;}
-.notif-dot{
-  position:absolute;
-  top:-3px;right:-3px;
-  min-width:16px;height:16px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#ef4444,#dc2626);
-  color:#fff;
-  font-size:10px;
-  font-weight:800;
-  line-height:16px;
-  text-align:center;
-  padding:0 4px;
-  box-shadow:0 0 0 2px #ffd54f, 0 2px 6px rgba(220,38,38,.45);
-  animation:notifPulse 2s ease-in-out infinite;
-}
-@keyframes notifPulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.12);}
-}
-
-.notif-panel{
-  position:fixed;
-  top:80px;right:20px;
-  width:380px;
-  max-height:520px;
-  background:#fffdf5;
-  border:1px solid rgba(245,179,1,.28);
-  border-radius:16px;
-  box-shadow:0 24px 60px -16px rgba(58,42,0,.32), 0 2px 6px rgba(180,124,0,.08);
-  z-index:200;
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  animation:notifIn .22s cubic-bezier(.2,.9,.3,1.2) both;
-}
-.notif-panel.show{display:flex;}
-@keyframes notifIn{
-  from{opacity:0;transform:translateY(-8px) scale(.96);}
-  to{opacity:1;transform:translateY(0) scale(1);}
-}
-.notif-head{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 18px;
-  border-bottom:1px solid rgba(245,179,1,.20);
-  background:linear-gradient(180deg,#fffdf5,#fff);
-}
-.notif-head-left{display:flex;align-items:center;gap:9px;}
-.notif-head-left svg{width:16px;height:16px;color:var(--primary-dark);}
-.notif-head h3{margin:0;font-size:15px;font-weight:700;color:var(--text);}
-.notif-clear{
-  border:none;background:none;
-  font-size:12.5px;color:var(--muted);
-  cursor:pointer;padding:4px 8px;border-radius:6px;
-  transition:.15s;font-weight:600;
-}
-.notif-clear:hover{background:var(--primary-soft);color:var(--primary-dark);}
-.notif-list{
-  flex:1;overflow-y:auto;
-  padding:6px 8px;
-  display:flex;flex-direction:column;gap:4px;
-}
-.notif-item{
-  position:relative;
-  padding:12px 14px 12px 30px;
-  border-radius:10px;
-  cursor:pointer;
-  transition:.15s;
-  border:1px solid transparent;
-  background:#fff;
-}
-.notif-item:hover{background:#fffdf5;border-color:rgba(245,179,1,.22);}
-.notif-item::before{
-  content:"";
-  position:absolute;
-  left:14px;top:18px;
-  width:8px;height:8px;border-radius:50%;
-  background:#d1d5db;
-  transition:.18s;
-}
-.notif-item.unread{background:rgba(255,244,204,.55);}
-.notif-item.unread::before{
-  background:linear-gradient(135deg,#ffd54f,#f5b301);
-  box-shadow:0 0 0 3px rgba(245,179,1,.28);
-}
-.notif-item.type-info::before{background:#3b82f6;}
-.notif-item.type-success::before{background:linear-gradient(135deg,#ffd54f,#b47c00);}
-.notif-item.type-warning::before{background:#f59e0b;}
-.notif-item.type-important::before{background:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.2);}
-.notif-item.unread.type-info::before{box-shadow:0 0 0 3px rgba(59,130,246,.2);}
-.notif-item.unread.type-warning::before{box-shadow:0 0 0 3px rgba(245,158,11,.2);}
-
-.notif-item-title{
-  font-size:14px;font-weight:700;color:var(--text);
-  margin:0 0 4px;
-  line-height:1.4;
-}
-.notif-item-content{
-  font-size:13px;color:#5a4a20;
-  line-height:1.65;
-  margin:0 0 6px;
-  word-break:break-word;
-}
-.notif-item-time{
-  font-size:11px;color:#b08868;
-  font-variant-numeric:tabular-nums;
-}
-.notif-empty{
-  padding:44px 20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13.5px;
-}
-.notif-empty svg{
-  width:40px;height:40px;
-  margin:0 auto 12px;display:block;
-  color:var(--primary);
-  opacity:.55;
-}
-.notif-foot{
-  padding:10px 18px;
-  border-top:1px solid rgba(245,179,1,.18);
-  background:#fffdf5;
-  text-align:center;
-}
-.notif-hint{font-size:11.5px;color:#b08868;}
-
-@media (max-width:520px){
-  .notif-panel{
-    top:auto !important;
-    left:10px !important;
-    right:10px !important;
-    width:auto !important;
-    max-height:70vh;
-  }
-}
-
-.notif-pin-badge{
-  display:inline-block;
-  margin-right:6px;
-  padding:1px 7px;
-  border-radius:999px;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.5px;
-  color:#3a2a00;
-  background:linear-gradient(135deg, #ffd54f, #f5b301);
-  vertical-align:1px;
-  box-shadow:0 2px 6px -2px rgba(180,124,0,.6);
-}
-
-.promo-banner{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  padding:18px 22px;
-  margin-bottom:24px;
-  border-radius:16px;
-  background:
-    radial-gradient(400px 160px at 100% 0%, rgba(255,233,168,.65), transparent 70%),
-    linear-gradient(135deg, #fffdf5 0%, #fff4cc 100%);
-  border:1px solid rgba(245,179,1,.32);
-  box-shadow:0 8px 24px -12px rgba(180,124,0,.25);
-  overflow:hidden;
-}
-.promo-banner::before{
-  content:"";
-  position:absolute;
-  left:0;top:0;bottom:0;
-  width:4px;
-  background:linear-gradient(180deg, #ffd54f, #f5b301);
-  border-radius:4px 0 0 4px;
-}
-.promo-badge{
-  position:absolute;
-  top:10px;right:14px;
-  font-size:10.5px;
-  font-weight:800;
-  letter-spacing:.5px;
-  color:#3a2a00;
-  background:linear-gradient(135deg, #ffd54f, #f5b301);
-  padding:2px 10px;
-  border-radius:999px;
-  box-shadow:0 4px 10px -4px rgba(180,124,0,.55);
-}
-.promo-body{
-  flex:1;
-  min-width:0;
-  padding-right:60px;
-}
-.promo-title{
-  margin:0 0 4px;
-  font-size:15.5px;
-  font-weight:800;
-  color:#b47c00;
-  letter-spacing:.3px;
-}
-.promo-desc{
-  margin:0;
-  font-size:13px;
-  line-height:1.65;
-  color:#7a5a20;
-}
-.promo-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  flex:0 0 auto;
-}
-.promo-close{
-  width:26px;height:26px;
-  border-radius:50%;
-  border:1px solid rgba(245,179,1,.32);
-  background:#fff;
-  color:var(--muted);
-  font-size:12px;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:0;
-  transition:.15s;
-}
-.promo-close:hover{
-  background:#fef2f2;
-  color:#b91c1c;
-  border-color:#fecaca;
-}
-@media (max-width:640px){
-  .promo-banner{
-    flex-wrap:wrap;
-    padding:16px 16px 14px;
-    gap:12px;
-  }
-  .promo-body{padding-right:0;width:100%;}
-  .promo-actions{width:100%;justify-content:flex-end;}
-  .promo-badge{top:8px;right:12px;}
-}
-</style>
-
-<!-- ============================================================
-     整屏翻页（首页 / 帮助页）
-     ============================================================ -->
-<style id="snap-scroll-style">
-:root { --header-h: 60px; }
-
-#page-home, #page-help {
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  margin-top: -26px !important;
-  margin-bottom: 0 !important;
-  box-sizing: border-box !important;
-}
-
-main { overflow: visible !important; }
-html, body { overflow-x: hidden !important; }
-
-.snap-wrap {
-  height: calc(100vh - var(--header-h, 60px));
-  overflow-y: auto;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  scrollbar-width: none;
-}
-.snap-wrap::-webkit-scrollbar { display: none; }
-
-.snap-section {
-  height: calc(100vh - var(--header-h, 60px));
-  min-height: calc(100vh - var(--header-h, 60px));
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  position: relative;
-  padding: 0;
-}
-/* 桌面端：给右侧指示器留出避让空间 */
-@media (min-width: 861px) {
-  .snap-section {
-    padding-right: 172px;
-  }
-}
-.snap-section::-webkit-scrollbar { width: 6px; }
-.snap-section::-webkit-scrollbar-thumb {
-  background: rgba(245,179,1,.28);
-  border-radius: 3px;
-}
-
-.snap-inner {
-  max-width: none;
-  margin: 0;
-  gap: 0;
-}
-
-.snap-indicator {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 60;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  padding: 8px 6px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(245,179,1,.20);
-  box-shadow: 0 8px 24px -12px rgba(180,124,0,.28);
-  scrollbar-width: none;
-}
-.snap-indicator.show { display: flex; }
-.snap-indicator::-webkit-scrollbar { display: none; }
-
-.snap-dot {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 14px 7px 10px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: .18s;
-  font-family: inherit;
-  color: #8a7340;
-  font-size: 12.5px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-align: left;
-}
-.snap-dot:hover {
-  background: rgba(255,244,204,.7);
-  color: #b47c00;
-}
-.snap-dot-dot {
-  flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #e5d6a8;
-  transition: .2s;
-}
-.snap-dot.active {
-  background: linear-gradient(135deg,#ffd54f,#f5b301);
-  color: #3a2a00;
-  box-shadow: 0 4px 10px -4px rgba(180,124,0,.55);
-}
-.snap-dot.active .snap-dot-dot {
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(255,255,255,.45);
-}
-
-@media (max-width: 860px) {
-  .snap-indicator { right: 8px; padding: 6px 4px; gap: 2px; }
-  .snap-dot { padding: 6px; gap: 0; }
-  .snap-dot-text { display: none; }
-  .snap-section { padding: 20px 46px 24px 14px; }
-  #page-home, #page-help { margin: -18px -14px 0; }
-}
-
-.snap-footer-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-.snap-footer {
-  text-align: center;
-  padding: 40px 20px;
-  max-width: 520px;
-}
-.snap-footer-logo {
-  font-size: 26px;
-  font-weight: 900;
-  color: #b47c00;
-  letter-spacing: 3px;
-  margin-bottom: 14px;
-}
-.snap-footer-version {
-  font-size: 14px;
-  color: #8a7340;
-  margin-bottom: 6px;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-}
-.snap-footer-copy {
-  font-size: 12.5px;
-  color: #a89260;
-  margin-bottom: 26px;
-}
-.snap-footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.snap-footer-links a {
-  font-size: 13.5px;
-  color: #b47c00;
-  cursor: pointer;
-  font-weight: 700;
-  text-decoration: none;
-  padding: 7px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(245,179,1,.3);
-  background: rgba(255,244,204,.5);
-  transition: .15s;
-}
-.snap-footer-links a:hover {
-  background: linear-gradient(135deg,#ffd54f,#f5b301);
-  color: #3a2a00;
-  border-color: transparent;
-}
-
-#page-help .help-layout {
-  display: block !important;
-  grid-template-columns: none !important;
-}
-#page-help .help-sidebar { display: none !important; }
-#page-help .help-content { display: block !important; }
-
-.snap-section .panel:last-child { margin-bottom: 0; }
-</style>
 
 <!-- 帮助页 panel 内部旧版式 -->
 <style id="help-panel-style">
@@ -1127,14 +32,14 @@ html, body { overflow-x: hidden !important; }
     height: 32px !important;
     border-radius: 50% !important;
     flex: 0 0 auto !important;
-    background: linear-gradient(135deg, #ffd54f, #b47c00) !important;
+    background: linear-gradient(135deg, #7bb8e8, #2c5f8a) !important;
     color: #fff !important;
     font-weight: 800 !important;
     font-size: 14px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    box-shadow: 0 3px 9px rgba(180,124,0,.28) !important;
+    box-shadow: 0 3px 9px rgba(74,144,226,.28) !important;
   }
   #page-help .help-step-body{
     flex: 1 !important;
@@ -1194,6 +99,15 @@ html, body { overflow-x: hidden !important; }
       </button>
       <img id="userAvatar" alt="">
       <span class="user-email" id="userEmail" style="display:none;"></span>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题" title="切换暗色 / 亮色">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
       <button class="btn small" id="loginBtn">登录</button>
       <button class="btn ghost small" id="logoutBtn" style="display:none;">退出</button>
     </div>
@@ -1229,7 +143,7 @@ html, body { overflow-x: hidden !important; }
         <div class="hp-hero-main">
           <span class="hp-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg>
-            <V4 class="2">4.2</V4> 活力版
+            <V4 class="2">5.0</V4> 稳定版
           </span>
           <h1>岁窦工具箱</h1>
           <p class="hp-sub">69 款本地小工具 · 打开即用 · 数据不上传</p>
@@ -1301,31 +215,61 @@ html, body { overflow-x: hidden !important; }
       <div class="hp-promo" id="hpPromo">
         <div class="hp-promo-track" id="hpPromoTrack">
 
-          <!-- slide 1 -->
+          <!-- slide 1：V5.0 主题与暗色模式 -->
           <div class="hp-promo-slide slide-study">
             <div class="hp-promo-body">
-              <span class="hp-promo-tag">V4.2 更新</span>
-              <h3>「学科与学习」专区上线</h3>
-              <p>函数图像、化学方程式、元素周期表、古诗词默写、地球模块、中国历史简表……15 款学习工具一站收纳，拆分数理化与文史地理两个子分类，学生党专属工作台。</p>
-              <button type="button" class="hp-promo-btn" data-jump="apps">立即体验 →</button>
+              <span class="hp-promo-tag">V5.0 更新</span>
+              <h3>淡蓝色主题 & 暗色模式上线</h3>
+              <p>全站换装淡蓝色主题，主色 #4a90e2，长时间使用更舒适。正式引入暗色模式，支持顶栏图标、设置页三态选择与快捷键 Shift + D 切换，夜间使用更护眼。</p>
+              <button type="button" class="hp-promo-btn" data-jump="settings">去设置 →</button>
             </div>
             <div class="hp-promo-illo illo-study">
               <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M30 22h60v76H30z"/>
-                <path d="M45 22v76M75 22v76"/>
-                <path d="M38 40h4M38 52h4M38 64h4M68 40h4M68 52h4M68 64h4"/>
-                <circle cx="60" cy="46" r="5"/>
-                <path d="M60 41v-6M60 51v6M55 46h-6M65 46h6"/>
+                <circle cx="60" cy="60" r="36"/>
+                <path d="M60 24v36l24 12"/>
               </svg>
             </div>
           </div>
 
-          <!-- slide 2 -->
+          <!-- slide 2：新增工具 -->
+          <div class="hp-promo-slide slide-utility">
+            <div class="hp-promo-body">
+              <span class="hp-promo-tag">新增工具</span>
+              <h3>密码生成器 · 本地生成不上传</h3>
+              <p>支持随机密码、口令短语、PIN 码三种模式。使用浏览器原生加密随机源生成，不上传、不记录、不联网。实时显示强度等级、估算熵值与暴力破解时间。</p>
+              <button type="button" class="hp-promo-btn" data-jump="passwordgen">去试试 →</button>
+            </div>
+            <div class="hp-promo-illo illo-utility">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="30" y="50" width="60" height="40" rx="8"/>
+                <path d="M45 50V35a15 15 0 0 1 30 0v15"/>
+                <circle cx="60" cy="70" r="5"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- slide 3：V5.0 收敛 -->
+          <div class="hp-promo-slide slide-create">
+            <div class="hp-promo-body">
+              <span class="hp-promo-tag">稳定版</span>
+              <h3>代码与样式全面收敛</h3>
+              <p>清理历史遗留样式，移除整屏翻页残留，版本号统一从常量读取。优化「我的常用」逻辑，AI 功能增加未登录提示。界面更清爽，维护更从容。</p>
+              <button type="button" class="hp-promo-btn" data-jump="apps">查看应用 →</button>
+            </div>
+            <div class="hp-promo-illo illo-create">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M40 30h40v60H40z"/>
+                <path d="M50 45h20M50 55h20M50 65h10"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- slide 4：王牌功能保留 -->
           <div class="hp-promo-slide slide-health">
             <div class="hp-promo-body">
               <span class="hp-promo-tag">健康与运动</span>
               <h3>急救知识速查 + CPR 节拍器</h3>
-              <p>12 个常见紧急场景的分步处理指南，覆盖 CPR、海姆立克、溺水、触电、中风、烧烫伤；含 110 次/分的 CPR 节拍器、AED 使用引导，以及可导出的紧急信息卡。全部离线可用。</p>
+              <p>12 个常见紧急场景的分步处理指南，覆盖 CPR、海姆立克、溺水、触电、中风、烧烫伤；含 110 次/分的 CPR 节拍器、AED 使用引导，以及可导出的紧急信息卡。</p>
               <button type="button" class="hp-promo-btn" data-jump="firstaid">马上查看 →</button>
             </div>
             <div class="hp-promo-illo illo-health">
@@ -1336,41 +280,8 @@ html, body { overflow-x: hidden !important; }
             </div>
           </div>
 
-          <!-- slide 3 -->
-          <div class="hp-promo-slide slide-create">
-            <div class="hp-promo-body">
-              <span class="hp-promo-tag">创作工坊</span>
-              <h3>小说助手 · 创作一站式</h3>
-              <p>时间线、起名器、对话生成器、随机灵感、灵感速记、小说管理六个子工具统一入口，数据互通。角色关系图、表格填入器、畅想画布，让小说、剧本、长图创作一站搞定。</p>
-              <button type="button" class="hp-promo-btn" data-jump="novelassistant">进入创作 →</button>
-            </div>
-            <div class="hp-promo-illo illo-create">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M28 90l10-22 44-44 12 12-44 44z"/>
-                <path d="M82 24l12 12M38 68l12 12"/>
-                <path d="M28 90l-6 8 10-4"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- slide 4 -->
-          <div class="hp-promo-slide slide-utility">
-            <div class="hp-promo-body">
-              <span class="hp-promo-tag">实用工具</span>
-              <h3>表情包收藏 · 一键复制到剪贴板</h3>
-              <p>拖拽批量上传，静态图自动压缩到 480px 以内，GIF 保留动图。点击缩略图即可复制到剪贴板，直接粘到微信 / QQ / 钉钉。支持分类、标签、常用标记与使用次数统计。</p>
-              <button type="button" class="hp-promo-btn" data-jump="sticker">去试试 →</button>
-            </div>
-            <div class="hp-promo-illo illo-utility">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="60" cy="60" r="36"/>
-                <path d="M46 52h.01M74 52h.01"/>
-                <path d="M44 74a20 20 0 0 0 32 0"/>
-              </svg>
-            </div>
-          </div>
-
         </div>
+      
 
         <button class="hp-promo-arrow prev" id="hpPromoPrev" type="button" aria-label="上一张">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1416,7 +327,6 @@ html, body { overflow-x: hidden !important; }
         <button type="button" class="hp-tool" data-jump="funcplot">
           <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M6.5 17c1.6-6.4 3.1-9.5 4.6-9.5s2.4 8.5 3.9 8.5 1.8-4.2 3.5-5.5"/></svg></span>
           <span class="hp-tool-body"><b>函数图像绘制</b><em>多函数叠加 · 标签可拖拽 · 高清导出</em></span>
-          <span class="hp-tool-hot">NEW</span>
         </button>
 
         <button type="button" class="hp-tool" data-jump="whitenoise">
@@ -1432,7 +342,6 @@ html, body { overflow-x: hidden !important; }
         <button type="button" class="hp-tool" data-jump="firstaid">
           <span class="hp-tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><path d="M12 9v6M9 12h6"/></svg></span>
           <span class="hp-tool-body"><b>急救知识速查</b><em>12 个紧急场景 · CPR 节拍器 · AED</em></span>
-          <span class="hp-tool-hot">NEW</span>
         </button>
       </div>
     </section>
@@ -1446,42 +355,40 @@ html, body { overflow-x: hidden !important; }
 
       <div class="hp-new">
         <button type="button" class="hp-new-card" data-jump="sportsinjury">
-          <span class="hp-new-badge">NEW</span>
           <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/><circle cx="12" cy="5" r="1.5"/></svg></span>
           <b>运动损伤应急处理</b>
           <em>10 种常见损伤 · RICE 分步指导</em>
         </button>
 
         <button type="button" class="hp-new-card" data-jump="fasting">
-          <span class="hp-new-badge">NEW</span>
           <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M18 4.5l1.5-1.5"/></svg></span>
           <b>轻断食时间表</b>
           <em>16:8 / 18:6 / 20:4 · 打卡统计</em>
         </button>
 
         <button type="button" class="hp-new-card" data-jump="acupoint">
-          <span class="hp-new-badge">NEW</span>
+         
           <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
           <b>常见穴位速查</b>
           <em>25 个常用穴位 · 症状 / 部位 / 经络</em>
         </button>
 
         <button type="button" class="hp-new-card" data-jump="devicetest">
-          <span class="hp-new-badge">NEW</span>
+         
           <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg></span>
           <b>实用测试</b>
           <em>键盘 · 鼠标 · 网络 · 麦克风</em>
         </button>
 
         <button type="button" class="hp-new-card" data-jump="videocollect">
-          <span class="hp-new-badge">NEW</span>
+         
           <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 8l6 4-6 4V8z"/></svg></span>
           <b>视频收藏</b>
           <em>B站 / 抖音 / 小红书 / YouTube</em>
         </button>
 
         <button type="button" class="hp-new-card" data-jump="sticker">
-          <span class="hp-new-badge">NEW</span>
+         
           <span class="hp-new-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4 4 0 0 0 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg></span>
           <b>表情包收藏</b>
           <em>一键复制到剪贴板 · GIF 保留</em>
@@ -1630,36 +537,34 @@ html, body { overflow-x: hidden !important; }
 
       <details class="hp-note" open>
         <summary>
-          <span class="hp-note-title">岁窦工作室 · V4.2 </span>
+          <span class="hp-note-title">岁窦工作室 · V5.0 </span>
           <span class="hp-note-hint">点击展开 / 收起</span>
           <svg class="hp-note-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
 
-          <div class="notice-body">
-            <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。V4.2 活力版在 V4.1 的基础上继续打磨：首页彻底重构，搜索系统升级为独立搜索页，帮助文档和编者的话也同步更新。</p>
+        <div class="notice-body">
+          <p>欢迎你打开这个页面，岁窦工作室出品的岁窦工具箱。V5.0 稳定版是频繁更新期的收官之作。在这个版本中，我们完成了代码与样式的全面收敛，将全站主题从蜂蜜黄换成更加宁静护眼的淡蓝色，并正式引入暗色模式，同时新增了大家期待已久的密码生成器。</p>
 
-            <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
+          <p><span style="color:#b91c1c;"><b>注意：所有数据请善于保存，能导出的内容就尽快导出，否则数据丢失、无法写入数据等错误会出现。部分工具搭配了导出功能，就是为了防止这个情况的出现。再次提醒，使用完一个工具后，导出。</b></span></p>
 
-            <p>V4.2 最大的变化是首页。原来的「整屏翻页」改为常规单页滚动布局，新增推广轮播、专题推荐、最新上架、「为什么选择岁窦」等板块，浏览体验更像一个完整的工具箱主页，而不是一张张幻灯片。首页 Hero 区域保留了大标题、快捷胶囊和数据统计，同时腾出更多空间给内容板块，让用户在首屏就能看到推广、热门和最新。</p>
+          <p>从 V2.1 到 V5.0，工具箱走过了密集的迭代期。V2 系列打骨架、定分类；V3 系列换主题、加首页倒计时、加通知；V4 系列换蜂蜜黄、整屏翻页、学科大类、首页重构、搜索升级。快速迭代带来了丰富度，也积累了历史包袱。V5.0 的目标不是“再加多少”，而是“把已有的沉淀下来”——收敛历史债务，补全真正缺失的工具，并为长期使用引入暗色模式。</p>
 
-            <p>搜索系统是 V4.2 的第二大变化。顶部搜索框改为一颗「🔍 搜索」按钮，点击进入独立搜索页，不再有下拉遮挡的问题。搜索页支持<b>模糊搜索</b>（匹配名称、简介、关键词、分类）和<b>精确搜索</b>（只匹配工具名或 id）两种模式，内置 12 个热门搜索标签，结果列表关键词自动高亮。空状态时搜索框+热门标签居中显示，开始输入后自动靠顶，符合直觉。当关键词只命中一款工具时，会直接跳到该工具页，省去中转。</p>
+          <p>V5.0 之后将进入维护期，只做 bug 修复与安全更新，不再频繁添加工具。维护期版本号使用 V5.0.1、V5.0.2 的形式，小数点后一位表示修复类更新，只有重大变化才升到 V5.1。我们希望你打开它时，它就安安静静地在那里，好用、不打扰、不掉链子。</p>
 
-            <p>应用中心保持 V4.1 的 C 方案（吸顶搜索栏 + 分类胶囊 + 我的常用 + 全部应用拼音分组），学科与学习、健康与运动、创作工坊等九大分类工具不变。「学科与学习」大类依旧收纳函数图像绘制、化学方程式、元素周期表、物理公式计算、解方程组、矩阵运算、电路计算、遗传计算、人体系统速查、中国历史简表、世界历史简表、地球模块、中国地理、古诗词默写、细胞结构速查等 15 款学习工具，并拆分为「数理化」「文史地理」两个子分类。</p>
+          <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
 
-            <p>联系方式：（微博）@岁窦工作室、（邮箱）q13052830801@163.com</p>
-
-            <div class="notice-sign">
-              <p>2026 年 10 月</p>
-              <p>岁窦工具箱 · V4.2 活力版</p>
-            </div>
+          <div class="notice-sign">
+            <p>2026 年 10 月</p>
+            <p>岁窦工具箱 · V5.0 稳定版</p>
           </div>
+        </div>
       </details>
     </section>
 
     <!-- ========== ⑨ 页脚 ========== -->
     <footer class="hp-footer">
       <div class="hp-footer-logo">岁窦工具箱</div>
-      <div class="hp-footer-sub">V4.2 活力版 · 2026© 岁窦制作</div>
+      <div class="hp-footer-sub">V5.0 稳定版 · 2026© 岁窦制作</div>
 
       <div class="hp-footer-links">
         <button type="button" data-jump="apps">应用中心</button>
@@ -1769,8 +674,8 @@ html, body { overflow-x: hidden !important; }
   <p class="empty" id="appsNoResult" style="display:none;">没有找到相关工具，换个关键词试试吧～</p>
 </section>
 
-  <!-- ==================== 帮助中心 ==================== -->
- <!-- ==================== 帮助中心 ==================== -->
+
+<!-- ==================== 帮助中心 ==================== -->
 <section id="page-help" class="page">
   <h2 class="page-title">
     <span class="page-icon">
@@ -1782,7 +687,7 @@ html, body { overflow-x: hidden !important; }
     </span>
     帮助中心
   </h2>
-  <p class="page-desc">V4.2 活力版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
+  <p class="page-desc">V5.0 稳定版帮助中心：新手教程、常见问题、快捷键与数据说明。若这里没有解决你的疑问，欢迎通过文末的方式联系我们。</p>
 
   <div class="help-layout">
     <div class="help-content">
@@ -1838,7 +743,7 @@ html, body { overflow-x: hidden !important; }
         </h3>
         <div class="help-step">
           <span class="help-step-num">1</span>
-          <div class="help-step-body"><b>先逛一圈首页</b>首页采用常规单页滚动布局，从上到下依次是：Hero 区（大标题 + 数据统计）、推广轮播、热门工具、最新上架、专题推荐、「为什么选择岁窦工具箱」、编者的话、页脚。推广轮播会自动切换，鼠标悬停暂停，支持左右箭头与圆点手动切换。首页 Hero 右侧显示工具总数、分类数、本地运行比例与数据上传量。</div>
+          <div class="help-step-body"><b>先逛一圈首页</b>首页采用常规单页滚动布局，从上到下依次是：Hero 区（大标题 + 数据统计）、推广轮播、热门工具、最新上架、专题推荐、「为什么选择岁窦工具箱」、编者的话、页脚。推广轮播会自动切换，鼠标悬停暂停，支持左右箭头与圆点手动切换。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">2</span>
@@ -1846,7 +751,7 @@ html, body { overflow-x: hidden !important; }
         </div>
         <div class="help-step">
           <span class="help-step-num">3</span>
-          <div class="help-step-body"><b>用搜索快速找到工具</b>点击顶部导航栏的「🔍 搜索」按钮进入独立搜索页。搜索页支持两种模式：<strong>模糊搜索</strong>（匹配名称、简介、关键词、分类）与<strong>精确搜索</strong>（只匹配工具名或 id）。页面内置 12 个热门搜索标签，点击即搜；结果列表关键词会自动高亮；只命中一款工具时会直接跳到该工具页，省去中转。空状态时搜索框与热门标签整体居中，输入后自动靠顶。</div>
+          <div class="help-step-body"><b>用搜索快速找到工具</b>点击顶部导航栏的「搜索」按钮进入独立搜索页。搜索页支持两种模式：<strong>模糊搜索</strong>（匹配名称、简介、关键词、分类）与<strong>精确搜索</strong>（只匹配工具名或 id）。页面内置 12 个热门搜索标签，点击即搜；结果列表关键词会自动高亮；只命中一款工具时会直接跳到该工具页。空状态时搜索框与热门标签整体居中，输入后自动靠顶。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">4</span>
@@ -1858,10 +763,14 @@ html, body { overflow-x: hidden !important; }
         </div>
         <div class="help-step">
           <span class="help-step-num">6</span>
-          <div class="help-step-body"><b>养成备份的习惯</b>在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。单工具页也各自带导出按钮（CSV / JSON / PNG / Word / TXT）。</div>
+          <div class="help-step-body"><b>切换主题（V5.0 新增）</b>V5.0 引入暗色模式。点击右上角用户头像附近的太阳 / 月亮图标，一键切换亮暗；或者进入「设置 → 外观」选择「跟随系统 / 亮色 / 暗色」；熟悉快捷键的用户也可以直接按 <span class="kbd">Shift</span> + <span class="kbd">D</span>。首次访问时跟随操作系统偏好，手动切换后会记住你的选择。</div>
         </div>
         <div class="help-step">
           <span class="help-step-num">7</span>
+          <div class="help-step-body"><b>养成备份的习惯</b>在「设置 → 数据管理」里点「导出全部数据（JSON）」即可下载一份完整备份。清除浏览器缓存或更换设备前，建议先导出一份。单工具页也各自带导出按钮（CSV / JSON / PNG / Word / TXT）。</div>
+        </div>
+        <div class="help-step">
+          <span class="help-step-num">8</span>
           <div class="help-step-body"><b>健康数据仅供参考</b>「健康管理」与「运动记录」中的 BMI、睡眠时长、心率 / 血糖 / 血压判定、运动热量估算、鞋码推荐等均为参考性质，<b>不能替代专业医疗意见，如有不适请及时就医。</b></div>
         </div>
       </div>
@@ -1873,14 +782,33 @@ html, body { overflow-x: hidden !important; }
           常见问题
         </h3>
 
-                <details class="faq-item" >
-          <summary>V4.2 活力版相比 V4.1 改了什么？</summary>
+        <details class="faq-item">
+          <summary>V5.0 稳定版相比 V4.2 改了什么？</summary>
           <div class="faq-body">
-            <p><b>V4.2 的核心是首页重构与搜索系统升级。</b></p>
-            <p><b>首页重构</b>：从「整屏翻页」改为常规单页滚动布局，新增推广轮播（4 张自动轮播）、最新上架、专题推荐、「为什么选择岁窦工具箱」等板块，让首页内容更丰富、浏览更顺畅，更接近一个完整的工具箱主页。</p>
-            <p><b>搜索系统升级</b>：顶部搜索框改为「🔍 搜索」按钮，点击进入独立搜索页，告别下拉面板遮挡问题。搜索页支持<b>模糊搜索</b>与<b>精确搜索</b>两种模式，内置 12 个热门搜索标签、关键词自动高亮、空状态居中显示；只命中一款工具时直接跳到该工具页。切换搜索模式即时生效，无需重新输入。</p>
-            <p><b>专题推荐</b>：按使用场景打包四组专题——学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口，一键直达。</p>
-            <p><b>帮助文档 &amp; 编者的话</b>：同步更新到 V4.2，覆盖首页重构、搜索升级等所有新变化。</p>
+            <p><b>V5.0 是频繁更新期的收官之作，核心做了三件事：收敛、补全、前瞻。</b></p>
+            <p><b>淡蓝色主题</b>：全站从蜂蜜黄换装为淡蓝色系（主色 <code>#4a90e2</code>）。长时间使用更舒适，也更贴合「稳定版」的中性定位。数据可视化色（统计图、词云、BMI 分段等）保留原有多彩色，确保数据一眼可辨。</p>
+            <p><b>暗色模式</b>：完整的暗色视觉体系，深蓝黑背景、分层清晰、对比度达标。支持顶栏图标、设置页三态选择、快捷键 <span class="kbd">Shift</span> + <span class="kbd">D</span> 三种切换入口。首次访问跟随系统偏好，手动切换后记住选择。</p>
+            <p><b>密码生成器</b>：新增工具，支持随机密码 / 口令短语 / PIN 码三种模式，使用浏览器原生加密随机源，不上传、不记录、不联网。</p>
+            <p><b>代码与样式收敛</b>：合并内联样式块，去掉不必要的 <code>!important</code>；移除整屏翻页残留；版本号统一从常量读取；清理重复 HTML 与 ID。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>怎么切换暗色模式？</summary>
+          <div class="faq-body">
+            <p>三种方式任选其一：</p>
+            <p><b>方式一</b>：点击右上角用户头像附近的太阳 / 月亮图标，一键切换。</p>
+            <p><b>方式二</b>：进入「设置 → 外观」，选择「跟随系统 / 亮色 / 暗色」。</p>
+            <p><b>方式三</b>：按快捷键 <span class="kbd">Shift</span> + <span class="kbd">D</span>。</p>
+            <p>首次访问时跟随操作系统偏好。手动切换后会记住你的选择。清空浏览器数据后恢复为「跟随系统」。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>密码生成器会记录我生成的密码吗？</summary>
+          <div class="faq-body">
+            <p>不会。密码完全在浏览器本地生成，不会上传、不会记录、不会联网校验。关闭页面后无法找回，请复制后立即保存到你的密码管理器。</p>
+            <p>工具使用 <code>crypto.getRandomValues</code> 加密随机源生成，不使用 <code>Math.random</code>。</p>
           </div>
         </details>
 
@@ -1892,23 +820,12 @@ html, body { overflow-x: hidden !important; }
             <p>两种模式可以随时切换，切换后立即重新出结果，不需要重新输入。</p>
           </div>
         </details>
-        <details class="faq-item" >
-          <summary>V4.1 活力版相比 V4.0 改了什么？</summary>
-          <div class="faq-body">
-            <p><b>V4.1 的核心是新增「学科与学习」大类</b>，把学习类工具集中收纳，并拆分为「数理化」与「文史地理」两个子分类，侧边栏浏览更清爽。</p>
-            <p><b>新增 15 款学习工具</b>：函数图像绘制、化学方程式、元素周期表、物理公式计算、解方程组、矩阵运算、电路计算、遗传计算、人体系统速查、中国历史简表、世界历史简表、地球模块、中国地理、古诗词默写、细胞结构速查。</p>
-            <p><b>重点工具</b>：函数图像绘制支持多函数叠加、标题与标签拖拽缩放、坐标轴范围自定义；化学方程式支持自动配平、电荷守恒、反应类型判断、气体 / 沉淀 / 水判定、摩尔质量计算；地球模块四合一（公转与四季 / 自转 / 板块构造 / 经纬度距离）；中国地理三合一（地形 / 河流湖泊 / 行政区划）；古诗词默写内置 160 首经典诗词，支持名句填空与朗读。</p>
-            <p><b>修复</b>：颜色转换取色器事件绑定、矩阵运算逆矩阵伴随矩阵初始化、古诗词数据字段映射、地球模块 / 中国地理 / 中国历史简表页面切换重绘等多处稳定性问题。</p>
-          </div>
-        </details>
 
         <details class="faq-item">
-          <summary>V4.0 活力版相比 V3.0.10.1 改了什么？</summary>
+          <summary>为什么点了搜索会直接跳到工具页？</summary>
           <div class="faq-body">
-            <p><b>V4.0 主要做了三件事</b>：一是视觉全面换装，二是新增 20 款工具，三是首页 / 帮助页改版为整屏翻页。</p>
-            <p><b>视觉方面</b>：全站主题色从「中国红 + 金色」换成「蜂蜜黄 + 暖棕」（主色 <code>#f5b301</code>）。顶栏、按钮、卡片、标签、进度条、渐变卡、表单 focus 光圈、子标签激活态全部改为蜂蜜黄体系。首页 Hero 换成金黄渐变并保留柔光装饰。</p>
-            <p><b>新增工具</b>（20 款）：表格填入器、幸运转盘、抛硬币模拟器、反应速度测试、中国车牌一览表、饮水量计算、倒数日、白噪音助眠、食物过敏清单、角色关系图、小说收藏、油耗计算、颜色转换、日期计算、贷款计算器、折扣计算器、世界时钟、生肖星座、Cron 表达式、分贝仪。</p>
-            <p><b>布局方面</b>：首页与帮助页改为整屏翻页，右侧固定竖排导航；应用中心分类卡调整为七大分类；顶部导航新增通知铃铛。</p>
+            <p>当搜索关键词只命中一款工具时，系统会直接跳到该工具页，省去中转。</p>
+            <p>命中多款或没有命中时，会停留在搜索页显示结果列表或空状态提示。你也可以手动切换为「精确搜索」，只匹配工具名或 id。</p>
           </div>
         </details>
 
@@ -1941,7 +858,7 @@ html, body { overflow-x: hidden !important; }
           <summary>为什么 AI 功能提示「请先登录」？</summary>
           <div class="faq-body">
             <p>AI 请求需要通过你的登录凭证转发到服务端进行鉴权和额度统计，因此必须先登录才能使用。</p>
-            <p>登录后每天有固定的免费额度，聊天页右上角会显示「今日已用 x / 20 次」。运动热量估算、健康数据分析、随机灵感 AI 生成、起名器等同样计入该额度。</p>
+            <p>V5.0 后 AI 按钮上会显示小锁图标，鼠标悬停会提示「AI 功能需登录，本地工具不受影响」。登录页也会说明清楚哪些功能需要登录。</p>
           </div>
         </details>
 
@@ -1970,19 +887,19 @@ html, body { overflow-x: hidden !important; }
         </details>
 
         <details class="faq-item">
+          <summary>「我的常用」里的工具是怎么来的？</summary>
+          <div class="faq-body">
+            <p>两种方式：一是你手动点击工具卡右上角的 ☆ 收藏；二是工具使用满 3 次后自动加入。</p>
+            <p>V5.0 后会自动加入的工具卡上会显示微弱的「自动」标记，方便你识别。你也可以在设置页关闭「自动加入常用」。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
           <summary>上传的图片会不会占用很多空间？</summary>
           <div class="faq-body">
             <p>所有图片在上传前都会自动压缩：头像 180px、人物图片 400px、小说封面 600px、地点 / 影视 / 运动图片 800px。</p>
             <p>浏览器 localStorage 上限一般约 5 MB，可在「设置 → 数据管理」查看当前占用。建议不要一次性放入过多高清大图。</p>
             <p>「表格填入器」的图片只在当前页面内存中使用，导出后不占用浏览器存储空间。</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>「表格填入器」的图片怎么移动？</summary>
-          <div class="faq-body">
-            <p>表格里的图片可以直接拖到其他单元格；也可以拖回下方素材区，重新分配。点击图片右上角的 × 可以删除。</p>
-            <p>如果先点击下方素材区的某张图，再点击表格单元格，也能直接放入。导出前还可以勾选是否导出标题。</p>
           </div>
         </details>
 
@@ -1998,6 +915,14 @@ html, body { overflow-x: hidden !important; }
         </details>
 
         <details class="faq-item">
+          <summary>「表格填入器」的图片怎么移动？</summary>
+          <div class="faq-body">
+            <p>表格里的图片可以直接拖到其他单元格；也可以拖回下方素材区，重新分配。点击图片右上角的 × 可以删除。</p>
+            <p>如果先点击下方素材区的某张图，再点击表格单元格，也能直接放入。导出前还可以勾选是否导出标题。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
           <summary>「白噪音助眠」的音频是从哪来的？</summary>
           <div class="faq-body">
             <p>所有白噪音都由浏览器实时合成（Web Audio API），不加载任何外部音频文件。</p>
@@ -2006,47 +931,10 @@ html, body { overflow-x: hidden !important; }
         </details>
 
         <details class="faq-item">
-          <summary>「颜色转换」支持哪些格式？</summary>
-          <div class="faq-body">
-            <p>支持 <b>HEX、RGB、HSL、CMYK</b> 四种格式实时互转。拖动滑块或修改 HEX 值时，其它三种格式会同步更新，任意一种都能一键复制。</p>
-            <p>还可以调用系统取色器、随机生成颜色、或从常用色板中挑选。</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
           <summary>「分贝仪」需要麦克风权限吗？安全吗？</summary>
           <div class="faq-body">
             <p>首次使用需要授权麦克风权限。所有音频处理都在你的浏览器本地完成，<b>不会录制、不会上传任何音频</b>。</p>
             <p>分贝值为相对值，非专业声级计，仅供日常生活参考。安静环境下可点「校准」按钮，让读数更贴近真实。</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>「函数图像绘制」支持哪些函数写法？</summary>
-          <div class="faq-body">
-            <p>支持：<code>sin(x)</code>、<code>cos(x)</code>、<code>tan(x)</code>、<code>x^2</code>、<code>1/x</code>、<code>sqrt(x)</code>、<code>abs(x)</code>、<code>ln(x)</code>、<code>log(x)</code>、<code>exp(x)</code>。<br>常量：<code>pi</code> / <code>PI</code>、<code>e</code> / <code>E</code>；幂用 <code>^</code>。</p>
-            <p><b>乘号不能省略</b>——写 <code>2*x</code>，不要写 <code>2x</code>。这样是为了避免和科学计数法（如 <code>2e5</code>）冲突。</p>
-            <p>标题与函数标签都可以在图像上直接拖动，把鼠标悬停在标签上滚动滚轮可缩放字号。</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>「化学方程式」能处理哪些情况？</summary>
-          <div class="faq-body">
-            <p>支持：<b>自动配平、原子守恒验证、电荷守恒验证、反应类型判断、气体 / 沉淀 / 水判定、摩尔质量计算</b>。</p>
-            <p>化学式支持括号与下标（<code>Ca(OH)2</code>、<code>Fe2(SO4)3</code>），状态符号 <code>(s)(l)(g)(aq)</code> 自动忽略。</p>
-            <p>离子方程式也支持：<code>Fe3+ + e- → Fe2+</code>、<code>Ba2+ + SO4^2- → BaSO4</code>。乘号与系数都写在化学式前面即可。</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>「地球模块」包含哪些内容？</summary>
-          <div class="faq-body">
-            <p>共四个子页：</p>
-            <p><b>公转与四季</b>：拖动滑块看太阳直射点纬度、40°N 昼长、极昼范围随季节变化。<br>
-            <b>自转</b>：昼夜半球、经线旋转动画、自转方向（北极看逆时针 / 南极看顺时针）、线速度表、地方时计算。<br>
-            <b>板块构造</b>：六大板块与典型地貌。<br>
-            <b>经纬度距离</b>：输入两个坐标自动算大圆距离、方位角、中点坐标。</p>
           </div>
         </details>
 
@@ -2073,14 +961,6 @@ html, body { overflow-x: hidden !important; }
             <p>如果仍然异常，欢迎把浏览器版本和具体操作步骤反馈给我们。</p>
           </div>
         </details>
-
-        <details class="faq-item">
-          <summary>为什么点了搜索会直接跳到工具页？</summary>
-          <div class="faq-body">
-            <p>当搜索关键词只命中一款工具时，系统会直接跳到该工具页，省去中转。</p>
-            <p>命中多款或没有命中时，会停留在搜索页显示结果列表或空状态提示。你也可以手动切换为「精确搜索」，只匹配工具名或 id。</p>
-          </div>
-        </details>
       </div>
 
       <!-- 工具小贴士 -->
@@ -2090,6 +970,7 @@ html, body { overflow-x: hidden !important; }
           工具小贴士
         </h3>
         <div class="help-tip-grid">
+          <div class="help-tip"><b>密码生成器</b>随机密码 / 口令短语 / PIN 码三种模式。使用浏览器原生加密随机源生成，不上传、不记录、不联网。实时显示强度等级、估算熵值与暴力破解时间。</div>
           <div class="help-tip"><b>函数图像绘制</b>输入一个或多个函数表达式，自动生成图像。可自定义 X / Y 范围、坐标轴自身范围、刻度线方向、箭头、标题与函数标签的位置与字号，支持导出高清 PNG。</div>
           <div class="help-tip"><b>化学方程式</b>输入方程式自动配平，同时验证原子守恒与电荷守恒，识别反应类型，标注气体 / 沉淀 / 水，并计算各物质的摩尔质量。支持离子方程式。</div>
           <div class="help-tip"><b>元素周期表</b>118 种元素完整数据：原子量、电子排布、熔点、沸点、密度、发现年。按类别上色，支持按名称、符号、原子序数搜索，按类别筛选。</div>
@@ -2105,9 +986,15 @@ html, body { overflow-x: hidden !important; }
           <div class="help-tip"><b>中国地理</b>三合一：中国地形（28 条）、河流湖泊（10 条河流 + 8 个湖泊）、行政区划（34 个省级行政区）。</div>
           <div class="help-tip"><b>古诗词默写</b>内置 160 首经典诗词。名句上下句填空、按朝代筛选、朗读、诗词库浏览。可选加载在线诗词库（唐诗三百首 / 宋词三百首 / 诗经）。</div>
           <div class="help-tip"><b>细胞结构速查</b>动物细胞、植物细胞、原核细胞三类。SVG 示意图可点击查看结构详情，含 15 种主要细胞结构。</div>
+          <div class="help-tip"><b>数理化实验</b>30 个高中经典实验，覆盖数学、物理、化学三科。含实验目的、原理、器材、步骤、现象、结论、注意事项，动画可播放、暂停、拖动进度条。</div>
+          <div class="help-tip"><b>生活可视化</b>18 个动画科普：血液循环、呼吸过程、水循环、月相、潮汐、声音波形、光的色散等。支持播放、暂停、拖动进度条。</div>
 
           <div class="help-tip"><b>健康管理</b>共四个子模块：BMI 计算、鞋码计算、睡眠记录、生命体征。</div>
           <div class="help-tip"><b>运动记录</b>先填好个人信息，再添加运动。状态可选「计划」或「已记录」，AI 可辅助估算热量。</div>
+          <div class="help-tip"><b>急救知识速查</b>12 个常见紧急场景的分步处理指南，含 CPR 节拍器、AED 使用引导与紧急信息卡。</div>
+          <div class="help-tip"><b>常见穴位速查</b>25 个常用穴位的定位、主治、按摩方法与禁忌，支持按症状、按部位、按经络三种视角查询。</div>
+          <div class="help-tip"><b>轻断食时间表</b>支持 16:8 / 18:6 / 20:4 / 14:10 与自定义模式，实时显示进食窗口、断食窗口、当前状态与倒计时，含 30 天打卡统计。</div>
+          <div class="help-tip"><b>运动损伤应急处理</b>10 种常见运动损伤的识别、现场处理、就医指征、停训建议与预防方法，含 RICE / PRICE 分步指导。</div>
           <div class="help-tip"><b>体感温度</b>结合温湿度风速计算体感温度，自动切换酷热 / 风寒模型，给出户外运动风险与建议。</div>
           <div class="help-tip"><b>冥想练习</b>四种呼吸节奏：4-7-8、箱式、等长、深度放松。圆形随呼吸节律缩放，可开关提示音。</div>
           <div class="help-tip"><b>饮水量计算</b>输入体重、年龄，选择性别、活动量与气温，估算每日建议饮水量，含分时段参考。</div>
@@ -2115,16 +1002,13 @@ html, body { overflow-x: hidden !important; }
           <div class="help-tip"><b>食物过敏清单</b>记录过敏原、类别、严重程度、典型症状与应对方法，支持筛选、搜索与导出。</div>
           <div class="help-tip"><b>数学计算</b>计算器（普通 / 专家）与单位换算（8 大类）两个模块。</div>
           <div class="help-tip"><b>文章分析</b>字数统计按字符计算；词频分析中文按双字组切分，可切换停用词过滤。</div>
-          <div class="help-tip"><b>小说助手</b>章节分类、字数统计图，可导出 TXT 与 HTML。</div>
-          <div class="help-tip"><b>人物印象表</b>支持 AI 生成小传，结果可一键插入表单。</div>
-          <div class="help-tip"><b>时间线</b>纯本地工具，按时间顺序记录事件，支持分类与排序。</div>
-          <div class="help-tip"><b>起名器 / 对话生成器</b>需要登录后调用 AI。</div>
+          <div class="help-tip"><b>小说助手</b>时间线、起名器、对话生成器、随机灵感、灵感速记、小说管理，六个子工具统一入口。</div>
           <div class="help-tip"><b>随机灵感</b>本地随机不耗额度；AI 批量生成会一次给 3 / 6 / 10 条，并自动避开已生成过的内容。</div>
-          <div class="help-tip"><b>灵感速记</b>纯本地工具，支持标签与全文搜索。</div>
-          <div class="help-tip"><b>畅想画布</b>支持鼠标与触屏书写，导出 1400 × 900 高清 PNG。</div>
           <div class="help-tip"><b>角色关系图</b>拖拽式人物关系网，可导出高清 PNG。</div>
-          <div class="help-tip"><b>图片压缩</b>本地浏览器压缩，支持质量滑块、目标大小、格式切换。</div>
+          <div class="help-tip"><b>图片工具</b>包含图片压缩、拼图（长图）、去除背景、图片加水印四个子工具。</div>
           <div class="help-tip"><b>小说收藏</b>记录读过的书，书名、作者、阅读进度、评分与短评，支持筛选、搜索与导出。</div>
+          <div class="help-tip"><b>视频收藏</b>B站 / 抖音 / 快手 / 小红书 / 微博 / YouTube 等多平台链接，记录博主、发布日期、类型、时长、评分与备注。</div>
+          <div class="help-tip"><b>表情包收藏</b>拖拽批量上传，静态图自动压缩到 480px 以内，GIF 保留动图；一键复制到剪贴板。</div>
           <div class="help-tip"><b>我的日历</b>点击日期格子添加安排，可导出当月图片。</div>
           <div class="help-tip"><b>我的记账本</b>多币种，按币种汇总，可导出 CSV。</div>
           <div class="help-tip"><b>时间戳转换</b>秒 / 毫秒自动识别、多时区、多格式，附时间差计算。</div>
@@ -2145,10 +1029,9 @@ html, body { overflow-x: hidden !important; }
           <div class="help-tip"><b>反应速度测试</b>6 次取平均，7 档评级，不支持键盘，鼠标 / 触摸均可。</div>
           <div class="help-tip"><b>中国车牌一览表</b>按七大地理大区浏览车牌代码，支持省份 / 城市 / 代码搜索。</div>
           <div class="help-tip"><b>倒数日</b>内置 10 种常见节日，实时显示距下一个节日的天数，可查 2024-2036 年日期。</div>
-          <div class="help-tip"><b>分贝仪</b>用麦克风实时测量环境噪音，显示相对分贝值与噪音等级。所有处理本地完成，不会录制或上传任何音频。</div>
-          <div class="help-tip"><b>首页 · 推广轮播</b>首页自动轮播 4 张主题卡片，覆盖「学科与学习 / 急救知识速查 / 创作工坊 / 表情包收藏」。支持左右箭头、圆点切换、鼠标悬停暂停与触屏滑动。</div>
-          <div class="help-tip"><b>搜索页 · 模糊 / 精确</b>模糊搜索匹配名称、简介、关键词、分类；精确搜索只匹配工具名或 id。内置 12 个热门搜索标签、关键词高亮、空状态居中显示。</div>
-          <div class="help-tip"><b>首页 · 专题推荐</b>按场景打包四组专题：学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口。</div>
+          <div class="help-tip"><b>分贝仪</b>用麦克风实时测量环境噪音，所有处理本地完成，不会录制或上传任何音频。</div>
+          <div class="help-tip"><b>随机数</b>随机整数、随机小数、从列表抽取、随机洗牌四种模式。</div>
+          <div class="help-tip"><b>实用测试</b>键盘、鼠标、网络、麦克风四项硬件测试，全部在浏览器本地完成。</div>
         </div>
       </div>
 
@@ -2158,6 +1041,12 @@ html, body { overflow-x: hidden !important; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg>
           快捷键速查
         </h3>
+        <div class="help-key-row">
+          <div class="help-key-label">主题切换</div>
+          <div class="help-key-desc">
+            <span class="kbd">Shift</span> + <span class="kbd">D</span> 在亮色 / 暗色之间切换
+          </div>
+        </div>
         <div class="help-key-row">
           <div class="help-key-label">数学计算 · 计算器</div>
           <div class="help-key-desc">
@@ -2236,7 +1125,7 @@ html, body { overflow-x: hidden !important; }
         </div>
         <div class="help-info-row">
           <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span>
-          <div class="help-info-body"><b>导出格式</b>：JSON（完整备份）、CSV（记账、小说、油耗、过敏）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线、关系图）。</div>
+          <div class="help-info-body"><b>导出格式</b>：JSON（完整备份）、CSV（记账、小说、油耗、过敏）、docx（歌曲、运动记录）、TXT / HTML（小说）、PNG（日历、影视、画布、运动、睡眠曲线、关系图、表格填入器、角色关系图）。</div>
         </div>
       </div>
 
@@ -2256,7 +1145,7 @@ html, body { overflow-x: hidden !important; }
         </div>
         <div class="help-info-row">
           <span class="help-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-          <div class="help-info-body"><b>版本</b>：V4.2 活力版（2026.10）</div>
+          <div class="help-info-body"><b>版本</b>：V5.0 稳定版（2026.10）</div>
         </div>
       </div>
 
@@ -2266,7 +1155,7 @@ html, body { overflow-x: hidden !important; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           下载帮助文档
         </h3>
-        <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V4.2 活力版。</p>
+        <p class="tip" style="margin-bottom:14px;">把整份帮助内容导出为独立文件，包含快速开始、常见问题、工具小贴士、快捷键、数据说明等全部章节，支持离线阅读与打印。导出内容对应 V5.0 稳定版。</p>
         <div class="help-dl-actions">
           <button type="button" class="btn" data-help-dl="html">下载 HTML 帮助文档</button>
           <button type="button" class="btn ghost" data-help-dl="docx">下载 Word（docx）</button>
@@ -2337,414 +1226,351 @@ html, body { overflow-x: hidden !important; }
 
     <div class="version-line">
       <span class="version-label">当前版本</span>
-      <span class="version-val">V4.2 活力版（2026.10）</span>
+      <span class="version-val">V5.0 稳定版（2026.10）</span>
     </div>
 
-          <details class="sub" id="versionHistory" style="margin-top:18px;margin-bottom:0;">
-        <summary>查看完整版本更迭（V2.1 → V4.2）</summary>
-        <div class="inner">
+    <details class="sub" id="versionHistory" style="margin-top:18px;margin-bottom:0;">
+  <summary>查看完整版本更迭（V2.1 → V5.0）</summary>
+  <div class="inner">
 
-          <!-- 版本路径 -->
-          <div class="version-line" style="margin-bottom:20px;flex-wrap:wrap;gap:10px;">
-            <span class="version-label">V2.1</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">正式版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V2.2.1</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">黄金版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V2.3</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V2.3.1</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V2.3.2</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V3.0</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">焕新版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V4.0</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">V4.1</span>
-            <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
-            <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
-            <span class="version-label">当前</span>
-            <span class="version-val">V4.2 活力版</span>
-          </div>
+    <!-- 版本路径 -->
+    <div class="version-line" style="margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+      <span class="version-label">V2.1</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">正式版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V2.2.1</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">黄金版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V2.3</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V2.3.1</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">结构重整</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V2.3.2</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">铂金版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V3.0</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">焕新版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V4.0</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V4.1</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">V4.2</span>
+      <span class="version-val" style="color:#9ca3af;font-size:15px;">活力版</span>
+      <span style="color:var(--lime-shine);font-weight:800;font-size:16px;">→</span>
+      <span class="version-label">当前</span>
+      <span class="version-val">V5.0 稳定版</span>
+    </div>
 
-                    <!-- ================= V4.2 活力版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
-            V4.2 活力版 · 首页重构 + 搜索系统升级
-          </h3>
+    <!-- ================= V5.0 稳定版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
+      V5.0 稳定版 · 淡蓝主题 + 暗色模式 + 密码生成器
+    </h3>
 
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">首页</span><b>首页彻底重构</b></div>
-              <p>从「整屏翻页」改为常规单页滚动布局，结构更清晰：Hero 区、推广轮播、热门工具、最新上架、专题推荐、卖点说明、编者的话、页脚，一屏到底，浏览更顺畅。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>推广轮播</b></div>
-              <p>首页新增 4 张自动轮播卡片，覆盖「学科与学习更新 / 急救知识速查 / 创作工坊 / 表情包收藏」四大主题。支持左右箭头、圆点切换、鼠标悬停暂停与触屏滑动。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>专题推荐</b></div>
-              <p>按使用场景打包四组专题：学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口，一键直达。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>最新上架 & 卖点说明</b></div>
-              <p>首页新增「最新上架」区，集中展示 6 款新工具；另设「为什么选择岁窦工具箱」，用 4 张卡片讲清楚本地运行、零数据上传、打开即用、可导出可备份四大特点。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">搜索</span><b>搜索系统升级：顶部按钮 + 独立搜索页</b></div>
-              <p>顶部搜索框改为「🔍 搜索」按钮，点击进入独立搜索页。告别下拉面板遮挡问题，搜索空间更大、结果更清晰。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">搜索</span><b>模糊搜索 + 精确搜索双模式</b></div>
-              <p>搜索页支持两种模式：模糊搜索匹配名称、简介、关键词与分类；精确搜索只匹配工具名或 id，用来精准定位某一款工具。切换即时生效，无需重新输入。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">搜索</span><b>热门搜索 + 关键词高亮</b></div>
-              <p>搜索页内置 12 个热门搜索标签（BMI、二维码、记账、函数图像等），点击即搜；结果列表中关键词会自动高亮，一眼看出命中位置。空状态时搜索框+热门标签整体居中，输入后自动靠顶。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">优化</span><b>一键直达工具</b></div>
-              <p>搜索关键词只命中一款工具时，直接跳到该工具页，省去中转；命中多款时进入搜索页展示结果列表，点击任意结果直接进入对应工具。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">同步</span><b>帮助文档 & 编者的话更新</b></div>
-              <p>帮助文档、编者的话、版本更迭全部同步到 V4.2，覆盖首页重构、搜索升级、专题推荐等所有新变化。帮助文档仍支持 HTML / Markdown / Word 三种格式导出。</p>
-            </div>
-          </div>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">定位</span><b>频繁更新期的收官之作</b></div>
+        <p>V5.0 是岁窦工具箱从“快速迭代”走向“长期稳定”的分水岭。不再追求“每周都有新东西”，而是追求“你打开它，它就安安静静地在那里，好用、不打扰、不掉链子”。之后进入维护期，只做 bug 修复与安全更新。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">配色</span><b>全站换装淡蓝色主题</b></div>
+        <p>从蜂蜜黄全面切换为淡蓝色系。主色采用柔和天蓝（<code>#4a90e2</code>），配合冷灰、极浅冷白背景。长时间使用更舒适，也更贴合“稳定版”的中性基调。数据可视化色（统计图、词云、BMI 分段等）保留原有多彩色，确保数据依然一眼可辨。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>暗色模式</b></div>
+        <p>完整的暗色视觉体系：深蓝黑背景、分层清晰（背景 → 卡片 → 悬浮层）、对比度达标。支持三种切换入口：顶栏太阳/月亮图标、设置页三态选择（跟随系统 / 亮色 / 暗色）、快捷键 <span class="kbd">Shift + D</span>。首次访问跟随系统偏好，手动切换后记住选择。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>密码生成器</b></div>
+        <p>「实用工具」分类下新增密码生成器。支持随机密码（长度 8-64 位、字符类型勾选、排除易混淆字符）、口令短语（3-8 个单词、分隔符、大小写、追加数字）、PIN 码（4-12 位）三种模式。使用浏览器原生加密随机源 <code>crypto.getRandomValues</code>，不上传、不记录、不联网。实时显示强度等级、估算熵值与暴力破解时间。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">收敛</span><b>代码与样式收敛</b></div>
+        <p>合并 <code>&lt;head&gt;</code> 内多个内联 <code>&lt;style&gt;</code> 块，去掉不必要的 <code>!important</code>；移除整屏翻页残留的 JS 与 CSS；版本号统一从 <code>window.__APP_VERSION__</code> 常量读取，所有显示位置动态注入；清理重复的 HTML 与 ID。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">优化</span><b>「我的常用」逻辑透明化</b></div>
+        <p>使用满 3 次自动加入常用时，卡片上会显示微弱的「自动」标记；提供「从常用移除」入口；设置页可关闭「自动加入常用」。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">优化</span><b>AI 功能提示明确化</b></div>
+        <p>AI 按钮上增加小锁图标，未登录时鼠标悬停提示「AI 功能需登录，本地工具不受影响」。登录页说明清楚哪些功能需要登录。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">文档</span><b>帮助中心 & 编者的话更新</b></div>
+        <p>帮助文档、编者的话、版本更迭全部同步到 V5.0，覆盖淡蓝主题、暗色模式、密码生成器、代码收敛等所有新变化。帮助文档仍支持 HTML / Markdown / Word 三种格式导出。</p>
+      </div>
+    </div>
 
-          <!-- ================= V4.1 活力版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);"></span>
-            V4.1 活力版 · 学科与学习上线
-          </h3>
+    <!-- ================= V4.2 活力版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V4.2 活力版 · 首页重构 + 搜索系统升级
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">首页</span><b>首页彻底重构</b></div>
+        <p>从「整屏翻页」改为常规单页滚动布局，新增推广轮播、最新上架、专题推荐、「为什么选择岁窦工具箱」等板块，浏览体验更像一个完整的工具箱主页。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">搜索</span><b>搜索系统升级：顶部按钮 + 独立搜索页</b></div>
+        <p>顶部搜索框改为「🔍 搜索」按钮，点击进入独立搜索页。支持模糊搜索与精确搜索双模式，内置 12 个热门搜索标签、关键词自动高亮。只命中一款工具时直接跳到该工具页。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>专题推荐 & 推广轮播</b></div>
+        <p>按使用场景打包四组专题：学习专区、健康生活、创作工坊、效率工具，每个专题内嵌 6 个常用工具快捷入口。首页新增 4 张自动轮播卡片。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">同步</span><b>帮助文档 & 编者的话更新</b></div>
+        <p>帮助文档、编者的话、版本更迭全部同步到 V5.0，覆盖首页重构、搜索升级、专题推荐等所有新变化。</p>
+      </div>
+    </div>
 
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>学科与学习大类</b></div>
-              <p>新增「学科与学习」顶层分类，下辖「数理化」与「文史地理」两个子分类，共收纳 15 款学习工具。数学、物理、化学、生物、地理、历史、语文一次到位，学生党专属工作台。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">数学</span><b>函数图像绘制</b></div>
-              <p>输入一个或多个函数表达式，自动生成函数图像。支持定义域 / 值域自定义、坐标轴自身范围自定义、刻度线方向（朝内 / 朝外）、箭头自定义、图像标题与函数标签拖拽缩放、曲线颜色自定义、导出高清 PNG。无网格设计，界面清爽。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">化学</span><b>化学方程式</b></div>
-              <p>输入化学方程式自动配平，附原子守恒验证、电荷守恒、反应类型判断（分解 / 化合 / 置换 / 复分解 / 中和）、气体 / 沉淀 / 水判定、摩尔质量计算。支持括号、下标、状态符号、离子电荷。内置 28 条常见方程式一键载入。化学式上下标采用自定义 span，明显下沉、样式统一。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">化学</span><b>元素周期表</b></div>
-              <p>118 种元素完整数据：原子量、电子排布、熔点、沸点、密度、发现年。按类别上色（碱金属 / 碱土金属 / 过渡金属 / 后过渡金属 / 类金属 / 非金属 / 卤素 / 稀有气体 / 镧系 / 锕系），支持按名称、符号、原子序数搜索，按类别筛选。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">物理</span><b>物理公式计算</b></div>
-              <p>输入已知量自动求未知量。涵盖运动学、力学、能量、电学、热学五大类共 25+ 个公式。支持速度、加速度、匀加速位移、密度、压强、牛顿第二定律、浮力、杠杆、功、功率、动能、势能、欧姆定律、电功率、串并联电阻、热量、热效率等。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">数学</span><b>解方程组</b></div>
-              <p>一元一次、一元二次、二元一次、三元一次方程组求解。一元二次按判别式 Δ = b² − 4ac 分类讨论，支持复数根；多元一次使用克拉默法则，系数行列式为 0 时给出无解或无穷多解的提示，附完整解题步骤。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">数学</span><b>矩阵运算</b></div>
-              <p>加法、减法、乘法、转置、行列式、逆矩阵六大运算，支持 1×1 到 5×5。行列式用高斯消元，逆矩阵用伴随矩阵法。输入支持整数、小数、负数、分数，附关键中间结果。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">物理</span><b>电路计算</b></div>
-              <p>串联电阻、并联电阻、欧姆定律、电阻定律、电功率（P = UI / P = I²R / P = U²/R）、电能、串联分压、并联分流，共 10 个公式。填部分已知量自动求剩下的量。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">生物</span><b>遗传计算</b></div>
-              <p>一对基因、两对独立基因、ABO 血型三大模块。庞纳特方格可视化，基因型 / 表现型比例自动统计，含亲本配子推导。血型模块按 A/B/i 三等位基因模型推算子女血型概率与不可能血型。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">生物</span><b>人体系统速查</b></div>
-              <p>运动、消化、呼吸、循环、泌尿、神经、内分泌、生殖八大系统。每个系统含主要器官、器官功能、常见疾病、日常保健。采用与全站一致的扁平线性 SVG 图标。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">历史</span><b>中国历史简表</b></div>
-              <p>从夏商周到新中国，共 38 个时期的时间轴。含都城、开国君主、末代君主、代表人物、大事记、主要成就。子页另设「朝代对比」「历史地图」「历代帝王」三大功能，可横向对比两个朝代、查看疆域缩略图、浏览历代帝王世系。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">历史</span><b>世界历史简表</b></div>
-              <p>古埃及、两河流域、古印度、古希腊、古罗马、拜占庭、阿拉伯帝国、中世纪欧洲、文艺复兴、大航海时代、工业革命、两次世界大战、冷战、当代世界，共 15 个时期。含代表人物、大事记、主要成就。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">地理</span><b>地球模块</b></div>
-              <p>四合一地理工具：公转与四季（含太阳直射点、昼长、极昼范围实时计算）、自转（昼夜半球、经线旋转、自转方向、线速度表、地方时计算）、板块构造（六大板块与典型地貌）、经纬度距离（Haversine 公式、大圆距离、方位角、中点坐标）。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">地理</span><b>中国地理</b></div>
-              <p>三合一地理工具：中国地形（四大高原 / 四大盆地 / 三大平原 / 三大丘陵 / 主要山脉，共 28 条）、河流湖泊（10 条主要河流 + 8 个主要湖泊）、行政区划（34 个省级行政区，按大区筛选、按面积或人口排序）。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">语文</span><b>古诗词默写</b></div>
-              <p>内置 160 首经典诗词，覆盖先秦到近现代。名句上下句填空、按朝代筛选、看提示、看答案、统计对错、诗词库浏览、一键朗读。可选加载在线诗词库（唐诗三百首 / 宋词三百首 / 诗经，约 900 首），本地优先不依赖网络。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">生物</span><b>细胞结构速查</b></div>
-              <p>动物细胞、植物细胞、原核细胞三类。SVG 示意图可点击查看结构详情，含细胞膜、细胞质、细胞核、线粒体、核糖体、内质网、高尔基体、溶酶体、中心体、细胞壁、叶绿体、液泡、拟核、质粒、荚膜等结构。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">优化</span><b>分类侧边栏拆分</b></div>
-              <p>「学科与学习」不再是一个长列表，拆分为「数理化」与「文史地理」两个子分组，侧边栏浏览更清爽。「数理化」用烧瓶图标，「文史地理」用地图图标。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">修复</span><b>多处稳定性修复</b></div>
-              <p>修复颜色转换工具取色器事件绑定的语法错误；修复矩阵运算逆矩阵的伴随矩阵初始化错误；修复古诗词默写数据字段映射问题；修复中国历史简表 / 地球模块 / 中国地理在页面切换时的重绘与兜底逻辑。</p>
-            </div>
-          </div>
+    <!-- ================= V4.1 活力版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V4.1 活力版 · 学科与学习上线
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>学科与学习大类</b></div>
+        <p>新增「学科与学习」顶层分类，下辖「数理化」与「文史地理」两个子分类，共收纳 15 款学习工具。数学、物理、化学、生物、地理、历史、语文一次到位。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">工具</span><b>15 款学习工具</b></div>
+        <p>函数图像绘制、化学方程式、元素周期表、物理公式计算、解方程组、矩阵运算、电路计算、遗传计算、人体系统速查、中国历史简表、世界历史简表、地球模块、中国地理、古诗词默写、细胞结构速查。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">优化</span><b>分类侧边栏拆分</b></div>
+        <p>「学科与学习」拆分为「数理化」与「文史地理」两个子分组，侧边栏浏览更清爽。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">修复</span><b>多处稳定性修复</b></div>
+        <p>修复颜色转换取色器事件绑定、矩阵运算逆矩阵伴随矩阵初始化、古诗词数据字段映射、地球模块 / 中国地理 / 中国历史简表页面切换重绘等稳定性问题。</p>
+      </div>
+    </div>
 
-          <!-- ================= V4.0 活力版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V4.0 活力版 · 蜂蜜黄主题全面焕新
-          </h3>
+    <!-- ================= V4.0 活力版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V4.0 活力版 · 蜂蜜黄主题全面焕新
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">配色</span><b>全局换装蜂蜜黄主题</b></div>
+        <p>整套界面以琥珀黄（<code>#f5b301</code> 主色）为主，配合暖棕与阳光橙点缀。顶栏、按钮、卡片、标签、进度条、渐变卡、表单 focus 光圈、子标签激活态全部换为蜂蜜黄体系。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>20 款实用工具</b></div>
+        <p>白噪音助眠、食物过敏清单、角色关系图、小说收藏、油耗计算、颜色转换、日期计算、贷款计算器、折扣计算器、世界时钟、生肖星座、Cron 表达式、分贝仪、饮水量计算、体感温度、倒数日、表格填入器、幸运转盘、抛硬币模拟器、反应速度测试、中国车牌一览表。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">布局</span><b>首页 / 帮助页整屏翻页</b></div>
+        <p>首页与帮助页改为整屏翻页，右侧固定竖排导航。鼠标滚轮、触屏滑动、方向键都能翻屏。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">优化</span><b>通知系统与账户体系</b></div>
+        <p>顶部通知铃铛未读数实时更新，未读高亮，支持全部标为已读，展示最近 30 条。登录后支持上传本地数据到云端、从云端拉取、多设备同步。</p>
+      </div>
+    </div>
 
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">配色</span><b>全局换装蜂蜜黄主题</b></div>
-              <p>整套界面以琥珀黄（<code>#f5b301</code> 主色）为主，配合暖棕与阳光橙点缀。顶栏、按钮、卡片、标签、进度条、渐变卡、表单 focus 光圈、子标签激活态全部换为蜂蜜黄体系。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">首页</span><b>Hero 换成金黄渐变</b></div>
-              <p>首页大标题区从国庆红金改为金黄渐变，保留右上角柔光晕与右下角装饰圆球，整体更明亮温暖。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">布局</span><b>首页 / 帮助页整屏翻页</b></div>
-              <p>首页与帮助页改为整屏翻页，右侧固定竖排导航（欢迎 / 编者的话 / 热门应用 / 页脚）。鼠标滚轮、触屏滑动、方向键 <span class="kbd">↑↓</span> / <span class="kbd">Home</span> / <span class="kbd">End</span> 都能翻屏。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">首页</span><b>热门应用改版</b></div>
-              <p>热门应用改为 2 行 × 4 列精选 8 张卡片布局。右侧竖排显示「40+ 款工具 / 7 大分类 / V4.1 活力版 / 0 数据上传」。新增 7 个分类快捷入口与 3 条使用小贴士。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>20 款实用工具</b></div>
-              <p>白噪音助眠、食物过敏清单、角色关系图、小说收藏、油耗计算、颜色转换、日期计算、贷款计算器、折扣计算器、世界时钟、生肖星座、Cron 表达式、分贝仪、饮水量计算、体感温度、倒数日、表格填入器、幸运转盘、抛硬币模拟器、反应速度测试、中国车牌一览表。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">分类</span><b>七大分类重梳</b></div>
-              <p>按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具」七大分类重新梳理，每一个工具都归到最自然的位置。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">优化</span><b>应用中心全部应用拼音分组</b></div>
-              <p>「全部应用」按拼音首字母排序并分组显示（A→Z），新增工具自动归位，查找更高效。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">优化</span><b>通知系统与账户体系</b></div>
-              <p>顶部通知铃铛未读数实时更新，未读高亮，支持全部标为已读，展示最近 30 条。登录后支持上传本地数据到云端、从云端拉取、多设备同步。</p>
-            </div>
-          </div>
+    <!-- ================= V3.0.10.1 国庆特别版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V3.0.10.1 国庆特别版 · 红金主题国庆焕新
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">配色</span><b>全局换装红金主题</b></div>
+        <p>整套界面从铂金金属灰改为中国红 + 金色（<code>#c62828</code> 主色，<code>#f6c453</code> 金色）。首页 Hero 换成红金渐变并加了柔光装饰。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>表格填入器</b></div>
+        <p>「创作工坊」分类下新增表格填入器。提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>幸运转盘</b></div>
+        <p>「实用工具」分类下新增幸运转盘。可自定义 2-12 个选项，每个选项可单独设置权重（1-100），扇区宽度按权重实时变化。内置六套主题，点击中间按钮旋转，结果自动记录到历史。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>抛硬币模拟器</b></div>
+        <p>支持单次 3D 翻转动画与批量投掷（最多 10000 次），累计统计正面 / 反面次数、占比、最长连续正面与反面记录。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>反应速度测试</b></div>
+        <p>等待绿色出现后立即点击，共 6 次取平均，评级从「超人」到「需要练习」共 7 档，历史自动保存。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>中国车牌一览表</b></div>
+        <p>按七大地理大区浏览全国各省市车牌代码，含使 / 领 / 警 / 军 / 挂等特殊车牌。支持按省份、城市、代码实时搜索。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>饮水量计算</b></div>
+        <p>输入体重、年龄，选择性别、活动量与气温环境，估算每日建议饮水量，并给出分时段参考、杯子 / 瓶装换算与计算依据。历史自动保存。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>倒数日</b></div>
+        <p>内置元旦、春节、清明节、劳动节、端午节、母亲节、父亲节、教师节、中秋节、国庆节等常见节日，实时显示距离下一个节日的天数。点击任意节日可查看 2024 - 2036 年完整日期。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">调整</span><b>左侧分类侧边栏</b></div>
+        <p>原有的面包屑导航升级为左侧固定侧边栏。按七大分类重新梳理，当前工具高亮显示。移动端自动折叠为顶部横向滚动胶囊条。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>首页国庆倒计时</b></div>
+        <p>首页 Hero 下方新增国庆倒计时卡片，实时显示距离 2026 年 10 月 1 日的天、时、分、秒。进入假期后自动切换为正计时，假期结束后显示「期待下一个国庆」。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>通知系统</b></div>
+        <p>顶部导航新增通知铃铛，未读数量实时显示。点击展开通知面板，展示最近 30 条通知，支持全部标为已读。</p>
+      </div>
+    </div>
 
-          <!-- ================= V3.0.10.1 国庆特别版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V3.0.10.1 国庆特别版 · 红金主题国庆焕新
-          </h3>
+    <!-- ================= V3.0 焕新版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V3.0 焕新版 · 青柠主题 + 四款新工具
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">配色</span><b>全局换装青柠绿主题</b></div>
+        <p>整套界面从铂金金属灰改为青柠绿（<code>#84cc16</code> 主色），顶栏、按钮、卡片悬停、标签、进度条、渐变卡统一为青柠质感。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>冥想练习</b></div>
+        <p>「健康与运动」分类新增冥想练习工具。内置 4-7-8 呼吸、箱式呼吸、等长呼吸、深度放松四种节奏，圆形随呼吸节律放大缩小，附呼吸提示音与循环计数。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>JSON 格式化 / 校验</b></div>
+        <p>「AI 与开发」分类新增 JSON 工具。支持 2/4 空格格式化、一键压缩、转义 / 去转义；语法错误会定位到具体行列，输入时实时校验。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>汇率换算</b></div>
+        <p>「计算与数据」分类新增汇率换算。内置常用货币参考汇率，离线可用；支持联网更新当日参考值，并缓存到本地。</p>
+      </div>
+    </div>
 
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">配色</span><b>全局换装红金主题</b></div>
-              <p>整套界面从铂金金属灰改为中国红 + 金色（<code>#c62828</code> 主色，<code>#f6c453</code> 金色），顶栏、按钮、卡片悬停、标签、进度条、渐变卡统一为红金质感。首页 Hero 换成红金渐变并加了柔光装饰。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>表格填入器</b></div>
-              <p>「创作工坊」分类下新增表格填入器。提供「夯 / 顶级 / 人上人 / NPC / 拉完了」五档填图表格，支持多图拖拽、跨格移动、拖回素材区重新分配，可自定义标题并勾选是否导出标题，最终导出为 2 倍分辨率高清 PNG。纯本地运行。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>幸运转盘</b></div>
-              <p>「实用工具」分类下新增幸运转盘。可自定义 2-12 个选项，每个选项可单独设置权重（1-100），扇区宽度按权重实时变化。内置彩虹 / 马卡龙 / 霓虹 / 森林 / 海洋 / 红金 六套主题，点击中间按钮旋转，缓动减速停在指针扇区，结果自动记录到历史。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>抛硬币模拟器</b></div>
-              <p>「实用工具」分类下新增抛硬币模拟器。支持单次 3D 翻转动画与批量投掷（10 / 100 / 1000 / 自定义，最多 10000 次），累计统计正面 / 反面次数、占比、最长连续正面与反面记录，历史自动保存。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>反应速度测试</b></div>
-              <p>「实用工具」分类下新增反应速度测试。等待绿色出现后立即点击，共 6 次取平均，评级从「超人」到「需要练习」共 7 档，含最快 / 最慢 / 明细展示，历史自动保存。仅支持鼠标与触摸，不响应键盘。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>中国车牌一览表</b></div>
-              <p>「实用工具」分类下新增中国车牌一览表。按华北 / 东北 / 华东 / 华中 / 华南 / 西南 / 西北七大地理大区浏览全国各省市车牌代码，含使 / 领 / 警 / 军 / 挂 / 学 / 试 / 超等特殊车牌。支持按省份、城市、代码实时搜索。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>饮水量计算</b></div>
-              <p>「健康与运动」分类下新增饮水量计算。输入体重、年龄，选择性别、活动量与气温环境，估算每日建议饮水量，并给出分时段参考、杯子 / 瓶装换算与计算依据。历史自动保存。结果仅供参考，不能替代专业医嘱。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>倒数日</b></div>
-              <p>「实用工具」分类下新增倒数日。内置元旦、春节、清明节、劳动节、端午节、母亲节、父亲节、教师节、中秋节、国庆节等常见节日，实时显示距离下一个节日的天数。点击任意节日可横向展开 2024 - 2036 年完整日期。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">调整</span><b>左侧分类侧边栏</b></div>
-              <p>原有的面包屑导航升级为左侧固定侧边栏。按「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发 / 实用工具」七大分类重新梳理，当前工具高亮显示。移动端自动折叠为顶部横向滚动胶囊条。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>首页国庆倒计时</b></div>
-              <p>首页 Hero 下方新增国庆倒计时卡片，实时显示距离 2026 年 10 月 1 日的天、时、分、秒。进入假期后自动切换为正计时，假期结束后显示「期待下一个国庆」。红金渐变配色，与国庆主题一致。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>通知系统</b></div>
-              <p>顶部导航新增通知铃铛，未读数量实时显示。点击展开通知面板，展示最近 30 条通知，支持全部标为已读。新工具上线与重要公告会通过通知推送。</p>
-            </div>
-          </div>
+    <!-- ================= V2.3.2 铂金版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V2.3.2 铂金版 · 功能扩充与体验优化
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">追加</span><b>菜谱收藏工具</b></div>
+        <p>「收藏与记录」分类新增菜谱收藏工具。支持录入菜名、分类、难度、食材清单和制作步骤，可上传成品图（自动压缩），方便随手记录和查找家常菜谱。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>图片压缩工具</b></div>
+        <p>「创作工坊」分类新增图片压缩工具，纯浏览器本地处理，支持调节压缩质量、目标文件大小，原图与压缩后并排预览对比，支持 JPG / WebP / PNG 格式输出。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>时间戳转换</b></div>
+        <p>「时间与生活」分类新增时间戳工具，支持时间戳与日期双向互转、秒/毫秒自动识别、多时区切换、多格式输出，并附时间差计算。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>二维码工具</b></div>
+        <p>上线二维码生成工具，支持文字、网站、电话号码等多种编码类型，支持导出 PNG / SVG，可嵌中心 Logo。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>体感温度与运动风险</b></div>
+        <p>「健康与运动」分类新增体感温度工具，结合气温、湿度、风速自动切换酷热指数 / 风寒指数模型，评估户外运动风险等级，给出对应补水与防护建议。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">优化</span><b>风险条动态指示</b></div>
+        <p>体感温度风险条新增指示箭头，根据计算结果自动滑动到对应风险等级，带平滑过渡动画，风险等级直观可视。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">修复</span><b>本地模式兼容性</b></div>
+        <p>修复多个工具在本地文件协议（file://）下的渲染异常、跨域报错、Canvas 导出失败等问题，核心功能离线可用。</p>
+      </div>
+    </div>
 
-          <!-- ================= V3.0 焕新版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V3.0 焕新版 · 青柠主题 + 四款新工具
-          </h3>
+    <!-- ================= V2.3.1 结构调整 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V2.3.1 铂金版 · 结构重整（无新功能）
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">分类</span><b>六大分类重新归位</b></div>
+        <p>从原来的「健康 / 统计与计算 / 收藏 / 创作」四类，重组为「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六类。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">调整</span><b>鞋码迁入健康与运动</b></div>
+        <p>「数学计算 → 鞋码计算」整体迁入「健康管理」，作为 BMI、睡眠、生命体征之外的第四个身体数据子工具。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">拆分</span><b>AI 助手只留聊天</b></div>
+        <p>原「AI 助手」下的 6 个子工具，除「聊天」保留外，其余全部拆出，归入「创作工坊」。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">独立</span><b>时间与生活独立成类</b></div>
+        <p>「时钟工具 / 我的记账本 / 我的日历」从其他分类迁出，组成新的「时间与生活」分类。</p>
+      </div>
+    </div>
 
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">配色</span><b>全局换装青柠绿主题</b></div>
-              <p>整套界面从铂金金属灰改为青柠绿（<code>#84cc16</code> 主色），顶栏、按钮、卡片悬停、标签、进度条、渐变卡统一为青柠质感。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">首页</span><b>Hero 换成青柠渐变</b></div>
-              <p>首页大标题区从灰渐变改为绿渐变（浅青柠 → 青柠 → 深绿），右上角新增一层柔光晕。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">深色区</span><b>计算器 / 时钟 / 代码编辑器</b></div>
-              <p>这三处的深色底统一改成深墨绿（<code>#1a2e05</code>），文字与代码色改用淡青柠，既保持对深色底的对比，又与整体主题一致。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">数据</span><b>数据颜色保持独立</b></div>
-              <p>统计图、词云、小说章节类型、BMI 分段、体感温度风险条、生命体征状态、音乐平台标识等数据色全部保留原样，确保数据依然一眼可辨。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>冥想练习</b></div>
-              <p>「健康与运动」分类新增冥想练习工具。内置 4-7-8 呼吸、箱式呼吸、等长呼吸、深度放松四种节奏，圆形随呼吸节律放大缩小，附呼吸提示音与循环计数，纯本地运行。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>JSON 格式化 / 校验</b></div>
-              <p>「AI 与开发」分类新增 JSON 工具。支持 2/4 空格格式化、一键压缩、转义 / 去转义；语法错误会定位到具体行列，输入时实时校验。纯本地运行，不上传数据。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>汇率换算</b></div>
-              <p>「计算与数据」分类新增汇率换算。内置常用货币参考汇率，离线可用；支持联网更新当日参考值，并缓存到本地。结果为参考性质，实际以银行或支付平台成交价为准。</p>
-            </div>
-          </div>
+    <!-- ================= V2.3 铂金版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V2.3 铂金版 · 健康主题 + 金属质感（历史版本）
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">配色</span><b>全局换装铂金主题</b></div>
+        <p>整套界面从原来的蓝色系改为铂金金属灰，按钮、图标底、标签、进度条统一为铂金质感。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>健康管理</b></div>
+        <p>把原「数学计算 → BMI 计算」整体迁入「健康管理」，并新增「睡眠记录」与「生命体征」两大模块。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">新增</span><b>运动记录</b></div>
+        <p>支持「计划」与「已记录」两种状态，运动类型 8 选 1；填入个人信息后 AI 可估算热量消耗。</p>
+      </div>
+    </div>
 
-          <!-- ================= V2.3.2 铂金版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V2.3.2 铂金版 · 功能扩充与体验优化
-          </h3>
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">追加</span><b>菜谱收藏工具</b></div>
-              <p>「收藏与记录」分类新增菜谱收藏工具。支持录入菜名、分类、难度、食材清单和制作步骤，可上传成品图（自动压缩），方便随手记录和查找家常菜谱。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>图片压缩工具</b></div>
-              <p>「创作工坊」分类新增图片压缩工具，纯浏览器本地处理，支持调节压缩质量、目标文件大小，原图与压缩后并排预览对比，支持 JPG / WebP / PNG 格式输出。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>时间戳转换</b></div>
-              <p>「时间与生活」分类新增时间戳工具，支持时间戳与日期双向互转、秒/毫秒自动识别、多时区切换、多格式输出，并附时间差计算。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>二维码工具</b></div>
-              <p>上线二维码生成工具，支持文字、网站、电话号码等多种编码类型，支持导出 PNG / SVG，可嵌中心 Logo。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>体感温度与运动风险</b></div>
-              <p>「健康与运动」分类新增体感温度工具，结合气温、湿度、风速自动切换酷热指数 / 风寒指数模型，评估户外运动风险等级，给出对应补水与防护建议。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">优化</span><b>风险条动态指示</b></div>
-              <p>体感温度风险条新增指示箭头，根据计算结果自动滑动到对应风险等级，带平滑过渡动画，风险等级直观可视。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">修复</span><b>本地模式兼容性</b></div>
-              <p>修复多个工具在本地文件协议（file://）下的渲染异常、跨域报错、Canvas 导出失败等问题，核心功能离线可用。</p>
-            </div>
-          </div>
+    <!-- ================= V2.2.1 黄金版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#b48a4a;"></span>
+      V2.2.1 黄金版 · 结构收敛与功能扩充
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:26px;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">布局</span><b>导航精简为四入口</b></div>
+        <p>导航栏只保留「首页 / 应用 / 帮助 / 设置」；原「AI 助手」不再单独占一个入口，统一并入「应用」中心。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">功能</span><b>计算器升级为数学计算</b></div>
+        <p>原「计算器」改名「数学计算」，拆为计算器（普通 / 专家）、单位换算、BMI 计算三个独立模块。</p>
+      </div>
+    </div>
 
-          <!-- ================= V2.3.1 结构调整 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V2.3.1 铂金版 · 结构重整（无新功能）
-          </h3>
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">分类</span><b>六大分类重新归位</b></div>
-              <p>从原来的「健康 / 统计与计算 / 收藏 / 创作」四类，重组为「健康与运动 / 创作工坊 / 收藏与记录 / 计算与数据 / 时间与生活 / AI 与开发」六类。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">调整</span><b>鞋码迁入健康与运动</b></div>
-              <p>「数学计算 → 鞋码计算」整体迁入「健康管理」，作为 BMI、睡眠、生命体征之外的第四个身体数据子工具。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">拆分</span><b>AI 助手只留聊天</b></div>
-              <p>原「AI 助手」下的 6 个子工具，除「聊天」保留外，其余全部拆出，归入「创作工坊」。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">独立</span><b>时间与生活独立成类</b></div>
-              <p>「时钟工具 / 我的记账本 / 我的日历」从其他分类迁出，组成新的「时间与生活」分类。</p>
-            </div>
-          </div>
+    <!-- ================= V2.1 正式版 ================= -->
+    <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
+      V2.1 正式版 · 奠定基础
+    </h3>
+    <div class="upgrade-grid" style="margin-bottom:0;">
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">框架</span><b>单页应用骨架</b></div>
+        <p>确定「首页 / 应用 / 帮助 / 设置」四大导航入口，所有工具共用一套 CSS 变量与卡片体系。</p>
+      </div>
+      <div class="upgrade-item">
+        <div class="up-head"><span class="up-badge">核心</span><b>常用工具落地</b></div>
+        <p>文章分析、计算器、统计图、时钟、记事本、人物印象表、歌曲 / 地点 / 影视收藏等工具首次成型。</p>
+      </div>
+    </div>
 
-          <!-- ================= V2.3 铂金版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V2.3 铂金版 · 健康主题 + 金属质感（历史版本）
-          </h3>
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">配色</span><b>全局换装铂金主题</b></div>
-              <p>整套界面从原来的蓝色系改为铂金金属灰，按钮、图标底、标签、进度条统一为铂金质感。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>健康管理</b></div>
-              <p>把原「数学计算 → BMI 计算」整体迁入「健康管理」，并新增「睡眠记录」与「生命体征」两大模块。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">新增</span><b>运动记录</b></div>
-              <p>支持「计划」与「已记录」两种状态，运动类型 8 选 1；填入个人信息后 AI 可估算热量消耗。</p>
-            </div>
-          </div>
+  </div>
+</details>
 
-          <!-- ================= V2.2.1 黄金版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#b48a4a;"></span>
-            V2.2.1 黄金版 · 结构收敛与功能扩充
-          </h3>
-          <div class="upgrade-grid" style="margin-bottom:26px;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">布局</span><b>导航精简为四入口</b></div>
-              <p>导航栏只保留「首页 / 应用 / 帮助 / 设置」；原「AI 助手」不再单独占一个入口，统一并入「应用」中心。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">功能</span><b>计算器升级为数学计算</b></div>
-              <p>原「计算器」改名「数学计算」，拆为计算器（普通 / 专家）、单位换算、BMI 计算三个独立模块。</p>
-            </div>
-          </div>
 
-          <!-- ================= V2.1 正式版 ================= -->
-          <h3 style="font-size:15px;margin:6px 0 12px;color:var(--primary-dark);display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#9ca3af;"></span>
-            V2.1 正式版 · 奠定基础
-          </h3>
-          <div class="upgrade-grid" style="margin-bottom:0;">
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">框架</span><b>单页应用骨架</b></div>
-              <p>确定「首页 / 应用 / 帮助 / 设置」四大导航入口，所有工具共用一套 CSS 变量与卡片体系。</p>
-            </div>
-            <div class="upgrade-item">
-              <div class="up-head"><span class="up-badge">核心</span><b>常用工具落地</b></div>
-              <p>文章分析、计算器、统计图、时钟、记事本、人物印象表、歌曲 / 地点 / 影视收藏等工具首次成型。</p>
-            </div>
-          </div>
-
-        </div>
-      </details>
   </div>
 </section>
 
@@ -6994,7 +5820,158 @@ html, body { overflow-x: hidden !important; }
     </p>
   </div>
 </section>
+<!-- 密码生成器 -->
+<section id="page-passwordgen" class="page">
+  <h2 class="page-title">
+    <span class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        <circle cx="12" cy="16" r="1.5"/>
+      </svg>
+    </span>
+    密码生成器
+  </h2>
+  <p class="page-desc">在浏览器本地生成高强度密码。不上传、不记录、不联网。</p>
 
+  <div class="ta-subtabs" id="pwdTabs">
+    <button class="ta-subtab active" data-pwd="random" type="button">随机密码</button>
+    <button class="ta-subtab" data-pwd="passphrase" type="button">口令短语</button>
+    <button class="ta-subtab" data-pwd="pin" type="button">PIN 码</button>
+  </div>
+
+  <!-- 随机密码 -->
+  <div class="ta-subpage active" data-pwd-page="random">
+    <div class="panel">
+      <div class="pwd-display" id="pwdDisplay">
+        <span class="pwd-text" id="pwdText">点击生成</span>
+        <button class="pwd-copy" id="pwdCopy" type="button" title="复制">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="pwd-strength" id="pwdStrength">
+        <div class="pwd-strength-bar"><i></i><i></i><i></i><i></i></div>
+        <div class="pwd-strength-text" id="pwdStrengthText">等待生成</div>
+      </div>
+
+      <div class="pwd-actions">
+        <button class="btn" id="pwdRegen" type="button">重新生成</button>
+        <button class="btn ghost" id="pwdCopy2" type="button">复制密码</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">参数</h3>
+      <div class="pwd-field">
+        <label class="pwd-label">长度：<b id="pwdLenVal">16</b> 位</label>
+        <input type="range" id="pwdLen" min="8" max="64" value="16">
+      </div>
+
+      <div class="pwd-checks">
+        <label class="pwd-check"><input type="checkbox" id="pwdUpper" checked><span>大写字母 A-Z</span></label>
+        <label class="pwd-check"><input type="checkbox" id="pwdLower" checked><span>小写字母 a-z</span></label>
+        <label class="pwd-check"><input type="checkbox" id="pwdDigit" checked><span>数字 0-9</span></label>
+        <label class="pwd-check"><input type="checkbox" id="pwdSymbol" checked><span>常用符号 !@#$%^&*</span></label>
+        <label class="pwd-check"><input type="checkbox" id="pwdSymbolExt"><span>扩展符号 ()_+-=[]{}|;:,.&lt;&gt;?</span></label>
+        <label class="pwd-check"><input type="checkbox" id="pwdNoConfuse"><span>排除易混淆字符 0 O 1 l I</span></label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pwd-meta">
+        <div class="pwd-meta-item"><span>估算熵值</span><b id="pwdEntropy">—</b></div>
+        <div class="pwd-meta-item"><span>暴力破解估算</span><b id="pwdCrack">—</b></div>
+      </div>
+      <p class="tip" style="margin:14px 0 0;">估算基于「离线暴力破解 100 亿次/秒」的场景，仅供强度参考。</p>
+    </div>
+  </div>
+
+  <!-- 口令短语 -->
+  <div class="ta-subpage" data-pwd-page="passphrase">
+    <div class="panel">
+      <div class="pwd-display" id="ppDisplay">
+        <span class="pwd-text" id="ppText">点击生成</span>
+        <button class="pwd-copy" id="ppCopy" type="button" title="复制">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+      <div class="pwd-actions">
+        <button class="btn" id="ppRegen" type="button">重新生成</button>
+        <button class="btn ghost" id="ppCopy2" type="button">复制</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">参数</h3>
+      <div class="pwd-field">
+        <label class="pwd-label">单词数：<b id="ppCountVal">4</b> 个</label>
+        <input type="range" id="ppCount" min="3" max="8" value="4">
+      </div>
+      <div class="form-grid">
+        <label class="field"><span>分隔符</span>
+          <select id="ppSep">
+            <option value="-">- 连字符</option>
+            <option value="_">_ 下划线</option>
+            <option value=".">. 点号</option>
+            <option value=" ">空格</option>
+          </select>
+        </label>
+        <label class="field"><span>单词首字母</span>
+          <select id="ppCase">
+            <option value="lower">全小写</option>
+            <option value="capital">首字母大写</option>
+            <option value="upper">全大写</option>
+          </select>
+        </label>
+      </div>
+      <label class="pwd-check"><input type="checkbox" id="ppAddNum"><span>末尾追加一个随机数字</span></label>
+    </div>
+  </div>
+
+  <!-- PIN 码 -->
+  <div class="ta-subpage" data-pwd-page="pin">
+    <div class="panel">
+      <div class="pwd-display" id="pinDisplay">
+        <span class="pwd-text" id="pinText">点击生成</span>
+        <button class="pwd-copy" id="pinCopy" type="button" title="复制">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+      <div class="pwd-actions">
+        <button class="btn" id="pinRegen" type="button">重新生成</button>
+        <button class="btn ghost" id="pinCopy2" type="button">复制</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-head">参数</h3>
+      <div class="pwd-field">
+        <label class="pwd-label">PIN 长度：<b id="pinLenVal">6</b> 位</label>
+        <input type="range" id="pinLen" min="4" max="12" value="6">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="panel-head">说明</h3>
+    <p class="tip" style="margin-bottom:0;">
+      · 所有密码都使用浏览器原生加密随机源（<code>crypto.getRandomValues</code>）生成，不用 <code>Math.random</code>。<br>
+      · 密码不会上传、不会记录、不会联网校验。<br>
+      · 复制后请妥善保存到你的密码管理器，关闭页面后无法找回。<br>
+      · 本工具不提供密码存储功能。
+    </p>
+  </div>
+</section>
 <!-- 角色关系图 -->
 <section id="page-relgraph" class="page">
   <h2 class="page-title">
@@ -7005,7 +5982,7 @@ html, body { overflow-x: hidden !important; }
   <div class="panel">
     <div class="rg-toolbar">
       <button class="btn" id="rgAdd" type="button">＋ 添加角色</button>
-      <button class="btn ghost" id="rgConnectMode" type="button">🔗 连线模式</button>
+      <button class="btn ghost" id="rgConnectMode" type="button">连线模式</button>
       <button class="btn ghost" id="rgAutoLayout" type="button">自动布局</button>
       <button class="btn ghost" id="rgClear" type="button">清空</button>
       <button class="btn" id="rgExport" type="button">导出 PNG</button>
@@ -7582,7 +6559,7 @@ html, body { overflow-x: hidden !important; }
   <p class="page-desc">设置进食窗口，实时显示当前状态与倒计时，每天打卡记录，附 30 天完成率统计。纯本地运行。</p>
 
   <div class="fs-warning-banner">
-    ⚠️ 轻断食不适合所有人。<b>孕妇 / 哺乳期、未成年人、糖尿病、低血糖、进食障碍、慢性病患者</b>请先咨询医生，不要自行尝试。
+     轻断食不适合所有人。<b>孕妇 / 哺乳期、未成年人、糖尿病、低血糖、进食障碍、慢性病患者</b>请先咨询医生，不要自行尝试。
   </div>
 
   <!-- 状态卡 -->
@@ -7591,8 +6568,8 @@ html, body { overflow-x: hidden !important; }
       <svg viewBox="0 0 200 200">
         <defs>
           <linearGradient id="fsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffd54f"/>
-            <stop offset="100%" stop-color="#b47c00"/>
+            <stop offset="0%" stop-color="#7bb8e8"/>
+            <stop offset="100%" stop-color="#2c5f8a"/>
           </linearGradient>
         </defs>
         <circle class="fs-ring-bg" cx="100" cy="100" r="86"/>
@@ -7757,7 +6734,7 @@ html, body { overflow-x: hidden !important; }
   <p class="page-desc">12 个常见紧急场景的分步处理指南，含 CPR 节拍器、AED 使用引导与紧急信息卡。所有内容均为静态内置，离线可用。若这里没有覆盖你的情况，请立即拨打 120。</p>
 
   <div class="fa-warning-banner">
-    ⚠️ 本工具仅供日常参考，<b>不能替代专业医疗诊断与治疗</b>。紧急情况请立即拨打 <b>120</b>。
+     本工具仅供日常参考，<b>不能替代专业医疗诊断与治疗</b>。紧急情况请立即拨打 <b>120</b>。
   </div>
 
   <div class="fa-topbar">
@@ -7838,7 +6815,7 @@ html, body { overflow-x: hidden !important; }
   <p class="page-desc">25 个常用穴位的定位、主治、按摩方法与禁忌，支持按症状、按部位、按经络三种视角查询。含局部示意图与朗读。纯本地运行。</p>
 
   <div class="ap-warning-banner">
-    ⚠️ 本工具仅供日常保健参考，<b>不能替代医疗诊断与治疗</b>。孕妇、皮肤破损、急性病请咨询医生。
+     本工具仅供日常保健参考，<b>不能替代医疗诊断与治疗</b>。孕妇、皮肤破损、急性病请咨询医生。
   </div>
 
 <div class="ta-subtabs" id="apTabs">
@@ -7899,7 +6876,7 @@ html, body { overflow-x: hidden !important; }
   <p class="page-desc">10 种常见运动损伤的识别、现场处理、就医指征、停训建议与预防方法。含 RICE / PRICE 分步指导。纯本地运行。</p>
 
   <div class="si-warning-banner">
-    ⚠️ 本工具仅供日常运动参考，<b>不能替代专业医疗诊断与治疗</b>。出现严重畸形、麻木、剧烈疼痛、意识异常时，请立即就医或拨打 <b>120</b>。
+     本工具仅供日常运动参考，<b>不能替代专业医疗诊断与治疗</b>。出现严重畸形、麻木、剧烈疼痛、意识异常时，请立即就医或拨打 <b>120</b>。
   </div>
 
   <div id="siMainView">
@@ -8173,8 +7150,6 @@ html, body { overflow-x: hidden !important; }
 <script src="js/decibel2.js"></script>
 
 
-<!-- 整屏翻页 -->
-<script src="js/snapscroll2.js"></script>
 
 <script src="js/funcplot2.js"></script>
 <script src="js/chemistry2.js"></script>
@@ -8205,6 +7180,7 @@ html, body { overflow-x: hidden !important; }
 <script src="js/sportsinjury2.js"></script>
 <script src="js/devicetest2.js"></script>
 <script src="js/novelassistant2.js"></script>
+<script src="js/passwordgen2.js"></script>
 
 <!-- 首页交互 -->
 <script>
@@ -8524,6 +7500,7 @@ html, body { overflow-x: hidden !important; }
   /* 暴露给外部：方便别处调用 */
   window.__openSearch = openSearch;
 })();
+
 </script>
 
 </body>
