@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>岁窦工具箱 · 下载中心</title>
+<style>
+:root{
+  --primary:#4a90e2;--primary-light:#7bb8e8;--primary-dark:#2c5f8a;
+  --primary-soft:#e6f2fb;--primary-softer:#f0f7fd;
+  --bg-base:#f5f9fc;--bg-card:#ffffff;
+  --text-primary:#1a2e42;--text-secondary:#4a6a86;--text-muted:#6b8299;
+  --border-base:#d5e3f0;--border-subtle:#e8f0f8;
+  --success:#3f6b52;--success-soft:#e8f2ec;
+  --warning:#8a6414;--warning-soft:#faf3e3;
+  --radius:14px;
+  --shadow-sm:0 2px 8px rgba(60,110,160,.08);
+  --shadow-md:0 10px 28px rgba(60,110,160,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --primary:#5b9bd5;--primary-light:#7bb8e8;--primary-dark:#7bb8e8;
+    --primary-soft:#16324a;--primary-softer:#122840;
+    --bg-base:#0d1a26;--bg-card:#16293c;
+    --text-primary:#e8f2fa;--text-secondary:#b8cde0;--text-muted:#7a95ad;
+    --border-base:rgba(90,150,200,.22);--border-subtle:rgba(90,150,200,.12);
+    --success:#5fb98a;--success-soft:#163a2a;
+    --warning:#d9a94a;--warning-soft:#3a2d12;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(123,184,232,.22), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(74,144,226,.10), transparent 60%),
+    linear-gradient(180deg,var(--bg-base) 0%,var(--primary-softer) 100%);
+  background-attachment:fixed;
+  color:var(--text-primary);
+  min-height:100vh;line-height:1.6;
+  padding:40px 20px 60px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;}
+
+/* 头部 */
+.hero{display:flex;align-items:center;gap:18px;margin-bottom:32px;flex-wrap:wrap;}
+.hero-logo{
+  width:64px;height:64px;border-radius:16px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 24px -8px rgba(74,144,226,.6);flex-shrink:0;
+}
+.hero-logo svg{width:30px;height:30px;}
+.hero-text{flex:1;min-width:200px;}
+.hero-text h1{font-size:24px;font-weight:800;letter-spacing:1.5px;margin-bottom:4px;}
+.hero-text p{font-size:13.5px;color:var(--text-muted);}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:11px 20px;border-radius:10px;font-size:14px;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;transition:.18s;
+  letter-spacing:.5px;white-space:nowrap;font-family:inherit;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+  color:#fff;box-shadow:0 6px 16px -6px rgba(74,144,226,.55);
+}
+.btn-primary:hover{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  box-shadow:0 10px 22px -8px rgba(74,144,226,.75);transform:translateY(-1px);
+}
+.btn-ghost{background:var(--bg-card);border:1px solid var(--border-base);color:var(--primary-dark);}
+.btn-ghost:hover{background:var(--primary-soft);border-color:var(--primary);}
+.btn-sm{padding:7px 14px;font-size:13px;border-radius:8px;}
+.btn svg{width:15px;height:15px;flex-shrink:0;}
+
+/* 提示 */
+.notice{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:14px 18px;border-radius:var(--radius);
+  background:var(--primary-softer);
+  border:1px solid var(--border-base);border-left:4px solid var(--primary);
+  font-size:13.5px;color:var(--text-secondary);line-height:1.7;
+  margin-bottom:24px;
+}
+.notice svg{width:18px;height:18px;color:var(--primary);flex-shrink:0;margin-top:2px;}
+.notice b{color:var(--primary-dark);}
+.notice code{
+  background:var(--primary-soft);color:var(--primary-dark);
+  padding:1px 6px;border-radius:4px;
+  font-family:Consolas,Menlo,monospace;font-size:12.5px;
+}
+
+/* 筛选 */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.search-input{
+  flex:1 1 220px;min-width:180px;padding:10px 16px;
+  border-radius:999px;border:1px solid var(--border-base);
+  background:var(--bg-card);color:var(--text-primary);
+  font-size:14px;font-family:inherit;outline:none;transition:.16s;
+}
+.search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.18);}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{
+  padding:8px 16px;border-radius:999px;
+  border:1px solid var(--border-base);background:var(--bg-card);
+  color:var(--text-secondary);font-size:13px;font-weight:600;
+  cursor:pointer;transition:.16s;font-family:inherit;white-space:nowrap;
+}
+.chip:hover{border-color:var(--primary);background:var(--primary-softer);color:var(--primary-dark);}
+.chip.active{
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 10px -4px rgba(74,144,226,.55);
+}
+
+/* 表格 */
+.table-card{
+  background:var(--bg-card);border:1px solid var(--border-base);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;
+}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:820px;}
+thead{background:var(--primary-softer);}
+thead th{
+  padding:14px 16px;text-align:left;font-size:12.5px;font-weight:800;
+  color:var(--text-muted);letter-spacing:1px;white-space:nowrap;
+  border-bottom:1px solid var(--border-base);
+}
+tbody td{
+  padding:16px;border-bottom:1px solid var(--border-subtle);
+  vertical-align:middle;color:var(--text-primary);
+}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background .15s;}
+tbody tr:hover{background:var(--primary-softer);}
+
+.ver-cell{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.ver-num{
+  font-family:Consolas,Menlo,monospace;font-size:16px;font-weight:800;
+  color:var(--primary-dark);letter-spacing:.5px;
+}
+.ver-tag{
+  display:inline-block;font-size:10.5px;font-weight:800;
+  padding:2px 9px;border-radius:999px;letter-spacing:.5px;white-space:nowrap;
+}
+.ver-tag.stable{background:var(--success-soft);color:var(--success);}
+.ver-tag.beta{background:var(--warning-soft);color:var(--warning);}
+.ver-tag.latest{
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+  color:#fff;box-shadow:0 3px 8px -3px rgba(74,144,226,.55);
+}
+
+.platform-cell{display:flex;align-items:center;gap:7px;font-weight:700;font-size:13.5px;}
+.platform-cell svg{width:16px;height:16px;color:var(--primary-dark);flex-shrink:0;}
+.date-cell{font-family:Consolas,Menlo,monospace;font-size:13px;color:var(--text-muted);white-space:nowrap;}
+.size-cell{font-size:13px;color:var(--text-secondary);white-space:nowrap;}
+.notes-cell{font-size:13px;color:var(--text-secondary);line-height:1.6;max-width:340px;}
+.notes-cell ul{padding-left:18px;margin:0;}
+.notes-cell li{margin-bottom:2px;}
+.download-cell{white-space:nowrap;}
+.empty-row td{text-align:center;padding:48px 20px;color:var(--text-muted);font-size:14px;}
+
+/* 底部 */
+.footer{margin-top:40px;text-align:center;font-size:12.5px;color:var(--text-muted);}
+.footer a{color:var(--primary-dark);text-decoration:none;font-weight:600;}
+.footer a:hover{text-decoration:underline;}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:32px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  padding:11px 22px;background:var(--text-primary);color:var(--bg-card);
+  border-radius:10px;font-size:13.5px;font-weight:600;
+  box-shadow:0 12px 32px -10px rgba(13,26,38,.5);
+  opacity:0;pointer-events:none;transition:.25s ease;z-index:9999;
+  max-width:90vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media (prefers-color-scheme:dark){.toast{background:var(--bg-card);color:var(--text-primary);}}
+
+@media (max-width:720px){
+  body{padding:24px 14px 40px;}
+  .hero-logo{width:52px;height:52px;border-radius:14px;}
+  .hero-logo svg{width:24px;height:24px;}
+  .hero-text h1{font-size:19px;}
+  .hero-text p{font-size:12.5px;}
+  .btn{padding:9px 16px;font-size:13px;}
+  thead th{padding:12px 12px;font-size:11.5px;}
+  tbody td{padding:14px 12px;font-size:13px;}
+  .ver-num{font-size:15px;}
+  .notes-cell{max-width:200px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>岁窦工具箱 · 下载中心</h1>
+      <p>选择版本与平台，获取对应的安装包</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-ghost" href="https://sulder.top/" rel="noopener">返回首页</a>
+    </div>
+  </header>
+
+  <div class="notice">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+    <div>
+      点击「蓝奏云下载」会<b>自动复制密码</b>并打开网盘，粘贴密码即可下载。
+      若想实现「点击即下载」，请把安装包上传到自己的 OSS/CDN 并填入数据表的 <code>direct</code> 字段。
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input type="search" class="search-input" id="searchInput" placeholder="搜索版本号，如 1.0、1.1…" autocomplete="off">
+    <div class="filter-chips" id="filterChips">
+      <button class="chip active" data-platform="all" type="button">全部平台</button>
+      <button class="chip" data-platform="android" type="button">Android</button>
+      <button class="chip" data-platform="windows" type="button">Windows</button>
+      <button class="chip" data-platform="ios" type="button">iOS</button>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width:150px;">版本</th>
+            <th style="min-width:120px;">平台</th>
+            <th style="min-width:120px;">发布日期</th>
+            <th style="min-width:100px;">文件大小</th>
+            <th style="min-width:280px;">更新内容</th>
+            <th style="min-width:150px;">下载</th>
+          </tr>
+        </thead>
+        <tbody id="versionBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="footer">
+    2026 © 岁窦工作室 · 岁窦工具箱 ·
+    <a href="https://sulder.top/" rel="noopener">sulder.top</a>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   ★★★ 版本数据表 ★★★
+   ------------------------------------------------------------
+   发新版时，只需要在数组最上面插入一条记录。
+   字段说明：
+     version   版本号          如 "1.0.0"
+     platform  "android" / "windows" / "ios"
+     date      发布日期        如 "2026-10-07"
+     size      文件大小        如 "约 48 MB"
+     type      "stable" / "beta"
+     latest    布尔值，标记「最新」，只应有一条
+     notes     更新内容（数组或字符串）
+     lanzou    蓝奏云链接（可选）
+     pwd       蓝奏云密码（可选，会自动复制到剪贴板）
+     direct    ★ 直链地址（如果有，点击立刻下载）★
+     coming    true 表示未发布，显示"敬请期待"
+   ============================================================ */
+const versions = [
+  // ---------- 1.0.0 Android ----------
+  {
+    version: '1.0.0',
+    platform: 'android',
+    date: '2026-10-07',
+    size: '约 48 MB',
+    type: 'stable',
+    latest: true,
+    notes: [
+      '首个 Android 稳定版',
+      '收录 70 款本地工具',
+      '淡蓝色主题 + 暗色模式'
+    ],
+    lanzou: 'https://sulder.lanzouq.com/isnHm4b3zm7i',   // ← 已更新
+    pwd: 'hmvm'                                          // ← 已更新
+    // direct: 'https://cdn.sulder.top/apk/suidou-1.0.0.apk'
+  },
+
+  // ---------- 1.0.0 Windows ----------
+  {
+    version: '1.0.0',
+    platform: 'windows',
+    date: '2026-10-07',
+    size: '约 92 MB',
+    type: 'stable',
+    latest: true,
+    notes: [
+      '首个 Windows 桌面版',
+      '左侧固定导航 + 右侧内容区',
+      '三栏式布局，工具导航可展开'
+    ],
+    lanzou: 'https://sulder.lanzouq.com/icQVy4b3zrfg',   // ← 已更新
+    pwd: 'fd0w'                                          // ← 已更新
+    // direct: 'https://cdn.sulder.top/exe/suidou-setup-1.0.0.exe'
+  },
+
+  // ---------- 1.0.0 iOS（未发布） ----------
+  {
+    version: '1.0.0',
+    platform: 'ios',
+    date: '—',
+    size: '—',
+    type: 'beta',
+    latest: false,
+    notes: '预计 2027 年左右登陆 App Store，敬请期待。',
+    coming: true
+  }
+
+  /* ============================================================
+     以后加新版，直接在数组最上面插入，例如：
+
+     {
+       version: '1.1.0',
+       platform: 'android',
+       date: '2026-11-15',
+       size: '约 50 MB',
+       type: 'stable',
+       latest: true,                       // 记得把上面旧版的 latest 改成 false
+       notes: ['新增 XX 工具', '修复 XX 问题', '优化启动速度'],
+       lanzou: 'https://sulder.lanzouq.com/xxxxxxx',
+       pwd: 'abcd',
+       direct: 'https://cdn.sulder.top/apk/suidou-1.1.0.apk'   // 若有直链
+     },
+     ============================================================ */
+];
+
+
+/* ============================================================
+   平台图标 & 名称
+   ============================================================ */
+const PLATFORM_META = {
+  android: {
+    name: 'Android',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12a6 6 0 0 1 12 0v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-6z"/><path d="M6 12H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2"/><path d="M18 12h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/><path d="M9 16h6"/></svg>'
+  },
+  windows: {
+    name: 'Windows',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>'
+  },
+  ios: {
+    name: 'iOS',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>'
+  }
+};
+
+const DL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function renderNotes(notes) {
+  if (Array.isArray(notes)) {
+    if (!notes.length) return '—';
+    return '<ul>' + notes.map(n => `<li>${escapeHtml(n)}</li>`).join('') + '</ul>';
+  }
+  return escapeHtml(notes || '—');
+}
+
+function renderRow(v) {
+  const meta = PLATFORM_META[v.platform] || { name: v.platform, icon: '' };
+
+  let tagHtml = '';
+  if (v.latest) tagHtml += '<span class="ver-tag latest">最新</span>';
+  else if (v.type === 'beta') tagHtml += '<span class="ver-tag beta">测试版</span>';
+  else if (v.type === 'stable') tagHtml += '<span class="ver-tag stable">稳定版</span>';
+
+  let downloadHtml = '';
+  if (v.coming) {
+    downloadHtml = '<button class="btn btn-ghost btn-sm" disabled style="opacity:.55;cursor:not-allowed;">敬请期待</button>';
+  } else if (v.direct) {
+    // ★ 有直链：<a download> 触发浏览器直接下载
+    downloadHtml = `<a class="btn btn-primary btn-sm" href="${escapeHtml(v.direct)}" download>${DL_ICON} 立即下载</a>`;
+  } else if (v.lanzou) {
+    downloadHtml = `<button class="btn btn-primary btn-sm js-lanzou"
+      data-url="${escapeHtml(v.lanzou)}"
+      data-pwd="${escapeHtml(v.pwd || '')}"
+      type="button">${DL_ICON} 蓝奏云下载</button>`;
+  } else {
+    downloadHtml = '<button class="btn btn-ghost btn-sm" disabled style="opacity:.55;cursor:not-allowed;">暂无</button>';
+  }
+
+  return `
+    <tr data-platform="${escapeHtml(v.platform)}" data-version="${escapeHtml(v.version)}">
+      <td><div class="ver-cell"><span class="ver-num">v${escapeHtml(v.version)}</span>${tagHtml}</div></td>
+      <td><div class="platform-cell">${meta.icon}<span>${escapeHtml(meta.name)}</span></div></td>
+      <td><span class="date-cell">${escapeHtml(v.date)}</span></td>
+      <td><span class="size-cell">${escapeHtml(v.size)}</span></td>
+      <td><div class="notes-cell">${renderNotes(v.notes)}</div></td>
+      <td class="download-cell">${downloadHtml}</td>
+    </tr>
+  `;
+}
+
+let currentPlatform = 'all';
+
+function render() {
+  const body = document.getElementById('versionBody');
+  const kw = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+
+  const list = versions.filter(v => {
+    if (currentPlatform !== 'all' && v.platform !== currentPlatform) return false;
+    if (kw && !v.version.toLowerCase().includes(kw)) return false;
+    return true;
+  });
+
+  if (!list.length) {
+    body.innerHTML = `<tr class="empty-row"><td colspan="6">没有匹配的版本</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = list.map(renderRow).join('');
+
+  // 绑定蓝奏云按钮
+  body.querySelectorAll('.js-lanzou').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const url = btn.dataset.url;
+      const pwd = btn.dataset.pwd;
+      if (pwd) {
+        copyToClipboard(pwd).then(ok => {
+          showToast(ok ? `提取密码 ${pwd} 已复制，即将打开网盘…` : `请手动复制密码：${pwd}`);
+        });
+      }
+      setTimeout(() => window.open(url, '_blank', 'noopener'), 260);
+    });
+  });
+}
+
+document.getElementById('searchInput').addEventListener('input', render);
+
+document.getElementById('filterChips').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  document.querySelectorAll('#filterChips .chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  currentPlatform = chip.dataset.platform;
+  render();
+});
+
+/* 工具函数 */
+function copyToClipboard(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text)
+      .then(() => true)
+      .catch(() => fallbackCopy(text));
+  }
+  return Promise.resolve(fallbackCopy(text));
+}
+function fallbackCopy(text) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch (e) { return false; }
+}
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+render();
+</script>
+
+</body>
+</html>
